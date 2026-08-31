@@ -244,15 +244,37 @@ Full report: `experiments/exp002-pilot/REPORT.md`; per-run detail in
 
 ## Planned (not started)
 
-- **Implement the resource policy in `isv-eval` (recommended next task,
-  Task 007 outcome B)** — add a clearly-labeled alternative-resource
-  attestation tier and report canonical coverage + broader resource-supported
-  coverage side by side, leaving historical A/B/C classifications untouched;
-  policy in `docs/RESOURCE_POLICY.md`. Not started.
-- **EXP-002 full scale / EXP-003** — only after the resource policy is
-  implemented in the evaluator (so coverage numbers are interpretable); do not
-  proceed automatically.
+- **EXP-003 / full-scale constrained generation** — only after reviewing the
+  Task 008 two-tier evaluator implementation (done); scope decided after that
+  review, using the EXP-002 pilot evidence (which unresolved-form categories
+  benefit from supplied alternatives; the 12 A→C regressions) and the manual
+  linguistic review. Do not proceed automatically.
 - **Manual linguistic review** of the EXP-001 unresolved sample (Task 004 artifacts; human-only, no automatic classification).
+
+### Follow-up: two-layer policy implemented in the evaluator (Task 008, 2026-09-01)
+
+Not an experiment — an evaluator task. The Task 007 policy
+(`docs/RESOURCE_POLICY.md`) is implemented in `isv-eval`:
+
+- **Evidence layer** (`src/isv_eval/evidence.py`): loads the audited
+  alternative resources (`isv.dic` exact surfaces, `interslavicfreq` wordlists,
+  `slovnik` snapshot) and attaches per-token evidence provenance
+  (layer/source/kind). A/B/C semantics are untouched; alternative-resource hits
+  never become A/B; only exact-surface attestation counts toward the broader
+  tier; orthographic variants (`sěli` vs `seli`) and historical presence are
+  recorded but never count.
+- **Metrics** (`metrics.py`): `canonical_coverage` (== historical
+  `morphologically_valid_coverage`) and `broader_resource_supported_coverage`
+  reported side by side, plus `canonical_supported_tokens`,
+  `broader_resource_supported_tokens`, `unresolved_tokens`. The CLI reports
+  both numbers with full resource provenance.
+- **Verification**: A/B/C counts and `morphologically_valid_coverage`
+  reproduced byte-identically on all 7 EXP-001 runs (raw outputs untouched);
+  the new broader metrics reproduce the Task 007 estimate exactly
+  (Claude 73.55→86.00 %, DeepSeek 74.42→82.81 %, Gemini 71.72→82.32 %,
+  ChatGPT 75.95→86.27 %, GPTs-ISV Teacher 79.83→88.44 %, Bielik 55.48→78.99 %,
+  Grok 76.56→86.41 %). 14 focused policy tests added (45 total; full suite
+  green).
 
 ### Follow-up: resource reconciliation and evaluation policy (Task 007, 2026-08-31)
 

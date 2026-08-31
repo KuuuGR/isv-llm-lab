@@ -13,6 +13,18 @@ Denominator policy (documented in DESIGN.md §6 and in every report):
     the important metric; reconciliation of DESIGN.md §6 wording: the
     "headword-or-justified" reading is A + B.)
 - ``unresolved_rate``              = C / total_tokens
+
+Two-layer resource policy (SODA Task 008, spec: ``docs/RESOURCE_POLICY.md``):
+
+- ``canonical_supported_tokens`` / ``canonical_coverage`` — the same A+B set
+  under the canonical-coverage name (``morphologically_valid_coverage`` is
+  kept for historical compatibility and equals ``canonical_coverage``).
+- ``broader_resource_supported_tokens`` / ``broader_resource_supported_coverage``
+  — canonical-supported tokens plus lexical tokens with qualifying direct
+  evidence (exact surface attestation in the audited alternative resources),
+  divided by ``total_tokens``. This is an *evidence estimate*, never a
+  validity claim.
+- ``unresolved_tokens`` — bucket C (identical to ``unresolved_forms``).
 """
 
 from __future__ import annotations
@@ -37,6 +49,14 @@ def compute_metrics(classifications: list) -> dict:
     def rate(numerator: int) -> float | None:
         return round(numerator / lexical, 6) if lexical else None
 
+    # Broader tier: canonical tokens always count; a C token counts only when
+    # the evidence layer marked it (exact alternative-resource attestation).
+    broader = sum(
+        1 for tok in classifications
+        if tok.is_lexical and (tok.classification in (A, B)
+                               or tok.broader_supported)
+    )
+
     return {
         # The metric names required by the task, with explicit denominators.
         "total_tokens": lexical,
@@ -48,10 +68,21 @@ def compute_metrics(classifications: list) -> dict:
         "exact_dictionary_coverage": rate(a),
         "morphologically_valid_coverage": rate(a + b),
         "unresolved_rate": rate(c),
+        # Two-layer resource policy (Task 008).
+        "canonical_supported_tokens": a + b,
+        "canonical_coverage": rate(a + b),
+        "broader_resource_supported_tokens": broader,
+        "broader_resource_supported_coverage": rate(broader),
+        "unresolved_tokens": c,
         "denominator_policy": (
             "coverage denominators are lexical tokens (word-like tokens); "
             "punctuation and numbers are excluded; "
-            "morphologically_valid_coverage = (A + B) / lexical_tokens"
+            "canonical_coverage = (A + B) / lexical_tokens "
+            "(= morphologically_valid_coverage, historical name); "
+            "broader_resource_supported_coverage = "
+            "(canonical-supported + exact alternative-resource attestation) "
+            "/ lexical_tokens; the broader tier is an evidence estimate, "
+            "never a validity claim"
         ),
         "bucket_counts": {"A": a, "B": b, "C": c, "non_lexical": non_lexical},
     }

@@ -381,3 +381,42 @@ Decisions:
   evaluator, and all historical results are untouched. The single next task is
   implementing the two-tier policy in `isv-eval` (option B, concretized); it
   is not started.
+
+## D-027 · 2026-09-01 · The two-layer resource policy is implemented as a separate evidence layer; A/B/C semantics and all historical results are frozen
+
+Task 008 implemented the Task 007 policy (`docs/RESOURCE_POLICY.md`) in
+`isv-eval`. Decisions:
+
+- **The evidence layer is additive, never a redefinition of A/B/C.** The
+  canonical evaluator (`classifier.py`) is unchanged: A = exact lexicon match,
+  B = bounded morphological fallback, C = unresolved. A separate pass
+  (`evidence.attach_evidence`) attaches per-token provenance. An
+  alternative-resource hit never becomes A/B and never changes a historical
+  classification.
+- **Only exact surface attestation counts toward the broader tier.** The
+  broader metric adds C tokens whose primary normalized key is exactly present
+  in `isv.dic` or the `interslavicfreq` wordlists. Diacritic stripping,
+  etymological folding, `slovnik` presence and Hunspell tags are recorded as
+  evidence (layers `orthographic_variant` / `historical_evidence`) but never
+  count — preserving the Task 007 §5 "what must NOT count as proof" rules.
+- **No double counting.** A token supported by several resources (canonical +
+  alternative, or several alternative resources) is counted once in
+  `broader_resource_supported_tokens`; canonical tokens are broader-supported
+  by definition.
+- **Provenance is a small JSON record on each token.** `layer` + `source` +
+  `kind` (+ small detail such as cB / tags / lemma list). Resource payloads
+  are not duplicated; only bucket-C tokens are looked up in the alternative
+  resources.
+- **Historical metrics are preserved and the new metrics are additive.**
+  `morphologically_valid_coverage` and all A/B/C counts are byte-identical on
+  the 7 EXP-001 runs; `canonical_coverage` is defined as equal to it; the
+  broader metrics reproduce the Task 007 §6 demonstration exactly. Historical
+  reports are not rewritten.
+- **The implementation is general — no EXP-002 special-casing.** Discrepancy
+  forms (`seli`, `sedeli`, `reci`, `rekl`, `dejstvitelno`, `dalše`, `bojala`)
+  fall out of the exact-lookup rules; `sěli` (only diacritic-stripped) is
+  correctly excluded while `sěděli` remains canonical A.
+- **Scope guard held.** Only the evaluator changed (`evidence.py`, `metrics.py`,
+  `cli.py`, `tokenizer.py` + tests + docs). No UI/API/db/service, no
+  morphology-engine change, no resource modification, no historical
+  recomputation.

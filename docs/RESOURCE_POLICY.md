@@ -1,6 +1,10 @@
 # Interslavic Resource Reconciliation and Evaluation Policy
 
 Status: SODA Task 007 deliverable (2026-08-31).
+**Implemented** as the evaluator's two-layer evidence tier by SODA Task 008
+(2026-09-01): `src/isv_eval/evidence.py` (evidence layer),
+`src/isv_eval/metrics.py` (canonical + broader coverage), per-token provenance
+in `tokens.json`. A/B/C semantics and all historical results are unchanged.
 
 This document reconciles the project's Interslavic resources into a layered,
 transparent evaluation/reference policy. It answers one question:

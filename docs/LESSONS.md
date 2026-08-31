@@ -404,3 +404,28 @@ models wrote non-Interslavic" would be wrong.
 **Next time.** When reporting coverage, state what the generator path does and
 does not emit (the lexicon manifest), and check morphology-coverage gaps
 before attributing unresolved forms to the models.
+## L-021 · 2026-09-01 · An evidence layer can be added without touching the classification: keep the "what" (A/B/C) frozen and add the "why" (provenance) as a separate pass
+
+**Observation.** Task 008 added the two-layer resource policy to `isv-eval`
+without modifying `classifier.py` at all. The canonical A/B/C assignments stay
+byte-identical; a separate `evidence.attach_evidence()` pass attaches per-token
+provenance (layer/source/kind) and a broader-support flag. The key rule that
+made it safe: only an exact surface attestation in the audited alternative
+resources counts toward the broader tier; diacritic-stripped/folded near-misses
+(`sěli` vs `seli`) and historical presence (`slovnik`) are recorded as evidence
+but never count. Verifying all 7 EXP-001 runs reproduced their A/B/C counts and
+`morphologically_valid_coverage` byte-for-byte, while the new broader metrics
+matched the Task 007 demonstration exactly, turned a risky refactor into a
+checkable claim.
+
+**Why it matters.** "The evaluator must change" invites regressions; "the
+evaluator must gain a clearly-separated evidence layer" invites a design where
+historical semantics are frozen by construction. The dual coverage pair
+(canonical vs broader) is now an invariant every future report can rely on:
+the two numbers can only agree or widen, never silently reinterpret the old
+one.
+
+**Next time.** When a policy change targets an existing metric, implement the
+new capability as an additive layer over the old one, keep a deterministic
+cross-check against a known historical run, and state the "what counts" rule
+(the inclusion/exclusion list) in the report so provenance can be audited.

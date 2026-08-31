@@ -1,9 +1,9 @@
 # Roadmap
 
-Status: updated 2026-08-31 (Task 007 — resource reconciliation and evaluation
-policy completed; next recommended task is implementing that policy in the
-evaluator). This is a plan, not a commitment; the Architect/Research Lead
-re-prioritizes as evidence arrives.
+Status: updated 2026-09-01 (Task 008 — the two-layer resource evaluation
+policy is implemented in the evaluator; next recommended task is deciding
+EXP-003's scope with the two-tier evaluator). This is a plan, not a
+commitment; the Architect/Research Lead re-prioritizes as evidence arrives.
 
 ## Done
 
@@ -158,34 +158,48 @@ re-prioritizes as evidence arrives.
         `data/dictionary/resource-policy/{README.md,evidence.json}` (local);
         SODA docs updated. No resource modified, no evaluator code changed,
         historical results preserved.
+- [x] **Task 008 — Two-layer resource evaluation policy implemented in
+  `isv-eval`** (evaluator change only; no resource/experiment change):
+  - [x] New evidence layer `src/isv_eval/evidence.py`: loads the audited
+        alternative resources (`isv.dic` exact surfaces, `interslavicfreq`
+        wordlists, `slovnik` snapshot) and attaches per-token evidence
+        provenance (layer/source/kind) to every token.
+  - [x] A/B/C semantics untouched; alternative-resource hits never become A/B;
+        only exact-surface attestation counts toward the broader tier;
+        orthographic variants (folded/diacritic-stripped) and historical
+        presence are recorded but never count (no double counting).
+  - [x] `metrics.py` reports `canonical_coverage` (== historical
+        `morphologically_valid_coverage`) and
+        `broader_resource_supported_coverage` side by side, plus
+        `canonical_supported_tokens`, `broader_resource_supported_tokens`,
+        `unresolved_tokens`; `cli.py` exposes them with full provenance and a
+        `--no-alternative-resources` opt-out.
+  - [x] 14 focused policy tests (`tests/test_resource_evidence.py`); full
+        suite green (45 tests). Historical A/B/C + canonical coverage verified
+        byte-identical on all 7 EXP-001 runs; broader metrics reproduce the
+        Task 007 §6 demonstration exactly (e.g. ChatGPT 75.95 % → 86.27 %).
 
 ## Next recommended task (single)
 
-- [ ] **Implement the documented resource policy in `isv-eval`** (Task 007
-  outcome B, concretized): add a clearly-labeled **alternative-resource
-  attestation tier** and report **canonical coverage** and **broader
-  resource-supported coverage** side by side, while leaving the historical
-  A/B/C classifications and all existing reports untouched. This is the
-  smallest step that makes future experiment numbers interpretable under the
-  policy in `docs/RESOURCE_POLICY.md`. Do not start it from this roadmap entry
-  alone — it requires a SODA task.
+- [ ] **Decide and run EXP-003 — a full-scale constrained/dictionary-guided
+  generation experiment measured with the two-tier evaluator.** The pilot's
+  measurement blocker is gone: the evaluator now reports both canonical
+  coverage and broader resource-supported coverage, so the effect of
+  resource-supported forms is measurable. EXP-002's pilot evidence (which
+  unresolved-form categories benefit from supplied alternatives; the 12 A→C
+  regressions) and the manual linguistic review should shape the design. Do
+  not start it from this roadmap entry alone — it requires a SODA task, and
+  its scope is decided only after reviewing the Task 008 implementation.
 
-## Parallel (not blocking the pilot)
+## Later
 
 - [ ] **Manual linguistic review of the Experiment 001 unresolved sample** —
   annotate `experiments/exp001-baseline/manual-audit/sample.csv`
   (100 stratified forms + 8 shared-by-all diagnostic forms, prepared in Task
   004; full contexts in `sample.json`). The Task 005 cross-resource evidence
-  (`cross-resource-audit.csv`) is available as an input to the review.
-  Human classification only — no automatic language-origin detection.
-
-## Later
-
-- [ ] **Experiment 002/003 — full-scale constrained/dictionary-guided
-  generation** — only after the evaluator implements the two-tier resource
-  policy (next recommended task) makes coverage numbers interpretable; the
-  pilot evidence will then decide which unresolved-form categories benefit
-  from supplied alternatives.
+  (`cross-resource-audit.csv`) and the new per-token two-layer evidence
+  (`resource_evidence` in `tokens.json`) are available as inputs to the review.
+    Human classification only — no automatic language-origin detection.
 - [ ] Investigate dictionary **data licensing** (Steen source data / Google
   Spreadsheet) before any redistribution of derived data.
 - [ ] Decide primary morphology backend for constrained generation
@@ -217,10 +231,9 @@ re-prioritizes as evidence arrives.
 - Token-aligned evaluator-state transitions (implemented in `compare_exp002.py`
   for EXP-002) reused as a standard regression signal in any future
   before/after comparison.
-- An explicit, clearly-labeled alternative-resource attestation tier in the
-  evaluator (separate from canonical A/B/C), so forms attested in
-  `interslavicfreq`/hunspell can be recorded without silently changing the
-  canonical classification (candidate direction from Task 006.2
-  recommendation B; promoted to the recommended next task by Task 007).
+- Two-layer resource evidence in the evaluator (implemented in Task 008):
+  per-token `resource_evidence` provenance and the canonical/broader coverage
+  pair; a future step could surface the broader tier in the comparison scripts
+  (`compare_exp001.py` / `compare_exp002.py`) as a standard additive signal.
 - Corpus building: collected raw model outputs + validated analysis as a seed
   evaluation set for later experiments.

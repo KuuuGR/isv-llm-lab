@@ -54,6 +54,14 @@ class Token:
         "matches",
         "candidates",
         "review",
+        # Two-layer resource evidence (SODA Task 008). ``resource_evidence``
+        # is a list of {"layer", "source", "kind", "detail"} records;
+        # ``resource_evidence_status`` summarizes the strongest layer;
+        # ``broader_supported`` marks tokens that count toward the broader
+        # resource-supported coverage metric.
+        "resource_evidence_status",
+        "resource_evidence",
+        "broader_supported",
     )
 
     def __init__(self, surface: str, kind: str, sentence_id: int,
@@ -73,6 +81,9 @@ class Token:
         self.matches = None
         self.candidates = None
         self.review = False
+        self.resource_evidence_status = None
+        self.resource_evidence = []
+        self.broader_supported = False
 
     def as_dict(self) -> dict:
         return {
@@ -87,9 +98,13 @@ class Token:
             "position": self.position,
             "translit": self.translit,
             "classification": self.classification,
+            "canonical_status": self.classification,
             "matches": self.matches,
             "candidates": self.candidates,
             "review": self.review,
+            "broader_resource_supported": self.broader_supported,
+            "resource_evidence_status": self.resource_evidence_status,
+            "resource_evidence": self.resource_evidence,
         }
 
     def __repr__(self) -> str:  # pragma: no cover - debugging aid

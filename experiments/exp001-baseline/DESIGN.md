@@ -190,6 +190,19 @@ morphological association).
 | `morphologically_valid_coverage` | **(A + B) / `total_tokens`** (the important number: headword-or-justified; reconciled with the task formula — see D-015) |
 | `unresolved_forms` | count of bucket C tokens (and rate = C / total) |
 
+Since SODA Task 008 (two-layer resource policy; spec
+`docs/RESOURCE_POLICY.md`) the same evaluator additionally reports:
+
+| Metric | Definition |
+|---|---|
+| `canonical_supported_tokens` / `canonical_coverage` | the A+B set under the **canonical coverage** name (`morphologically_valid_coverage` is kept unchanged for historical comparability and equals `canonical_coverage`) |
+| `broader_resource_supported_tokens` / `broader_resource_supported_coverage` | canonical-supported tokens plus lexical tokens with an **exact surface attestation** in the audited alternative resources (`isv.dic`, `interslavicfreq` wordlists), divided by `total_tokens` — an *evidence estimate*, never a validity claim |
+| `unresolved_tokens` | bucket C (identical to `unresolved_forms`) |
+
+Per token, `tokens.json` now also records `canonical_status`, the
+`resource_evidence` list (layer/source/kind) and `broader_resource_supported`,
+so every counted or excluded form can be justified.
+
 Denominator policy (repeated in every report's `denominator_policy`): coverage
 denominators are lexical tokens; punctuation and numbers are excluded from all
 vocabulary coverage. `tokens_total` reports every token (lexical +
@@ -242,6 +255,14 @@ Status: the harness is implemented; the experiment is not run.
 - **`interslavicfreq`** is deliberately NOT integrated into the baseline
   metrics (optional plausibility signal for later). Hunspell `isv.dic` also
   remains a future independent validity signal.
+- **Two-layer resource policy (SODA Task 008)** — the evaluator now also
+  reports `canonical_coverage` and `broader_resource_supported_coverage`:
+  `data/dictionary/audit/` resources (`isv.dic` exact surfaces,
+  `interslavicfreq` wordlists, `slovnik` historical snapshot) are loaded as a
+  separate evidence layer (`src/isv_eval/evidence.py`). A/B/C semantics are
+  untouched; alternative-resource hits are never promoted into A/B; only
+  exact-surface attestation counts toward the broader tier; orthographic
+  variants and historical presence are recorded as provenance but never count.
 - `more → morem` is NOT hard-coded anywhere; it is used only as the audit
   warning. A token `morem` evaluates to C against the current lexicon, and
   `morje`/`morjem` evaluate to A (verified live).

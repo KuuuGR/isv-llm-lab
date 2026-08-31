@@ -13,13 +13,13 @@ translation application.
 
 ## Status
 
-SODA Task 003 complete (2026-08-31): **Experiment 001 (baseline) has been
-run**. Seven independent whole-story translations (ChatGPT, Gemini, Claude,
-DeepSeek, Bielik, Grok, and the custom GPT "Interslavic — Medžuslovjansky
-Language Teacher") were evaluated against the snapshot dictionary + generated
-full-form lexicon. Results: `experiments/exp001-baseline/outputs/comparison.md`
-and `docs/EXPERIMENTS.md`. Raw inputs and outputs stay out of git
-(copyrighted); per-run hashes make everything reproducible.
+SODA Task 008 complete (2026-09-01): the two-layer resource evaluation policy
+from `docs/RESOURCE_POLICY.md` (Task 007) is implemented in `isv-eval`. The
+evaluator now reports **canonical coverage** and **broader resource-supported
+coverage** side by side, with per-token evidence provenance, while the
+historical A/B/C classifications and all EXP-001/EXP-002 results remain
+unchanged. Experiments: `docs/EXPERIMENTS.md`. Raw inputs and outputs stay out
+of git (copyrighted); per-run hashes make everything reproducible.
 
 ## Documentation
 
@@ -37,14 +37,21 @@ and `docs/EXPERIMENTS.md`. Raw inputs and outputs stay out of git
 ## The evaluator (`isv-eval`)
 
 Takes any Interslavic text and measures how much of its vocabulary is
-justifiable by the available lexical and morphological resources:
+justifiable by the available lexical and morphological resources, under a
+two-layer resource policy (`docs/RESOURCE_POLICY.md`):
 
 - **A** — exact lexical match (headword or inflected form in the full-form
   lexicon generated from the dictionary snapshot + `@interslavic/morphology`);
 - **B** — morphologically valid (rescued by re-inflecting candidate lemmas);
 - **C** — unresolved (preserved with sentence context for manual review);
-- metrics: `exact_dictionary_coverage`, `morphologically_valid_coverage`,
-  `unresolved_rate`, `total_tokens`.
+- **canonical coverage** — `(A + B) / lexical_tokens` (the historical
+  `morphologically_valid_coverage`, renamed/documented);
+- **broader resource-supported coverage** — canonical-supported tokens plus
+  tokens with an **exact surface attestation** in the audited alternative
+  resources (`isv.dic`, `interslavicfreq` wordlists), divided by
+  `lexical_tokens`. An *evidence estimate*, never a validity claim.
+- per-token evidence (layer + source + kind) explains **why** every token was
+  or was not counted.
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
@@ -53,6 +60,10 @@ python3 scripts/fetch_dictionary.py # snapshots basic.json + manifest (network)
 python3 scripts/generate_lexicon.py # builds the full-form lexicon (~90 s)
 .venv/bin/isv-eval text.txt --out results/
 ```
+
+The broader tier is enabled automatically when the audited alternative
+resources are present under `data/dictionary/audit/` (gitignored local
+artifacts); pass `--no-alternative-resources` to skip them.
 
 See `docs/STATE.md` and `experiments/exp001-baseline/DESIGN.md` for details.
 The dictionary snapshot and lexicon are gitignored (license unresolved).
