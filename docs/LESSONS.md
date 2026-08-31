@@ -141,3 +141,27 @@ signal a baseline must avoid.
 metrics compare like with like. If an input artifact is discovered after the
 fact, document it and record length as future metrics rather than comparing
 raw bytes.
+
+## L-009 · 2026-08-31 · Stratify audit samples by cross-model spread; do not let simple heuristics stand in for evidence
+
+**Observation.** When building the manual-audit sample of unresolved forms, a
+"capitalized mid-sentence" heuristic seemed like a cheap way to identify
+proper names — but it flagged dialogue-initial words (`ali`, `bile`, `bio`)
+that simply follow a dash. The reliable basis turned out to be the explicit
+name families that occur in the Polish source story (Bronisława, Teofil,
+Julianna, Przemysława, Antoni, Międzyrzecze), matched against normalized forms
+— and even then the first pattern set missed `przemysława` (ł) and `julijana`
+(juli-jana) until the patterns covered the orthographic variants.
+
+**Why it matters.** Sampling by raw frequency alone produces a worksheet
+dominated by a few hundred tokens of story content (character names), which
+is exactly what a manual audit must not drown in. Cross-model spread
+(shared-by-N) and model-specific strata surface different information than
+frequency. And any heuristic that silently misfires corrupts the "evidence"
+a human reviewer is meant to trust.
+
+**Next time.** For an audit sample: stratify by (frequency, shared-by-many,
+model-specific, orthographic/edge features, names), keep every selection
+deterministic, and validate name grouping against the actual source text
+rather than a surface heuristic. Record what the sample is NOT claiming
+(here: no language-origin judgment) in the worksheet itself.

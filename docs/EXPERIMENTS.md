@@ -91,6 +91,19 @@ with a complete full-form lexicon (L-001).
   measure; human evaluation is a separate future task. Raw file size is
   recorded for input integrity only and is not a translation-quality metric.
 
+### Follow-up: manual audit sample (Task 004, 2026-08-31)
+
+A stratified sample of **100 unresolved forms + 8 diagnostic forms** was
+prepared for human linguistic inspection (`experiments/exp001-baseline/manual-audit/`,
+prepared by `scripts/sample_exp001_audit.py`). It is a follow-up analysis of
+EXP-001, not a new experiment; no metrics or raw files were changed and no
+linguistic-origin classification was performed. Sample groups: 25
+high-frequency (A), 25 shared-by-2–6-models (B), 25 model-specific (C), 15
+diverse/edge-case (D), 10 story-name representatives (E), plus the 8 forms
+unresolved by all seven models as a diagnostic appendix. Dataset statistics:
+1,050 unique unresolved forms / 2,888 occurrences; 831 forms appear in exactly
+one model, 8 in all seven.
+
 ## Planned (not started)
 
 - **EXP-002 — Constrained generation (documented in DESIGN.md, not implemented).**

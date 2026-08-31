@@ -1,6 +1,6 @@
 # Roadmap
 
-Status: updated 2026-08-31 (end of Task 003). This is a plan, not a
+Status: updated 2026-08-31 (end of Task 004). This is a plan, not a
 commitment; the Architect/Research Lead re-prioritizes as evidence arrives.
 
 ## Done
@@ -31,14 +31,31 @@ commitment; the Architect/Research Lead re-prioritizes as evidence arrives.
   - [x] B-bucket fallback batched (one morphology call per chunk of distinct
         candidate lemmas) — cut full-story runtime from minutes to seconds.
   - [x] Results: `experiments/exp001-baseline/outputs/comparison.md` + docs/EXPERIMENTS.md.
+- [x] **Task 004 — Manual audit sample prepared** (follow-up analysis of
+  EXP-001, not a new experiment):
+  - [x] Dataset statistics (1,050 unique unresolved forms / 2,888 occurrences;
+        831 in exactly one model, 8 in all seven).
+  - [x] Stratified ~100-form sample (`scripts/sample_exp001_audit.py`):
+        A 25 high-frequency, B 25 shared (2–6 models), C 25 model-specific,
+        D 15 diverse/edge-case, E 10 story-name representatives, plus the
+        8 shared-by-all forms as a diagnostic appendix.
+  - [x] Worksheet with blank human-review columns
+        (`experiments/exp001-baseline/manual-audit/`), no automatic
+        linguistic classification.
 
 ## Next recommended task (single)
 
-- [ ] **Experiment 002 — constrained generation** (compare against this
-  baseline; see `experiments/exp001-baseline/DESIGN.md` § Future experiment).
+- [ ] **Manual linguistic review of the Experiment 001 unresolved sample** —
+  annotate `experiments/exp001-baseline/manual-audit/sample.csv`
+  (100 stratified forms + 8 shared-by-all diagnostic forms, prepared in Task
+  004; full contexts in `sample.json`). Human classification only — no
+  automatic language-origin detection.
 
 ## Later
 
+- [ ] **Experiment 002 — constrained generation** (compare against the
+  baseline; see `experiments/exp001-baseline/DESIGN.md` § Future experiment)
+  after the manual audit informs what the unresolved forms actually are.
 - [ ] Investigate dictionary **data licensing** (Steen source data / Google
   Spreadsheet) before any redistribution of derived data.
 - [ ] Decide primary morphology backend for constrained generation
@@ -48,9 +65,6 @@ commitment; the Architect/Research Lead re-prioritizes as evidence arrives.
   (planned signal for suspicious-form ranking, not yet integrated).
 - [ ] Precomputed lexicon index (e.g. serialized dict) to cut lexicon load time
   if full-story runs get slow.
-- [ ] Manual linguistic review of the Experiment 001 unresolved vocabularies
-  (sentence context + candidate lemmas already preserved in
-  `outputs/*/unresolved.json`); no automatic language-origin classification.
 
 ## Future ideas (recorded, not implemented)
 

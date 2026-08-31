@@ -157,3 +157,16 @@ valid comparison of translation length or quality in Experiment 001 — sizes
 are recorded for input integrity only, and the previous report's size
 observation is clarified accordingly. No new length metrics are implemented in
 this task; they are recorded as future ideas in ROADMAP.
+
+## D-021 · 2026-08-31 · Manual audit sample is stratified evidence, not a classification
+
+The ~100-form unresolved sample for human review is stratified to maximize
+information (high-frequency / shared / model-specific / diverse-edge / names),
+built deterministically by `scripts/sample_exp001_audit.py`, and explicitly
+excludes any automatic linguistic-origin judgment. Group E (names) uses the
+name families from the source story; group D records only factual resource
+relationships (e.g. matches a lexicon form once diacritics are stripped). The
+8 forms unresolved by all seven models are kept as a diagnostic appendix,
+not merged into the main sample. `human_class` columns stay blank for the
+human reviewer. The sample data (which quotes copyrighted output sentences)
+is gitignored; only the README and script are committed.

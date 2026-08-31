@@ -1,6 +1,6 @@
 # Project State
 
-Updated: 2026-08-31 (SODA Task 003 complete — Experiment 001 baseline run)
+Updated: 2026-08-31 (SODA Task 004 — manual audit sample prepared)
 
 ## What this project is
 
@@ -17,7 +17,7 @@ Research hypothesis:
 This is a hypothesis. The first experiment must establish a baseline before
 any constrained system is judged against it.
 
-## Current status (end of Task 003)
+## Current status (end of Task 004)
 
 | Area | Status |
 |---|---|
@@ -32,6 +32,7 @@ any constrained system is judged against it.
 | Evaluation harness | ✅ `isv-eval` CLI: tokenizer, lexical lookup, morphological validation, A/B/C classification, metrics, serialization |
 | Smoke tests | ✅ 31 tests (tokenizer, normalization, classifier, B-fallback, end-to-end corpus) |
 | **Experiment 001 (baseline)** | ✅ **RUN COMPLETED** — 7 model conditions evaluated on the complete Polish story; comparison in `experiments/exp001-baseline/outputs/comparison.md` |
+| **Manual audit sample (Task 004)** | ✅ **PREPARED** — stratified ~100-form sample of unresolved forms + statistics under `experiments/exp001-baseline/manual-audit/` (local, gitignored) for human review; no linguistic classification performed |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
 
 ### Experiment 001 headline numbers
@@ -68,6 +69,7 @@ src/
 scripts/
   fetch_dictionary.py        — snapshot basic.json + write manifest
   generate_lexicon.py        — build full-form lexicon TSV + manifest
+  sample_exp001_audit.py     — build the manual-audit sample of unresolved forms
 data/
   dictionary/README.md       — how to regenerate the (gitignored) data
 tests/
@@ -83,6 +85,7 @@ docs/
 experiments/
   exp001-baseline/
     DESIGN.md                — Experiment 001 design (input/storage/metrics/reproducibility)
+    manual-audit/README.md   — manual audit sample of unresolved forms (data is gitignored)
 ```
 
 ## Working agreements

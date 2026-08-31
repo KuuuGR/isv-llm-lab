@@ -14,6 +14,10 @@ experiments/**/outputs/*
 experiments/**/input/*
 !experiments/**/input/README.md
 
+# Manual-audit sample quotes copyrighted output sentences — stay local
+experiments/**/manual-audit/*
+!experiments/**/manual-audit/README.md
+
 # Raw experiment input set (source story + model outputs, copyrighted)
 opowiadania-set-isv/
 
