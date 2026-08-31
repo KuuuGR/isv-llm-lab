@@ -1,6 +1,7 @@
 # Roadmap
 
-Status: updated 2026-08-31 (Task 006.1 — EXP-002 operator packaging complete).
+Status: updated 2026-08-31 (Task 006.2 — EXP-002 pilot executed, finalized,
+and analyzed; next recommended task is evaluator/resource reconciliation).
 This is a plan, not a commitment; the Architect/Research Lead re-prioritizes
 as evidence arrives.
 
@@ -104,16 +105,43 @@ as evidence arrives.
   - [x] `.md` operator files gitignored (they embed complete model output);
         README + manifest.json committed. Pilot README now documents the
         copy/paste workflow.
+- [x] **Task 006.2 — EXP-002 pilot executed, finalized, and analyzed**:
+  - [x] All seven conditions executed externally via the operator prompts,
+        collected byte-for-byte, compared with the SAME evaluator as EXP-001.
+  - [x] Completeness + SHA-256 integrity verified for all 7 runs
+        (`scripts/verify_exp002_runs.py`; 7/7 pass).
+  - [x] Regression bookkeeping improved: **token-aligned evaluator-state
+        transition matrix** (C→A / C→B / C→C / A→A / A→B / A→C / B→A / B→B /
+        B→C) with A→C and B→C regression lists, plus a per-selected-form
+        candidate-usage table (`scripts/compare_exp002.py`). This exposed A→C
+        regressions the old unique-form bookkeeping missed.
+  - [x] Results: 6/7 models improved coverage (+0.35…+1.28 pp); C→A = 90,
+        A→C = 12, B→C = 0. Grok (7) and Claude (3) introduced non-supplied
+        spellings; ChatGPT (2) over-applied supplied candidates to valid forms.
+  - [x] `interslavicfreq` discrepancy explained: alternative-resource surfaces
+        are invisible to the strictly canonical evaluator (adopted `seli`,
+        `sedeli`, `reci`, `rekl`, `dejstvitelno` produced no measurable gain);
+        an evaluator/resource integration gap by design, not an error in either
+        layer. No resource modified.
+  - [x] Bielik no-change case byte-verified (formatting-only revision;
+        hypotheses recorded, no internal-cause claim).
+  - [x] 5 curated complete before/after human-review pairs
+        (`comparison/human_review.md`) across outcome categories.
+  - [x] Final report + single recommendation
+        (`experiments/exp002-pilot/REPORT.md`).
 
 ## Next recommended task (single)
 
-- [ ] **Execute the EXP-002 pilot** (Task 006 follow-up) — send the prepared
-  revision prompts (`experiments/exp002-pilot/input/<run>/prompt.txt`, one per
-  EXP-001 source run) to an LLM externally, save each reply byte-for-byte,
-  register it with `scripts/run_exp002_pilot.py collect`, then run
-  `scripts/run_exp002_pilot.py compare` for the before/after evidence. The
-  pilot's success criteria (§10 of DESIGN.md) decide whether a larger EXP-002
-  is justified. Do not proceed to a larger experiment automatically.
+- [ ] **Evaluate/reconcile the evaluator-resource layer** (Task 006.2
+  recommendation B) — the pilot showed that candidate generation (alternative
+  resources: `interslavicfreq`, hunspell) and evaluation (strictly canonical
+  dictionary) use inconsistent standards: adopted alternative-resource forms
+  (`seli`, `sedeli`, `reci`, `rekl`, `dejstvitelno`) produce no measurable
+  coverage gain. Reconcile the layers under a single documented resource policy
+  (optionally an explicit, clearly-labeled alternative-resource attestation
+  tier separate from canonical A/B/C) before any larger experiment, whose
+  coverage numbers would otherwise be uninterpretable. Do not start this task
+  from this roadmap entry alone — it requires a SODA task.
 
 ## Parallel (not blocking the pilot)
 
@@ -126,9 +154,11 @@ as evidence arrives.
 
 ## Later
 
-- [ ] **Experiment 002 — full-scale constrained/dictionary-guided generation**
-  after the pilot (Task 006) reports evidence on which unresolved-form
-  categories benefit from supplied alternatives.
+- [ ] **Experiment 002/003 — full-scale constrained/dictionary-guided
+  generation** — only after the evaluator/resource reconciliation (next
+  recommended task) makes coverage numbers interpretable; the pilot evidence
+  will then decide which unresolved-form categories benefit from supplied
+  alternatives.
 - [ ] Investigate dictionary **data licensing** (Steen source data / Google
   Spreadsheet) before any redistribution of derived data.
 - [ ] Decide primary morphology backend for constrained generation
@@ -157,5 +187,13 @@ as evidence arrives.
   in the candidate ranking (e.g. down-weight neologisms/doubtful entries).
 - A lightweight manual-review workflow for "suspicious forms" with sentence
   context preserved (no language-origin classifier in Task 001).
+- Token-aligned evaluator-state transitions (implemented in `compare_exp002.py`
+  for EXP-002) reused as a standard regression signal in any future
+  before/after comparison.
+- An explicit, clearly-labeled alternative-resource attestation tier in the
+  evaluator (separate from canonical A/B/C), so forms attested in
+  `interslavicfreq`/hunspell can be recorded without silently changing the
+  canonical classification (candidate direction from Task 006.2
+  recommendation B).
 - Corpus building: collected raw model outputs + validated analysis as a seed
   evaluation set for later experiments.

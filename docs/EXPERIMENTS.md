@@ -134,18 +134,18 @@ and explicitly bounded; no forced conclusion.
 
 | Field | Value |
 |---|---|
-| Status | **PILOT PREPARED** (Task 006, 2026-08-31). Input packages ready for all seven EXP-001 source runs; external LLM execution pending. No revision has been run or evaluated yet. |
+| Status | **EXECUTED AND ANALYZED** (Task 006.2, 2026-08-31). All seven conditions were run externally, compared with the same evaluator, and finalized. Results, transition/regression analysis, the `interslavicfreq` discrepancy, and the recommendation are in `experiments/exp002-pilot/REPORT.md`. |
 | Design | `experiments/exp002-pilot/DESIGN.md` |
 | Hypothesis | "If an LLM is given explicit Interslavic lexical alternatives for forms that are not present in the canonical dictionary, can it revise its own complete translation into a version with better lexical/morphological resource coverage while preserving the meaning and coherence of the original text?" |
 | Loop under test | EXP-001 output → identify unresolved forms → deterministic candidate generation (canonical dictionary / Task-005 cross-resource evidence / morphology) → stratified pilot selection → revision prompt (complete original + candidate table) → EXTERNAL LLM → complete revised translation → SAME `isv-eval` on original and revised → before/after comparison |
 | Two questions kept distinct | (A) Can an unresolved form be replaced by a resource-supported form? — deterministic candidate generation, no LLM. (B) Can an LLM use supplied alternatives correctly in context? — the actual pilot research question. |
 | Candidate sources | canonical dictionary (`basic.json`/lexicon), orthographic variants, alternative resources (hunspell `isv.dic`, `interslavicfreq`, `slovnik` snapshot), morphology-derived canonical lemmas (JS engine paradigms as supporting evidence), none (leave unchanged). Provenance per candidate; no invented candidates; no language-origin classification. |
 | Pilot composition | 30 stratified forms per source run (ortho / resource / morphology / high-freq / shared / specific / no-candidate strata); character names and quoted example words excluded from revision targets. Prepared for all 7 runs by `scripts/prepare_exp002_pilot.py`. |
-| Execution | External (no LLM API client, D-007). `scripts/run_exp002_pilot.py collect` stores raw replies byte-for-byte, records metadata (unknowns stay `unknown`), refuses overwrite. |
-| Evaluation | `scripts/compare_exp002.py` — before/after: lexical tokens, A/B/C counts, valid coverage, unresolved rate, unique unresolved forms, resolved / newly-introduced forms; replacement metrics: supplied candidates used / accepted / not used / replaced-without-candidate (must be 0). Same evaluator as EXP-001. |
-| Human evaluation | Complete before/after text pairs in `comparison/human_review.md` for holistic Project-Owner reading (qualitative evidence, no word-by-word annotation, no scores). |
-| Reproducibility | Selection and candidates deterministic (regeneration byte-identical except `prepared_at`); per-run metadata records source EXP-001 run id, original/revision SHA-256, prompt hash, candidate list, evaluator commit, dictionary manifest, resource provenance, experiment condition. |
-| Layout | `experiments/exp002-pilot/{DESIGN.md, README.md, prompt_template.txt}` committed; `input/`, `outputs/`, `comparison/` gitignored (embed raw model output). |
+| Execution | External (no LLM API client, D-007). `scripts/run_exp002_pilot.py collect` stores raw replies byte-for-byte, records metadata (unknowns stay `unknown`), refuses overwrite. All seven runs were executed via the `operator-prompts/` copy/paste interface. |
+| Evaluation | `scripts/compare_exp002.py` — before/after: lexical tokens, A/B/C counts, valid coverage, unresolved rate, unique unresolved forms, resolved / newly-introduced forms; replacement metrics: supplied candidates used / accepted / not used / replaced-without-candidate. Since Task 006.2: a **token-aligned evaluator-state transition matrix** (all nine C→A/C→B/C→C/A→A/A→B/A→C/B→A/B→B/B→C transitions, with A→C and B→C regression lists) and a **per-selected-form candidate-usage table**. Same evaluator as EXP-001. |
+| Human evaluation | 5 complete before/after text pairs in `comparison/human_review.md` (curated across outcome categories) for holistic Project-Owner reading (qualitative evidence, no word-by-word annotation, no scores). |
+| Reproducibility | Selection and candidates deterministic (regeneration byte-identical except `prepared_at`); per-run metadata records source EXP-001 run id, original/revision SHA-256, prompt hash, candidate list, evaluator commit, dictionary manifest, resource provenance, experiment condition. Completeness + SHA-256 verified for all 7 runs by `scripts/verify_exp002_runs.py` (7/7 pass). |
+| Layout | `experiments/exp002-pilot/{DESIGN.md, README.md, REPORT.md, prompt_template.txt}` committed; `input/`, `outputs/`, `comparison/` gitignored (embed raw model output). |
 
 ### Status (Task 006)
 
@@ -183,8 +183,73 @@ Usability audit and packaging of the prepared pilot (no experiment change):
   gitignored (they embed complete model output); README + manifest.json
   committed. The pilot is ready for external execution with copy/paste only.
 
+### Follow-up: execution and finalization (Task 006.2, 2026-08-31)
+
+The pilot was executed for all seven conditions and finalized. Headline
+results (same evaluator as EXP-001; lexical-token denominators; Δ pp of valid
+coverage):
+
+| Model | Baseline | Revised | Δ pp | Unresolved tokens | Unique unresolved | A→C regressions |
+|---|---:|---:|---:|---:|---:|---:|
+| ChatGPT | 75.95% | 77.20% | +1.25 | 366 → 347 | 189 → 184 | 2 |
+| Claude | 73.55% | 74.83% | +1.28 | 393 → 374 | 197 → 195 | 3 |
+| Gemini | 71.72% | 72.60% | +0.88 | 416 → 403 | 197 → 190 | 0 |
+| Grok | 76.56% | 77.51% | +0.95 | 345 → 331 | 176 → 176 | 7 |
+| GPTs — ISV Teacher | 79.83% | 80.35% | +0.53 | 307 → 299 | 175 → 173 | 0 |
+| DeepSeek | 74.42% | 74.77% | +0.35 | 366 → 361 | 176 → 173 | 0 |
+| Bielik | 55.48% | 55.48% | +0.00 | 695 → 695 | 335 → 335 | 0 |
+
+- **Bookkeeping improvement.** `compare_exp002.py` now computes a
+  **token-aligned evaluator-state transition matrix** (LCS alignment of
+  lexical tokens): totals C→A = 90, A→C = 12, B→C = 0, C→B = 0 (the B bucket
+  is nearly empty in these texts, 1–4 tokens per run). This exposed A→C
+  regressions the old unique-form bookkeeping missed (e.g. ChatGPT
+  `někogda→někdy`, `čto→što` — supplied candidates over-applied to
+  already-valid forms; and Claude `različna→různa`, the third Claude
+  regression).
+- **Candidate usage.** All six revising models adopted 4–7 supplied surfaces
+  as targeted replacements; 5–6 supplied surfaces were newly introduced by
+  each revision; Bielik introduced none. Accepted adoptions almost always
+  coincide with canonical dictionary forms; adoptions attested only in
+  alternative resources are rejected by the evaluator.
+- **A→C regressions (12).** Grok (7) and Claude (3) changed valid `različ-*`
+  forms into non-supplied `růz-*`/`různč-*` spellings (compliance failure);
+  ChatGPT (2) over-applied supplied candidates to valid forms
+  (`někogda→někdy`, `čto→što`). B→C = 0 everywhere.
+- **`interslavicfreq` discrepancy.** Supplied surfaces attested in
+  `interslavicfreq` are invisible to the canonical evaluator: adopted
+  replacements `seli`, `sedeli`, `reci`, `rekl`, `dejstvitelno` produced no
+  coverage gain, and 113 alternative-resource surfaces used in revisions were
+  never accepted. The evaluator is strictly canonical-dictionary-driven
+  (exact/folded lexicon match + morphology over prefix-matching canonical
+  lemmas); these forms have no canonical lemma path (e.g. `reći` is absent
+  from the canonical dictionary; `bojati sę` is excluded from lemma-driven
+  morphology; `dejstvitelno` has no prefix-matching lemma at all). This is an
+  evaluator/resource integration gap by design, not an error in either layer.
+- **Bielik.** Byte-verified no-change: identical lexical token sequences
+  (1561 = 1561), 0 positional diffs; only formatting changed (33 leading `- `
+  dialogue markers removed, dialogue re-indented). No target form replaced, no
+  supplied candidate introduced; hypotheses recorded, no internal-cause claim.
+- **Human review.** 5 curated complete before/after pairs in
+  `comparison/human_review.md` (clear improvement / no regression / with
+  regression / little improvement / no change) for holistic Project-Owner
+  reading.
+- **Recommendation.** **B — improve the evaluator/resource layer first**:
+  candidate generation and evaluation use inconsistent resource layers, so
+  coverage numbers from any larger experiment would be uninterpretable until
+  they are reconciled. Not started.
+
+Full report: `experiments/exp002-pilot/REPORT.md`; per-run detail in
+`comparison/<run>/` (local, gitignored).
+
 ## Planned (not started)
 
-- **EXP-002 full scale** — only if the pilot's evidence justifies it (DESIGN §10); do not proceed automatically.
+- **Evaluator/resource reconciliation (recommended next task, Task 006.2
+  outcome B)** — align candidate generation and evaluation under a single,
+  documented resource policy before any larger experiment; the `interslavicfreq`
+  discrepancy shows the current layers disagree. Not started.
+- **EXP-002 full scale / EXP-003** — only after the resource/evaluator
+  reconciliation makes coverage numbers interpretable; do not proceed
+  automatically.
 - **Manual linguistic review** of the EXP-001 unresolved sample (Task 004 artifacts; human-only, no automatic classification).
 

@@ -21,6 +21,7 @@ from the existing evaluator plus the deterministic candidate bookkeeping.
 
 from __future__ import annotations
 
+import difflib
 import json
 import subprocess
 import sys
@@ -55,6 +56,128 @@ def load_candidates(pilot_input: Path) -> list[dict]:
     """Return the selected-form records from the pilot candidates.json."""
     data = json.loads((pilot_input / "candidates.json").read_text(encoding="utf-8"))
     return data["selected_forms"]
+
+
+def align_lexical(
+    before_tokens: list[dict],
+    after_tokens: list[dict],
+) -> list[tuple[dict | None, dict | None]]:
+    """Align lexical token sequences (by normalized form) with LCS (difflib).
+
+    Returns aligned pairs; unmatched positions carry None. Pairs are used to
+    describe evaluator-state transitions per position — never as a claim about
+    linguistic correctness.
+    """
+    b = [t for t in before_tokens if t.get("is_lexical")]
+    a = [t for t in after_tokens if t.get("is_lexical")]
+    b_norms = [t["normalized"] for t in b]
+    a_norms = [t["normalized"] for t in a]
+    matcher = difflib.SequenceMatcher(None, b_norms, a_norms, autojunk=False)
+    pairs: list[tuple[dict | None, dict | None]] = []
+    for tag, i1, i2, j1, j2 in matcher.get_opcodes():
+        if tag == "equal":
+            for k in range(i2 - i1):
+                pairs.append((b[i1 + k], a[j1 + k]))
+        elif tag == "replace":
+            n = min(i2 - i1, j2 - j1)
+            for k in range(n):
+                pairs.append((b[i1 + k], a[j1 + k]))
+            for k in range(n, i2 - i1):
+                pairs.append((b[i1 + k], None))
+            for k in range(n, j2 - j1):
+                pairs.append((None, a[j1 + k]))
+        elif tag == "delete":
+            for k in range(i2 - i1):
+                pairs.append((b[i1 + k], None))
+        elif tag == "insert":
+            for k in range(j2 - j1):
+                pairs.append((None, a[j1 + k]))
+    return pairs
+
+
+def transition_stats(
+    pairs: list[tuple[dict | None, dict | None]],
+) -> tuple[dict[str, int], dict[str, list[dict]]]:
+    """Per-position before→after evaluator-class transitions.
+
+    matrix keys: A→A, A→B, A→C, B→A, B→B, B→C, C→A, C→B, C→C, plus
+    unmatched_before / unmatched_after for alignment gaps.
+    detail: A_to_C, B_to_C, C_to_A, C_to_B, A_to_B, B_to_A — lists of
+    {"form", "replacement", "count"} aggregated over aligned positions where
+    the surface changed. Evaluator-state transitions only.
+    """
+    matrix: dict[str, int] = defaultdict(int)
+    form_pairs: dict[tuple[str, str], Counter] = defaultdict(Counter)
+    for b_tok, a_tok in pairs:
+        if b_tok is None:
+            matrix["unmatched_after"] += 1
+            continue
+        if a_tok is None:
+            matrix["unmatched_before"] += 1
+            continue
+        b_cls, a_cls = b_tok["classification"], a_tok["classification"]
+        key = f"{b_cls}→{a_cls}"
+        matrix[key] += 1
+        b_form, a_form = b_tok["normalized"], a_tok["normalized"]
+        if b_form != a_form:
+            form_pairs[(b_cls, a_cls)][(b_form, a_form)] += 1
+    detail: dict[str, list[dict]] = {}
+    for pair_key, list_key in [
+        (("A", "C"), "A_to_C"),
+        (("B", "C"), "B_to_C"),
+        (("C", "A"), "C_to_A"),
+        (("C", "B"), "C_to_B"),
+        (("A", "B"), "A_to_B"),
+        (("B", "A"), "B_to_A"),
+    ]:
+        entries = [
+            {"form": f, "replacement": r, "count": c}
+            for (f, r), c in sorted(form_pairs[pair_key].items())
+        ]
+        if entries:
+            detail[list_key] = entries
+    return dict(matrix), detail
+
+
+def candidate_usage(
+    records: list[dict],
+    pairs: list[tuple[dict | None, dict | None]],
+    after_tokens: list[dict],
+    after_lexical: set[str],
+) -> list[dict]:
+    """Per selected form: supplied candidates, usage in revised output,
+    evaluator acceptance, whether the original form disappeared, and which
+    surfaces actually replaced it at its aligned positions."""
+    out: list[dict] = []
+    for rec in records:
+        form = rec["form"]
+        form_key = form.lower()
+        supplied = sorted({alt["surface"].lower()
+                           for alt in rec.get("alternatives", [])})
+        supplied_set = set(supplied)
+        used = sorted(supplied_set & after_lexical)
+        accepted = sorted({t["token"].lower() for t in after_tokens
+                           if t["token"].lower() in supplied_set
+                           and t.get("classification") in ("A", "B")})
+        replacements: Counter = Counter()
+        for b_tok, a_tok in pairs:
+            if (b_tok is not None and a_tok is not None
+                    and b_tok["normalized"].lower() == form_key):
+                replacements[a_tok["normalized"]] += 1
+        replacement_surfaces = {s: c for s, c in sorted(replacements.items())}
+        other = sorted({s for s in replacements
+                        if s.lower() != form_key and s.lower() not in supplied_set})
+        out.append({
+            "form": form,
+            "stratum": rec.get("stratum"),
+            "candidate_surfaces_supplied": supplied,
+            "candidate_surfaces_used_in_revised": used,
+            "candidate_surfaces_accepted_in_revised": accepted,
+            "original_form_disappeared": form_key not in after_lexical,
+            "replacement_surfaces_at_form_positions": replacement_surfaces,
+            "non_supplied_surfaces_introduced": other,
+        })
+    return out
 
 
 def compute_comparison(pilot_input: Path, revised_path: Path) -> dict:
@@ -93,8 +216,10 @@ def compute_comparison(pilot_input: Path, revised_path: Path) -> dict:
                 candidate_lemmas.add(alt["lemma"].lower())
             supplied_by_form[r["form"]].add(alt["surface"].lower())
 
-    before_lexical = {t["token"].lower() for t in load_tokens(before_dir)}
-    after_lexical = {t["token"].lower() for t in load_tokens(after_dir)}
+    before_tokens = load_tokens(before_dir)
+    after_tokens = load_tokens(after_dir)
+    before_lexical = {t["token"].lower() for t in before_tokens}
+    after_lexical = {t["token"].lower() for t in after_tokens}
     # A supplied surface "used" in revised is surface-level overlap, not proof
     # of a targeted replacement: distinguish pre-existing tokens (also present
     # in the original) from tokens newly introduced by the revision.
@@ -105,7 +230,7 @@ def compute_comparison(pilot_input: Path, revised_path: Path) -> dict:
         c for c in candidate_lemmas if c in after_lexical)
     # supplied candidates that the evaluator accepts (A/B) in revised output
     accepted = set()
-    for t in load_tokens(after_dir):
+    for t in after_tokens:
         if t["token"].lower() in candidate_surfaces and t.get("classification") in ("A", "B"):
             accepted.add(t["token"].lower())
 
@@ -121,6 +246,11 @@ def compute_comparison(pilot_input: Path, revised_path: Path) -> dict:
             replaced_without_candidate.append(form)
         elif supplied_for_form and not (supplied_for_form & after_lexical):
             replaced_without_candidate.append(form)
+
+    # Evaluator-state transitions (token-aligned) and per-form candidate usage.
+    pairs = align_lexical(before_tokens, after_tokens)
+    transition_matrix, transition_detail = transition_stats(pairs)
+    usage = candidate_usage(records, pairs, after_tokens, after_lexical)
 
     bm, am = before["report"]["metrics"], after["report"]["metrics"]
     comparison = {
@@ -167,6 +297,14 @@ def compute_comparison(pilot_input: Path, revised_path: Path) -> dict:
             "unresolved_forms_replaced_without_supplied_candidate":
                 replaced_without_candidate,
         },
+        "transitions": {
+            "method": "per-position LCS alignment of lexical tokens; "
+                      "before→after evaluator class; evaluator-state "
+                      "transitions only, no linguistic judgment",
+            "matrix": transition_matrix,
+            "detail": transition_detail,
+        },
+        "candidate_usage": usage,
         "note": "Metrics from the same isv-eval evaluator; replacement "
                 "bookkeeping is deterministic and evidence-based; no "
                 "linguistic quality score.",
@@ -177,6 +315,69 @@ def compute_comparison(pilot_input: Path, revised_path: Path) -> dict:
 def load_tokens(eval_dir: Path) -> list[dict]:
     with open(eval_dir / "tokens.json", encoding="utf-8") as fh:
         return json.load(fh)
+
+
+def render_transitions(comparison: dict, lines: list[str]) -> None:
+    t = comparison.get("transitions")
+    if not t:
+        return
+    matrix = t["matrix"]
+    lines += [
+        "",
+        "## Evaluator-state transitions (token-aligned, same evaluator)",
+        "",
+        "| transition | count |",
+        "|---|---:|",
+    ]
+    order = ["A→A", "A→B", "A→C", "B→A", "B→B", "B→C", "C→A", "C→B", "C→C",
+             "unmatched_before", "unmatched_after"]
+    for key in order:
+        lines.append(f"| {key} | {matrix.get(key, 0)} |")
+    lines.append("")
+    detail = t["detail"]
+    for key, label in [
+        ("A_to_C", "A→C regressions (previously exact → unresolved)"),
+        ("B_to_C", "B→C regressions (previously morphologically valid → unresolved)"),
+        ("C_to_A", "C→A resolutions (previously unresolved → exact)"),
+        ("C_to_B", "C→B resolutions (previously unresolved → morphologically valid)"),
+        ("A_to_B", "A→B (previously exact → morphologically valid only)"),
+        ("B_to_A", "B→A (previously morphologically valid → exact)"),
+    ]:
+        entries = detail.get(key)
+        if entries:
+            lines.append(f"{label}:")
+            lines.append("  " + "; ".join(
+                f"{e['form']} → {e['replacement']} (×{e['count']})"
+                for e in entries))
+            lines.append("")
+
+
+def render_candidate_usage(comparison: dict, lines: list[str]) -> None:
+    usage = comparison.get("candidate_usage")
+    if not usage:
+        return
+    lines += [
+        "",
+        "## Candidate usage per selected form",
+        "",
+        "| form | supplied | used | accepted | original gone | replacement(s) | "
+        "other non-supplied |",
+        "|---|---|---|---|---|---|---|",
+    ]
+    for u in usage:
+        supplied = ", ".join(u["candidate_surfaces_supplied"][:4])
+        if len(u["candidate_surfaces_supplied"]) > 4:
+            supplied += " …"
+        repl = ", ".join(f"{s}×{c}" for s, c
+                         in u["replacement_surfaces_at_form_positions"].items()) or "—"
+        other = ", ".join(u["non_supplied_surfaces_introduced"]) or "—"
+        lines.append(
+            f"| {u['form']} | {len(u['candidate_surfaces_supplied'])} "
+            f"({supplied}) | {len(u['candidate_surfaces_used_in_revised'])} | "
+            f"{len(u['candidate_surfaces_accepted_in_revised'])} | "
+            f"{'yes' if u['original_form_disappeared'] else 'no'} | "
+            f"{repl} | {other} |")
+    lines.append("")
 
 
 def render_md(comparison: dict) -> str:
@@ -232,6 +433,8 @@ def render_md(comparison: dict) -> str:
             "⚠️ FLAG: unresolved forms replaced without a supplied candidate:",
             "  " + ", ".join(r["unresolved_forms_replaced_without_supplied_candidate"]),
         ]
+    render_transitions(comparison, lines)
+    render_candidate_usage(comparison, lines)
     lines += ["", "No linguistic quality score is assigned.", ""]
     return "\n".join(lines)
 
@@ -246,12 +449,14 @@ def _pctd(v: float | None) -> str:
     return f"{v * 100:+.2f}%"
 
 
-def render_human_pairs(pairs: list[tuple[str, str, str]]) -> str:
+def render_human_pairs(pairs: list[tuple[str, str, str, str]]) -> str:
     """Complete before/after text pairs for holistic Project-Owner reading.
 
     Qualitative evidence only — no word-by-word annotation, no scoring.
     Each pair is the COMPLETE original translation and the COMPLETE revised
-    output of one pilot run, stored verbatim.
+    output of one pilot run, stored verbatim. Each pair carries only an
+    outcome category (a descriptive label of evaluator coverage change), so
+    the Project Owner can select examples without lexical annotation.
     """
     lines = [
         "# EXP-002 pilot — human review pairs (holistic reading)",
@@ -262,10 +467,15 @@ def render_human_pairs(pairs: list[tuple[str, str, str]]) -> str:
         "byte-for-byte from the pilot input packages and the raw revised "
         "outputs.",
         "",
+        "Each pair is labeled only with the observed outcome category "
+        "(evaluator coverage change); no word-by-word annotation is given.",
+        "",
     ]
-    for i, (run_id, before, after) in enumerate(pairs, start=1):
+    for i, (run_id, outcome, before, after) in enumerate(pairs, start=1):
         lines += [
             f"## Pair {i} — {run_id}",
+            "",
+            f"**Outcome category:** {outcome}",
             "",
             "### Before (original EXP-001 translation)",
             "",
@@ -283,14 +493,31 @@ def render_human_pairs(pairs: list[tuple[str, str, str]]) -> str:
     return "\n".join(lines)
 
 
+# Representative outcome categories for holistic reading. Selected
+# deterministically to cover different observed outcomes; raw outputs stay
+# byte-for-byte. The categories are evaluator-coverage labels only.
+HUMAN_PAIR_SELECTION: dict[str, str] = {
+    "exp002__2026-08-31__openai__chatgpt__unknown":
+        "clear improvement, no new unresolved unique forms",
+    "exp002__2026-08-31__google__gemini__unknown":
+        "improvement with no A→C regression",
+    "exp002__2026-08-31__anthropic__claude__unknown":
+        "improvement with A→C regression (različ-* → růz-* spellings)",
+    "exp002__2026-08-31__deepseek__deepseek__unknown":
+        "little improvement (+0.35 pp)",
+    "exp002__2026-08-31__unknown__bielik__unknown":
+        "no change (formatting-only revision)",
+}
+
+
 def main(argv: list[str] | None = None) -> int:
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--pilot-run", default=None,
                         help="single pilot run id; default: all with a revised output")
-    parser.add_argument("--human-pairs", type=int, default=2,
+    parser.add_argument("--human-pairs", type=int, default=len(HUMAN_PAIR_SELECTION),
                         help="number of complete before/after pairs to write "
-                             "into the human-review doc (default 2)")
+                             "into the human-review doc")
     args = parser.parse_args(argv)
 
     comparisons = []
@@ -334,16 +561,19 @@ def main(argv: list[str] | None = None) -> int:
         "\n".join(summary_md), encoding="utf-8")
     print("\n" + "\n".join(summary_md))
 
-    # Human review pairs: complete before/after texts, first N pilot runs.
-    pairs = []
-    for c in comparisons:
-        pilot_input = INPUT_DIR / c["pilot_run_id"]
-        revised = OUTPUTS_DIR / c["pilot_run_id"] / "revised.txt"
-        pairs.append((c["pilot_run_id"],
+    # Human review pairs: complete before/after texts, selected across
+    # outcome categories in HUMAN_PAIR_SELECTION order (deterministic).
+    by_id = {c["pilot_run_id"]: c for c in comparisons}
+    pairs: list[tuple[str, str, str, str]] = []
+    for run_id in HUMAN_PAIR_SELECTION:
+        c = by_id.get(run_id)
+        if not c or len(pairs) >= max(1, args.human_pairs):
+            continue
+        pilot_input = INPUT_DIR / run_id
+        revised = OUTPUTS_DIR / run_id / "revised.txt"
+        pairs.append((run_id, HUMAN_PAIR_SELECTION[run_id],
                       (pilot_input / "original.txt").read_text(encoding="utf-8"),
                       revised.read_text(encoding="utf-8")))
-        if len(pairs) >= max(1, args.human_pairs):
-            break
     (COMPARISON_DIR / "human_review.md").write_text(
         render_human_pairs(pairs), encoding="utf-8")
     print(f"[human-review] wrote {len(pairs)} complete before/after pair(s) to "

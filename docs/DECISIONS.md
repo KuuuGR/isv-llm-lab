@@ -299,3 +299,44 @@ usability problem was naming and discoverability, not content. Decisions:
   committed.
 - **No scope growth.** Task 006.1 is packaging/usability only — no new
   architecture, no candidate redesign, no LLM API, no execution of the pilot.
+
+## D-025 · 2026-08-31 · EXP-002 finalization: token-aligned transitions are the regression bookkeeping standard; discrepancy documented, not fixed
+
+The pilot's finalization (Task 006.2) decided how to record and interpret the
+executed pilot:
+
+- **Regression bookkeeping = token-aligned evaluator-state transitions.** The
+  previous "resolved unique form" view conflated genuine resolutions (C→A)
+  with C→C re-spellings (`sěli → seli`, `reći → reci`). `compare_exp002.py`
+  now LCS-aligns the lexical token sequences before/after and reports all nine
+  transitions (C→A, C→B, C→C, A→A, A→B, A→C, B→A, B→B, B→C) with A→C and B→C
+  regression lists. This exposed A→C regressions the old bookkeeping missed
+  (ChatGPT `někogda→někdy`, `čto→što` — supplied candidates over-applied to
+  already-valid forms; Claude `različna→různa`). These categories are
+  evaluator-state transitions only; no linguistic correctness is inferred.
+- **Candidate usage is attribution-based, not surface-overlap.** "Accepted"
+  (surface present in revised and A/B) is distinguished from "targeted
+  adoption" (a supplied surface found at the position of the original selected
+  form), and from "newly introduced by revision" (absent from the original).
+  Only the latter two support claims that the model *used* a supplied
+  alternative.
+- **The `interslavicfreq`/alternative-resource discrepancy is documented, not
+  fixed.** The strictly canonical evaluator cannot see surfaces attested only
+  in alternative resources (adopted `seli`, `sedeli`, `reci`, `rekl`,
+  `dejstvitelno` produce no measurable gain); the canonical dictionary, the
+  evaluator, and the resources are all left untouched. Explaining the
+  discrepancy (integration gap by design + resource-layer difference) is the
+  deliverable, not a judgment about which layer is right.
+- **Bielik's no-change is a verified result, not an error to fix.** Byte-level
+  verification shows a formatting-only revision; hypotheses are recorded as
+  labeled hypotheses, no internal-cause claim.
+- **Recommendation B (evaluator/resource reconciliation) is the single next
+  task.** Candidate generation and evaluation use inconsistent resource
+  layers, so any larger experiment's coverage numbers would be
+  uninterpretable until the layers are reconciled under one documented policy.
+  Not started (the decision is the deliverable, not the implementation).
+- **Human-review material is a curated outcome sample.** 5 complete
+  before/after pairs across outcome categories; no word-by-word annotation,
+  no automatic linguistic judgment.
+- **No new functionality was built** (no UI/API/db/translator/synonym
+  ranking); raw model outputs remain immutable artifacts.

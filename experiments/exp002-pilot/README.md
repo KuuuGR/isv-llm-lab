@@ -37,7 +37,9 @@ operator files to conditions and pilot run ids is in
 
 ## Status
 
-All seven input packages are prepared:
+**EXECUTED AND ANALYZED (Task 006.2, 2026-08-31).** All seven conditions were
+run externally and compared; the final report is [`REPORT.md`](REPORT.md). The
+pilot packages remain as prepared below.
 
 | pilot run | source EXP-001 run |
 |---|---|
@@ -55,6 +57,7 @@ All seven input packages are prepared:
 
 ```
 DESIGN.md                  — experiment specification (read first)
+REPORT.md                  — final report: results, regressions, discrepancy, recommendation
 prompt_template.txt        — revision prompt template (shared by all runs)
 operator-prompts/          — ONE self-contained Markdown prompt per condition
     README.md                  usage + mapping (committed)
@@ -70,9 +73,10 @@ outputs/<pilot_run_id>/    — created by `collect`:
     meta.json                  revision metadata (model/provider/version/date)
 comparison/<pilot_run_id>/ — created by `compare`:
     before/  after/            isv-eval artifacts (report/tokens/unresolved)
-    comparison.json / .md      before/after metrics + replacement bookkeeping
+    comparison.json / .md      before/after metrics + transition matrix +
+                               per-form candidate usage
 comparison/comparison.md   — summary across runs
-comparison/human_review.md — complete before/after text pairs (holistic reading)
+comparison/human_review.md — 5 complete before/after text pairs (holistic reading)
 ```
 
 Input packages, revised outputs, comparison artifacts, and the operator `.md`

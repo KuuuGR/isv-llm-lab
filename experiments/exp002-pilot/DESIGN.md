@@ -1,11 +1,11 @@
 # Experiment 002 — Pilot: Dictionary-Guided Revision of Experiment 001 Outputs
 
-Status: **PILOT PREPARED (Task 006, 2026-08-31).** The pilot's input packages
-(revision prompts, candidate lists, original translations) are built. LLM
-execution is **external** — this project has no LLM API client by design
-(D-007). Revised outputs are dropped into the run layout and evaluated with the
-**same evaluator** as EXP-001. This document is the specification; §9 records
-the implemented layout.
+Status: **PILOT EXECUTED AND ANALYZED (Task 006.2, 2026-08-31).** All seven
+conditions were run externally, compared with the same evaluator as EXP-001,
+and finalized. See [`REPORT.md`](REPORT.md) for results, the transition/regression
+analysis, the `interslavicfreq` discrepancy, and the recommendation. This
+document remains the specification; §7 and §9 record the implemented layout and
+bookkeeping.
 
 ---
 ## 1. Objective
@@ -201,6 +201,18 @@ and writes per-run before/after comparison:
   - supplied candidates not used,
   - unresolved forms replaced without a supplied candidate (must be 0;
     flagged if not).
+
+Since Task 006.2, the comparison additionally reports:
+
+- a **token-aligned evaluator-state transition matrix** — all nine transitions
+  (C→A, C→B, C→C, A→A, A→B, A→C, B→A, B→B, B→C) computed by LCS-aligning the
+  lexical token sequences before/after, with A→C and B→C regression lists
+  (this replaces the coarser "resolved unique form" view, which conflated C→C
+  re-spellings with genuine resolutions);
+- a **per-selected-form candidate-usage table** — supplied surfaces, surfaces
+  actually present in revised output, evaluator acceptance, disappearance of
+  the original form, and the surfaces that replaced it at its aligned
+  positions.
 
 No invented quality score.
 

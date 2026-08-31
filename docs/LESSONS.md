@@ -274,3 +274,70 @@ transform, not new architecture.
 at the same time as the experiment layout; name files by their operator role;
 and when auditing usability, verify actual file contents and code paths before
 trusting either names or the README.
+
+## L-015 · 2026-08-31 · Unique-form bookkeeping hides token-level regressions — align tokens, not forms
+
+**Observation.** When finalizing EXP-002, the old "resolved unique form"
+view counted a form as resolved if it was no longer C in the revised text —
+which silently included C→C re-spellings (`sěli → seli`, `reći → reci`) and
+hid A→C regressions on forms that were already C elsewhere. Example: ChatGPT
+changed a valid `někogda` (A) into the supplied `někdy` (C), but because
+`někdy` was already unresolved elsewhere in the same text, the unique-form
+diff showed no regression. Only a **token-aligned transition matrix** (LCS of
+lexical tokens, before→after class, all nine C/A/B transitions) exposed it —
+and it also revealed a third Claude regression (`različna → různa`) that the
+unique-form diff had missed.
+
+**Why it matters.** Regression analysis is the central safety signal of a
+revision experiment. Form-level diffing is cheap but blind to the *positions*
+where changes happen; a model can over-apply a correct candidate to an
+already-valid form and no form-level metric will see it.
+
+**Next time.** For any before/after comparison, report both form-level counts
+and the token-aligned transition matrix; treat "new unresolved unique form"
+and "A→C regression" as different signals that must be tracked separately.
+
+## L-016 · 2026-08-31 · Candidate sources and the evaluator must share one resource policy, or measured gains are uninterpretable
+
+**Observation.** EXP-002 supplied candidates from `interslavicfreq`, hunspell
+`isv.dic`, and the `slovnik` snapshot — but the evaluator is strictly
+canonical-dictionary-driven (exact/folded lexicon match + morphology over
+prefix-matching canonical lemmas). 113 alternative-resource surfaces used in
+revisions were invisible to the evaluator, and adopted replacements `seli`,
+`sedeli`, `reci`, `rekl`, `dejstvitelno` produced zero measurable coverage
+gain. The mechanism works (models use supplied candidates) but the *measured*
+effect depends entirely on whether the supplied surface happens to coincide
+with the canonical dictionary. Individual causes were verified: `reći` is
+absent from the canonical dictionary; `bojati sę` is excluded from lemma-driven
+morphology (multi-token reflexive lemma); `dejstvitelno` has no
+prefix-matching canonical lemma at all; comparatives such as `dalše` are not
+generated.
+
+**Why it matters.** A revision experiment is only as interpretable as the
+agreement between what it *offers* (candidates from any documented resource)
+and what it *measures* (canonical coverage). With two inconsistent layers, a
+"good" or "bad" result can be an artifact of the resource gap.
+
+**Next time.** Reconcile candidate generation and evaluation under one
+documented resource policy before running a larger experiment — or record an
+explicit, labeled attestation tier so alternative-resource forms are visible
+to the analysis without silently changing the canonical A/B/C classes.
+
+## L-017 · 2026-08-31 · A no-change model output is a result, not a failure of the analysis — verify it byte-level and keep hypotheses labeled
+
+**Observation.** Bielik returned the input with formatting-only changes:
+identical lexical token sequences (1561 = 1561, 0 positional diffs), no added
+or removed surface forms; only the leading blank line, 33 dialogue `- `
+markers, and indentation changed. No target form was replaced and no supplied
+candidate was introduced. Byte-level verification (positional diff of lexical
+tokens + surface-set diff) is what makes this a *result* rather than a guess.
+
+**Why it matters.** A control that does nothing is informative (the mechanism
+is model-dependent), but only if the "nothing" is proven, not assumed. And the
+reason the model did nothing is unknowable from the output — hypotheses (echo
+behavior, formatting-only interpretation, instruction-following failure) must
+stay labeled as hypotheses.
+
+**Next time.** When a model is expected to change a document and appears not
+to, verify at the token level before reporting, and record possible
+explanations as labeled hypotheses, never as internal-cause claims.
