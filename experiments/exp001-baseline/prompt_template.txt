@@ -1,0 +1,9 @@
+Translate the following complete Polish text into Interslavic (Medžuslovjansky).
+
+Preserve the meaning, narrative structure, paragraph structure, dialogue, character names, and overall style of the original.
+
+Do not summarize or omit anything.
+
+Return only the Interslavic translation, without explanations, comments, or analysis.
+
+[FULL POLISH SOURCE TEXT]

@@ -8,9 +8,11 @@ venv/
 # Node
 node_modules/
 
-# Experiment artifacts
-experiments/**/outputs/
-experiments/**/input/
+# Experiment artifacts — raw story/outputs stay local (copyrighted)
+experiments/**/outputs/*
+!experiments/**/outputs/README.md
+experiments/**/input/*
+!experiments/**/input/README.md
 
 # Data snapshots (license pending — keep local until cleared)
 data/*
