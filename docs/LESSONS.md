@@ -64,3 +64,57 @@ coding the map saves a confusing debugging round.
 
 **Next time.** Derive the character set from the real corpus (a one-liner
 `set(isv_column)`) instead of from memory of the orthography.
+
+## L-005 · 2026-08-31 · Per-token subprocess calls are the runtime bottleneck; batch at the text level
+
+**Observation.** With the full-form lexicon in place, bucket B was expected to
+fire rarely (L-001), but the *fallback transport* still dominated runtime: the
+classifier opened one Node subprocess per unresolved token. A 10 KB story
+produced hundreds of unresolved tokens → minutes per run and an apparent hang.
+Batching distinct candidate lemmas into one `inflect` call per 2000-item chunk
+(deduplicated across tokens) cut each run to seconds with identical
+classification (D-017).
+
+**Why it matters.** Any per-token subprocess or network pattern is O(tokens)
+process spawns — the constant factor explodes on real-length text even when
+the logical work per token is small. The ROADMAP item was real; the design
+"one morphology call per text" should have been the default from the start.
+
+**Next time.** Before scaling to full-length inputs, profile the number of
+subprocess/network round-trips, not just total tokens.
+
+## L-006 · 2026-08-31 · Raw experiment inputs can carry hidden preprocessing artifacts — document, don't fix
+
+**Observation.** The supplied Polish source (`op-pl.txt`) wraps the story in
+markdown code fences and includes an embedded instruction line
+("Przetłumacz to opowiadanie na medżusłowiański:"). The file was hashed and
+used byte-for-byte; the artifact is recorded in `source.meta.json` and
+propagates into every run's `prompt.txt`.
+
+**Why it matters.** "Use the files exactly as supplied" and "document
+preprocessing issues, create a derived artifact rather than changing the raw
+output" conflict with any instinct to clean the input. An undocumented
+artifact silently breaks future reproducibility; a documented one is evidence.
+
+**Next time.** Always diff the raw input against expectations (fences,
+BOMs, embedded instructions) *before* hashing, and record the observation in
+the same meta file as the hash.
+
+## L-007 · 2026-08-31 · Unknown metadata must be recorded explicitly, and shared unresolved forms are mostly story content
+
+**Observation.** All seven baseline outputs were generated externally, so
+model versions, dates, prompts and (for two) providers are unknown. Recording
+`unknown` explicitly (D-018) costs nothing and prevents later false precision.
+Also, the 8 forms unresolved by *all* models turn out to be character names
+(`Bronislava`, `Teofil`), the story's quoted in-text example words
+(`pul`/`pui`), and verbs every output uses (`bojala`, `bojati`, `dokazano`,
+`rekla`) — i.e. shared because they are story content, not because models
+converge on errors.
+
+**Why it matters.** A naive reading of "shared by all models" as
+"systematically hard for all models" would be wrong for proper nouns and
+quoted content; the correct next step is to look at the sentence context that
+the evaluator already preserves.
+
+**Next time.** When reporting overlap statistics, check the preserved
+sentence context before interpreting what "shared" means.

@@ -173,19 +173,19 @@ Legend for "How we intend to use it":
 | Preservation strategy | **Snapshot locally** under `data/dictionary/basic.json` (+ SHA-256 manifest and fetch-date record) — done in Task 002. Because the data license is unresolved, the snapshot stays out of git until licensing is cleared; the provenance record is reproducible from the fetch script + manifest. This is the single most important reproducibility artifact. |
 | Notes | `type` encodes word provenance: 1 = universal, 2 = predominantly, 3 = regionally, 4 = Church Slavonic, 5 = neologism, 9 = doubtful. `intelligibility` marks per-language `+`/`-`/`~`. Both are candidate-ranking inputs for the future experiment. |
 
-## 12. Polish source story (Experiment 001 input)
+## 12. Polish source story + model outputs (Experiment 001 inputs)
 
 | Field | Value |
 |---|---|
-| Name | One complete Polish short story |
-| Repository | — (to be provided by the Project Owner; not requested yet) |
-| Purpose | The single source text for the baseline translation experiment. |
-| License | Copyrighted literary work — for internal experimentation only; do not publish the source text or model outputs without clearing rights. |
-| Version / tag / commit inspected | — |
-| Relevant files | — |
+| Name | One complete Polish short story + seven LLM-generated Interslavic translations |
+| Repository | Provided by the Project Owner (Task 003) in `opowiadania-set-isv/` — `op-pl.txt` (source) + `op-gpt.txt`, `op-gemini.txt`, `op-claude.txt`, `op-deepSeek.txt`, `op-bielik.txt`, `op-grok.txt`, `op-gpt-isvt.txt` |
+| Purpose | The single source text for the baseline translation experiment and the seven unconstrained whole-story translations evaluated as separate conditions |
+| License | Copyrighted literary work (source) and derived translations — for internal experimentation only; do not publish the source text or model outputs without clearing rights |
+| Version / tag / commit inspected | Source SHA-256 `e3164ffc6a812640967ff749158db4746bea358cb4ac9c1532c214852b29e643` (10,827 bytes); per-output SHA-256 + size recorded in each run's `meta.json` |
+| Relevant files | `opowiadania-set-isv/op-*.txt` (raw inputs, gitignored); copies + hashes in `experiments/exp001-baseline/outputs/<run_id>/` (gitignored) |
 | How we intend to use it | **Use now** (Experiment 001 input). |
-| Preservation strategy | Store in `experiments/exp001-baseline/input/` with a fixed filename and recorded metadata; do not commit to git if copyright is a concern — keep on a local/data path and record a hash. |
-| Notes | See `experiments/exp001-baseline/DESIGN.md`. |
+| Preservation strategy | Raw files stay out of git (`.gitignore`: `opowiadania-set-isv/`); registered under `experiments/exp001-baseline/input/source.txt` with `source.meta.json` (SHA-256, size, provision timestamp, preprocessing note). Run dirs hold byte-for-byte copies (`source.txt`, `output.txt`) plus hashes for reproducibility. |
+| Notes | The supplied source file wraps the story in a markdown fence with an embedded Polish instruction line — documented in `source.meta.json`, not modified. See `experiments/exp001-baseline/DESIGN.md` and `docs/EXPERIMENTS.md`. |
 
 ## 13. Task 002 artifacts (our generated dependencies)
 

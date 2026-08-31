@@ -13,9 +13,13 @@ translation application.
 
 ## Status
 
-SODA Task 002 complete (2026-08-31): the Experiment 001 **evaluation harness**
-(`isv-eval`) is implemented and smoke-tested. The experiment itself has **not
-been run** — the Polish story has not been requested from the Project Owner.
+SODA Task 003 complete (2026-08-31): **Experiment 001 (baseline) has been
+run**. Seven independent whole-story translations (ChatGPT, Gemini, Claude,
+DeepSeek, Bielik, Grok, and the custom GPT "Interslavic — Medžuslovjansky
+Language Teacher") were evaluated against the snapshot dictionary + generated
+full-form lexicon. Results: `experiments/exp001-baseline/outputs/comparison.md`
+and `docs/EXPERIMENTS.md`. Raw inputs and outputs stay out of git
+(copyrighted); per-run hashes make everything reproducible.
 
 ## Documentation
 

@@ -1,8 +1,10 @@
 # Experiment 001 — Baseline: Unconstrained LLM Translation (Polish → Interslavic)
 
-Status: **Harness implemented (Task 002); experiment not run.** The input story
-has not been requested from the Project Owner. This document is the
-specification Task 002 implemented; §7 records how it was built.
+Status: **RUN COMPLETED (Task 003, 2026-08-31).** Seven conditions evaluated
+on the complete Polish story; results in `outputs/comparison.md` and
+`docs/EXPERIMENTS.md` § EXP-001. This document is the specification that
+Task 002 implemented; §7 records how the harness was built, and §3 lists the
+actual seven conditions used.
 
 ---
 
@@ -30,13 +32,22 @@ direct LLM translation. The baseline must be trustworthy before any comparison.
 Each of the following models receives the same complete source text
 independently (no cross-model interaction):
 
-- ChatGPT
-- Gemini
-- Claude
-- DeepSeek
+1. ChatGPT (`op-gpt.txt`)
+2. Gemini (`op-gemini.txt`)
+3. Claude (`op-claude.txt`)
+4. DeepSeek (`op-deepSeek.txt`)
+5. Bielik (`op-bielik.txt`)
+6. Grok (`op-grok.txt`)
+7. GPTs — "Interslavic — Medžuslovjansky Language Teacher" (`op-gpt-isvt.txt`,
+   `condition_type = specialized_custom_gpt`, kept separate from ordinary
+   ChatGPT; internal system instructions not available)
 
 One run per model. A **different model version is a different experimental
 condition** and gets its own run, even if it is the "same" model name.
+All outputs were generated externally: model versions, generation dates,
+providers (for Bielik/Grok) and prompts are recorded as `unknown`
+(`prompt_status = unknown`); none can be confirmed to have used
+`prompt_template.txt`.
 
 ## 4. Reproducibility & storage
 

@@ -121,3 +121,28 @@ schema, license_status=UNRESOLVED). `scripts/generate_lexicon.py` writes the
 TSV lexicon + `lexicon.manifest.json`. All of it is gitignored (only
 `data/dictionary/README.md` is committed). The manifest content is embedded in
 every `isv-eval` report for reproducibility.
+
+## D-017 · 2026-08-31 · Batch the bucket-B morphological fallback
+
+Full-story evaluation exposed a runtime bottleneck: the fallback spawned one
+Node subprocess per unresolved token. The fallback now collects all tokens
+needing bucket B, deduplicates their candidate lemmas, and sends one
+`inflect` call per chunk (2000 lemmas). Classification results are identical
+(31 tests unchanged); full-story runs dropped from minutes to seconds.
+Methodology is unchanged — only the transport.
+
+## D-018 · 2026-08-31 · Externally generated outputs get explicit `unknown` metadata, never inferred values
+
+Model versions, generation dates, prompts and (where applicable) providers
+for the seven baseline outputs are not known; `meta.json` records `unknown`
+for every missing field and `prompt_status = unknown` (no output can be
+confirmed to have used `prompt_template.txt`). Provision timestamps come from
+raw file mtimes. Nothing is inferred from filenames or assumptions.
+
+## D-019 · 2026-08-31 · The custom GPT condition stays separate from ordinary ChatGPT
+
+"GPTs — Interslavic — Medžuslovjansky Language Teacher" is its own condition
+(`model = gpt-isvt`, `condition_type = specialized_custom_gpt`, separate run
+directory and row in the comparison table). Its internal system instructions
+are not available and are explicitly recorded as such; the run's `prompt.txt`
+is the standard template plus a documented note, not the unseen instructions.

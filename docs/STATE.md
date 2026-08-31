@@ -1,6 +1,6 @@
 # Project State
 
-Updated: 2026-08-31 (SODA Task 002 complete)
+Updated: 2026-08-31 (SODA Task 003 complete — Experiment 001 baseline run)
 
 ## What this project is
 
@@ -17,7 +17,7 @@ Research hypothesis:
 This is a hypothesis. The first experiment must establish a baseline before
 any constrained system is judged against it.
 
-## Current status (end of Task 002)
+## Current status (end of Task 003)
 
 | Area | Status |
 |---|---|
@@ -27,12 +27,32 @@ any constrained system is judged against it.
 | Frequency/synonym resources audited | ✅ `medzuslovjansky/interslavicfreq` |
 | Grammar consistency audit | ✅ `docs/GRAMMAR_AUDIT.md` |
 | Ecosystem survey | ✅ `SOURCES.md` ("Not used" section) |
-| Experiment 001 | **Harness implemented — experiment not run, input story not requested** |
 | Dictionary snapshot | ✅ `data/dictionary/basic.json` (19,100 rows, local, gitignored) + `manifest.json` (SHA-256, URL, retrieval time, schema, license status) |
 | Full-form lexicon | ✅ `data/dictionary/lexicon.tsv` (320,824 entries) generated from `@interslavic/morphology@0.1.2` |
 | Evaluation harness | ✅ `isv-eval` CLI: tokenizer, lexical lookup, morphological validation, A/B/C classification, metrics, serialization |
 | Smoke tests | ✅ 31 tests (tokenizer, normalization, classifier, B-fallback, end-to-end corpus) |
+| **Experiment 001 (baseline)** | ✅ **RUN COMPLETED** — 7 model conditions evaluated on the complete Polish story; comparison in `experiments/exp001-baseline/outputs/comparison.md` |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
+
+### Experiment 001 headline numbers
+
+Seven whole-story translations were evaluated against the snapshot dictionary
++ generated full-form lexicon (denominators = lexical tokens):
+
+| Condition | Lexical Tokens | Exact (A) | Morph. Valid (B) | Unresolved (C) | Valid Coverage |
+|---|---:|---:|---:|---:|---:|
+| ChatGPT | 1522 | 1153 | 3 | 366 | 75.95% |
+| GPTs — ISV Teacher | 1522 | 1213 | 2 | 307 | 79.83% |
+| Gemini | 1471 | 1054 | 1 | 416 | 71.72% |
+| Claude | 1486 | 1092 | 1 | 393 | 73.55% |
+| DeepSeek | 1431 | 1064 | 1 | 366 | 74.42% |
+| Bielik | 1561 | 862 | 4 | 695 | 55.48% |
+| Grok | 1472 | 1127 | 0 | 345 | 76.56% |
+
+Order is not a ranking. Full table, per-model unresolved vocabularies,
+pairwise overlaps and shared-form statistics are in
+`experiments/exp001-baseline/outputs/comparison.{md,json}` (gitignored) and
+summarized in `docs/EXPERIMENTS.md` § EXP-001.
 
 ## Repository layout
 
