@@ -1,7 +1,8 @@
 # Roadmap
 
-Status: updated 2026-08-31 (end of Task 005). This is a plan, not a
-commitment; the Architect/Research Lead re-prioritizes as evidence arrives.
+Status: updated 2026-08-31 (Task 006 — EXP-002 pilot prepared). This is a plan,
+not a commitment; the Architect/Research Lead re-prioritizes as evidence
+arrives.
 
 ## Done
 
@@ -58,8 +59,39 @@ commitment; the Architect/Research Lead re-prioritizes as evidence arrives.
   - [x] Key finding: 403 forms (38.4%) are attested verbatim in an alternative
         resource; 450 have candidate lemmas but no resource evidence; 116 have
         neither; 45 orthographic-variant candidates; 36 names/special only.
+- [x] **Task 006 — EXP-002 pilot prepared** (dictionary-guided revision;
+  *pilot only*, no production pipeline, EXP-002 not yet run):
+  - [x] DESIGN (`experiments/exp002-pilot/DESIGN.md`): loop under test, two
+        separate questions (resource question A vs revision question B),
+        candidate sources, prompt rules, pilot scope, evaluation.
+  - [x] Deterministic candidate generation + stratified selection
+        (`scripts/prepare_exp002_pilot.py`): canonical dictionary /
+        orthographic variant / alternative resource / morphology-derived /
+        none, with full provenance per candidate; name/special forms are
+        excluded from revision targets.
+  - [x] Revision prompt template + complete-document prompt per run
+        (`prompt_template.txt`, input packages under
+        `experiments/exp002-pilot/input/`, gitignored).
+  - [x] Before/after evaluation with the SAME `isv-eval` evaluator
+        (`scripts/compare_exp002.py`) + human-review before/after pairs doc.
+  - [x] Reproducible orchestrator (`scripts/run_exp002_pilot.py`):
+        prepare / collect / compare / status; collect never overwrites and
+        stores external LLM output byte-for-byte.
+  - [x] Input packages prepared for **all 7** EXP-001 source runs (30 forms
+        per run; ~24 with candidates). LLM execution is external (no API
+        client, D-007).
 
 ## Next recommended task (single)
+
+- [ ] **Execute the EXP-002 pilot** (Task 006 follow-up) — send the prepared
+  revision prompts (`experiments/exp002-pilot/input/<run>/prompt.txt`, one per
+  EXP-001 source run) to an LLM externally, save each reply byte-for-byte,
+  register it with `scripts/run_exp002_pilot.py collect`, then run
+  `scripts/run_exp002_pilot.py compare` for the before/after evidence. The
+  pilot's success criteria (§10 of DESIGN.md) decide whether a larger EXP-002
+  is justified. Do not proceed to a larger experiment automatically.
+
+## Parallel (not blocking the pilot)
 
 - [ ] **Manual linguistic review of the Experiment 001 unresolved sample** —
   annotate `experiments/exp001-baseline/manual-audit/sample.csv`
@@ -70,9 +102,9 @@ commitment; the Architect/Research Lead re-prioritizes as evidence arrives.
 
 ## Later
 
-- [ ] **Experiment 002 — constrained generation** (compare against the
-  baseline; see `experiments/exp001-baseline/DESIGN.md` § Future experiment)
-  after the manual audit informs what the unresolved forms actually are.
+- [ ] **Experiment 002 — full-scale constrained/dictionary-guided generation**
+  after the pilot (Task 006) reports evidence on which unresolved-form
+  categories benefit from supplied alternatives.
 - [ ] Investigate dictionary **data licensing** (Steen source data / Google
   Spreadsheet) before any redistribution of derived data.
 - [ ] Decide primary morphology backend for constrained generation

@@ -41,7 +41,7 @@ Legend for "How we intend to use it":
 | Relevant files | — (same structure as item 1) |
 | How we intend to use it | **Reference.** Confirms that the *actively maintained* dictionary codebase lives in the `medzuslovjansky` org. If the data pipeline changes, this is the repo to watch. |
 | Preservation strategy | None required (no direct dependency). |
-| Notes | The live site data we snapshot is produced by this lineage. The Task 005 audit additionally used its test-fixture snapshot `src/services/dictionary-test/basic.json` (master, 2026-07; copy at `data/dictionary/audit/slovnik/`, gitignored) as an independent earlier snapshot of the same lineage — it contributed 0 headword matches for the unresolved population. |
+| Notes | The live site data we snapshot is produced by this lineage. The Task 005 audit additionally used its test-fixture snapshot `src/services/dictionary-test/basic.json` (master, 2026-07; copy at `data/dictionary/audit/slovnik/`, gitignored) as an independent earlier snapshot of the same lineage — it contributed 0 headword matches for the unresolved population. In Task 006 the EXP-002 pilot reads the same snapshot for exact/orthographic candidate evidence (attested `isv` surface + POS). |
 
 ## 3. `@interslavic/utils` (legacy npm package)
 
@@ -70,6 +70,7 @@ Legend for "How we intend to use it":
 | How we intend to use it | **Use now** (baseline evaluation) and **Use later** (constrained generation). The deterministic morphology engine (`@interslavic/morphology`) and translit are the core building blocks. |
 | Task 002 usage | `@interslavic/morphology@0.1.2` + `@interslavic/translit@0.1.0` are pinned in `src/morphology_backend/package.json` (committed lockfile). The full-form lexicon is generated via the published `inflect()` API driven directly from `basic.json` rows — NOT via `tools/dump`, which is coupled to the monorepo's internal fixtures. |
 | Preservation strategy | Pin exact npm versions in the evaluation environment; the package content is small enough to vendor later if npm access becomes an issue. MIT license permits vendoring. |
+| Task 006 usage | The EXP-002 pilot derives `morphology_derived` candidates from the evaluator's B-fallback candidate lemmas that are canonical headwords, and records the JS engine's generated paradigm (via the full-form lexicon) as supporting evidence (`scripts/prepare_exp002_pilot.py`). |
 | Notes | This is the *successor* to `@interslavic/utils`. The dictionary app still pins the old package; our project should use the new one. Verified locally: `more` → ins.sg. `morętem`/`morętom`; `dělati` produces the full paradigm incl. Long/Short present variants. |
 
 ## 5. `gold-silver-copper/interslavic` (Rust morphology)
@@ -101,6 +102,7 @@ Legend for "How we intend to use it":
 | Preservation strategy | Pin via PyPI if published (verify), otherwise pin the git revision; vendoring permitted (MIT). The bundled frequency and Hunspell data are snapshotted assets — pin them separately. |
 | Notes | Fork of `wordfreq`. The synonym maps derive from a Google Spreadsheet at build time; the shipped pickle/msgpack files are the frozen artifacts we actually consume. |
 | Task 005 usage | Audit inputs acquired at the pinned revision (`b84535b`) under `data/dictionary/audit/` (gitignored): `data/frequency/small_isv{.x}.msgpack.gz` wordlists and `data/hunspell/isv.dic`/`isv.aff`. Synonyms/quality were NOT testable locally (runtime Google-Sheet fetch). |
+| Task 006 usage | EXP-002 pilot candidate generation (`scripts/prepare_exp002_pilot.py`) reads the frozen wordlists again for exact-form/orthographic candidate evidence (attested surface + `cB` frequency recorded per candidate). |
 
 ## 7. `medzuslovjansky/isv_hunspell_dict`
 
@@ -115,7 +117,7 @@ Legend for "How we intend to use it":
 | How we intend to use it | **Use now** — the Hunspell `isv.dic` provides a ready-made list of accepted surface forms (a second, independent validity signal for the baseline evaluation, complementary to the morphology engine). |
 | Task 002 usage | **Not yet integrated** — recorded as a future independent validity signal (ROADMAP "Future ideas"); the baseline uses the generated full-form lexicon + live morphology only. |
 | Preservation strategy | Download the pinned release artifacts (or reuse the copies already bundled in `interslavicfreq`). No code needed. |
-| Notes | MIT-licensed data; safe to snapshot. Used in the Task 005 cross-resource audit: 54 of the 1,050 unresolved forms are listed in `isv.dic` with full-form morphological tags (copy at `data/dictionary/audit/hunspell/`, gitignored). |
+| Notes | MIT-licensed data; safe to snapshot. Used in the Task 005 cross-resource audit: 54 of the 1,050 unresolved forms are listed in `isv.dic` with full-form morphological tags (copy at `data/dictionary/audit/hunspell/`, gitignored). In Task 006 the EXP-002 pilot uses those attested surfaces + tags as alternative-resource candidates. |
 
 ## 8. Jan van Steenbergen — Interslavic grammar documentation
 
@@ -171,6 +173,7 @@ Legend for "How we intend to use it":
 | Relevant files | `basic.json`; columns: `id, isv, addition, partOfSpeech, type, en, ru, be, uk, pl, cs, sk, sl, hr, sr, mk, bg, intelligibility` |
 | How we intend to use it | **Use now.** This is the exact-match lexical reference for the baseline evaluation (`exact_dictionary_coverage`, headword lookup). |
 | Task 002 usage | Snapshot + manifest implemented by `scripts/fetch_dictionary.py` (URL, retrieved_at, SHA-256, size, row count, schema, `license_status=UNRESOLVED`). The snapshot stays **out of git** (`.gitignore`); the manifest's content is embedded in every `isv-eval` report for reproducibility. |
+| Task 006 usage | EXP-002 candidate generation uses `basic.json` as the canonical-dictionary source: headwords (plus `addition` variants) for orthographic-variant candidates and the canonical-lemma pool for morphology-derived candidates. |
 | Preservation strategy | **Snapshot locally** under `data/dictionary/basic.json` (+ SHA-256 manifest and fetch-date record) — done in Task 002. Because the data license is unresolved, the snapshot stays out of git until licensing is cleared; the provenance record is reproducible from the fetch script + manifest. This is the single most important reproducibility artifact. |
 | Notes | `type` encodes word provenance: 1 = universal, 2 = predominantly, 3 = regionally, 4 = Church Slavonic, 5 = neologism, 9 = doubtful. `intelligibility` marks per-language `+`/`-`/`~`. Both are candidate-ranking inputs for the future experiment. |
 
@@ -197,6 +200,7 @@ Legend for "How we intend to use it":
 | Contents | `lexicon.tsv`: 320,824 rows `form\tlemma\txpos\tupos\tfeats\tentry_type` (headwords + generated paradigms), derived from `basic.json` via `@interslavic/morphology@0.1.2`. `backend.mjs`: line-delimited-JSON stdio service exposing `inflect` and `translit`. |
 | License | Derived from dictionary data whose license is **UNRESOLVED** → lexicon stays out of git. Backend code is ours (MIT project). |
 | Preservation strategy | Regenerate via `scripts/generate_lexicon.py` (records dictionary hash + morphology version in `lexicon.manifest.json`). Node deps pinned via committed `package-lock.json`. |
+| Task 006 usage | The EXP-002 pilot's orthographic-variant candidates come from the lexicon's `ORTHOGRAPHIC_VARIANT` evidence (canonical surface forms reachable from a C-form by diacritic/fold normalization), and morphology-derived candidates use the prebuilt lemma→paradigm index. |
 
 ---
 

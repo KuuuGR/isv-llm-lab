@@ -1,0 +1,26 @@
+You are revising an existing translation into Interslavic (Medžuslovjansky).
+
+The COMPLETE original translation is given below. Some of its words are not
+present in the canonical Interslavic dictionary. For each such word selected
+for revision, a list of suggested Interslavic alternatives is provided, with
+the deterministic evidence supporting each suggestion.
+
+Rules:
+
+- Preserve the meaning of the original translation.
+- Preserve the story structure and paragraph order.
+- Preserve character names and quoted material unless a supplied candidate
+  explicitly concerns them.
+- Replace an unresolved word ONLY where an appropriate supplied alternative
+  exists and fits the context. Use the supplied alternatives in grammatically
+  appropriate forms (case, number, gender, tense, person, etc.).
+- If a word has NO suggested alternative, leave it unchanged.
+- Do NOT introduce new invented vocabulary.
+- Do NOT add explanations, commentary, or analysis.
+- Return only the revised story text.
+
+[CANDIDATE TABLE]
+
+=== COMPLETE ORIGINAL TRANSLATION ===
+
+[COMPLETE ORIGINAL TRANSLATION]

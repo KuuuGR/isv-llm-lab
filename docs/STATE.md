@@ -1,6 +1,6 @@
 # Project State
 
-Updated: 2026-08-31 (SODA Task 005 — cross-resource audit complete)
+Updated: 2026-08-31 (SODA Task 006 — EXP-002 pilot prepared)
 
 ## What this project is
 
@@ -17,7 +17,7 @@ Research hypothesis:
 This is a hypothesis. The first experiment must establish a baseline before
 any constrained system is judged against it.
 
-## Current status (end of Task 005)
+## Current status (end of Task 006)
 
 | Area | Status |
 |---|---|
@@ -34,6 +34,7 @@ any constrained system is judged against it.
 | **Experiment 001 (baseline)** | ✅ **RUN COMPLETED** — 7 model conditions evaluated on the complete Polish story; comparison in `experiments/exp001-baseline/outputs/comparison.md` |
 | **Manual audit sample (Task 004)** | ✅ **PREPARED** — stratified ~100-form sample of unresolved forms + statistics under `experiments/exp001-baseline/manual-audit/` (local, gitignored) for human review; no linguistic classification performed |
 | **Cross-resource audit (Task 005)** | ✅ **COMPLETE** — all 1,050 unresolved forms re-checked against hunspell `isv.dic`, `interslavicfreq` wordlists, and the `slovnik` snapshot (evidence only; no resource modified); report under `experiments/exp001-baseline/manual-audit/` (local, gitignored) |
+| **EXP-002 pilot (Task 006)** | ✅ **PREPARED** — deterministic candidate generation + stratified selection + revision prompt + before/after evaluation tooling; input packages for all 7 EXP-001 runs under `experiments/exp002-pilot/`; LLM execution is external (no LLM API client, D-007) |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
 
 ### Experiment 001 headline numbers
@@ -72,6 +73,9 @@ scripts/
   generate_lexicon.py        — build full-form lexicon TSV + manifest
   sample_exp001_audit.py     — build the manual-audit sample of unresolved forms
   audit_exp001_resources.py  — cross-resource audit of all unresolved forms (Task 005)
+  prepare_exp002_pilot.py    — EXP-002 candidate generation + prompt packages
+  compare_exp002.py          — EXP-002 before/after evaluation + human-review pairs
+  run_exp002_pilot.py        — EXP-002 orchestrator (prepare / collect / compare / status)
 data/
   dictionary/README.md       — how to regenerate the (gitignored) data
   dictionary/audit/          — downloaded audit inputs (hunspell, frequency, slovnik), gitignored
@@ -89,6 +93,11 @@ experiments/
   exp001-baseline/
     DESIGN.md                — Experiment 001 design (input/storage/metrics/reproducibility)
     manual-audit/README.md   — manual audit sample of unresolved forms + cross-resource audit index (data is gitignored)
+  exp002-pilot/
+    DESIGN.md                — EXP-002 pilot design (candidate generation, prompt, evaluation)
+    README.md                — operator instructions (prepare / execute externally / evaluate)
+    prompt_template.txt      — revision prompt template (shared)
+    input/  outputs/  comparison/  — run artifacts (all gitignored; inputs prepared for 7 runs)
 ```
 
 ## Working agreements

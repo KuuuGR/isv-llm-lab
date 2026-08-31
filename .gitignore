@@ -18,6 +18,9 @@ experiments/**/input/*
 experiments/**/manual-audit/*
 !experiments/**/manual-audit/README.md
 
+# EXP-002 comparison artifacts (embed raw revised outputs — stay local)
+experiments/**/comparison/*
+
 # Raw experiment input set (source story + model outputs, copyrighted)
 opowiadania-set-isv/
 

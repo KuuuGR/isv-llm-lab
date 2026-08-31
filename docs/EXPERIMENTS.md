@@ -130,7 +130,36 @@ forms; the audit does not claim the remaining ~52% is non-Interslavic (see
 `cross-resource-summary.md`). Main research-question answer is evidence-based
 and explicitly bounded; no forced conclusion.
 
+## EXP-002 — Pilot: Dictionary-Guided Revision of Experiment 001 Outputs
+
+| Field | Value |
+|---|---|
+| Status | **PILOT PREPARED** (Task 006, 2026-08-31). Input packages ready for all seven EXP-001 source runs; external LLM execution pending. No revision has been run or evaluated yet. |
+| Design | `experiments/exp002-pilot/DESIGN.md` |
+| Hypothesis | "If an LLM is given explicit Interslavic lexical alternatives for forms that are not present in the canonical dictionary, can it revise its own complete translation into a version with better lexical/morphological resource coverage while preserving the meaning and coherence of the original text?" |
+| Loop under test | EXP-001 output → identify unresolved forms → deterministic candidate generation (canonical dictionary / Task-005 cross-resource evidence / morphology) → stratified pilot selection → revision prompt (complete original + candidate table) → EXTERNAL LLM → complete revised translation → SAME `isv-eval` on original and revised → before/after comparison |
+| Two questions kept distinct | (A) Can an unresolved form be replaced by a resource-supported form? — deterministic candidate generation, no LLM. (B) Can an LLM use supplied alternatives correctly in context? — the actual pilot research question. |
+| Candidate sources | canonical dictionary (`basic.json`/lexicon), orthographic variants, alternative resources (hunspell `isv.dic`, `interslavicfreq`, `slovnik` snapshot), morphology-derived canonical lemmas (JS engine paradigms as supporting evidence), none (leave unchanged). Provenance per candidate; no invented candidates; no language-origin classification. |
+| Pilot composition | 30 stratified forms per source run (ortho / resource / morphology / high-freq / shared / specific / no-candidate strata); character names and quoted example words excluded from revision targets. Prepared for all 7 runs by `scripts/prepare_exp002_pilot.py`. |
+| Execution | External (no LLM API client, D-007). `scripts/run_exp002_pilot.py collect` stores raw replies byte-for-byte, records metadata (unknowns stay `unknown`), refuses overwrite. |
+| Evaluation | `scripts/compare_exp002.py` — before/after: lexical tokens, A/B/C counts, valid coverage, unresolved rate, unique unresolved forms, resolved / newly-introduced forms; replacement metrics: supplied candidates used / accepted / not used / replaced-without-candidate (must be 0). Same evaluator as EXP-001. |
+| Human evaluation | Complete before/after text pairs in `comparison/human_review.md` for holistic Project-Owner reading (qualitative evidence, no word-by-word annotation, no scores). |
+| Reproducibility | Selection and candidates deterministic (regeneration byte-identical except `prepared_at`); per-run metadata records source EXP-001 run id, original/revision SHA-256, prompt hash, candidate list, evaluator commit, dictionary manifest, resource provenance, experiment condition. |
+| Layout | `experiments/exp002-pilot/{DESIGN.md, README.md, prompt_template.txt}` committed; `input/`, `outputs/`, `comparison/` gitignored (embed raw model output). |
+
+### Status (Task 006)
+
+- Prepared: `scripts/prepare_exp002_pilot.py`, `scripts/run_exp002_pilot.py`,
+  `scripts/compare_exp002.py`, `prompt_template.txt`, DESIGN + operator README.
+- Input packages built for all seven source runs: `exp002__<exp001_run_id>`
+  under `experiments/exp002-pilot/input/` (each 30 selected forms; ~24 with
+  candidates, ~4–9 without — the "no candidate" stratum is the control).
+- No revised outputs yet (`run_exp002_pilot.py status` shows 0/7 with
+  revisions); before/after numbers will be recorded here after external
+  execution. Success criteria in DESIGN §10; no assumption the answer is yes.
+
 ## Planned (not started)
 
-- **EXP-002 — Constrained generation (documented in DESIGN.md, not implemented).**
+- **EXP-002 full scale** — only if the pilot's evidence justifies it (DESIGN §10); do not proceed automatically.
+- **Manual linguistic review** of the EXP-001 unresolved sample (Task 004 artifacts; human-only, no automatic classification).
 

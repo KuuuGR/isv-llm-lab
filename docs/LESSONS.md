@@ -202,3 +202,48 @@ dictionary or metrics would import the artifact.
 **Next time.** When auditing against generated resources, store the raw
 annotation line as evidence and call out suspicious rows rather than
 silently trusting or silently fixing them.
+
+## L-012 · 2026-08-31 · Morphology-derived candidates need a closeness filter and only fire when stronger evidence is absent
+
+**Observation.** When building EXP-002's candidate list from the evaluator's
+B-fallback candidate lemmas, prefix-only matching produced semantically
+irrelevant suggestions (`rekol` → `reklama`). Restricting to canonical
+headwords, adding a paradigm-closeness check (some generated form shares a
+≥5-char prefix with the unresolved form; ≥3 for short forms), and suppressing
+morphology-derived candidates whenever an orthographic or alternative-resource
+candidate already exists made the candidate table defensible. Verification
+also showed that candidate `surface` extraction differs per resource shape
+(`entry.form` vs `entry.isv`; `hit.form` vs `hit.matched`), and that the
+unresolved-form set includes inflected name forms (`przemysłavy`) that the
+audit's name regexes missed — the pilot excludes names/special from revision
+with its own superset detector.
+
+**Why it matters.** A candidate table is the entire interface between evidence
+and the LLM: one noisy suggestion invites the model to invent replacements
+(question B becomes untestable), and one name form wrongly selected for
+"revision" would corrupt story content. Deterministic, evidence-bound
+candidate generation is what keeps question A (can a form be replaced?) from
+leaking into question B (can the LLM use alternatives?).
+
+**Next time.** When deriving candidates from morphology engines, always
+condition on (1) canonical membership, (2) morphological closeness to the
+observed form, and (3) absence of stronger direct evidence; and validate name
+exclusion against the *inflected* forms actually observed, not just the source
+story's name lemmas.
+
+## L-013 · 2026-08-31 · Wall-clock timestamps are the only nondeterminism in deterministic package generation
+
+**Observation.** Regenerating an EXP-002 input package and diffing it against
+the stored copy showed byte-identical output everywhere except the
+`prepared_at` ISO timestamp in `meta.json`. Everything a reviewer or operator
+acts on (selection, candidates, prompt, original text, hashes) is stable
+across regenerations.
+
+**Why it matters.** "Deterministic selection" is only meaningful if it can be
+demonstrated. Diffing a regenerated package against the committed layout
+(rather than trusting the code) is a cheap, convincing check, and it also
+catches accidental nondeterminism in iteration order, set unpacking, or
+dictionary ordering.
+
+**Next time.** When a spec promises determinism, verify it by regeneration and
+`diff -r`; keep `prepared_at` as the single documented exception.

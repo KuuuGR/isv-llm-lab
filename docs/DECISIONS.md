@@ -206,3 +206,55 @@ LEMMA_FOUND / ORTHOGRAPHIC_VARIANT / NO_MATCH / NOT_TESTABLE). Decisions:
   (gitignored); audit outputs live under `experiments/exp001-baseline/manual-audit/`
   (gitignored); `human_class`/`human_notes`/`confidence` remain for the human
   reviewer.
+
+## D-023 · 2026-08-31 · EXP-002 pilot: supplied alternatives only, external LLM execution, deterministic everything
+
+The dictionary-guided revision pilot (SODA Task 006) tests whether an LLM can
+revise a complete translation using *supplied* Interslavic alternatives. Key
+decisions:
+
+- **Two questions are kept distinct** (DESIGN §1): (A) can an unresolved form
+  be replaced by a resource-supported form — answered deterministically by
+  candidate generation; (B) can an LLM use supplied alternatives correctly in
+  context — answered by the pilot run. They are never conflated.
+- **The LLM is never asked to invent vocabulary.** Every selected unresolved
+  form gets a deterministic candidate list (canonical dictionary /
+  orthographic variant / alternative resource / morphology-derived / none);
+  forms with no defensible candidate are explicitly marked "leave unchanged".
+  Provenance (kind + source + detail + structured evidence) is recorded per
+  candidate; nothing is invented; diacritic-stripped similarity is a
+  candidate, never proof of equivalence; no language-origin classification.
+- **Complete-document constraint.** The prompt contains the complete original
+  translation and demands a complete revised translation; no sentence/paragraph
+  splitting for independent rewriting.
+- **External execution, never fabricated.** The project has no LLM API client
+  (D-007). `scripts/run_exp002_pilot.py collect` copies the operator's raw
+  reply byte-for-byte, records model/provider/version/generation date
+  (defaults `unknown`), verifies SHA-256, and refuses to overwrite an existing
+  revision.
+- **Stratified pilot scope, not all 1,050 forms.** Deterministic stratified
+  selection per source run (30 forms: orthographic / alternative-resource /
+  morphology / high-frequency / shared / model-specific / no-candidate
+  strata). Character names and quoted example words are excluded from revision
+  targets (preserved). Selection is reproducible (regeneration is
+  byte-identical except the `prepared_at` timestamp).
+- **Morphology-derived candidates are lemmas, not form claims.** A canonical
+  headword lemma from the evaluator's B-fallback candidates is supplied as a
+  candidate lemma (with its generated paradigm as supporting evidence) — not a
+  claim that the observed form is generated. Only included when no stronger
+  orthographic/alternative-resource evidence exists, and only when a paradigm
+  form shares a ≥5-char prefix (≥3 for short forms) with the unresolved form.
+- **Same evaluator, no invented quality score.** `scripts/compare_exp002.py`
+  runs the same `isv-eval` as EXP-001 on original and revised, plus
+  deterministic replacement bookkeeping (candidates used / accepted / not used
+  / replaced-without-candidate, which must be 0). No linguistic quality score.
+- **Human evaluation is holistic, not word-by-word.** A small number of
+  complete before/after text pairs are prepared for Project-Owner reading
+  (qualitative evidence only); no manual annotation workflow is created.
+- **Metadata unknown remains unknown.** Source run id, original/revision
+  SHA-256, prompt, candidate list, evaluator commit, dictionary manifest and
+  resource provenance are recorded per run; unknown model/provider/version/date
+  stay `unknown` (D-018).
+- **Input packages, revised outputs and comparison artifacts are gitignored**
+  (they embed raw model output); only DESIGN, README, template, and scripts
+  are committed.
