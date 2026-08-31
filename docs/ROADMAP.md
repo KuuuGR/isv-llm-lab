@@ -54,6 +54,10 @@ commitment; the Architect/Research Lead re-prioritizes as evidence arrives.
 
 ## Future ideas (recorded, not implemented)
 
+- Translation-length metrics for future experiments (do NOT compare raw file
+  sizes across source vs outputs — the source may carry prompt/formatting
+  content, Task 003.1): character count excluding formatting, lexical token
+  count, average word length, output/source length ratio.
 - `@interslavic/levenshtein` as an approximate-intelligibility signal for
   ranking candidate lexemes in the constrained system.
 - `@interslavic/stemmer`/`@interslavic/lunr` for cross-script search over the

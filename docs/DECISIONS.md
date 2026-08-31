@@ -146,3 +146,14 @@ raw file mtimes. Nothing is inferred from filenames or assumptions.
 directory and row in the comparison table). Its internal system instructions
 are not available and are explicitly recorded as such; the run's `prompt.txt`
 is the standard template plus a documented note, not the unseen instructions.
+
+## D-020 · 2026-08-31 · Source corpus and translation prompt are separated; raw byte size is not a translation-length metric
+
+For future controlled experiments, `source.txt` contains **only** the actual
+Polish story and `prompt.txt` contains the translation instructions + source
+text (a concept Experiment 001's supplied `op-pl.txt` violated by embedding an
+instruction line and markdown fence). Consequently, raw file size is NOT a
+valid comparison of translation length or quality in Experiment 001 — sizes
+are recorded for input integrity only, and the previous report's size
+observation is clarified accordingly. No new length metrics are implemented in
+this task; they are recorded as future ideas in ROADMAP.

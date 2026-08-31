@@ -118,3 +118,26 @@ the evaluator already preserves.
 
 **Next time.** When reporting overlap statistics, check the preserved
 sentence context before interpreting what "shared" means.
+
+## L-008 · 2026-08-31 · Keep the translation instruction out of the source corpus
+
+**Observation.** The supplied Polish source (`op-pl.txt`) begins with
+`Przetłumacz to opowiadanie na medżusłowiański:` followed by the story; the
+model outputs contain only the translation. Raw byte size is therefore NOT a
+valid source-vs-output length comparison — the source carries prompt/formatting
+content the outputs do not. Experiment 001 recorded sizes only for input
+integrity, which is correct; the source-vs-prompt rule is set for future
+controlled experiments (`source.txt = Polish story only`,
+`prompt.txt = translation instructions + source text`), without retroactively
+changing Experiment 001.
+
+**Why it matters.** A byte-size comparison between a source carrying an
+instruction and a translation of only the story would be an artifact of input
+formatting, not of translation length or quality — exactly the kind of false
+signal a baseline must avoid.
+
+**Next time.** Separate the translation instruction (prompt) from the corpus
+(source) at experiment design time, so raw file sizes and derived length
+metrics compare like with like. If an input artifact is discovered after the
+fact, document it and record length as future metrics rather than comparing
+raw bytes.

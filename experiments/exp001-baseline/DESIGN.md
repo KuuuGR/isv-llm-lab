@@ -26,6 +26,20 @@ direct LLM translation. The baseline must be trustworthy before any comparison.
   sentence-by-sentence. Rationale: preserve context, narrative consistency,
   terminology, character names, stylistic consistency across the text.
 - Sentence splitting happens only **after** translation, for analysis.
+- **Source vs prompt separation (Task 003.1 rule for future experiments):**
+  the source corpus should contain *only* the actual Polish story. Translation
+  instructions (e.g. `Przetłumacz to opowiadanie na medžuslovjansky…` or the
+  standardized prompt) belong in the **prompt**, not inside the source corpus.
+  Conceptually:
+  ```
+  source.txt = Polish story only
+  prompt.txt = translation instructions + source text
+  ```
+  Experiment 001 is not retroactively modified: its supplied `op-pl.txt`
+  contained an embedded instruction line and markdown fence, which were hashed
+  and evaluated as-is (documented in `input/source.meta.json`). As a result,
+  raw file size is not a valid comparison of translation length for
+  Experiment 001 — byte sizes are recorded for input integrity only.
 
 ## 3. Model outputs
 

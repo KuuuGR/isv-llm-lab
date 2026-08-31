@@ -58,6 +58,13 @@ with a complete full-form lexicon (L-001).
 - No condition produced Cyrillic output; all seven outputs are Latin script.
 - Output sizes span 9,863–10,310 bytes (source 10,827 bytes); Bielik has the
   most lexical tokens (1,561), DeepSeek the fewest (1,431).
+  **Note (Task 003.1): raw file size is NOT a valid comparison of translation
+  length in Experiment 001.** The Polish source file begins with the
+  translation instruction `Przetłumacz to opowiadanie na medżusłowiański:`
+  (plus a markdown fence), which the model outputs do not contain; the source
+  is therefore not byte-comparable with the translations. Byte sizes are
+  recorded only for input integrity (hashing), not as a translation-length or
+  quality metric. Lexical-token counts above are the informative length signal.
 - Per-model titles differ (e.g. Bielik: *Priča o Riječima Koje Su Bile Kao
   Sestre* vs ChatGPT: *Pověst o Slovah, Ktore Byli Jak Sestry*); end markers
   vary (`KONEC`/`KRAJ`).
@@ -72,9 +79,17 @@ with a complete full-form lexicon (L-001).
   the standard prompt plus a note, not the actual unseen instructions.
 - The supplied source file wraps the story in a markdown code fence with an
   embedded Polish instruction line; the file was hashed and used as-is
-  (`source.meta.json` documents this preprocessing artifact).
+  (`source.meta.json` documents this preprocessing artifact). Consequently
+  the raw source byte size is not comparable with the translation outputs
+  (see Notable observations).
+- **Future-experiment rule (Task 003.1):** the source corpus should contain
+  *only* the Polish story; translation instructions belong in the prompt.
+  Conceptually: `source.txt = Polish story only`, `prompt.txt = translation
+  instructions + source text`. Experiment 001 is not retroactively changed;
+  this rule governs future controlled experiments.
 - Automatic lexical/morphological coverage is not a linguistic-quality
-  measure; human evaluation is a separate future task.
+  measure; human evaluation is a separate future task. Raw file size is
+  recorded for input integrity only and is not a translation-quality metric.
 
 ## Planned (not started)
 
