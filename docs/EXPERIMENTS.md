@@ -104,6 +104,32 @@ unresolved by all seven models as a diagnostic appendix. Dataset statistics:
 1,050 unique unresolved forms / 2,888 occurrences; 831 forms appear in exactly
 one model, 8 in all seven.
 
+### Follow-up: cross-resource audit of unresolved forms (Task 005, 2026-08-31)
+
+A **post-hoc evidence audit** re-checked **all 1,050** unique unresolved forms
+against the project's other documented Interslavic resources (no sampling, no
+resource modification, no linguistic judgment). Prepared by
+`scripts/audit_exp001_resources.py`; report and per-form evidence matrix under
+`experiments/exp001-baseline/manual-audit/` (local, gitignored).
+
+Resources audited: canonical `basic.json`/lexicon (0 hits — by construction),
+the `medzuslovjansky/slovnik` snapshot (0 headword hits), the full-form
+Interslavic Hunspell dictionary `isv.dic` (**54** forms, with morphological
+tags, e.g. `bojala st:bojati vf:part past sg fem`), and the `interslavicfreq`
+wordlists (**403** forms), plus JS morphology (0, deterministic) and Rust
+morphology (NOT_TESTABLE — no toolchain).
+
+Primary partition (evidence classes, mutually exclusive): **403** forms
+attested verbatim in an alternative resource (38.4%), **450** with recorded
+candidate lemmas but no resource evidence (42.9%), **116** with no resource
+evidence and no candidates (11.0%), **45** orthographic-variant candidates
+only (4.3%), **36** proper-name/story-specific only (3.4%). On direct
+evidence, ~48% of the apparent unresolved vocabulary is explained by resource
+coverage, evaluator normalization limits, or story-specific names/special
+forms; the audit does not claim the remaining ~52% is non-Interslavic (see
+`cross-resource-summary.md`). Main research-question answer is evidence-based
+and explicitly bounded; no forced conclusion.
+
 ## Planned (not started)
 
 - **EXP-002 — Constrained generation (documented in DESIGN.md, not implemented).**

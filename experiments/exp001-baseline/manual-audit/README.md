@@ -93,10 +93,45 @@ Do **not** treat `FOREIGN_SLAVIC` as an automatic category — even if a form
 looks obviously Russian / Czech / Serbian / etc., the judgment belongs to the
 human reviewer.
 
+## Cross-resource audit (post-hoc evidence for the reviewer)
+
+Before filling in the worksheet, the reviewer can consult the **cross-resource
+audit** produced by SODA Task 005 (`cross-resource-audit.csv` / `.json` /
+`cross-resource-summary.md` in this directory). It re-checks **all 1,050**
+unique unresolved forms — including this 108-form sample — against the
+project's other documented Interslavic resources (the full-form Hunspell
+dictionary `isv.dic`, the `interslavicfreq` wordlists, the `slovnik`
+snapshot, plus the canonical `basic.json`/lexicon). For each form it records
+evidence categories per resource:
+
+```
+EXACT_FORM            the form itself is listed in the resource
+MORPHOLOGICAL_FORM    listed as a generated inflection of a lemma
+LEMMA_FOUND           the resource exposes the form as a lemma/stem only
+ORTHOGRAPHIC_VARIANT  only a diacritic-stripped / folded spelling matches
+NO_MATCH              not found
+NOT_TESTABLE          resource could not be audited (e.g. Rust morphology)
+```
+
+and analytical buckets (`FOUND_IN_ALTERNATIVE_RESOURCE`,
+`ORTHOGRAPHIC_VARIANT_CANDIDATE`, `PROPER_NAME_OR_SPECIAL`,
+`CURRENT_RESOURCES_AGREE_NO_MATCH`, `AMBIGUOUS`). For forms found in
+`isv.dic`, the hunspell morphological tags (`st:`, `po:`, `vf:`, `case:`,
+`num:`) are recorded as evidence.
+
+These are **evidence inputs only**: the audit does not populate `human_class`,
+`human_notes`, or `confidence`. It can, however, materially reduce the
+reviewer's work — e.g. a form already attested in the wordlist/hunspell with
+tags rarely needs the same depth of review as a form in the genuine null set.
+
 ## Methodological notes
 
 - No LLM or heuristic classifier was used to judge form origin; no external
   dictionaries were queried to produce a classification.
+- The cross-resource audit (Task 005) is evidence-only: it compares surface
+  forms against explicit resources, records orthographic relationships as
+  *candidates* (never silently as matches), and does not perform any
+  linguistic-origin classification.
 - The "proper name" grouping (group `E`) uses the explicit name families that
   occur in the Polish source story, matched against normalized forms; it is an
   orthographic/identity grouping, not a language classification.
@@ -113,4 +148,11 @@ human reviewer.
 | `sample.csv` | Human audit worksheet (one row per form, blank annotation columns) |
 | `sample.json` | Machine-readable sample with full per-occurrence context |
 | `statistics.json` | Descriptive statistics of the whole unresolved dataset |
+| `cross-resource-audit.csv` | Evidence matrix: all 1,050 unresolved forms × resources (Task 005) |
+| `cross-resource-audit.json` | Full per-form cross-resource evidence (tags, cB, candidates) |
+| `cross-resource-summary.md` | Task 005 report: quantitative summary, overlaps, important cases |
 | `README.md` | This file |
+
+Artifacts quoting model-output sentences (`sample.csv`, `sample.json`) and the
+cross-resource audit files (model-output vocabulary forms) are gitignored and
+stay local; this README is the committed index.

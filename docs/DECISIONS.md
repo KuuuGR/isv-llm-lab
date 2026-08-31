@@ -170,3 +170,39 @@ relationships (e.g. matches a lexicon form once diacritics are stripped). The
 not merged into the main sample. `human_class` columns stay blank for the
 human reviewer. The sample data (which quotes copyrighted output sentences)
 is gitignored; only the README and script are committed.
+
+## D-022 · 2026-08-31 · Cross-resource audit is evidence-only; no resource is promoted or modified
+
+The post-hoc audit of all 1,050 unresolved forms (`scripts/audit_exp001_resources.py`)
+records what each documented Interslavic resource contains for a form, with
+per-resource evidence categories (EXACT_FORM / MORPHOLOGICAL_FORM /
+LEMMA_FOUND / ORTHOGRAPHIC_VARIANT / NO_MATCH / NOT_TESTABLE). Decisions:
+
+- **Audit the full population** (all 1,050 forms), not a sample — computationally
+  feasible with dictionary-style lookups.
+- **JS-morphology determinism:** the generated full-form lexicon is a complete
+  dump of the engine's paradigms for every `basic.json` lemma, so "can the
+  engine generate this form" is answered by lexicon membership; no live
+  inflection re-run is needed (the evaluator's live fallback already failed
+  for every C-form's candidate lemmas).
+- **Orthographic relationships are candidates, not matches** (e.g. `što`→`sto`
+  after stripping is recorded as ORTHOGRAPHIC_VARIANT, never as a resolution).
+- **Resource discrepancies are documented, not fixed** (e.g. `isv.dic` lists
+  `byh` with an implausible lemma association `st:abak ...`); the canonical
+  dictionary, the evaluator, and upstream resources are untouched.
+- **Frozen data, not live services:** the audit uses the shipped
+  `interslavicfreq` wordlists (pinned `b84535b`) and `isv.dic`/`isv.aff`;
+  synonym/quality data is NOT_TESTABLE because the package builds it from a
+  live Google Spreadsheet at runtime. Rust morphology is NOT_TESTABLE (no
+  toolchain). `slovnik` contributes only a same-lineage snapshot (0 headword
+  hits for this population).
+- **No linguistic-origin category** is created (no FOREIGN_LANGUAGE bucket),
+  and no LLM/heuristic judges forms; name/special detection uses only
+  deterministic source-story patterns.
+- **No automatic dictionary modification** and no promotion of alternative
+  resources into the canonical dictionary; a found-in-wordlist/hunspell hit is
+  recorded as attestation evidence only.
+- Audit inputs are downloaded at documented pins under `data/dictionary/audit/`
+  (gitignored); audit outputs live under `experiments/exp001-baseline/manual-audit/`
+  (gitignored); `human_class`/`human_notes`/`confidence` remain for the human
+  reviewer.

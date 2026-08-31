@@ -41,7 +41,7 @@ Legend for "How we intend to use it":
 | Relevant files | — (same structure as item 1) |
 | How we intend to use it | **Reference.** Confirms that the *actively maintained* dictionary codebase lives in the `medzuslovjansky` org. If the data pipeline changes, this is the repo to watch. |
 | Preservation strategy | None required (no direct dependency). |
-| Notes | The live site data we snapshot is produced by this lineage. |
+| Notes | The live site data we snapshot is produced by this lineage. The Task 005 audit additionally used its test-fixture snapshot `src/services/dictionary-test/basic.json` (master, 2026-07; copy at `data/dictionary/audit/slovnik/`, gitignored) as an independent earlier snapshot of the same lineage — it contributed 0 headword matches for the unresolved population. |
 
 ## 3. `@interslavic/utils` (legacy npm package)
 
@@ -100,6 +100,7 @@ Legend for "How we intend to use it":
 | Task 002 usage | **Not integrated into the baseline evaluator.** It remains a planned signal for ranking suspicious/unresolved forms; the core metrics deliberately do not depend on it (D-012, ROADMAP). |
 | Preservation strategy | Pin via PyPI if published (verify), otherwise pin the git revision; vendoring permitted (MIT). The bundled frequency and Hunspell data are snapshotted assets — pin them separately. |
 | Notes | Fork of `wordfreq`. The synonym maps derive from a Google Spreadsheet at build time; the shipped pickle/msgpack files are the frozen artifacts we actually consume. |
+| Task 005 usage | Audit inputs acquired at the pinned revision (`b84535b`) under `data/dictionary/audit/` (gitignored): `data/frequency/small_isv{.x}.msgpack.gz` wordlists and `data/hunspell/isv.dic`/`isv.aff`. Synonyms/quality were NOT testable locally (runtime Google-Sheet fetch). |
 
 ## 7. `medzuslovjansky/isv_hunspell_dict`
 
@@ -114,7 +115,7 @@ Legend for "How we intend to use it":
 | How we intend to use it | **Use now** — the Hunspell `isv.dic` provides a ready-made list of accepted surface forms (a second, independent validity signal for the baseline evaluation, complementary to the morphology engine). |
 | Task 002 usage | **Not yet integrated** — recorded as a future independent validity signal (ROADMAP "Future ideas"); the baseline uses the generated full-form lexicon + live morphology only. |
 | Preservation strategy | Download the pinned release artifacts (or reuse the copies already bundled in `interslavicfreq`). No code needed. |
-| Notes | MIT-licensed data; safe to snapshot. |
+| Notes | MIT-licensed data; safe to snapshot. Used in the Task 005 cross-resource audit: 54 of the 1,050 unresolved forms are listed in `isv.dic` with full-form morphological tags (copy at `data/dictionary/audit/hunspell/`, gitignored). |
 
 ## 8. Jan van Steenbergen — Interslavic grammar documentation
 

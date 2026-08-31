@@ -14,6 +14,22 @@ dictionary data is unresolved** (see `SOURCES.md`).
 | `lexicon.tsv` | `scripts/generate_lexicon.py` | Full-form lexicon: headwords + generated paradigms (`form\tlemma\txpos\tupos\tfeats\tentry_type`) |
 | `lexicon.manifest.json` | `scripts/generate_lexicon.py` | Provenance: dictionary hash, entry_count, morphology version, sha256 |
 
+## `audit/` — cross-resource audit inputs (Task 005)
+
+Downloaded once, locally, for the post-hoc cross-resource audit of
+Experiment 001 unresolved forms. Read-only inputs; not used by the evaluator.
+
+| File | Source | Contents |
+|---|---|---|
+| `audit/hunspell/isv.dic`, `isv.aff` | `medzuslovjansky/interslavicfreq` `data/hunspell/` (pinned `b84535b`) | Full-form Interslavic Hunspell dictionary (1,042,916 lines; 500,952 distinct surface forms) |
+| `audit/frequency/small_isv.msgpack.gz`, `small_isvx.msgpack.gz` | same pin, `data/frequency/` | Frozen word → cB frequency wordlists (579,860 / 252,461 entries) |
+| `audit/slovnik/basic.json` | `medzuslovjansky/slovnik` `master` `src/services/dictionary-test/basic.json` | Independent earlier snapshot of the dictionary lineage (18,464 rows) |
+| `audit/hunspell/_isv_forms.pkl.gz` | generated | Cache of parsed `isv.dic` (forms + stems) built by the audit script |
+
+`interslavicfreq` is MIT-licensed; its synonym/quality data is not included
+because it is built at runtime from a live Google Spreadsheet. These files
+are gitignored like all other local dictionary data.
+
 ## How to (re)generate
 
 ```bash

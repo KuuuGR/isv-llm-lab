@@ -1,6 +1,6 @@
 # Roadmap
 
-Status: updated 2026-08-31 (end of Task 004). This is a plan, not a
+Status: updated 2026-08-31 (end of Task 005). This is a plan, not a
 commitment; the Architect/Research Lead re-prioritizes as evidence arrives.
 
 ## Done
@@ -42,14 +42,31 @@ commitment; the Architect/Research Lead re-prioritizes as evidence arrives.
   - [x] Worksheet with blank human-review columns
         (`experiments/exp001-baseline/manual-audit/`), no automatic
         linguistic classification.
+- [x] **Task 005 — Cross-resource audit of unresolved forms** (post-hoc
+  evidence audit of EXP-001, not a new experiment):
+  - [x] All **1,050** unresolved forms re-checked against every documented
+        Interslavic resource (`scripts/audit_exp001_resources.py`): `basic.json`,
+        generated lexicon, `slovnik` snapshot, hunspell `isv.dic`, and
+        `interslavicfreq` wordlists; JS morphology (deterministic via lexicon),
+        Rust morphology recorded NOT_TESTABLE (no toolchain).
+  - [x] Per-form evidence matrix + report
+        (`experiments/exp001-baseline/manual-audit/cross-resource-audit.{json,csv}`,
+        `cross-resource-summary.md`); evidence categories, no linguistic
+        judgments, no resource modification.
+  - [x] Audit inputs downloaded at documented pins and stored locally
+        (`data/dictionary/audit/`, gitignored).
+  - [x] Key finding: 403 forms (38.4%) are attested verbatim in an alternative
+        resource; 450 have candidate lemmas but no resource evidence; 116 have
+        neither; 45 orthographic-variant candidates; 36 names/special only.
 
 ## Next recommended task (single)
 
 - [ ] **Manual linguistic review of the Experiment 001 unresolved sample** —
   annotate `experiments/exp001-baseline/manual-audit/sample.csv`
   (100 stratified forms + 8 shared-by-all diagnostic forms, prepared in Task
-  004; full contexts in `sample.json`). Human classification only — no
-  automatic language-origin detection.
+  004; full contexts in `sample.json`). The Task 005 cross-resource evidence
+  (`cross-resource-audit.csv`) is available as an input to the review.
+  Human classification only — no automatic language-origin detection.
 
 ## Later
 
@@ -77,7 +94,9 @@ commitment; the Architect/Research Lead re-prioritizes as evidence arrives.
 - `@interslavic/stemmer`/`@interslavic/lunr` for cross-script search over the
   generated lexicon.
 - Hunspell `isv.dic` as an independent surface-form validity signal and/or a
-  spellcheck-style fuzzy fallback for unresolved forms.
+  spellcheck-style fuzzy fallback for unresolved forms (Task 005 confirmed it
+  covers 54 of the 1,050 unresolved forms with full-form morphological tags;
+  integration decision still open).
 - Dictionary `type` and `intelligibility` columns as provenance-aware features
   in the candidate ranking (e.g. down-weight neologisms/doubtful entries).
 - A lightweight manual-review workflow for "suspicious forms" with sentence

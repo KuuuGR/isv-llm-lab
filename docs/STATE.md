@@ -1,6 +1,6 @@
 # Project State
 
-Updated: 2026-08-31 (SODA Task 004 — manual audit sample prepared)
+Updated: 2026-08-31 (SODA Task 005 — cross-resource audit complete)
 
 ## What this project is
 
@@ -17,7 +17,7 @@ Research hypothesis:
 This is a hypothesis. The first experiment must establish a baseline before
 any constrained system is judged against it.
 
-## Current status (end of Task 004)
+## Current status (end of Task 005)
 
 | Area | Status |
 |---|---|
@@ -33,6 +33,7 @@ any constrained system is judged against it.
 | Smoke tests | ✅ 31 tests (tokenizer, normalization, classifier, B-fallback, end-to-end corpus) |
 | **Experiment 001 (baseline)** | ✅ **RUN COMPLETED** — 7 model conditions evaluated on the complete Polish story; comparison in `experiments/exp001-baseline/outputs/comparison.md` |
 | **Manual audit sample (Task 004)** | ✅ **PREPARED** — stratified ~100-form sample of unresolved forms + statistics under `experiments/exp001-baseline/manual-audit/` (local, gitignored) for human review; no linguistic classification performed |
+| **Cross-resource audit (Task 005)** | ✅ **COMPLETE** — all 1,050 unresolved forms re-checked against hunspell `isv.dic`, `interslavicfreq` wordlists, and the `slovnik` snapshot (evidence only; no resource modified); report under `experiments/exp001-baseline/manual-audit/` (local, gitignored) |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
 
 ### Experiment 001 headline numbers
@@ -70,8 +71,10 @@ scripts/
   fetch_dictionary.py        — snapshot basic.json + write manifest
   generate_lexicon.py        — build full-form lexicon TSV + manifest
   sample_exp001_audit.py     — build the manual-audit sample of unresolved forms
+  audit_exp001_resources.py  — cross-resource audit of all unresolved forms (Task 005)
 data/
   dictionary/README.md       — how to regenerate the (gitignored) data
+  dictionary/audit/          — downloaded audit inputs (hunspell, frequency, slovnik), gitignored
 tests/
   fixtures/smoke_corpus.txt  — synthetic smoke corpus
   test_*.py                  — normalize/tokenizer/classifier/smoke tests
@@ -85,7 +88,7 @@ docs/
 experiments/
   exp001-baseline/
     DESIGN.md                — Experiment 001 design (input/storage/metrics/reproducibility)
-    manual-audit/README.md   — manual audit sample of unresolved forms (data is gitignored)
+    manual-audit/README.md   — manual audit sample of unresolved forms + cross-resource audit index (data is gitignored)
 ```
 
 ## Working agreements

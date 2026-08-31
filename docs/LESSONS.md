@@ -165,3 +165,40 @@ model-specific, orthographic/edge features, names), keep every selection
 deterministic, and validate name grouping against the actual source text
 rather than a surface heuristic. Record what the sample is NOT claiming
 (here: no language-origin judgment) in the worksheet itself.
+
+## L-010 · 2026-08-31 · Unresolved ≠ unsupported: community resources answer more than the evaluator's lexicon can
+
+**Observation.** The cross-resource audit of all 1,050 unresolved forms found
+that 403 (38.4%) are attested verbatim in `interslavicfreq` wordlists (54 also
+in the full-form Hunspell `isv.dic` with morphological tags), while our
+canonical `basic.json`-derived lexicon (320k entries) contains none of them by
+construction. A full population audit took ~15 s using dictionary-style
+lookups — no sampling was needed.
+
+**Why it matters.** The largest single cause of Experiment 001's "unresolved"
+vocabulary is *resource coverage*, not model failure: the community's broader
+wordlists and full-form dictionary know these forms. Reporting the raw C-count
+without this context overstates the "unsupported vocabulary" share. It also
+shows an evaluator decision point: is coverage limited to the canonical
+lexicon, or should attested forms in community resources count as valid?
+
+**Next time.** Before interpreting unresolved counts, check the forms against
+the other already-documented resources (cheap, full population); record
+evidence categories per resource and keep orthographic relationships as
+candidates, not matches.
+
+## L-011 · 2026-08-31 · Machine-generated dictionaries carry annotation artifacts — trust the form, doubt the tag
+
+**Observation.** `isv.dic` lists `byh` with lemma `st:abak ... case:voc`
+(an implausible association) and `jeden` as `st:jedeny` (a participle), while
+`bojala st:bojati vf:part tense:past sg fem` is clean. Community data is
+pipeline-generated; individual rows are not curated.
+
+**Why it matters.** A full-form hit is strong attestation evidence, but the
+accompanying lemma/POS annotation can be wrong. Recording the raw tag as
+evidence (with provenance) is correct; propagating it into the canonical
+dictionary or metrics would import the artifact.
+
+**Next time.** When auditing against generated resources, store the raw
+annotation line as evidence and call out suspicious rows rather than
+silently trusting or silently fixing them.
