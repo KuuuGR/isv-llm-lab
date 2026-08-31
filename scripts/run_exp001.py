@@ -28,6 +28,11 @@ Existing run directories are never overwritten: a `-2`, `-3`, … suffix is
 appended for repeated conditions. `meta.json` records source/output SHA-256,
 the evaluation code commit, the dictionary manifest and the morphology
 version, so the run is reproducible.
+
+For externally generated outputs whose exact model version or prompt is not
+known, record `unknown` explicitly (do not invent metadata); mark a condition
+with `--condition-type specialized_custom_gpt` when the output came from a
+custom GPT whose internal instructions are not visible.
 """
 
 from __future__ import annotations
@@ -53,9 +58,6 @@ OUTPUTS_DIR = EXP / "outputs"
 PROMPT_TEMPLATE = EXP / "prompt_template.txt"
 
 EXPERIMENT_ID = "exp001"
-
-# provider (task §3): exact names to avoid silent substitutions
-PROVIDERS = ("openai", "google", "anthropic", "deepseek")
 
 
 def run_id(date: str, provider: str, model: str, model_version: str) -> str:
@@ -86,6 +88,8 @@ def ingest_source(source_path: Path) -> None:
         "sha256": hashlib.sha256(raw).hexdigest(),
         "size_bytes": len(raw),
         "ingested_at": datetime.now(timezone.utc).isoformat(),
+        "provision_timestamp": datetime.fromtimestamp(
+            source_path.stat().st_mtime, timezone.utc).isoformat(),
         "title": None,          # fill in from Project Owner if known
         "author": None,
         "copyright_note": (
@@ -108,11 +112,28 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--ingest-source", metavar="PATH",
                         help="register the authoritative Polish source and exit")
-    parser.add_argument("--provider", choices=PROVIDERS,
-                        help="provider (openai|google|anthropic|deepseek)")
+    parser.add_argument("--provider",
+                        help="provider label, e.g. openai (free-form; use "
+                             "'unknown' when not known)")
     parser.add_argument("--model", help="model family label, e.g. chatgpt")
     parser.add_argument("--model-version",
-                        help="exact model/version string given by the interface")
+                        help="exact model/version string given by the "
+                             "interface, or 'unknown'")
+    parser.add_argument("--display-name", default=None,
+                        help="human-readable condition name (e.g. "
+                             "'GPTs — ISV Teacher') used in reports")
+    parser.add_argument("--condition-type", default="standard",
+                        choices=["standard", "specialized_custom_gpt"],
+                        help="condition class; use specialized_custom_gpt for "
+                             "custom GPTs whose internal instructions are "
+                             "not visible")
+    parser.add_argument("--prompt-status", default="unknown",
+                        choices=["standard_template", "different", "unknown"],
+                        help="whether the output is known to have used "
+                             "prompt_template.txt; externally generated "
+                             "outputs default to 'unknown'")
+    parser.add_argument("--generation-date", default="unknown",
+                        help="date the model output was generated, if known")
     parser.add_argument("--output", help="path to the RAW model output text file")
     parser.add_argument("--notes", default="",
                         help="free-form run notes (interface, parameters, …)")
@@ -158,9 +179,15 @@ def main(argv: list[str] | None = None) -> int:
         "experiment_id": EXPERIMENT_ID,
         "date": date,
         "timestamp": now.isoformat(),
+        "provision_timestamp": datetime.fromtimestamp(
+            output_path.stat().st_mtime, timezone.utc).isoformat(),
         "provider": args.provider,
         "model": args.model,
         "model_version": args.model_version,
+        "display_name": args.display_name,
+        "condition_type": args.condition_type,
+        "prompt_status": args.prompt_status,
+        "generation_date": args.generation_date,
         "prompt": str(run_dir / "prompt.txt"),
         "source_text": str(run_dir / "source.txt"),
         "output_text": str(run_dir / "output.txt"),

@@ -51,7 +51,7 @@ def load_runs() -> list[dict]:
 
 
 def model_label(meta: dict) -> str:
-    return meta.get("model", meta.get("provider", "?"))
+    return meta.get("display_name") or meta.get("model") or meta.get("provider", "?")
 
 
 def summarize(runs: list[dict]) -> dict:
@@ -101,12 +101,24 @@ def unresolved_overlap(runs: list[dict]) -> dict:
             key = f"{a} ∩ {b}"
             overlaps[key] = sorted(set(per_model[a]) & set(per_model[b]))
 
+    n_models = len(labels)
+    shared = {
+        "unique_unresolved_forms": len(all_forms),
+        "shared_by_2_or_more_models": sum(
+            1 for row in form_table if row["models_with_form"] >= 2),
+        "shared_by_3_or_more_models": sum(
+            1 for row in form_table if row["models_with_form"] >= 3),
+        "shared_by_all_models": sum(
+            1 for row in form_table if row["models_with_form"] == n_models),
+    }
+
     return {
         "per_model_unresolved_counts": {
             label: dict(counts) for label, counts in per_model.items()
         },
         "form_table": form_table,
         "pairwise_overlaps": overlaps,
+        "shared_summary": shared,
     }
 
 
@@ -147,6 +159,13 @@ def render_markdown(table: dict, overlap: dict) -> str:
         lines.append(f"- {key}: {len(forms)} — "
                      + ", ".join(f"`{f}`" for f in forms[:20])
                      + ("…" if len(forms) > 20 else ""))
+
+    s = overlap["shared_summary"]
+    lines += ["", "## Shared unresolved forms", "",
+              f"- unique unresolved forms: **{s['unique_unresolved_forms']}**",
+              f"- shared by 2+ models: **{s['shared_by_2_or_more_models']}**",
+              f"- shared by 3+ models: **{s['shared_by_3_or_more_models']}**",
+              f"- shared by all models: **{s['shared_by_all_models']}**"]
     return "\n".join(lines) + "\n"
 
 
