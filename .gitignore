@@ -21,6 +21,11 @@ experiments/**/manual-audit/*
 # EXP-002 comparison artifacts (embed raw revised outputs — stay local)
 experiments/**/comparison/*
 
+# EXP-002 operator prompts (embed complete original model output — stay local)
+experiments/**/operator-prompts/*
+!experiments/**/operator-prompts/README.md
+!experiments/**/operator-prompts/manifest.json
+
 # Raw experiment input set (source story + model outputs, copyrighted)
 opowiadania-set-isv/
 

@@ -1,6 +1,6 @@
 # Project State
 
-Updated: 2026-08-31 (SODA Task 006 — EXP-002 pilot prepared)
+Updated: 2026-08-31 (SODA Task 006.1 — EXP-002 operator packaging complete)
 
 ## What this project is
 
@@ -17,7 +17,7 @@ Research hypothesis:
 This is a hypothesis. The first experiment must establish a baseline before
 any constrained system is judged against it.
 
-## Current status (end of Task 006)
+## Current status (end of Task 006.1)
 
 | Area | Status |
 |---|---|
@@ -35,6 +35,7 @@ any constrained system is judged against it.
 | **Manual audit sample (Task 004)** | ✅ **PREPARED** — stratified ~100-form sample of unresolved forms + statistics under `experiments/exp001-baseline/manual-audit/` (local, gitignored) for human review; no linguistic classification performed |
 | **Cross-resource audit (Task 005)** | ✅ **COMPLETE** — all 1,050 unresolved forms re-checked against hunspell `isv.dic`, `interslavicfreq` wordlists, and the `slovnik` snapshot (evidence only; no resource modified); report under `experiments/exp001-baseline/manual-audit/` (local, gitignored) |
 | **EXP-002 pilot (Task 006)** | ✅ **PREPARED** — deterministic candidate generation + stratified selection + revision prompt + before/after evaluation tooling; input packages for all 7 EXP-001 runs under `experiments/exp002-pilot/`; LLM execution is external (no LLM API client, D-007) |
+| **EXP-002 operator packaging (Task 006.1)** | ✅ **COMPLETE** — audit confirmed `prompt.txt` is a complete self-contained prompt; seven single-file operator prompts generated (`operator-prompts/01-…07-….md`, gitignored, embed model output); selection verified byte-identical; prompt template gained the explicit "use supplied alternatives, not independent discovery" instruction |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
 
 ### Experiment 001 headline numbers
@@ -76,6 +77,7 @@ scripts/
   prepare_exp002_pilot.py    — EXP-002 candidate generation + prompt packages
   compare_exp002.py          — EXP-002 before/after evaluation + human-review pairs
   run_exp002_pilot.py        — EXP-002 orchestrator (prepare / collect / compare / status)
+  package_operator_prompts.py — EXP-002 operator-facing single-file Markdown prompts
 data/
   dictionary/README.md       — how to regenerate the (gitignored) data
   dictionary/audit/          — downloaded audit inputs (hunspell, frequency, slovnik), gitignored
@@ -97,6 +99,7 @@ experiments/
     DESIGN.md                — EXP-002 pilot design (candidate generation, prompt, evaluation)
     README.md                — operator instructions (prepare / execute externally / evaluate)
     prompt_template.txt      — revision prompt template (shared)
+    operator-prompts/        — ONE self-contained Markdown prompt per condition (generated, .md gitignored)
     input/  outputs/  comparison/  — run artifacts (all gitignored; inputs prepared for 7 runs)
 ```
 

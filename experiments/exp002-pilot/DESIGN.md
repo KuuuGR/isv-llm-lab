@@ -152,8 +152,25 @@ experiments/exp002-pilot/input/<pilot_run_id>/
     meta.json          # provenance: source run, candidates, prompt hash, layout
 ```
 
-The Project Owner / operator sends `prompt.txt` to an LLM and saves the
-returned text **byte-for-byte** as:
+The **operator interface** is one clearly named, self-contained Markdown file
+per condition:
+
+```
+experiments/exp002-pilot/operator-prompts/<NN>-<condition>.md
+    # EXP-002 Pilot — <Condition>
+    > COPY THIS ENTIRE FILE INTO <LLM>.
+    <the complete prompt.txt content, verbatim>
+```
+
+Generated deterministically by `scripts/package_operator_prompts.py`
+(byte-identical on rerun; no timestamps; `manifest.json` records the generator
+commit and per-file SHA-256s). The `.md` files embed the complete original
+translation (model output) and are gitignored. Packaging changed nothing about
+candidate selection, generation rules, the selected forms, EXP-001 outputs, or
+the evaluator (verified: regenerated selection is byte-identical).
+
+The Project Owner / operator opens the Markdown file, copies the **entire**
+file into the specified LLM, and saves the returned text **byte-for-byte** as:
 
 ```
 experiments/exp002-pilot/outputs/<pilot_run_id>/revised.txt
@@ -201,6 +218,10 @@ experiments/exp002-pilot/
     DESIGN.md                  — this document
     prompt_template.txt        — revision prompt template (shared)
     README.md                  — operator instructions (how to execute/evaluate)
+    operator-prompts/          — ONE self-contained Markdown prompt per condition
+        README.md                  usage + condition→file mapping (committed)
+        manifest.json              generator commit + per-file SHA-256s (committed)
+        01-chatgpt.md … 07-grok.md  complete prompts (gitignored: embed model output)
     input/<pilot_run_id>/      — prepared immutable input packages (gitignored)
     outputs/<pilot_run_id>/    — revised.txt + meta.json dropped in by operator
     comparison/                — before/after comparison artifacts (gitignored)

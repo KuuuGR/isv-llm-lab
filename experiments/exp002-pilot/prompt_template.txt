@@ -5,6 +5,11 @@ present in the canonical Interslavic dictionary. For each such word selected
 for revision, a list of suggested Interslavic alternatives is provided, with
 the deterministic evidence supporting each suggestion.
 
+This is a controlled experiment: we test whether you can USE the supplied
+alternatives correctly in context, not whether you can independently discover
+new Interslavic vocabulary. Choose only among the supplied alternatives and
+their grammatically appropriate forms; do not invent replacements.
+
 Rules:
 
 - Preserve the meaning of the original translation.

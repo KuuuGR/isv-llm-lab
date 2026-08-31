@@ -247,3 +247,30 @@ dictionary ordering.
 
 **Next time.** When a spec promises determinism, verify it by regeneration and
 `diff -r`; keep `prepared_at` as the single documented exception.
+
+## L-014 · 2026-08-31 · The operator interface is part of the experiment; audit file contents, not filenames
+
+**Observation.** Task 006 generated a perfectly usable `prompt.txt` (complete
+revision instructions, candidate table with provenance, and the byte-exact
+complete original translation) — but it was not discoverable as such. The
+Project Owner reasonably assumed `prompt.txt` was only the generic instruction
+and that the material had to be assembled from `source.txt` + `candidates.json`
++ `meta.json`. The audit then found there is no `source.txt` at all (the
+byte-for-byte EXP-001 output is `original.txt`), that `prompt.txt` alone was
+sufficient, and that only one LLM-facing element was missing: an explicit
+statement that the model must use supplied alternatives rather than discover
+new ones.
+
+**Why it matters.** An experiment that cannot be executed without understanding
+the internal JSON architecture has a usability failure at the operator
+boundary — the Project Owner's "don't turn a small experiment into Microsoft
+Office" concern. Filename-based assumptions corrupt the mental model
+(`source.txt` vs `original.txt` vs `prompt.txt`), while content-based
+inspection resolves it in minutes. The fix (one clearly named, self-contained
+Markdown file per condition, whole file pasted into the LLM) is a packaging
+transform, not new architecture.
+
+**Next time.** Design the *operator handoff* (what a human copies into an LLM)
+at the same time as the experiment layout; name files by their operator role;
+and when auditing usability, verify actual file contents and code paths before
+trusting either names or the README.

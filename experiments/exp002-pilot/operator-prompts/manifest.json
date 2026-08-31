@@ -1,0 +1,45 @@
+{
+  "experiment_id": "exp002-pilot",
+  "artifact": "operator-prompts",
+  "generator": "scripts/package_operator_prompts.py",
+  "generator_commit": "07cf955378e7a936d69361399564387422f4cd6b",
+  "source": "experiments/exp002-pilot/input/<pilot_run_id>/prompt.txt (complete revision prompt per run)",
+  "note": "Deterministic packaging; no timestamps. The Markdown files embed the complete original EXP-001 translation (model output) and are gitignored; manifest + README are committed.",
+  "files": {
+    "01-chatgpt.md": {
+      "pilot_run": "exp002__2026-08-31__openai__chatgpt__unknown",
+      "source_prompt_sha256": "31460ff717f613cefe9da36bd4b59cd782910ca138abc0287d7497023bbd1a35",
+      "output_sha256": "0dbf6d2c406445ee3045db96bf6b75da25bf8308ac26d4e75e145fc5b1f6ab94"
+    },
+    "02-gpt-isv-teacher.md": {
+      "pilot_run": "exp002__2026-08-31__openai__gpt-isvt__unknown",
+      "source_prompt_sha256": "21eb1d79490a05b75f8bf75dc5f1f23e3098e285d0a510f4cafe5677c7815204",
+      "output_sha256": "e41b2904a00cd3b67a4b9215d5f53f1ac07243477cbd02aa26bf38220e58b7e4"
+    },
+    "03-gemini.md": {
+      "pilot_run": "exp002__2026-08-31__google__gemini__unknown",
+      "source_prompt_sha256": "bb713c015abaa88c7c94e59c06a2a5c33ae4679878c0512f0267c1ae8736e152",
+      "output_sha256": "cb65f01b12c93ee209b5e8997795f6a3825942ff1c4e61b57c6406b6792ec2b9"
+    },
+    "04-claude.md": {
+      "pilot_run": "exp002__2026-08-31__anthropic__claude__unknown",
+      "source_prompt_sha256": "32246da315bceec5440e6973754771ea8d9d9fcb8bfc623cc382850058c933e8",
+      "output_sha256": "7690d657ef268a7d70a81d52a6fa2c323cd866a1549f18706210c59ecb86728c"
+    },
+    "05-deepseek.md": {
+      "pilot_run": "exp002__2026-08-31__deepseek__deepseek__unknown",
+      "source_prompt_sha256": "266b805411016ef2e919134640c485c6c1d60f318b58c8a939c4fa12c2b2518f",
+      "output_sha256": "380d147b9bd5901d2cdf882e2b18ef7224187f2ff6d1888950762362662410cb"
+    },
+    "06-bielik.md": {
+      "pilot_run": "exp002__2026-08-31__unknown__bielik__unknown",
+      "source_prompt_sha256": "837e931fe61379f640aa632f3b4341084dd13dace7986122b895f52db22cc01e",
+      "output_sha256": "9d5535b0ed55df105cdb2a898f4f19d61ea3b63f5c429a86c0009dbae1b47d96"
+    },
+    "07-grok.md": {
+      "pilot_run": "exp002__2026-08-31__unknown__grok__unknown",
+      "source_prompt_sha256": "36d135dfdc52ccfcbf31deba7f3e174e315d8514b567cff49b5f8805cd5fec2e",
+      "output_sha256": "18475b298e6bc2e82aba4aa8785e6068e7e66619f8a49dafe76c223e91d2f79f"
+    }
+  }
+}

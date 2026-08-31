@@ -258,3 +258,44 @@ decisions:
 - **Input packages, revised outputs and comparison artifacts are gitignored**
   (they embed raw model output); only DESIGN, README, template, and scripts
   are committed.
+
+## D-024 · 2026-08-31 · Operator interface is one self-contained Markdown file per condition; packaging never changes the experiment
+
+The EXP-002 pilot's usability audit (Task 006.1) found that `prompt.txt` was
+already a complete, self-contained LLM prompt (instructions + candidate table
+with provenance + the complete original translation, byte-exact tail) — the
+usability problem was naming and discoverability, not content. Decisions:
+
+- **One file per condition, copy/paste only.** The operator interface is a
+  clearly named Markdown file per condition
+  (`experiments/exp002-pilot/operator-prompts/<NN>-<condition>.md`) whose
+  entire content is pasted into the specified LLM. No manual assembly from
+  `source.txt`/`original.txt`, `candidates.json`, `meta.json`, or
+  `prompt_template.txt` is required or expected. (Note: the package contains
+  `original.txt`; there is no `source.txt` — the name confusion was part of
+  what the audit resolved.)
+- **Filenames are not evidence.** The audit inspected actual contents and code
+  paths, not names: the file named `prompt.txt` was the complete prompt; the
+  file named `original.txt` was the byte-for-byte EXP-001 output (SHA-256
+  match); `candidates.json` adds machine-readable structure (sentence
+  context, stratum, POS/tags/cB/paradigm evidence) that is a digest source for
+  the prompt but not required to run the experiment.
+- **Packaging is a pure transform.** `scripts/package_operator_prompts.py`
+  only reads the prepared input packages and wraps each `prompt.txt` in a
+  Markdown header (`# EXP-002 Pilot — <Condition>` + `> COPY THIS ENTIRE FILE
+  INTO <LLM>.`). It is deterministic (byte-identical on rerun, no timestamps);
+  the manifest records the generator commit and per-file SHA-256s. Candidate
+  selection, generation rules, the 30 selected forms, EXP-001 outputs,
+  metrics, dictionary, and evaluator are untouched — verified by byte-identical
+  selection after regenerating the packages.
+- **One LLM-facing prompt gap was fixed.** The audit's checklist required an
+  explicit "important distinction": the model must USE supplied alternatives
+  in context, not independently discover new ones. The prompt template now
+  states this (matching DESIGN §1's separation of questions A/B); packages
+  were regenerated so `prompt.txt` and the operator files stay consistent.
+- **Operator files are gitignored.** They embed the complete original
+  translation (model output); per the repository's copyright policy only the
+  packaging script, `operator-prompts/README.md`, and `manifest.json` are
+  committed.
+- **No scope growth.** Task 006.1 is packaging/usability only — no new
+  architecture, no candidate redesign, no LLM API, no execution of the pilot.
