@@ -1,4 +1,72 @@
 # isv-llm-lab
-Research lab for improving LLM-generated Interslavic using existing lexical and morphological resources.
-Can we make LLMs generate better Interslavic by giving them less freedom, not more?
-This is an experimental community project. It is not an official Interslavic project.
+
+**Interslavic LLM Lab**
+
+> Research lab for improving LLM-generated Interslavic using existing lexical and morphological resources.
+
+Can we make LLMs generate better Interslavic by giving them **less freedom, not more**?
+
+This is an experimental, open-source, non-profit **community research project**.
+It is **not an official Interslavic project** and does not present itself as such.
+The initial purpose is experimentation and benchmarking, not a production
+translation application.
+
+## Status
+
+SODA Task 002 complete (2026-08-31): the Experiment 001 **evaluation harness**
+(`isv-eval`) is implemented and smoke-tested. The experiment itself has **not
+been run** — the Polish story has not been requested from the Project Owner.
+
+## Documentation
+
+| File | Contents |
+|---|---|
+| [`SOURCES.md`](SOURCES.md) | Source & dependency inventory (licenses, commits, preservation plan) |
+| [`docs/STATE.md`](docs/STATE.md) | Project state |
+| [`docs/ROADMAP.md`](docs/ROADMAP.md) | Roadmap + future ideas |
+| [`docs/DECISIONS.md`](docs/DECISIONS.md) | Decision log |
+| [`docs/EXPERIMENTS.md`](docs/EXPERIMENTS.md) | Experiment log |
+| [`docs/GRAMMAR_AUDIT.md`](docs/GRAMMAR_AUDIT.md) | Grammar consistency audit (Steen docs vs JS vs Rust) |
+| [`docs/LESSONS.md`](docs/LESSONS.md) | Lessons learned (SODA) |
+| [`experiments/exp001-baseline/DESIGN.md`](experiments/exp001-baseline/DESIGN.md) | Experiment 001 design (baseline evaluation) |
+
+## The evaluator (`isv-eval`)
+
+Takes any Interslavic text and measures how much of its vocabulary is
+justifiable by the available lexical and morphological resources:
+
+- **A** — exact lexical match (headword or inflected form in the full-form
+  lexicon generated from the dictionary snapshot + `@interslavic/morphology`);
+- **B** — morphologically valid (rescued by re-inflecting candidate lemmas);
+- **C** — unresolved (preserved with sentence context for manual review);
+- metrics: `exact_dictionary_coverage`, `morphologically_valid_coverage`,
+  `unresolved_rate`, `total_tokens`.
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
+npm ci                              # in src/morphology_backend/
+python3 scripts/fetch_dictionary.py # snapshots basic.json + manifest (network)
+python3 scripts/generate_lexicon.py # builds the full-form lexicon (~90 s)
+.venv/bin/isv-eval text.txt --out results/
+```
+
+See `docs/STATE.md` and `experiments/exp001-baseline/DESIGN.md` for details.
+The dictionary snapshot and lexicon are gitignored (license unresolved).
+
+## Research question
+
+> Modern LLMs can generate plausible-looking Interslavic while introducing
+> vocabulary or forms that are actually borrowed from individual Slavic
+> languages or are otherwise not supported by the established Interslavic
+> resources.
+
+Proposed direction: constrain generation using existing Interslavic lexical and
+morphological resources. This is a hypothesis — the first experiment establishes
+the unconstrained baseline before any constrained system is judged.
+
+## Stack principles
+
+- Python for orchestration/analysis (default), Node for the existing
+  `@interslavic/morphology` engine.
+- Reuse existing Interslavic resources; do not reimplement morphology.
+- Keep the project small and reproducible.

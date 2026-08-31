@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "isv-eval"
+version = "0.1.0"
+description = "Evaluation harness for Experiment 001: measures how much of an Interslavic text is justifiable by existing lexical and morphological resources."
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+[project.scripts]
+isv-eval = "isv_eval.cli:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["isv_eval*"]

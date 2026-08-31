@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+
+# Experiment artifacts
+experiments/**/outputs/
+experiments/**/input/
+
+# Data snapshots (license pending — keep local until cleared)
+data/*
+!data/dictionary/
+data/dictionary/*
+!data/dictionary/README.md
+*.msgpack
+*.pickle
+
+# OS
+.DS_Store

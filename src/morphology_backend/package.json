@@ -1,0 +1,14 @@
+{
+  "name": "isv-morphology-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Narrow subprocess interface to the Interslavic morphology engine (@interslavic/morphology) plus translit.",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@interslavic/morphology": "0.1.2",
+    "@interslavic/translit": "0.1.0"
+  }
+}
