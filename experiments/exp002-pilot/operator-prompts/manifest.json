@@ -2,7 +2,7 @@
   "experiment_id": "exp002-pilot",
   "artifact": "operator-prompts",
   "generator": "scripts/package_operator_prompts.py",
-  "generator_commit": "07cf955378e7a936d69361399564387422f4cd6b",
+  "generator_commit": "c4618113ad737ddbc5783fee76b9ee6818a5ab24",
   "source": "experiments/exp002-pilot/input/<pilot_run_id>/prompt.txt (complete revision prompt per run)",
   "note": "Deterministic packaging; no timestamps. The Markdown files embed the complete original EXP-001 translation (model output) and are gitignored; manifest + README are committed.",
   "files": {
