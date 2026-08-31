@@ -340,3 +340,44 @@ executed pilot:
   no automatic linguistic judgment.
 - **No new functionality was built** (no UI/API/db/translator/synonym
   ranking); raw model outputs remain immutable artifacts.
+
+## D-026 · 2026-08-31 · Resource layers are a documented evidence model, not a truth ranking; two-tier metrics; no resource/evaluator change in this task
+
+Task 007 reconciled the resource set and defined the evaluation policy.
+Decisions:
+
+- **No resource is "the truth".** Resources are layered by their actual role:
+  canonical dictionary (`basic.json`/lexicon), morphological rules
+  (JS + Rust), alternative resources (`isv.dic`, `interslavicfreq` wordlists),
+  historical reference (`slovnik` — same lineage, no independent weight),
+  reference material (Steen grammar / community — not ingested, licensing).
+  Disagreements are preserved and explained, not resolved.
+- **The `interslavicfreq` discrepancy decomposes into three kinds** (verified
+  from the data): evaluator matching limits (candidate-prefix matching does
+  not fold etymological chars, so `sedeli` cannot reach the canonical lemma
+  `sěděti`; multi-token lemmas such as `bojati sę` are excluded), morphology
+  coverage (`sěsti` past forms are not generated; synthetic comparatives are
+  absent from the `inflect()`-generated lexicon), and resource-layer
+  differences (`reći`, `dejstvitelno` are absent from the canonical
+  dictionary). No layer is judged right or wrong.
+- **The evaluator's question is narrower than "valid Interslavic".** `isv-eval`
+  answers "can this surface be generated/recognized from the canonical
+  dictionary + morphology?"; the metric name `morphologically_valid_coverage`
+  invites over-interpretation. Future reports adopt the term **canonical
+  coverage** and state the narrower question. Historical reports are not
+  rewritten.
+- **Two metrics for future experiments.** Canonical coverage ((A+B)/lexical
+  tokens) and broader resource-supported coverage (also counting exact
+  surfaces attested in `isv.dic`/frequency wordlists). A labeled per-run
+  estimate shows +6–23 pp alternative-attested share of EXP-001 unresolved
+  vocabulary; the broader tier is an evidence estimate, never a validity
+  claim.
+- **Candidate generation weights candidates by layer** (canonical surface >
+  generated inflection > orthographic variant > alternative-resource
+  attestation > historical snapshot), all with provenance — the pilot evidence
+  supports this ordering.
+- **Scope guard held.** This task produced only documentation + one
+  deterministic audit script; the canonical dictionary, the resources, the
+  evaluator, and all historical results are untouched. The single next task is
+  implementing the two-tier policy in `isv-eval` (option B, concretized); it
+  is not started.

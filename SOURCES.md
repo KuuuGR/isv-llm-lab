@@ -1,9 +1,12 @@
 # Source & Dependency Inventory
 
 Status: snapshot of the audit performed during SODA Task 001 (2026-08-31),
-updated at the end of Task 002 with what the harness actually consumes, and at
+updated at the end of Task 002 with what the harness actually consumes, at
 Task 006.2 with the EXP-002 pilot's finding that the canonical evaluator does
-not consume the alternative resources listed below.
+not consume the alternative resources listed below, and at Task 007 with the
+resource reconciliation that assigns every item below a documented resource
+layer (canonical dictionary / morphological rules / alternative resources /
+historical reference / reference material) under `docs/RESOURCE_POLICY.md`.
 
 This file records every external source relevant to the project, how we intend
 to use it, and how we plan to preserve it. See `docs/DECISIONS.md` for the
@@ -44,6 +47,7 @@ Legend for "How we intend to use it":
 | How we intend to use it | **Reference.** Confirms that the *actively maintained* dictionary codebase lives in the `medzuslovjansky` org. If the data pipeline changes, this is the repo to watch. |
 | Preservation strategy | None required (no direct dependency). |
 | Notes | The live site data we snapshot is produced by this lineage. The Task 005 audit additionally used its test-fixture snapshot `src/services/dictionary-test/basic.json` (master, 2026-07; copy at `data/dictionary/audit/slovnik/`, gitignored) as an independent earlier snapshot of the same lineage — it contributed 0 headword matches for the unresolved population. In Task 006 the EXP-002 pilot reads the same snapshot for exact/orthographic candidate evidence (attested `isv` surface + POS). Task 006.2: same-lineage snapshots are never promoted to canonical evidence; the canonical evaluator consumes only the `basic.json`/lexicon lineage (see `experiments/exp002-pilot/REPORT.md` §6). |
+| Task 007 finding | **Layer: historical reference (same lineage as `basic.json`).** 18,464 rows, same schema, 0 headword hits for the unresolved population; being the same lineage it adds **no independent weight** to evidence (see `docs/RESOURCE_POLICY.md` §1, §5). |
 
 ## 3. `@interslavic/utils` (legacy npm package)
 
@@ -73,6 +77,7 @@ Legend for "How we intend to use it":
 | Task 002 usage | `@interslavic/morphology@0.1.2` + `@interslavic/translit@0.1.0` are pinned in `src/morphology_backend/package.json` (committed lockfile). The full-form lexicon is generated via the published `inflect()` API driven directly from `basic.json` rows — NOT via `tools/dump`, which is coupled to the monorepo's internal fixtures. |
 | Preservation strategy | Pin exact npm versions in the evaluation environment; the package content is small enough to vendor later if npm access becomes an issue. MIT license permits vendoring. |
 | Task 006 usage | The EXP-002 pilot derives `morphology_derived` candidates from the evaluator's B-fallback candidate lemmas that are canonical headwords, and records the JS engine's generated paradigm (via the full-form lexicon) as supporting evidence (`scripts/prepare_exp002_pilot.py`). |
+| Task 007 finding | **Layer: morphological rules.** The evaluator's canonical path is (basic.json → lexicon → engine). Verified coverage gaps: no past forms generated for `sěsti`; `inflect()` emits no synthetic comparatives (so `dalše` is unreachable from `daleko`/`daleky`/`dalj`); multi-token lemmas (`bojati sę`) are excluded from lemma-driven matching. See `docs/RESOURCE_POLICY.md` §2–3. |
 | Notes | This is the *successor* to `@interslavic/utils`. The dictionary app still pins the old package; our project should use the new one. Verified locally: `more` → ins.sg. `morętem`/`morętom`; `dělati` produces the full paradigm incl. Long/Short present variants. |
 
 ## 5. `gold-silver-copper/interslavic` (Rust morphology)
@@ -88,6 +93,7 @@ Legend for "How we intend to use it":
 | How we intend to use it | **Use later** (constrained generation) — a possible alternate/parallel morphology backend; **Reference now** — confirms the grammar rules and dictionary metadata semantics that the JS engine also implements. |
 | Preservation strategy | Pin a git revision as a Cargo dependency, or treat as a submodule if used. Both licenses permit vendoring. |
 | Notes | API follows the task's desired interface (`lemma + features → valid ISV form`), e.g. `noun_with`, `verb_with_present_hint`, `adj`, `pronoun`, `vocative`. The vocative is deliberately a standalone function (returns `None` for feminine consonant stems and neuters) — see `docs/GRAMMAR_AUDIT.md`. No Rust toolchain was available during this audit; analysis is static + documentation-based. |
+| Task 007 finding | **Layer: morphological rules (alternate implementation); NOT_TESTABLE.** Same rule engine as the JS package (parity harness: 99.98 % nouns, 100 % others). No Rust toolchain in this environment, so no live verification was performed (stated explicitly rather than reproduced from memory). See `docs/RESOURCE_POLICY.md` §1. |
 
 ## 6. `medzuslovjansky/interslavicfreq` (Python frequency/synonyms)
 
@@ -106,6 +112,7 @@ Legend for "How we intend to use it":
 | Task 005 usage | Audit inputs acquired at the pinned revision (`b84535b`) under `data/dictionary/audit/` (gitignored): `data/frequency/small_isv{.x}.msgpack.gz` wordlists and `data/hunspell/isv.dic`/`isv.aff`. Synonyms/quality were NOT testable locally (runtime Google-Sheet fetch). |
 | Task 006 usage | EXP-002 pilot candidate generation (`scripts/prepare_exp002_pilot.py`) reads the frozen wordlists again for exact-form/orthographic candidate evidence (attested surface + `cB` frequency recorded per candidate). |
 | Task 006.2 finding | **Evaluator/resource discrepancy documented.** The canonical `isv-eval` evaluator never consumes this resource. Surfaces attested verbatim here (e.g. `seli`, `sedeli`, `reci`, `rekl`, `dejstvitelno`, `rekla`, `bojala`) were supplied as candidates and often adopted by the revising LLMs, but are invisible to the canonical evaluator (bucket C), producing no measurable coverage gain. The evidence does not judge which layer is right; see `experiments/exp002-pilot/REPORT.md` §6. No resource modified. |
+| Task 007 finding | **Layer: alternative resource (surface frequency data).** `seli` cB −619, `sedeli` −619, `reci` −580, `rekl` −486, `dejstvitelno` −650, `dalše` −495 are surface wordforms without POS/paradigm linkage; homographs not disambiguated (freq `seli` is ambiguous with `isv.dic`'s `seli st:seliti`). They stay **evidence, not canonical validity**; the broader resource-supported metric counts them, canonical coverage does not. See `docs/RESOURCE_POLICY.md` §1–2, §5. |
 
 ## 7. `medzuslovjansky/isv_hunspell_dict`
 
@@ -121,6 +128,7 @@ Legend for "How we intend to use it":
 | Task 002 usage | **Not yet integrated** — recorded as a future independent validity signal (ROADMAP "Future ideas"); the baseline uses the generated full-form lexicon + live morphology only. |
 | Preservation strategy | Download the pinned release artifacts (or reuse the copies already bundled in `interslavicfreq`). No code needed. |
 | Notes | MIT-licensed data; safe to snapshot. Used in the Task 005 cross-resource audit: 54 of the 1,050 unresolved forms are listed in `isv.dic` with full-form morphological tags (copy at `data/dictionary/audit/hunspell/`, gitignored). In Task 006 the EXP-002 pilot uses those attested surfaces + tags as alternative-resource candidates. Task 006.2 documented that the canonical evaluator does not consume `isv.dic` either: surfaces attested here (e.g. `dalše`) are supplied as candidates but stay bucket C in evaluation (see `experiments/exp002-pilot/REPORT.md` §6). |
+| Task 007 finding | **Layer: alternative resource (surface attestation); full-form enumeration.** `isv.aff` has no affix rules (only `SET/WORDCHARS/TRY`, 3 `MAP`, 65 `ICONV`, 1 `REP`); ~500,952 surfaces are pre-enumerated. Membership = spellchecker-style attestation, not canonical validity; pipeline tags can be artifacts (`byh st:abak …`, `seli st:seliti` disagrees with the story's `seli`). See `docs/RESOURCE_POLICY.md` §1–2, L-019. |
 
 ## 8. Jan van Steenbergen — Interslavic grammar documentation
 
@@ -178,6 +186,7 @@ Legend for "How we intend to use it":
 | Task 002 usage | Snapshot + manifest implemented by `scripts/fetch_dictionary.py` (URL, retrieved_at, SHA-256, size, row count, schema, `license_status=UNRESOLVED`). The snapshot stays **out of git** (`.gitignore`); the manifest's content is embedded in every `isv-eval` report for reproducibility. |
 | Task 006 usage | EXP-002 candidate generation uses `basic.json` as the canonical-dictionary source: headwords (plus `addition` variants) for orthographic-variant candidates and the canonical-lemma pool for morphology-derived candidates. |
 | Task 006.2 finding | `basic.json`/lexicon is the **sole canonical evaluation source**: the evaluator never consumes alternative resources (hunspell, `interslavicfreq`, `slovnik`), which is exactly why EXP-002 candidates attested only in those resources were rejected. Task 006.2 recommends reconciling the resource layers under one documented policy before any larger experiment (see `experiments/exp002-pilot/REPORT.md` §6, §11). This snapshot was not modified. |
+| Task 007 finding | **Layer: canonical dictionary.** The only layer the evaluator consumes; 19,100 rows (headwords + `addition` variants, POS, `type` 1–9, intelligibility). Data license still UNRESOLVED. `docs/RESOURCE_POLICY.md` defines canonical coverage over this layer and keeps alternative resources in a separate evidence tier. |
 | Preservation strategy | **Snapshot locally** under `data/dictionary/basic.json` (+ SHA-256 manifest and fetch-date record) — done in Task 002. Because the data license is unresolved, the snapshot stays out of git until licensing is cleared; the provenance record is reproducible from the fetch script + manifest. This is the single most important reproducibility artifact. |
 | Notes | `type` encodes word provenance: 1 = universal, 2 = predominantly, 3 = regionally, 4 = Church Slavonic, 5 = neologism, 9 = doubtful. `intelligibility` marks per-language `+`/`-`/`~`. Both are candidate-ranking inputs for the future experiment. |
 

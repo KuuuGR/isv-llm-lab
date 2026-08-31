@@ -34,6 +34,9 @@ data/*
 !data/dictionary/
 data/dictionary/*
 !data/dictionary/README.md
+!data/dictionary/resource-policy/
+data/dictionary/resource-policy/*
+!data/dictionary/resource-policy/README.md
 *.msgpack
 *.pickle
 

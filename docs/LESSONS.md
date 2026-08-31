@@ -341,3 +341,66 @@ stay labeled as hypotheses.
 **Next time.** When a model is expected to change a document and appears not
 to, verify at the token level before reporting, and record possible
 explanations as labeled hypotheses, never as internal-cause claims.
+
+## L-018 · 2026-08-31 · Resource disagreements decompose into a small set of kinds — classify them before choosing a next step
+
+**Observation.** The `interslavicfreq`/canonical discrepancy looked like one
+problem but, probed against the actual data, decomposes into three kinds with
+different fixes: (1) evaluator matching limits — candidate-prefix matching
+does not fold etymological characters (`sedeli` cannot reach the canonical
+lemma `sěděti` although `sěděli` is bucket A) and multi-token lemmas
+(`bojati sę`) are excluded; (2) morphology-engine coverage — `sěsti`'s past
+forms are not generated and synthetic comparatives (`dalše`) are absent from
+the `inflect()`-generated lexicon; (3) resource-layer differences — `reći` and
+`dejstvitelno` are simply absent from the canonical dictionary, so no lemma
+path exists while the community resources attest the surfaces.
+
+**Why it matters.** "Reconcile the resources" is not actionable until each
+discrepancy is attributed: matching/normalization gaps, engine coverage, and
+dictionary coverage imply different implementations, and fixing the wrong one
+solves nothing (e.g. adding `reći` to a wordlist would not fix the `sedeli`
+prefix gap).
+
+**Next time.** When resources disagree, probe each form against every layer
+(canonical headword, lexicon, live morphology generation, hunspell tags,
+frequency, historical snapshot) before proposing a reconciliation; classify
+the disagreement, then decide.
+
+## L-019 · 2026-08-31 · `isv.dic` is a full-form enumeration, not a rule-based dictionary
+
+**Observation.** The Hunspell resource has no affix rules: `isv.aff` (74 lines)
+contains only `SET/WORDCHARS/TRY`, 3 `MAP`, 65 `ICONV` transliteration rules and
+one `REP što→čto`. Every surface is pre-enumerated in `isv.dic` (~1,042,916
+lines, ~500,952 distinct forms) with pipeline-generated tags. "Present in
+`isv.dic`" therefore means "the generating pipeline enumerated it with these
+tags" — it is surface attestation, not evidence of morphological regularity,
+and the tags can be artifacts (`byh st:abak …`, L-011) or disagree with other
+layers (`seli st:seliti` = present 3sg of "settle", while the story's `seli`
+is the past of "sit down").
+
+**Why it matters.** Treating `isv.dic` membership as "canonical Interslavic"
+imports both the pipeline's coverage and its tag interpretation; treating it
+as a spellchecker inventory ("would not be flagged") is defensible and
+reproducible.
+
+**Next time.** Document the generative structure of a dictionary resource
+(affix rules vs full-form, ICONV/REP normalization) before assigning it an
+evidence role; record raw tags as evidence and distrust them as annotation.
+
+## L-020 · 2026-08-31 · Canonical-lemma existence does not imply canonical-form coverage
+
+**Observation.** A lemma can be a canonical headword while the engine fails to
+generate its forms: `sěsti` is in `basic.json`, yet the JS engine generates no
+`sěl`-forms, so `sěli` is bucket C; and `inflect()` emits no synthetic
+comparative cells at all, so `dalše` is bucket C although `daleko`/`daleky`/
+`dalj` are canonical. A full-form lexicon is only as complete as the generator
+path that built it.
+
+**Why it matters.** "Canonical coverage" can understate even regular
+morphology when the generation path has gaps; the broader-resource tier exists
+precisely to surface this, and interpreting a low canonical number as "the
+models wrote non-Interslavic" would be wrong.
+
+**Next time.** When reporting coverage, state what the generator path does and
+does not emit (the lexicon manifest), and check morphology-coverage gaps
+before attributing unresolved forms to the models.

@@ -244,12 +244,43 @@ Full report: `experiments/exp002-pilot/REPORT.md`; per-run detail in
 
 ## Planned (not started)
 
-- **Evaluator/resource reconciliation (recommended next task, Task 006.2
-  outcome B)** — align candidate generation and evaluation under a single,
-  documented resource policy before any larger experiment; the `interslavicfreq`
-  discrepancy shows the current layers disagree. Not started.
-- **EXP-002 full scale / EXP-003** — only after the resource/evaluator
-  reconciliation makes coverage numbers interpretable; do not proceed
-  automatically.
+- **Implement the resource policy in `isv-eval` (recommended next task,
+  Task 007 outcome B)** — add a clearly-labeled alternative-resource
+  attestation tier and report canonical coverage + broader resource-supported
+  coverage side by side, leaving historical A/B/C classifications untouched;
+  policy in `docs/RESOURCE_POLICY.md`. Not started.
+- **EXP-002 full scale / EXP-003** — only after the resource policy is
+  implemented in the evaluator (so coverage numbers are interpretable); do not
+  proceed automatically.
 - **Manual linguistic review** of the EXP-001 unresolved sample (Task 004 artifacts; human-only, no automatic classification).
+
+### Follow-up: resource reconciliation and evaluation policy (Task 007, 2026-08-31)
+
+Not an experiment. The resource set was reconciled into a layered evidence
+model and an evaluation policy (`docs/RESOURCE_POLICY.md`; evidence table
+`data/dictionary/resource-policy/evidence.json` via
+`scripts/audit_resource_layers.py`). Key results:
+
+- **Resource layers** (no resource is "truth"): canonical dictionary
+  (`basic.json`/lexicon), morphological rules (JS `@interslavic/morphology`,
+  Rust `gold-silver-copper/interslavic` — NOT_TESTABLE, no toolchain),
+  alternative resources (`isv.dic`, `interslavicfreq` wordlists), historical
+  reference (`slovnik`, same lineage), reference material (Steen/community —
+  not ingested).
+- **`interslavicfreq` discrepancy explained from data** — three kinds:
+  evaluator matching limits (`sedeli`↔`sěděti` folded-prefix gap; `bojati sę`
+  multi-token exclusion), morphology coverage (`sěsti` past forms;
+  comparatives absent from the `inflect()` lexicon), resource-layer
+  differences (`reći`, `dejstvitelno` absent from the canonical dictionary).
+- **Evaluator diagnosis**: `isv-eval` answers "canonical resource coverage",
+  not "is this valid Interslavic"; metric terminology for future reports is
+  **canonical coverage**.
+- **Two-metric proposal**: canonical coverage + broader resource-supported
+  coverage. Labeled per-run estimate of the broader tier on EXP-001 outputs:
+  Claude 73.55→86.00 %, DeepSeek 74.42→82.81 %, Gemini 71.72→82.32 %,
+  ChatGPT 75.95→86.27 %, GPTs-ISV Teacher 79.83→88.44 %, Bielik 55.48→78.99 %,
+  Grok 76.56→86.41 % (alternative-attested unresolved tokens added). Evidence
+  estimate, not a validity claim.
+- **No changes**: no resource modified, no evaluator code changed, historical
+  results preserved.
 

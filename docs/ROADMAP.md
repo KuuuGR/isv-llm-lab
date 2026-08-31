@@ -1,9 +1,9 @@
 # Roadmap
 
-Status: updated 2026-08-31 (Task 006.2 — EXP-002 pilot executed, finalized,
-and analyzed; next recommended task is evaluator/resource reconciliation).
-This is a plan, not a commitment; the Architect/Research Lead re-prioritizes
-as evidence arrives.
+Status: updated 2026-08-31 (Task 007 — resource reconciliation and evaluation
+policy completed; next recommended task is implementing that policy in the
+evaluator). This is a plan, not a commitment; the Architect/Research Lead
+re-prioritizes as evidence arrives.
 
 ## Done
 
@@ -129,19 +129,46 @@ as evidence arrives.
         (`comparison/human_review.md`) across outcome categories.
   - [x] Final report + single recommendation
         (`experiments/exp002-pilot/REPORT.md`).
+- [x] **Task 007 — Interslavic resource reconciliation and evaluation policy**
+  (policy definition, not a new experiment; no resource/evaluator changes):
+  - [x] Audited every resource already present into a **layered evidence
+        model**: canonical dictionary (`basic.json`/lexicon), morphological
+        rules (JS + Rust), alternative resources (`isv.dic`, `interslavicfreq`
+        wordlists), historical reference (`slovnik` snapshot), reference
+        material (Steen grammar, community material — not ingested).
+  - [x] Explained the **`interslavicfreq` discrepancy from the data**: three
+        kinds of disagreement — evaluator matching limits (folded-prefix gap
+        `sedeli`↔`sěděti`; multi-token lemma exclusion `bojati sę`),
+        morphology coverage (`sěsti` past forms; comparatives absent from the
+        `inflect()`-generated lexicon), and resource-layer differences
+        (`reći`, `dejstvitelno` absent from the canonical dictionary).
+  - [x] Diagnosed `isv-eval`: it answers "can this surface be
+        generated/recognized from the canonical dictionary + morphology?"
+        (a coverage metric), **not** "is this form valid Interslavic?".
+        Adopted the term **canonical coverage** for future reports.
+  - [x] Proposed the **two-metric policy**: canonical coverage + broader
+        resource-supported coverage; a labeled per-run demonstration shows
+        +6–23 pp alternative-attested share of EXP-001 unresolved vocabulary
+        (e.g. ChatGPT 75.95 % → 86.27 %, Bielik 55.48 % → 78.99 %).
+  - [x] Defined candidate-generation weighting by layer (canonical surface >
+        generated inflection > orthographic variant > alternative-resource
+        attestation > historical snapshot), all with provenance.
+  - [x] Deliverables: `docs/RESOURCE_POLICY.md`,
+        `scripts/audit_resource_layers.py`,
+        `data/dictionary/resource-policy/{README.md,evidence.json}` (local);
+        SODA docs updated. No resource modified, no evaluator code changed,
+        historical results preserved.
 
 ## Next recommended task (single)
 
-- [ ] **Evaluate/reconcile the evaluator-resource layer** (Task 006.2
-  recommendation B) — the pilot showed that candidate generation (alternative
-  resources: `interslavicfreq`, hunspell) and evaluation (strictly canonical
-  dictionary) use inconsistent standards: adopted alternative-resource forms
-  (`seli`, `sedeli`, `reci`, `rekl`, `dejstvitelno`) produce no measurable
-  coverage gain. Reconcile the layers under a single documented resource policy
-  (optionally an explicit, clearly-labeled alternative-resource attestation
-  tier separate from canonical A/B/C) before any larger experiment, whose
-  coverage numbers would otherwise be uninterpretable. Do not start this task
-  from this roadmap entry alone — it requires a SODA task.
+- [ ] **Implement the documented resource policy in `isv-eval`** (Task 007
+  outcome B, concretized): add a clearly-labeled **alternative-resource
+  attestation tier** and report **canonical coverage** and **broader
+  resource-supported coverage** side by side, while leaving the historical
+  A/B/C classifications and all existing reports untouched. This is the
+  smallest step that makes future experiment numbers interpretable under the
+  policy in `docs/RESOURCE_POLICY.md`. Do not start it from this roadmap entry
+  alone — it requires a SODA task.
 
 ## Parallel (not blocking the pilot)
 
@@ -155,10 +182,10 @@ as evidence arrives.
 ## Later
 
 - [ ] **Experiment 002/003 — full-scale constrained/dictionary-guided
-  generation** — only after the evaluator/resource reconciliation (next
-  recommended task) makes coverage numbers interpretable; the pilot evidence
-  will then decide which unresolved-form categories benefit from supplied
-  alternatives.
+  generation** — only after the evaluator implements the two-tier resource
+  policy (next recommended task) makes coverage numbers interpretable; the
+  pilot evidence will then decide which unresolved-form categories benefit
+  from supplied alternatives.
 - [ ] Investigate dictionary **data licensing** (Steen source data / Google
   Spreadsheet) before any redistribution of derived data.
 - [ ] Decide primary morphology backend for constrained generation
@@ -194,6 +221,6 @@ as evidence arrives.
   evaluator (separate from canonical A/B/C), so forms attested in
   `interslavicfreq`/hunspell can be recorded without silently changing the
   canonical classification (candidate direction from Task 006.2
-  recommendation B).
+  recommendation B; promoted to the recommended next task by Task 007).
 - Corpus building: collected raw model outputs + validated analysis as a seed
   evaluation set for later experiments.
