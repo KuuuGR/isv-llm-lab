@@ -183,18 +183,29 @@ re-prioritizes as evidence arrives.
   - [x] Verified the primary alignment resource exists in-repo: `basic.json`
         has a Polish translation column (`pl`, 18,916 keys); a reverse index
         covers lemma vocabulary (`być→byti`, `się→sę`, `dziś→[dnėś, tutdėnj,
-        sego dnja]`); inflected Polish forms miss and Polish lemmatization is
-        not a project dependency — stated as a limitation, handled by
-        dictionary-verified lemma recovery + an explicit curated residual
-        table + `[?]` (no silent heuristics).
+        sego dnja]`); measured on the story: 207/578 (36 %) direct hits,
+        ~28 (~5 %) dictionary-verified recovery, residual 371 = ~54 names +
+        ~317 inflected non-name forms. Polish lemmatization is not a project
+        dependency — stated as a limitation, handled by dictionary-verified
+        lemma recovery + an explicit curated residual table + `[?]`
+        (no silent heuristics).
   - [x] Four conditions specified (A baseline / B scaffold single candidate /
         C + alternatives / D + reliable grammatical annotations), token-aligned
         scaffold representation, prompt design that treats the scaffold as
         vocabulary guidance (never a surface template), reuse of the Task 008
         two-tier evaluator and the EXP-002 external-execution/comparison
-        machinery, reproducibility plan, human holistic-reading protocol.
+        machinery, reproducibility plan, blinded human holistic-reading
+        protocol.
+  - [x] Scaffold-generation method decided (D-029): deterministic pipeline,
+        no hidden LLM calls; lemma-based / LLM-assisted generation rejected
+        for v1; curated residual is explicit human judgment.
+  - [x] Research record created: `docs/RESEARCH_NOTES.md` (methodological
+        taxonomy: direct translation / post-hoc revision / generation-time
+        scaffolding / generation-time lexical+grammatical constraints;
+        measured alignment numbers; standing rules).
   - [x] Deliverable: `experiments/exp003-scaffold/DESIGN.md`; SODA docs
-        updated (STATE, ROADMAP, DECISIONS D-028, EXPERIMENTS, LESSONS L-022).
+        updated (STATE, ROADMAP, DECISIONS D-028/D-029, EXPERIMENTS,
+        LESSONS L-022/L-023, RESEARCH_NOTES).
         Recommendation: **GO** for a controlled pilot (existing story,
         3 models × 4 conditions). Not started.
 

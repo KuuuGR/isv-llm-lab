@@ -257,23 +257,35 @@ Full report: `experiments/exp002-pilot/REPORT.md`; per-run detail in
 ### Follow-up: EXP-003 designed — lexical scaffold at generation time (Task 009, 2026-09-01)
 
 Not an experiment — a design task (no implementation, no LLM calls). Deliverable:
-`experiments/exp003-scaffold/DESIGN.md`. Key verified findings and decisions:
+`experiments/exp003-scaffold/DESIGN.md`. Research-relevant facts are also
+recorded in `docs/RESEARCH_NOTES.md` (methodological taxonomy + measured
+numbers). Key verified findings and decisions:
 
 - **Alignment resource already in-repo**: `basic.json` has a Polish
   translation column (`pl`, 18,916 normalized keys). A reverse index covers
   lemma vocabulary (`być→byti`, `się→sę`, `dobrze→dobro`,
   `pierwszy→pŕvy`, `dziś→[dnėś, tutdėnj, sego dnja]`, `tam→[tam, tamo,
-  onamo, onde]`); measured 36% of unique story forms hit directly, ~5% via
-  dictionary-verified lemma recovery, and the residual is names plus
-  inflected forms. Polish lemmatization is **not** a project dependency —
-  stated as a limitation, handled by an explicit curated residual table and
-  `[?]` (no silent heuristics).
+  onamo, onde]`). Measured on the actual story (578 unique forms): 207 (36 %)
+  direct hits, ~28 (~5 %) via dictionary-verified lemma recovery; the residual
+  of 371 splits into ~54 name-like tokens (pass-through) and **~317 inflected
+  non-name forms** handled by an explicit per-story curated table; everything
+  else maps to `[?]`. Polish lemmatization is **not** a project dependency —
+  stated as a limitation, never a silent heuristic.
+- **Scaffold-generation method (D-029)**: the generator is **deterministic
+  and contains no hidden LLM calls**; lemma-based and LLM-assisted generation
+  were analyzed and rejected for v1 (an LLM step would change the variable
+  under test). Curated residual table is explicit, committed, provenance-bearing
+  human judgment.
 - **Conditions**: A = direct baseline; B = scaffold, one canonical candidate;
   C = + alternatives; D = + reliable grammatical annotations (dictionary POS /
   verb aspect / generated example forms only). D is not assumed to be best.
 - **Scaffold representation**: token-aligned lines grouped by sentence
-  (`Dziś → [dnėś]`), alternatives inline; prompts instruct the model that the
-  scaffold is vocabulary guidance, never a surface template.
+  (`Dziś → [dnėś]`), alternatives inline; Polish surface token boundaries are
+  preserved while ISV-side units are lemmas/concepts; prompts instruct the
+  model that the scaffold is vocabulary guidance, never a surface template.
+- **Human evaluation is blinded**: condition labels randomized per model,
+  automatic scores withheld until the initial holistic judgment, answers
+  recorded verbatim with the mapping key.
 - **Scope**: existing story, 3 models × 4 conditions (Claude, ChatGPT,
   Bielik) as a controlled pilot; reuses EXP-002 execution/comparison machinery
   and the Task 008 two-tier evaluator. Recommendation: **GO** for Task 010
