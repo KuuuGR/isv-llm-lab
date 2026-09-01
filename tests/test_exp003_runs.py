@@ -295,3 +295,115 @@ def test_partition_runs_excludes_failed_and_partial(cmp_mod, tmp_path,
     assert rec["status"] == "collected_partial_output"
     assert rec["excluded_from_quantitative_comparison"] is True
     assert "truncated" in rec["reason"]
+
+
+# ---------------------------------------------------------------------------
+# Blinded human-review artifact (DESIGN §11, Task 012)
+# ---------------------------------------------------------------------------
+
+
+def _make_analyses() -> dict[str, dict]:
+    """8 complete-run analyses (chatgpt + claude, A-D) with run ids."""
+    analyses = {}
+    for model in ("chatgpt", "claude"):
+        provider = "openai" if model == "chatgpt" else "anthropic"
+        for cond in ("A", "B", "C", "D"):
+            rid = f"2099-01-01__{provider}__{model}__unknown__{cond.lower()}"
+            analyses[rid] = {"run_id": rid, "model": model,
+                             "condition": cond}
+    return analyses
+
+
+def test_human_review_blinding_and_content(cmp_mod, tmp_path, monkeypatch):
+    """The review artifact: neutral sets, per-set randomized Version labels,
+    byte-exact translations, DESIGN §11 rubric, no model names/metrics."""
+    analyses = _make_analyses()
+    outputs = tmp_path / "outputs"
+    for a in analyses.values():
+        d = outputs / a["run_id"]
+        d.mkdir(parents=True)
+        # distinctive but neutral content so byte-exactness is really checked
+        (d / "output.txt").write_text(
+            f"Story version {a['condition']} of the set.\n",
+            encoding="utf-8")
+    monkeypatch.setattr(cmp_mod, "OUTPUTS_DIR", outputs)
+
+    doc, key = cmp_mod.render_human_pairs(analyses)
+
+    # determinism: same seed -> identical artifact
+    doc2, key2 = cmp_mod.render_human_pairs(analyses)
+    assert doc == doc2
+    assert key == key2
+
+    # exactly two neutral sets, four versions each
+    assert doc.count("## Set ") == 2
+    for set_name in ("Set 1", "Set 2"):
+        section = doc.split(f"## {set_name}\n")[1].split("## Set ")[0] \
+            if set_name == "Set 1" else doc.split(f"## {set_name}\n")[1]
+        assert section.count("### Version ") == 4
+
+    # no model identities, no automatic metrics in the review document.
+    # ("coverage" appears only in the instruction NOT to consult coverage
+    # numbers, which is the blinding reminder, not a leaked metric.)
+    low = doc.lower()
+    for bad in ("chatgpt", "claude", "bielik", "canonical", "broader",
+                "unresolved", "regression", "candidate", "invented"):
+        assert bad not in low, f"blinding leak: {bad!r}"
+    assert "%" not in doc
+    assert "coverage" not in doc or \
+        low.count("do not consult any automatic metric, coverage number") == 1
+
+    # key: every set maps 4 conditions to a permutation of Version 1..4,
+    # and the model/run are recorded only here
+    assert len(key) == 2
+    for entry in key:
+        assert entry["model"] in ("chatgpt", "claude")
+        labels = entry["blinded_labels"]
+        assert sorted(labels.values()) == \
+            [f"Version {i}" for i in range(1, 5)]
+        assert sorted(entry["runs"]) == ["A", "B", "C", "D"]
+        # presentation order is a permutation of the conditions
+        assert sorted(entry["presentation_order"]) == ["A", "B", "C", "D"]
+        # Version 1 is NOT necessarily condition A (blinding worked)
+        assert entry["presentation_order"] != ["A", "B", "C", "D"] or \
+            entry["set"] != "Set 1"  # at least one set must be shuffled
+
+    # translations embedded byte-exact (modulo terminal newlines)
+    for entry in key:
+        for cond, label in entry["blinded_labels"].items():
+            raw = (outputs / entry["runs"][cond] / "output.txt") \
+                .read_text(encoding="utf-8")
+            assert f"### {label}" in doc
+            assert raw.rstrip("\n") in doc
+            assert f"Story version {cond} of the set." in doc
+
+    # DESIGN §11 rubric present verbatim
+    for q in cmp_mod._RUBRIC_QUESTIONS:
+        assert q in doc
+    assert "Preference ordering" in doc
+    assert "Best:" in doc and "Worst:" in doc
+    # post-unblinding scaffold question, explicitly separated
+    assert "# PART 2" in doc
+    assert "does the scaffolded text feel constrained by the" in doc
+    assert "# Recording" in doc
+
+
+def test_human_review_excludes_incomplete_models(cmp_mod, tmp_path,
+                                                monkeypatch):
+    """Bielik (incomplete) never appears in the review — only complete runs."""
+    analyses = _make_analyses()
+    # a Bielik A analysis would exist for a partial run; ensure it is ignored
+    analyses["2099-01-01__unknown__bielik__unknown__a"] = {
+        "run_id": "2099-01-01__unknown__bielik__unknown__a",
+        "model": "bielik", "condition": "A"}
+    outputs = tmp_path / "outputs"
+    for a in analyses.values():
+        d = outputs / a["run_id"]
+        d.mkdir(parents=True)
+        (d / "output.txt").write_text("x\n", encoding="utf-8")
+    monkeypatch.setattr(cmp_mod, "OUTPUTS_DIR", outputs)
+
+    doc, key = cmp_mod.render_human_pairs(analyses)
+    assert "bielik" not in doc.lower()
+    assert len(key) == 2
+    assert all(e["model"] in ("chatgpt", "claude") for e in key)
