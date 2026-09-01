@@ -141,6 +141,32 @@ def test_verify_flags_missing_collection(run_mod, setup):
     assert "output.txt missing" in errors
 
 
+def test_collect_records_status_parameters_and_note(run_mod, setup):
+    """Failed/partial runs are preserved with a documented status (D-023)."""
+    src = setup / "error.txt"
+    src.write_bytes("Przepraszamy, Bielik ma chwilowe problemy.\n".encode())
+    run_id = "2099-01-01__openai__chatgpt__unknown__a"
+    rc = run_mod.run_collect(
+        run_id, src, "2026-09-01", "chatgpt", "openai", "GPT-5.6 Luna",
+        generation_parameters="thinking OFF",
+        status="failed_external_output",
+        note="Service error page; no translation content.")
+    assert rc == 0
+    meta = json.loads(
+        (setup / "outputs" / run_id / "meta.json").read_text(
+            encoding="utf-8"))
+    assert meta["status"] == "failed_external_output"
+    assert meta["generation_parameters"] == "thinking OFF"
+    assert meta["model_version"] == "GPT-5.6 Luna"
+    assert meta["generation_date"] == "2026-09-01"
+    assert "no translation content" in meta["note"]
+    # default status is the normal complete-run status
+    src2 = setup / "ok.txt"
+    src2.write_bytes(b"Full translation.\n")
+    assert run_mod.run_collect(run_id, src2, "2026-09-01", "chatgpt",
+                               "openai", "GPT-5.6 Luna") == 2  # refuse overwrite
+
+
 # ---------------------------------------------------------------------------
 # Comparison logic (pure functions)
 # ---------------------------------------------------------------------------
@@ -233,3 +259,39 @@ def test_pairwise_deltas(cmp_mod):
     assert p["deltas"]["unresolved_tokens"] == -2
     assert p["deltas"]["canonical_coverage"] == pytest.approx(0.166666, abs=1e-4)
     assert p["note"]
+
+
+def test_partition_runs_excludes_failed_and_partial(cmp_mod, tmp_path,
+                                                   monkeypatch):
+    """Runs with a documented non-complete status are excluded from the
+    quantitative comparison but preserved with their reason."""
+    outputs = tmp_path / "outputs"
+    for run_id, status, cond in [
+        ("2099-01-01__openai__chatgpt__unknown__a", "collected_external_output", "A"),
+        ("2099-01-01__unknown__bielik__unknown__b", "collected_partial_output", "B"),
+        ("2099-01-01__unknown__bielik__unknown__c", "failed_external_output", "C"),
+    ]:
+        d = outputs / run_id
+        d.mkdir(parents=True)
+        (d / "output.txt").write_bytes(b"x")
+        (d / "meta.json").write_text(json.dumps({
+            "status": status,
+            "condition": cond,
+            "model": "bielik" if "bielik" in run_id else "chatgpt",
+            "note": "truncated at act 3" if status == "collected_partial_output"
+                    else "echo of the prompt, no translation"
+                    if status == "failed_external_output" else "",
+        }), encoding="utf-8")
+    monkeypatch.setattr(cmp_mod, "OUTPUTS_DIR", outputs)
+
+    complete, excluded = cmp_mod.partition_runs(sorted(
+        p.name for p in outputs.iterdir()))
+    assert complete == ["2099-01-01__openai__chatgpt__unknown__a"]
+    assert set(excluded) == {
+        "2099-01-01__unknown__bielik__unknown__b",
+        "2099-01-01__unknown__bielik__unknown__c",
+    }
+    rec = excluded["2099-01-01__unknown__bielik__unknown__b"]
+    assert rec["status"] == "collected_partial_output"
+    assert rec["excluded_from_quantitative_comparison"] is True
+    assert "truncated" in rec["reason"]
