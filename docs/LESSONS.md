@@ -459,3 +459,32 @@ whether the canonical dictionary's per-language translation columns provide
 the mapping; build the reverse index, measure exact-hit coverage on the actual
 corpus, and size the residual *before* deciding whether a lemmatizer or
 curation is needed. Record the measured percentages in the design.
+
+## L-023 · 2026-09-01 · When the scaffold is the experimental variable, its generator must be deterministic and free of hidden LLM calls; measure the residual's composition before committing to a curation approach
+
+**Observation.** EXP-003's design had to answer "how is the scaffold
+generated?" before anything else. Two traps appeared. First, an LLM-assisted
+generation step would silently change the variable under test
+(`Polish → LLM → scaffold → LLM → ISV` claims a dictionary-scaffold result).
+The design therefore adopts a fully deterministic generator and, if an LLM is
+ever used for disambiguation, requires it to be an explicitly documented
+experimental variable. Second, the first-pass description of the unaligned
+residual said "mostly names" — measuring the actual story corrected that:
+of 578 unique Polish forms, 36 % hit the `pl` reverse index directly, ~5 %
+were recoverable by dictionary-verified suffix stripping, and the residual of
+371 forms splits into only ~54 name-like tokens versus **~317 genuinely
+inflected non-name forms** needing per-surface curation. The curation table
+is therefore a substantial, explicit, committed artifact for one story, not a
+small footnote.
+
+**Why it matters.** A scaffold pipeline that hides a model call cannot answer
+the question it claims to answer; and a curation workload sized from a wrong
+guess about the residual's composition leads to either an over- or
+under-scoped implementation. Measuring the composition (names vs inflection)
+upfront makes the cost honest and the design auditable.
+
+**Next time.** When the input transformation is the experimental variable,
+(a) forbid hidden LLM calls inside it unless the LLM step is itself a labeled
+condition, and (b) quantify the automatic-coverage percentage and the
+*composition* of the residual (names / closed-class / inflected open-class)
+before choosing between a heuristic, a curation table, or a new dependency.

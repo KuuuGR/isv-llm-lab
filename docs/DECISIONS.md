@@ -476,3 +476,34 @@ implementing it. Key decisions:
 - **Design only.** Nothing was implemented and no LLM was called. Design
   report: `experiments/exp003-scaffold/DESIGN.md`. Recommendation: **GO** for
   implementation (Task 010).
+
+## D-029 · 2026-09-01 · EXP-003 scaffold generation is deterministic and contains no hidden LLM calls; the residual curation is explicit human judgment
+
+SODA Task 009's second pass (research-record requirements) pinned down the
+scaffold-generation method. Decisions:
+
+- **The scaffold generator must not hide LLM calls.** EXP-003's experimental
+  variable is the *scaffold itself*; generating it with `Polish → LLM →
+  scaffold → LLM → ISV` would test an LLM-assisted scaffold, not a dictionary
+  scaffold. All five candidate methods were analyzed (automatic-from-surface,
+  from-lemmas, lemmas+grammar, LLM-assisted, other): v1 adopts the automatic
+  deterministic pipeline; lemma-based methods are rejected because no Polish
+  lemmatizer is a dependency; an LLM-assisted variant is allowed *only* as an
+  explicitly documented experimental variable later, never hidden (§6.4 of
+  the design).
+- **The curated residual table is human judgment, made explicit.** Measured
+  on the actual story: of 578 unique Polish forms, 207 (36 %) hit the reverse
+  index directly, ~28 (~5 %) via dictionary-verified suffix recovery, and the
+  residual of 371 splits into ~54 name-like (pass-through) and ~317 genuinely
+  inflected non-name forms that are curated per surface form. The curation is
+  committed, provenance-bearing, and reviewable — the honest cost of having no
+  lemmatizer, never a silent weak heuristic.
+- **The research record is a document, not a system.** A lightweight
+  `docs/RESEARCH_NOTES.md` captures the methodological taxonomy (direct
+  translation / post-hoc revision / generation-time scaffolding /
+  generation-time lexical+grammatical constraints), the measured alignment
+  numbers, and the standing rules for the future paper.
+- **Human evaluation is blinded.** Condition labels are randomized per model
+  and automatic scores are withheld until the initial holistic judgment, to
+  avoid biasing it; answers and the mapping key are recorded verbatim for the
+  research record.
