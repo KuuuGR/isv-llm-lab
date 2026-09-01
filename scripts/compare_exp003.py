@@ -16,10 +16,14 @@ For every collected run (outputs/<run_id>/output.txt) this script:
    changes (comparison/within_model/<model>.json);
 4. computes within-condition model comparisons (comparison/within_condition/
    <condition>.json);
-5. writes blinded complete-text human-review pairs
-   (comparison/human_review.md) with the label mapping kept separately
-   (comparison/human_review_key.json) so automatic metrics stay hidden during
-   holistic judgment.
+5. writes the blinded holistic human-review document
+   (comparison/human_review.md) for the complete runs: neutral "Set N"
+   labels, per-set deterministic randomized "Version 1..4" labels, the
+   DESIGN §11 question rubric, preference-ordering template, a clearly
+   separated post-unblinding section (scaffold-constraint question) and a
+   recording checklist; the set/model/condition/version mapping stays in
+   comparison/human_review_key.json so automatic metrics and model
+   identities stay hidden during the initial holistic judgment.
 
 Runs whose meta.json status is not collected_external_output
 (failed_external_output / collected_partial_output) are preserved and
@@ -34,6 +38,7 @@ from __future__ import annotations
 import difflib
 import hashlib
 import json
+import random
 import subprocess
 import sys
 from collections import Counter, defaultdict
@@ -51,6 +56,12 @@ CONDITIONS = ("A", "B", "C", "D")
 MODELS = ("chatgpt", "claude", "bielik")
 
 PAIR_KEYS = ["A_vs_B", "A_vs_C", "A_vs_D", "B_vs_C", "B_vs_D", "C_vs_D"]
+
+# Fixed seed for the blinded human-review presentation order (Task 012):
+# the per-model mapping of A/B/C/D to "Version 1..4" and the Set order are
+# deterministically shuffled, so regeneration is reproducible while the
+# reviewer never sees alphabetical condition order or model identities.
+REVIEW_SEED = 20260901
 
 
 def _pct(v: float | None) -> str:
@@ -675,45 +686,126 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def render_human_pairs(analyses: dict[str, dict]) -> tuple[str, list[dict]]:
-    """Blinded complete-text pairs within each model (B/C/D vs A, C vs B, D vs C).
+    """Blinded, DESIGN §11-compliant holistic review of the complete runs.
 
-    Only blinded labels ("Version N") are shown; the model/condition mapping
-    goes to human_review_key.json, kept separate from the review document.
+    - Only quantitatively complete runs participate (analyses already
+      excludes failed/partial runs, e.g. all Bielik runs).
+    - Neutral set labels ("Set 1", "Set 2", …) — the model behind each set is
+      recorded ONLY in human_review_key.json (Task 012 §3/§4).
+    - Per set, the four conditions A/B/C/D are mapped to "Version 1..4" by a
+      deterministic seeded shuffle (REVIEW_SEED), so the presentation order
+      is reproducible and never alphabetical.
+    - The review document contains the DESIGN §11 question rubric, a
+      preference-ordering template, a clearly separated post-unblinding
+      section (scaffold-constraint question), and a recording checklist.
+      No automatic metric appears anywhere in the review document.
+    - Translations are embedded exactly as collected (only terminal
+      newlines are stripped for the fenced display; content is unmodified).
     """
+    by_model: dict[str, dict[str, dict]] = {}
+    for a in analyses.values():
+        by_model.setdefault(a["model"], {})[a["condition"]] = a
+    models = [m for m, conds in by_model.items() if len(conds) == len(CONDITIONS)]
+
+    rng = random.Random(REVIEW_SEED)
+    rng.shuffle(models)  # deterministic neutral set order
+    set_names = [f"Set {i + 1}" for i in range(len(models))]
+
+    # --- blinded material ---
     out: list[str] = [
-        "# EXP-003 — human review (blinded, holistic)", "",
-        "Below are complete Interslavic translations grouped by source model.",
-        "**Do not consult automatic metrics while reading.** The labels are",
-        "blinded; the label mapping is kept separately and only unblinded",
-        "after the holistic judgment is recorded.", "",
-        "For each model, compare the versions and note: which sounds more",
-        "natural Interslavic, which you would prefer to read, which feels",
-        "more mechanically constructed, and which better preserves the",
-        "original meaning and style.", "",
+        "# EXP-003 — human naturalness review (blinded, holistic)", "",
+        "You are reviewing complete Interslavic translations of the same",
+        "Polish story. Every translation is the whole story; the versions",
+        "differ only in how they were generated.", "",
+        "## How to use this file", "",
+        "1. Read each set of four versions in any order you like.",
+        "2. Answer the four questions and give the preference ordering for",
+        "   each set, writing your answers verbatim into the answer boxes.",
+        "3. **Do not read PART 2 until you have finished and recorded your",
+        "   answers for BOTH sets.**",
+        "4. Do not consult any automatic metric, coverage number, or the",
+        "   file `human_review_key.json` before you finish PART 1.", "",
+        "There are no wrong answers and no scoring. You are judging how the",
+        "texts read as natural, coherent Interslavic prose.", "",
     ]
+
     key: list[dict] = []
-    version = 0
-    for model in MODELS:
-        conds = {
-            a["condition"]: a for a in analyses.values() if a["model"] == model}
-        if len(conds) < 2:
-            continue
-        labels: dict[str, str] = {}
-        out.append(f"## Model group — model {model}")
+    for model, set_name in zip(models, set_names):
+        conds = by_model[model]
+        order = list(CONDITIONS)
+        rng.shuffle(order)  # condition behind Version 1..4 for this set
+        labels = {c: f"Version {i + 1}" for i, c in enumerate(order)}
+
+        out.append(f"## {set_name}")
         out.append("")
-        for condition in sorted(conds):
-            version += 1
-            label = f"Version {version}"
-            labels[condition] = label
+        for condition in order:
             text = (OUTPUTS_DIR / conds[condition]["run_id"]
                     / "output.txt").read_text(encoding="utf-8")
-            out += [f"### {label}", "", "```", text.rstrip("\n"), "```", ""]
+            out += [f"### {labels[condition]}", "", "```",
+                    text.rstrip("\n"), "```", ""]
+        out += _rubric(set_name)
         key.append({
-            "group": model,
-            "blinded_labels": labels,
-            "runs": {c: conds[c]["run_id"] for c in conds},
+            "set": set_name,
+            "model": model,
+            "presentation_order": order,
+            "blinded_labels": {c: labels[c] for c in CONDITIONS},
+            "runs": {c: conds[c]["run_id"] for c in CONDITIONS},
         })
+
+    # --- post-unblinding + recording (never before the initial judgment) ---
+    out += [
+        "---", "",
+        "# PART 2 — AFTER the initial judgment (read this only after you",
+        "# have recorded your PART 1 answers for both sets)", "",
+        "The version labels were randomized. Open `human_review_key.json`",
+        "(or ask the experiment operator) to see which version label",
+        "corresponds to which condition (A/B/C/D) for each set.", "",
+        "For each set, answer the additional DESIGN §11 question:", "",
+        "> For B/C/D only, does the scaffolded text feel constrained by the",
+        "> scaffold?", "",
+        "Set 1 — B/C/D scaffold constraint:", "",
+        "```", "", "```", "",
+        "Set 2 — B/C/D scaffold constraint:", "",
+        "```", "", "```", "",
+        "---", "",
+        "# Recording", "",
+        "- date: ",
+        "- reviewer's answers: recorded verbatim above (PART 1 questions and",
+        "  preference orderings; PART 2 scaffold-constraint answers).",
+        "- presentation order and randomized mapping: `human_review_key.json`",
+        "  (set label, model, condition behind each Version label, run id).",
+        "- questions answered before unblinding: PART 1 (all four questions +",
+        "  preference ordering, both sets).",
+        "- questions answered after unblinding: PART 2 (scaffold constraint,",
+        "  B/C/D only).",
+        "- No numerical score is computed from these answers; the human",
+        "  judgment stays a separate qualitative evidence layer.", "",
+    ]
     return "\n".join(out), key
+
+
+_RUBRIC_QUESTIONS = [
+    "Which version sounds more naturally Interslavic?",
+    "Which version would you prefer to read?",
+    "Does one version feel more mechanically constructed?",
+    "Which version preserves the meaning and style of the Polish original "
+    "better?",
+]
+
+
+def _rubric(set_name: str) -> list[str]:
+    """The DESIGN §11 fixed holistic rubric for one set, with answer boxes."""
+    lines = [f"### Questions — {set_name}", ""]
+    for i, q in enumerate(_RUBRIC_QUESTIONS, 1):
+        lines += [f"{i}. {q}", "", "```", "", "```", ""]
+    lines += [
+        f"### Preference ordering — {set_name}", "",
+        "Rank all four versions:", "",
+        "Best:", "2nd:", "3rd:", "Worst:", "",
+        "One short paragraph explaining the preference:", "",
+        "```", "", "```", "",
+    ]
+    return lines
 
 
 if __name__ == "__main__":
