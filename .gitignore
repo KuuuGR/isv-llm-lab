@@ -34,6 +34,9 @@ experiments/**/operator-prompts/*
 # Raw experiment input set (source story + model outputs, copyrighted)
 opowiadania-set-isv/
 
+# EXP-003 temporary operator artifacts (raw external replies, copyrighted)
+experiments/**/temp/*
+
 # Data snapshots (license pending — keep local until cleared)
 data/*
 !data/dictionary/
