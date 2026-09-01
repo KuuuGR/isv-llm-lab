@@ -563,3 +563,29 @@ treat first-candidate order as a research decision, review it against the
 actual source sense, and record the ordering rationale with the candidate —
 not as an afterthought.
 
+
+## L-027 · 2026-09-01 · Verify output completeness before trusting a model's coverage numbers — small-context models truncate silently
+
+**Observation.** EXP-003 intake (Task 011) found that 4/4 Bielik replies were
+not usable translations: two truncated mid-story (≈3 of 7 acts, ~40 % of the
+text, ending mid-sentence/mid-word), one was a Croatian paraphrase/echo of the
+prompt scaffold (no translation), and one was a service error page. The
+complete ChatGPT/Claude replies were ~10 KB with all 9 story sections and an
+end marker; the truncated ones were ~4.8 KB and stopped before the Epilog.
+Structural checks (section headings, end markers, head/tail lines) identified
+all four failures in seconds; the echo and the error page had zero story
+sections.
+
+**Why it matters.** A coverage number computed on a truncated translation is
+not a coverage number — it silently measures a prefix of the story (Bielik
+partial canonical coverage 57 % / 39 % looks "low" for reasons that have
+nothing to do with vocabulary quality). Had the pipeline registered and
+evaluated every file without a completeness gate, the analysis would have
+mixed non-comparable texts. The completeness gate (structural inspection +
+documented run status, D-035) is what keeps the comparison meaningful.
+
+**Next time.** Any externally executed run collection should start with a
+structural completeness check per file (expected section markers, end marker,
+head/tail, byte size relative to complete peers) before any evaluation or
+comparison — and failures must be recorded as data (status + note), never
+silently rerun, repaired, or excluded from the record.

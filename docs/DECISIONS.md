@@ -590,3 +590,34 @@ recording the rationale in each row's basis note. The table is the
 human-judgment record; the generator preserves table order for curated
 candidates and automatic order for dictionary hits.
 
+
+## D-035 · 2026-09-01 · Failed and partial runs are preserved with a documented status and excluded from the quantitative comparison
+
+EXP-003 intake (Task 011) received external replies whose completeness varies
+by model. Decision:
+
+- `collect` records an additive `status` field per run:
+  `collected_external_output` (complete translation reply),
+  `collected_partial_output` (truncated translation — translation content
+  exists but the story is incomplete), `failed_external_output` (reply is not
+  a translation at all, e.g. an echo of the prompt or a service error page).
+  A `generation_parameters` field records supplied generation settings
+  (e.g. "thinking OFF"); missing metadata stays `unknown` (D-018).
+- All statuses are preserved byte-for-byte with the same SHA-256/immutability
+  guarantees (D-023) — a failed run is data, never a deletion.
+- The comparison tool treats only `collected_external_output` runs as
+  quantitatively comparable; `collected_partial_output` and
+  `failed_external_output` runs are written to
+  `comparison/<run_id>/excluded.json` with their reason and listed in the
+  summary, so truncated or non-translation text can never distort coverage or
+  transition numbers.
+- Bielik A/B (truncated) were still evaluated as partial-text diagnostics
+  (recorded, not comparable); Bielik C/D (no translation) were not evaluated —
+  a fabricated number for a non-translation is worse than an explicit
+  "not evaluable" record.
+
+Rationale: the experiment's quantitative core must only contain complete
+translations of the same source text; truncation is a confound, and
+non-translation text would produce meaningless "coverage". This is a
+bookkeeping decision — it does not change the evaluator, the scaffold, the
+prompts, or any metric definition.
