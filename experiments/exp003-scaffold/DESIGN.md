@@ -22,19 +22,28 @@ built from it covers lemma-level Polish vocabulary well (verified live:
 `być→byti`, `się→sę`, `dobrze→dobro`, `pierwszy→pŕvy`, `dziś→[dnėś, tutdėnj,
 sego dnja]`, `tam→[tam, tamo, onamo, onde]`). What it does **not** cover is
 inflected Polish forms (`był`, `bawił`, `morzem`), because the repository has
-**no Polish lemmatizer** and none is a current dependency. The design therefore
-uses a three-layer alignment strategy — exact reverse-index lookup, a
-dictionary-verified lemma-recovery fallback, and an **explicit, committed,
-provenance-bearing curation table** for the residual set of one story — and
-marks anything still unmapped `[?]` rather than guessing. This keeps the
-"no silent weak heuristics" rule.
+**no Polish lemmatizer** and none is a current dependency.
+
+Measured on the actual story (578 unique Polish forms): 207 (36 %) hit the
+reverse index directly; dictionary-verified lemma recovery adds ~28 (~5 %);
+the residual of 371 forms splits into ~54 name-like tokens (pass-through) and
+**~317 genuinely inflected non-name forms** — these are handled by an
+**explicit, committed, provenance-bearing curation table** for this one story.
+Anything still unmapped is scaffolded `[?]` rather than guessed. This keeps
+the "no silent weak heuristics" rule (see §6.3, §7).
+
+The scaffold is generated **deterministically, with no hidden LLM calls**
+(§6.4): the experimental variable is the scaffold itself, so its generator
+must not smuggle in a translation step (`Polish → LLM → scaffold → LLM → ISV`
+would not test a dictionary scaffold at all).
 
 Four conditions are specified (A = direct baseline, B = scaffold with one
 canonical candidate, C = scaffold with dictionary-supported alternatives,
 D = C + reliable grammatical annotations). The evaluator is already ready
 (Task 008 two-tier policy). The recommendation is **GO** for a controlled
-pilot on the existing story with 2–3 models; generalization claims require
-more stories later.
+pilot on the existing story with 3 models; generalization claims require more
+stories later. Research-relevant decisions and measurements are recorded in
+`docs/RESEARCH_NOTES.md` (§15).
 
 ## 2. Research question
 
@@ -107,7 +116,7 @@ outcome). A is the disjoint control.
 
 ## 5. Recommended scaffold representation
 
-**Recommendation: token-aligned, one line per Polish token, grouped by
+**Recommendation: token-aligned, one line per Polish surface token, grouped by
 sentence, with alternatives as an inline bracketed list.** Example (rendered
 form, Condition C):
 
@@ -140,14 +149,23 @@ Why this over the alternatives the task proposed:
   one-line-per-token and the ordering is meaningful (§7), rather than a
   separate table that breaks the 1:1 correspondence.
 
+**Token boundaries vs lemmas/concepts.** The scaffold preserves **Polish
+surface token boundaries** (one line per source token) because lemma-level
+input representation would require a Polish lemmatizer (not available, §6.3).
+The *semantic units* on the ISV side, however, are **lemmas/concepts**, not
+surface forms: a scaffolded candidate is an ISV headword the model inflects
+itself. The alignment mapping (Polish surface → ISV lemma) is exactly the
+direction the reverse index + curation provide. Repeated Polish words map
+identically (memoized) — no special representation. Punctuation is **not**
+scaffolded (the model owns it); sentence/paragraph boundaries are preserved
+by the grouping. Multi-token entries render as a single quoted unit, e.g.
+`na przykład → [napriměr]` and `bać się → [bojati sę]` (one concept needing
+multiple ISV words, or one Polish multiword needing one ISV headword).
+
 Machine-readable form: the scaffold is generated as `scaffold.json` (per
 sentence: list of `{pl_surface, pl_normalized, isv_candidates[], note}` with
 full provenance), and the prompt embeds a deterministic human-readable
-rendering of it. Repeated Polish words map identically (memoized) — no
-special representation. Punctuation is **not** scaffolded (the model owns it);
-sentence/paragraph boundaries are preserved by the grouping. Multi-token
-entries (see §6) render as a single quoted unit, e.g. `na przykład → [napriměr]`
-and `bać się → [bojati sę]`.
+rendering of it.
 
 ## 6. Polish-to-scaffold alignment strategy
 
@@ -175,7 +193,7 @@ sentence-grouped):
 
 1. **Multiword expressions** — a per-story table (`na przykład → napriměr`,
    `bać się → bojati sę`, …) is applied greedily before single-token
-   mapping. Entries are committed artifacts with provenance (see §16). This
+   mapping. Entries are committed artifacts with provenance (§17). This
    covers Polish multiword expressions and multi-word ISV headwords (`sego
    dnja`).
 2. **Exact reverse-index hit** → ISV candidate list (canonical layer,
@@ -185,8 +203,8 @@ sentence-grouped):
    A small, frozen, audited table of common Polish inflectional endings is
    tried; the recovered stem is kept **only if it re-looks-up in the reverse
    index** (so the dictionary filters everything; nothing is invented).
-   Measured on the actual story: this rescues only ~5% of unique forms —
-   Polish inflection is morphophonological (suppletion `był→być`,
+   Measured on the actual story: this rescues only ~28 forms (~5 % of unique)
+   — Polish inflection is morphophonological (suppletion `był→być`,
    alternations `słów→słowo`), which a suffix stripper cannot handle. This
    is the honest upper bound of what a rule-based fallback can do.
 4. **Proper names** — deterministic: capitalized in the source + no reverse
@@ -198,10 +216,10 @@ sentence-grouped):
 5. **Residual (inflected non-name forms)** — an explicit, committed, per-story
    **curation table**: Polish surface → ISV candidates, each entry carrying
    provenance (basis: reverse-index verification where possible, the `pl`
-   gloss, and human review). For the current story the residual is measured
-   at ~59% of unique forms (mostly names — handled in step 4 — plus
-   inflected verbs/nouns/pronouns); the non-name portion is a small, fully
-   auditable set (~200–250 unique tokens).
+   gloss, and human review). Measured composition of the residual (371 unique
+   forms): ~54 name-like (handled in step 4) + **~317 inflected non-name
+   forms** to curate. This is a manageable, fully auditable set for one
+   story; its size is a direct consequence of having no lemmatizer (§6.3).
 6. **Unmapped** — anything still without a mapping is scaffolded `[?]` and
    the scaffold notes "no mapping found". It is never silently guessed.
 
@@ -211,10 +229,37 @@ sentence-grouped):
 dependencies** (no Polish morphological analyzer; none proposed in this task
 because it would add a heavyweight, network-downloaded dependency). The
 design handles this explicitly: dictionary-verified recovery + a curated
-residual table for one story, `[?]` otherwise. If EXP-003 later expands to
-multiple stories, adding an audited Polish lemmatizer (e.g. Stanza-pl,
-Apache-2.0) becomes a separately approved dependency decision, not a silent
-improvement.
+residual table for one story, `[?]` otherwise. The curation is human
+judgment, but it is *explicit, committed, provenance-bearing, and
+reviewable* — it is not a silent weak heuristic presented as reliable
+linguistic analysis. If EXP-003 later expands to multiple stories, adding an
+audited Polish lemmatizer (e.g. Stanza-pl, Apache-2.0) becomes a separately
+approved dependency decision (§18).
+
+### 6.4 Scaffold generation method — deterministic and auditable
+
+The task's critical question: should the scaffold be generated (1)
+automatically from Polish, (2) from Polish lemmas, (3) from Polish lemmas +
+grammatical features, (4) through an LLM-assisted semantic mapping, or (5)
+another method? Decision for EXP-003 v1:
+
+| Method | Verdict | Why |
+|---|---|---|
+| (1) Automatic from Polish surface tokens (deterministic pipeline: §6.2) | **ADOPTED** | Reproducible, no hidden computation, directly traceable to the audited dictionary; the scaffold is exactly the dictionary's evidence, nothing more. |
+| (2) From Polish lemmas | **REJECTED for v1** | Requires reliable Polish lemmatization, which is not a project dependency (§6.3). Dictionary-verified lemma recovery is the available subset of this option. |
+| (3) Polish lemmas + grammatical features | **REJECTED for v1** | Requires a Polish lemmatizer *and* a Polish morphological analyzer — neither exists in-repo. Note: Condition D supplies **ISV-side** grammatical annotations from ISV resources; that is different and supported. |
+| (4) LLM-assisted semantic mapping | **REJECTED for v1** | Would create `Polish → LLM → scaffold → LLM → ISV` and claim a dictionary-scaffold effect. If ever used later, it must be an explicitly documented *experimental variable*, not a hidden step (see §18). |
+| (5) Other | — | None needed; the pipeline is the smallest reliable mechanism. |
+
+Consequences of the decision:
+
+- **No hidden LLM calls in the scaffold generator.** The only non-automatic
+  element is the curated residual table, which is explicit human judgment
+  committed as a versioned file, not an opaque model step.
+- **What the model receives is fully specified**: every scaffold candidate is
+  traceable to a resource (canonical dictionary / verified recovery /
+  curation / `[?]`), recorded in `scaffold.json` with provenance.
+- This keeps the measured effect attributable to the scaffold itself (§9).
 
 ## 7. Candidate-generation strategy
 
@@ -238,6 +283,9 @@ provenance: `{surface, pos, layer, source, kind, detail}`.
    ISV surfaces; they do **not** encode Polish↔ISV equivalence, so they cannot
    ground Polish→ISV mappings.
 5. **Historical (`slovnik`)** — never promoted; recorded only as provenance.
+6. **Curated (human, explicit)** — entries from the per-story curation table
+   (§6.2 step 5), each with its recorded basis. Ranked after automatic layers
+   so automatic evidence always wins where both exist.
 
 **Candidate ordering** (for Condition B's single pick and C's list order):
 exact-pl-gloss first, then dictionary `type` ascending (type 1 = universal
@@ -291,7 +339,7 @@ content**: A has no scaffold block; B/C/D share one scaffold block template,
 and C/D add the alternatives / annotations within the block. This keeps
 differences attributable to the intended variable as much as possible. The
 residual confound — that scaffolded prompts are longer — is acknowledged in
-§15.
+§16.
 
 ## 9. Experimental controls
 
@@ -304,7 +352,7 @@ residual confound — that scaffolded prompts are longer — is acknowledged in
   (title + body), with a `source.meta.json` recording the derivation (parent
   EXP-001 source SHA-256, what was removed, new SHA-256). This is a
   forward-applied rule for future experiments; EXP-001 data is untouched.
-- **Models:** same model runs A/B/C/D; 2–3 models in the first wave (§14).
+- **Models:** same model runs A/B/C/D; 3 models in the first wave (§13).
 - **Prompts:** stored per run; differ only by condition content (§8).
 - **Settings:** temperature/seed recorded (`unknown` where the interface
   cannot fix them; the operator prompt requests a stated default).
@@ -357,18 +405,29 @@ words.
 
 Procedure (qualitative, holistic):
 
-1. **Complete-text comparison, not word lists.** For each model, present the
-   complete A, B, C, D translations side by side (whole document; the
+1. **Complete-text comparison, not word lists.** For each model, the complete
+   A, B, C, D translations are compared as whole documents (the
    `human_review.md` pattern from EXP-002).
-2. **A small fixed rubric of holistic questions** (no per-word judgment):
-   - Which text reads most like natural Interslavic prose?
-   - Which has the fewest jarring/foreign-looking words?
-   - Which best preserves the story's meaning and style?
-   - (B/C/D only) Does the scaffolded text feel constrained or mechanical?
-3. **Preference ordering** A vs B vs C vs D (per model) plus a one-paragraph
-   justification.
-4. Results are recorded verbatim in `comparison/human_review.md`; no scoring
-   is computed from them.
+2. **Blinded presentation.** Conditions are relabeled neutrally (e.g.
+   "Version 1/2/3/4") with the mapping randomized per model and recorded in
+   the review file. Automatic scores are **not** shown before the holistic
+   judgment, to avoid biasing it (the task explicitly requests this).
+3. **A small fixed rubric of holistic questions** (no per-word judgment):
+   - Which version sounds more naturally Interslavic?
+   - Which version would you prefer to read?
+   - Does one version feel more mechanically constructed?
+   - Which version preserves the meaning and style of the Polish original
+     better?
+   - (B/C/D only, after unblinding) Does the scaffolded text feel
+     constrained by the scaffold?
+4. **Preference ordering** (best to worst among the four versions, per model)
+   plus a one-paragraph justification.
+5. **Recording for research:** the reviewer's verbatim answers, the
+   presentation-order mapping, the date, and the model are written to
+   `comparison/human_review.md`; the mapping key (which version label is which
+   condition) is kept in the same file after the initial judgment is recorded.
+   No scoring is computed from the answers. These records are research
+   evidence for the future paper (§15).
 
 This preserves the three-way distinction the task demands:
 resource-supported vocabulary (deterministic), automatic metrics (evaluator),
@@ -381,8 +440,8 @@ holistic naturalness judgment (human) — never collapsed into one score.
 Rationale:
 
 - It has established EXP-001 and EXP-002 baselines — the only corpus with
-  historical numbers, maximizing comparability.
-- Cost and interpretability: one story × 4 conditions × 2–3 models is already
+  historical numbers, maximizing comparability; a controlled continuation.
+- Cost and interpretability: one story × 4 conditions × 3 models is already
   a bounded first dataset.
 - One story **cannot** support generalization claims; EXP-003 v1 is therefore
   framed as a controlled within-story comparison (a pilot-scale design with
@@ -391,9 +450,12 @@ Rationale:
   would require new copyrighted sources plus licensing work — a separate
   decision.
 
-A **second story is a drop-in extension**: the pipeline is parameterized by
-story; adding one more story (with its own curation table) is a second wave,
-not a redesign. The design does not request ten stories now.
+**Limitation, stated:** one story, one genre, one set of characters — any
+conclusion is story-conditional. **Later validation set:** a second story
+(with its own curation table) is a drop-in extension and should be added as
+a separate wave *if* the first wave shows a direction-consistent effect; the
+pipeline is parameterized by story, so this is not a redesign. The design
+does not request ten stories now.
 
 ## 13. Model recommendation
 
@@ -408,16 +470,18 @@ Reasoning:
   answer to the primary question.
 - Claude and ChatGPT are strong general translators (represent the
   "competent translator" regime, where scaffolding must help rather than
-  interfere).
+  interfere), and have demonstrated structured-prompt adherence in EXP-002.
 - Bielik is a Polish-language model with the **lowest** EXP-001 coverage
   (55.5 %): it is the highest-risk, highest-signal stress case (worst
   baseline → largest possible effect; Polish-native behavior may confound or
-  amplify scaffold effects — that is a finding, not a bug).
+  amplify scaffold effects — that is a finding, not a bug). It is also the
+  best test of whether the scaffold helps a weak baseline.
 - GPTs "ISV Teacher" is excluded from the main wave because its internal
   system prompt is unavailable (a confound by construction, D-018); it may
   return later as a separate exploratory condition.
 - Selection is **not** based on the coverage ranking alone: it balances
-  strength spread (2 strong, 1 weak) against cost and the research question.
+  strength spread (2 strong, 1 weak) against cost, availability,
+  structured-prompt adherence, and the research question.
 
 A second wave (remaining models and/or a second story) is triggered only if
 the first wave shows a real, direction-consistent effect.
@@ -429,11 +493,12 @@ meta conventions):
 
 research question · hypotheses · conditions · source identity + SHA-256 ·
 model/provider/version · prompt (committed, hashed) · generation date ·
-resource versions (`basic.json` manifest, lexicon manifest, audit pins) ·
+parameters (temperature/seed where available, else `unknown`) · resource
+versions (`basic.json` manifest, lexicon manifest, audit pins) ·
 candidate-generation procedure (script commit + scaffolds + curation tables +
-hashes) · evaluator version (commit) · raw outputs (immutable, hashed,
-gitignored per copyright) · automatic metrics · deviations · failures ·
-limitations · conclusions.
+hashes) · scaffold-generation procedure (same) · evaluator version (commit) ·
+raw outputs (immutable, hashed, gitignored per copyright) · automatic
+metrics · deviations · failures · limitations · conclusions.
 
 - Scaffold regeneration is deterministic and verified byte-identical on rerun
   (except timestamps, L-013).
@@ -445,34 +510,71 @@ limitations · conclusions.
   generators, manifests and READMEs committed — the same copyright policy as
   EXP-001/002.
 
-## 15. Risks and limitations
+## 15. Research-notes / publication considerations
+
+The project may become the basis for a publication on LLM-assisted translation
+of a low-resource constructed language. EXP-003 introduces a genuinely new
+methodological distinction, recorded in `docs/RESEARCH_NOTES.md`:
+
+> **generation-time lexical scaffolding** (EXP-003 B/C) and
+> **generation-time lexical + grammatical constraints** (EXP-003 D) are
+> distinct from **direct translation** (EXP-001) and **post-hoc lexical
+> revision** (EXP-002).
+
+The research record captures, per task instruction §18: what we test, why,
+what the model receives, what happened, what we learned — including measured
+alignment coverage, the lemmatization limitation, the scaffold-generation
+method decision (no hidden LLM calls), and the rule that negative results are
+preserved. Lightweight by design; no research-management system is created.
+
+Paper-relevant properties of the design:
+
+- Every artifact is deterministic and versioned (scripts + commits + resource
+  pins + hashes), so the pipeline can be re-run and the numbers re-derived.
+- The two-tier metric terminology (canonical coverage vs broader
+  resource-supported coverage) matches the published policy
+  (`docs/RESOURCE_POLICY.md`), so results map to the policy document.
+- Unknowns stay unknown (model versions, providers, EXP-001 prompts) and are
+  recorded as such (D-018), so a future paper states its own provenance
+  limits honestly.
+- Source licensing is documented (story + derived artifacts stay out of git);
+  the method description can cite the deterministic scaffold pipeline and
+  the curated-table provenance model.
+- Human evaluation is a described qualitative protocol (blinded holistic
+  paired comparison), not an ad-hoc score.
+
+## 16. Risks and limitations
 
 1. **Alignment gaps (main risk).** Polish inflectional forms are not
-   lemmatizable with current dependencies. Mitigation: exact reverse index +
-   dictionary-verified recovery + explicit curated residual table + `[?]`
-   fallback. The residual curation is human judgment — but it is *explicit*,
-   committed, provenance-bearing, and reviewable; it is not a silent
-   heuristic. A second story would need its own curation table.
+   lemmatizable with current dependencies (measured: ~317 unique inflected
+   non-name forms in the story require curation). Mitigation: exact reverse
+   index + dictionary-verified recovery + explicit curated residual table +
+   `[?]` fallback. The residual curation is human judgment — but it is
+   *explicit*, committed, provenance-bearing, and reviewable; it is not a
+   silent heuristic. A second story would need its own curation table.
 2. **Prompt-length confound.** Scaffolded prompts are longer and more
    structured than A. A vs B is the cleanest contrast; B/C/D are nested. This
    is documented, not eliminable, with the external-interface constraint.
-3. **LLM non-compliance.** Models may (a) mechanically copy the scaffold
+3. **Hidden-LLM confound (guarded by design).** If the scaffold generator
+   contained LLM calls, the measured effect would be "LLM-assisted scaffold",
+   not "dictionary scaffold". The generator is deterministic (§6.4); any
+   future LLM-assisted variant becomes an explicit experimental variable.
+4. **LLM non-compliance.** Models may (a) mechanically copy the scaffold
    (word-order leakage) or (b) ignore it entirely. Both are detected by
    candidate-usage statistics and the transition matrix; neither is assumed
    away.
-4. **Alternative-resource evidence cannot ground Polish→ISV mappings.** The
+5. **Alternative-resource evidence cannot ground Polish→ISV mappings.** The
    scaffold is canonically centered; alternative attestation only annotates.
    This is a scope limit of the mechanism, stated in §7.
-5. **Etymological orthography.** Canonical headwords use etymological
+6. **Etymological orthography.** Canonical headwords use etymological
    characters (`dnėś`, `pŕvy`); models may render base-letter spellings.
    The Task 008 evaluator folds these (they count as canonical), and the
    scaffold may annotate the folded form as an orthographic note (§7.3) — but
    the model's spelling choices remain its own.
-6. **One story, one domain.** No generalization claim is made.
-7. **Names and quoted examples** are passed through; story-specific content
-   limits cross-story transfer (known from EXP-001/002).
+7. **One story, one domain.** No generalization claim is made; conclusions are
+   story-conditional until a validation story is run.
 
-## 16. What must be implemented in the next task (Task 010)
+## 17. Required implementation work for the next task (Task 010)
 
 1. `scripts/build_exp003_scaffold.py` — reverse index (from `basic.json`),
    alignment pipeline (multiword → exact → verified recovery → names →
@@ -496,20 +598,27 @@ limitations · conclusions.
 **No evaluator changes are required** — the Task 008 policy already provides
 the two-tier metrics and per-token provenance.
 
-## 17. What must NOT be implemented
+## 18. Explicitly deferred work
 
-- No LLM API client / in-repo generation (external execution only, D-007).
-- No general-purpose translator; no UI; no database; no web service; no API.
-- No fine-tuning; no training.
-- No Polish NLP framework / lemmatizer dependency in Task 010 (deferred,
-   separately approved, only if multi-story scale-up demands it).
-- No synonym-ranking system; no language-origin classifier; no naturalness
-   scorer.
-- No modification of the evaluator, the canonical dictionary, or any
-   historical EXP-001/EXP-002 artifact.
-- No changes to Task 007/008 policy or terminology.
+**Required for EXP-003 (in scope, Task 010):** everything in §17. Nothing
+else.
 
-## 18. Expected artifacts and directory structure
+**Useful later (deferred, decided on evidence):**
+- Second story as validation set (with its own curation table); remaining
+  models (Gemini, DeepSeek, Grok; GPTs ISV Teacher as an explicitly-labeled
+  exploratory condition).
+- Audited Polish lemmatizer (e.g. Stanza-pl) — only if multi-story scale-up
+  demands it; a separately approved dependency decision.
+- LLM-assisted semantic disambiguation in the scaffold pipeline — only as an
+  explicitly documented experimental variable, never hidden (§6.4).
+
+**Not justified now (future research directions, not part of EXP-003):**
+Wikipedia translation, corpus creation, fine-tuning, mobile application, web
+service, automated human feedback loops, multiple translation agents,
+production translator, API integration. None of these become part of EXP-003
+unless justified by the experiment's results and separately approved.
+
+## 19. Expected artifacts and directory structure
 
 ```
 experiments/exp003-scaffold/
@@ -529,48 +638,38 @@ experiments/exp003-scaffold/
 ```
 
 `<run_id>` = `2026-09-XX__<provider>__<model>__<model_version>__<condition>`.
-
-## 19. Scientific-publication considerations
-
-The design is built for future reconstruction:
-
-- Every artifact is deterministic and versioned (scripts + commits + resource
-   pins + hashes), so the pipeline can be re-run and the numbers re-derived.
-- The two-tier metric terminology (canonical coverage vs broader
-   resource-supported coverage) matches the published policy
-   (`docs/RESOURCE_POLICY.md`), so results map to the policy document.
-- Unknowns stay unknown (model versions, providers, EXP-001 prompts) and are
-   recorded as such (D-018), so a future paper states its own provenance
-   limits honestly.
-- Source licensing is documented (story + derived artifacts stay out of git);
-   the method description can cite the deterministic scaffold pipeline and
-   the curated-table provenance model.
-- Negative results are preserved and reportable.
-- Human evaluation is a described qualitative protocol (holistic paired
-   comparison), not an ad-hoc score.
+It is always obvious which files are design / generated scaffolds / prompts /
+raw outputs / evaluation reports / human-review material / metadata /
+reproducibility info; copyrighted story material stays out of git per
+repository policy.
 
 ## 20. Recommendation
 
 **GO — implement EXP-003 as a controlled pilot** (Task 010): the existing
-story, 4 conditions × 3 models, using the pipeline in §16.
+story, 4 conditions × 3 models, using the pipeline in §17.
 
 Justification:
 
 - The primary alignment resource already exists in the repository (verified:
   the `pl` reverse index covers lemma vocabulary; the alignment gaps are
-  known, measured, and handled explicitly, not hidden).
+  known, measured — 36 % direct + ~5 % recovery + explicit curation — and
+  handled explicitly, not hidden).
+- The scaffold generator is deterministic with no hidden LLM calls, so the
+  measured effect is attributable to the scaffold (§6.4).
 - The evaluator already implements the required two-tier metrics and
   per-token provenance (Task 008) — no evaluator change is needed.
 - The EXP-002 infrastructure (operator prompts, byte-for-byte collection,
-   token-aligned comparisons, human-review pairs) is directly reusable.
+  token-aligned comparisons, human-review pairs) is directly reusable.
 - The experiment answers the central, untested question (generation-time
   guidance vs post-hoc revision), with a within-model controlled design that
   is cheap enough to run and interpretable enough to decide the next step.
 
 Conditions on GO: (1) the curated residual table for the story is completed
 with full provenance during Task 010; (2) B/C/D prompts are byte-identical
-except condition content; (3) the first wave stays at 2–3 models — expanding
-is a separate decision after evidence.
+except condition content; (3) the first wave stays at 3 models — expanding
+is a separate decision after evidence; (4) the research record
+(`docs/RESEARCH_NOTES.md`) is updated with the run's results, including
+negative results.
 
 ---
 
@@ -579,6 +678,7 @@ is a separate decision after evidence.
 > **GO** for EXP-003 implementation (Task 010), scoped as a controlled pilot
 > on the existing Polish story with 3 models × 4 conditions. The design is
 > grounded in a verified existing resource (the dictionary's Polish column),
-> handles the known alignment limitation explicitly rather than silently, and
-> reuses the project's established evaluation and execution machinery. No
-> implementation was performed; no LLM was called.
+> handles the known alignment limitation explicitly rather than silently,
+> keeps the scaffold generator deterministic and free of hidden LLM calls,
+> and reuses the project's established evaluation and execution machinery.
+> No implementation was performed; no LLM was called.
