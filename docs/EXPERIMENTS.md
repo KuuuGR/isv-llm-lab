@@ -244,17 +244,11 @@ Full report: `experiments/exp002-pilot/REPORT.md`; per-run detail in
 
 ## Planned (not started)
 
-- **EXP-003 / lexical-scaffold generation experiment — infrastructure
-  implemented (Task 010, 2026-09-01), experiment NOT executed.** The design is
-  `experiments/exp003-scaffold/DESIGN.md`; the pilot tests generation-time
-  dictionary guidance (a deterministic Polish→ISV lexical scaffold built from
-  `basic.json`'s `pl` column) vs unconstrained translation (A) and vs
-  post-hoc revision (EXP-002). All tooling is ready (scaffold generator,
-  12 operator prompts, run orchestrator, comparison, integrity verifier —
-  see the Task 010 follow-up below) but **no LLM has been called and no
-  results exist**: the Project Owner must execute the 12 external runs and
-  register the raw replies.
 - **Manual linguistic review** of the EXP-001 unresolved sample (Task 004 artifacts; human-only, no automatic classification).
+- **EXP-003 blinded human naturalness assessment**: holistic, complete-text
+  comparison of the 8 complete EXP-003 runs (4 per model) once the Project
+  Owner judges them; automatic metrics withheld until the initial judgment
+  (blinded pairs prepared at `experiments/exp003-scaffold/comparison/human_review.md`).
 
 ### Follow-up: EXP-003 infrastructure implemented (Task 010, 2026-09-01)
 
@@ -298,6 +292,117 @@ Key deliverables and decisions:
 - **Status**: infrastructure prepared — **experiment not executed, result
   unknown**. No evaluator change (Task 008 policy untouched), no LLM API
   client.
+
+### Follow-up: EXP-003 intake, integrity check and preliminary analysis (Task 011, 2026-09-01)
+
+The 12 external replies (3 models × 4 conditions) were registered, verified
+and preliminarily analyzed. No LLM was called, no methodology changed, no
+output replaced or repaired; failed runs are preserved as data (D-023, D-035).
+
+**Model conditions (recorded in run metadata as supplied by the Project
+Owner):** ChatGPT = GPT-5.6 Luna, thinking OFF; Claude = Sonnet 5 Medium
+(generation parameters not supplied → `unknown`); Bielik = Bielik 3.0
+(provider not supplied → `unknown`). DeepSeek (DeepSeek-V4-Pro, DeepThink ON)
+is **not** part of EXP-003's design and was not used.
+
+**12-run completeness matrix (structure inspection, no linguistic judgment):**
+
+| Run | Bytes | Sections (of Prolog+7 Acts+Epilog) | End marker | Status |
+|---|---:|---|---|---|
+| ChatGPT A | 9,926 | 9/9 | KONEC | ✅ complete |
+| ChatGPT B | 10,307 | 9/9 | KONĖC | ✅ complete |
+| ChatGPT C | 10,384 | 9/9 | KONĖC | ✅ complete |
+| ChatGPT D | 10,413 | 9/9 | KONEC | ✅ complete |
+| Claude A | 10,238 | 9/9 | KONEC | ✅ complete |
+| Claude B | 10,332 | 9/9 | KONĖC | ✅ complete |
+| Claude C | 10,418 | 9/9 | KONEC | ✅ complete |
+| Claude D | 10,337 | 9/9 | KONĖC | ✅ complete |
+| Bielik A | 4,849 | 3/9 (Prolog + 3 acts, "čin") | none | ⚠️ truncated mid-sentence (~40 % of story) |
+| Bielik B | 4,760 | 3/9 (Prolog + 3 acts) | none | ⚠️ truncated mid-word ("Š") |
+| Bielik C | 4,087 | 0/9 | none | ❌ no translation (reply paraphrases/echoes the prompt scaffold in Croatian) |
+| Bielik D | 128 | 0/9 | none | ❌ no translation (service error page) |
+
+All 8 ChatGPT/Claude replies are single-translation responses: no preamble,
+no commentary, complete story structure, ending marker; no format anomalies.
+Bielik A and B stop before the story ends (Bielik A after ≈2.5 acts, Bielik B
+during act 3) and their orthography is Croatian- / Czech-flavored (observed
+fact; the evaluator quantifies the lexical consequence). Bielik C's "echo" is
+not a verbatim copy of the prompt — a Croatian paraphrase of the instructions
+followed by scaffold prefix lines (≈6 % of the prompt length); Bielik D is a
+"Przepraszamy, Bielik ma chwilowe problemy techniczne" service page.
+
+**Integrity:** all 12 temp files registered byte-for-byte through
+`run_exp003_pilot.py collect` (never overwritten; SHA-256 in meta.json;
+temp == collected verified byte-identical); `verify_exp003_runs.py` 12/12 OK;
+full test suite 77 green. Runs recorded with exact model info; new additive
+metadata fields `generation_parameters` and documented `status`
+(D-035). Bielik C/D have status `failed_external_output` (not evaluable as
+translations — recorded explicitly, no fabricated result); Bielik A/B have
+`collected_partial_output` (evaluated, but metrics reflect partial text and
+are excluded from all comparisons).
+
+**Evaluator results (Task 008 evaluator, unmodified; 10 processable runs;**
+lexical-token denominators):
+
+| Run | Lexical tokens | Canonical coverage | Broader coverage | Unresolved rate |
+|---|---:|---:|---:|---:|
+| ChatGPT A | 1,475 | 76.27 % | 87.05 % | 23.73 % |
+| ChatGPT B | 1,478 | 85.72 % | 90.80 % | 14.28 % |
+| ChatGPT C | 1,476 | 84.82 % | 89.16 % | 15.18 % |
+| ChatGPT D | 1,485 | 84.04 % | 88.82 % | 15.96 % |
+| Claude A | 1,513 | 75.81 % | 87.51 % | 24.19 % |
+| Claude B | 1,488 | 78.97 % | 86.42 % | 21.03 % |
+| Claude C | 1,533 | 75.41 % | 84.47 % | 24.59 % |
+| Claude D | 1,516 | 85.62 % | 92.02 % | 14.38 % |
+| Bielik A (partial) | 750 | 57.07 % | 78.67 % | 42.93 % |
+| Bielik B (partial) | 674 | 38.81 % | 49.19 % | 61.19 % |
+| Bielik C / D | — | not evaluated (no translation) | — | — |
+
+**Comparison highlights (8 complete runs; no composite score, no ranking):**
+
+- Scaffold (B) improves canonical coverage over unconstrained baseline (A) for
+  both models: ChatGPT +9.45 pp, Claude +3.16 pp. Broader coverage: ChatGPT
+  +3.75 pp, Claude −1.08 pp (Claude's B prefers canonical forms but slightly
+  fewer alternative-attested ones).
+- Alternatives (C) vs B: ChatGPT −0.90 pp canonical (B > C); Claude −3.56 pp
+  canonical (B > C). Adding alternatives did not help either model relative to
+  the single-candidate scaffold.
+- Grammar info (D): Claude D is the best run of the set (85.62 % canonical,
+  92.02 % broader; +9.81 pp vs A, +6.65 pp vs B, +10.21 pp vs C); ChatGPT D is
+  slightly below its own B (−1.68 pp) and C (−0.78 pp).
+- Within-condition model deltas: A nearly tied (ChatGPT 76.27 vs Claude
+  75.81); B/C ChatGPT > Claude by 6.8–9.4 pp; D Claude > ChatGPT by +1.58 pp.
+- Name-excluded diagnostics reproduce the same ordering (names do not distort
+  the comparison). Supplied-candidate adoption proxy (of 667 supplied
+  surfaces): ChatGPT A 112 → B 195 → C 195 → D 180; Claude A 111 → B 131 →
+  C 139 → D 196. Invented (non-supplied, non-name) unresolved forms fall with
+  scaffold use: ChatGPT A 139 → B 85; Claude A 155 → D 82.
+- A→C regression lists (e.g. ChatGPT B: `byl→měl`, `dlja→dla`; Claude B→C:
+  `ako→jesli` ×7) are the designed token-aligned bookkeeping of different
+  translations — evidence for the analysis, not linguistic verdicts.
+
+**Validity answers (evidence-based, § of `docs/RESEARCH_NOTES.md` 4.9):**
+(A) 8/12 runs executed the intended conditions; Bielik C/D did not produce a
+translation and Bielik A/B truncated before completion. (B) Only 8/12 are
+sufficiently complete for quantitative comparison. (C) Bielik (3 of 4
+conditions) failed to follow the instructions; ChatGPT and Claude complied in
+all 4 conditions. (D) Bielik C (prompt paraphrase/echo) and D (error page)
+are unexpected behaviors; Bielik A/B truncation is systematic. (E) No
+scaffold-side unwanted effect is measurable from these artifacts; the
+scaffold effect is the +3–9 pp B-vs-A gain, while the alternative/grammar
+increments differ by model. (F) Yes — where alternatives were supplied (C),
+neither model beat its own single-candidate condition (B) on canonical
+coverage, and Claude C is even below its baseline A. (G) Condition D's value
+is model-dependent and currently not uniform: Claude D is the strongest run
+(+10.2 pp over its C), ChatGPT D does not add over B/C. (H) **No — Bielik is
+not usable as a quantitative participant**; its four runs either truncate
+(2) or contain no translation (2). Its partial numbers are recorded as data
+but are not comparable to complete runs.
+
+**Methodological consequences:** the EXP-003 quantitative core is the
+8 complete runs (2 models × 4 conditions); Bielik is a qualitative observation
+for this experiment. The naturalness question remains open — higher coverage
+is not "better Interslavic"; blinded human judgment is the next step.
 
 ### Follow-up: EXP-003 designed — lexical scaffold at generation time (Task 009, 2026-09-01)
 

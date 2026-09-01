@@ -1,8 +1,9 @@
 # Roadmap
 
-Status: updated 2026-09-01 (Task 010 — EXP-003 scaffold pipeline implemented;
-experiment NOT yet executed; awaiting external LLM runs by the Project
-Owner). This is a plan, not a commitment; the Architect/Research Lead
+Status: updated 2026-09-01 (Task 011 — EXP-003 external replies registered
+and preliminarily analyzed: 8/12 runs complete and comparable; Bielik 4/4
+unusable as quantitative data; next step is the blinded human assessment).
+This is a plan, not a commitment; the Architect/Research Lead
 re-prioritizes as evidence arrives.
 
 ## Done
@@ -249,18 +250,54 @@ re-prioritizes as evidence arrives.
         RESEARCH_NOTES §4.8, EXPERIMENTS, STATE, SOURCES).
         **Experiment not executed — the Project Owner runs the 12 prompts
         externally and returns raw replies.**
+- [x] **Task 011 — EXP-003 intake, integrity check and preliminary analysis**
+  (no LLM called, no methodology changed, no output repaired):
+  - [x] All 12 external replies located in `experiments/exp003-scaffold/temp/`,
+        inspected (existence/bytes/SHA-256/completeness/truncation/commentary/
+        story structure/format anomalies), and registered byte-for-byte via
+        `run_exp003_pilot.py collect` with the real model metadata
+        (ChatGPT GPT-5.6 Luna thinking OFF; Claude Sonnet 5 Medium; Bielik 3.0;
+        unknowns kept `unknown`; new additive fields `generation_parameters`
+        and documented `status`, D-035). Never overwrote; temp files untouched.
+  - [x] Completeness matrix: **8/12 complete** (ChatGPT A–D, Claude A–D —
+        all story sections + end marker, no commentary); **4/12 Bielik runs
+        unusable**: A/B truncated mid-story (≈3/7 acts; ≈40 % of text), C =
+        Croatian paraphrase/echo of the prompt (no translation), D = service
+        error page (no translation). Bielik C/D recorded
+        `failed_external_output` (not evaluable — no fabricated result);
+        Bielik A/B `collected_partial_output` (evaluated, partial text only).
+  - [x] Evaluated the 10 processable runs with the Task 008 evaluator
+        unmodified; ran the comparison tool on the 8 complete runs
+        (Bielik preserved but excluded, D-035).
+  - [x] Preliminary coverage (canonical/broader): ChatGPT
+        A 76.3/87.1 → B 85.7/90.8 → C 84.8/89.2 → D 84.0/88.8; Claude
+        A 75.8/87.5 → B 79.0/86.4 → C 75.4/84.5 → D 85.6/92.0.
+        B helps both models (+9.4 / +3.2 pp); alternatives (C) do not beat B;
+        Claude D is the strongest run (+10.2 pp over its C), ChatGPT D does not
+        add over B/C. No composite score; no ranking by coverage alone.
+  - [x] Integrity: `verify_exp003_runs.py` 12/12 OK; temp == collected
+        byte-identical; full test suite 77 green (2 new tests for collect
+        status/parameters and compare run-partition exclusion).
+  - [x] Validity (evidence-based): 8/12 executed the intended conditions;
+        only 8/12 are quantitatively comparable; Bielik failed 3/4 conditions;
+        no scaffold-side artifact defect observed; C did not beat B for either
+        model (Claude C below its own A); D is model-dependent; **Bielik is
+        not usable as a quantitative participant**.
+  - [x] SODA docs updated (DECISIONS D-035, LESSONS L-027, RESEARCH_NOTES
+        §4.9, EXPERIMENTS, STATE, ROADMAP).
 
 ## Next recommended task (single)
 
-- [ ] **Project Owner executes the 12 EXP-003 runs externally** (one
-  operator prompt per model × condition; Bielik's context window may fail —
-  record the failure, do not shorten the prompt), then register replies with
-  `scripts/run_exp003_pilot.py collect`, evaluate, compare, and verify.
-  When the raw outputs and evaluations are back, a follow-up SODA task
-  analyses EXP-003 (coverage/transitions/regressions/candidate usage/
-  invented forms + blinded human judgment) and writes `REPORT.md`.
-  Do not start from this roadmap entry alone — execution is external and the
-  analysis task requires the raw outputs.
+- [ ] **Blinded human naturalness assessment of the 8 complete EXP-003 runs**
+  (4 per model), using the prepared
+  `experiments/exp003-scaffold/comparison/human_review.md` pairs
+  (automatic metrics withheld until the initial holistic judgment).
+  The Project Owner judges naturalness / preference / mechanical feel /
+  meaning preservation; answers are recorded verbatim with the key in
+  `human_review_key.json`. After that, a follow-up SODA task writes the
+  EXP-003 analysis report (`REPORT.md`), combining automatic coverage /
+  transition / regression / candidate-usage evidence with the human verdicts.
+  Do not start a new experiment or a second model cohort before this.
 
 ## Later
 
