@@ -1,0 +1,115 @@
+{
+  "experiment_id": "exp003",
+  "artifact": "operator-prompts",
+  "generator": "scripts/package_exp003_prompts.py",
+  "generator_commit": "15aa57171e63465924b37422ea6e5f7df6792023",
+  "template": "experiments/exp003-scaffold/prompt_template.txt",
+  "source": {
+    "file": "experiments/exp003-scaffold/input/source.txt",
+    "sha256": "5de968a6214d3d64bdb586b5121f494c4bb107e33546487a86bf8ecc57280723"
+  },
+  "scaffold_blocks": {
+    "B": "8b1910a3a002ecd6277307d5bcb9f5111b4e9cde0024e79fb9d8567d56c27d82",
+    "C": "48b72ef1d417c552858be3a6a424c0ec079b6d997b1abea4ab0785e97943a918",
+    "D": "c8cd42364dcc93457cfabcfc6d9691b25368da386b5e7e9623c76fa6355d4e0f"
+  },
+  "note": "Deterministic packaging; no timestamps. The Markdown files embed the copyrighted story and are gitignored; README + manifest are committed. Prompts for one model differ only in the condition block.",
+  "files": {
+    "01-chatgpt-A.md": {
+      "model": "chatgpt",
+      "provider": "openai",
+      "model_version": "unknown",
+      "condition": "A",
+      "prompt_text_sha256": "c2a8f4db8027e58b768b8f3151e70d785fb926aab896ccd1454acf50cbfbae42",
+      "output_sha256": "518af61d1bcb67316bb9756c760446ed49c1b9588adfaa850efc7d7a60035b21"
+    },
+    "02-chatgpt-B.md": {
+      "model": "chatgpt",
+      "provider": "openai",
+      "model_version": "unknown",
+      "condition": "B",
+      "prompt_text_sha256": "359a165d9f7a38cd7f0981bb7fd973bc3a57bf5ea75c402817b6be95f0f68afa",
+      "output_sha256": "ab7272b6698d79865ebb31ad62a8f6fb6f9ae2ee8c70f9d3d5c2236f0f2d7a3a"
+    },
+    "03-chatgpt-C.md": {
+      "model": "chatgpt",
+      "provider": "openai",
+      "model_version": "unknown",
+      "condition": "C",
+      "prompt_text_sha256": "786464c5713857225f6fd3ff7ea230dd05be89f2842e57b6f6c70efdd63d4626",
+      "output_sha256": "fdc224f5dd5272aa9184b4db791ee9eddc7cd649e3804ddbb49440e9846e5fb6"
+    },
+    "04-chatgpt-D.md": {
+      "model": "chatgpt",
+      "provider": "openai",
+      "model_version": "unknown",
+      "condition": "D",
+      "prompt_text_sha256": "8ceb5becb35a4d8df139fe6031df24be1e01d4869d18d517ff76f4b67a965761",
+      "output_sha256": "f1078012521b1bec46c837128fa2e1911359de276e9d55a123f211fddc7f3703"
+    },
+    "05-claude-A.md": {
+      "model": "claude",
+      "provider": "anthropic",
+      "model_version": "unknown",
+      "condition": "A",
+      "prompt_text_sha256": "8173b62c94543cc7fcc9ecde961a701406b261d5cac1b66dee1c9f8f2097d47c",
+      "output_sha256": "5ff1eb966de62136e1fc4963082fd21c858ce9b467863835c6a43577acfa2900"
+    },
+    "06-claude-B.md": {
+      "model": "claude",
+      "provider": "anthropic",
+      "model_version": "unknown",
+      "condition": "B",
+      "prompt_text_sha256": "8e6d3fd55d83129d64c47c1796c79e1693ac10d9df8809a58ad044c569018dfd",
+      "output_sha256": "e9262ac1c0ee9572a92c3591082c73bb027512ef7b4c5c37c43dc708a8f6deb2"
+    },
+    "07-claude-C.md": {
+      "model": "claude",
+      "provider": "anthropic",
+      "model_version": "unknown",
+      "condition": "C",
+      "prompt_text_sha256": "acda65a80e25de76ddf549c6edaef4754e5865441e83e4d189a4d2fc9607f8a6",
+      "output_sha256": "54b636c3703181118d94fe6106247d07a953e153e3a39da8580e734d5c0be490"
+    },
+    "08-claude-D.md": {
+      "model": "claude",
+      "provider": "anthropic",
+      "model_version": "unknown",
+      "condition": "D",
+      "prompt_text_sha256": "bca7e4da05b3fd3983e189ca97d42996869eadabbed81e68a626095ec3e8139c",
+      "output_sha256": "de9440795e8168452f25c5f3cc6d84fe52eb79e4002794f3efd81a5a74b4f6be"
+    },
+    "09-bielik-A.md": {
+      "model": "bielik",
+      "provider": "unknown",
+      "model_version": "unknown",
+      "condition": "A",
+      "prompt_text_sha256": "01256cba076c3401a4c6d837685aed0dcc886d7be18583b2883f4940b0e6d339",
+      "output_sha256": "fbe95f3f88f56002d8e34d134790485df2582b08b886be225bb1ccdd5b3172b2"
+    },
+    "10-bielik-B.md": {
+      "model": "bielik",
+      "provider": "unknown",
+      "model_version": "unknown",
+      "condition": "B",
+      "prompt_text_sha256": "eb7432e8450b6116071492423366b04464e24f6efb914980c8282cad5eb90fec",
+      "output_sha256": "68b401b2ad0e4f06040818ca138dbe4ca6e6cec52797d97b26d6f1ba15d6d634"
+    },
+    "11-bielik-C.md": {
+      "model": "bielik",
+      "provider": "unknown",
+      "model_version": "unknown",
+      "condition": "C",
+      "prompt_text_sha256": "bebcc8bec70065ac1eff7eaf682a604789769ce401107c319a8fc336e2989ac1",
+      "output_sha256": "310432b588e564719f1e4de190515a9e64d6040f945aef0fca1a6f2f20f9c0d5"
+    },
+    "12-bielik-D.md": {
+      "model": "bielik",
+      "provider": "unknown",
+      "model_version": "unknown",
+      "condition": "D",
+      "prompt_text_sha256": "3fd130852ca48a1282302579fcadd96bc77a618840e1d0fbe5724712ff6f699e",
+      "output_sha256": "b49b0c3b413cc9fc2dff88ebd72287d1a60e472f127f7b526a49a4ed9b673c01"
+    }
+  }
+}

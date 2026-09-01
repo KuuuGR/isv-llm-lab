@@ -1,0 +1,30 @@
+# EXP-003 — {CONDITION_NAME} — {MODEL_NAME}
+
+Experiment ID: {EXPERIMENT_ID}
+Target model: {MODEL_NAME}
+Condition: {CONDITION_LABEL}
+
+Translate the Polish story below into Interslavic (Medžuslovjansky).
+
+## Rules
+
+- Translate the complete document: the title, the section headings, and all
+  paragraphs, in their original order.
+- Preserve paragraph breaks, character names, and quoted dialogue exactly as
+  they appear.
+- Produce natural, idiomatic Interslavic. The result must read as one
+  coherent story, not as a word-for-word rendering of Polish.
+- Return only the Interslavic translation — no explanations, no comments, no
+  notes about your choices, and no alternative versions.
+
+{SCAFFOLD_BLOCK}
+## Source text (Polish)
+
+```
+{STORY}
+```
+
+## Output
+
+Return the complete Interslavic translation of the source text, and nothing
+else.
