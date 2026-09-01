@@ -1,10 +1,8 @@
 # Roadmap
 
-Status: updated 2026-09-01 (Task 011 — EXP-003 external replies registered
-and preliminarily analyzed: 8/12 runs complete and comparable; Bielik 4/4
-unusable as quantitative data; next step is the blinded human assessment).
-This is a plan, not a commitment; the Architect/Research Lead
-re-prioritizes as evidence arrives.
+Status: updated 2026-09-01 (Task 012 — the blinded human naturalness review
+for EXP-003 is prepared and ready for the Project Owner: 8 complete runs in
+two neutral sets with randomized version labels; judgment pending).
 
 ## Done
 
@@ -285,18 +283,35 @@ re-prioritizes as evidence arrives.
         not usable as a quantitative participant**.
   - [x] SODA docs updated (DECISIONS D-035, LESSONS L-027, RESEARCH_NOTES
         §4.9, EXPERIMENTS, STATE, ROADMAP).
+- [x] **Task 012 — blinded human naturalness review prepared** (no LLM
+  called, no output modified, no evaluator change, no metrics exposed):
+  - [x] `compare_exp003.py`'s `render_human_pairs` upgraded to the DESIGN
+        §11-compliant artifact: neutral "Set 1/Set 2" labels (model identity
+        only in the key file), per-set deterministic randomized
+        "Version 1..4" mapping (fixed seed `20260901`, reproducible), the
+        four holistic questions verbatim, preference-ordering template,
+        clearly separated post-unblinding section (scaffold-constraint
+        question, B/C/D only), and a recording checklist; translations
+        embedded byte-exact from the collected outputs.
+  - [x] `human_review.md` regenerated for the 8 complete runs (ChatGPT A–D,
+        Claude A–D); Bielik excluded (all four runs incomplete/failed,
+        preserved as qualitative artifacts); `human_review_key.json` holds
+        the set→model→condition→version→run mapping.
+  - [x] 2 new tests (blinding/content/determinism/byte-exactness; exclusion
+        of incomplete models); full suite **79 green**.
+  - [x] Docs: RESEARCH_NOTES §4.10 (review cohort), comparison README,
+        STATE, ROADMAP.
 
 ## Next recommended task (single)
 
-- [ ] **Blinded human naturalness assessment of the 8 complete EXP-003 runs**
-  (4 per model), using the prepared
-  `experiments/exp003-scaffold/comparison/human_review.md` pairs
-  (automatic metrics withheld until the initial holistic judgment).
-  The Project Owner judges naturalness / preference / mechanical feel /
-  meaning preservation; answers are recorded verbatim with the key in
-  `human_review_key.json`. After that, a follow-up SODA task writes the
-  EXP-003 analysis report (`REPORT.md`), combining automatic coverage /
-  transition / regression / candidate-usage evidence with the human verdicts.
+- [ ] **Project Owner performs the blinded holistic review** of the 8 complete
+  EXP-003 runs, reading `experiments/exp003-scaffold/comparison/human_review.md`
+  (PART 1: four questions + preference ordering per set, without consulting
+  `human_review_key.json` or any metric; then PART 2 after unblinding). The
+  answers are recorded verbatim in the document — no score is computed. A
+  follow-up SODA task then writes the EXP-003 analysis report (`REPORT.md`),
+  combining the automatic coverage / transition / regression / candidate-usage
+  evidence (Task 011) with the human verdicts.
   Do not start a new experiment or a second model cohort before this.
 
 ## Later

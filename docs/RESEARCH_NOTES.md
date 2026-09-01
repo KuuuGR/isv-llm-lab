@@ -218,9 +218,15 @@ precisely what each model received and how the numbers were produced. Status:
   everything including tamper detection. Failed/empty runs are preserved and
   documented (Bielik's context window is the known risk — D-023/D-028).
 - **Human evaluation is holistic and blinded.** `compare_exp003.py` writes
-  complete-text pairs (`comparison/human_review.md`) with blinded labels and a
-  separate `human_review_key.json`; automatic metrics stay hidden during the
-  initial naturalness/preference judgment.
+  the DESIGN §11 review document (`comparison/human_review.md`) for the 8
+  complete runs: two neutral sets ("Set 1"/"Set 2"), per-set deterministic
+  randomized "Version 1..4" labels (fixed seed, reproducible; the model is
+  never named in the document), the four holistic questions, a
+  preference-ordering template, a clearly separated post-unblinding section
+  (scaffold-constraint question, B/C/D only), and a recording checklist;
+  automatic metrics stay hidden until the initial judgment is recorded. The
+  mapping lives in `human_review_key.json` (set → model → condition → version
+  → run id). See §4.10.
 
 ### 4.9 Intake, integrity, and preliminary quantitative results (SODA Task 011, 2026-09-01)
 
@@ -329,6 +335,35 @@ L-027): structural inspection before evaluation, documented statuses, failed
 runs preserved. (3) The scaffold worked at generation time for both models
 (B > A), consistent with the EXP-003 hypothesis direction; the
 alternatives/grammar increments split by model.
+
+### 4.10 Blinded human naturalness review — cohort prepared (SODA Task 012, 2026-09-01)
+
+The human-review artifact is prepared for the Project Owner; no answers exist
+yet (they are recorded verbatim when the review is performed).
+
+- **Review cohort: 8 runs.** ChatGPT A/B/C/D and Claude A/B/C/D — exactly the
+  complete, quantitatively usable runs. **Bielik is excluded from the
+  quantitative human comparison** because all four Bielik runs were
+  incomplete/failed (Task 011); its outputs remain preserved as qualitative
+  experimental artifacts. DeepSeek and Grok were never part of EXP-003.
+- **Blinding.** The review document (`experiments/exp003-scaffold/comparison/
+  human_review.md`) shows two neutral sets ("Set 1", "Set 2") with per-set
+  labels "Version 1..4"; conditions A/B/C/D are mapped to the versions by a
+  **deterministic seeded shuffle** (seed `20260901` in `compare_exp003.py`),
+  so presentation order is reproducible and never alphabetical. The model
+  behind each set and the version→condition mapping are recorded only in
+  `human_review_key.json`.
+- **Metrics withheld.** No automatic metric (canonical/broader coverage,
+  unresolved counts, regressions, candidate usage) and no model identity
+  appears in the review document before the initial holistic judgment. The
+  four DESIGN §11 questions + preference ordering are answered first; the
+  scaffold-constraint question (B/C/D only) is in a clearly separated PART 2,
+  answered only after unblinding.
+- **Not collapsed.** The human naturalness/preference judgment is a separate
+  qualitative evidence layer; it is never converted into a numerical quality
+  score and never merged with evaluator coverage. Recording keeps the date,
+  verbatim answers, presentation order, randomized mapping, and the
+  before/after-unblinding split.
 
 ## 5. Standing methodological rules learned so far (research-relevant)
 
