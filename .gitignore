@@ -18,8 +18,13 @@ experiments/**/input/*
 experiments/**/manual-audit/*
 !experiments/**/manual-audit/README.md
 
-# EXP-002 comparison artifacts (embed raw revised outputs — stay local)
+# EXP-002/EXP-003 comparison artifacts (embed raw revised outputs — stay local)
 experiments/**/comparison/*
+!experiments/**/comparison/README.md
+
+# EXP-003 scaffolds (embed the aligned story token stream — stay local)
+experiments/**/scaffolds/*
+!experiments/**/scaffolds/README.md
 
 # EXP-002 operator prompts (embed complete original model output — stay local)
 experiments/**/operator-prompts/*

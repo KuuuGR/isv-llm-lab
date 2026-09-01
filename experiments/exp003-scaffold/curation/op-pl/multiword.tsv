@@ -1,0 +1,6 @@
+# op-pl multi-word expressions mapped as one unit.
+# expression	isv1,isv2	note
+# Both entries are dictionary-verified: basic.json headword 'prosto' carries
+# pl gloss "po prostu"; headword 'směsta' carries pl gloss "od razu".
+po prostu	prosto	basic.json headword 'prosto' (adv.); pl gloss 'po prostu'
+od razu	směsta	basic.json headword 'směsta' (adv.); pl gloss 'od razu'

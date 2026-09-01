@@ -1,0 +1,357 @@
+# op-pl residual forms (Polish surface -> ordered ISV candidates) with basis.
+# form	isv1,isv2 | NONE	basis
+bać	bojati sę	lemma 'bać' (pl); pl gloss 'bać się'
+bała	bojati sę	lemma 'bać' (pl); pl gloss 'bać się'
+bliskie	blizky,približeny	lemma 'bliski' (pl); 
+braku	deficit,nedostatȯk	lemma 'brak' (pl); 
+bratem	brat	lemma 'brat' (pl); 
+brzmiał	glåsiti,zvųčati	lemma 'brzmieć' (pl); 
+brzmiały	glåsiti,zvųčati	lemma 'brzmieć' (pl); 
+był	byti	lemma 'być' (pl); 
+była	byti	lemma 'być' (pl); 
+było	byti	lemma 'być' (pl); 
+bólem	bolj	lemma 'ból' (pl); 
+będziecie	byti	lemma 'być' (pl); 
+cennego	cěnny	lemma 'cenny' (pl); 
+cenniejszego	cěnny	lemma 'cenny' (pl); 
+chce	hotěti,htěti	lemma 'chcieć' (pl); 
+chcesz	hotěti,htěti	lemma 'chcieć' (pl); 
+chciał	hotěti,htěti	lemma 'chcieć' (pl); 
+chciała	hotěti,htěti	lemma 'chcieć' (pl); 
+chciałabym	hotěti,htěti	lemma 'chcieć' (pl); 
+chciałem	hotěti,htěti	lemma 'chcieć' (pl); 
+chcą	hotěti,htěti	lemma 'chcieć' (pl); 
+chodzi	idti o	reviewer-judged: 'chodzi o' = it's about (composed of canonical 'idti' + 'o'); 'hoditi' (walk) rejected as wrong sense
+
+codziennego	dnevny,každodėnny	lemma 'codzienny' (pl); 
+czasu	vrěmę,čas	lemma 'czas' (pl); 
+czego	čto	lemma 'co' (pl); 
+czegoś	něčto	lemma 'coś' (pl); 
+czuła	čuti	lemma 'czuć' (pl); 
+dam	dati	lemma 'dać' (pl); 
+dawała	davati	lemma 'dawać' (pl); 
+dni	dėnj	lemma 'dzień' (pl); 
+dnia	dėnj	lemma 'dzień' (pl); 
+dodał	dobaviti,dodati	lemma 'dodać' (pl); 
+dodała	dobaviti,dodati	lemma 'dodać' (pl); 
+dolinie	dolina	lemma 'dolina' (pl); 
+dowody	dokaz,dovod	lemma 'dowód' (pl); 
+dowodów	dokaz,dovod	lemma 'dowód' (pl); 
+drugiego	drugy,vtory	lemma 'drugi' (pl); 
+drugiej	drugy,vtory	lemma 'drugi' (pl); 
+drugim	drugy,vtory	lemma 'drugi' (pl); 
+dwie	dva	lemma 'dwa' (pl); 
+dwóch	dva	lemma 'dwa' (pl); 
+dziełem	dělo	lemma 'dzieło' (pl); pl gloss 'czyn, uczynek' (story sense 'dzieło przypadku')
+długą	dȯlgy	lemma 'długi' (pl); 
+fakty	fakt	lemma 'fakt' (pl); 
+fal	vala,vȯlna	lemma 'fala' (pl); 
+gramatyką	gramatika	lemma 'gramatyka' (pl); 
+grzeczności	laska	lemma 'grzeczność' (pl); pl gloss 'uprzejmość' (story 'system grzeczności')
+głupia	durny,glupy,neumny	lemma 'głupi' (pl); 
+historię	historija	lemma 'historia' (pl); 
+imieniu	imę	lemma 'imię' (pl); 
+jakich	kaky	lemma 'jaki' (pl); 
+jedno	jedin	lemma 'jeden' (pl); 
+jednym	jedin	lemma 'jeden' (pl); 
+jestem	byti	lemma 'być' (pl); 
+jesteś	byti	lemma 'być' (pl); 
+jesteście	byti	lemma 'być' (pl); 
+języka	język	lemma 'język' (pl); 
+językach	język	lemma 'język' (pl); 
+językami	język	lemma 'język' (pl); 
+języki	język	lemma 'język' (pl); 
+językiem	język	lemma 'język' (pl); 
+języku	język	lemma 'język' (pl); 
+języków	język	lemma 'język' (pl); 
+każde	každy,vsekto,vśaky	lemma 'każdy' (pl); 
+kimś	někto	lemma 'ktoś' (pl); 
+kochasz	ljubiti,milovati	lemma 'kochać' (pl); 
+kochała	ljubiti,milovati	lemma 'kochać' (pl); 
+kogoś	někto	lemma 'ktoś' (pl); 
+kompromisów	kompromis	lemma 'kompromis' (pl); 
+kontaktu	kontakt	lemma 'kontakt' (pl); 
+końcu	konėc	lemma 'koniec' (pl); 
+krajami	dŕžava,kraj	lemma 'kraj' (pl); 
+księgi	kniga	lemma 'księga' (pl); pl gloss 'książka'
+która	ktory,iže,koj	lemma 'który' (pl); 
+które	ktory,iže,koj	lemma 'który' (pl); 
+którym	ktory,iže,koj	lemma 'który' (pl); 
+którą	ktory,iže,koj	lemma 'który' (pl); 
+kuferze	skrinja	lemma 'kufer' (pl); 
+kwiatów	cvět	lemma 'kwiat' (pl); 
+kłócili	prěpirati sę,spirati sę,sporiti	lemma 'kłócić' (pl); pl gloss 'kłócić się'
+lat	god,rok	lemma 'rok' (pl); 
+leżało	ležati	lemma 'leżeć' (pl); 
+lingwiści	językoslovėc,językověd,językoznavėc,lingvist	lemma 'lingwista' (pl); 
+liści	list	lemma 'liść' (pl); 
+liście	list	lemma 'liść' (pl); 
+ma	iměti, imati	lemma 'mieć' (pl); 
+mają	iměti, imati	lemma 'mieć' (pl); 
+mamy	iměti, imati	lemma 'mieć' (pl); 
+marzyła	mėčtati	lemma 'marzyć' (pl); 
+masz	iměti, imati	lemma 'mieć' (pl); 
+miasteczko	gråd	lemma 'miasteczko' (pl); pl gloss 'miasto' (story sense 'miasteczko' = small town)
+miasteczku	gråd	lemma 'miasteczko' (pl); pl gloss 'miasto' (story sense 'miasteczko')
+miał	iměti, imati	lemma 'mieć' (pl); 
+miała	iměti, imati	lemma 'mieć' (pl); 
+miałeś	iměti, imati	lemma 'mieć' (pl); 
+miały	iměti, imati	lemma 'mieć' (pl); 
+mieli	iměti, imati	lemma 'mieć' (pl); 
+mieni	blěskati	lemma 'mienić' (pl); pl gloss 'lśnić' (story 'światło mieni się')
+mieszkali	žiti	lemma 'mieszkać' (pl); 
+mieszkała	žiti	lemma 'mieszkać' (pl); 
+mieszkańcy	obyvatelj,žitelj	lemma 'mieszkaniec' (pl); 
+milczała	mȯlčati	lemma 'milczeć' (pl); 
+milczeniu	mȯlčańje	lemma 'milczenie' (pl); 
+minęły	minųti	lemma 'minąć' (pl); 
+mogą	mogti	lemma 'móc' (pl); 
+mogły	mogti	lemma 'móc' (pl); 
+moje	moj	lemma 'mój' (pl); 
+morza	morje	lemma 'morze' (pl); 
+moście	most	lemma 'most' (pl); 
+możliwe	možlivy,možny	lemma 'możliwy' (pl); 
+musi	morati	lemma 'musieć' (pl); excluded 'byti dȯlžėn','iměti, imati'
+muszą	morati	lemma 'musieć' (pl); excluded 'byti dȯlžėn','iměti, imati' (must-have senses)
+muszę	morati	lemma 'musieć' (pl); excluded 'byti dȯlžėn','iměti, imati'
+myślałam	mněti,mněvati	lemma 'myśleć' (pl); 
+myślenia	mysljeńje	lemma 'myślenie' (pl); 
+myśli	mněti,mněvati	lemma 'myśleć' (pl); 
+myślisz	mněti,mněvati,mysliti	lemma 'myśleć' (pl); 
+mówili	govoriti,kazati,mȯlviti	lemma 'mówić' (pl); 
+mówią	govoriti,kazati,mȯlviti	lemma 'mówić' (pl); 
+mówił	govoriti,kazati,mȯlviti	lemma 'mówić' (pl); 
+mówiła	govoriti,kazati,mȯlviti	lemma 'mówić' (pl); 
+mężczyznę	mųž	lemma 'mężczyzna' (pl); 
+najmłodsza	mlådy	lemma 'najmłodszy' (pl); pl gloss 'młody' (superlative sense)
+najważniejsze	važny	lemma 'najważniejszy' (pl); pl gloss 'ważny' (superlative sense)
+naszej	naš	lemma 'nasz' (pl); 
+natychmiastowe	bezposrědnji, bezposrědny,sėjčasny,tutčasny	lemma 'natychmiastowy' (pl); 
+nauczyli	naučiti	lemma 'nauczyć' (pl); 
+nauczyliście	naučiti	lemma 'nauczyć' (pl); 
+nauczył	naučiti	lemma 'nauczyć' (pl); 
+nauczyłam	naučiti	lemma 'nauczyć' (pl); 
+nauczyłem	naučiti	lemma 'nauczyć' (pl); 
+nazwie	imę,nazva,nazvańje	lemma 'nazwa' (pl); 
+nich	oni	lemma 'oni' (pl); 
+niego	on	lemma 'on' (pl); 
+niej	ona	lemma 'ona' (pl); 
+niejasne	nejasny	lemma 'niejasny' (pl); 
+niemożliwe	nemožlivy,nemožny	lemma 'niemożliwy' (pl); 
+niewystarczające	nedostatȯčny	lemma 'niewystarczający' (pl); 
+nimi	oni	lemma 'oni' (pl); 
+niosąc	nesti	lemma 'nieść' (pl); 
+nią	ona	lemma 'ona' (pl); 
+obcych	ćuđi,ćuđinėc	lemma 'obcy' (pl); 
+oczach	oko	lemma 'oko' (pl); 
+oddali	dalj	lemma 'oddal' (pl); pl gloss 'odległość' (story 'w oddali' = in the distance)
+odkrywa	odkryvati,råzkryvati	lemma 'odkrywać' (pl); 
+odkryła	odkryti,råzkryti	lemma 'odkryć' (pl); 
+odpowiadał	odgovarjati,odpovědati,podhoditi	lemma 'odpowiadać' (pl); 
+odpowiedzi	odgovor,odpověď,odzyv	lemma 'odpowiedź' (pl); 
+odpowiedział	odgovoriti,odpověděti,podȯjdti	lemma 'odpowiedzieć' (pl); 
+odpowiedziała	odgovoriti,odpověděti,podȯjdti	lemma 'odpowiedzieć' (pl); 
+ogrodzie	sad	lemma 'ogród' (pl); 
+osiedlali	seliti sę	lemma 'osiedlać' (pl); pl gloss 'osiedlać się'
+otoczonej	okrųžati	lemma 'otoczony' (pl); pl gloss 'otaczać' (participle sense)
+oznacza	oznamenovyvati,označati,znamenovati	lemma 'oznaczać' (pl); 
+oznaczało	oznamenovyvati,označati,znamenovati	lemma 'oznaczać' (pl); 
+patrzyło	ględati,ględěti,pozirati	lemma 'patrzeć' (pl); 
+patrzyły	ględati,ględěti,pozirati	lemma 'patrzeć' (pl); 
+patrząc	ględati,ględěti,pozirati	lemma 'patrzeć' (pl); 
+pewnego	isty,uvěrjeny	lemma 'pewny' (pl); 
+piękne	krasivy,krasny	lemma 'piękny' (pl); 
+pobożne	nabožny,věrozakonny	lemma 'pobożny' (pl); 
+podobieństw	podoba,podobnosť,shodnosť	lemma 'podobieństwo' (pl); 
+podobieństwa	podoba,podobnosť,shodnosť	lemma 'podobieństwo' (pl); 
+podobieństwach	podoba,podobnosť,shodnosť	lemma 'podobieństwo' (pl); 
+podobna	podobny,shodny	lemma 'podobny' (pl); 
+podobne	podobny,shodny	lemma 'podobny' (pl); 
+podobni	podobny,shodny	lemma 'podobny' (pl); 
+podobnych	podobny,shodny	lemma 'podobny' (pl); 
+podróżowali	pųtovati	lemma 'podróżować' (pl); 
+pojawiły	javiti sę,pojaviti sę,vȯzniknųti	lemma 'pojawić' (pl); 
+pokazała	izstaviti,okazati	lemma 'pokazać' (pl); 
+pokłócili	spŕti sę, sprěti sę	lemma 'pokłócić' (pl); 
+porównywała	sråvnjati	lemma 'porównywać' (pl); 
+poszedł	pojdti	lemma 'pójść' (pl); 
+poszukiwania	iskańje	lemma 'poszukiwanie' (pl); 
+poszła	pojdti	lemma 'pójść' (pl); 
+powiedział	izrěkti,pověděti,rěkti	lemma 'powiedzieć' (pl); 
+powiedziała	izrěkti,pověděti,rěkti	lemma 'powiedzieć' (pl); 
+powiedziałem	izrěkti,pověděti,rěkti	lemma 'powiedzieć' (pl); 
+powierzchni	povŕhnja,povŕhnosť,povŕšina	lemma 'powierzchnia' (pl); 
+powietrzu	vȯzduh	lemma 'powietrze' (pl); 
+powinienem	dȯlžny	lemma 'powinien' (pl); excluded 'byti dȯlžėn' (dup. of must)
+powinnam	dȯlžny	lemma 'powinien' (pl); excluded 'byti dȯlžėn'
+pozna	poznati,uznati	lemma 'poznać' (pl); 
+pożyczyli	pozajęti	lemma 'pożyczyć' (pl); excluded 'dati zajėm' (phrasal duplicate)
+prababci	prababica	lemma 'prababcia' (pl); 
+prawdziwa	istinny,istinlivy,pravdivy,stvaŕny	lemma 'prawdziwy' (pl); 
+prawdą	istina,pravda	lemma 'prawda' (pl); 
+prawdę	istina,pravda	lemma 'prawda' (pl); 
+prostych	prosty,pręmy,råvny	lemma 'prosty' (pl); 
+prośbą	prośba	lemma 'prośba' (pl); 
+przeczytaniu	pročitati	lemma 'przeczytać' (pl); 
+przenoszą	prěnositi	lemma 'przenosić' (pl); 
+przestali	prěstati	lemma 'przestać' (pl); 
+przestał	prěstati	lemma 'przestać' (pl); 
+przestała	prěstati	lemma 'przestać' (pl); 
+przyjaźnią	družba,prijateljstvo	lemma 'przyjaźń' (pl); 
+przyjechała	dojehati,prijehati	lemma 'przyjechać' (pl); 
+przypadki	slučaj,pad,padež	lemma 'przypadek' (pl); 
+przypadku	slučaj,pad,padež	lemma 'przypadek' (pl); 
+próbowała	pokušati	lemma 'próbować' (pl); excluded 'degustovati' (taste sense)
+próbuję	pokušati	lemma 'próbować' (pl); excluded 'degustovati'
+pui	NONE	reviewed; no defensible candidate — quoted fictional word (story's two invented languages) — keep as-is
+pul	NONE	reviewed; no defensible candidate — quoted fictional word (story's two invented languages) — keep as-is
+pytając	pytati,zapytyvati	lemma 'pytać' (pl); 
+pytania	pytańje,vȯpros,zapytańje	lemma 'pytanie' (pl); 
+pytała	pytati,zapytyvati	lemma 'pytać' (pl); 
+płaczem	plač	lemma 'płacz' (pl); 
+płynęła	pluti,plyvti,tekti	lemma 'płynąć' (pl); 
+racji	iměti pravdų	lemma 'racja' (pl); pl gloss 'mieć rację' (be right)
+rację	iměti pravdų	lemma 'racja' (pl); pl gloss 'mieć rację' (be right)
+rady	konsilium,rada	lemma 'rada' (pl); 
+rodzinie	rodina,sěmja,sěmėjstvo	lemma 'rodzina' (pl); 
+rodziną	rodina,sěmja,sěmėjstvo	lemma 'rodzina' (pl); 
+rozdzielały	děliti,råzděljati	lemma 'rozdzielać' (pl); 
+rozumiała	pojmati,postigati,råzbirati,råzbrati	lemma 'rozumieć' (pl); 
+rozumiem	pojmati,postigati,råzbirati,råzbrati	lemma 'rozumieć' (pl); 
+rzeki	rěka	lemma 'rzeka' (pl); 
+rzeką	rěka	lemma 'rzeka' (pl); 
+rzekę	rěka	lemma 'rzeka' (pl); 
+różne	råzličny,råzny	lemma 'różny' (pl); 
+różnice	råzlika,råzličje	lemma 'różnica' (pl); 
+różnić	råzlikovati sę,råzličati sę,råzniti sę	lemma 'różnić' (pl); 
+różnych	råzličny,råzny	lemma 'różny' (pl); 
+sama	sam	lemma 'sam' (pl); 
+same	sam	lemma 'sam' (pl); 
+sensu	smysl	lemma 'sens' (pl); 
+siadając	sědati	lemma 'siadać' (pl); 
+siedziała	sěděti	lemma 'siedzieć' (pl); 
+siedzieli	sěděti	lemma 'siedzieć' (pl); 
+siostry	sestra	lemma 'siostra' (pl); 
+skomplikowana	komplikovany,neprosty,složeny	lemma 'skomplikowany' (pl); 
+skomplikowane	komplikovany,neprosty,složeny	lemma 'skomplikowany' (pl); 
+sobą	sebe	lemma 'siebie' (pl); 
+spojrzał	poględati,posmotriti,pozrěti	lemma 'spojrzeć' (pl); 
+spojrzała	poględati,posmotriti,pozrěti	lemma 'spojrzeć' (pl); 
+spokrewnione	spokrȯvnjeny,srodny	lemma 'spokrewniony' (pl); 
+spotkały	strěsti,sųstrěsti	lemma 'spotkać' (pl); 
+spotykały	strěćati,sųstrěćati	lemma 'spotykać' (pl); 
+spróbowała	pokusiti,poprobovati	lemma 'spróbować' (pl); 
+spróbuj	pokusiti,poprobovati	lemma 'spróbować' (pl); 
+spójrzmy	poględati,posmotriti,pozrěti	lemma 'spojrzeć' (pl); 
+spędzili	provesti	lemma 'spędzić' (pl); 
+spędziły	provesti	lemma 'spędzić' (pl); 
+starej	stary	lemma 'stary' (pl); 
+starsza	starějši, starši	lemma 'starszy' (pl); 
+starszego	starějši, starši	lemma 'starszy' (pl); 
+starszym	starějši, starši	lemma 'starszy' (pl); 
+starym	stary	lemma 'stary' (pl); 
+stawiają	postavjati,stavjati	lemma 'stawiać' (pl); 
+straci	izgubiti,utratiti	lemma 'stracić' (pl); 
+stracił	izgubiti,utratiti	lemma 'stracić' (pl); 
+stracone	izgubiti,utratiti	lemma 'stracić' (pl); 
+strony	stråna,strånica	lemma 'strona' (pl); 
+stronę	stråna,strånica	lemma 'strona' (pl); 
+strumienia	struja	lemma 'strumień' (pl); 
+swoich	svoj	lemma 'swój' (pl); 
+swojej	svoj	lemma 'swój' (pl); 
+szelest	šum	lemma 'szelest' (pl); pl gloss 'hałas' (story sense 'szelest liści')
+szukacie	iskati	lemma 'szukać' (pl); 
+szukasz	iskati	lemma 'szukać' (pl); 
+szukała	iskati	lemma 'szukać' (pl); 
+szum	šum	lemma 'szum' (pl); pl gloss 'hałas' (story sense 'szum strumienia')
+sąsiadów	sųsěd	lemma 'sąsiad' (pl); 
+słowa	slovo,rěč	lemma 'słowo' (pl); 
+słuchajcie	slušati	lemma 'słuchać' (pl); 
+słychać	slyšati	lemma 'słychać' (pl); pl gloss 'słyszeć' (impersonal sense 'one hears')
+słyszał	slyšati	lemma 'słyszeć' (pl); 
+słyszała	slyšati	lemma 'słyszeć' (pl); 
+słyszałem	slyšati	lemma 'słyszeć' (pl); 
+słów	slovo,rěč	lemma 'słowo' (pl); 
+taka	ovaky,takovy,taky	lemma 'taki' (pl); 
+takie	ovaky,takovy,taky	lemma 'taki' (pl); 
+tego	tȯj,ov,sėj,tutȯj	lemma 'ten' (pl); 
+trudne	trudny,tęžky	lemma 'trudny' (pl); 
+twoja	tvoj	lemma 'twój' (pl); 
+twoje	tvoj	lemma 'twój' (pl); 
+tygodnie	sedmica,tydėnj	lemma 'tydzień' (pl); 
+tym	tȯj,ov,sėj,tutȯj	lemma 'ten' (pl); 
+tymi	tȯj,ov,sėj,tutȯj	lemma 'ten' (pl); 
+uczyli	učiti	lemma 'uczyć' (pl); 
+uczyła	učiti	lemma 'uczyć' (pl); 
+uczą	učiti	lemma 'uczyć' (pl); 
+udowodnione	dokazati	lemma 'udowodnić' (pl); 
+unosił	NONE	reviewed; no defensible candidate — story 'unosił się zapach' (wafted); no defensible canonical verb
+upierać	nastavati	lemma 'upierać' (pl); pl gloss 'nastawać' (story sense 'upierać się' = insist)
+upierała	nastavati	lemma 'upierać' (pl); story sense 'upierać się' = insist; excluded 'nastųpati' (step/occur)
+usiedli	usěsti	lemma 'usiąść' (pl); 
+uważa	domněvati	lemma 'uważać' (pl); excluded careful/beware senses
+uważał	domněvati	lemma 'uważać' (pl); excluded 'byti ostråžny','strěgti sę' (careful/beware senses)
+uznawał	poznavati,uznavati	lemma 'uznawać' (pl); 
+warto	stojiti,byti vŕdno	lemma 'warto' (pl); reviewer-judged sense (no pl gloss 'warto'); ISV 'stojiti'/'byti vŕdno'
+ważnego	važny,značimy	lemma 'ważny' (pl); 
+ważniejsze	važny,značimy	lemma 'ważny' (pl); 
+wiecie	věděti,znati	lemma 'wiedzieć' (pl); 
+wieczoru	večer	lemma 'wieczór' (pl); 
+wiedział	věděti,znati	lemma 'wiedzieć' (pl); 
+wiedzieli	věděti,znati	lemma 'wiedzieć' (pl); 
+wieki	stolěťje,věk,vȯzråst	lemma 'wiek' (pl); 
+wiem	věděti,znati	lemma 'wiedzieć' (pl); 
+wierzył	dověrjati,věriti	lemma 'wierzyć' (pl); 
+wody	voda	lemma 'woda' (pl); 
+wrócili	vråtiti sę,vŕnųti sę	lemma 'wrócić' (pl); 
+wspólne	spoľny,obći,družny,spolȯčny	lemma 'wspólny' (pl); 
+wszystkich	vėś	lemma 'wszystek' (pl); 
+wydaje	sdavati sę,kazati sę,izdavati sę	lemma 'wydawać się' (pl); story sense 'wydaje się' = it seems; excluded 'izdavati' (publish) & 'tratiti' (spend) senses
+
+wygodne	udobny,vygodny	lemma 'wygodny' (pl); 
+wygraną	izigrańje	lemma 'wygrana' (pl); 
+wyklucza	izključati	lemma 'wykluczać' (pl); 
+wystarczy	dostavati,stačiti	lemma 'wystarczyć' (pl); 
+wystarczyło	dostavati,stačiti	lemma 'wystarczyć' (pl); 
+wyszła	izȯjdti,vyjdti	lemma 'wyjść' (pl); 
+wzgórzami	bŕdo,gorka,hȯlm,pagorȯk	lemma 'wzgórze' (pl); 
+wzięła	vzęti	lemma 'wziąć' (pl); 
+zachodziło	zahoditi	lemma 'zachodzić' (pl); 
+zaczął	načęti,počęti,začęti	lemma 'zacząć' (pl); 
+zaczęła	načęti,počęti,začęti	lemma 'zacząć' (pl); 
+zamilkł	oněměti,zamȯlknųti	lemma 'zamilknąć' (pl); 
+zapisany	zapisati	lemma 'zapisać' (pl); 
+zapożyczenia	pozajęto slovo	lemma 'zapożyczenie' (pl); 
+zapożyczona	pozajęti	lemma 'zapożyczony' (pl); pl gloss 'pożyczyć' (participle sense 'borrowed')
+zaprotestowała	protestovati	lemma 'zaprotestować' (pl); 
+zapytał	zapytati	lemma 'zapytać' (pl); 
+zapytała	zapytati	lemma 'zapytać' (pl); 
+zaskoczeniem	udivjeńje	lemma 'zaskoczenie' (pl); pl gloss 'zdziwienie' (story 'z zaskoczeniem')
+zaśmiał	zasmějati sę	lemma 'zaśmiać' (pl); 
+zdania	rěčeńje	lemma 'zdanie' (pl); 
+zmienicie	izměniti,obŕnųti	lemma 'zmienić' (pl); 
+zmieniło	izměniti,obŕnųti	lemma 'zmienić' (pl); 
+znaczy	znamenovati,značiti	lemma 'znaczyć' (pl); 
+znajdujemy	nahoditi	lemma 'znajdować' (pl); 
+znaki	emblema,oznaka,priznak,znak	lemma 'znak' (pl); 
+znalazł	najdti	lemma 'znaleźć' (pl); 
+znalazła	najdti	lemma 'znaleźć' (pl); 
+znalazły	najdti	lemma 'znaleźć' (pl); 
+znaleźli	najdti	lemma 'znaleźć' (pl); 
+znaleźliśmy	najdti	lemma 'znaleźć' (pl); 
+znała	znati	lemma 'znać' (pl); 
+zobaczył	uviděti,uzrěti	lemma 'zobaczyć' (pl); 
+został	odstati,ostati,stati	lemma 'zostać' (pl); 
+zostało	odstati,ostati,stati	lemma 'zostać' (pl); 
+zraniliście	raniti	lemma 'zranić' (pl); 
+zranił	raniti	lemma 'zranić' (pl); 
+zraniłem	raniti	lemma 'zranić' (pl); 
+zrozumiała	pojęti,postignųti,sråzuměti	lemma 'zrozumieć' (pl); 
+zrozumienia	råzuměńje	lemma 'zrozumienie' (pl); 
+zrozumiesz	pojęti,postignųti,sråzuměti	lemma 'zrozumieć' (pl); 
+złożoności	složeny	lemma 'złożoność' (pl); pl gloss 'złożony' (story 'złożoność' = complexity)
+śmiali	zasmějati sę	lemma 'śmiać' (pl); pl gloss 'zaśmiać się' (story 'śmiali się' = laughed, ipf. past)
+światów	svět	lemma 'świat' (pl); 
+żadnych	nijedin,žadėn	lemma 'żaden' (pl); 
+życia	živobyťje,život	lemma 'życie' (pl); 
+życzenia	želańje	lemma 'życzenie' (pl); 
