@@ -17,8 +17,16 @@ Commands:
              register an externally generated raw output. The file is copied
              byte-for-byte, never modified, never overwritten; meta.json
              records prompt hash, source hash, condition, model, provider,
-             model version, generation date, evaluator commit, resource
-             versions, and the SHA-256 of the collected file.
+             model version, generation date, generation parameters, status,
+             evaluator commit, resource versions, and the SHA-256 of the
+             collected file. Additive overrides for a run:
+               --generation-date, --model, --provider, --model-version,
+               --generation-parameters, --status (default
+               collected_external_output; use failed_external_output for a
+               non-translation reply, collected_partial_output for a
+               truncated translation), --note (observed facts about the
+               reply, e.g. truncation). Unknown metadata stays 'unknown'
+               (D-018).
     evaluate --run <run_id> [--all]
              run the Task 008 evaluator (isv-eval, unmodified) on a collected
              output and write outputs/<run_id>/evaluation.json + .md.
@@ -190,7 +198,10 @@ def run_prepare(date: str, force: bool = False) -> int:
 
 
 def run_collect(run_id: str, output: Path, generation_date: str,
-                model: str, provider: str, model_version: str) -> int:
+                model: str, provider: str, model_version: str,
+                generation_parameters: str = "unknown",
+                status: str = "collected_external_output",
+                note: str = "") -> int:
     try:
         parts = parse_run_id(run_id)
     except ValueError as exc:
@@ -236,7 +247,8 @@ def run_collect(run_id: str, output: Path, generation_date: str,
                           else parts["model_version"]),
         "generation_date": generation_date if generation_date != "unknown"
                            else parts["date"],
-        "status": "collected_external_output",
+        "generation_parameters": generation_parameters,
+        "status": status,
         "collected_at": datetime.now(timezone.utc).isoformat(),
         "collected_by": "scripts/run_exp003_pilot.py collect",
         "prompt": {
@@ -253,7 +265,8 @@ def run_collect(run_id: str, output: Path, generation_date: str,
         "resources": resource_versions(),
         "note": "Raw LLM output stored byte-for-byte; never modified. "
                 "Empty or failed runs are preserved and documented, not "
-                "deleted.",
+                "deleted."
+                + (f" {note}" if note else ""),
     }
     (out_dir / "meta.json").write_text(
         json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -264,6 +277,8 @@ def run_collect(run_id: str, output: Path, generation_date: str,
     print(f"  condition/model/provider/version/date: "
           f"{condition}/{meta['model']}/{meta['provider']}/"
           f"{meta['model_version']}/{meta['generation_date']}")
+    print(f"  generation parameters: {meta['generation_parameters']}")
+    print(f"  status: {meta['status']}")
     return 0
 
 
@@ -369,6 +384,16 @@ def main(argv: list[str] | None = None) -> int:
     p_col.add_argument("--model", default="unknown")
     p_col.add_argument("--provider", default="unknown")
     p_col.add_argument("--model-version", default="unknown")
+    p_col.add_argument("--generation-parameters", default="unknown",
+                       help="e.g. 'thinking OFF' (recorded as supplied)")
+    p_col.add_argument("--status",
+                       default="collected_external_output",
+                       choices=("collected_external_output",
+                                "collected_partial_output",
+                                "failed_external_output"),
+                       help="document the run's outcome")
+    p_col.add_argument("--note", default="",
+                       help="observed facts about the reply (e.g. truncation)")
 
     p_ev = sub.add_parser("evaluate", help="evaluate a collected output")
     p_ev.add_argument("--run", required=True, dest="run_id")
@@ -380,7 +405,9 @@ def main(argv: list[str] | None = None) -> int:
         return run_prepare(args.date, args.force)
     if args.command == "collect":
         return run_collect(args.run_id, args.output, args.generation_date,
-                           args.model, args.provider, args.model_version)
+                           args.model, args.provider, args.model_version,
+                           args.generation_parameters, args.status,
+                           args.note)
     if args.command == "evaluate":
         return run_evaluate(args.run_id)
     if args.command == "status":

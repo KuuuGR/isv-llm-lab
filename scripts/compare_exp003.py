@@ -21,6 +21,12 @@ For every collected run (outputs/<run_id>/output.txt) this script:
    (comparison/human_review_key.json) so automatic metrics stay hidden during
    holistic judgment.
 
+Runs whose meta.json status is not collected_external_output
+(failed_external_output / collected_partial_output) are preserved and
+documented (comparison/<run_id>/excluded.json + a summary note) but are
+excluded from the quantitative comparison, so non-translation or truncated
+text never distorts coverage or transitions.
+
 No composite quality score is ever assigned.
 """
 from __future__ import annotations
@@ -476,6 +482,42 @@ def render_pair_md(p: dict, title: str) -> str:
     return "\n".join(lines)
 
 
+def run_meta(run_id: str) -> dict:
+    """meta.json for a run; empty dict when missing."""
+    p = OUTPUTS_DIR / run_id / "meta.json"
+    if not p.is_file():
+        return {}
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
+def partition_runs(runs: list[str]) -> tuple[list[str], dict[str, dict]]:
+    """Complete runs vs preserved-but-excluded runs (by meta.json status).
+
+    Complete = status collected_external_output (a full translation reply).
+    Excluded = failed_external_output (no translation content) or
+    collected_partial_output (truncated translation): preserved and
+    documented, never compared, so non-translation or partial text cannot
+    distort coverage or transitions.
+    """
+    complete: list[str] = []
+    excluded: dict[str, dict] = {}
+    for run_id in runs:
+        meta = run_meta(run_id)
+        status = meta.get("status", "unknown")
+        if status == "collected_external_output":
+            complete.append(run_id)
+        else:
+            excluded[run_id] = {
+                "run_id": run_id,
+                "condition": meta.get("condition"),
+                "model": meta.get("model"),
+                "status": status,
+                "reason": meta.get("note", ""),
+                "excluded_from_quantitative_comparison": True,
+            }
+    return complete, excluded
+
+
 def main(argv: list[str] | None = None) -> int:
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
@@ -505,11 +547,30 @@ def main(argv: list[str] | None = None) -> int:
               "first", file=sys.stderr)
         return 2
 
+    # Complete runs participate in the quantitative comparison. Runs whose
+    # meta status is not collected_external_output (failed_external_output =
+    # no translation content; collected_partial_output = truncated
+    # translation) are preserved and documented but excluded, so their
+    # non-translation or partial text never distorts coverage/transitions.
+    complete, excluded = partition_runs(runs)
+
+    if args.run and runs and not complete:
+        print(f"error: run {args.run!r} is not a complete run "
+              f"(status {run_meta(args.run).get('status')!r}); it was "
+              "preserved but is excluded from the quantitative comparison",
+              file=sys.stderr)
+        return 2
+    if not complete:
+        print("no complete runs to compare; all collected runs are "
+              "preserved but excluded (see their meta.json status)",
+              file=sys.stderr)
+        return 2
+
     supplied = supplied_surfaces()
     names = scaffold_names()
 
     analyses: dict[str, dict] = {}
-    for run_id in runs:
+    for run_id in complete:
         print(f"[analyze] {run_id}")
         analyses[run_id] = run_analysis(run_id, supplied, names)
         run_dir = COMPARISON_DIR / run_id
@@ -519,6 +580,12 @@ def main(argv: list[str] | None = None) -> int:
             encoding="utf-8")
         (run_dir / "comparison.md").write_text(
             render_run_md(analyses[run_id]), encoding="utf-8")
+    for run_id, rec in excluded.items():
+        run_dir = COMPARISON_DIR / run_id
+        run_dir.mkdir(parents=True, exist_ok=True)
+        (run_dir / "excluded.json").write_text(
+            json.dumps(rec, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"[excluded] {run_id} ({rec['status']})")
 
     by_key: dict[tuple[str, str], dict] = {
         (a["model"], a["condition"]): a for a in analyses.values()}
@@ -565,7 +632,8 @@ def main(argv: list[str] | None = None) -> int:
     # ---- summary ----
     summary = [
         "# EXP-003 — comparison summary", "",
-        f"{len(analyses)} run(s) analysed.", "",
+        f"{len(analyses)} complete run(s) analysed "
+        f"({len(excluded)} run(s) preserved but excluded — see below).", "",
     ]
     for run_id, a in sorted(analyses.items()):
         m = a["metrics"]
@@ -575,6 +643,13 @@ def main(argv: list[str] | None = None) -> int:
             f"{_pct(m['broader_resource_supported_coverage'])} · unresolved "
             f"{m['unresolved_tokens']} tokens "
             f"({_pct(m['unresolved_rate'])}).")
+    if excluded:
+        summary += ["", "Excluded from the quantitative comparison "
+                        "(preserved, documented in meta.json):", ""]
+        for run_id, rec in sorted(excluded.items()):
+            summary.append(
+                f"- `{run_id}` ({rec['condition']}): "
+                f"status {rec['status']} — {rec['reason']}")
     summary += [
         "",
         "Within-model pair comparisons: "
