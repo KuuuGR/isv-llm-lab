@@ -420,3 +420,59 @@ Task 008 implemented the Task 007 policy (`docs/RESOURCE_POLICY.md`) in
   `cli.py`, `tokenizer.py` + tests + docs). No UI/API/db/service, no
   morphology-engine change, no resource modification, no historical
   recomputation.
+
+## D-028 · 2026-09-01 · EXP-003 (lexical scaffold) is designed around the dictionary's Polish column; GO recommended for a controlled pilot
+
+SODA Task 009 designed EXP-003 — generation-time dictionary guidance — without
+implementing it. Key decisions:
+
+- **The primary alignment resource already exists: the `pl` translation
+  column of `basic.json`.** A Polish→Interslavic reverse index built from it
+  (18,916 normalized keys) is the scaffold's lexical source. Verified live:
+  `być→byti`, `się→sę`, `dobrze→dobro`, `pierwszy→pŕvy`, `dziś→[dnėś, tutdėnj,
+  sego dnja]`, `tam→[tam, tamo, onamo, onde]`. No new dependency is required
+  for the dictionary side.
+- **Polish lemmatization is not available and is stated as a limitation, not
+  hidden.** No Polish morphological analyzer is a project dependency; a
+  suffix-stripping fallback alone rescues only ~5% of unique story forms
+  (verified measurement). The alignment pipeline is therefore: multiword
+  table → exact reverse-index hit → dictionary-verified lemma recovery →
+  proper-name pass-through → explicit per-story curated residual table →
+  `[?]` (never a silent guess). The curated table is committed, auditable,
+  provenance-bearing human judgment for one story — the honest cost of having
+  no lemmatizer. Adding a lemmatizer for multi-story scale-up is a separate,
+  approved dependency decision.
+- **Alternative resources cannot ground Polish→ISV mappings.** `isv.dic` /
+  `interslavicfreq` attest ISV surfaces, not Polish↔ISV equivalences; they
+  annotate and tie-break candidates only, never create them (§7 of the
+  design). The scaffold is canonically centered; the Task 008 two-layer
+  policy applies unchanged at evaluation time.
+- **Four conditions; nested information, no assumed ordering of outcomes.**
+  A = direct baseline (within-experiment control); B = scaffold with one
+  canonical candidate; C = + alternatives; D = + grammatical annotations
+  (dictionary POS / verb aspect / a few generated example forms — only what
+  the resources generate reliably; no Polish-source morphological analysis).
+  H4–H6 are two-sided; D is not assumed to be best.
+- **Token-aligned scaffold representation.** One line per Polish token
+  (`Dziś → [dnėś]`), grouped by sentence, alternatives inline; not linear,
+  because a linear bag reads as a surface template and invites mechanical
+  copying. Prompts state explicitly that the scaffold is vocabulary guidance
+  (free word order, inflection, constructions, alternative choice) and not a
+  finished translation.
+- **Reuse, don't rebuild.** EXP-002's external-execution operator interface,
+  byte-for-byte collection with SHA-256 and no-overwrite, token-aligned
+  transition bookkeeping, and holistic human-review pairs are reused as-is;
+  the Task 008 evaluator already reports the needed metrics — no evaluator
+  change in Task 010.
+- **Pilot scope.** Existing Polish story only (comparability + cost; no
+  generalization claim), 3 models × 4 conditions in the first wave (Claude,
+  ChatGPT, Bielik — 2 strong + 1 weak stress case; GPTs ISV Teacher excluded
+  because its system prompt is a confound). A second story/model wave only if
+  the first shows a direction-consistent effect.
+- **Source cleaning is forward-applied D-020, never retroactive.** EXP-003
+  introduces a cleaned story-only `source.txt` (EXP-001's file embeds an
+  instruction line + fences; that historical artifact stays as-hashed in
+  EXP-001). The cleaning is documented in `source.meta.json`.
+- **Design only.** Nothing was implemented and no LLM was called. Design
+  report: `experiments/exp003-scaffold/DESIGN.md`. Recommendation: **GO** for
+  implementation (Task 010).

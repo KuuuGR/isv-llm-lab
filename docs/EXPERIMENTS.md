@@ -244,12 +244,40 @@ Full report: `experiments/exp002-pilot/REPORT.md`; per-run detail in
 
 ## Planned (not started)
 
-- **EXP-003 / full-scale constrained generation** — only after reviewing the
-  Task 008 two-tier evaluator implementation (done); scope decided after that
-  review, using the EXP-002 pilot evidence (which unresolved-form categories
-  benefit from supplied alternatives; the 12 A→C regressions) and the manual
-  linguistic review. Do not proceed automatically.
+- **EXP-003 / lexical-scaffold generation experiment — designed (Task 009,
+  2026-09-01), not implemented.** The full design is
+  `experiments/exp003-scaffold/DESIGN.md`; the recommendation is **GO** for a
+  controlled pilot (existing Polish story, conditions A/B/C/D × 3 models). It
+  tests generation-time dictionary guidance (a deterministic Polish→ISV
+  lexical scaffold built from `basic.json`'s `pl` column) vs unconstrained
+  translation (A) and vs post-hoc revision (EXP-002). Implementation is Task
+  010; do not start automatically.
 - **Manual linguistic review** of the EXP-001 unresolved sample (Task 004 artifacts; human-only, no automatic classification).
+
+### Follow-up: EXP-003 designed — lexical scaffold at generation time (Task 009, 2026-09-01)
+
+Not an experiment — a design task (no implementation, no LLM calls). Deliverable:
+`experiments/exp003-scaffold/DESIGN.md`. Key verified findings and decisions:
+
+- **Alignment resource already in-repo**: `basic.json` has a Polish
+  translation column (`pl`, 18,916 normalized keys). A reverse index covers
+  lemma vocabulary (`być→byti`, `się→sę`, `dobrze→dobro`,
+  `pierwszy→pŕvy`, `dziś→[dnėś, tutdėnj, sego dnja]`, `tam→[tam, tamo,
+  onamo, onde]`); measured 36% of unique story forms hit directly, ~5% via
+  dictionary-verified lemma recovery, and the residual is names plus
+  inflected forms. Polish lemmatization is **not** a project dependency —
+  stated as a limitation, handled by an explicit curated residual table and
+  `[?]` (no silent heuristics).
+- **Conditions**: A = direct baseline; B = scaffold, one canonical candidate;
+  C = + alternatives; D = + reliable grammatical annotations (dictionary POS /
+  verb aspect / generated example forms only). D is not assumed to be best.
+- **Scaffold representation**: token-aligned lines grouped by sentence
+  (`Dziś → [dnėś]`), alternatives inline; prompts instruct the model that the
+  scaffold is vocabulary guidance, never a surface template.
+- **Scope**: existing story, 3 models × 4 conditions (Claude, ChatGPT,
+  Bielik) as a controlled pilot; reuses EXP-002 execution/comparison machinery
+  and the Task 008 two-tier evaluator. Recommendation: **GO** for Task 010
+  implementation.
 
 ### Follow-up: two-layer policy implemented in the evaluator (Task 008, 2026-09-01)
 

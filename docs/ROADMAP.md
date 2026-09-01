@@ -1,9 +1,9 @@
 # Roadmap
 
-Status: updated 2026-09-01 (Task 008 — the two-layer resource evaluation
-policy is implemented in the evaluator; next recommended task is deciding
-EXP-003's scope with the two-tier evaluator). This is a plan, not a
-commitment; the Architect/Research Lead re-prioritizes as evidence arrives.
+Status: updated 2026-09-01 (Task 009 — EXP-003 lexical-scaffold experiment
+designed; recommendation GO; next task is implementing the scaffold
+pipeline). This is a plan, not a commitment; the Architect/Research Lead
+re-prioritizes as evidence arrives.
 
 ## Done
 
@@ -178,18 +178,36 @@ commitment; the Architect/Research Lead re-prioritizes as evidence arrives.
         suite green (45 tests). Historical A/B/C + canonical coverage verified
         byte-identical on all 7 EXP-001 runs; broader metrics reproduce the
         Task 007 §6 demonstration exactly (e.g. ChatGPT 75.95 % → 86.27 %).
+- [x] **Task 009 — EXP-003 lexical-scaffold experiment DESIGNED** (design
+  only; nothing implemented, no LLM called):
+  - [x] Verified the primary alignment resource exists in-repo: `basic.json`
+        has a Polish translation column (`pl`, 18,916 keys); a reverse index
+        covers lemma vocabulary (`być→byti`, `się→sę`, `dziś→[dnėś, tutdėnj,
+        sego dnja]`); inflected Polish forms miss and Polish lemmatization is
+        not a project dependency — stated as a limitation, handled by
+        dictionary-verified lemma recovery + an explicit curated residual
+        table + `[?]` (no silent heuristics).
+  - [x] Four conditions specified (A baseline / B scaffold single candidate /
+        C + alternatives / D + reliable grammatical annotations), token-aligned
+        scaffold representation, prompt design that treats the scaffold as
+        vocabulary guidance (never a surface template), reuse of the Task 008
+        two-tier evaluator and the EXP-002 external-execution/comparison
+        machinery, reproducibility plan, human holistic-reading protocol.
+  - [x] Deliverable: `experiments/exp003-scaffold/DESIGN.md`; SODA docs
+        updated (STATE, ROADMAP, DECISIONS D-028, EXPERIMENTS, LESSONS L-022).
+        Recommendation: **GO** for a controlled pilot (existing story,
+        3 models × 4 conditions). Not started.
 
 ## Next recommended task (single)
 
-- [ ] **Decide and run EXP-003 — a full-scale constrained/dictionary-guided
-  generation experiment measured with the two-tier evaluator.** The pilot's
-  measurement blocker is gone: the evaluator now reports both canonical
-  coverage and broader resource-supported coverage, so the effect of
-  resource-supported forms is measurable. EXP-002's pilot evidence (which
-  unresolved-form categories benefit from supplied alternatives; the 12 A→C
-  regressions) and the manual linguistic review should shape the design. Do
-  not start it from this roadmap entry alone — it requires a SODA task, and
-  its scope is decided only after reviewing the Task 008 implementation.
+- [ ] **Task 010 — implement the EXP-003 scaffold pipeline** as designed in
+  `experiments/exp003-scaffold/DESIGN.md` (pending Project Owner / Architect
+  GO): reverse index + alignment pipeline + scaffold renderer,
+  per-story curation tables, operator prompt packaging (4 conditions ×
+  3 models), run orchestrator + A-vs-B/C/D comparison (token-aligned
+  transitions, regression lists, candidate usage, invented-forms proxy),
+  integrity verification, tests. No evaluator changes needed. Do not start
+  from this roadmap entry alone — it requires a SODA task.
 
 ## Later
 

@@ -429,3 +429,33 @@ one.
 new capability as an additive layer over the old one, keep a deterministic
 cross-check against a known historical run, and state the "what counts" rule
 (the inclusion/exclusion list) in the report so provenance can be audited.
+
+## L-022 · 2026-09-01 · The dictionary's per-language translation columns are a reverse-indexable resource — measure coverage before proposing NLP infrastructure
+
+**Observation.** Task 009's EXP-003 design needed Polish→Interslavic
+alignment. The repository contains no Polish lemmatizer, and a naive
+suffix-stripping fallback was measured to rescue only ~5% of unique story
+forms — but `basic.json` turned out to carry a Polish translation column
+(`pl`, 18,916 normalized keys). Building a reverse index from it covers
+lemma-level Polish vocabulary directly (`być→byti`, `się→sę`,
+`pierwszy→pŕvy`, `dziś→[dnėś, tutdėnj, sego dnja]`, `tam→[tam, tamo, onamo,
+onde]`), with the canonical dictionary as both the source and the filter.
+The design's alignment pipeline (multiword table → exact reverse-index hit →
+dictionary-verified lemma recovery → name pass-through → curated residual →
+`[?]`) came out of *measuring* the gap first: 36% unique direct hits, ~5%
+recoverable, the rest names plus genuinely inflected forms.
+
+**Why it matters.** The reflexive move would have been to add a Polish
+morphological analyzer dependency (heavyweight, network-downloaded, licensing
+questions) before checking what the audited dictionary already encodes. The
+per-language columns are real translation-equivalence evidence created by the
+dictionary's editors — exactly the kind of provenance the resource policy
+wants, and it costs nothing new. When it still falls short (inflected forms),
+the honest answer is an explicit, committed curation table for the story, not
+a silent weak heuristic.
+
+**Next time.** Before proposing NLP infrastructure for a language pair, check
+whether the canonical dictionary's per-language translation columns provide
+the mapping; build the reverse index, measure exact-hit coverage on the actual
+corpus, and size the residual *before* deciding whether a lemmatizer or
+curation is needed. Record the measured percentages in the design.
