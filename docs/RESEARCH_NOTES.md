@@ -58,7 +58,16 @@ translation and to (2) correcting an already-generated translation, because in
 - Lesson generalized (L-015): unique-form bookkeeping hides token-level
   regressions → token-aligned transition matrices are the regression standard.
 
-## 4. EXP-003 — generation-time lexical scaffolding (implemented, Task 010; not yet executed)
+## 4. EXP-003 — generation-time lexical scaffolding (implemented, Task 010; executed externally, intake + preliminary analysis in Task 011)
+
+**Status update (Task 011):** the 12 external replies were registered,
+verified and preliminarily analyzed. **8 of 12 runs (ChatGPT A–D, Claude A–D)
+are complete translations and are quantitatively comparable. All 4 Bielik
+runs are unusable as quantitative data** (2 truncated, 1 prompt paraphrase/
+echo, 1 service error page) — see §4.9. The quantitative core of EXP-003 is
+therefore 2 models × 4 conditions; Bielik is a qualitative observation for
+this experiment. No methodology was changed; failures are preserved as data
+(D-035).
 
 ### 4.1 Research question and hypotheses
 See `experiments/exp003-scaffold/DESIGN.md` §2–§3. Summary:
@@ -138,7 +147,7 @@ unnatural outputs) are preserved and reported.**
 
 Implementation-level methodology, recorded so a future paper can state
 precisely what each model received and how the numbers were produced. Status:
-**infrastructure ready; no run executed yet.**
+**infrastructure ready; run execution external (Task 011: 8/12 complete).**
 
 - **Scaffold generation is fully deterministic and free of LLM calls** (D-029).
   `scripts/build_exp003_scaffold.py` reads (a) the cleaned story-only source
@@ -213,6 +222,114 @@ precisely what each model received and how the numbers were produced. Status:
   separate `human_review_key.json`; automatic metrics stay hidden during the
   initial naturalness/preference judgment.
 
+### 4.9 Intake, integrity, and preliminary quantitative results (SODA Task 011, 2026-09-01)
+
+**Model conditions actually used (recorded in run metadata as supplied by the
+Project Owner; nothing inferred):** ChatGPT = GPT-5.6 Luna, thinking OFF;
+Claude = Sonnet 5 Medium (no generation parameters supplied → `unknown`);
+Bielik = Bielik 3.0 (provider not supplied → `unknown`). DeepSeek
+(DeepSeek-V4-Pro, DeepThink ON) is outside EXP-003's design and was not used.
+
+**Output integrity.** All 12 replies were inspected for structure, truncation,
+commentary and format anomalies before any evaluation (no linguistic judgment;
+the evaluator quantifies lexical evidence later). All were registered
+byte-for-byte through `run_exp003_pilot.py collect` (SHA-256 in meta.json;
+temp == collected verified byte-identical; nothing overwritten, no original
+`.txt` modified). `verify_exp003_runs.py`: 12/12 OK. Full test suite 77 green.
+
+**Completeness matrix (structure only).** ChatGPT and Claude replies are
+complete in all four conditions: all story sections (Prolog + 7 acts +
+Epilog), end marker (`KONEC`/`KONĖC`), no preamble/commentary, no format
+anomalies; 9.9–10.4 KB. Bielik: A = truncated after ≈2.5 acts (mid-sentence),
+B = truncated during act 3 (mid-word `Š`), C = Croatian paraphrase/echo of the
+prompt scaffold (no translation; ≈6 % of the prompt length), D = service
+error page (`Przepraszamy, Bielik ma chwilowe problemy techniczne`). Bielik A/B
+also show Croatian- / Czech-flavored orthography (observed fact, quantified by
+the evaluator's coverage). Bielik A/B were registered
+`collected_partial_output`, C/D `failed_external_output` (D-035).
+
+**Evaluator results (Task 008 evaluator, unmodified; lexical-token
+denominators).** 10 processable runs were evaluated; Bielik C/D were recorded
+as not evaluable rather than producing a fabricated number.
+
+| Run | Lexical tokens | Canonical coverage | Broader coverage | Unresolved rate |
+|---|---:|---:|---:|---:|
+| ChatGPT A | 1,475 | 76.27 % | 87.05 % | 23.73 % |
+| ChatGPT B | 1,478 | 85.72 % | 90.80 % | 14.28 % |
+| ChatGPT C | 1,476 | 84.82 % | 89.16 % | 15.18 % |
+| ChatGPT D | 1,485 | 84.04 % | 88.82 % | 15.96 % |
+| Claude A | 1,513 | 75.81 % | 87.51 % | 24.19 % |
+| Claude B | 1,488 | 78.97 % | 86.42 % | 21.03 % |
+| Claude C | 1,533 | 75.41 % | 84.47 % | 24.59 % |
+| Claude D | 1,516 | 85.62 % | 92.02 % | 14.38 % |
+| Bielik A (partial text) | 750 | 57.07 % | 78.67 % | 42.93 % |
+| Bielik B (partial text) | 674 | 38.81 % | 49.19 % | 61.19 % |
+
+**Comparison highlights (8 complete runs; `compare_exp003.py`; no composite
+score, no ranking).**
+
+- **B vs A (scaffold effect):** canonical +9.45 pp (ChatGPT), +3.16 pp
+  (Claude). Broader: +3.75 pp (ChatGPT), −1.08 pp (Claude) — ChatGPT's B
+  raises both tiers; Claude's B raises canonical coverage at a small cost in
+  alternative-attested forms.
+- **C vs B (alternatives):** −0.90 pp (ChatGPT), −3.56 pp (Claude) canonical.
+  Supplying alternatives did not beat the single canonical candidate for
+  either model; Claude's C is even below its own unconstrained baseline A
+  (−0.40 pp).
+- **D vs C / D vs B (grammar info):** Claude D is the strongest run of the set
+  (+10.21 pp vs its C, +6.65 pp vs its B, +9.81 pp vs its A; broader 92.02 %);
+  ChatGPT D does not add over B (−1.68 pp) or C (−0.78 pp). The D effect is
+  model-dependent in this dataset.
+- **Within-condition model deltas:** A ≈ tied (ChatGPT 76.27 vs Claude
+  75.81); B/C ChatGPT ahead by 6.8–9.4 pp canonical; D Claude ahead (+1.58 pp).
+- **Name-excluded diagnostics** reproduce the same ordering (names do not
+  distort the comparison). **Supplied-candidate adoption proxy** (667 supplied
+  surfaces): ChatGPT A 112 → B 195 → C 195 → D 180; Claude A 111 → B 131 →
+  C 139 → D 196 present in output. **Invented (non-supplied, non-name)
+  unresolved forms** fall with scaffold use: ChatGPT A 139 → B 85; Claude
+  A 155 → D 82.
+- **Transition bookkeeping** is the designed token-aligned evidence (e.g.
+  ChatGPT B→C A→C regressions `byl→měl`, `dlja→dla`; Claude B→C `ako→jesli`
+  ×7) — evidence for the analysis, not linguistic verdicts.
+
+**Bielik-specific findings (treated as data, not hidden).** Observed facts:
+all 4 Bielik replies fail to deliver a complete translation; 2/4 truncate at
+≈40 % of the story with no end marker; 1/4 is a prompt paraphrase/echo; 1/4 is
+a service error page. Quantified: Bielik partial lexical tokens ≈750/674 vs
+≈1,475–1,533 for complete runs; partial-text canonical coverage 57.1 % / 38.8 %
+(non-comparable to complete runs). Possible explanation (hypothesis only, not
+proven by the artifacts): Bielik's smaller effective context truncated
+generation and the model then produced non-task output; the artifacts do not
+themselves prove the cause. No prompt was shortened and Bielik was not rerun.
+
+**Answerable validity questions (evidence-based; full A–H answers in
+`docs/EXPERIMENTS.md` § EXP-003).** (A) 8/12 runs executed the intended
+conditions; Bielik C/D produced no translation, A/B truncated. (B) Only 8/12
+are sufficiently complete for quantitative comparison. (C) Bielik failed to
+follow the experimental instructions in 3 of 4 conditions (A/B partial, C
+echo); ChatGPT and Claude complied in all 4. (D) Bielik C (paraphrase/echo)
+and D (error page) are unexpected behaviors; A/B truncation is systematic. (E)
+No scaffold-side unwanted effect is measurable from these artifacts: B
+improves coverage for both models and the residual → `[?]`/name handling did
+not produce anomalies in the outputs. (F) Yes — alternatives (C) never beat
+the single-candidate scaffold (B) on canonical coverage, and Claude C is
+below its own baseline A. (G) D's value is model-dependent and not yet
+uniformly measurable: Claude D strongly outperforms its C, ChatGPT D does
+not. (H) **No — Bielik is not usable as a quantitative participant in this
+experiment.** Its results are recorded as qualitative data; a second model
+cohort could repeat the experiment later if desired, but EXP-004 must not
+start from this dataset.
+
+**Methodological consequences.** (1) The quantitative core of EXP-003 is the
+8 complete runs (2 models × 4 conditions); coverage deltas above are
+preliminary, not a verdict, and naturalness remains a separate (human)
+question — higher coverage is resource-supported vocabulary, not "better
+Interslavic". (2) Completeness gating is now part of run intake (D-035,
+L-027): structural inspection before evaluation, documented statuses, failed
+runs preserved. (3) The scaffold worked at generation time for both models
+(B > A), consistent with the EXP-003 hypothesis direction; the
+alternatives/grammar increments split by model.
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - Token-aligned transition matrices, not unique-form counts, are the
@@ -236,6 +353,14 @@ precisely what each model received and how the numbers were produced. Status:
 - Deterministic candidate ordering is not automatically the best-sense
   ordering; when a single candidate is shown, ordering is a research decision
   to be reviewed and documented (Task 010; L-026, D-034).
+- Externally produced runs must pass a structural completeness check
+  (section markers, end markers, head/tail, byte size vs complete peers)
+  before evaluation; failed/partial runs are preserved with a documented
+  status and excluded from the quantitative comparison, never silently
+  rerun or repaired (Task 011; D-035, L-027).
+- A model's failure to complete a condition is experimental data: distinguish
+  model-capability, prompt/context, scaffold-design, evaluator, resource, and
+  actual-effect explanations, and never collapse them (Task 011; §4.9).
 
 ## 6. Open questions for future work
 
@@ -243,6 +368,14 @@ precisely what each model received and how the numbers were produced. Status:
   unresolved forms? (EXP-002 candidate data vs EXP-003 results — a direct
   comparison is possible because both use the same source and evaluator.)
 - Does the scaffold effect persist on a second story (out-of-domain)?
-- Do grammatical annotations (D) help any model, or only some?
+- Do grammatical annotations (D) help any model, or only some? (Task 011:
+  D strongly helped Claude, not ChatGPT, on this story — open whether that
+  splits by model or by other factors.)
 - Is the 12 A→C regression class from EXP-002 reproduced, avoided, or changed
   by generation-time guidance?
+- Why did alternatives (C) fail to beat the single-candidate scaffold (B) for
+  both models on this dataset — prompt load, candidate competition, or
+  condition design?
+- What does the blinded human judgment say about naturalness across the
+  8 complete runs (the automatic-metric ordering is not a naturalness
+  ordering)?
