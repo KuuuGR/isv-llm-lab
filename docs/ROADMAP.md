@@ -1,8 +1,8 @@
 # Roadmap
 
-Status: updated 2026-09-01 (Task 009 — EXP-003 lexical-scaffold experiment
-designed; recommendation GO; next task is implementing the scaffold
-pipeline). This is a plan, not a commitment; the Architect/Research Lead
+Status: updated 2026-09-01 (Task 010 — EXP-003 scaffold pipeline implemented;
+experiment NOT yet executed; awaiting external LLM runs by the Project
+Owner). This is a plan, not a commitment; the Architect/Research Lead
 re-prioritizes as evidence arrives.
 
 ## Done
@@ -208,17 +208,59 @@ re-prioritizes as evidence arrives.
         LESSONS L-022/L-023, RESEARCH_NOTES).
         Recommendation: **GO** for a controlled pilot (existing story,
         3 models × 4 conditions). Not started.
+- [x] **Task 010 — EXP-003 scaffold pipeline implemented** (implementation
+  of the approved design; no LLM called, no results produced):
+  - [x] Deterministic scaffold generator `scripts/build_exp003_scaffold.py`:
+        Polish→ISV reverse index from `basic.json` `pl` column, pipeline
+        multiword → names (D-031) → exact hit → dictionary-verified lemma
+        recovery → curated residual → `[?]`; per-story committed curation
+        tables (`curation/op-pl/{names,multiword,residual}.tsv`, D-032);
+        candidate provenance incl. headword-note cleaning and
+        comma-separated orthographic-variant splitting (D-033); grammar
+        annotations for condition D (dictionary POS + verb aspect + a few
+        generated example forms); `scaffold.json` + rendered `scaffold_B/C/D.txt`.
+  - [x] 12 self-contained operator prompts (4 conditions × 3 models:
+        ChatGPT, Claude, Bielik) via `scripts/package_exp003_prompts.py`;
+        deterministic, no timestamps, cross-model prompts byte-identical
+        except the condition block; manifest with hashes.
+  - [x] Run orchestrator `scripts/run_exp003_pilot.py`
+        (prepare / collect / evaluate / status): plan.json with run ids +
+        prompt/source/scaffold hashes; collect stores external replies
+        byte-for-byte, never overwrites, records SHA-256 + model metadata +
+        resource pins; evaluate runs the Task 008 evaluator unmodified.
+  - [x] Comparison `scripts/compare_exp003.py`: per-run two-tier metrics,
+        name-excluded diagnostics (D-030), candidate-usage proxy,
+        invented/non-supplied forms breakdown, within-model and
+        within-condition pairwise token-aligned transitions + A→C/B→C
+        regression lists + metric/structure deltas, blinded complete-text
+        human-review pairs with a separate label key.
+  - [x] Integrity verifier `scripts/verify_exp003_runs.py` (completeness,
+        SHA-256 byte-for-byte integrity, meta self-consistency).
+  - [x] 30 new focused tests (scaffold, provenance, candidate hierarchy,
+        proper names, determinism, prompt packaging, condition separation,
+        run integrity, comparison logic); full suite **75 green**.
+  - [x] Determinism verified: two independent scaffold builds byte-identical.
+  - [x] Scaffold stats (op-pl story): 1453 lexical tokens; 136 exact
+        reverse-index, 102 dictionary-verified recovery, 509 curated,
+        3 unmapped `[?]` (per-token stats); per-kind stats reconciled
+        (`sum(by_kind_tokens) == lexical_tokens`).
+  - [x] Scope held: no evaluator change, no LLM API client, no UI/db/service.
+        SODA docs updated (DECISIONS D-030…D-034, LESSONS L-024…L-026,
+        RESEARCH_NOTES §4.8, EXPERIMENTS, STATE, SOURCES).
+        **Experiment not executed — the Project Owner runs the 12 prompts
+        externally and returns raw replies.**
 
 ## Next recommended task (single)
 
-- [ ] **Task 010 — implement the EXP-003 scaffold pipeline** as designed in
-  `experiments/exp003-scaffold/DESIGN.md` (pending Project Owner / Architect
-  GO): reverse index + alignment pipeline + scaffold renderer,
-  per-story curation tables, operator prompt packaging (4 conditions ×
-  3 models), run orchestrator + A-vs-B/C/D comparison (token-aligned
-  transitions, regression lists, candidate usage, invented-forms proxy),
-  integrity verification, tests. No evaluator changes needed. Do not start
-  from this roadmap entry alone — it requires a SODA task.
+- [ ] **Project Owner executes the 12 EXP-003 runs externally** (one
+  operator prompt per model × condition; Bielik's context window may fail —
+  record the failure, do not shorten the prompt), then register replies with
+  `scripts/run_exp003_pilot.py collect`, evaluate, compare, and verify.
+  When the raw outputs and evaluations are back, a follow-up SODA task
+  analyses EXP-003 (coverage/transitions/regressions/candidate usage/
+  invented forms + blinded human judgment) and writes `REPORT.md`.
+  Do not start from this roadmap entry alone — execution is external and the
+  analysis task requires the raw outputs.
 
 ## Later
 

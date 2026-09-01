@@ -507,3 +507,86 @@ scaffold-generation method. Decisions:
   and automatic scores are withheld until the initial holistic judgment, to
   avoid biasing it; answers and the mapping key are recorded verbatim for the
   research record.
+
+## D-030 · 2026-09-01 · EXP-003 proper names are special tokens: preserved, never deleted, never dictionary vocabulary, never a coverage penalty
+
+SODA Task 010 pinned down how the scaffold and the analysis treat proper
+names (`Tomek`, `Bronisława`, `Teofil`, `Julianna`, `Przemysława`, `Antoni`,
+`Międzyrzecze`):
+
+- **Names are not vocabulary.** A name is scaffolded as
+  `[Name] (proper name — keep as-is)` and carries no ISV candidate; a name
+  never becomes an ordinary dictionary hit just because a same-spelled Polish
+  gloss exists (see D-031).
+- **Names are not deleted.** They remain part of the source and of the
+  generated translation; the operator prompts instruct the model to preserve
+  character names and quoted material verbatim.
+- **Names do not distort the metrics.** The historical EXP-001/002 numbers
+  are never changed; `compare_exp003.py` adds **new, clearly-labelled
+  name-excluded diagnostics** (`canonical_coverage_excl_names`,
+  `unresolved_rate_excl_names`, …) computed by excluding scaffold-name tokens
+  and capitalized unresolved tokens from the denominators. The invented-forms
+  analysis keeps a separate `proper_name_like` category.
+- **Documented everywhere.** Handling is documented in the scaffold
+  generator, the renderings, the comparison tool, the research notes, and the
+  operator README.
+
+## D-031 · 2026-09-01 · The per-story names table takes precedence over the dictionary during alignment
+
+One op-pl token exposed an ordering ambiguity: `Międzyrzecze` (the town name)
+coincides with a real `basic.json` Polish gloss (`międzyrzecze → međurěčje`).
+The alignment pipeline therefore checks the **explicit per-story names table
+before the exact dictionary lookup** (design §8). The names table is the
+human-reviewed record that this surface is a proper name in *this story*; the
+dictionary remains untouched. Pipeline order (deterministic, per sentence):
+multiword → **names** → exact reverse-index hit → dictionary-verified lemma
+recovery → curated residual → `[?]`.
+
+## D-032 · 2026-09-01 · Curation tables are committed artifacts; scaffolds and inputs stay gitignored
+
+The EXP-003 design contains an internal contradiction: §6.2/§6.3 describe the
+curated residual table as an *explicit, committed* artifact, while §19's
+directory listing marks `curation/` and `scaffolds/` as gitignored ("embeds
+story tokens"). Task 010 resolved it:
+
+- **`curation/op-pl/*.tsv` are committed.** They are the explicit,
+  reproducible, provenance-bearing residual mappings (313 unique forms) that
+  make the scaffold regenerable — the design's own rationale (§6.2/§6.3). They
+  contain isolated Polish surface forms + ISV candidates + notes, not story
+  prose.
+- **`input/`, `scaffolds/`, `outputs/`, `comparison/`, and the
+  `operator-prompts/*.md` stay gitignored.** The aligned scaffolds embed the
+  full story token stream; operator prompts and outputs embed the story and
+  model outputs (copyright policy, as in EXP-001/002).
+- Regeneration therefore works on a fresh clone for the curation half (tables
+  committed); the story half requires the local story file, exactly as
+  EXP-001/002 do.
+
+## D-033 · 2026-09-01 · Candidate surfaces are clean headwords; dictionary annotation artifacts are separated into metadata, never shown as surfaces
+
+`basic.json` stores two annotation artifacts inside the `isv` headword field
+that must not leak into the scaffold as "surfaces":
+
+- **Parenthetical notes** (11 headwords): verb-government or domain notes
+  such as `pozirati (na)`, `vråta (sport)`. Stripped from the surface;
+  recorded as `headword note: (…)` in the candidate detail.
+- **Comma-separated orthographic variants** (245 headwords):
+  `někȯgda, někȯgdy`, `v, vȯ`, `kak, kako`. Split into separate candidates;
+  the first is `layer = canonical`, the rest are `layer = orthographic_variant`
+  with the same row provenance and an explicit "orthographic variant of …"
+  note. This matches the design §7 resource hierarchy (orthographic variant is
+  a distinct, lower layer) and keeps Condition B's single pick a single
+  surface while preserving the alternatives for C/D.
+
+## D-034 · 2026-09-01 · Condition-B first-candidate order for curated entries is reviewer-chosen best-sense-first
+
+For curated entries the deterministic automatic ordering (dictionary `type`
+ascending, alternative-attestation count, lexicographic) does not guarantee
+the *semantically* best first candidate. Task 010 reviewed every curated
+entry's candidate order against the story sense and reordered the table
+(e.g. `słowa → slovo` before `rěč`; `tego → tȯj` before `ov`; `wydaje →
+sdavati sę` for the "it seems" sense; `chodzi → idti o` for "it's about"),
+recording the rationale in each row's basis note. The table is the
+human-judgment record; the generator preserves table order for curated
+candidates and automatic order for dictionary hits.
+

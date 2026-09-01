@@ -488,3 +488,78 @@ upfront makes the cost honest and the design auditable.
 condition, and (b) quantify the automatic-coverage percentage and the
 *composition* of the residual (names / closed-class / inflected open-class)
 before choosing between a heuristic, a curation table, or a new dependency.
+
+## L-024 · 2026-09-01 · Dictionary headwords carry annotation artifacts that must be separated at the scaffold boundary, not shown as surfaces
+
+**Observation.** `basic.json`'s `isv` headword field stores two kinds of
+annotation inside the "surface": trailing parenthetical notes (11 headwords —
+verb-government or domain notes such as `pozirati (na)`, `vråta (sport)`) and
+comma-separated orthographic variants (245 headwords — `někȯgda, někȯgdy`,
+`v, vȯ`). Before the cleaning step, the scaffold rendered `pozirati (na)` as
+a "candidate surface" the LLM might copy verbatim, and variants remained
+merged in one line (`někȯgda, někȯgdy`) so Condition B's "one candidate" was
+false (two surfaces in one line) and output-matching treated the pair as one
+surface. Cleaning at the candidate builders fixed both: notes become
+`headword note: (…)` detail metadata, and comma-split surfaces become distinct
+candidates with the first canonical and the rest `orthographic_variant`
+(layer + kind + explicit "orthographic variant of …" note). In the op-pl
+story this produced 20 distinct variant pairs / 131 variant candidates; none
+of the 11 noted headwords occur in this story, but the handling is tested.
+
+**Why it matters.** The scaffold is the only interface between the resource
+and the LLM; a single malformed surface (`pozirati (na)`) invites mechanical
+copying and contaminates candidate-adoption matching. Provenance that belongs
+in metadata must never ride along inside a surface string.
+
+**Next time.** When consuming a community-generated dictionary, profile the
+headword field's value shapes for embedded annotations *before* rendering it
+anywhere an LLM or matcher sees it; separate surface from metadata at the
+data boundary, not downstream.
+
+## L-025 · 2026-09-01 · When a design document contradicts itself, resolve toward reproducibility and record the decision
+
+**Observation.** The EXP-003 design's curation section (§6.2/§6.3) describes
+the curated residual table as an explicit, *committed* artifact, while §19's
+directory listing marks `curation/` (and `scaffolds/`) as gitignored
+("embeds story tokens"). Task 010 resolved this toward the design's own
+rationale: the curation tables are committed (they are the reproducibility
+record that makes the scaffold regenerable and auditable), while the aligned
+scaffolds, inputs, operator prompts, and outputs stay gitignored (they embed
+the story / model output, per the copyright policy). Regeneration on a fresh
+clone is therefore half-reproducible (tables + code committed; story must be
+restored locally), exactly like EXP-001/002.
+
+**Why it matters.** An internal contradiction left unresolved would produce
+an arbitrary choice at implementation time with no record. Making the choice,
+documenting the tension, and recording the resolution (D-032) turns an
+ambiguity into auditable methodology.
+
+**Next time.** When implementing a design, actively look for contradictions
+between its prose and its structure lists; resolve them explicitly in the
+SODA record with a one-line rationale, and prefer the option that preserves
+reproducibility.
+
+## L-026 · 2026-09-01 · A deterministic candidate ordering is not automatically the semantically-best ordering for the LLM
+
+**Observation.** The automatic candidate sort (dictionary `type` ascending,
+alternative-attestation count, variant index, lexicographic) is deterministic
+and provenance-correct, but for Condition B the model sees exactly one
+candidate per form, so "first candidate" becomes "the word the model is most
+likely to use". The automatic first picks were sometimes wrong for the story
+sense: `słowa → rěč` (speech) over `slovo` (word), `tego → ov` over the
+deictic `tȯj`, `wydaje → izdavati` (publishing) over `sdavati sę` (seems),
+`chodzi → hoditi` (walking) over `idti o` (is about). Task 010 reviewed every
+curated entry and reordered to best-sense-first, recording the rationale in
+each row's basis note (D-034).
+
+**Why it matters.** An experiment whose variable is "the supplied vocabulary"
+can silently bias against a condition if the single supplied candidate is the
+wrong sense — the model then avoids it, exactly as if the scaffold had not
+helped. Deterministic ≠ semantically correct; for curated entries the
+human-judgment layer is the place to encode sense.
+
+**Next time.** For any generation-time guidance where one candidate is shown,
+treat first-candidate order as a research decision, review it against the
+actual source sense, and record the ordering rationale with the candidate —
+not as an afterthought.
+

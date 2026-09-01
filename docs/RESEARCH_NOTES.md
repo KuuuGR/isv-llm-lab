@@ -23,8 +23,8 @@ Interslavic generation. Keeping them distinct is itself a research result:
 |---|---|---|
 | **Direct translation** | EXP-001 (7 models, baseline) | Polish source + plain translate instruction; no resource guidance |
 | **Post-hoc lexical revision** | EXP-002 (pilot) | An existing LLM translation + table of supplied ISV alternatives for selected unresolved forms; model revises the whole document |
-| **Generation-time lexical scaffolding** | EXP-003 (designed, B/C) | Polish source + deterministic Polish→ISV lexical scaffold (vocabulary guidance only) |
-| **Generation-time lexical + grammatical constraints** | EXP-003 (designed, D) | Polish source + scaffold + alternatives + reliable ISV-side grammatical annotations |
+| **Generation-time lexical scaffolding** | EXP-003 (B/C — scaffold implemented, runs not yet executed) | Polish source + deterministic Polish→ISV lexical scaffold (vocabulary guidance only) |
+| **Generation-time lexical + grammatical constraints** | EXP-003 (D — implemented, not yet executed) | Polish source + scaffold + alternatives + reliable ISV-side grammatical annotations |
 
 The research hypothesis motivating EXP-003: vocabulary guidance *at generation
 time* may give the LLM the resource-supported words while still letting it
@@ -58,7 +58,7 @@ translation and to (2) correcting an already-generated translation, because in
 - Lesson generalized (L-015): unique-form bookkeeping hides token-level
   regressions → token-aligned transition matrices are the regression standard.
 
-## 4. EXP-003 — generation-time lexical scaffolding (design, Task 009)
+## 4. EXP-003 — generation-time lexical scaffolding (implemented, Task 010; not yet executed)
 
 ### 4.1 Research question and hypotheses
 See `experiments/exp003-scaffold/DESIGN.md` §2–§3. Summary:
@@ -134,6 +134,85 @@ matrix, regression lists, candidate usage, invented-forms proxy, human
 preference ordering. **Negative results (scaffolding hurts / regressions /
 unnatural outputs) are preserved and reported.**
 
+### 4.8 Implementation (SODA Task 010) — the exact method that will be executed
+
+Implementation-level methodology, recorded so a future paper can state
+precisely what each model received and how the numbers were produced. Status:
+**infrastructure ready; no run executed yet.**
+
+- **Scaffold generation is fully deterministic and free of LLM calls** (D-029).
+  `scripts/build_exp003_scaffold.py` reads (a) the cleaned story-only source
+  `input/source.txt`, (b) `basic.json` via a Polish→ISV reverse index over the
+  `pl` column, (c) the committed per-story curation tables
+  `curation/op-pl/{names,multiword,residual}.tsv`, (d) the prebuilt full-form
+  lexicon for example forms. Per-sentence alignment order: **multiword →
+  names → exact reverse-index hit → dictionary-verified lemma recovery
+  (suffix stripping where the stem re-looks-up in the index) → curated
+  residual → `[?]`** (D-031: the names table precedes the dictionary, e.g.
+  `Międzyrzecze`). No timestamps in any artifact; two builds verified
+  byte-identical.
+- **Alignment limitations (stated).** No Polish lemmatizer is a dependency;
+  Polish inflection is morphophonological (suppletion `był→być`, alternations
+  `słów→słowo`). Rule-based recovery is bounded (~5 % of unique story forms);
+  everything else is curated per surface form in `residual.tsv` (313 unique
+  forms in this story), with `[?]` for the 3 forms with no defensible mapping.
+  The curation tables are committed and provenance-bearing (D-032); they are
+  story-specific human judgment, not a general resource.
+- **Candidate provenance policy.** Every ISV candidate carries
+  `{surface, pos, type, layer, source, kind, detail}`. Layers follow the
+  design §7 hierarchy: `canonical` (basic.json row, `pl_gloss_exact` /
+  `recovery`) → `orthographic_variant` (comma-separated second+ headword
+  spellings) → `alternative_attestation` (isv.dic / interslavicfreq notes on
+  the candidate) → historical (not present in this story). Parenthetical
+  headword notes (`pozirati (na)`) are metadata, never surfaces (D-033).
+  Weaker evidence is annotated, never promoted to canonical; no candidate is
+  invented.
+- **Condition definitions (what the prompt actually contains).** A: source +
+  translate instruction only. B: + the rendered scaffold with exactly one
+  canonical candidate per form. C: + all resource-supported alternatives
+  (deterministic order, provenance shown). D: + grammatical annotations —
+  dictionary POS, verb aspect, and a few generated example forms (verb
+  infinitive / 1sg present / past m.sg from the prebuilt lexicon); no Polish
+  morphological analysis, no full grammar engine (D-028). The scaffold is
+  vocabulary guidance; prompts state the model remains responsible for word
+  order, inflection, and natural grammar, and may depart from any supplied
+  candidate.
+- **Prompt-control policy.** The four prompts for one model are byte-identical
+  except the condition block (scaffold B/C/D + two additive sentences for
+  alternatives/grammar). No model-specific linguistic advice, no baseline
+  scores, no model comparisons, no request for explanations; the expected
+  output is the complete Interslavic story only. Model metadata
+  (provider/model/version/generation date) is recorded as `unknown` when the
+  Project Owner does not supply it (D-018/D-023); nothing is inferred.
+- **Proper-name treatment.** Names are scaffolded as `[Name] (proper name —
+  keep as-is)`, carry no candidates, are never deleted from the translation,
+  and are excluded from coverage denominators only in **new, clearly-labelled
+  name-excluded diagnostics** (historical metrics unchanged, D-030). The
+  invented-forms analysis keeps a separate `proper_name_like` category.
+- **Evaluation policy.** The Task 008 evaluator runs **unmodified**; canonical
+  and broader resource-supported coverage are reported side by side and never
+  merged (D-027). A/B/C transitions are token-aligned (LCS of lexical token
+  sequences), with A→C/B→C regression lists and C→A/C→B resolutions.
+  Candidate adoption is reported as a clearly-labelled **surface-level proxy**
+  (an output form equal to a supplied surface, normalized); position-targeted
+  adoption is not computable Polish→ISV without a translation model and is not
+  claimed. Invented/non-supplied vocabulary is categorized
+  (supplied / canonical-independently-generated / broader-resource-supported /
+  unresolved / proper-name-like) and stated to be an analytical signal, not a
+  correctness oracle. No composite quality score exists.
+- **Reproducibility strategy.** Every planned run has a run id
+  `<date>__<provider>__<model>__<version>__<condition>` in `outputs/plan.json`
+  with prompt/source/scaffold SHA-256s; `collect` stores raw output
+  byte-for-byte, never overwrites, and records output SHA-256, model
+  metadata, evaluator commit, dictionary manifest, lexicon hash, scaffold
+  generator commit, and curation-table hashes; `verify_exp003_runs.py` checks
+  everything including tamper detection. Failed/empty runs are preserved and
+  documented (Bielik's context window is the known risk — D-023/D-028).
+- **Human evaluation is holistic and blinded.** `compare_exp003.py` writes
+  complete-text pairs (`comparison/human_review.md`) with blinded labels and a
+  separate `human_review_key.json`; automatic metrics stay hidden during the
+  initial naturalness/preference judgment.
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - Token-aligned transition matrices, not unique-form counts, are the
@@ -150,6 +229,13 @@ unnatural outputs) are preserved and reported.**
   calls (Task 009; L-023).
 - External-interface constraints (no API client, manual copy/paste operator
   prompts) are part of the method, recorded per run (D-007, D-024).
+- Dictionary headword fields can carry embedded annotations (parenthetical
+  government/domain notes, comma-separated orthographic variants); surfaces
+  handed to an LLM must be clean, with annotations preserved as provenance
+  metadata (Task 010; L-024, D-033).
+- Deterministic candidate ordering is not automatically the best-sense
+  ordering; when a single candidate is shown, ordering is a research decision
+  to be reviewed and documented (Task 010; L-026, D-034).
 
 ## 6. Open questions for future work
 

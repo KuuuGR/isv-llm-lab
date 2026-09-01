@@ -244,15 +244,60 @@ Full report: `experiments/exp002-pilot/REPORT.md`; per-run detail in
 
 ## Planned (not started)
 
-- **EXP-003 / lexical-scaffold generation experiment — designed (Task 009,
-  2026-09-01), not implemented.** The full design is
-  `experiments/exp003-scaffold/DESIGN.md`; the recommendation is **GO** for a
-  controlled pilot (existing Polish story, conditions A/B/C/D × 3 models). It
-  tests generation-time dictionary guidance (a deterministic Polish→ISV
-  lexical scaffold built from `basic.json`'s `pl` column) vs unconstrained
-  translation (A) and vs post-hoc revision (EXP-002). Implementation is Task
-  010; do not start automatically.
+- **EXP-003 / lexical-scaffold generation experiment — infrastructure
+  implemented (Task 010, 2026-09-01), experiment NOT executed.** The design is
+  `experiments/exp003-scaffold/DESIGN.md`; the pilot tests generation-time
+  dictionary guidance (a deterministic Polish→ISV lexical scaffold built from
+  `basic.json`'s `pl` column) vs unconstrained translation (A) and vs
+  post-hoc revision (EXP-002). All tooling is ready (scaffold generator,
+  12 operator prompts, run orchestrator, comparison, integrity verifier —
+  see the Task 010 follow-up below) but **no LLM has been called and no
+  results exist**: the Project Owner must execute the 12 external runs and
+  register the raw replies.
 - **Manual linguistic review** of the EXP-001 unresolved sample (Task 004 artifacts; human-only, no automatic classification).
+
+### Follow-up: EXP-003 infrastructure implemented (Task 010, 2026-09-01)
+
+Implementation of the approved design; no experiment executed, no LLM called.
+Key deliverables and decisions:
+
+- **Deterministic scaffold generator** (`scripts/build_exp003_scaffold.py`):
+  reverse index over the `pl` column; pipeline multiword → names (D-031:
+  the per-story names table takes precedence over the dictionary —
+  `Międzyrzecze`) → exact hit → dictionary-verified lemma recovery → curated
+  residual → `[?]`; committed per-story curation tables
+  (`curation/op-pl/{names,multiword,residual}.tsv`, D-032: curation is
+  committed, aligned scaffolds/inputs/outputs stay gitignored); candidate
+  provenance incl. headword-note cleaning and comma-separated
+  orthographic-variant splitting (D-033: 11 noted headwords globally, 245
+  variant headwords; 20 variant pairs / 131 variant candidates in this
+  story); Condition-D grammar annotations (dictionary POS + verb aspect + a
+  few generated example forms); Condition-B first-candidate sense-review for
+  curated entries (D-034).
+- **12 operator prompts** (4 conditions × 3 models: ChatGPT, Claude, Bielik)
+  under `experiments/exp003-scaffold/operator-prompts/`, packaged
+  deterministically (`scripts/package_exp003_prompts.py`, no timestamps);
+  cross-model prompts byte-identical except the condition block.
+- **Run orchestrator** (`scripts/run_exp003_pilot.py`): plan with run ids +
+  prompt/source/scaffold hashes; byte-for-byte immutable collection with
+  SHA-256 + model/provider/version/date metadata (`unknown` when not
+  supplied) + resource pins; evaluation via the Task 008 evaluator
+  unmodified.
+- **Comparison** (`scripts/compare_exp003.py`): per-run two-tier metrics,
+  name-excluded diagnostics (D-030), candidate-usage surface proxy,
+  invented/non-supplied vocabulary breakdown, within-model and
+  within-condition pairwise token-aligned transitions + A→C/B→C regression
+  lists + metric/structure deltas, blinded complete-text human-review pairs
+  (`comparison/human_review.md` + separate `human_review_key.json`).
+- **Integrity verifier** (`scripts/verify_exp003_runs.py`): completeness,
+  byte-for-byte SHA-256 integrity, meta self-consistency.
+- **Tests**: 30 new (scaffold, provenance, hierarchy, names, determinism,
+  prompt packaging, condition separation, run integrity, comparison logic);
+  full suite **75 green**. **Determinism**: two independent builds
+  byte-identical.
+- **Status**: infrastructure prepared — **experiment not executed, result
+  unknown**. No evaluator change (Task 008 policy untouched), no LLM API
+  client.
 
 ### Follow-up: EXP-003 designed — lexical scaffold at generation time (Task 009, 2026-09-01)
 
