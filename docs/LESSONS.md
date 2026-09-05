@@ -589,3 +589,25 @@ structural completeness check per file (expected section markers, end marker,
 head/tail, byte size relative to complete peers) before any evaluation or
 comparison — and failures must be recorded as data (status + note), never
 silently rerun, repaired, or excluded from the record.
+
+## L-028 · 2026-09-05 · Pre-register model-selection criteria before screening; a roster decided after the fact is a rationalization risk
+
+**Observation.** EXP-004 preparation (Task 013) had to fix which models belong
+in the main screening. The coordinator supplied an explicit practical filter
+(web/chat interface without local install; free access sufficient for ~1 full
+story per day; identifiable model/version/settings) plus explicit exclusions
+(Venice AI as a platform, Mistral as unavailable, Bielik as a preserved
+qualitative negative result). Writing those criteria into a design document
+(D-036) *before any run* made the roster auditable and prevented the model set
+from being argued from the results later.
+
+**Why it matters.** Model choice is the first place selection bias enters a
+benchmark: without a stated filter, a roster can be quietly adjusted until a
+desired ordering appears. The same discipline applies to guidance methods
+(D-037): no strategy is assumed to win, and Phase B scope is decided from
+Phase A evidence, not from prior preference.
+
+**Next time.** Any multi-model or multi-method experiment should fix its
+selection criteria, roster, and exclusion rationale in the design document
+before execution, and record the criteria as a decision — even (especially)
+when the roster contains models the project already has opinions about.
