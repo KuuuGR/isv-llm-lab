@@ -12,18 +12,33 @@ Analysis produced by `scripts/compare_exp003.py` after runs are collected:
 - `within_condition/<condition>.json` — pairwise model comparisons within one
   condition.
 - `summary.md` — run summary plus all pairwise transition tables.
-- `human_review.md` — the DESIGN §11 blinded holistic review for the Project
-  Owner. Contains ONLY the 8 complete runs (ChatGPT A–D, Claude A–D),
-  grouped into two neutral sets ("Set 1", "Set 2") with per-set randomized
-  "Version 1..4" labels (deterministic seed, reproducible). Includes the four
-  holistic questions, a preference-ordering template, a clearly separated
-  post-unblinding section (scaffold-constraint question for B/C/D), and a
-  recording checklist. No automatic metric and no model identity appears in
-  the document.
-- `human_review_key.json` — the mapping (set label → model → condition →
-  Version label → run id), kept separate and opened only after the initial
-  holistic judgment is recorded. Answers are recorded verbatim in
-  `human_review.md`; no score is computed from them.
+- `human_review.md` — the DESIGN §11 blinded holistic review of the complete
+  runs (ChatGPT A–D, Claude A–D). **SUPERSEDED (2026-09-05, SODA Task 014)**
+  as the primary human-evaluation method: comparing four complete long
+  translations was too cognitively demanding for the Project Owner. It is
+  preserved only as a historical/provisional review design and carries a
+  superseded banner; **no holistic human result was obtained and none is
+  recorded anywhere**. Do not perform this review.
+- `human_review_key.json` — the mapping for the superseded holistic artifact
+  (set label → model → condition → Version label → run id). Kept only for
+  the historical record.
+- `sentence_review.md` — the PRIMARY EXP-003 human-evaluation instrument
+  (SODA Task 014): a sentence-level forced-choice preference test prepared
+  by `scripts/prepare_exp003_sentence_review.py`. ~100 questions; each shows
+  one Polish source sentence and the corresponding sentence from each of the
+  four conditions (A/B/C/D) of the same model, randomized per question into
+  neutral "Version 1..4" labels (fixed recorded seed, never alphabetical).
+  The Project Owner ticks the version that sounds most natural as
+  Medžuslovjansky (best-choice only). The document contains no model names,
+  no A/B/C/D condition labels, no automatic metrics, and no hints; the
+  instructions explicitly ask for a holistic sentence impression, not
+  word-level dictionary verification.
+- `sentence_review_key.json` — private answer key for `sentence_review.md`:
+  source sentence identity and text, story section, dialogue flag, the model,
+  run ids, the per-question randomized display order (Version label →
+  A/B/C/D), the version texts, the randomization seed, and sampling
+  metadata. Kept separate from the participant document and opened only
+  after the answers are recorded.
 
 Incomplete runs (e.g. all four Bielik runs, Task 011) are preserved under
 `<run_id>/excluded.json` and never enter the human review.

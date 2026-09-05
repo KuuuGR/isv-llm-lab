@@ -688,6 +688,14 @@ def main(argv: list[str] | None = None) -> int:
 def render_human_pairs(analyses: dict[str, dict]) -> tuple[str, list[dict]]:
     """Blinded, DESIGN §11-compliant holistic review of the complete runs.
 
+    SUPERSEDED as the primary EXP-003 human-evaluation method on 2026-09-05
+    (SODA Task 014) by the sentence-level forced-choice test prepared by
+    scripts/prepare_exp003_sentence_review.py: comparing four complete
+    translations was too cognitively demanding for the Project Owner. This
+    function is retained only to regenerate the historical/provisional
+    artifact (comparison/human_review.md + key); its output carries a
+    superseded banner and no holistic result is recorded.
+    
     - Only quantitatively complete runs participate (analyses already
       excludes failed/partial runs, e.g. all Bielik runs).
     - Neutral set labels ("Set 1", "Set 2", …) — the model behind each set is
@@ -714,6 +722,15 @@ def render_human_pairs(analyses: dict[str, dict]) -> tuple[str, list[dict]]:
     # --- blinded material ---
     out: list[str] = [
         "# EXP-003 — human naturalness review (blinded, holistic)", "",
+        "> **SUPERSEDED (2026-09-05, SODA Task 014).** This holistic",
+        "> complete-text review was replaced as the primary human-evaluation",
+        "> method by the sentence-level forced-choice test in",
+        "> `comparison/sentence_review.md`. Comparing four complete long",
+        "> translations was too cognitively demanding for reliable",
+        "> subjective judgment; this file is kept only as a historical /",
+        "> provisional review design. **No holistic human result was",
+        "> obtained, and none is recorded or inferred in this repository.**",
+        "",
         "You are reviewing complete Interslavic translations of the same",
         "Polish story. Every translation is the whole story; the versions",
         "differ only in how they were generated.", "",
