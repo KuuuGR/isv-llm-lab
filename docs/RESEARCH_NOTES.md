@@ -365,6 +365,52 @@ yet (they are recorded verbatim when the review is performed).
   verbatim answers, presentation order, randomized mapping, and the
   before/after-unblinding split.
 
+### 4.11 EXP-004 model screening — preparation (SODA Task 013, 2026-09-05)
+
+**Status: design only. Not approved, not executed, no LLM called.** Design:
+`experiments/exp004-modelscreen/DESIGN.md`. The EXP-003 human review remains
+open and untouched; nothing here assumes or claims its outcome.
+
+- **Purpose.** The next major phase is model screening: determine which LLMs
+  are practically useful for Polish → Medžuslovjansky translation under a
+  real-world workflow (web/chat interface, free access sufficient for ~1 full
+  story per day), then (later) which forms of external deterministic
+  linguistic guidance improve those models.
+- **Central hypothesis (unchanged, still a hypothesis):** LLMs can produce
+  plausible-looking Slavic text from learned patterns without reliably
+  consulting or reproducing Medžuslovjansky vocabulary and morphology;
+  supplying deterministic linguistic resources may improve quality. Many
+  assistance strategies are candidates; none is assumed to win (D-037).
+- **Two phases (D-037).** Phase A = model screening: one identical story, one
+  equivalent no-guidance instruction per roster row; outputs are a per-model
+  access verdict and versioned baseline numbers (canonical/broader coverage)
+  under full recording. Phase B = guidance-method experiments on Phase-A
+  models, scoped from Phase A evidence (headroom, access) plus the pending
+  EXP-003 report. Screening and method experiments are deliberately separate.
+- **Access filter (D-036).** Main-roster criterion: normal-user web/chat use,
+  free access sufficient for ~1 story/day, identifiable model/version/
+  settings. Local deployment, paid-only ordinary use, and one-off trial
+  credits are out of scope. Venice AI is a platform, not an independent model;
+  Mistral is not assumed available; Bielik remains a preserved qualitative
+  negative result (its free-web access failed this exact task in EXP-003) and
+  no new quantitative conclusion about it is invented.
+- **Roster (candidate; access to confirm):** GPT-5.6 Luna thinking OFF and ON;
+  the custom GPT "Interslavic / Medžuslovjansky Language Teacher" (separate
+  row; internal system prompt unknown — D-018 confound, exploratory);
+  Claude Sonnet 5; Gemini; DeepSeek-V4-Pro DeepThink OFF and ON; Grok; Kimi;
+  Qwen; GLM (conditional on web access). Versions/settings are recorded per
+  run; variant rows (thinking toggles) are explicit conditions.
+- **Protocol essentials.** Byte-identical story-only source (same as EXP-003);
+  equivalent base instruction; no guidance in Phase A; byte-for-byte
+  collection with SHA-256, documented statuses (D-035), completeness gate
+  before evaluation (L-027); context/window limitations and free-access
+  observations recorded; Task 008 two-tier evaluator unmodified, metrics not
+  redefined; no manual word-by-word classification; holistic human review is
+  not part of Phase A.
+- **Recording decision:** selection criteria and roster are fixed in the
+  design *before* execution (L-028) so the model set is not rationalized post
+  hoc.
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - Token-aligned transition matrices, not unique-form counts, are the
@@ -414,3 +460,7 @@ yet (they are recorded verbatim when the review is performed).
 - What does the blinded human judgment say about naturalness across the
   8 complete runs (the automatic-metric ordering is not a naturalness
   ordering)?
+- Which models pass the practical access filter, and how do their
+  versioned no-guidance baselines on the canonical story compare (EXP-004
+  Phase A)? How large is each model's headroom (unresolved rate) before
+  guidance-method experiments are scoped to it?
