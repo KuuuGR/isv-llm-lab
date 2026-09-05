@@ -1,9 +1,10 @@
 # Roadmap
 
-Status: updated 2026-09-05 (Task 014 — the EXP-003 holistic human review was
-superseded by a prepared sentence-level forced-choice test of ~100 questions;
-no holistic result was obtained or recorded; EXP-003 human judgment remains
-the immediate pending step; EXP-004 stays design-only).
+Status: updated 2026-09-05 (Task 015 — character-level orthographic sanity
+audit completed over all EXP-001/002/003 outputs as an independent,
+audit-only quality dimension; no historical score changed. EXP-003 human
+judgment remains the immediate pending step: the sentence-level
+forced-choice test is ready and unanswered; EXP-004 stays design-only).
 
 ## Done
 
@@ -369,6 +370,44 @@ the immediate pending step; EXP-004 stays design-only).
   - [x] Docs updated (DECISIONS D-038/D-039, LESSONS L-029, RESEARCH_NOTES
         §4.12 + supersession note, EXPERIMENTS, STATE, ROADMAP, comparison
         README, exp003 README).
+- [x] **Task 015 — character-level orthographic sanity audit over all
+  EXP-001/002/003 outputs** (audit-only; EXP-003 closure-relevant QC; EXP-004
+  untouched; no score or comparison artifact changed):
+  - [x] Authoritative inventory: the Interslavic alphabet as defined by the
+        Interslavic project on its official site —
+        https://steen.free.fr/interslavic/orthography.html (fetched
+        2026-09-05): standard 27-letter Latin alphabet (no q/w/x) +
+        etymological letters `ę ų å ė ȯ ć đ ĺ ń ŕ ś ź` + sanctioned
+        alternatives `ť ď ľ ň ř è ò` and combining-acute `t́ d́`. NOT derived
+        from our dictionaries/resources/outputs (D-040).
+  - [x] `src/isv_eval/orthography.py` deterministic validator: per char —
+        allowed ISV letter / Cyrillic / Polish-specific `ą ł ó ż` (ć ę ń ś ź
+        are valid etymological ISV letters and allowed) / other Latin /
+        other script / unexpected non-letter. Whitespace, ASCII digits and
+        an explicit prose-punctuation set are accepted; markdown/control/
+        formatting glyphs are reported as non-letter notes, never alphabet
+        errors. Text is never modified, transliterated, or repaired.
+  - [x] `scripts/check_orthography.py` runs all EXP-001 (7) / EXP-002 (7) /
+        EXP-003 (12) outputs deterministically and writes per-experiment
+        `outputs/orthography_report.{json,md}` (gitignored) with per-file
+        totals, outside-inventory breakdown, distinct unexpected chars,
+        frequencies, and line numbers. Result is a SEPARATE quality dimension
+        (D-041): resource-grounded lexical coverage is untouched.
+  - [x] Anomalies recorded (see RESEARCH_NOTES §4.13): Cyrillic in
+        Latin-script output (EXP-001/002 Claude 23/59; EXP-003 Claude a–d
+        9–45 incl. intra-word `Може`/`ь`); Polish names kept verbatim
+        (`Bronisława`/`Przemysława` → `ł`, `w`); Czech/Slovak accented drift
+        in EXP-003 ChatGPT/Claude and largely Czech Bielik-B; non-ISV
+        diacritics (`ē` in Gemini `dējstvitelno`, OCS-style `ǫ` in gpt-isvt
+        `Myslǫ`); Markdown `#`/`*` in EXP-001/002 outputs; Bielik-C prompt
+        echo (`→ ‡ [ ]`). Outside-inventory totals: 267 / 309 / 1 297 chars.
+  - [x] 21 new tests (inventory exactness, Cyrillic/Polish/other-Latin/
+        other-script classification, t́/d́ combining acute, punctuation/
+        whitespace/digits, corpus quotes/dashes, empty text, clean vs single
+        invalid character, mixed Latin/Cyrillic, determinism/purity, runner
+        determinism); full suite **107 green**.
+  - [x] Docs updated (DECISIONS D-040/D-041, LESSONS L-031, RESEARCH_NOTES
+        §4.13 + §5/§6, EXPERIMENTS follow-up + status, STATE, ROADMAP).
 
 ## Next recommended task (single)
 

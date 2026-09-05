@@ -242,7 +242,7 @@ coverage):
 Full report: `experiments/exp002-pilot/REPORT.md`; per-run detail in
 `comparison/<run>/` (local, gitignored).
 
-## Activity log — follow-ups after EXP-002 (SODA Tasks 007–012)
+## Activity log — follow-ups after EXP-002 (SODA Tasks 007–015)
 
 The pending-work list for the current state of the project is at the end of
 this file under **"Planned (not started) — current"**; the blocks below are
@@ -443,6 +443,44 @@ cognitively demanding — a format problem, not a result about any condition.
   Owner answers the 100 questions; then the EXP-003 `REPORT.md` combines the
   automatic evidence (Task 011) with the human preferences.
 
+### Follow-up: character-level orthographic sanity audit across EXP-001/002/003 outputs (Task 015, 2026-09-05)
+
+Before EXP-003 closure, all generated translation outputs (EXP-001: 7,
+EXP-002: 7, EXP-003: 12 run files) were run through a deterministic,
+audit-only character-level sanity check (new `src/isv_eval/orthography.py`,
+runner `scripts/check_orthography.py`, 21 new tests). The accepted letter
+inventory is the official Interslavic alphabet definition
+(https://steen.free.fr/interslavic/orthography.html, fetched 2026-09-05):
+standard 27-letter Latin alphabet (no q/w/x) + etymological letters
+`ę ų å ė ȯ ć đ ĺ ń ŕ ś ź` + sanctioned alternatives `ť ď ľ ň ř è ò` and
+combining-acute `t́ d́`; Polish letters `ą ł ó ż` are flagged separately;
+non-letters (whitespace, ASCII digits, explicit prose punctuation) are never
+alphabet errors. The audit never modifies text and does NOT recompute or
+alter any existing lexical/resource coverage number, A/B/C classification,
+or comparison artifact (D-040/D-041) — it is an independent quality
+dimension whose per-run reports are regenerated deterministically into each
+experiment's gitignored `outputs/orthography_report.{json,md}`.
+
+| Experiment | files | total chars | outside inventory | Cyrillic | Polish-spec. | other Latin | other script | non-letter |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| EXP-001 | 7 | 66 007 | 267 | 31 | 46 | 48 | 0 | 142 |
+| EXP-002 | 7 | 65 410 | 309 | 67 | 45 | 55 | 0 | 142 |
+| EXP-003 | 12 | 87 797 | 1 297 | 98 | 342 | 508 | 0 | 349 |
+
+Anomalies (see RESEARCH_NOTES §4.13 for detail and line-level per-run data):
+Cyrillic letters in Latin-script output (EXP-001/002 Claude 23/59, EXP-003
+Claude a–d 9–45 incl. intra-word Cyrillic like `Може`/`ь`; small counts in
+DeepSeek/gpt-isvt/Bielik); Polish name orthography kept verbatim
+(`Bronisława`/`Przemysława` → `ł` and `w`, the entire EXP-003 `w` count) plus
+minor genuine Polish forms (`mečtała`, `pokušała`); Czech/Slovak accented
+forms in EXP-003 ChatGPT/Claude (`myslíš`, `právě`, `původu`) and heavy Czech
+drift in Bielik-B (`lidé`, `může`, `být`); non-ISV diacritics (Gemini `ē` in
+`dējstvitelno`, gpt-isvt OCS-style `ǫ` in `Myslǫ`); EXP-001/002 outputs are
+Markdown-formatted (`#` headings, `**bold**`) and Bielik-C echoes its
+operator prompt (`→ ‡ [ ]`). Per the methodology, a character anomaly is a
+separate signal from lexical/resource coverage — a stray `ł` in a name does
+not invalidate a translation, and none of these findings changed any score.
+
 ### Follow-up: blinded human naturalness review prepared (Task 012, 2026-09-01) — **SUPERSEDED (Task 014)**
 
 The DESIGN §11 review artifact is ready for the Project Owner
@@ -562,13 +600,19 @@ model and an evaluation policy (`docs/RESOURCE_POLICY.md`; evidence table
   results preserved.
 
 
-## Planned (not started) — current (2026-09-05, SODA Task 014)
+## Planned (not started) — current (2026-09-05, SODA Task 015)
 
 Status categories are kept distinct:
 - **Completed experiments:** EXP-001 (baseline, historical), EXP-002
   (post-hoc revision pilot, historical). EXP-003 is **executed with
   preliminary automatic analysis (Task 011)** — its pilot results are
   preliminary and not a verdict; its **human evaluation is NOT complete**.
+- **QC layer completed (Task 015):** character-level orthographic sanity
+  audit over all EXP-001/002/003 outputs (official ISV alphabet source,
+  D-040/D-041). Audit-only — no text modified, no lexical/resource coverage
+  number or comparison artifact changed; per-run reports are regenerated
+  deterministically under each experiment's gitignored `outputs/`
+  (`orthography_report.{json,md}`).
 - **Pending human review:** EXP-003 sentence-level forced-choice test
   (Task 014 — participant document ready at
   `comparison/sentence_review.md`; **no answers exist**; the project is

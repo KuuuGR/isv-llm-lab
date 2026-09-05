@@ -14,7 +14,12 @@ translation application.
 ## Status
 
 See [`docs/STATE.md`](docs/STATE.md) for the current project state. As of
-2026-09-05 (SODA Task 014): EXP-003's human evaluation is prepared as a
+2026-09-05 (SODA Task 015): a deterministic character-level orthographic
+sanity audit now runs over all EXP-001/002/003 outputs as an independent,
+audit-only quality dimension (official Interslavic alphabet —
+`src/isv_eval/orthography.py`, runner `scripts/check_orthography.py`;
+no historical score or comparison artifact was changed — see
+`docs/DECISIONS.md` D-040/D-041). EXP-003's human evaluation is prepared as a
 sentence-level forced-choice test (~100 questions, blinded, deterministic —
 `experiments/exp003-scaffold/comparison/sentence_review.md` + private key)
 and **awaits the Project Owner's answers**; the earlier holistic complete-text

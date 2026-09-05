@@ -740,3 +740,59 @@ Rationale: human-preference measurement is only meaningful if every displayed
 question really is one source sentence rendered four ways, if the questionnaire
 is free of identity leaks and of dictionary-verification pressure, and if the
 whole preparation is reproducible from the recorded seed and key.
+
+## D-040 · 2026-09-05 · Character-level orthographic sanity: the ISV letter inventory comes from the official Interslavic orthography definition (Task 015)
+
+The accepted letter inventory for the character-level output audit is the
+one defined by the Interslavic project itself on its official website —
+https://steen.free.fr/interslavic/orthography.html (fetched 2026-09-05) —
+and is NOT derived from this project's dictionaries, lexicons, Hunspell
+resources, or model outputs. Concretely, the validator accepts:
+
+- the standard Latin alphabet of 27 letters (all of a–z except q, w, x,
+  plus č, š, ž, ě; the digraphs dž/lj/nj add no characters);
+- the optional etymological letters ę ų å ė ȯ ć đ ĺ ń ŕ ś ź;
+- the page-sanctioned alternative graphemes ť/ď (for t́/d́), ľ, ň, ř, è, ò,
+  and the combining-acute spellings t́/d́.
+
+Classification buckets per character: allowed ISV letter; Cyrillic letter;
+Polish-specific letter ą ł ó ż (lower/upper — ć ę ń ś ź are valid
+etymological ISV letters, hence allowed, never flagged); other Latin letter
+outside the inventory (q w x, á é í ý ú, macron forms, ǫ where ISV uses ų,
+ü, …); other-script letter; or unexpected non-letter. Non-letters are never
+alphabet errors: whitespace, ASCII digits, and an explicit corpus
+punctuation set are accepted; other non-letters (control chars, emoji,
+markdown/formatting glyphs) are reported as formatting/symbol notes with
+counts and line numbers.
+
+Rationale: "all Latin letters are valid" would be wrong (q w x are excluded,
+and letters like ł/ů/ř belong to national orthographies, not Interslavic);
+but deriving the inventory from our own dictionary or from model outputs
+would silently enshrine our data's conventions and biases. The language
+community's own orthography definition is the only auditable authority, and
+it makes the audit deterministic and externally checkable.
+
+## D-041 · 2026-09-05 · Character-level orthographic sanity is a separate quality dimension and never alters historical scores (Task 015)
+
+The character-level check is an audit-only layer. It never modifies,
+normalizes, transliterates, or repairs text; it is not part of the lexical
+coverage denominator; and it does not recompute or change any existing
+EXP-001/002/003 score, A/B/C classification, or comparison artifact.
+`resource-grounded lexical/morphological coverage` answers one question
+("is this token/word grounded in the canonical or broader resources");
+`character-level orthographic sanity` answers another ("does the character
+stream stay inside the accepted Interslavic alphabet"). They are reported
+side by side as independent signals.
+
+Consequences kept deliberately out of scope: a word absent from the
+canonical dictionary does not automatically mean it is invalid Interslavic;
+a character anomaly (e.g. a Polish name kept verbatim, a stray Cyrillic ь,
+a Czech-flavored long vowel) does not by itself prove that a whole
+translation is linguistically bad. Both signals are archived per run
+(gitignored `outputs/orthography_report.{json,md}` per experiment,
+regenerated deterministically by `scripts/check_orthography.py`) so later
+experiments can analyze their relationship instead of conflating them.
+
+Rationale: conflation would corrupt two already-committed historical
+comparisons and would make it impossible to study whether orthographic
+contamination and resource coverage move together or independently.

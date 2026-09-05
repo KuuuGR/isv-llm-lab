@@ -467,8 +467,110 @@ private answer key: `comparison/sentence_review_key.json`. No result exists.
   information. No composite quality score combining human preference with
   evaluator coverage is created.
 
+### 4.13 Character-level orthographic sanity audit — added (SODA Task 015, 2026-09-05)
+
+**Purpose.** One more automated quality-control layer run over ALL generated
+translation outputs of EXP-001, EXP-002 and EXP-003 before EXP-003 closure:
+a deterministic, character-level audit that catches a basic orthographic
+class of problem the token/word-level lexical evaluator cannot see — a
+translation containing Cyrillic letters or source-language-specific Latin
+letters (e.g. Polish `ł`, Czech `ů`/`ř`).
+
+**Authoritative alphabet source.** The letter inventory is taken verbatim
+from the Interslavic project's own definition, NOT derived from this
+project's dictionaries, lexicons, Hunspell, or model outputs:
+
+> https://steen.free.fr/interslavic/orthography.html — "Orthography
+> (Pravopisanje)", fetched 2026-09-05.
+
+The page defines (a) the standard Latin alphabet of 27 letters — all of
+a–z except `q w x`, plus `č š ž ě` (digraphs `dž lj nj` add no letters) —
+and (b) the optional etymological alphabet: `ę ų å ė ȯ ć đ ĺ ń ŕ ś ź`, with
+page-sanctioned alternative graphemes `ť ď` (for `t́ d́`), `ľ` (for `ĺ`),
+`ň` (for `ń`), `ř` (for `ŕ`), `è ò` (for `ė ȯ`), and the `t́`/`d́` spellings
+via combining acute. The validator accepts exactly this union (both cases);
+`q w x` and every other Latin letter (e.g. `á é í ý ú`, macron forms like
+`ē`, OCS-style `ǫ` where ISV uses `ų`, `ü`) are outside the inventory.
+
+**Exact validation policy (D-040).** For each character the checker reports
+one of: allowed ISV letter; Cyrillic letter (any Cyrillic block — all three
+experiments requested Latin-script output, so any Cyrillic letter is
+unexpected); Polish-specific letter `ą ł ó ż` (lower/upper) — deliberately
+NOT `ć ę ń ś ź`, which are valid etymological ISV letters and therefore
+allowed; other Latin letter outside the inventory; other-script letter;
+or an unexpected non-letter. Non-letters are never "alphabet errors":
+whitespace (any Unicode space), ASCII digits `0–9`, and an explicit prose
+punctuation set (`. , ; : ! ? … – — - ( ) « » „ “ ” " " ' ' ' ‘ ’`), which
+was cross-checked against the actual corpus documents, are accepted; any
+other non-letter (control characters, emoji, markdown/formatting glyphs
+such as `# *`, scaffold glyphs like `→ ‡`) is reported as a formatting/symbol
+note, never as an alphabet violation. Per output the audit reports total
+Unicode characters, allowed letters, accepted non-letters, characters
+outside the accepted inventory, and the outside-inventory breakdown
+(Cyrillic / Polish-specific / other Latin / other script / unexpected
+non-letter), plus every distinct unexpected character with its frequency
+and the 1-based line numbers where it occurs. The audit NEVER modifies,
+normalizes, transliterates, or repairs text.
+
+**Audit-only; historical scores untouched.** The check is a separate quality
+dimension (D-041). `resource-grounded lexical/morphological coverage`
+answers "is a token/word grounded in the canonical/broader resources";
+`character-level orthographic sanity` answers "does the character stream
+stay inside the ISV alphabet". They are reported side by side, never
+combined, and no existing lexical coverage score, A/B/C classification, or
+EXP-001/002/003 comparison artifact was recomputed or changed. Full per-file
+reports are regenerated deterministically by `scripts/check_orthography.py`
+into each experiment's gitignored `outputs/orthography_report.{json,md}`;
+implementation `src/isv_eval/orthography.py`; tests `tests/test_orthography.py`.
+
+**Results across the existing outputs** (2026-09-05; totals over the 7
+EXP-001, 7 EXP-002, 12 EXP-003 run files; per-run detail in the reports):
+
+| Experiment | files | total chars | outside inventory | Cyrillic | Polish-spec. | other Latin | other script | non-letter |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| EXP-001 | 7 | 66 007 | 267 | 31 | 46 | 48 | 0 | 142 |
+| EXP-002 | 7 | 65 410 | 309 | 67 | 45 | 55 | 0 | 142 |
+| EXP-003 | 12 | 87 797 | 1 297 | 98 | 342 | 508 | 0 | 349 |
+
+Every EXP-003 condition file has at least one character outside the accepted
+inventory; the cleanest files are ChatGPT-A (34 outside of ~8 000 chars) and
+Bielik-A (14). No EXP-001/002/003 file contains script characters other than
+Latin or Cyrillic; there are no control characters.
+
+**Anomalies found.** (1) **Cyrillic in Latin-script output** — EXP-001 Claude
+(23) and EXP-002 Claude (59, incl. `М е ж ь` in headings), EXP-003 Claude
+a–d (9–45 each), EXP-003 ChatGPT-B (3), Bielik-A (2), plus 1–4 stray
+Cyrillic letters in EXP-001/002 DeepSeek, gpt-isvt, Bielik. Notably
+EXP-003 Claude-C inserts Cyrillic *inside* Latin words (`Може`, `ь` inside
+`četyrьnadsęt`, `vęzь`, `prěvь`; `я` inside `neясno`). (2) **Polish
+orthography in proper names** — `ł`/`w` occur almost exclusively in the
+story's Polish names `Bronisława`/`Przemysława` kept verbatim (EXP-003: 300
+`ł`; all 269 `w` are inside that name); a minority of `ł` are genuine
+Polish-flavored verb forms (`mečtała`, `pokušała`). (3) **Czech/Slovak
+contamination** — EXP-003 ChatGPT a–d and Claude use accented Czech/Slovak
+long vowels (`myslíš`, `musím`, `právě`, `původu`); Bielik-B's truncated
+output drifts into largely Czech lexis (`lidé`, `může`, `být`, `odpovídal`,
+`která`), the single largest outside-inventory file (214). (4)
+**Non-ISV diacritics** — Gemini EXP-001/002 writes `dējstvitelno` (macron
+`ē`, ISV would use `ě`), gpt-isvt writes `Myslǫ` (OCS-style `ǫ`; ISV uses
+`ų`). (5) **Markdown formatting in EXP-001/002 outputs** — `#` (50) and `*`
+(92) heading/bold markers across Claude/Gemini/ChatGPT/GPT-ISVT/Grok runs;
+EXP-003 Bielik-C echoes the operator prompt, contributing `→ ‡ [ ]`
+(349 non-letter surprises). These formatting notes are reported as
+non-letter surprises, not alphabet errors. As required, a character anomaly
+is NOT treated as proof that a whole translation is linguistically invalid —
+it is one independent signal, analyzed against lexical coverage later.
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
+- The letter inventory for a constructed-language output audit comes from the
+  language community's own authoritative definition (the official
+  Interslavic orthography page), never inferred from this project's
+  dictionaries, resources, or model outputs (Task 015; D-040, L-031).
+- Character-level orthographic sanity is a quality dimension separate from
+  resource-grounded lexical/morphological coverage; both are reported side
+  by side and never combined, and an audit layer never rewrites or repairs
+  text nor recomputes historical scores (Task 015; D-041, L-031).
 - Token-aligned transition matrices, not unique-form counts, are the
   regression standard (EXP-002; L-015).
 - The evaluator answers *canonical resource coverage*, not "is this valid
@@ -528,6 +630,11 @@ private answer key: `comparison/sentence_review_key.json`. No result exists.
   a naturalness ordering)? Which formulation is preferred for the same source
   sentence — and does the preference split by condition (B/C/D scaffolds vs A
   baseline) or by model?
+- How do character-level anomalies (Cyrillic in Latin output, Polish/Czech
+  letter contamination, non-ISV diacritics) relate to lexical/resource
+  coverage: do files with more outside-inventory characters also show lower
+  canonical or broader coverage, or are the two dimensions independent
+  (Task 015 metrics are now available per run for exactly this analysis)?
 - Which models pass the practical access filter, and how do their
   versioned no-guidance baselines on the canonical story compare (EXP-004
   Phase A)? How large is each model's headroom (unresolved rate) before

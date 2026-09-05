@@ -665,3 +665,43 @@ dropping ambiguous sentences (the pool is large enough to be selective).
 documents, implement the pairing as a deterministic, tested function with a
 conservative content-consistency check and record its parameters (min words,
 overlap floor, seed) in the metadata — never hand-pair or index-align blind.
+
+## L-031 · 2026-09-05 · The alphabet for an orthographic audit comes from the language's own definition — and the audit stays a separate, read-only dimension
+
+**What happened.** A character-level sanity check over EXP-001/002/003
+outputs was needed because a token/word-level lexical evaluator cannot see a
+Cyrillic letter or a Polish `ł` inside an otherwise plausible output. Two
+temptations arose and were rejected: (a) treat "any Latin letter" as valid
+— wrong, because q/w/x are excluded from the ISV alphabet and letters like
+ł/ů/ř/ü belong to national orthographies, not Interslavic; (b) derive the
+inventory from our own canonical dictionary or from the model outputs —
+attractive because our data is at hand, but it would silently enshrine our
+data's conventions and biases as "the language". The accepted inventory was
+taken verbatim from the official Interslavic orthography definition
+(https://steen.free.fr/interslavic/orthography.html, fetched 2026-09-05),
+including its etymological extension letters and its sanctioned alternative
+graphemes, with the exact source recorded in the module and the docs.
+
+A second trap: conflating the new metric with existing lexical/resource
+coverage. A word missing from the canonical dictionary is not automatically
+invalid Interslavic, and a stray character is not proof that a whole
+translation is linguistically bad. The audit is therefore read-only (never
+normalizes, transliterates, or repairs text), reports its own per-run
+metrics, and deliberately does not recompute or alter any historical
+EXP-001/002/003 score or comparison artifact — both signals are archived
+side by side for later analysis of their relationship.
+
+**Why it matters.** Orthography and lexical coverage answer different
+questions; merging them would corrupt two already-committed historical
+comparisons and would make it impossible to study whether character
+contamination and resource coverage move together or independently. And an
+audit that "helpfully" repairs text would destroy the very evidence it is
+supposed to surface.
+
+**Next time.** For any constructed-language output audit, source the letter
+inventory from the language community's authoritative definition (record the
+URL and fetch date), classify non-letter characters explicitly (punctuation
+vs formatting vs control), report counts and locations rather than verdicts
+per file, and keep the layer read-only and separate from every existing
+score.
+
