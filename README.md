@@ -14,7 +14,7 @@ translation application.
 ## Status
 
 See [`docs/STATE.md`](docs/STATE.md) for the current project state. As of
-2026-09-05 (SODA Task 016): **EXP-003 is COMPLETED and CLOSED** — the
+2026-09-05 (SODA Task 017): **EXP-003 is COMPLETED and CLOSED** — the
 participant answered the 100-question blinded sentence-level forced-choice
 test, the answers were decoded against the private key
 (`scripts/analyze_exp003_sentence_review.py`; provenance artifacts Q58/Q67
@@ -33,9 +33,15 @@ deterministic non-name refinement used in the EXP-003 analysis. EXP-003 is
 closed to new runs, and no further human-evaluation exercise will be designed
 (`docs/DECISIONS.md` D-042/D-043, `docs/LESSONS.md` L-032/L-033). The
 EXP-004 practical model-screening experiment (Phase 1, clean direct-
-translation baseline) has its **roster and screening protocol finalized**
-but is **not approved and not executed** (`experiments/exp004-modelscreen/
-DESIGN.md`).
+translation baseline) is **approved for execution with the screening kit
+ready** (`experiments/exp004-modelscreen/`): 11 operator prompts from one
+shared direct-translation instruction (`base_instruction.txt`), a fixed
+roster plan, and the byte-for-byte intake → completeness-gate → Task 008
+evaluation → orthographic-audit pipeline (`scripts/run_exp004_phase1.py`,
+D-044). **No LLM output exists yet** — the project author's external web
+sessions against the models' chat interfaces are the remaining step,
+followed by the Phase 1 baseline table and the evidence-based Phase 2
+shortlist.
 The evaluator reports **canonical coverage** and **broader
 resource-supported coverage** side by side, with per-token evidence
 provenance, while the historical A/B/C classifications and all EXP-001/EXP-002

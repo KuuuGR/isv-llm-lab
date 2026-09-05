@@ -756,3 +756,18 @@ conditions.
 **Next time.** Keep the signals side by side in every report; never merge
 them into a composite score; and treat "automated best" and "human best" as
 two claims that must each be argued from their own evidence.
+
+## L-034 · 2026-09-05 · Pre-register the completeness gate from observed complete runs — do not eyeball truncation at intake (Task 017)
+
+EXP-003's usable/partial distinction was applied with a mix of automated
+and manual inspection at intake. For EXP-004 Phase 1 the gate is
+deterministic and pre-registered (D-044): byte floor (0.60 × source size,
+calibrated because the 8 complete EXP-003 runs were 9.9–10.4 KB and the
+truncated partials 4.1–4.8 KB), final-line end marker KONIEC/KONĖC,
+character-name presence, and head sanity. Verdicts are stored per run
+(`intake.json`) and evaluation is refused for `failed` intakes.
+
+**Next time.** For any multi-model generation round, fix the completeness
+criteria from observed complete peers BEFORE execution, encode them in the
+runner, and treat the verdict as data — never decide after seeing an output
+whether it "counts".

@@ -618,6 +618,48 @@ artifacts `comparison/sentence_review_results.{json,md}`.
   forced choice, run-level vs. sentence-level comparison only, the two
   provenance artifacts, exploratory statistics only.
 
+### 4.15 EXP-004 Phase 1 — execution kit prepared; screening pending external execution (SODA Task 017, 2026-09-05)
+
+EXP-003 closed; the Project Owner approved the finalized Phase 1 roster and
+protocol and ordered execution. What exists now is the deterministic
+**screening kit**; what does not yet exist is any LLM output (execution is
+the project author's external web sessions, operator role per D-007):
+
+- **One instruction, eleven rows.** `base_instruction.txt` carries the
+  approved §6.9 wording; `run_exp004_phase1.py prepare --date 2026-09-06`
+  rendered 11 operator prompts whose instruction + source bodies are
+  byte-identical across rows (verified in tests) — clean direct baseline,
+  no guidance of any kind. Prompt manifest (hashes) + fixed
+  `outputs/plan.json` (run ids `<date>__<provider>__<model>__
+  <model_version>__direct`) are committed/reproducible.
+- **Practical access filter is enforced at collect time.** Each row records
+  `access.filter_verdict` (pass/fail/unknown) + `quota_observed`, judged by
+  the operator against D-036 (≥ 1 full story/day or every other day on the
+  ordinary free tier, not a one-time trial). Conditional rows (Gemini, GLM)
+  run only on `pass`; otherwise the exclusion is recorded and the row is not
+  run. Venice (platform, not a model), local/self-hosted (out of scope), and
+  Bielik (already-observed qualitative negative, no rerun without a
+  methodological reason) remain excluded.
+- **Completeness gate pre-registered and calibrated (D-044, L-034).** Verdict
+  `complete` requires: non-empty; size ≥ 0.60 × source bytes (calibration:
+  8 complete EXP-003 runs were 9.9–10.4 KB vs 10.755 KB source; truncated
+  Bielik partials 4.1–4.8 KB); final non-empty line `KONIEC`/`KONĖC`; ≥ 3/5
+  main story names; head line ≥ 10 chars (rejects error pages/echoes).
+  `partial`/`failed` verdicts are stored in `intake.json` and preserved —
+  never deleted, repaired, or rerun (D-035). `evaluate` refuses `failed`
+  intakes and flags `usable = complete`.
+- **Evaluation unchanged.** Task 008 two-tier evaluator unmodified (canonical
+  vs broader coverage side by side, unresolved rate, per-token evidence) plus
+  the Task 015 character-level orthographic audit per run; `roster` reports
+  the metrics as separate dimensions with the access verdict and usability —
+  no ranking by coverage (L-033), no composite score. Within-provider
+  variant deltas (thinking ON/OFF, DeepThink ON/OFF) are descriptive
+  comparisons only.
+- **No human evaluation** in EXP-004 (D-042). The remaining step and its
+  expected output: author's 11 web sessions → collect/verify/evaluate →
+  roster table → Phase 1 report and an evidence-based Phase 2 shortlist
+  (3–5 models). Phase 2 must not start before that.
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - The letter inventory for a constructed-language output audit comes from the
@@ -678,6 +720,15 @@ artifacts `comparison/sentence_review_results.{json,md}`.
   one model (EXP-003 ChatGPT-B is coverage-best but human-least-preferred;
   D is human-favorite for both models); report them side by side, never as a
   composite score (Task 016; D-042, L-033).
+- For any multi-model generation round, pre-register the completeness gate
+  from observed complete peers BEFORE execution (e.g. byte floor = 0.60 ×
+  source size, final-line end marker, name coverage, head sanity) and encode
+  it in the runner; verdicts (complete/partial/failed) are data, and
+  evaluation of `failed` intakes is refused (Task 017; D-044, L-034).
+- When screening models for practical use, record the practical-access
+  verdict (free quota sufficient for ≥ 1 full task/day or every other day,
+  not a one-time trial) as part of each run's metadata at execution time —
+  do not assume an advertised free tier is usable (Task 017; D-036).
 
 ## 6. Open questions for future work
 

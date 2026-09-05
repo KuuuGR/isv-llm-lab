@@ -850,3 +850,38 @@ repairing, or silently ignoring discrepancies would destroy provenance and
 make the human signal unreproducible; a documented anomaly in one non-chosen
 option does not invalidate the aggregate preference signal, and the
 anomaly's existence is part of the result.
+
+## D-044 · 2026-09-05 · EXP-004 Phase 1 completeness gate + kit mechanics (Task 017)
+
+The Phase 1 screening gate, intake mechanics, and access-verdict recording
+are fixed before execution:
+
+- **Completeness gate (L-027), calibrated on EXP-003 observed data** — a run
+  is `complete` iff: output non-empty; byte size ≥ floor = 0.60 × source
+  bytes (EXP-003 complete runs were 9.9–10.4 KB vs a 10.755 KB source;
+  truncated Bielik partials were 4.1–4.8 KB, so 0.6× separates them with
+  margin); the final non-empty line is `KONIEC`/`KONĖC` (end-marker
+  convention from the canonical story, kept by every complete EXP-003 run);
+  ≥ 3 of 5 main story names present; first non-empty line ≥ 10 chars (rejects
+  service-error pages and prompt echoes). Verdicts `complete` / `partial` /
+  `failed` are written to `intake.json` and preserved as data — never
+  deleted, repaired, or rerun to improve the table (D-035).
+- **Evaluate refuses a `failed` intake** (no metric fabricated from an error
+  page or an echo); `usable` = (intake verdict `complete`) is carried in
+  `evaluation.json`; partials may still be evaluated but are flagged
+  not-usable.
+- **Access verdict is part of the run record** — each collect step records
+  `access.filter_verdict` (pass/fail/unknown) + `quota_observed`, filled by
+  the operator at execution time against the D-036 criteria (≥ 1 full story
+  per day/every other day on the ordinary free tier). Conditional roster
+  rows (Gemini, GLM) with a `fail` verdict are excluded from the
+  quantitative screening and the exclusion is documented.
+- **Kit determinism** — `run_exp004_phase1.py prepare --date <d>` renders
+  prompts, manifest, and plan byte-identically on regeneration; all 11 rows
+  share the identical instruction body from `base_instruction.txt` (the
+  approved §6.9 wording); per-row headers carry only identity/settings.
+
+Rationale: screening requires comparable, reproducible, complete baseline
+runs; a data-driven gate replaces ad-hoc judgment at intake, and the
+pre-registered access verdict keeps the "practically usable for one story
+per day" criterion (D-036) enforceable row by row rather than assumed.

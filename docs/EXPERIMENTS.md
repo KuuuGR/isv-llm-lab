@@ -640,7 +640,44 @@ model and an evaluation policy (`docs/RESOURCE_POLICY.md`; evidence table
   results preserved.
 
 
-## Planned (not started) — current (2026-09-05, SODA Task 016)
+### Follow-up: EXP-004 Phase 1 approved — screening kit prepared, execution pending author sessions (Task 017, 2026-09-05)
+
+EXP-003 is closed; the Project Owner approved the finalized Phase 1 roster +
+protocol and ordered its execution (Task 017; DESIGN §12 updated). No further
+human-evaluation exercise exists (D-042). The execution kit was built and
+tested in the repository:
+
+- `experiments/exp004-modelscreen/base_instruction.txt` — the single
+  direct-translation instruction (approved §6.9 wording); all 11 roster rows
+  receive byte-identical instruction bodies, differing only in documented
+  identity/settings headers (no scaffold, candidates, morphology/POS or
+  grammar notes, previous translations, or evaluator feedback anywhere —
+  clean baseline).
+- `scripts/run_exp004_phase1.py prepare --date 2026-09-06` — packaged 11
+  operator prompts (`operator-prompts/`, gitignored), the prompt manifest
+  (hashes only, committed), and the fixed `outputs/plan.json` with run ids
+  `<date>__<provider>__<model>__<model_version>__direct`. Deterministic:
+  byte-identical on regeneration.
+- `collect` (byte-for-byte, never overwrite, status + **access filter
+  verdict** recorded per row), `verify` (structural completeness gate,
+  verdicts complete/partial/failed preserved as data — D-044), `evaluate`
+  (Task 008 evaluator unmodified + Task 015 orthographic audit; refused for
+  `failed` intakes; `usable` = complete), `status`, `roster` (coverage pair,
+  unresolved, orthography, access, usability — no ranking, no composite).
+- `scripts/check_orthography.py` now includes EXP-004. 10 new tests
+  (128 total, all passing).
+
+**No LLM output exists yet** — the remaining step is the project author
+executing the 11 prompts in the models' web/chat interfaces (operator role,
+D-007) with the row-specific settings, recording the observed practical
+free-access verdict per row (D-036; Gemini/GLM run only if they pass), and
+returning the raw replies byte-for-byte for collect → verify → evaluate →
+roster. That yields the Phase 1 baseline table and the evidence-based
+Phase 2 shortlist (3–5 models), which this task must NOT produce from
+assumptions or start before the runs exist.
+
+
+## Planned (not started) — current (2026-09-05, SODA Task 017)
 
 Status categories are kept distinct:
 - **Completed experiments:** EXP-001 (baseline, historical), EXP-002
@@ -662,18 +699,20 @@ Status categories are kept distinct:
 - **No further human-evaluation exercise** will be designed: EXP-003
   collected the planned human signal (D-042).
 - **Planned experiments:** EXP-004 model screening — **Phase 1 roster and
-  screening protocol finalized (Task 016, §12 of its DESIGN); not yet
-  approved for execution** (execution gated on design approval + access
-  confirmations; no scaffolding yet — clean direct-translation baseline
-  first).
+  screening protocol finalized (Task 016, §12 of its DESIGN); APPROVED and
+  packaged for execution (Task 017)** — execution kit ready (prompts + plan
+  + intake/verify/evaluate pipeline), no LLM output yet; the remaining step
+  is the project author's external web sessions and the Phase 1 report.
 
 Planned (not started):
 
 - **Manual linguistic review** of the EXP-001 unresolved sample (Task 004
   artifacts; human-only, no automatic classification).
-- **EXP-004 Phase 1 — practical model screening (FINALIZED DESIGN, NOT
-  EXECUTED)**: design at `experiments/exp004-modelscreen/DESIGN.md` (Task
-  013 design; Task 016 finalized the roster and protocol). Phase 1 screens
+- **EXP-004 Phase 1 — practical model screening (APPROVED — KIT READY,
+  EXECUTION PENDING AUTHOR WEB SESSIONS)**: design at
+  `experiments/exp004-modelscreen/DESIGN.md` (Task
+  013 design; Task 016 finalized the roster and protocol; Task 017 approved
+  execution and prepared the kit). Phase 1 screens
   the practically available models on a **clean direct-translation
   baseline** (no scaffolding) under the practical access filter (D-036):
   usable via a web/chat interface, free access, enough practical free quota
@@ -694,6 +733,9 @@ Planned (not started):
   3. multiple resource-supported alternatives; 4. POS/morphology guidance;
   5. grammar guidance; 6. lexical + morphology/grammar combinations;
   7. evaluator/repair loop) to identify the best model × method
-  combination rather than a blind matrix. Execution gated on design
-  approval + access confirmation. Do not run EXP-004 translations before
-  then.
+  combination rather than a blind matrix. **As of Task 017**: prompts +
+  plan + pipeline exist (`run_exp004_phase1.py`, run ids
+  `…__direct`, condition `direct`); run the author's external sessions,
+  collect with per-row `--status`/`--access-verdict`, then
+  verify → evaluate → roster. Do not start Phase 2 before Phase 1 is
+  complete and reported.

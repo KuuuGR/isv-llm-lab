@@ -471,4 +471,19 @@ EXP-001/002/003 and starts no LLM run.
    Until then the repository's next *pending* step is Phase 1 execution;
    EXP-003 is closed and its report (`../exp003-scaffold/REPORT.md`) is the
    source of truth for that experiment.
+- **Approved for execution (SODA Task 017, 2026-09-05).** The Project Owner
+   approved the Phase 1 screening (roster + protocol as finalized in Task
+   016) and ordered its execution. The standing condition (c) of §11.4 is
+   satisfied (EXP-003 closed, Task 016). Phase 1 will not include any human
+   evaluation (D-042) and must not start Phase 2.
+- **Screening kit prepared (SODA Task 017, 2026-09-05).** `base_instruction.txt`
+   (the single direct-translation instruction of §6.9), one operator prompt
+   per roster row (byte-identical instruction bodies), the prompt manifest
+   (hashes only), and `outputs/plan.json` (11 fixed run ids, condition
+   `direct`) were produced deterministically by `scripts/run_exp004_phase1.py
+   prepare --date 2026-09-06`; the completeness gate and intake/evaluation/
+   orthography pipeline are implemented and tested. **No LLM output exists
+   yet**: the remaining step is external execution by the project author
+   (operator role) in the models' web/chat interfaces and byte-for-byte
+   collection, followed by evaluation and this phase's report.
 

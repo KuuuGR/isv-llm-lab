@@ -1,13 +1,14 @@
 # Roadmap
 
-Status: updated 2026-09-05 (Task 016 — EXP-003 CLOSED: the answered
-sentence-level forced-choice test was decoded and analyzed; final report at
-`experiments/exp003-scaffold/REPORT.md`; headline human result: guidance
-(B/C/D) 74 % vs. baseline A 26 %, D favored by both models, automated-best
-ChatGPT-B human-least-preferred — no composite score. Next pending step:
-EXP-004 Phase 1 practical model screening — roster/protocol finalized
-(Task 016), execution gated on design approval + access confirmations;
-EXP-004 stays unexecuted).
+Status: updated 2026-09-05 (Task 017 — EXP-004 Phase 1 practical model
+screening APPROVED and packaged: execution kit ready — 11 operator prompts
+from one shared direct-translation instruction, fixed plan, byte-for-byte
+intake + completeness gate + Task 008 evaluation + orthographic audit
+pipeline, tests green. No LLM output exists yet: the next step is the
+project author executing the prompts in the models' web/chat interfaces and
+returning the raw replies; then collect/verify/evaluate/roster and the
+Phase 1 report with the evidence-based Phase 2 shortlist. Phase 2 must not
+start before then).
 
 ## Done
 
@@ -442,6 +443,36 @@ EXP-004 stays unexecuted).
         §12 (clean baseline first; methods 1–7 only after Phase 1 selects
         models; no human evaluation; exclusions: Venice/local/Bielik).
         **Not executed** — gated on design approval + access confirmations.
+- [x] **Task 017 — EXP-004 Phase 1 execution: screening kit prepared
+      (approved; LLM output pending the author's external sessions,
+      2026-09-05).**
+  - [x] Design approved for execution (§12) — EXP-003 closed, no new human
+        evaluation (D-042).
+  - [x] `base_instruction.txt`: single direct-translation instruction
+        (§6.9 wording); byte-identical instruction body across all 11
+        roster rows.
+  - [x] `scripts/run_exp004_phase1.py` — prepare (prompts + manifest +
+        `outputs/plan.json`, run ids `<date>__<provider>__<model>__
+        <model_version>__direct`; deterministic), collect (byte-for-byte,
+        never overwrite; status + per-row practical free-access verdict
+        D-036), verify (structural completeness gate calibrated on EXP-003
+        data — size ≥ 0.6×source, final KONIEC/KONĖC, ≥ 3/5 story names,
+        head sanity; verdicts complete/partial/failed preserved as data,
+        D-044), evaluate (Task 008 evaluator unmodified + Task 015
+        orthography; refused for `failed` intakes; `usable` = complete),
+        status, roster (coverage pair/unresolved/orthography/access — no
+        ranking, no composite).
+  - [x] `scripts/check_orthography.py` includes EXP-004.
+  - [x] 10 new tests; full suite **128 green**.
+  - [x] Prompts packaged locally with `prepare --date 2026-09-06`
+        (11 files; gitignored), prompt manifest + READMEs committed.
+  - [x] Docs updated (DECISIONS D-044, LESSONS L-034, STATE, ROADMAP,
+        EXPERIMENTS follow-up + status, exp004 DESIGN §12 + README).
+  - [x] **Remaining:** author executes the 11 operator prompts in the
+        models' web/chat interfaces (recording per-row status + access
+        verdict), returns raw replies byte-for-byte → collect/verify/
+        evaluate/roster → Phase 1 report + Phase 2 shortlist. Phase 2 must
+        not start before then.
 
 ## Next recommended task (single)
 
@@ -454,18 +485,27 @@ EXP-004 stays unexecuted).
   the human least preferred — signals reported separately, no composite
   score. Provenance artifacts Q58/Q67 recorded (D-043). One verbatim
   participant comment preserved. Lessons L-032/L-033, decisions D-042/D-043.
-- [ ] **EXP-004 Phase 1 — practical model screening (NEXT, not started)** —
-  the roster and screening protocol are **finalized** (Task 016; §11.7/§12
-  of `experiments/exp004-modelscreen/DESIGN.md`): clean direct-translation
+- [x] ~~EXP-004 Phase 1 — practical model screening (NEXT, not started)~~ —
+  **KIT READY (Task 017)**: roster/protocol finalized (Task 016; §11.7/§12
+  of `experiments/exp004-modelscreen/DESIGN.md`), execution approved and
+  packaged (Task 017). Clean direct-translation
   baseline only (no scaffolding), models with practical web/chat access and
   sufficient free quota (GPT-5.6 Luna OFF/ON, GPT Interslavic Teacher,
   Claude Sonnet 5, Gemini conditional, DeepSeek V4 Pro OFF/ON, Grok, Kimi,
   Qwen, GLM conditional; Venice excluded, local/self-hosted excluded,
   Bielik documented as an already-observed negative qualitative case — no
-  new full baseline without a methodological reason). Execution is gated on
-  (a) design approval and (b) the coordinator's access confirmations (§11)
-  — the previous gate (c), "after the EXP-003 review is recorded and its
-  report written", is now satisfied. Only after Phase 1 selects the
+  new full baseline without a methodological reason). The gates are
+  satisfied: EXP-003 review recorded + report written, design approved.
+- [ ] **EXP-004 Phase 1 — execute the author's external web sessions
+  (NEXT, human operator step, not yet done)** — for each of the 11 rows:
+  open `experiments/exp004-modelscreen/operator-prompts/<file>.md`, copy the
+  ENTIRE file into the model's web/chat interface with the row's settings,
+  save the complete reply byte-for-byte, then
+  `run_exp004_phase1.py collect --run <run_id> --output <reply> --status …
+  --access-verdict pass|fail|unknown --access-note "…"` (Gemini/GLM run
+  only if the practical free quota passes; otherwise record the exclusion
+  with verdict `fail`), then `verify`, `evaluate --run <run_id>`, and after
+  all rows `roster`. Only after Phase 1 selects the
   strongest/practical models are the assistance methods tested
   systematically (1. direct translation; 2. lexical candidate guidance;
   3. multiple resource-supported alternatives; 4. POS/morphology guidance;
