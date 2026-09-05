@@ -421,23 +421,54 @@ EXP-001/002/003 and starts no LLM run.
    free web interfaces the coordinator uses.
 2. The custom GPT "Interslavic / Medžuslovjansky Language Teacher" is still
    available to the coordinator and is to be included as its own row.
-3. Practical free-tier sufficiency per model (~1 full story/day) — to be
-   verified during execution, not assumed.
+3. Practical free-tier sufficiency per model (~1 full story/day or every
+   other day) — to be verified during execution, not assumed.
 4. Approximate scheduling: EXP-004 execution is gated on (a) approval of this
    design, (b) the confirmations above, and (c) the standing rule that new
    translation runs do not start before the open EXP-003 human review is
-   recorded and reported (ROADMAP).
-5. Whether Phase A should reuse the same story as EXP-001/002/003 (this
+   recorded and reported (ROADMAP). **EXP-003 is now closed (Task 016,
+   2026-09-05) — the standing condition (c) is satisfied**; the remaining
+   gates are (a) design approval and (b) the confirmations above.
+5. Whether Phase 1 should reuse the same story as EXP-001/002/003 (this
    design assumes yes, for comparability) or whether a second licensed story
    is available.
 6. Any model the coordinator can access that is missing from §5.2, and any
    row in §5.2 the coordinator cannot access.
+7. Roster wording finalized by the Project Owner (Task 016): **Gemini is
+   included only if it passes the practical free-access/quota criterion**;
+   **GLM only if practical web access satisfies the project filter**; Venice
+   is not an independent model; local/self-hosted models are out of scope;
+   **Bielik remains an already-observed negative qualitative case and is not
+   given another full baseline run unless a methodological reason arises**.
 
 ## 12. Status / approval gate
 
+> Naming: this design's **Phase A/B** correspond to **Phase 1 / Phase 2** as
+> used in the Task-016 instructions and the ROADMAP (Phase A = practical
+> model screening = Phase 1; Phase B = guidance-method experiments = Phase 2).
+
 - **Prepared:** 2026-09-05 (Task 013). No LLM called; no output produced;
    no metric, evaluator, or experiment changed.
-- **Not approved.** Execution begins only after Project Coordinator /
-   Architect approval of this design and confirmation of §11. Until then the
-   repository's next *pending* step remains the EXP-003 blinded human review
-   (Task 012 artifact), which is untouched by this design.
+- **Roster and screening protocol FINALIZED (Task 016, 2026-09-05):** the
+   candidate roster of §5.2 is confirmed as the Phase 1 list
+   (GPT-5.6 Luna thinking OFF/ON, GPT Interslavic Teacher custom GPT, Claude
+   Sonnet 5, Gemini conditional on the free-access/quota criterion,
+   DeepSeek-V4-Pro DeepThink OFF/ON, Grok, Kimi, Qwen, GLM conditional on
+   web access; exclusions in §5.3 as updated in §11.7). Phase 1 tests a
+   **clean direct-translation baseline only** — no scaffolding, candidates,
+   morphology/POS or grammar guidance, alternatives, or repair loops yet
+   (§6.2). Only after Phase 1 selects the strongest/practical models are the
+   assistance methods tested systematically, in this order (Phase 2):
+   1. direct translation; 2. lexical candidate guidance; 3. multiple
+   resource-supported alternatives; 4. POS/morphology guidance; 5. grammar
+   guidance; 6. lexical + morphology/grammar combinations; 7. evaluator/
+   repair loop — the goal is the best model × method combination, not a
+   blind matrix. EXP-004 designs **no human-evaluation exercise** (D-042):
+   it relies on deterministic resource-grounded evaluation, with EXP-003's
+   human results as the independent signal already collected.
+- **Not approved for execution.** Execution begins only after Project
+   Coordinator / Architect approval of this design and confirmation of §11.
+   Until then the repository's next *pending* step is Phase 1 execution;
+   EXP-003 is closed and its report (`../exp003-scaffold/REPORT.md`) is the
+   source of truth for that experiment.
+

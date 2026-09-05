@@ -32,13 +32,23 @@ Analysis produced by `scripts/compare_exp003.py` after runs are collected:
   Medžuslovjansky (best-choice only). The document contains no model names,
   no A/B/C/D condition labels, no automatic metrics, and no hints; the
   instructions explicitly ask for a holistic sentence impression, not
-  word-level dictionary verification.
+  word-level dictionary verification. **Answered by the participant
+  (2026-09-05); decoded results below in `sentence_review_results.md`.**
 - `sentence_review_key.json` — private answer key for `sentence_review.md`:
   source sentence identity and text, story section, dialogue flag, the model,
   run ids, the per-question randomized display order (Version label →
   A/B/C/D), the version texts, the randomization seed, and sampling
   metadata. Kept separate from the participant document and opened only
   after the answers are recorded.
+- `sentence_review_results.md` + `sentence_review_results.json` — decoded
+  human results (SODA Task 016, `scripts/analyze_exp003_sentence_review.py`):
+  Version→A/B/C/D mapping per question, per-model/per-condition choice
+  counts and shares, exploratory χ²/Spearman statistics, the automated
+  metrics per condition (Task 011 + Task 015 orthographic audit incl. a
+  non-name refinement), and the verbatim participant comment. The completed
+  document and the key are never modified by the decoder; provenance notes
+  (Q58 `[x ]` artifact, Q67 Version-2 corruption) are recorded in the
+  results. Summary and interpretation: `../REPORT.md`.
 
 Incomplete runs (e.g. all four Bielik runs, Task 011) are preserved under
 `<run_id>/excluded.json` and never enter the human review.

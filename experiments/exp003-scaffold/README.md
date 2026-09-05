@@ -9,21 +9,21 @@ source is the starting point and the scaffold is vocabulary guidance *during*
 generation — there is **no hidden intermediate LLM translation**.
 
 - Design: `DESIGN.md` (SODA Task 009, approved).
-- Status (2026-09-05): **executed externally — intake and preliminary
-  analysis done (Task 011); 8 of 12 runs complete** (ChatGPT A–D, Claude A–D);
-  Bielik A–D incomplete/failed, preserved as qualitative artifacts. The
-  holistic complete-text human review (Task 012) was attempted and
-  **superseded as too cognitively demanding (Task 014, D-038)** — no holistic
-  result was obtained; the artifact is preserved as historical with a
-  superseded banner. The primary human-evaluation exercise is now a
-  **sentence-level forced-choice test (Task 014)**:
-  `comparison/sentence_review.md` — 100 questions (each: one Polish source
-  sentence + the corresponding sentence from the four conditions of the same
-  model, randomized into "Version 1..4"), prepared deterministically
-  (`scripts/prepare_exp003_sentence_review.py`), with the private mapping in
-  `comparison/sentence_review_key.json`. **No answers exist yet; the test
-  awaits the Project Owner.** EXP-003 is closed to new runs; the next step is
-  the human test, then the EXP-003 report. EXP-004 remains design-only.
+- Status (2026-09-05): **COMPLETED — CLOSED (SODA Task 016).** See
+  **`REPORT.md`** — the source of truth — which combines the automatic
+  evidence (Task 011 intake: 8/12 runs complete — ChatGPT A–D, Claude A–D;
+  Bielik A–D incomplete/failed, preserved as qualitative artifacts), the
+  character-level orthographic audit (Task 015), and the human
+  sentence-level forced-choice test results (Task 014 questionnaire,
+  answered by the participant, decoded in Task 016). Headline human result:
+  **74 % guided (B/C/D) vs. 26 % baseline (A) preference, identically for
+  ChatGPT and Claude**; D was the favorite for both models (ChatGPT 36 %,
+  Claude 42 %). Human preference and resource coverage agree at the Claude
+  D/C extremes but diverge for ChatGPT (coverage-best B is human-least
+  preferred) — no composite score is created. Full numbers, provenance notes
+  (Q58 `[x ]` artifact; Q67 Version-2 corruption) and limitations in
+  `REPORT.md`. EXP-003 is closed to new runs; the next step is EXP-004
+  Phase 1 screening (design finalized, not executed).
 
 ## Conditions and models
 

@@ -796,3 +796,57 @@ experiments can analyze their relationship instead of conflating them.
 Rationale: conflation would corrupt two already-committed historical
 comparisons and would make it impossible to study whether orthographic
 contamination and resource coverage move together or independently.
+
+## D-042 · 2026-09-05 · EXP-003 closure: interpretation rules for the decoded human preferences (Task 016)
+
+EXP-003 is closed with the human sentence-level forced-choice test answered,
+decoded, and combined with the automated evidence (REPORT.md). The following
+interpretation rules are fixed:
+
+- Signals stay separate: (1) human sentence preference, (2) resource-
+  grounded lexical/morphological coverage (canonical/broader, Task 008
+  evaluator), (3) character-level orthographic sanity (Task 015), (4)
+  linguistic correctness (not directly measured here). None is ground truth;
+  they answer different questions and are never merged into a composite
+  quality score.
+- Human results are reported per displayed Version, per condition, per model,
+  and per condition within model, with sample sizes. Association with
+  automated metrics is condition-level only (run-level coverage cannot be
+  paired to sentence-level choices) and is descriptive/exploratory
+  (χ² vs. uniform; Spearman over the 8 condition points with explicit
+  caveats) — no overclaiming from n = 100, one participant, one story.
+- EXP-003 was the planned human-evaluation exercise. No further human test
+  is designed; the participant is not an expert linguistic annotator and is
+  not turned into one. Comments are qualitative provenance, not data.
+- Headline reading: guidance (B/C/D) was preferred over the unguided
+  baseline (A) by 74 % vs. 26 % (identical for both models); D was the
+  favorite condition for both models; but the automated-best ChatGPT-B was
+  the human-least-preferred, so resource coverage does not predict
+  naturalness — the two signals diverge for ChatGPT and agree at the Claude
+  D/C extremes.
+
+Rationale: EXP-003's purpose is to collect independent evidence, not to
+declare a winner; conflating the signals (or creating a composite score)
+would overstate what a one-story, one-participant, 8-run pilot supports.
+
+## D-043 · 2026-09-05 · Completed questionnaires are provenance: validate before decoding, document anomalies, never regenerate or repair (Task 016)
+
+When a completed participant questionnaire arrives, the analysis pipeline
+first validates it against the private key and its own recorded structure:
+question count and original order, exactly one checked answer per question,
+and every displayed Version text byte-identical (whitespace-collapsed) to
+the key. Structural damage aborts before any analysis. Two real anomalies
+were found in the completed sentence_review.md and handled this way: Q58's
+answer encoded as `[x ]` (checked with stray whitespace — an editor
+artifact) is decoded and recorded with its raw encoding as provenance; Q67's
+Version 2 (a non-chosen option) was accidentally edited during the answering
+session (`sę, že` → `, žesę`, same character multiset) — recorded as a
+provenance anomaly in the results and REPORT, and the decode (which uses the
+recorded tick, unaffected) proceeds. The completed document and the key are
+never modified, regenerated, "repaired", or reordered.
+
+Rationale: an answered questionnaire is a primary record. Regenerating,
+repairing, or silently ignoring discrepancies would destroy provenance and
+make the human signal unreproducible; a documented anomaly in one non-chosen
+option does not invalidate the aggregate preference signal, and the
+anomaly's existence is part of the result.

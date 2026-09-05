@@ -242,7 +242,7 @@ coverage):
 Full report: `experiments/exp002-pilot/REPORT.md`; per-run detail in
 `comparison/<run>/` (local, gitignored).
 
-## Activity log — follow-ups after EXP-002 (SODA Tasks 007–015)
+## Activity log — follow-ups after EXP-002 (SODA Tasks 007–016)
 
 The pending-work list for the current state of the project is at the end of
 this file under **"Planned (not started) — current"**; the blocks below are
@@ -481,6 +481,46 @@ operator prompt (`→ ‡ [ ]`). Per the methodology, a character anomaly is a
 separate signal from lexical/resource coverage — a stray `ł` in a name does
 not invalidate a translation, and none of these findings changed any score.
 
+### Follow-up: EXP-003 closed — human results decoded and combined with automated evidence (Task 016, 2026-09-05)
+
+The participant answered all 100 forced-choice questions. Decoder
+`scripts/analyze_exp003_sentence_review.py` validated the completed document
+against the private key (100 questions, original order, one tick each,
+399/400 Version texts byte-identical) and recorded two provenance artifacts
+(Q58 `[x ]` encoding; Q67 non-chosen Version-2 text accidentally corrupted
+during answering — no effect on decoding; document never modified or
+regenerated, D-043). Full results and interpretation: the final
+**`experiments/exp003-scaffold/REPORT.md`**; decoded artifacts
+`comparison/sentence_review_results.{json,md}`.
+
+**Human preference.** Display positions balanced (V1–V4 = 25/29/22/24).
+Overall per condition (n = 100): A 26 %, B 16 %, C 19 %, **D 39 %**
+(χ²(3) = 12.56, p ≈ 0.006 vs. uniform). Per model (n = 50): ChatGPT A 26 /
+B 12 / C 26 / **D 36 %**; Claude A 26 / B 20 / C 12 / **D 42 %**.
+Guidance vs. baseline: **B+C+D 74 % vs. A 26 %, identical for both models**.
+One verbatim comment (Q7, vocabulary uncertainty) preserved as qualitative
+provenance.
+
+**Human vs. automated.** For Claude the signals agree at the extremes
+(D: canonical 85.6 / broader 92.0 / unresolved 14.4 %, human favorite; C:
+75.4 / 84.5 / 24.6 %, human least favorite). For ChatGPT they diverge:
+B is the automated best (85.7 / 90.8 / 14.3 %) yet the human least
+preferred (12 %), while D (84.0 / 88.8, not the coverage best) is the human
+favorite (36 %). Exploratory Spearman over the 8 condition points (share vs.
+broader +0.49, canonical +0.23, unresolved −0.23, ortho −0.20) is
+descriptive only. Task 015 orthographic signal: raw condition deltas are
+dominated by the story names kept verbatim; a non-name refinement tracks the
+Claude extremes (C dirtiest → least preferred, D cleanest → most preferred)
+but does not explain ChatGPT's preference for D over the cleaner B. No
+composite score (D-042). Full tables in REPORT.md.
+
+**Status.** EXP-003 is **COMPLETED — CLOSED**. Its human evaluation is
+recorded and reported; its automatic evidence and orthographic audit are
+unchanged; nothing historical was recomputed. Lessons L-032/L-033, decisions
+D-042/D-043; research record §4.14 in RESEARCH_NOTES. Next step (not
+started): EXP-004 Phase 1 screening (roster/protocol finalized, execution
+gated on approval + access confirmations).
+
 ### Follow-up: blinded human naturalness review prepared (Task 012, 2026-09-01) — **SUPERSEDED (Task 014)**
 
 The DESIGN §11 review artifact is ready for the Project Owner
@@ -600,57 +640,60 @@ model and an evaluation policy (`docs/RESOURCE_POLICY.md`; evidence table
   results preserved.
 
 
-## Planned (not started) — current (2026-09-05, SODA Task 015)
+## Planned (not started) — current (2026-09-05, SODA Task 016)
 
 Status categories are kept distinct:
 - **Completed experiments:** EXP-001 (baseline, historical), EXP-002
-  (post-hoc revision pilot, historical). EXP-003 is **executed with
-  preliminary automatic analysis (Task 011)** — its pilot results are
-  preliminary and not a verdict; its **human evaluation is NOT complete**.
+  (post-hoc revision pilot, historical), **EXP-003 (generation-time lexical
+  scaffolding) — COMPLETED AND CLOSED (Task 016)** with its final report at
+  `experiments/exp003-scaffold/REPORT.md`: automatic evidence (Task 011),
+  character-level orthographic audit (Task 015), and the decoded human
+  sentence-level forced-choice results (Task 014 questionnaire answered by
+  the participant). Headline: guidance (B/C/D) preferred over baseline A
+  74 % vs. 26 %; D favored by both models; no composite score; the signals
+  (human preference / resource coverage / orthographic sanity) are reported
+  separately and diverge for ChatGPT-B. Nothing historical was recomputed.
 - **QC layer completed (Task 015):** character-level orthographic sanity
   audit over all EXP-001/002/003 outputs (official ISV alphabet source,
   D-040/D-041). Audit-only — no text modified, no lexical/resource coverage
   number or comparison artifact changed; per-run reports are regenerated
   deterministically under each experiment's gitignored `outputs/`
   (`orthography_report.{json,md}`).
-- **Pending human review:** EXP-003 sentence-level forced-choice test
-  (Task 014 — participant document ready at
-  `comparison/sentence_review.md`; **no answers exist**; the project is
-  waiting on the Project Owner). The earlier holistic review format (Task 012)
-  is **superseded** (format too cognitively demanding, D-038) and preserved
-  only as a historical artifact.
-- **Planned experiments:** EXP-004 model screening (design prepared in Task
-  013; **not approved, not executed**).
+- **No further human-evaluation exercise** will be designed: EXP-003
+  collected the planned human signal (D-042).
+- **Planned experiments:** EXP-004 model screening — **Phase 1 roster and
+  screening protocol finalized (Task 016, §12 of its DESIGN); not yet
+  approved for execution** (execution gated on design approval + access
+  confirmations; no scaffolding yet — clean direct-translation baseline
+  first).
 
 Planned (not started):
 
 - **Manual linguistic review** of the EXP-001 unresolved sample (Task 004
   artifacts; human-only, no automatic classification).
-- **EXP-003 human judgment (pending)**: the Project Owner answers the
-  sentence-level forced-choice questionnaire (Task 014 — 100 questions,
-  ~10–15 minutes, at
-  `experiments/exp003-scaffold/comparison/sentence_review.md`), ticking the
-  version that sounds most natural as Medžuslovjansky per question; the
-  answers are then mapped back to conditions via
-  `comparison/sentence_review_key.json` (opened only after answering) and
-  combined with the automatic evidence in the future EXP-003 `REPORT.md`.
-  This is the immediate next step; nothing may claim the EXP-003 human
-  evaluation is finished.
-- **EXP-004 — practical model screening (PLANNED)**: design at
-  `experiments/exp004-modelscreen/DESIGN.md` (Task 013, 2026-09-05;
-  DESIGN ONLY). Phase A screens models under the practical access filter
-  (D-036) with one identical source and one equivalent no-guidance
-  instruction per roster row (GPT-5.6 Luna thinking OFF/ON, custom GPT ISV
-  Teacher, Claude Sonnet 5, Gemini, DeepSeek-V4-Pro DeepThink OFF/ON, Grok,
-  Kimi, Qwen, GLM conditional; Venice AI excluded as a platform, Mistral not
-  assumed available, Bielik preserved as a qualitative negative result). Full
-  recording (model/version/settings, context/window, failures/truncations as
-  data), byte-for-byte collection (D-035), Task 008 two-tier evaluator
-  unmodified, no manual word-by-word classification, no composite score.
-  Phase B (guidance-method experiments: candidate hints, one canonical
-  candidate, alternatives, lemma+POS, lemma+grammatical features, candidate
-  inflected forms, lexical+grammatical scaffolding, pre-translation analysis,
-  post-generation validation, LLM repair, iterative draft→evaluate→repair) is
-  designed for but scoped only after Phase A evidence. Execution gated on
-  design approval + access confirmation; sequenced after the EXP-003 human
-  review/report. Do not run EXP-004 translations before then.
+- **EXP-004 Phase 1 — practical model screening (FINALIZED DESIGN, NOT
+  EXECUTED)**: design at `experiments/exp004-modelscreen/DESIGN.md` (Task
+  013 design; Task 016 finalized the roster and protocol). Phase 1 screens
+  the practically available models on a **clean direct-translation
+  baseline** (no scaffolding) under the practical access filter (D-036):
+  usable via a web/chat interface, free access, enough practical free quota
+  for at least one full story per day or every other day (not a one-time
+  trial), practically usable by the project author. Roster: GPT-5.6 Luna
+  thinking OFF, GPT-5.6 Luna thinking ON, GPT Interslavic Teacher custom
+  GPT, Claude Sonnet 5, Gemini (only if it passes the free-access/quota
+  criterion), DeepSeek V4 Pro DeepThink OFF, DeepSeek V4 Pro DeepThink ON,
+  Grok, Kimi, Qwen, GLM (if practical web access satisfies the filter).
+  Exclusions: Venice AI (not an independent model), local/self-hosted
+  models (out of practical scope), Bielik (already-observed negative
+  qualitative case — no new full baseline unless a methodological reason
+  arises). Full recording, byte-for-byte collection (D-035), Task 008
+  two-tier evaluator unmodified, no manual word-by-word classification, no
+  composite score, no human evaluation. After Phase 1 selects the
+  strongest/practical models, Phase 2 tests the assistance methods
+  systematically (1. direct translation; 2. lexical candidate guidance;
+  3. multiple resource-supported alternatives; 4. POS/morphology guidance;
+  5. grammar guidance; 6. lexical + morphology/grammar combinations;
+  7. evaluator/repair loop) to identify the best model × method
+  combination rather than a blind matrix. Execution gated on design
+  approval + access confirmation. Do not run EXP-004 translations before
+  then.

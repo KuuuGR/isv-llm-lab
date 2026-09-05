@@ -1,10 +1,13 @@
 # Roadmap
 
-Status: updated 2026-09-05 (Task 015 — character-level orthographic sanity
-audit completed over all EXP-001/002/003 outputs as an independent,
-audit-only quality dimension; no historical score changed. EXP-003 human
-judgment remains the immediate pending step: the sentence-level
-forced-choice test is ready and unanswered; EXP-004 stays design-only).
+Status: updated 2026-09-05 (Task 016 — EXP-003 CLOSED: the answered
+sentence-level forced-choice test was decoded and analyzed; final report at
+`experiments/exp003-scaffold/REPORT.md`; headline human result: guidance
+(B/C/D) 74 % vs. baseline A 26 %, D favored by both models, automated-best
+ChatGPT-B human-least-preferred — no composite score. Next pending step:
+EXP-004 Phase 1 practical model screening — roster/protocol finalized
+(Task 016), execution gated on design approval + access confirmations;
+EXP-004 stays unexecuted).
 
 ## Done
 
@@ -408,23 +411,74 @@ forced-choice test is ready and unanswered; EXP-004 stays design-only).
         determinism); full suite **107 green**.
   - [x] Docs updated (DECISIONS D-040/D-041, LESSONS L-031, RESEARCH_NOTES
         §4.13 + §5/§6, EXPERIMENTS follow-up + status, STATE, ROADMAP).
+- [x] **Task 016 — EXP-003 closed: human test decoded + analyzed; EXP-004
+      Phase-1 roster/protocol finalized (2026-09-05).**
+  - [x] Completed questionnaire recovered and verified against the private
+        key: 100 questions, original order, one tick each, 399/400 Version
+        texts byte-identical; two provenance artifacts recorded (Q58 `[x ]`
+        encoding; Q67 non-chosen Version-2 accidental transposition — no
+        effect on decoding; document never modified/regenerated, D-043).
+  - [x] `scripts/analyze_exp003_sentence_review.py` decodes Version→A/B/C/D
+        deterministically, computes per-version/per-condition/per-model
+        results with sample sizes, and combines them with the unchanged
+        Task 011 coverage/unresolved metrics and the Task 015 orthographic
+        audit incl. a deterministic non-name refinement; writes
+        `comparison/sentence_review_results.{json,md}`. No composite score.
+  - [x] Human results (n = 100; 50/model): per condition A 26 % / B 16 % /
+        C 19 % / D 39 % (χ²(3) = 12.56, p ≈ 0.006); ChatGPT A 26 / B 12 /
+        C 26 / D 36 % (p ≈ 0.12); Claude A 26 / B 20 / C 12 / D 42 %
+        (p ≈ 0.02); guidance vs. baseline 74 % vs. 26 % for both models;
+        no display-position bias; one verbatim comment (Q7).
+  - [x] Final report `experiments/exp003-scaffold/REPORT.md` written:
+        human results, automated evidence, Task 015 orthographic findings
+        (incl. non-name refinement), human-vs-automated comparison
+        (agreeing for Claude at the D/C extremes, diverging for ChatGPT-B),
+        what EXP-003 supports / does not support, limitations.
+  - [x] 11 new decoder tests; full suite green.
+  - [x] Docs updated (DECISIONS D-042/D-043, LESSONS L-032/L-033,
+        RESEARCH_NOTES §4.14 + §5/§6, EXPERIMENTS follow-up + status,
+        STATE, ROADMAP, exp003 REPORT/README, comparison README).
+  - [x] EXP-004 Phase-1 roster/screening protocol finalized in DESIGN §11.7/
+        §12 (clean baseline first; methods 1–7 only after Phase 1 selects
+        models; no human evaluation; exclusions: Venice/local/Bielik).
+        **Not executed** — gated on design approval + access confirmations.
 
 ## Next recommended task (single)
 
-- [ ] **Project Owner answers the EXP-003 sentence-level questionnaire**:
-  open `experiments/exp003-scaffold/comparison/sentence_review.md` and tick
-  exactly one "Version 1..4" box per question (100 questions, ~10–15
-  minutes). Judge which version sounds most natural as Medžuslovjansky as a
-  whole; do not verify individual words. Do not open
-  `sentence_review_key.json` before finishing. A follow-up SODA task then
-  maps the recorded ticks back to conditions via the key and writes the
-  EXP-003 analysis report (`REPORT.md`), combining the automatic coverage /
-  transition / regression / candidate-usage evidence (Task 011) with the
-  human preferences.
+- [x] ~~Project Owner answers the EXP-003 sentence-level questionnaire~~ —
+  **DONE (2026-09-05)** and the follow-up analysis is also done (Task 016).
+  EXP-003 is closed; results in `experiments/exp003-scaffold/REPORT.md`.
+  Headline human result: guidance (B/C/D) preferred over baseline A
+  **74 % vs. 26 %** (identical for ChatGPT and Claude); D favored by both
+  models (ChatGPT 36 %, Claude 42 %); ChatGPT-B is the automated best but
+  the human least preferred — signals reported separately, no composite
+  score. Provenance artifacts Q58/Q67 recorded (D-043). One verbatim
+  participant comment preserved. Lessons L-032/L-033, decisions D-042/D-043.
+- [ ] **EXP-004 Phase 1 — practical model screening (NEXT, not started)** —
+  the roster and screening protocol are **finalized** (Task 016; §11.7/§12
+  of `experiments/exp004-modelscreen/DESIGN.md`): clean direct-translation
+  baseline only (no scaffolding), models with practical web/chat access and
+  sufficient free quota (GPT-5.6 Luna OFF/ON, GPT Interslavic Teacher,
+  Claude Sonnet 5, Gemini conditional, DeepSeek V4 Pro OFF/ON, Grok, Kimi,
+  Qwen, GLM conditional; Venice excluded, local/self-hosted excluded,
+  Bielik documented as an already-observed negative qualitative case — no
+  new full baseline without a methodological reason). Execution is gated on
+  (a) design approval and (b) the coordinator's access confirmations (§11)
+  — the previous gate (c), "after the EXP-003 review is recorded and its
+  report written", is now satisfied. Only after Phase 1 selects the
+  strongest/practical models are the assistance methods tested
+  systematically (1. direct translation; 2. lexical candidate guidance;
+  3. multiple resource-supported alternatives; 4. POS/morphology guidance;
+  5. grammar guidance; 6. lexical + morphology/grammar combinations;
+  7. evaluator/repair loop). No human-evaluation exercise in EXP-004
+  (D-042).
 
 ## After the EXP-003 human review is recorded and reported
 
-- [ ] **EXP-004 Phase A (model screening)** — gated on: (a) approval of
+**STATUS: this gate is satisfied — EXP-003 is recorded and reported
+(2026-09-05, Task 016). The section below is kept for the historical rule.**
+
+- [x] ~~EXP-004 Phase A (model screening)~~ — gated on: (a) approval of
   `experiments/exp004-modelscreen/DESIGN.md`, (b) the coordinator's access
   confirmations listed in its §11, and (c) the standing rule above (new
   translation runs start only after the EXP-003 review is recorded and its

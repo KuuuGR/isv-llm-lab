@@ -14,19 +14,28 @@ translation application.
 ## Status
 
 See [`docs/STATE.md`](docs/STATE.md) for the current project state. As of
-2026-09-05 (SODA Task 015): a deterministic character-level orthographic
-sanity audit now runs over all EXP-001/002/003 outputs as an independent,
-audit-only quality dimension (official Interslavic alphabet —
-`src/isv_eval/orthography.py`, runner `scripts/check_orthography.py`;
-no historical score or comparison artifact was changed — see
-`docs/DECISIONS.md` D-040/D-041). EXP-003's human evaluation is prepared as a
-sentence-level forced-choice test (~100 questions, blinded, deterministic —
-`experiments/exp003-scaffold/comparison/sentence_review.md` + private key)
-and **awaits the Project Owner's answers**; the earlier holistic complete-text
-review format was superseded as too cognitively demanding (no holistic result
-was obtained — see `docs/DECISIONS.md` D-038). EXP-003 is closed to new runs.
-The EXP-004 practical model-screening experiment is **designed but not
-approved and not executed** (`experiments/exp004-modelscreen/DESIGN.md`).
+2026-09-05 (SODA Task 016): **EXP-003 is COMPLETED and CLOSED** — the
+participant answered the 100-question blinded sentence-level forced-choice
+test, the answers were decoded against the private key
+(`scripts/analyze_exp003_sentence_review.py`; provenance artifacts Q58/Q67
+recorded, no document modified) and combined with the automatic evidence.
+Final report: [`experiments/exp003-scaffold/REPORT.md`](
+experiments/exp003-scaffold/REPORT.md). Headline human result: scaffolded
+guidance (B/C/D) preferred over the unguided baseline (A) **74 % vs. 26 %**,
+identically for ChatGPT and Claude; condition D (grammatical annotations) was
+the favorite for both models (36 % / 42 %). Human preference and resource
+coverage agree for Claude at the extremes but diverge for ChatGPT (the
+coverage-best ChatGPT-B is the human least preferred) — the signals are
+reported separately, and no composite quality score is used. The
+character-level orthographic audit (Task 015) remains an independent,
+audit-only quality dimension over all EXP-001/002/003 outputs, now with a
+deterministic non-name refinement used in the EXP-003 analysis. EXP-003 is
+closed to new runs, and no further human-evaluation exercise will be designed
+(`docs/DECISIONS.md` D-042/D-043, `docs/LESSONS.md` L-032/L-033). The
+EXP-004 practical model-screening experiment (Phase 1, clean direct-
+translation baseline) has its **roster and screening protocol finalized**
+but is **not approved and not executed** (`experiments/exp004-modelscreen/
+DESIGN.md`).
 The evaluator reports **canonical coverage** and **broader
 resource-supported coverage** side by side, with per-token evidence
 provenance, while the historical A/B/C classifications and all EXP-001/EXP-002

@@ -705,3 +705,54 @@ vs formatting vs control), report counts and locations rather than verdicts
 per file, and keep the layer read-only and separate from every existing
 score.
 
+
+## L-032 · 2026-09-05 · An answered questionnaire is provenance: validate the completed document before decoding it (Task 016)
+
+**What happened.** The completed EXP-003 sentence_review.md was decoded by
+first validating it against the private key: 100 question blocks in original
+order, exactly one checked Version per question, and 399/400 displayed
+Version texts byte-identical to the key. The validation caught two real
+artifacts of the answering session: Q58's answer encoded `[x ]` (checked
+with stray whitespace) and Q67's Version 2 (a non-chosen option) with an
+accidental character transposition (`sę, že` → `, žesę`; same character
+multiset — an editor artifact, not a regeneration). Both were recorded as
+provenance notes in the results and the REPORT; the document was not
+modified, regenerated, or repaired, and decoding (which uses the recorded
+ticks) was unaffected.
+
+**Why it matters.** An answered questionnaire is a primary record. If the
+analysis silently "fixed" the `[x ]` encoding, silently ignored the Q67
+corruption, or — worse — regenerated the questionnaire, the human signal
+would lose its provenance and reproducibility. Structural damage (wrong
+count, reordering, missing/double ticks) aborts before any analysis.
+
+**Next time.** Before decoding any completed human instrument, run a strict
+validation pass against the private key (structure + tick counts + text
+identity), abort on structural damage, and record every artifact as a
+provenance note in the outputs. Never modify, regenerate, or repair the
+completed document.
+
+## L-033 · 2026-09-05 · Automated-best is not human-preferred: coverage, orthography, and naturalness are separate signals that can diverge per model (Task 016)
+
+**What happened.** EXP-003's human forced-choice results (74 % guided vs.
+26 % baseline; D favorite for both models) were combined with the run-level
+automated metrics. For Claude the signals agreed at the extremes (D best on
+coverage, cleanest orthography, human favorite; C worst on all three and
+human least favorite). For ChatGPT they diverged sharply: condition B is the
+automated best (canonical 85.7 / broader 90.8, lowest unresolved rate,
+cleanest orthography) yet the human **least** preferred (12 %), while D —
+not the coverage-best — was the human favorite (36 %). A character-level
+anomaly count (Task 015) cannot explain ChatGPT's preference either.
+
+**Why it matters.** Resource-grounded lexical coverage answers "is this
+token/word justifiable by the resources"; character-level sanity answers "is
+this orthographically clean"; a human forced choice answers "which sentence
+reads most naturally to this reader". They are different constructs and this
+is the first direct evidence in the project that they can move in different
+directions within one model. Conflating them (or ranking conditions by
+coverage alone and calling it quality) would have mis-ordered ChatGPT's
+conditions.
+
+**Next time.** Keep the signals side by side in every report; never merge
+them into a composite score; and treat "automated best" and "human best" as
+two claims that must each be argued from their own evidence.

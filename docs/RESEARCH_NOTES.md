@@ -423,10 +423,13 @@ open and untouched; nothing here assumes or claims its outcome.
 
 ### 4.12 Sentence-level forced-choice human test — prepared (SODA Task 014, 2026-09-05)
 
-**Status: prepared, not answered.** This is the ONE planned human-evaluation
-exercise for EXP-003 (D-038). Participant document:
+**Status: ANSWERED and analyzed (Task 016, 2026-09-05) — results in §4.14
+and `experiments/exp003-scaffold/REPORT.md`.** This is the ONE planned
+human-evaluation exercise for EXP-003 (D-038). Participant document:
 `experiments/exp003-scaffold/comparison/sentence_review.md` (self-contained);
-private answer key: `comparison/sentence_review_key.json`. No result exists.
+private answer key: `comparison/sentence_review_key.json`. Decoded results:
+`comparison/sentence_review_results.{json,md}` (no result existed until the
+participant answered all 100 questions).
 
 - **Why the format changed.** The Project Owner found the holistic
   complete-text comparison (four full translations per model) too cognitively
@@ -561,6 +564,60 @@ non-letter surprises, not alphabet errors. As required, a character anomaly
 is NOT treated as proof that a whole translation is linguistically invalid —
 it is one independent signal, analyzed against lexical coverage later.
 
+### 4.14 EXP-003 results — human test decoded, combined with automated evidence, experiment closed (SODA Task 016, 2026-09-05)
+
+The participant answered all 100 forced-choice questions. Decoding
+(`scripts/analyze_exp003_sentence_review.py`, D-043) validated the completed
+document against the private key (100 questions, original order, one tick
+each, 399/400 Version texts byte-identical) and recorded two provenance
+notes: Q58 answered as `[x ]` (stray-whitespace encoding) and Q67 Version 2
+(non-chosen, condition D) corrupted during the answering session
+(`sę, že` → `, žesę`, same character multiset) — neither affects decoding,
+and the document was not modified or regenerated. Full write-up: the
+experiment's final report `experiments/exp003-scaffold/REPORT.md`; decoded
+artifacts `comparison/sentence_review_results.{json,md}`.
+
+- **Human preference (n = 100; 50 per model).** Choices per displayed
+  Version 1–4: 25 / 29 / 22 / 24 (no position bias). Per condition: A 26 %
+  (26), B 16 % (16), C 19 % (19), **D 39 % (39)**; χ²(3) vs. uniform =
+  12.56, p ≈ 0.006. Per model: ChatGPT A 26 % / B 12 % / C 26 % / D 36 %
+  (χ² p ≈ 0.12); Claude A 26 % / B 20 % / C 12 % / **D 42 %** (χ² p ≈ 0.02).
+  Guidance vs. baseline: **B+C+D = 74 % vs. A = 26 % — identical for both
+  models**. The baseline was chosen at ≈ chance (26 % vs. 25 % expected).
+- **Automated evidence (Task 011, unchanged).** Coverage and preference
+  agree for Claude at the extremes (D: canonical 85.6 / broader 92.0 /
+  unresolved 14.4 %, human favorite 42 %; C: 75.4 / 84.5 / 24.6 %, human
+  least favorite 12 %) but diverge for ChatGPT: B is the automated best
+  (85.7 / 90.8 / 14.3 %, orthographically cleanest) yet the human least
+  preferred (12 %), while D (84.0 / 88.8, not the coverage best) is the
+  human favorite (36 %). Exploratory Spearman over the 8 condition points:
+  share vs. broader +0.49, canonical +0.23, unresolved −0.23, orthographic
+  outside −0.20 (n = 8 — descriptive only, no inference).
+- **Orthographic sanity (Task 015) vs. preference.** Raw condition-level
+  Polish/other-Latin counts are dominated by the story names kept verbatim
+  (`Bronisława`/`Przemysława` → ł/w), so a non-name refinement was added to
+  the decoder (letters inside name tokens excluded). The refined signal
+  tracks the Claude extremes only: C has by far the most non-name
+  contamination (70; Cyrillic 45 incl. intra-word) and is the human least
+  favorite; D the least (11) and the human favorite. For ChatGPT, D is the
+  favorite but not the cleanest (non-name 16 vs. B 7), so orthography does
+  not explain ChatGPT's preference.
+- **No composite score; separate signals (D-042).** Human preference,
+  resource coverage, orthographic sanity, and linguistic correctness remain
+  four separate constructs; none is ground truth, and the divergence for
+  ChatGPT-B is the key caution against ranking conditions by coverage alone
+  (L-033).
+- **One verbatim participant comment** (Q7, vocabulary uncertainty, not a
+  linguistic annotation) preserved as qualitative provenance.
+- **EXP-003 is closed.** The experiment supports, on this story with this
+  participant: guidance preferred over baseline ~3:1; D favored for both
+  models; coverage gains for ChatGPT (all conditions) and Claude (D). It
+  does not support: general claims beyond this pilot, coverage-based
+  naturalness claims, any composite ranking, or any claim about Bielik.
+  Limitations: one story, one non-expert participant, sentence-sample
+  forced choice, run-level vs. sentence-level comparison only, the two
+  provenance artifacts, exploratory statistics only.
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - The letter inventory for a constructed-language output audit comes from the
@@ -610,12 +667,30 @@ it is one independent signal, analyzed against lexical coverage later.
   source sentence across condition outputs) must be a deterministic,
   content-checked function (monotonic alignment + cross-run overlap floor),
   never blind indexing or hand pairing (Task 014; D-039, L-030).
+- A completed questionnaire is provenance: validate it against the private
+  key (structure, tick counts, Version-text identity) before decoding; abort
+  on structural damage; record answer-encoding and text artifacts (e.g. `[x ]`,
+  an accidental transposition in a non-chosen option) as provenance notes;
+  never regenerate, repair, or modify the completed document (Task 016;
+  D-043, L-032).
+- Automated-best is not human-preferred: resource coverage, orthographic
+  sanity, and human naturalness are separate signals that can diverge within
+  one model (EXP-003 ChatGPT-B is coverage-best but human-least-preferred;
+  D is human-favorite for both models); report them side by side, never as a
+  composite score (Task 016; D-042, L-033).
 
 ## 6. Open questions for future work
 
 - Does generation-time scaffolding beat post-hoc revision on the *same*
   unresolved forms? (EXP-002 candidate data vs EXP-003 results — a direct
   comparison is possible because both use the same source and evaluator.)
+- EXP-003 (one story, one participant) showed guidance preferred over
+  baseline (74 % vs. 26 %) and condition D favored by both models, but
+  ChatGPT-B was coverage-best yet human-least-preferred: is the
+  coverage-vs-naturalness divergence a model property, a condition-design
+  property (D's grammar annotations changing wording the reader preferred),
+  or an artifact of one participant? What would a second participant or a
+  second story show?
 - Does the scaffold effect persist on a second story (out-of-domain)?
 - Do grammatical annotations (D) help any model, or only some? (Task 011:
   D strongly helped Claude, not ChatGPT, on this story — open whether that
@@ -624,17 +699,21 @@ it is one independent signal, analyzed against lexical coverage later.
   by generation-time guidance?
 - Why did alternatives (C) fail to beat the single-candidate scaffold (B) for
   both models on this dataset — prompt load, candidate competition, or
-  condition design?
-- What does the sentence-level forced-choice human test say about naturalness
-  across the four conditions per model (the automatic-metric ordering is not
-  a naturalness ordering)? Which formulation is preferred for the same source
-  sentence — and does the preference split by condition (B/C/D scaffolds vs A
-  baseline) or by model?
+  condition design? (Human preference mirrors the coverage result for B vs C
+  only in part: for Claude, C is the human least favorite too.)
+- **Answered by Task 016:** the human test showed guidance (B/C/D) preferred
+  over baseline A (74 % vs. 26 %), D the favorite for both models (ChatGPT
+  36 %, Claude 42 %), with no display-position bias; per-condition and
+  per-model tables in §4.14 and `experiments/exp003-scaffold/REPORT.md`.
 - How do character-level anomalies (Cyrillic in Latin output, Polish/Czech
   letter contamination, non-ISV diacritics) relate to lexical/resource
   coverage: do files with more outside-inventory characters also show lower
   canonical or broader coverage, or are the two dimensions independent
   (Task 015 metrics are now available per run for exactly this analysis)?
+  First Task 016 look (condition level, n = 8): the refined non-name
+  orthographic signal tracks human preference only at the Claude extremes
+  (C dirtiest → least preferred; D cleanest → most preferred), and does not
+  explain ChatGPT's preference for D over the cleaner B.
 - Which models pass the practical access filter, and how do their
   versioned no-guidance baselines on the canonical story compare (EXP-004
   Phase A)? How large is each model's headroom (unresolved rate) before
