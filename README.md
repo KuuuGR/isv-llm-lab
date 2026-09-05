@@ -13,13 +13,17 @@ translation application.
 
 ## Status
 
-SODA Task 008 complete (2026-09-01): the two-layer resource evaluation policy
-from `docs/RESOURCE_POLICY.md` (Task 007) is implemented in `isv-eval`. The
-evaluator now reports **canonical coverage** and **broader resource-supported
-coverage** side by side, with per-token evidence provenance, while the
-historical A/B/C classifications and all EXP-001/EXP-002 results remain
-unchanged. Experiments: `docs/EXPERIMENTS.md`. Raw inputs and outputs stay out
-of git (copyrighted); per-run hashes make everything reproducible.
+See [`docs/STATE.md`](docs/STATE.md) for the current project state. As of
+2026-09-05 (SODA Task 013): EXP-003's blinded holistic human review is
+prepared and **awaiting the Project Owner** (no human judgment exists yet);
+the EXP-004 practical model-screening experiment is **designed but not
+approved and not executed** (`experiments/exp004-modelscreen/DESIGN.md`).
+The evaluator reports **canonical coverage** and **broader
+resource-supported coverage** side by side, with per-token evidence
+provenance, while the historical A/B/C classifications and all EXP-001/EXP-002
+results remain unchanged. Experiments: `docs/EXPERIMENTS.md`. Raw inputs and
+outputs stay out of git (copyrighted); per-run hashes make everything
+reproducible.
 
 ## Documentation
 

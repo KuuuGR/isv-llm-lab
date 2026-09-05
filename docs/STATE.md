@@ -1,8 +1,8 @@
 # Project State
 
-Updated: 2026-09-01 (SODA Task 012 — blinded human naturalness review for
-EXP-003 prepared: 8 complete runs, neutral sets, deterministic randomized
-version labels, DESIGN §11 rubric; awaiting Project Owner judgment)
+Updated: 2026-09-05 (SODA Task 013 — EXP-004 practical model-screening
+experiment designed, not approved, not executed; the EXP-003 blinded human
+review remains open and is the immediate pending step)
 
 ## What this project is
 
@@ -19,7 +19,7 @@ Research hypothesis:
 This is a hypothesis. The first experiment must establish a baseline before
 any constrained system is judged against it.
 
-## Current status (end of Task 009)
+## Current status (as of SODA Task 013)
 
 | Area | Status |
 |---|---|
@@ -44,6 +44,8 @@ any constrained system is judged against it.
 | **EXP-003 implemented (Task 010)** | ✅ **INFRASTRUCTURE PREPARED — EXPERIMENT NOT EXECUTED** — deterministic scaffold generator (`scripts/build_exp003_scaffold.py`; reverse index + multiword/names/residual alignment; per-story curation tables committed; candidate provenance incl. headword-note cleaning and orthographic-variant splitting D-033; grammar annotations for condition D); 12 self-contained operator prompts (4 conditions × 3 models, `experiments/exp003-scaffold/operator-prompts/`, packaging script deterministic); run orchestrator (`scripts/run_exp003_pilot.py` prepare/collect/evaluate/status, byte-for-byte immutable collection, plan + meta.json with prompt/source/scaffold hashes + resource pins); comparison tool (`scripts/compare_exp003.py`: per-run two-tier metrics, name-excluded diagnostics D-030, candidate-usage proxy, invented-forms analysis, within-model/within-condition pairwise token-aligned transitions + regression lists, blinded human-review pairs); integrity verifier (`scripts/verify_exp003_runs.py`); tests added (30 new; full suite 75 green); scaffold determinism verified (two builds byte-identical). **No LLM called. No experiment results exist.** Next action: Project Owner executes the 12 prompts externally and returns raw replies for `collect` |
 | **EXP-003 intake (Task 011)** | ✅ **COMPLETE — PRELIMINARY ANALYSIS, NOT A VERDICT** — all 12 external replies located, hashed, inspected (structure/completeness/commentary/format) and registered byte-for-byte (`experiments/exp003-scaffold/outputs/`, meta.json with real model info: ChatGPT GPT-5.6 Luna thinking OFF, Claude Sonnet 5 Medium, Bielik 3.0; generation parameters + documented status now recorded, D-035). **8/12 runs are complete translations** (ChatGPT A–D, Claude A–D; all sections present, ending marker KONEC/KONĖC, no commentary). **4/12 Bielik runs are not usable**: A and B truncated mid-story (≈3 of 7 acts, ~40% of the text), C replied with a Croatian paraphrase/echo of the prompt (no translation), D returned a service-error page (no translation). 10 processable runs evaluated with the Task 008 evaluator unmodified; comparison run on the 8 complete runs (Bielik preserved but excluded, D-035). Preliminary headline coverage (canonical / broader): ChatGPT A 76.3/87.1 → B 85.7/90.8 → C 84.8/89.2 → D 84.0/88.8; Claude A 75.8/87.5 → B 79.0/86.4 → C 75.4/84.5 → D 85.6/92.0. **No composite score, no ranking by coverage alone; naturalness is a separate (human) question. Bielik cannot participate quantitatively.** Full analysis in `docs/EXPERIMENTS.md` § EXP-003 and `docs/RESEARCH_NOTES.md` § 4.9. Next action: blinded human naturalness assessment of the 8 complete runs (4 per model) |
 | **EXP-003 human review prepared (Task 012)** | ✅ **REVIEW READY — JUDGMENT PENDING** — the DESIGN §11 blinded holistic review is packaged for the Project Owner: `experiments/exp003-scaffold/comparison/human_review.md` contains ONLY the 8 complete runs (ChatGPT A–D, Claude A–D) in two neutral sets ("Set 1"/"Set 2") with per-set deterministic randomized "Version 1..4" labels (seed `20260901` in `compare_exp003.py`, reproducible); the four holistic questions + preference ordering + a clearly separated post-unblinding section (scaffold-constraint question, B/C/D only) + a recording checklist. No automatic metric or model identity appears in the document; the mapping lives in `human_review_key.json`. Bielik (all four runs incomplete/failed) is excluded from the review, preserved as qualitative artifacts. Translations embedded byte-for-byte. Next action: Project Owner performs the review and records answers verbatim |
+| **EXP-003 human judgment (open)** | ⏳ **WAITING FOR THE PROJECT OWNER — NOT COMPLETE** — the human-review stage is still open: the review artifact is final and nothing further can be prepared without the answers, but **no human-review result exists** and none may be inferred. The EXP-003 report (`REPORT.md`) is deferred until the answers are recorded verbatim in `human_review.md` (PART 1 before unblinding, PART 2 after). Do not treat EXP-003's automatic metrics as a naturalness verdict |
+| **EXP-004 model screening prepared (Task 013)** | 🧪 **DESIGNED — NOT APPROVED, NOT EXECUTED** — `experiments/exp004-modelscreen/DESIGN.md` specifies the practical model-screening phase (D-036 access filter; D-037 two-phase split): identical story-only source, equivalent no-guidance instruction per roster row (GPT-5.6 Luna OFF/ON, custom GPT ISV Teacher, Claude Sonnet 5, Gemini, DeepSeek-V4-Pro OFF/ON, Grok, Kimi, Qwen, GLM conditional; Venice AI excluded as a platform, Mistral not assumed, Bielik preserved qualitative only), full recording incl. context/window + access observations, byte-for-byte collection with documented statuses (D-035) and completeness gate (L-027), Task 008 two-tier evaluator unmodified, no manual word-by-word classification; Phase B guidance-method experiments designed for but not started; anti-leak rule (no encoded winner). No LLM called. Execution gated on design approval + access confirmation, and sequenced after the EXP-003 human review/report |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
 
 ### Experiment 001 headline numbers
@@ -127,7 +129,11 @@ experiments/
     operator-prompts/        — 12 self-contained operator prompts (generated, .md gitignored)
     input/  scaffolds/  outputs/  comparison/  — run artifacts (gitignored; 12 replies collected Task 011, 8 complete)
     comparison/README.md — document the blinded review format (8 complete runs, neutral sets, randomized version labels)
-  temp/                    — Project Owner's raw operator replies (gitignored, Task 011)
+    temp/                    — Project Owner's raw operator replies (gitignored, Task 011)
+  exp004-modelscreen/
+    DESIGN.md                — EXP-004 practical model-screening design (Task 013; DESIGN ONLY — not approved, not executed)
+    README.md                — status + pointer to DESIGN
+    input/  operator-prompts/  outputs/  — do not exist yet (created only after approval + access confirmation; gitignored patterns already cover them)
 ```
 
 ## Working agreements

@@ -9,8 +9,12 @@ source is the starting point and the scaffold is vocabulary guidance *during*
 generation — there is **no hidden intermediate LLM translation**.
 
 - Design: `DESIGN.md` (SODA Task 009, approved).
-- Status: **infrastructure prepared — experiment not yet executed** (as of
-  SODA Task 010). The Project Owner must execute the 12 LLM runs externally.
+- Status (2026-09-05): **executed externally — intake and preliminary
+  analysis done (Task 011); 8 of 12 runs complete** (ChatGPT A–D, Claude A–D);
+  Bielik A–D incomplete/failed, preserved as qualitative artifacts. The
+  **blinded holistic human review is prepared (Task 012) and awaits the
+  Project Owner** — no answers exist yet. EXP-003 is closed to new runs; the
+  next step is the review, then the EXP-003 report.
 
 ## Conditions and models
 
@@ -39,7 +43,7 @@ The scaffold generator is **deterministic and contains no hidden LLM calls**
 (D-029). The only LLM calls in the experiment are the externally executed
 translation conditions.
 
-## How to execute the experiment (Project Owner)
+## How the experiment was executed (historical record — completed in Task 011)
 
 ```text
 1. For each of the 12 files in operator-prompts/:

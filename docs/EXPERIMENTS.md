@@ -242,14 +242,11 @@ coverage):
 Full report: `experiments/exp002-pilot/REPORT.md`; per-run detail in
 `comparison/<run>/` (local, gitignored).
 
-## Planned (not started)
+## Activity log — follow-ups after EXP-002 (SODA Tasks 007–012)
 
-- **Manual linguistic review** of the EXP-001 unresolved sample (Task 004 artifacts; human-only, no automatic classification).
-- **EXP-003 human judgment (pending)**: the Project Owner performs the
-  blinded holistic review (Task 012 — artifact ready at
-  `experiments/exp003-scaffold/comparison/human_review.md`); answers are
-  recorded verbatim and combined with the automatic evidence in the future
-  EXP-003 `REPORT.md`.
+The pending-work list for the current state of the project is at the end of
+this file under **"Planned (not started) — current"**; the blocks below are
+chronological records of work done after EXP-002.
 
 ### Follow-up: EXP-003 infrastructure implemented (Task 010, 2026-09-01)
 
@@ -516,3 +513,45 @@ model and an evaluation policy (`docs/RESOURCE_POLICY.md`; evidence table
 - **No changes**: no resource modified, no evaluator code changed, historical
   results preserved.
 
+
+## Planned (not started) — current (2026-09-05, SODA Task 013)
+
+Status categories are kept distinct:
+- **Completed experiments:** EXP-001 (baseline, historical), EXP-002
+  (post-hoc revision pilot, historical). EXP-003 is **executed with
+  preliminary automatic analysis (Task 011)** — its pilot results are
+  preliminary and not a verdict; its **human evaluation is NOT complete**.
+- **Pending human review:** EXP-003 §11 blinded holistic review (Task 012
+  artifact ready; **no answers exist**; the project is waiting on the Project
+  Owner).
+- **Planned experiments:** EXP-004 model screening (design prepared in Task
+  013; **not approved, not executed**).
+
+Planned (not started):
+
+- **Manual linguistic review** of the EXP-001 unresolved sample (Task 004
+  artifacts; human-only, no automatic classification).
+- **EXP-003 human judgment (pending)**: the Project Owner performs the
+  blinded holistic review (Task 012 — artifact ready at
+  `experiments/exp003-scaffold/comparison/human_review.md`); answers are
+  recorded verbatim and combined with the automatic evidence in the future
+  EXP-003 `REPORT.md`. This is the immediate next step; nothing may claim the
+  EXP-003 human evaluation is finished.
+- **EXP-004 — practical model screening (PLANNED)**: design at
+  `experiments/exp004-modelscreen/DESIGN.md` (Task 013, 2026-09-05;
+  DESIGN ONLY). Phase A screens models under the practical access filter
+  (D-036) with one identical source and one equivalent no-guidance
+  instruction per roster row (GPT-5.6 Luna thinking OFF/ON, custom GPT ISV
+  Teacher, Claude Sonnet 5, Gemini, DeepSeek-V4-Pro DeepThink OFF/ON, Grok,
+  Kimi, Qwen, GLM conditional; Venice AI excluded as a platform, Mistral not
+  assumed available, Bielik preserved as a qualitative negative result). Full
+  recording (model/version/settings, context/window, failures/truncations as
+  data), byte-for-byte collection (D-035), Task 008 two-tier evaluator
+  unmodified, no manual word-by-word classification, no composite score.
+  Phase B (guidance-method experiments: candidate hints, one canonical
+  candidate, alternatives, lemma+POS, lemma+grammatical features, candidate
+  inflected forms, lexical+grammatical scaffolding, pre-translation analysis,
+  post-generation validation, LLM repair, iterative draft→evaluate→repair) is
+  designed for but scoped only after Phase A evidence. Execution gated on
+  design approval + access confirmation; sequenced after the EXP-003 human
+  review/report. Do not run EXP-004 translations before then.

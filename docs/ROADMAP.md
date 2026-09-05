@@ -1,8 +1,8 @@
 # Roadmap
 
-Status: updated 2026-09-01 (Task 012 — the blinded human naturalness review
-for EXP-003 is prepared and ready for the Project Owner: 8 complete runs in
-two neutral sets with randomized version labels; judgment pending).
+Status: updated 2026-09-05 (Task 013 — EXP-004 practical model-screening
+experiment DESIGNED, not approved, not executed; the EXP-003 blinded human
+review remains the immediate pending step and is untouched).
 
 ## Done
 
@@ -301,6 +301,29 @@ two neutral sets with randomized version labels; judgment pending).
         of incomplete models); full suite **79 green**.
   - [x] Docs: RESEARCH_NOTES §4.10 (review cohort), comparison README,
         STATE, ROADMAP.
+- [x] **Task 013 — EXP-004 practical model screening DESIGNED** (no LLM
+  called, no output produced, no evaluator/metric/experiment changed; the
+  open EXP-003 human review is untouched):
+  - [x] Design document `experiments/exp004-modelscreen/DESIGN.md`
+        (DESIGN ONLY — not approved, not executed): central hypothesis
+        restated as hypothesis; two-phase structure (Phase A model
+        screening / Phase B guidance-method experiments, D-037);
+        practical model-access filter (D-036); candidate roster with
+        repo-evidence vs to-confirm status (GPT-5.6 Luna OFF/ON, custom GPT
+        ISV Teacher, Claude Sonnet 5, Gemini, DeepSeek-V4-Pro OFF/ON, Grok,
+        Kimi, Qwen, GLM conditional; Venice AI excluded as platform, Mistral
+        not assumed, Bielik preserved qualitative only); Phase A protocol
+        (identical story-only source, equivalent no-guidance instruction,
+        full recording incl. context/window + access observations,
+        byte-for-byte collection with D-035 statuses + L-027 completeness
+        gate, Task 008 two-tier evaluator unmodified, no manual word-by-word
+        classification); Phase B extensibility (strategy list mapped to
+        existing machinery, deterministic-guidance discipline); anti-leak
+        rule (no encoded winner); open items requiring coordinator
+        confirmation.
+  - [x] SODA docs updated (DECISIONS D-036/D-037, LESSONS L-028,
+        RESEARCH_NOTES §4.11 + open questions, EXPERIMENTS, STATE,
+        ROADMAP). Full test suite 79 green (no code changed).
 
 ## Next recommended task (single)
 
@@ -312,7 +335,18 @@ two neutral sets with randomized version labels; judgment pending).
   follow-up SODA task then writes the EXP-003 analysis report (`REPORT.md`),
   combining the automatic coverage / transition / regression / candidate-usage
   evidence (Task 011) with the human verdicts.
-  Do not start a new experiment or a second model cohort before this.
+
+## After the EXP-003 human review is recorded and reported
+
+- [ ] **EXP-004 Phase A (model screening)** — gated on: (a) approval of
+  `experiments/exp004-modelscreen/DESIGN.md`, (b) the coordinator's access
+  confirmations listed in its §11, and (c) the standing rule above (new
+  translation runs start only after the EXP-003 review is recorded and its
+  report written). Phase A output: per-model access verdicts + versioned
+  no-guidance baseline numbers on the canonical story; then Phase B
+  (guidance-method experiments) is scoped from that evidence.
+  Do not run EXP-004 translations before the design is approved and access
+  details are confirmed.
 
 ## Later
 
