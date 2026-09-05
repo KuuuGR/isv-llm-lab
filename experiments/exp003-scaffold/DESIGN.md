@@ -400,6 +400,23 @@ high-coverage-but-unnatural output (§11).
 
 ## 11. Human evaluation procedure
 
+> **Superseded (2026-09-05, SODA Task 014, D-038).** The procedure below was
+> implemented (Task 012) and attempted by the Project Owner, who found the
+> holistic complete-text comparison too cognitively demanding — a format
+> problem, not a result about any condition. **No holistic human result was
+> obtained or recorded.** The holistic artifact (`comparison/human_review.md`)
+> is preserved as a historical/provisional review design with a superseded
+> banner. The actual EXP-003 human-evaluation protocol is now the
+> sentence-level forced-choice test (`comparison/sentence_review.md`,
+> prepared by `scripts/prepare_exp003_sentence_review.py`): ~100 questions,
+> each showing one Polish source sentence plus the corresponding sentence
+> from each of the four conditions (A/B/C/D) of the same model in a
+> per-question deterministic randomized order ("Version 1..4", seed
+> `20260905`); the Project Owner ticks the version that sounds most natural
+> as Medžuslovjansky as a whole (explicitly NOT checking individual words
+> against a dictionary). The mapping is in `comparison/sentence_review_key.json`.
+> This is the ONE planned human-evaluation exercise for EXP-003.
+
 The Project Owner is **not** a manual lexical annotator and will not classify
 words.
 

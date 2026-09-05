@@ -1,8 +1,9 @@
 # Roadmap
 
-Status: updated 2026-09-05 (Task 013 — EXP-004 practical model-screening
-experiment DESIGNED, not approved, not executed; the EXP-003 blinded human
-review remains the immediate pending step and is untouched).
+Status: updated 2026-09-05 (Task 014 — the EXP-003 holistic human review was
+superseded by a prepared sentence-level forced-choice test of ~100 questions;
+no holistic result was obtained or recorded; EXP-003 human judgment remains
+the immediate pending step; EXP-004 stays design-only).
 
 ## Done
 
@@ -283,8 +284,10 @@ review remains the immediate pending step and is untouched).
         not usable as a quantitative participant**.
   - [x] SODA docs updated (DECISIONS D-035, LESSONS L-027, RESEARCH_NOTES
         §4.9, EXPERIMENTS, STATE, ROADMAP).
-- [x] **Task 012 — blinded human naturalness review prepared** (no LLM
-  called, no output modified, no evaluator change, no metrics exposed):
+- [x] **Task 012 — blinded holistic human naturalness review prepared**
+  (**SUPERSEDED as the primary method by Task 014** — kept as a
+  historical/provisional artifact; no LLM called, no output modified, no
+  evaluator change, no metrics exposed):
   - [x] `compare_exp003.py`'s `render_human_pairs` upgraded to the DESIGN
         §11-compliant artifact: neutral "Set 1/Set 2" labels (model identity
         only in the key file), per-set deterministic randomized
@@ -301,6 +304,11 @@ review remains the immediate pending step and is untouched).
         of incomplete models); full suite **79 green**.
   - [x] Docs: RESEARCH_NOTES §4.10 (review cohort), comparison README,
         STATE, ROADMAP.
+  - [x] **Task 014 follow-up: superseded.** The Project Owner attempted the
+        holistic review and found comparing four complete long translations
+        too cognitively demanding (format problem, not a result about any
+        condition — D-038). `human_review.md` now carries a superseded
+        banner; no holistic human result was obtained and none is recorded.
 - [x] **Task 013 — EXP-004 practical model screening DESIGNED** (no LLM
   called, no output produced, no evaluator/metric/experiment changed; the
   open EXP-003 human review is untouched):
@@ -324,17 +332,56 @@ review remains the immediate pending step and is untouched).
   - [x] SODA docs updated (DECISIONS D-036/D-037, LESSONS L-028,
         RESEARCH_NOTES §4.11 + open questions, EXPERIMENTS, STATE,
         ROADMAP). Full test suite 79 green (no code changed).
+- [x] **Task 014 — EXP-003 human evaluation replaced by a sentence-level
+  forced-choice test** (no LLM judge; no holistic result inferred; EXP-004
+  untouched, stays design-only; old holistic artifact preserved as
+  superseded):
+  - [x] New method decided and recorded (D-038): the Project Owner found the
+        holistic complete-text comparison too cognitively demanding, so the
+        PRIMARY EXP-003 human-evaluation method is now ONE sentence-level
+        forced-choice experiment — this is the ONE planned human-evaluation
+        exercise for EXP-003. No holistic human result exists.
+  - [x] `scripts/prepare_exp003_sentence_review.py` (deterministic, pure):
+        line-based segmentation; monotonic length-based DP alignment
+        (1:1/1:2/2:1 + skips) between the Polish source and each of the four
+        conditions per model; quadruple pool with all-pairs cross-run token
+        overlap floor (same content), ≥4-word completeness, exclusion of
+        all-four-identical sentences; stratified sampling (story section ×
+        dialogue) ~50/model; per-question seeded randomization of the
+        A/B/C/D → "Version 1..4" display order (seed `20260905`, never
+        alphabetical).
+  - [x] Participant document `comparison/sentence_review.md` (100 questions,
+        self-contained, blinded: no model names, no A/B/C/D condition
+        labels, no metrics, no hints; instructions ask for a holistic
+        sentence impression and explicitly say NOT to verify words against a
+        dictionary) + private answer key `comparison/sentence_review_key.json`
+        (source sentence identity/text, section, dialogue flag, run ids,
+        version texts, display order, seed, hashes; opened only after
+        answering).
+  - [x] Holistic artifact marked superseded: `compare_exp003.py`'s
+        `render_human_pairs` emits a SUPERSEDED banner; comparison README
+        documents both artifacts; no answers were recorded anywhere.
+  - [x] 7 new tests (determinism/reproducibility, per-question randomization
+        and non-alphabetical orders, alignment content check, exclusion of
+        misaligned/all-identical sentences, blinding of the participant
+        document, answer-key↔document correctness, no-overwrite guard); full
+        suite **86 green**.
+  - [x] Docs updated (DECISIONS D-038/D-039, LESSONS L-029, RESEARCH_NOTES
+        §4.12 + supersession note, EXPERIMENTS, STATE, ROADMAP, comparison
+        README, exp003 README).
 
 ## Next recommended task (single)
 
-- [ ] **Project Owner performs the blinded holistic review** of the 8 complete
-  EXP-003 runs, reading `experiments/exp003-scaffold/comparison/human_review.md`
-  (PART 1: four questions + preference ordering per set, without consulting
-  `human_review_key.json` or any metric; then PART 2 after unblinding). The
-  answers are recorded verbatim in the document — no score is computed. A
-  follow-up SODA task then writes the EXP-003 analysis report (`REPORT.md`),
-  combining the automatic coverage / transition / regression / candidate-usage
-  evidence (Task 011) with the human verdicts.
+- [ ] **Project Owner answers the EXP-003 sentence-level questionnaire**:
+  open `experiments/exp003-scaffold/comparison/sentence_review.md` and tick
+  exactly one "Version 1..4" box per question (100 questions, ~10–15
+  minutes). Judge which version sounds most natural as Medžuslovjansky as a
+  whole; do not verify individual words. Do not open
+  `sentence_review_key.json` before finishing. A follow-up SODA task then
+  maps the recorded ticks back to conditions via the key and writes the
+  EXP-003 analysis report (`REPORT.md`), combining the automatic coverage /
+  transition / regression / candidate-usage evidence (Task 011) with the
+  human preferences.
 
 ## After the EXP-003 human review is recorded and reported
 

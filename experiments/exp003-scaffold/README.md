@@ -12,9 +12,18 @@ generation — there is **no hidden intermediate LLM translation**.
 - Status (2026-09-05): **executed externally — intake and preliminary
   analysis done (Task 011); 8 of 12 runs complete** (ChatGPT A–D, Claude A–D);
   Bielik A–D incomplete/failed, preserved as qualitative artifacts. The
-  **blinded holistic human review is prepared (Task 012) and awaits the
-  Project Owner** — no answers exist yet. EXP-003 is closed to new runs; the
-  next step is the review, then the EXP-003 report.
+  holistic complete-text human review (Task 012) was attempted and
+  **superseded as too cognitively demanding (Task 014, D-038)** — no holistic
+  result was obtained; the artifact is preserved as historical with a
+  superseded banner. The primary human-evaluation exercise is now a
+  **sentence-level forced-choice test (Task 014)**:
+  `comparison/sentence_review.md` — 100 questions (each: one Polish source
+  sentence + the corresponding sentence from the four conditions of the same
+  model, randomized into "Version 1..4"), prepared deterministically
+  (`scripts/prepare_exp003_sentence_review.py`), with the private mapping in
+  `comparison/sentence_review_key.json`. **No answers exist yet; the test
+  awaits the Project Owner.** EXP-003 is closed to new runs; the next step is
+  the human test, then the EXP-003 report. EXP-004 remains design-only.
 
 ## Conditions and models
 

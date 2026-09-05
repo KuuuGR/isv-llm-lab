@@ -14,9 +14,13 @@ translation application.
 ## Status
 
 See [`docs/STATE.md`](docs/STATE.md) for the current project state. As of
-2026-09-05 (SODA Task 013): EXP-003's blinded holistic human review is
-prepared and **awaiting the Project Owner** (no human judgment exists yet);
-the EXP-004 practical model-screening experiment is **designed but not
+2026-09-05 (SODA Task 014): EXP-003's human evaluation is prepared as a
+sentence-level forced-choice test (~100 questions, blinded, deterministic —
+`experiments/exp003-scaffold/comparison/sentence_review.md` + private key)
+and **awaits the Project Owner's answers**; the earlier holistic complete-text
+review format was superseded as too cognitively demanding (no holistic result
+was obtained — see `docs/DECISIONS.md` D-038). EXP-003 is closed to new runs.
+The EXP-004 practical model-screening experiment is **designed but not
 approved and not executed** (`experiments/exp004-modelscreen/DESIGN.md`).
 The evaluator reports **canonical coverage** and **broader
 resource-supported coverage** side by side, with per-token evidence

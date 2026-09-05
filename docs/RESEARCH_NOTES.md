@@ -336,7 +336,17 @@ runs preserved. (3) The scaffold worked at generation time for both models
 (B > A), consistent with the EXP-003 hypothesis direction; the
 alternatives/grammar increments split by model.
 
-### 4.10 Blinded human naturalness review — cohort prepared (SODA Task 012, 2026-09-01)
+### 4.10 Blinded holistic human naturalness review — cohort prepared (SODA Task 012, 2026-09-01); **SUPERSEDED (Task 014)**
+
+> **Supersession note (2026-09-05).** The Project Owner attempted this
+> holistic complete-text review and found the format too cognitively
+> demanding (comparing four complete long translations → unreliable
+> subjective judgments). This is a format problem, not a result about any
+> condition; **no holistic human result was obtained and none is recorded or
+> inferred**. The holistic artifact is preserved as a historical/provisional
+> review design (superseded banner in `human_review.md`). The primary
+> EXP-003 human-evaluation method is now the sentence-level forced-choice
+> test described in §4.12 (D-038).
 
 The human-review artifact is prepared for the Project Owner; no answers exist
 yet (they are recorded verbatim when the review is performed).
@@ -411,6 +421,52 @@ open and untouched; nothing here assumes or claims its outcome.
   design *before* execution (L-028) so the model set is not rationalized post
   hoc.
 
+### 4.12 Sentence-level forced-choice human test — prepared (SODA Task 014, 2026-09-05)
+
+**Status: prepared, not answered.** This is the ONE planned human-evaluation
+exercise for EXP-003 (D-038). Participant document:
+`experiments/exp003-scaffold/comparison/sentence_review.md` (self-contained);
+private answer key: `comparison/sentence_review_key.json`. No result exists.
+
+- **Why the format changed.** The Project Owner found the holistic
+  complete-text comparison (four full translations per model) too cognitively
+  demanding; that is a methodological property of the format, and no holistic
+  result was recorded (supersession note in §4.10).
+- **One question = one source sentence.** A Polish source sentence from the
+  original story, shown together with the corresponding sentence from each of
+  the four EXP-003 conditions (A/B/C/D) of the same model. The four
+  Interslavic versions are displayed as neutral "Version 1..4" in a
+  per-question deterministic randomized order (fixed seed `20260905`,
+  reproducible; alphabetical order rejected). The Project Owner ticks the
+  version that sounds most natural as Medžuslovjansky (best-choice only; no
+  full ranking and no worst choice — a fast, reliable best-choice signal).
+- **Bias control.** The instructions explicitly ask for a holistic sentence
+  impression, say that unfamiliar forms may appear, and instruct the
+  reviewer NOT to verify individual words against a dictionary (the reviewer
+  is a Polish native with Russian/Czech exposure). No model names, no A/B/C/D
+  condition labels, no automatic metrics, and no hints appear in the
+  participant document.
+- **Sampling (all from existing EXP-003 data).** Monotonic length-based DP
+  alignment (1:1/1:2/2:1 + skips) between the source sentence list and each
+  condition output; the pool keeps only source sentences with a 1:1 anchor in
+  all four conditions of a model whose four versions pass an all-pairs
+  cross-run token-overlap floor (same content), have ≥ 4 words (no
+  truncation fragments), and are not token-identical across all four
+  conditions. ~50 questions per model are drawn by deterministic stratified
+  sampling (story section × dialogue/narration, even spacing); fully
+  distinct-version questions are preferred. Real pools on 2026-09-05:
+  99 (ChatGPT) and 101 (Claude) aligned quadruples → 100 questions (50+50),
+  covering all nine story sections with 35 dialogue items. Filters and pool
+  sizes are recorded in the key (D-039).
+- **Answer key and analysis.** `sentence_review_key.json` records per
+  question: model, story section, source-sentence index + text, dialogue
+  flag, run ids, version texts, the display order (Version label → A/B/C/D),
+  and the seed + document hashes. Later analysis can compute preference
+  counts by displayed version, mapped back to A/B/C/D, preference rates,
+  results by model and by condition, and uncertainty/sample-size
+  information. No composite quality score combining human preference with
+  evaluator coverage is created.
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - Token-aligned transition matrices, not unique-form counts, are the
@@ -442,6 +498,16 @@ open and untouched; nothing here assumes or claims its outcome.
 - A model's failure to complete a condition is experimental data: distinguish
   model-capability, prompt/context, scaffold-design, evaluator, resource, and
   actual-effect explanations, and never collapse them (Task 011; §4.9).
+- Human-evaluation formats must be workload-pre-tested with the intended
+  reviewer; a format that exceeds working memory (e.g. holistic comparison of
+  several full texts) is a methodological problem, not a result about the
+  conditions — replace the measurement, preserve the old artifact as
+  superseded, and record that no result was obtained (Task 014; D-038,
+  L-029).
+- Pairing items across independently formatted documents (e.g. the same
+  source sentence across condition outputs) must be a deterministic,
+  content-checked function (monotonic alignment + cross-run overlap floor),
+  never blind indexing or hand pairing (Task 014; D-039, L-030).
 
 ## 6. Open questions for future work
 
@@ -457,9 +523,11 @@ open and untouched; nothing here assumes or claims its outcome.
 - Why did alternatives (C) fail to beat the single-candidate scaffold (B) for
   both models on this dataset — prompt load, candidate competition, or
   condition design?
-- What does the blinded human judgment say about naturalness across the
-  8 complete runs (the automatic-metric ordering is not a naturalness
-  ordering)?
+- What does the sentence-level forced-choice human test say about naturalness
+  across the four conditions per model (the automatic-metric ordering is not
+  a naturalness ordering)? Which formulation is preferred for the same source
+  sentence — and does the preference split by condition (B/C/D scaffolds vs A
+  baseline) or by model?
 - Which models pass the practical access filter, and how do their
   versioned no-guidance baselines on the canonical story compare (EXP-004
   Phase A)? How large is each model's headroom (unresolved rate) before

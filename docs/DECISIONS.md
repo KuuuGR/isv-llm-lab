@@ -667,3 +667,76 @@ is definitely best", or privileged treatment of any previous winner. Metrics
 (canonical and broader resource-supported coverage, side by side) are not
 redefined to favor an outcome; failures and truncations stay recorded as data
 (D-035). Hypotheses are labelled as hypotheses in the design and reports.
+
+## D-038 · 2026-09-05 · The holistic complete-text human review is superseded by ONE sentence-level forced-choice experiment (EXP-003, Task 014)
+
+The Project Owner attempted the prepared holistic review
+(`comparison/human_review.md`, DESIGN §11 / Task 012) and found the format too
+cognitively demanding: comparing four complete long translations makes it hard
+to remember earlier versions, which undermines the reliability of holistic
+judgments. That is a methodological problem with the review FORMAT, not a
+result about any translation condition: **no ranking of the four conditions
+is inferred or recorded from the attempted reading, and no holistic human
+result exists.**
+
+The primary human-evaluation method for EXP-003 is therefore replaced by ONE
+sentence-level forced-choice experiment (this is the ONE planned
+human-evaluation exercise for EXP-003): for each question the Project Owner
+sees one Polish source sentence and the corresponding sentence from each of
+the four conditions (A/B/C/D) of the same model, shown in a per-question
+deterministic randomized order under neutral labels "Version 1..4", and ticks
+the version that sounds most natural as Medžuslovjansky (best-choice only; no
+full 1–4 ranking, no worst choice — priority is a fast, reliable best-choice
+signal). Approximately 100 questions (≈50 per model × ChatGPT/Claude).
+
+Bias control: because Polish is the Project Owner's strongest language and
+they also know Russian and Czech, the test must NOT ask whether individual
+words are objectively dictionary-valid. Instructions ask for a holistic
+sentence impression ("as a whole, sounds most natural and plausible as
+Medžuslovjansky"), state that unfamiliar forms may appear, and say the test is
+not an expert linguistic classification. Blinding (no model names, no A/B/C/D,
+no metrics, no hints) is maintained until the answers are recorded.
+
+The superseded holistic artifact is preserved as a historical/provisional
+review design (with a superseded banner), not deleted. The Project Owner's
+informal impressions from the attempted holistic reading are NOT experimental
+results and are not recorded as such.
+
+## D-039 · 2026-09-05 · EXP-003 sentence-level test: deterministic alignment, stratified sampling, and seeded per-question randomization (Task 014)
+
+Preparation of the sentence-level forced-choice test
+(`scripts/prepare_exp003_sentence_review.py`) fixes the operational rules:
+
+- **Alignment.** Sentence units are segmented by identical punctuation rules
+  in the Polish source and in every output (unpunctuated heading/end-marker
+  lines become markers and never enter the content pool; units below 4 words
+  are dropped as fragments). Each output is aligned to the Polish source by a
+  monotonic dynamic program over token-length ratios (1:1 / 1:2 / 2:1 with
+  skips). A source sentence enters the quadruple pool only if it has a 1:1
+  anchor in all four conditions of the same model AND the four Interslavic
+  sentences pass an all-pairs cross-run token-overlap floor (≥ 0.30) — i.e.
+  the four versions provably render the same source sentence. Quadruples
+  whose four versions are token-identical are excluded (no signal).
+- **Sampling.** ~50 questions per model, stratified by story section
+  (Prolog → Akt I–VII → Epilog) × dialogue/narration via deterministic
+  largest-remainder allocation with even spacing by source position; fully
+  distinct four-version questions are preferred inside each stratum. The
+  sample therefore covers different parts of the story and mixes dialogue and
+  narration; the pool size per model (99/101 on 2026-09-05 data) is reported
+  in the key rather than padded with fabricated questions.
+- **Randomization & reproducibility.** Version display order is randomized
+  per question with one fixed recorded seed (`20260905`); alphabetical
+  display order is rejected per question. The private answer key
+  (`comparison/sentence_review_key.json`) records, per question: model,
+  story section, source-sentence index and text, dialogue flag, run ids,
+  version texts, the display order (Version label → A/B/C/D), and the global
+  seed + document hashes, so later analysis can compute preference counts by
+  displayed version and by condition, preference rates, per-model and
+  per-condition results, and uncertainty/sample-size information. No
+  composite "quality score" combining human preference with evaluator
+  coverage is created.
+
+Rationale: human-preference measurement is only meaningful if every displayed
+question really is one source sentence rendered four ways, if the questionnaire
+is free of identity leaks and of dictionary-verification pressure, and if the
+whole preparation is reproducible from the recorded seed and key.

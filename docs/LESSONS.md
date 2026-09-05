@@ -611,3 +611,57 @@ Phase A evidence, not from prior preference.
 selection criteria, roster, and exclusion rationale in the design document
 before execution, and record the criteria as a decision — even (especially)
 when the roster contains models the project already has opinions about.
+
+## L-029 · 2026-09-05 · A human-evaluation format that over-taxes the reviewer is a format problem — pre-test the cognitive load of the task, not just its content
+
+**Observation.** EXP-003's prepared human review asked the Project Owner to
+compare four complete long translations of the same story and form holistic
+judgments (Task 012). When the Project Owner attempted it, the format itself
+failed: holding four full texts in working memory while judging them is too
+cognitively demanding, and the resulting subjective judgments would be
+unreliable. No result about any condition was inferred from the attempt —
+the failure was methodological (D-038). The replacement is a sentence-level
+forced-choice test: ~100 questions, each asking for a single best-choice among
+four short renderings of one source sentence, designed to be answerable in
+seconds.
+
+**Why it matters.** A review instrument can be content-valid and correctly
+blinded and still produce noise if the *task* exceeds the reviewer's
+cognitive capacity. The earlier design (Task 012) validated the artifact
+mechanically (blinding, determinism, byte-exactness) but not its workload.
+The Project Owner's attempted reading was the de facto pilot that exposed the
+workload problem — and the correct response was to redesign the measurement,
+not to salvage a low-reliability holistic verdict or to invent results.
+
+**Next time.** Any human-evaluation instrument should include a workload
+pre-test with the intended reviewer on a small slice (e.g. 5–10 items of the
+real format) before full preparation, and the format should minimize
+working-memory load (single decision per item, short items, no full-text
+ranking). When a format fails for cognitive-load reasons, record the
+supersession as a decision, preserve the old artifact as historical, and
+report that no result was obtained.
+
+## L-030 · 2026-09-05 · Machine-checkable alignment beats eyeballing when a questionnaire must pair sentences across conditions
+
+**Observation.** Building the EXP-003 sentence-level test (Task 014) needed to
+pair, for each question, one Polish source sentence with the corresponding
+sentence from each of the four conditions (A/B/C/D) of the same model —
+across outputs whose paragraph breaks and even sentence boundaries differ.
+Blind indexing would drift after the first merge/split; manual pairing of
+~200 quadruples would be error-prone and unreviewable. The implemented
+approach: identical punctuation segmentation rules on every document,
+monotonic length-based DP alignment (1:1/1:2/2:1 + skips), then an all-pairs
+cross-run token-overlap floor so only quadruples whose four Interslavic
+versions share real content enter the pool (99/101 candidates per model on
+real data). Tests assert that every displayed version contains the source
+sentence's content marker.
+
+**Why it matters.** A preference test built on mispaired sentences measures
+nothing; the pairing is the data-generation step and must be deterministic,
+conservative, and verifiable. The overlap floor deliberately errs toward
+dropping ambiguous sentences (the pool is large enough to be selective).
+
+**Next time.** When an artifact pairs items across independently formatted
+documents, implement the pairing as a deterministic, tested function with a
+conservative content-consistency check and record its parameters (min words,
+overlap floor, seed) in the metadata — never hand-pair or index-align blind.
