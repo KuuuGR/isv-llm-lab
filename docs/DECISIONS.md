@@ -621,3 +621,49 @@ translations of the same source text; truncation is a confound, and
 non-translation text would produce meaningless "coverage". This is a
 bookkeeping decision — it does not change the evaluator, the scaffold, the
 prompts, or any metric definition.
+
+## D-036 · 2026-09-05 · Practical model-access filter for the EXP-004 screening roster
+
+EXP-004 preparation (Task 013) fixes which models belong in the main
+screening. A model is generally considered for the main roster only if **all**
+hold: (1) a normal user can use it through a web/chat interface without
+installing or running the model locally; (2) its free access is practically
+sufficient for at least approximately one full story translation per day (not
+one-off trial credits, not quotas that make daily translation impractical);
+(3) provider/model/version/settings are identifiable and recordable. Local
+deployment, hardware requirements, and free-weights-but-local models are out
+of scope for the main screening; paid-subscription-only models are out of
+scope for ordinary use.
+
+Rationale: the target workflow is real-world use by the project coordinator
+(~1 story per day or every other day through ordinary chat interfaces), and
+guidance-method experiments are expensive, so the model set must be screened
+against that practical criterion *before* research effort is spent on
+guidance methods. Recording the filter as a decision prevents post-hoc
+rationalization of model choices. Consequences for specific candidates are
+recorded in `experiments/exp004-modelscreen/DESIGN.md` §5: Venice AI is a
+platform, not an independent model (excluded from the model comparison);
+Mistral is not assumed available (coordinator currently has no access);
+Bielik stays a preserved qualitative negative result of EXP-003 — its free-web
+access demonstrably failed this exact task in EXP-003, and no new quantitative
+conclusion about Bielik is invented.
+
+## D-037 · 2026-09-05 · EXP-004 is two phases: model screening first, guidance-method experiments later — and neither encodes a winner
+
+EXP-004 preparation (Task 013) separates **model screening** (Phase A: which
+models are practically usable, and their no-guidance baseline on one identical
+story/instruction) from **guidance-method experiments** (Phase B: which forms
+of external deterministic linguistic guidance change quality on the models
+that pass Phase A). Mixing the two in one matrix would confound the access
+question with the method question and multiply cost.
+
+Phase B scoping (which strategies, enumerated in
+`experiments/exp004-modelscreen/DESIGN.md` §7, run on which models) is decided
+from Phase A evidence — headroom and access verdicts — and from the pending
+EXP-003 report, not from an assumption that any particular strategy or model
+wins. The design and any later implementation must not encode "candidate lists
+are definitely better", "grammar scaffolding is definitely better", "model X
+is definitely best", or privileged treatment of any previous winner. Metrics
+(canonical and broader resource-supported coverage, side by side) are not
+redefined to favor an outcome; failures and truncations stay recorded as data
+(D-035). Hypotheses are labelled as hypotheses in the design and reports.
