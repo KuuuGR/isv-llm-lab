@@ -6,6 +6,7 @@ Deterministic, read-only audit of every generated translation output:
 - EXP-001  experiments/exp001-baseline/outputs/<run>/output.txt        (7 runs)
 - EXP-002  experiments/exp002-pilot/outputs/<run>/revised.txt          (7 runs)
 - EXP-003  experiments/exp003-scaffold/outputs/<run>/output.txt       (12 runs)
+- EXP-004  experiments/exp004-modelscreen/outputs/<run>/output.txt   (Phase 1)
 
 Uses the authoritative Interslavic letter inventory from the official
 Interslavic website (see src/isv_eval/orthography.py). Text is NEVER
@@ -42,6 +43,11 @@ EXPERIMENTS = {
     "exp003": {
         "dir": ROOT / "experiments" / "exp003-scaffold" / "outputs",
         "label": "EXP-003",
+        "globs": ("*/output.txt",),
+    },
+    "exp004": {
+        "dir": ROOT / "experiments" / "exp004-modelscreen" / "outputs",
+        "label": "EXP-004",
         "globs": ("*/output.txt",),
     },
 }

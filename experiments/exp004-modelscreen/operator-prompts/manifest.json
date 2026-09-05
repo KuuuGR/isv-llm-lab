@@ -1,0 +1,76 @@
+{
+  "artifact": "operator-prompt-manifest",
+  "experiment_id": "exp004",
+  "date": "2026-09-06",
+  "generator": "scripts/run_exp004_phase1.py prepare",
+  "generator_commit": "4b48d64a6e11061c5ce46550454d9d0af8f83b49",
+  "note": "Prompt files embed the copyrighted story and stay local (gitignored); this manifest records prompt hashes only.",
+  "files": [
+    {
+      "file": "01-gpt-5.6-luna-thinkoff.md",
+      "run_id": "2026-09-06__openai__gpt-5.6-luna__thinkoff__direct",
+      "prompt_sha256": "4f79463b37eea66198d00d6d53674033b20d566215e3e9121dbb58147c779d53",
+      "bytes": 12016
+    },
+    {
+      "file": "02-gpt-5.6-luna-thinkon.md",
+      "run_id": "2026-09-06__openai__gpt-5.6-luna__thinkon__direct",
+      "prompt_sha256": "959543a8d41e03b1d65b312f5a1ed08a827b236b4b9779b3496909fc8694af82",
+      "bytes": 12012
+    },
+    {
+      "file": "03-gpt-isv-teacher-unknown.md",
+      "run_id": "2026-09-06__openai__gpt-isv-teacher__unknown__direct",
+      "prompt_sha256": "479c80cf5aad6d76a9b1652e2330435748742e03c306165dd1b300454bd02363",
+      "bytes": 12081
+    },
+    {
+      "file": "04-claude-sonnet-5.md",
+      "run_id": "2026-09-06__anthropic__claude__sonnet-5__direct",
+      "prompt_sha256": "809e21b83fd4e7c3447186bf803baae3cb3cc0cddfed0e75f22a866fd97e549d",
+      "bytes": 11985
+    },
+    {
+      "file": "05-gemini-unknown.md",
+      "run_id": "2026-09-06__google__gemini__unknown__direct",
+      "prompt_sha256": "79a166784bd49549134d7684aab4a60543f4cfd8e01fb06c34631d18f744f188",
+      "bytes": 12071
+    },
+    {
+      "file": "06-deepseek-v4-pro-deepthinkoff.md",
+      "run_id": "2026-09-06__deepseek__deepseek-v4-pro__deepthinkoff__direct",
+      "prompt_sha256": "28793fd6c74ac75a77356d0db5d610bfdcb5bd016022d4b9d8cbf3966162ca43",
+      "bytes": 12043
+    },
+    {
+      "file": "07-deepseek-v4-pro-deepthinkon.md",
+      "run_id": "2026-09-06__deepseek__deepseek-v4-pro__deepthinkon__direct",
+      "prompt_sha256": "14b2175e6e1f3ee70a88965fd05760fd31cc2f9346d0b7babc6070b30986baeb",
+      "bytes": 12039
+    },
+    {
+      "file": "08-grok-unknown.md",
+      "run_id": "2026-09-06__xai__grok__unknown__direct",
+      "prompt_sha256": "30745c25eec531b0bfdd78603af17f2e5fa11a6b675fc292e7d656834cd57c81",
+      "bytes": 11951
+    },
+    {
+      "file": "09-kimi-unknown.md",
+      "run_id": "2026-09-06__moonshot__kimi__unknown__direct",
+      "prompt_sha256": "838e967ff7e986f7e662f858d06f4cc0e7dbf06bc9c37ce75eba388e223f8a48",
+      "bytes": 11956
+    },
+    {
+      "file": "10-qwen-unknown.md",
+      "run_id": "2026-09-06__alibaba__qwen__unknown__direct",
+      "prompt_sha256": "d424dc8149d35c5df60bf1f20593a9e7cb841cf863d90fae0501198487146c3b",
+      "bytes": 11965
+    },
+    {
+      "file": "11-glm-unknown.md",
+      "run_id": "2026-09-06__zhipu__glm__unknown__direct",
+      "prompt_sha256": "0469268b84bcc4cb807777c269f383e612027bdf23aad8998e192f241958860c",
+      "bytes": 12031
+    }
+  ]
+}
