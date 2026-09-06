@@ -803,3 +803,30 @@ prior experiment. (3) Save the raw session file (prompt + reply together)
 as the provenance artifact and define a deterministic reply-boundary rule
 (suffix after the prompt's closing `## Output` line) instead of asking the
 operator to split prompt and reply by hand.
+
+## L-036 · 2026-09-06 · A corpus-priming control needs mechanical same-session and no-corpus guarantees, not operator good faith (Task 019)
+
+**Observed.** Phase 2A's manipulation is *context retention*: a corpus
+priming effect only exists if the reference text and the translation task
+happen in the same conversation, and the control condition only means
+something if its sessions contain no prior ISV reference material. In
+preparing the kit it became clear that neither property can be verified
+after the fact from a filename or a hand-written note — the author's
+Phase-1 session files already showed that annotations drift (L-035).
+
+**Interpretation.** When the experimental variable is *what else is in the
+context*, provenance must record *what was actually in the context*:
+the session file is the unit of evidence, and the boundary rule must be
+mechanical (extract the reply after the prompt's closing `## Output` line)
+with condition-specific checks on the *prefix* (corpus present before the
+translation instruction for primed runs; corpus absent everywhere for
+control runs).
+
+**Next time.** (1) Encode contamination checks into the collector, not into
+instructions: reject primed sessions whose prefix lacks the corpus
+fingerprint and control sessions that contain it. (2) Treat "the author
+ran it correctly" as unverified until the stored session bytes prove it.
+(3) Where a manipulation is sequential (two prompts in one session), name
+and store the messages so the reply boundary is unambiguous even when the
+model's first reply contains prompt-like markers — split after the
+translation instruction's own marker, never by scanning the whole file.

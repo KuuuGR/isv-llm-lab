@@ -732,7 +732,62 @@ before evaluation:
   end-to-end); full suite green (Task 018). Docs updated: D-045, L-035,
   DESIGN §12, exp004 READMEs, STATE, ROADMAP, RESEARCH_NOTES.
 
-## Planned (not started) — current (2026-09-06, SODA Task 018)
+### Follow-up: EXP-004 Phase 2A corpus priming — full-roster kit prepared (Task 019, 2026-09-06)
+
+Phase 2A is the corpus-grounding experiment prepared but NOT executed in
+this task (no external LLM call). Kit:
+`experiments/exp004-modelscreen/phase2a/`; design: DESIGN §13; decision:
+D-046.
+
+- **What is tested:** does exposing an LLM to authentic Medžuslovjansky
+  immediately before translation change its generated Medžuslovjansky?
+  Framed strictly as **in-context learning / corpus priming / contextual
+  grounding / reference-text conditioning** (never training; never textual
+  reconstruction — the reference text is never the target).
+- **Roster:** the FULL reconciled 18-configuration Phase-1 roster (GLM
+  excluded), per the author's Task-019 instruction that Phase 2A must not
+  be narrowed to a hand-picked shortlist before any corpus experiment. The
+  roster is derived in code from `run_exp004_phase1.ROSTER`.
+- **Fixed reference corpus:** "Tuta historija" excerpt (Prolog + Razděl 1
+  "Věčna Zima") supplied by the author in the task text — authentic ISV
+  narrative prose + dialogue; 4 820 B; SHA-256
+  `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c`;
+  embedded directly in the Prompt-1 files (no URL anywhere); kept local
+  (gitignored); provenance + contamination probe in `corpus/README.md`.
+- **Conditions:** control (`p2a-ctl`; the Phase-1 clean direct task — the
+  Phase-1 baseline outputs satisfy it, fresh controls optional) and
+  corpus-primed (`p2a-primed`; msg1 = study reference text as language
+  reference — no translation/summary/reproduction/imitation/questions;
+  msg2 = same Polish story, standard instruction + reference cue, SAME
+  session). The translation instruction + story body is byte-identical
+  across all control and msg2 prompts (no scaffolding/candidates/
+  morphology/repair).
+- **Contamination control:** mechanical — `collect-session` requires the
+  corpus BEFORE the translation instruction in primed sessions (same-
+  session proof), rejects control sessions containing corpus material, and
+  rejects altered translation instructions; fresh session per run.
+- **Run identity:** `<date>__<provider>__<model>__<model_version>__`
+  `p2a-ctl|p2a-primed`; every run linked to its Phase-1 `baseline_run_id`;
+  36-run plan + 54 prompt files + manifest (hashes); deterministic kit
+  (`scripts/run_exp004_phase2a.py prepare --date YYYY-MM-DD`).
+- **Result format (`compare`):** per-configuration primed-vs-baseline
+  per-dimension deltas (canonical coverage, broader resource-supported
+  coverage, unresolved rate, lexical tokens, A/B/C, orthography-out) — no
+  composite score, no ranking (L-033). Evaluation reuses the unmodified
+  Task 008 evaluator + Task 015 orthography audit.
+- **Preserved observation (RESEARCH_NOTES §4.17):** Claude Sonnet 5 max
+  (>45 min, continuations, free-tier exhaustion in Phase 1) stays in the
+  roster as an availability constraint; an impractical session is recorded
+  as an execution limitation, never silently substituted.
+- **Tests:** 19 added (identity/condition separation, hash consistency,
+  prompt separation, no-corpus-in-control, roster coverage, contamination
+  rejection, compare); full suite **155 green**.
+- **Next:** the author executes the 18 primed sessions externally (operator
+  protocol in `phase2a/README.md`), then collect/verify/evaluate/compare.
+  Phase 2B (Wikipedia-length authentic reference + independent Polish
+  story) is documented as future work.
+
+## Planned (not started) — current (2026-09-06, SODA Task 019)
 
 Status categories are kept distinct:
 - **Completed experiments:** EXP-001 (baseline, historical), EXP-002
@@ -756,9 +811,11 @@ Status categories are kept distinct:
 - **Planned experiments:** EXP-004 model screening — **Phase 1 EXECUTED and
   RECONCILED (Task 018, 2026-09-06)**: 19 collected runs, 18 intake-complete
   and evaluated (evidence table in `outputs/roster.md`); GLM 4.5
-  failed/excluded per protocol; Phase 1 report + evidence-based Phase 2
-  shortlist are the next step. Phase 2 (guidance methods) stays closed
-  until then.
+  failed/excluded per protocol. **Phase 2A (full-roster corpus priming)
+  PREPARED and execution-ready (Task 019, 2026-09-06)** — no LLM run
+  performed yet; author's external primed sessions are the next step;
+  Phase 2B documented as future work. Phase 2 guidance methods stay closed
+  until Phase 1 is complete and reported.
 
 Planned (not started):
 
@@ -798,6 +855,20 @@ Planned (not started):
   3. multiple resource-supported alternatives; 4. POS/morphology guidance;
   5. grammar guidance; 6. lexical + morphology/grammar combinations;
   7. evaluator/repair loop) to identify the best model × method
-  combination rather than a blind matrix. **Next:** Phase 1 report +
-  evidence-based Phase 2 shortlist (3–5 models). Do not start Phase 2
+  combination rather than a blind matrix. **Next:** Phase 1 report;
+  Phase 2A corpus priming (full roster) is prepared and execution-ready
+  (Task 019) — author executes the primed sessions externally, then
+  collect/verify/evaluate/compare. Do not start further Phase 2 work
   before Phase 1 is complete and reported.
+- **EXP-004 Phase 2A — full-roster corpus priming (PREPARED — NOT
+  EXECUTED, Task 019, 2026-09-06)**: tests the core corpus-grounding
+  hypothesis on ALL 18 Phase-1-usable configurations: does authentic ISV
+  exposure immediately before translation change generation? Two
+  conditions (control = Phase-1 baseline; corpus-primed = msg1 authentic
+  "Tuta historija" reference + msg2 same Polish story in one session);
+  fixed corpus identical for every model (4 820 B, sha256 `413830fa…`);
+  run ids `…__p2a-ctl|p2a-primed` linked to Phase-1 baselines;
+  contamination-controlled collection; per-dimension `compare` deltas
+  (no composite score, no ranking). Kit + protocol:
+  `experiments/exp004-modelscreen/phase2a/README.md` (DESIGN §13, D-046).
+  **No external LLM run exists yet.**

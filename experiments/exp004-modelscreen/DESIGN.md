@@ -520,3 +520,142 @@ EXP-001/002/003 and starts no LLM run.
    transliterated names such as Bronislava/Przemyslava/Julijana) failed an
    exact Polish-token match (D-045, L-035). Phase 2 remains closed.
 
+## 13. Phase 2A — full-roster corpus priming (prepared, SODA Task 019)
+
+### 13.1 What Phase 2A tests and what it is not
+
+Phase 2A replaces the originally sketched "narrowed shortlist of guidance
+methods" step with the project's core corpus-grounding hypothesis:
+
+> Does exposing an LLM to authentic Medžuslovjansky text immediately before
+> translation cause it to generate Medžuslovjansky that is more consistent
+> with the real language than the same model translating without that
+> exposure?
+
+This is **in-context learning / corpus priming / contextual grounding /
+reference-text conditioning**. It is NOT training (weights are never
+changed) and NOT textual reconstruction: the reference text is never the
+target, the model is explicitly forbidden to translate/summarize/reproduce/
+modify/continue/imitate it or answer questions about it, and a new
+translation with different wording and sentence structures is expected and
+is not a failure.
+
+The Project Coordinator's plan to narrow Phase 2 to 3–5 hand-picked "best"
+models was **explicitly not taken** (2026-09-06): narrowing before any
+guidance/context experiment would throw away the 18 usable Phase-1 baselines
+and risk selecting on the very effect Phase 2A must measure. Phase 2A
+therefore covers the **full reconciled 18-configuration Phase-1 roster**
+(GLM excluded; the roster is derived in code from the Phase-1 roster, never
+from filenames).
+
+### 13.2 The two conditions (per configuration)
+
+- **Control (`p2a-ctl`)** — the same clean direct-translation task as
+  Phase 1 (same base instruction, same Polish source story, fresh session,
+  no corpus). The Phase-1 baseline outputs satisfy this condition; the
+  compare step prefers a freshly collected Phase-2A control if the author
+  executes one, otherwise the Phase-1 output of the same configuration.
+- **Corpus-primed (`p2a-primed`)** — two sequential prompts in ONE fresh
+  session:
+  - **Prompt 1** — a substantial authentic Medžuslovjansky text (the fixed
+    author-supplied "Tuta historija" excerpt, ~4.5 KB; §13.3) with an
+    explicit study-as-language-reference instruction (vocabulary, word
+    formation, morphology, syntax, orthography, style). No translation is
+    requested; the model must not translate/summarize/reproduce/continue/
+    imitate the text or answer questions about its content.
+  - **Prompt 2** — the exact same Polish source story as Phase 1 with the
+    standard direct-translation instruction plus a one-sentence reference
+    cue pointing at the preceding authentic text. The story bytes are
+    unchanged; there is no lexical scaffolding, no candidate list, no
+    dictionary injection, no morphology annotation, no repair instruction.
+    The translation instruction + story body is byte-identical across all
+    control and Prompt-2 files.
+
+The key comparison is **primed vs Phase-1 direct baseline for the same
+model/configuration** (per-dimension delta; no composite score, no
+ranking).
+
+### 13.3 Fixed reference corpus
+
+- **Corpus id:** `tuta-historija` v1 — an excerpt ("Prolog" + Razděl 1
+  "Věčna Zima") of the authentic Medžuslovjansky work "Tuta historija",
+  supplied in full by the project author in Task 019 (2026-09-06). No URL,
+  nothing fetched.
+- **Content:** narrative prose and dialogue — descriptions, character
+  speech, questions, answers, everyday constructions — so the reference
+  covers vocabulary, morphology, syntax, word formation, orthography and
+  style.
+- **Size/hash:** 4 820 bytes; SHA-256
+  `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c`
+  (pinned in the orchestrator + tests; a corpus change is a new version,
+  never a silent edit). Same corpus for every model — no per-model
+  truncation; if an interface cannot accept it, that run is recorded as an
+  execution/access limitation.
+- **License/copyright:** author-supplied; distribution status not recorded,
+  so the text stays local (gitignored) like the Polish story; only hashes
+  and provenance are committed. It is embedded directly in the generated
+  Prompt-1 files (no URL is ever given to the model or the operator).
+- **Contamination probe:** the corpus shares no plot, characters, setting
+  or sentences with the Polish story; title words, character names and the
+  place name of the story do not occur in it, and it is not a translation
+  of the story (asserted by tests).
+
+### 13.4 Contamination control (critical)
+
+- Every run starts a **new fresh session**; sessions must never contain
+  unrelated ISV material.
+- Primed runs must keep Prompt 1 and Prompt 2 in the **same session** — the
+  priming effect is context retention; the collector mechanically requires
+  the corpus to appear in the session BEFORE the translation instruction
+  (same-session proof) and rejects altered translation instructions.
+- Control sessions must never contain any ISV reference material; the
+  collector **rejects** a control session containing the corpus
+  fingerprint.
+- The author attestation and access/quota verdicts are recorded exactly as
+  in Phase 1 (D-036/§5.1). Terminology is fixed: in-context learning /
+  corpus priming / contextual grounding / reference-text conditioning —
+  never "training".
+
+### 13.5 Run identity
+
+Run ids: `<date>__<provider>__<model>__<model_version>__<condition>` with
+`<condition>` = `direct` (Phase 1) | `p2a-ctl` | `p2a-primed`. The three
+identities are disjoint; every Phase-2A run carries its `baseline_run_id`
+(the Phase-1 `direct` run of the same configuration, resolved from the
+actual Phase-1 plan). The kit is deterministic: regenerating
+`scripts/run_exp004_phase2a.py prepare --date YYYY-MM-DD` yields
+byte-identical prompts, manifest and plan.
+
+### 13.6 Collection, verification, evaluation
+
+Mirrors Phase 1 (D-035 byte-for-byte; L-027 completeness gate with
+ISV-tolerant name stems; Task 008 evaluator unmodified; Task 015
+orthography audit; no composite scores). New subcommands: `compare` writes
+the per-configuration primed-vs-baseline delta table
+(`phase2a/outputs/compare.{json,md}`) — canonical coverage, broader
+resource-supported coverage, unresolved rate, lexical tokens, A/B/C counts,
+orthography-out — with no ranking. Nothing is evaluated without a collected
+file; outputs are never modified or deleted.
+
+### 13.7 Future Phase 2B (documented, NOT executed)
+
+Phase 2B would test corpus length/complexity and content effects with a
+longer authentic reference text — an actual ISV Wikipedia article — plus an
+**independently created** Polish story inspired by its subject (a new story,
+NOT the canonical Phase-1 story, so corpus content and story content are
+decoupled). Phase 2B is not implemented here.
+
+### 13.8 Status
+
+- **Prepared (SODA Task 019, 2026-09-06):** protocol above; corpus file +
+  provenance; `phase2a/` kit (README, prompts, manifest, plan — 36 runs,
+  18 configurations × control/primed); `scripts/run_exp004_phase2a.py`
+  (prepare/collect/collect-session/verify/evaluate/status/roster/compare);
+  tests for identity, condition separation, corpus/source hash consistency,
+  prompt separation, no-corpus-in-control, and complete roster coverage
+  (19 new tests; full suite green).
+- **NOT executed:** no external LLM call was made in Task 019; execution is
+  the author's next operator step (fresh sessions per run; the Claude
+  Sonnet 5 — max row carries its known >45-min/free-tier constraint
+  (§12/README row 12; RESEARCH_NOTES §4.16/§4.17)).
+

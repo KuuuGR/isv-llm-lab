@@ -36,6 +36,11 @@ experiments/**/operator-prompts/*
 experiments/**/collected-sessions/*
 !experiments/**/collected-sessions/README.md
 
+# EXP-004 Phase 2A reference corpus (author-supplied Medžuslovjansky text;
+# distribution status not recorded — stays local like the Polish story)
+experiments/**/phase2a/corpus/*
+!experiments/**/phase2a/corpus/README.md
+
 # Raw experiment input set (source story + model outputs, copyrighted)
 opowiadania-set-isv/
 

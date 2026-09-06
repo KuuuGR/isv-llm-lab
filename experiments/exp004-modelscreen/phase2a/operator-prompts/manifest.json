@@ -1,0 +1,454 @@
+{
+  "artifact": "operator-prompt-manifest",
+  "experiment_id": "exp004",
+  "phase": "2a",
+  "date": "2026-09-07",
+  "generator": "scripts/run_exp004_phase2a.py prepare",
+  "generator_commit": "f395cea14fc616e510f627f90f8dc4add077ddbd",
+  "corpus": {
+    "id": "tuta-historija",
+    "version": "v1",
+    "file": "experiments/exp004-modelscreen/phase2a/corpus/tuta-historija-excerpt.txt",
+    "sha256": "413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c",
+    "bytes": 4820
+  },
+  "source": {
+    "file": "experiments/exp004-modelscreen/input/source.txt",
+    "sha256": "5de968a6214d3d64bdb586b5121f494c4bb107e33546487a86bf8ecc57280723"
+  },
+  "note": "Prompt files embed the copyrighted Polish story and the author-supplied corpus and stay local (gitignored); this manifest records prompt hashes only.",
+  "files": [
+    {
+      "file": "ctl-01-gpt-5.6-luna-thinkoff.md",
+      "run_id": "2026-09-07__openai__gpt-5.6-luna__thinkoff__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "1539267e83d8bea7ab115cd1717920c72f11bcacfb387d4986426b139a5faf07",
+      "bytes": 12173
+    },
+    {
+      "file": "ctl-02-gpt-5.6-luna-thinkon.md",
+      "run_id": "2026-09-07__openai__gpt-5.6-luna__thinkon__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "ec045ac25b20fc9d137ef41dd19db317d24cc09bf908faac15b5235b748447bb",
+      "bytes": 12169
+    },
+    {
+      "file": "ctl-03-gpt-isv-teacher-unknown.md",
+      "run_id": "2026-09-07__openai__gpt-isv-teacher__unknown__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "8ee0731a8bdf6fcb7b6959cd347a12bb6351ae25c1dc98f6a2466b1f95e483d6",
+      "bytes": 12238
+    },
+    {
+      "file": "ctl-04-claude-sonnet-5.md",
+      "run_id": "2026-09-07__anthropic__claude__sonnet-5__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "a5aa143d6239ea13000d522754b01420df1916661487b4b7bc892a341b09717d",
+      "bytes": 12201
+    },
+    {
+      "file": "ctl-05-gemini-3.1-pro-extthinkon.md",
+      "run_id": "2026-09-07__google__gemini-3.1-pro__extthinkon__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "1095d0922e33033fa1fc2d4b675f1ad4714677c073ce29e7a21b6f0199d13dc9",
+      "bytes": 12272
+    },
+    {
+      "file": "ctl-06-deepseek-v3-instant-deepthinkoff.md",
+      "run_id": "2026-09-07__deepseek__deepseek-v3-instant__deepthinkoff__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "ce77098071c8eaea8854bd7fffe00e4a22cc6cfe33694077e1d90b686b7e007f",
+      "bytes": 12229
+    },
+    {
+      "file": "ctl-07-deepseek-v3-instant-deepthinkon.md",
+      "run_id": "2026-09-07__deepseek__deepseek-v3-instant__deepthinkon__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "2859046ce5f1152d58e52a7198d3e580d27f842b717b52dda607be2f7055e299",
+      "bytes": 12225
+    },
+    {
+      "file": "ctl-08-grok-unknown.md",
+      "run_id": "2026-09-07__xai__grok__unknown__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "7d458c22a0be13071f9e6ac9f34d84487752d6220145b565e7197ec5a247c8b6",
+      "bytes": 12108
+    },
+    {
+      "file": "ctl-09-kimi-k2.6-instant.md",
+      "run_id": "2026-09-07__moonshot__kimi__k2.6-instant__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "40062eec3b5dbc51a2fa6550bb8423708c8b3dd5699cb170dfc2484e4f2f2be9",
+      "bytes": 12182
+    },
+    {
+      "file": "ctl-10-qwen-3.8-max-thinking.md",
+      "run_id": "2026-09-07__alibaba__qwen-3.8-max__thinking__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "84e2020043a920eb2cd63d4bcdc890750ed0f75f676cece629f87b1bc34100ca",
+      "bytes": 12180
+    },
+    {
+      "file": "ctl-12-claude-sonnet-5-max.md",
+      "run_id": "2026-09-07__anthropic__claude__sonnet-5-max__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "4a4f697bbf1e0a9a6f290182926102666cbf67c4858751746c7820fc9508cb22",
+      "bytes": 12222
+    },
+    {
+      "file": "ctl-13-gemini-3.6-flash-extthinkoff.md",
+      "run_id": "2026-09-07__google__gemini-3.6-flash__extthinkoff__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "a286ef74b09441d9df2af637060b843382a694e3f57a4fbae0b5d780a2db5927",
+      "bytes": 12234
+    },
+    {
+      "file": "ctl-14-gemini-3.6-flash-extthinkon.md",
+      "run_id": "2026-09-07__google__gemini-3.6-flash__extthinkon__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "0909b8126b8801aede3f3e91544583f6ee537ec3e8d93c0c23b0d5aa41a6726d",
+      "bytes": 12230
+    },
+    {
+      "file": "ctl-15-deepseek-v3-expert-deepthinkoff.md",
+      "run_id": "2026-09-07__deepseek__deepseek-v3-expert__deepthinkoff__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "df1bcaf75f4eddb4144dc9e78c5fc51dcfca8506dc085b1a72ee7e1f7b965f86",
+      "bytes": 12226
+    },
+    {
+      "file": "ctl-16-deepseek-v3-expert-deepthinkon.md",
+      "run_id": "2026-09-07__deepseek__deepseek-v3-expert__deepthinkon__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "a5c114d01718013b99b09eecd586312c592205c25d2d590d5b746f003778cf72",
+      "bytes": 12222
+    },
+    {
+      "file": "ctl-17-qwen-3.7-plus-thinking.md",
+      "run_id": "2026-09-07__alibaba__qwen-3.7-plus__thinking__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "b01707f54ba5e168a9da33e2c7976342b5d3e7c326c91e870bc82d06d1981fdc",
+      "bytes": 12183
+    },
+    {
+      "file": "ctl-18-qwen-3.7-plus-fast.md",
+      "run_id": "2026-09-07__alibaba__qwen-3.7-plus__fast__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "183793d607804391bff83c26e3c3f73b715cbc74fd53ae4e5a3d700e0f0b30b2",
+      "bytes": 12167
+    },
+    {
+      "file": "ctl-19-qwen-3.8-max-fast.md",
+      "run_id": "2026-09-07__alibaba__qwen-3.8-max__fast__p2a-ctl",
+      "condition": "p2a-ctl",
+      "message": null,
+      "prompt_sha256": "bab2f9feb286a4d00276e3bf8d8468fb54bf2aedbf7c01b301fee683f431e847",
+      "bytes": 12164
+    },
+    {
+      "file": "primed-01-gpt-5.6-luna-thinkoff-msg1.md",
+      "run_id": "2026-09-07__openai__gpt-5.6-luna__thinkoff__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "5d7508cf32d52851a330a7fc0fec5470b57bf9c78f3b5bfdf4fe8c1a8f17752b",
+      "bytes": 6428
+    },
+    {
+      "file": "primed-01-gpt-5.6-luna-thinkoff-msg2.md",
+      "run_id": "2026-09-07__openai__gpt-5.6-luna__thinkoff__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "bf1c0e6f75570ad3ac02e478c4427594e14d7d05fd4a749e7134975c12aa1f71",
+      "bytes": 12226
+    },
+    {
+      "file": "primed-02-gpt-5.6-luna-thinkon-msg1.md",
+      "run_id": "2026-09-07__openai__gpt-5.6-luna__thinkon__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "bd69a7849c306dbfd1da0747586136d1685635b5501207b8a07bcc30a5770986",
+      "bytes": 6424
+    },
+    {
+      "file": "primed-02-gpt-5.6-luna-thinkon-msg2.md",
+      "run_id": "2026-09-07__openai__gpt-5.6-luna__thinkon__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "cec5cc273ab472d49a531a30548ae863329b0695b68be95fc7c82f61e3a35b81",
+      "bytes": 12222
+    },
+    {
+      "file": "primed-03-gpt-isv-teacher-unknown-msg1.md",
+      "run_id": "2026-09-07__openai__gpt-isv-teacher__unknown__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "61cb98e0848f84495d9ed23664e3cc18681de6ecbde3f4ff54e02c0710676685",
+      "bytes": 6493
+    },
+    {
+      "file": "primed-03-gpt-isv-teacher-unknown-msg2.md",
+      "run_id": "2026-09-07__openai__gpt-isv-teacher__unknown__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "ce0894ae77f25dea08aa79f08cc716e03194268c5c748823be2d0b8e915ce4e5",
+      "bytes": 12291
+    },
+    {
+      "file": "primed-04-claude-sonnet-5-msg1.md",
+      "run_id": "2026-09-07__anthropic__claude__sonnet-5__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "0edfda38f8dffee098c646529aaa27a0ec392998ed8bc9fa7fe922721eacbfaa",
+      "bytes": 6456
+    },
+    {
+      "file": "primed-04-claude-sonnet-5-msg2.md",
+      "run_id": "2026-09-07__anthropic__claude__sonnet-5__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "cdee38060676568cbc5fbfe2417d76bc643ea1d763169b369f8273a318042e96",
+      "bytes": 12254
+    },
+    {
+      "file": "primed-05-gemini-3.1-pro-extthinkon-msg1.md",
+      "run_id": "2026-09-07__google__gemini-3.1-pro__extthinkon__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "6a210143415c7aaaa9258cdaadad1900b6511ee0b0964a166b9fec832d8f7b01",
+      "bytes": 6527
+    },
+    {
+      "file": "primed-05-gemini-3.1-pro-extthinkon-msg2.md",
+      "run_id": "2026-09-07__google__gemini-3.1-pro__extthinkon__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "e400fc53582fee8398ceecfcbfd26f900da5528c74482d9e1ee1ee162996e73e",
+      "bytes": 12325
+    },
+    {
+      "file": "primed-06-deepseek-v3-instant-deepthinkoff-msg1.md",
+      "run_id": "2026-09-07__deepseek__deepseek-v3-instant__deepthinkoff__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "0768d959cdf1b02469645361c070976cc881a085052125c79731e4f558cbe645",
+      "bytes": 6484
+    },
+    {
+      "file": "primed-06-deepseek-v3-instant-deepthinkoff-msg2.md",
+      "run_id": "2026-09-07__deepseek__deepseek-v3-instant__deepthinkoff__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "c0c855e8cc3aa5afbde415a32dadb1dc18e02a45eeae26bde0880d1b16df7555",
+      "bytes": 12282
+    },
+    {
+      "file": "primed-07-deepseek-v3-instant-deepthinkon-msg1.md",
+      "run_id": "2026-09-07__deepseek__deepseek-v3-instant__deepthinkon__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "47b598d577f83fd57c5318ecdcfc8ab2f84e556570da6c0f18de4ab6809cc771",
+      "bytes": 6480
+    },
+    {
+      "file": "primed-07-deepseek-v3-instant-deepthinkon-msg2.md",
+      "run_id": "2026-09-07__deepseek__deepseek-v3-instant__deepthinkon__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "c23e951ed9d6b2f5ab0cead0adc932ae103f25fc4092813bc7468c0f22bece50",
+      "bytes": 12278
+    },
+    {
+      "file": "primed-08-grok-unknown-msg1.md",
+      "run_id": "2026-09-07__xai__grok__unknown__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "905c3c84593d376af762ed2dcc709b7eb6997f7b8e84acd3d2793928f2119885",
+      "bytes": 6363
+    },
+    {
+      "file": "primed-08-grok-unknown-msg2.md",
+      "run_id": "2026-09-07__xai__grok__unknown__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "83ec29fdb8b9785e38e71aff85c705a1d58daa458e91f062103977c573a1fcf8",
+      "bytes": 12161
+    },
+    {
+      "file": "primed-09-kimi-k2.6-instant-msg1.md",
+      "run_id": "2026-09-07__moonshot__kimi__k2.6-instant__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "84a58eb76e9511b741c59c4b87c6588d6699e3eed94e404d06fba9bae006a7a3",
+      "bytes": 6437
+    },
+    {
+      "file": "primed-09-kimi-k2.6-instant-msg2.md",
+      "run_id": "2026-09-07__moonshot__kimi__k2.6-instant__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "86730d29b5b718d96642fbd7eb84b863c8279defd1c631f1a1b137f65782cc49",
+      "bytes": 12235
+    },
+    {
+      "file": "primed-10-qwen-3.8-max-thinking-msg1.md",
+      "run_id": "2026-09-07__alibaba__qwen-3.8-max__thinking__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "a77e168a98fd2bc54acfdf777273429f80a12553f08f2b248b3f9dca607629e8",
+      "bytes": 6435
+    },
+    {
+      "file": "primed-10-qwen-3.8-max-thinking-msg2.md",
+      "run_id": "2026-09-07__alibaba__qwen-3.8-max__thinking__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "0f9daf56e7294b995c628e0807d4cc472988bf27ee198568f1c7ceb7b12b15f2",
+      "bytes": 12233
+    },
+    {
+      "file": "primed-12-claude-sonnet-5-max-msg1.md",
+      "run_id": "2026-09-07__anthropic__claude__sonnet-5-max__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "c5db17e0ec52ffae4738a06094a0ab6278b15bb5ed0c6d0e836ad1c7ea27c8cd",
+      "bytes": 6477
+    },
+    {
+      "file": "primed-12-claude-sonnet-5-max-msg2.md",
+      "run_id": "2026-09-07__anthropic__claude__sonnet-5-max__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "38f3cb6e4a10de31bd2437cdf688748e14e43b1a259a9733ac001062cda1a66a",
+      "bytes": 12275
+    },
+    {
+      "file": "primed-13-gemini-3.6-flash-extthinkoff-msg1.md",
+      "run_id": "2026-09-07__google__gemini-3.6-flash__extthinkoff__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "fcbc932c8ab72c63921c2854701d3fd409b51302be71ef3a7ba9eb679dc2b2de",
+      "bytes": 6489
+    },
+    {
+      "file": "primed-13-gemini-3.6-flash-extthinkoff-msg2.md",
+      "run_id": "2026-09-07__google__gemini-3.6-flash__extthinkoff__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "66a38afa0479a2202d357993cbae93872d0da7d893cf1c2f4759a1e2d3610e6a",
+      "bytes": 12287
+    },
+    {
+      "file": "primed-14-gemini-3.6-flash-extthinkon-msg1.md",
+      "run_id": "2026-09-07__google__gemini-3.6-flash__extthinkon__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "660ea9f4af0ce0df64422d1e6fef2fbb055bd3fec9b96aa1412eac8c0e23ec0b",
+      "bytes": 6485
+    },
+    {
+      "file": "primed-14-gemini-3.6-flash-extthinkon-msg2.md",
+      "run_id": "2026-09-07__google__gemini-3.6-flash__extthinkon__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "99d9a687dbdaa410ffc4b40bc9bfb0a1229ba65c4a0d890f12eb43235c2835e5",
+      "bytes": 12283
+    },
+    {
+      "file": "primed-15-deepseek-v3-expert-deepthinkoff-msg1.md",
+      "run_id": "2026-09-07__deepseek__deepseek-v3-expert__deepthinkoff__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "8941220e1f601c611faa43bb2b4868882b2621fb1af40ab33fe638b9ca6a3141",
+      "bytes": 6481
+    },
+    {
+      "file": "primed-15-deepseek-v3-expert-deepthinkoff-msg2.md",
+      "run_id": "2026-09-07__deepseek__deepseek-v3-expert__deepthinkoff__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "edcc14016dac72eab4bec3ff6f1cc47addbc7573fc1faf103dc93a85d7bae486",
+      "bytes": 12279
+    },
+    {
+      "file": "primed-16-deepseek-v3-expert-deepthinkon-msg1.md",
+      "run_id": "2026-09-07__deepseek__deepseek-v3-expert__deepthinkon__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "da8080e186180dae7f401d425826a4f0411b1efc44c5bfe878a2dcf972749bb1",
+      "bytes": 6477
+    },
+    {
+      "file": "primed-16-deepseek-v3-expert-deepthinkon-msg2.md",
+      "run_id": "2026-09-07__deepseek__deepseek-v3-expert__deepthinkon__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "f899b2ff422160803fb182e1d5af61873c43fca14bc0248a7b4b60a4b6dfb9d8",
+      "bytes": 12275
+    },
+    {
+      "file": "primed-17-qwen-3.7-plus-thinking-msg1.md",
+      "run_id": "2026-09-07__alibaba__qwen-3.7-plus__thinking__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "b4a590366f9d7bb9d29049c3a755d0da5c1bfddf7985b0081e10497cf8ba0565",
+      "bytes": 6438
+    },
+    {
+      "file": "primed-17-qwen-3.7-plus-thinking-msg2.md",
+      "run_id": "2026-09-07__alibaba__qwen-3.7-plus__thinking__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "73a16ebd375e97d50c7a01cd9a7f7ed6a2e32ea4791d45d303213fffbed1a88f",
+      "bytes": 12236
+    },
+    {
+      "file": "primed-18-qwen-3.7-plus-fast-msg1.md",
+      "run_id": "2026-09-07__alibaba__qwen-3.7-plus__fast__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "aa95da9f60290a6f1a2328d0daa9cdbf27f85b0bed5314acef286e46e93a5dfc",
+      "bytes": 6422
+    },
+    {
+      "file": "primed-18-qwen-3.7-plus-fast-msg2.md",
+      "run_id": "2026-09-07__alibaba__qwen-3.7-plus__fast__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "7089937e0a42f0e3eb881d98af71bf5e210f27e7c4584134cd637ffc2e7c279f",
+      "bytes": 12220
+    },
+    {
+      "file": "primed-19-qwen-3.8-max-fast-msg1.md",
+      "run_id": "2026-09-07__alibaba__qwen-3.8-max__fast__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "7f0c68d431a931ca7e821c86160b009358fb525c33e0640fabad7c43c29257fb",
+      "bytes": 6419
+    },
+    {
+      "file": "primed-19-qwen-3.8-max-fast-msg2.md",
+      "run_id": "2026-09-07__alibaba__qwen-3.8-max__fast__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "aca4f01a8030ca7c455476c0dcc99df7b948957a8eb76bfab562ccabbb9310fc",
+      "bytes": 12217
+    }
+  ]
+}

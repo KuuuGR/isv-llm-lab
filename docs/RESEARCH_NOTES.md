@@ -727,6 +727,80 @@ deterministic evidence before any evaluation. What was done and learned:
   coverage-only ranking — L-033). Preliminary Phase 2 observations belong
   to the Phase 1 report; Phase 2 itself remains closed.
 
+### 4.17 EXP-004 Phase 1 — Claude Sonnet 5 max: a preserved practical-availability observation (SODA Task 019, 2026-09-06)
+
+Recorded so the observation is not lost when Phase 2A scheduling is
+decided. **Observed facts only** (author report, 2026-09-06, Phase 1 run
+#12); no cause is asserted — in particular, no server-load claim:
+
+- execution took **>45 minutes** (unusually long relative to every other
+  Phase-1 row);
+- it required **repeated continuation** (the interface stopped / the reply
+  had to be continued) to reach the completed translation;
+- the free-tier allowance was **exhausted** during the run;
+- consequently the model has **poor practical suitability** for this
+  project's per-story operator workflow.
+
+Interpretation (explicitly bounded): runtime, continuation count and quota
+consumption are **availability/execution data**, not translation-quality
+signals (D-045). The output itself is complete and was evaluated normally.
+Practical consequence: Phase 2A (corpus priming) keeps Claude Sonnet 5 max
+in the roster — the Project Coordinator decided against narrowing the
+roster before any corpus experiment — but a primed session of this row may
+be impractical on a given day; that is recorded as an execution limitation
+(fresh-session protocol), never silently substituted by another model or
+another corpus.
+
+### 4.18 EXP-004 Phase 2A — full-roster corpus priming prepared (SODA Task 019, 2026-09-06)
+
+Phase 2A is the project's core corpus-grounding experiment:
+
+> Does exposing an LLM to authentic Medžuslovjansky text immediately before
+> translation cause it to generate Medžuslovjansky that is more consistent
+> with the real language than the same model translating without that
+> exposure?
+
+What was prepared (no external LLM call in this task):
+
+- **Fixed reference corpus:** an authentic Medžuslovjansky excerpt
+  ("Prolog" + Razděl 1 "Věčna Zima") of the author-supplied work
+  "Tuta historija" (Task 019 text, 4 820 B, SHA-256
+  `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c`),
+  embedded directly in the Prompt-1 operator files (no URL anywhere).
+  Narrative prose + dialogue → vocabulary, morphology, syntax, word
+  formation, orthography and style are all observable in it; a
+  contamination probe found no overlap (title, characters, setting,
+  sentences) with the Polish story.
+- **Two conditions per Phase-1-usable configuration (18; GLM excluded):**
+  control (`p2a-ctl`, the Phase-1 clean direct task — Phase-1 outputs
+  satisfy it; compare prefers a fresh control if the author executes one)
+  and corpus-primed (`p2a-primed`: msg1 = study the reference text — no
+  translation requested, no summary/reproduction/imitation/questions; msg2
+  = the same Polish story with the standard instruction + a reference cue,
+  in the SAME session). The translation instruction + story body is
+  byte-identical across all control and msg2 prompts.
+- **Contamination control is mechanical:** fresh session per run;
+  `collect-session` requires the corpus BEFORE the translation instruction
+  in primed sessions (same-session proof) and rejects control sessions
+  that contain the corpus; altered translation instructions are rejected.
+- **Run identity:** `<date>__<provider>__<model>__<model_version>__`
+  `p2a-ctl|p2a-primed` (Phase 1 = `__direct`), each run linked to its
+  Phase-1 `baseline_run_id`; 36-run plan; deterministic kit
+  (`scripts/run_exp004_phase2a.py prepare --date YYYY-MM-DD`).
+- **Result table = `compare`:** per-configuration primed-vs-baseline
+  per-dimension deltas (canonical coverage, broader resource-supported
+  coverage, unresolved rate, lexical tokens, A/B/C counts, orthography-out)
+  — no composite score, no ranking (L-033). Evaluation reuses the
+  unmodified Task 008 evaluator + Task 015 orthography audit.
+- **Future Phase 2B documented, not started:** an authentic ISV Wikipedia
+  article as reference plus an independently written Polish story inspired
+  by its subject (decouples corpus content from story content; tests
+  length/complexity effects).
+
+Methodological naming fixed from here on: **in-context learning / corpus
+priming / contextual grounding / reference-text conditioning** — never
+"training" (weights are never changed).
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - The letter inventory for a constructed-language output audit comes from the

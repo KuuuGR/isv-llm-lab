@@ -1,12 +1,14 @@
 # Roadmap
 
-Status: updated 2026-09-06 (Task 018 — EXP-004 Phase 1 execution COMPLETED:
-the author's 19 external sessions were audited and reconciled against the
-deterministic prompt package; 18 runs are intake-complete and evaluated
-(evidence table `experiments/exp004-modelscreen/outputs/roster.md`); GLM 4.5
-failed/excluded per protocol; Claude Sonnet 5 max runtime + free-tier
-exhaustion preserved as availability data. Next: the Phase 1 report and the
-evidence-based Phase 2 shortlist. Phase 2 must not start before then).
+Status: updated 2026-09-06 (Task 019 — EXP-004 Phase 2A (full-roster corpus
+priming) PREPARED and execution-ready: fixed author-supplied reference
+corpus ("Tuta historija" excerpt, 4 820 B, sha256 `413830fa…`) + 36-run
+plan (18 Phase-1-usable configurations × control/corpus-primed) + 54
+operator prompt files + contamination-controlled collection + compare
+tooling under `experiments/exp004-modelscreen/phase2a/`; 19 new tests
+(155 total green). **No external LLM run was performed in Task 019** —
+execution of the primed sessions is the author's next operator step; Phase
+1 remains executed/evaluated (Task 018).
 
 ## Done
 
@@ -506,6 +508,49 @@ evidence-based Phase 2 shortlist. Phase 2 must not start before then).
   - [x] Docs updated (D-045, L-035, DESIGN §12, exp004 README +
         operator-prompts/collected-sessions/outputs READMEs, STATE, ROADMAP,
         EXPERIMENTS, RESEARCH_NOTES).
+- [x] **Task 019 — EXP-004 Phase 2A corpus priming PREPARED (full roster;
+      execution-ready; 2026-09-06).** No external LLM call in this task.
+  - [x] Hypothesis fixed: does exposing an LLM to authentic
+        Medžuslovjansky immediately before translation change its generated
+        Medžuslovjansky (in-context learning / corpus priming / contextual
+        grounding / reference-text conditioning — NOT training, NOT
+        reconstruction). Coordinator's 3–5-model "Phase 2 shortlist" idea
+        explicitly NOT taken: full reconciled 18-configuration Phase-1
+        roster (GLM excluded), derived in code from the Phase-1 roster.
+  - [x] Fixed reference corpus: "Tuta historija" excerpt (Prolog + Razděl 1
+        "Věčna Zima") supplied by the author in the task text — no URL,
+        embedded directly in Prompt-1 files; 4 820 B; SHA-256
+        `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c`;
+        local/gitignored (distribution status not recorded); provenance +
+        contamination probe in `phase2a/corpus/README.md`.
+  - [x] Two conditions: control `p2a-ctl` (Phase-1 clean direct task —
+        Phase-1 outputs satisfy it; fresh control optional and preferred by
+        compare when executed) and corpus-primed `p2a-primed` (msg1 = study
+        reference text; no translation/summary/reproduction/imitation/
+        questions — msg2 = same Polish story + standard instruction +
+        reference cue, SAME session). Translation instruction + story body
+        byte-identical across all control/msg2 prompts.
+  - [x] Contamination control mechanical: fresh session per run;
+        `collect-session` requires the corpus BEFORE the translation
+        instruction in primed sessions (same-session proof), rejects
+        control sessions containing corpus material, rejects altered
+        translation instructions.
+  - [x] Run identity: `<date>__…__p2a-ctl|p2a-primed`, each linked to its
+        Phase-1 `baseline_run_id` (all 36 resolved against the actual
+        Phase-1 plan); 36-run plan + 54 prompt files + manifest (hashes);
+        deterministic kit.
+  - [x] `scripts/run_exp004_phase2a.py` — prepare/collect/collect-session/
+        verify/evaluate/status/roster/**compare** (per-dimension deltas vs
+        baseline; no composite score, no ranking).
+  - [x] Tests: 19 new (roster = 18 usable configs; run identity + condition
+        separation vs Phase 1; corpus/source hash consistency; prompt
+        separation; no corpus in control; primed session requires corpus;
+        contamination rejection; compare); full suite **155 green**.
+  - [x] Docs updated (D-046, L-036, RESEARCH_NOTES §4.17 Claude-Sonnet-5-max
+        availability observation + §4.18 Phase 2A prep, DESIGN §13, exp004
+        README + phase2a READMEs, STATE, ROADMAP, EXPERIMENTS).
+  - [x] Phase 2B (Wikipedia-length authentic reference + independent Polish
+        story) documented as future work — not started.
 
 ## Next recommended task (single)
 
@@ -529,20 +574,28 @@ evidence-based Phase 2 shortlist. Phase 2 must not start before then).
   OFF/ON, GPT Interslavic Teacher, Claude Sonnet 5 Medium + max, Gemini 3.1
   Pro + 3.6 Flash, DeepSeek V3 Instant + V3 Expert, Grok, Kimi K2.6 Instant,
   Qwen 3.8 Max + 3.7 Plus. Venice/local/Bielik remain excluded as before.
-- [ ] **EXP-004 Phase 1 report + Phase 2 shortlist (NEXT)** — write the
-  Phase 1 report from `outputs/roster.md` + per-run evaluation/orthography
-  artifacts (18 usable runs; GLM preserved as the failed/excluded case;
-  Claude Sonnet 5 max runtime recorded as availability data), and select
-  the small evidence-based Phase 2 shortlist (~3–5 models) using the
-  documented multi-dimensional judgment (practical availability,
-  completeness/reliability, lexical/resource evidence, orthographic
-  cleanliness, morphology/evidence, obvious quality issues — NOT coverage
-  ranking alone, per the EXP-003 lesson). Only after Phase 1 selects the
-  strongest/practical models are the assistance methods tested
-  systematically (1. direct translation; 2. lexical candidate guidance;
-  3. multiple resource-supported alternatives; 4. POS/morphology guidance;
-  5. grammar guidance; 6. lexical + morphology/grammar combinations;
-  7. evaluator/repair loop). No human-evaluation exercise in EXP-004
+- [ ] **EXP-004 Phase 2A — corpus priming: execute the primed sessions
+      (NEXT)** — the author runs the 18 corpus-primed sessions externally
+  per `experiments/exp004-modelscreen/phase2a/README.md` (fresh session per
+  run; msg1 = authentic "Tuta historija" reference text + study
+  instruction, wait for the short confirmation, msg2 = the same Polish
+  story as Phase 1 in the SAME session; save byte-for-byte), then
+  collect/collect-session → verify → evaluate → **compare** (primed vs
+  Phase-1 baseline per-dimension deltas; no composite score, no ranking).
+  The Phase-1 baseline outputs serve as the control condition (`p2a-ctl`);
+  the author may re-execute selected fresh controls with the provided
+  `ctl-*.md` prompts (compare prefers a fresh control when one exists).
+  Claude Sonnet 5 max row: known >45-min/free-tier constraint
+  (availability data only — RESEARCH_NOTES §4.17); if impractical on the
+  day, record it as an execution limitation, never substitute silently.
+- [ ] **EXP-004 Phase 1 report** — write the Phase 1 report from
+  `outputs/roster.md` + per-run evaluation/orthography artifacts (18 usable
+  runs; GLM preserved as the failed/excluded case; Claude Sonnet 5 max
+  runtime recorded as availability data) using the documented
+  multi-dimensional judgment (practical availability, completeness/
+  reliability, lexical/resource evidence, orthographic cleanliness,
+  morphology/evidence, obvious quality issues — NOT coverage ranking alone,
+  per the EXP-003 lesson). No human-evaluation exercise in EXP-004
   (D-042).
 
 ## After the EXP-003 human review is recorded and reported

@@ -940,3 +940,77 @@ settings, and intake metadata is needed before evaluation.
 1 failed/excluded). Evidence tables stay per-dimension (coverage, broader
 coverage, unresolved rate, orthography, completeness, access, anomalies);
 no composite score and no coverage-only ranking.
+
+## D-046 · 2026-09-06 · EXP-004 Phase 2A: full-roster corpus priming with an author-supplied fixed corpus — design and kit (Task 019)
+
+**Context.** EXP-004 Phase 1 established clean direct-translation baselines
+for 18 usable configurations (GLM failed). The next experiment must test
+the project's core corpus-grounding hypothesis: does authentic
+Medžuslovjansky exposure immediately before translation change a model's
+generated Medžuslovjansky? A "narrow Phase-2 shortlist" idea (pick 3–5
+models before any corpus experiment) was considered and rejected: it would
+select on the very effect to be measured and would discard 18 paired
+baselines.
+
+**Decision.**
+
+1. **Phase 2A covers the full reconciled 18-configuration Phase-1 roster.**
+   The roster is derived in code from the Phase-1 roster (GLM excluded as
+   the single non-usable row) — never reconstructed from filenames. No
+   model is dropped because Phase 1 "did well" or "did poorly"; every
+   usable configuration gets a primed run.
+2. **Fixed reference corpus, author-supplied, no URL.** The corpus is the
+   "Tuta historija" excerpt supplied in the Task-019 text (Prolog + Razděl 1
+   "Věčna Zima"; 4 820 B; SHA-256
+   `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c`),
+   embedded directly in the generated Prompt-1 files. The author's
+   instruction overrides any earlier textbook/PDF corpus discussion: no
+   external fetch, no subsetting of other material. Corpus distribution
+   status is not recorded → the text stays local (gitignored) like the
+   Polish story; provenance, size and hash are committed.
+3. **Two conditions.** Control (`p2a-ctl`) = the Phase-1 clean direct task;
+   the Phase-1 baseline outputs satisfy this condition, and a freshly
+   collected control is preferred by the compare step when the author
+   executes one. Corpus-primed (`p2a-primed`) = Prompt 1 (study the
+   authentic text as a language reference; the model is told NOT to
+   translate/summarize/reproduce/modify/continue/imitate it or answer
+   questions about it; no translation requested) + Prompt 2 (the same
+   Polish story, standard instruction, reference cue) in the SAME fresh
+   session. The translation instruction + story body is byte-identical
+   across all control and Prompt-2 files; no scaffolding, candidates,
+   dictionary injection, morphology annotations, or repair instructions.
+4. **Contamination control is mechanical.** Fresh session per run; primed
+   collection requires the corpus fingerprint before the translation
+   instruction in the session file (same-session proof); control sessions
+   containing corpus material are rejected; altered translation
+   instructions are rejected.
+5. **Terminology is fixed.** In-context learning / corpus priming /
+   contextual grounding / reference-text conditioning. The corpus is never
+   described as "training" and no weights are ever changed. The hypothesis
+   is NOT textual reconstruction: new translations with different wording
+   are expected and are not failures.
+6. **Run identity is phase-explicit.** `<date>__<provider>__<model>__`
+   `<model_version>__direct` (Phase 1) | `p2a-ctl` | `p2a-primed`
+   (Phase 2A). Every Phase-2A run records its Phase-1 `baseline_run_id`.
+7. **Result discipline is unchanged.** Compare reports per-dimension
+   deltas (canonical coverage, broader resource-supported coverage,
+   unresolved rate, lexical tokens, A/B/C, orthography-out); no composite
+   score, no ranking (L-033). Evaluation reuses the unmodified Task 008
+   evaluator and the Task 015 orthography audit.
+8. **Phase 2B is documented, not executed.** A Wikipedia-length authentic
+   ISV reference plus an independently written Polish story inspired by its
+   subject (decouples corpus content from story content). No Phase-2B work
+   in Task 019.
+9. **Claude Sonnet 5 max stays in the roster** with its recorded
+   practical-availability constraint (>45 min, continuations, free-tier
+   exhaustion — RESEARCH_NOTES §4.17). A primed session that is
+   impractical on the day is recorded as an execution limitation, never
+   silently substituted.
+
+**Consequences.** Execution-ready Phase-2A kit under
+`experiments/exp004-modelscreen/phase2a/` (36 planned runs, 54 operator
+prompt files, manifest of hashes, `scripts/run_exp004_phase2a.py` with
+prepare/collect/collect-session/verify/evaluate/status/roster/compare, 19
+new tests). No external LLM call was made in Task 019; execution is the
+author's next operator step. The compare table is the Phase-2A deliverable
+format; whether priming "helps" is an empirical question left open.
