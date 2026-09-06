@@ -1,18 +1,23 @@
-"""EXP-004 Phase 1 — screening run orchestration tests (SODA Task 017).
+"""EXP-004 Phase 1 — screening run orchestration tests (SODA Tasks 017/018).
 
 Covers the clean-baseline preparation and the byte-for-byte / completeness
 discipline:
 - prepare packages one self-contained operator prompt per roster row from a
   synthetic source, with an IDENTICAL instruction body across all rows (no
   guidance content anywhere), deterministic regeneration (byte-identical
-  prompts, manifest, plan), a prompt manifest of hashes, and a fixed 11-row
-  plan with `direct` condition run ids;
+  prompts, manifest, plan), a prompt manifest of hashes, and a fixed 19-row
+  executed-roster plan with `direct` condition run ids (Task 018: the
+  planned 11-row roster expanded during collection into the reconciled
+  executed set);
 - collect registers an external output byte-for-byte, refuses to overwrite,
   rejects unknown runs, and records status + the practical free-access
-  verdict;
+  verdict; collect-session extracts the raw reply embedded in an author
+  session file (prompt + reply in one markdown file) after validating the
+  instruction body against the canonical prompt;
 - verify runs the structural completeness gate (size floor, end marker
-  KONIEC/KONĖC, story-name coverage, head sanity) and classifies outputs as
-  complete / partial / failed, never deleting or repairing them;
+  KONIEC/KONEC/KONĖC, ISV-tolerant story-name stems, head sanity) and
+  classifies outputs as complete / partial / failed, never deleting or
+  repairing them;
 - evaluate refuses a 'failed' intake without --force and writes the Task 008
   summary plus the orthographic audit (subprocess faked);
 - no fabricated outputs: nothing is evaluated without a collected file.
@@ -30,7 +35,7 @@ RUN_ID = "2099-01-01__openai__gpt-5.6-luna__thinkoff__direct"
 RUN2_ID = "2099-01-01__openai__gpt-5.6-luna__thinkon__direct"
 RUN3_ID = "2099-01-01__openai__gpt-isv-teacher__unknown__direct"
 RUN4_ID = "2099-01-01__anthropic__claude__sonnet-5__direct"
-RUN5_ID = "2099-01-01__deepseek__deepseek-v4-pro__deepthinkoff__direct"
+RUN5_ID = ("2099-01-01__deepseek__deepseek-v3-expert__deepthinkoff__direct")
 
 _SOURCE = (
     "Opowieść o Słów, Które Były Jak Siostry\n"
@@ -95,12 +100,13 @@ def prepare(run_mod, setup, date="2099-01-01", force=False):
 # prepare
 # ---------------------------------------------------------------------------
 
-def test_prepare_packages_11_rows_with_identical_instruction(run_mod, setup):
+def test_prepare_packages_19_rows_with_identical_instruction(run_mod, setup):
     plan = json.loads(prepare(run_mod, setup).read_text(encoding="utf-8"))
-    assert len(plan["runs"]) == 11
+    assert len(plan["runs"]) == 19
     assert {r["model"] for r in plan["runs"]} == {
-        "gpt-5.6-luna", "gpt-isv-teacher", "claude", "gemini",
-        "deepseek-v4-pro", "grok", "kimi", "qwen", "glm"}
+        "gpt-5.6-luna", "gpt-isv-teacher", "claude", "gemini-3.1-pro",
+        "gemini-3.6-flash", "deepseek-v3-instant", "deepseek-v3-expert",
+        "grok", "kimi", "qwen-3.8-max", "qwen-3.7-plus", "glm"}
     bodies = []
     for r in plan["runs"]:
         pf = setup / "operator-prompts" / Path(r["prompt_file"]).name
@@ -137,7 +143,7 @@ def test_prepare_deterministic_and_plan_run_ids(run_mod, setup):
     assert all(r["run_id"].endswith("__direct") for r in plan["runs"])
     manifest = json.loads((setup / "operator-prompts" / "manifest.json")
                           .read_text(encoding="utf-8"))
-    assert len(manifest["files"]) == 11
+    assert len(manifest["files"]) == 19
     for f in manifest["files"]:
         pf = setup / "operator-prompts" / f["file"]
         assert run_mod.sha256_bytes(pf.read_bytes()) == f["prompt_sha256"]
@@ -146,9 +152,11 @@ def test_prepare_deterministic_and_plan_run_ids(run_mod, setup):
 def test_prepare_records_conditional_rows_and_exclusions_in_plan(
         run_mod, setup):
     plan = json.loads(prepare(run_mod, setup).read_text(encoding="utf-8"))
-    gemini = next(r for r in plan["runs"] if r["model"] == "gemini")
+    gemini = next(r for r in plan["runs"]
+                  if r["model"] == "gemini-3.1-pro")
     glm = next(r for r in plan["runs"] if r["model"] == "glm")
     assert "conditional" in gemini and "conditional" in glm
+    assert gemini["conditional"] and glm["conditional"]
     # variant rows carry variant_of and same provider/model
     off = next(r for r in plan["runs"]
                if r["model"] == "gpt-5.6-luna" and r["model_version"] == "thinkoff")
@@ -206,6 +214,74 @@ def test_collect_refuses_overwrite_and_unknown_run(run_mod, setup):
 
 
 # ---------------------------------------------------------------------------
+# collect-session (Task 018: raw reply embedded in an author session file)
+# ---------------------------------------------------------------------------
+
+def _author_session(run_mod, setup, row_prompt_file, reply_text):
+    """Simulate the author's save: canonical prompt with its final two lines
+    ('Return the complete Interslavic translation ...') replaced by the raw
+    model reply."""
+    pf = setup / "operator-prompts" / row_prompt_file
+    text = pf.read_text(encoding="utf-8")
+    assert text.endswith("else.\n")
+    cut = text.rfind("Return the complete")
+    return text[:cut].encode("utf-8") + reply_text.encode("utf-8")
+
+
+def test_collect_session_extracts_reply_byte_for_byte(run_mod, setup):
+    prepare(run_mod, setup)
+    session = setup / "session.md"
+    session.write_bytes(_author_session(run_mod, setup,
+                                        "01-gpt-5.6-luna-thinkoff.md",
+                                        _COMPLETE))
+    rc = run_mod.run_collect_session(
+        RUN_ID, session, "2099-01-01", "unknown", "unknown", "unknown",
+        "unknown", "collected_external_output", "pass",
+        "complete in one free session", "")
+    assert rc == 0
+    out_dir = setup / "outputs" / RUN_ID
+    assert (out_dir / "output.txt").read_text(
+        encoding="utf-8") == _COMPLETE
+    meta = json.loads((out_dir / "meta.json").read_text(encoding="utf-8"))
+    assert meta["session"]["name"] == "session.md"
+    assert meta["output"]["sha256"] == run_mod.sha256_bytes(
+        _COMPLETE.encode("utf-8"))
+    assert meta["access"]["filter_verdict"] == "pass"
+    # session file itself untouched
+    assert session.read_bytes().startswith(b"# EXP-004")
+
+
+def test_collect_session_refuses_overwrite_and_unknown_run(run_mod, setup):
+    prepare(run_mod, setup)
+    session = setup / "session.md"
+    session.write_bytes(_author_session(run_mod, setup,
+                                        "01-gpt-5.6-luna-thinkoff.md",
+                                        _COMPLETE))
+    assert run_mod.run_collect_session(
+        RUN_ID, session, "2099-01-01", "unknown", "unknown", "unknown") == 0
+    assert run_mod.run_collect_session(
+        RUN_ID, session, "2099-01-01", "unknown", "unknown", "unknown") == 2
+    assert run_mod.run_collect_session(
+        "2099-01-01__openai__nope__x__direct", session, "2099-01-01",
+        "unknown", "unknown", "unknown") == 2
+
+
+def test_collect_session_rejects_altered_instruction_body(run_mod, setup):
+    prepare(run_mod, setup)
+    raw = _author_session(run_mod, setup, "01-gpt-5.6-luna-thinkoff.md",
+                          _COMPLETE)
+    # tamper with the instruction text (would break the clean-baseline
+    # invariant if the author had modified the instruction)
+    raw = raw.replace(b"Translate the Polish story below into Interslavic",
+                      b"Translate the Polish fable below into Interslavic")
+    session = setup / "session.md"
+    session.write_bytes(raw)
+    assert run_mod.run_collect_session(
+        RUN_ID, session, "2099-01-01", "unknown", "unknown", "unknown") == 2
+    assert not (setup / "outputs" / RUN_ID / "output.txt").exists()
+
+
+# ---------------------------------------------------------------------------
 # verify (completeness gate)
 # ---------------------------------------------------------------------------
 
@@ -242,6 +318,31 @@ def test_verify_complete_partial_failed(run_mod, setup):
     intake = register(RUN4_ID, "", "failed_external_output")
     assert intake["verdict"] == "failed"
     assert (out_dir / "output.txt").read_bytes() == b""
+
+
+def test_gate_accepts_transliterated_names_and_konce_end_marker(
+        run_mod, setup):
+    """EXP-004 Phase 1 models transliterate Polish proper names
+    (Bronisława -> Bronislava, Przemysław -> Przemyslava, Antoni -> Antonij,
+    Julianna -> Julijana) and close with 'KONEC'. The gate must still pass
+    such a complete translation (Task 018 calibration)."""
+    prepare(run_mod, setup)
+    reply = setup / "reply-isv.txt"
+    text = (_COMPLETE
+            .replace("Bronisława", "Bronislava")
+            .replace("Przemysława", "Przemyslava")
+            .replace("Antoni", "Antonij")
+            .replace("Julianna", "Julijana")
+            .replace("\nKONIEC\n", "\nKONEC\n"))
+    reply.write_text(text, encoding="utf-8")
+    assert run_mod.run_collect(RUN_ID, reply, "2099-01-01", "unknown",
+                               "unknown", "unknown") == 0
+    assert run_mod.run_verify(RUN_ID) == 0
+    intake = json.loads((setup / "outputs" / RUN_ID / "intake.json")
+                        .read_text(encoding="utf-8"))
+    assert intake["verdict"] == "complete"
+    assert intake["checks"]["names_present"] == 5
+    assert intake["checks"]["end_marker"] is True
 
 
 def test_verify_detects_tamper(run_mod, setup):
@@ -324,5 +425,5 @@ def test_status_and_roster_empty_and_with_run(run_mod, setup):
     assert run_mod.run_roster() == 0
     roster = json.loads((setup / "outputs" / "roster.json").read_text(
         encoding="utf-8"))
-    assert len(roster["rows"]) == 11
+    assert len(roster["rows"]) == 19
     assert roster["rows"][0]["collected"] is False

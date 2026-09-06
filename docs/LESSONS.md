@@ -771,3 +771,35 @@ character-name presence, and head sanity. Verdicts are stored per run
 criteria from observed complete peers BEFORE execution, encode them in the
 runner, and treat the verdict as data — never decide after seeing an output
 whether it "counts".
+
+## L-035 · 2026-09-06 · Operator annotations drift from the executed identity, and exact-token structural checks break on transliterated names — verify both against deterministic evidence (Task 018)
+
+**Observed.** The author's saved session filenames/headers contradicted the
+executed identity in at least three ways: DeepSeek rows 15/16 kept the
+planned `v4-pro` filename while the interface/header said **V3 Expert**;
+row 19 was named `Max-Fast` but its header said `Max-Thinking`; Qwen
+headers carried an `EXP-004q` typo; Claude's header had to be annotated
+with "Medium - default" to record the actual model. Separately, three
+complete translations (Kimi, DeepSeek V3 Expert OFF, and several others)
+failed the intake gate's exact Polish-token name check because the models
+transliterated proper names (Bronislava, Przemyslava, Julijana, Antonij).
+
+**Interpretation.** Hand-typed filenames and annotations are *declared*
+claims, not identity. The only trustworthy anchors are the deterministic
+prompt package (byte-identical instruction bodies per run), the prompt
+manifest, run ids, and the preserved raw session bytes. And a structural
+gate calibrated on one generation round's surface conventions (verbatim
+proper names, `KONIEC` only) silently misfires on the next round's
+cross-model spelling variation.
+
+**Next time.** (1) Treat every operator-supplied label as a hypothesis to be
+confirmed against the prompt package + stored raw artifact before any
+evaluation; quarantine rather than guess when they conflict and no
+deterministic resolution exists. (2) Calibrate structural gates on
+variant-tolerant features (folded stems, accepted end-marker spellings
+KONIEC/KONEC/KONĖC) up front when a screening spans heterogeneous models —
+calibrate from a sample of *observed complete peers*, not from a single
+prior experiment. (3) Save the raw session file (prompt + reply together)
+as the provenance artifact and define a deterministic reply-boundary rule
+(suffix after the prompt's closing `## Output` line) instead of asking the
+operator to split prompt and reply by hand.

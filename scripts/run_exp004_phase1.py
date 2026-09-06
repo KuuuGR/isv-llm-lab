@@ -31,12 +31,6 @@ Commands:
            byte-identical prompts, manifest, and plan.
 
   collect  --run <run_id> --output <path>
-           [--generation-date YYYY-MM-DD] [--model M] [--provider P]
-           [--model-version V] [--generation-parameters S]
-           [--status {collected_external_output,collected_partial_output,
-                      failed_external_output}]
-           [--access-verdict {pass,fail,unknown}] [--access-note TEXT]
-           [--note TEXT]
            register an externally generated raw output: copied byte-for-byte,
            never modified, never overwritten; meta.json records prompt/source
            hashes, provider/model/version, generation date + parameters,
@@ -44,12 +38,24 @@ Commands:
            observed by the operator at execution time), output SHA-256, and
            resource pins.
 
+  collect-session  --run <run_id> --session <path>
+           [same option set as collect]
+           register the raw model reply EMBEDDED in an author session file
+           (the author saved each external session as one markdown file:
+           annotated prompt header + unmodified instruction/source body +
+           the model's raw reply appended after the prompt's closing
+           '## Output' line). Validates the instruction body against the
+           canonical prompt (clean-baseline invariant), extracts the reply
+           byte-for-byte into outputs/<run_id>/output.txt, and records the
+           session file's SHA-256 + the reply SHA-256 in meta.json. The
+           session file itself is never modified.
+
   verify   [--run <run_id> | --all] [--size-floor BYTES] [--no-plan]
            integrity checks (output hash vs meta, plan consistency) plus the
            structural completeness gate (L-027): non-empty output, byte size
            >= floor (default 0.60 x source bytes), head sanity, presence of
            the story's main character-name tokens, and the end marker
-           (KONIEC/KONĖC) as the final non-empty line. Writes
+           (KONIEC/KONEC/KONĖC) as the final non-empty line. Writes
            outputs/<run>/intake.json with a verdict:
              complete  — passes the gate (quantitatively usable)
              partial   — real translation but truncated / marker missing
@@ -100,6 +106,7 @@ EXP = ROOT / "experiments" / "exp004-modelscreen"
 INPUT_DIR = EXP / "input"
 OPERATOR_PROMPTS = EXP / "operator-prompts"
 OUTPUTS_DIR = EXP / "outputs"
+SESSION_DIR = EXP / "collected-sessions"
 BASE_INSTRUCTION = EXP / "base_instruction.txt"
 EXP003_SOURCE = (ROOT / "experiments" / "exp003-scaffold" / "input"
                  / "source.txt")
@@ -109,89 +116,215 @@ EXP003_SOURCE_SHA256 = (
     "5de968a6214d3d64bdb586b5121f494c4bb107e33546487a86bf8ecc57280723")
 
 CONDITION = "direct"
-END_MARKER_RE = re.compile(r"^\s*(KONIEC|KONĖC)\s*$")
-# story's main character names (kept verbatim in every prior ISV run)
-NAME_TOKENS = ("Bronisława", "Teofil", "Julianna", "Przemysław", "Antoni")
+END_MARKER_RE = re.compile(r"^\s*(KONIEC|KONEC|KONĖC)\s*$")
+# Story's main character names. EXP-003 outputs kept the Polish spellings
+# verbatim; EXP-004 Phase-1 models transliterate them (Bronisława →
+# Bronislava/Bronisława; Przemysław → Przemyslava/Przemysław; Antoni →
+# Anton/Antonij; Julianna → Julianna/Julijana), so names are matched by
+# case/diacritic-folded, w/v-tolerant stems (Task 018 calibration).
+NAME_STEMS = {
+    "bronislawa": ("bronislav", "bronislaw"),
+    "teofil": ("teofil",),
+    "julianna": ("julian", "julij"),
+    "przemyslawa": ("przemyslav", "przemyslaw"),
+    "antoni": ("anton",),
+}
+_DIACRITIC_FOLD = str.maketrans({
+    "ł": "l", "š": "s", "ś": "s", "ě": "e", "ć": "c", "č": "c",
+    "ż": "z", "ž": "z", "ń": "n", "à": "a", "é": "e", "è": "e", "ů": "u",
+})
+
+
+def _fold_for_names(text: str) -> str:
+    return text.lower().translate(_DIACRITIC_FOLD)
+
+
+def instruction_body(text: str) -> str:
+    """The clean-baseline invariant region: from the instruction's first
+    line through the prompt's closing '## Output' marker (excludes the
+    editable header and any appended reply)."""
+    start = text.find("Translate the Polish story below into Interslavic")
+    if start < 0:
+        return ""
+    end = text.rfind("## Output")
+    if end < 0:
+        return text[start:]
+    return text[start:end + len("## Output")]
+
+
+def split_session_reply(raw: bytes) -> tuple[bytes, bytes]:
+    """Split an author session file (prompt + appended raw reply) at the
+    prompt's closing '## Output\\n' marker. The canonical prompt always ends
+    '## Output\\n\\n'; the model's reply is everything after that marker and
+    the following blank line(s). Returns (prompt_prefix, reply). The reply is
+    the model's raw output and is never modified."""
+    marker = b"## Output\n"
+    idx = raw.rfind(marker)
+    if idx < 0:
+        return raw, b""
+    pos = idx + len(marker)
+    while pos < len(raw) and raw[pos:pos + 1] in (b"\n", b"\r"):
+        pos += 1
+    return raw[:idx], raw[pos:]
 
 # ---------------------------------------------------------------------------
-# Roster (EXP-004 DESIGN §5.2/§11.7; finalized Task 016/017)
+# Reconciled executed roster (EXP-004 Phase 1, actual collected runs, SODA
+# Task 018)
 # ---------------------------------------------------------------------------
-# Every row: provider, model, model_version (variant/settings token),
-# label, interface, generation_parameters (human text), custom_gpt (bool),
-# variant_of (run-id model/version token of the sibling, or None),
-# conditional (free-text filter condition or "").
+# The planned 11-row roster (EXP-004 DESIGN §5.2) expanded during manual
+# collection into the concrete executed set below. Model/version tokens are
+# the reconciled identities: author filename/header annotations were
+# audited against each other and the deterministic prompt package
+# (scripts/audit_exp004_collected.py); three contradictory annotations were
+# resolved with the author (2026-09-06): 15/16 DeepSeek = V3 Expert (not the
+# stale 'v4-pro' filename), 19 Qwen = 3.8 Max Fast (header 'Thinking' was a
+# copy error), 05 Gemini = 3.1 Pro extended-thinking ON. Confidence is
+# recorded in the registry; model identity beyond the prompt package rests
+# on the operator's annotations (D-018 'unknown' fallback where absent).
+# session_file = the author's raw session file name (prompt+reply), kept
+# byte-for-byte under collected-sessions/.
 ROSTER = [
     {
         "provider": "openai", "model": "gpt-5.6-luna", "model_version": "thinkoff",
         "label": "GPT-5.6 Luna — thinking OFF", "interface": "ChatGPT (web)",
         "generation_parameters": "thinking OFF", "custom_gpt": False,
         "variant_of": None, "conditional": "",
+        "session_file": "01-gpt-5.6-luna-thinkoff.md",
     },
     {
         "provider": "openai", "model": "gpt-5.6-luna", "model_version": "thinkon",
         "label": "GPT-5.6 Luna — thinking ON", "interface": "ChatGPT (web)",
         "generation_parameters": "thinking ON", "custom_gpt": False,
         "variant_of": "thinkoff", "conditional": "",
+        "session_file": "02-gpt-5.6-luna-thinkon.md",
     },
     {
         "provider": "openai", "model": "gpt-isv-teacher", "model_version": "unknown",
         "label": "GPT Interslavic Teacher (custom GPT)", "interface": "ChatGPT (custom GPT)",
         "generation_parameters": "custom GPT; built-in system prompt unknown (D-018)",
         "custom_gpt": True, "variant_of": None, "conditional": "",
+        "session_file": "03-gpt-isv-teacher-unknown.md",
     },
     {
         "provider": "anthropic", "model": "claude", "model_version": "sonnet-5",
-        "label": "Claude Sonnet 5", "interface": "Claude (web)",
-        "generation_parameters": "Sonnet 5", "custom_gpt": False,
-        "variant_of": None, "conditional": "",
+        "label": "Claude Sonnet 5 — Medium (default)", "interface": "Claude (web)",
+        "generation_parameters": "Sonnet 5 Medium (default)",
+        "custom_gpt": False, "variant_of": None, "conditional": "",
+        "session_file": "04-claude-sonnet-5.md",
     },
     {
-        "provider": "google", "model": "gemini", "model_version": "unknown",
-        "label": "Gemini", "interface": "Google Gemini (web)",
-        "generation_parameters": "unknown",
+        "provider": "google", "model": "gemini-3.1-pro", "model_version": "extthinkon",
+        "label": "Gemini 3.1 Pro — extended thinking ON", "interface": "Google Gemini (web)",
+        "generation_parameters": "3.1 Pro, extended thinking ON "
+                                 "(declared 'Rozszerzony - Myslenie rozszerzone')",
         "custom_gpt": False, "variant_of": None,
-        "conditional": "only if practical free access/quota satisfies §5.1 "
-                       "(>= 1 full story per day or every other day)",
+        "conditional": "run only if practical free access/quota satisfies "
+                       "§5.1 (>= 1 full story per day or every other day)",
+        "session_file": "05-gemini-3.1-Pro-rozszerzony.md",
     },
     {
-        "provider": "deepseek", "model": "deepseek-v4-pro",
+        "provider": "deepseek", "model": "deepseek-v3-instant",
         "model_version": "deepthinkoff",
-        "label": "DeepSeek V4 Pro — DeepThink OFF", "interface": "DeepSeek chat (web)",
-        "generation_parameters": "DeepThink OFF", "custom_gpt": False,
-        "variant_of": None, "conditional": "",
+        "label": "DeepSeek V3 Instant — DeepThink OFF", "interface": "DeepSeek chat (web)",
+        "generation_parameters": "DeepSeek-V3-Instant, DeepThink OFF",
+        "custom_gpt": False, "variant_of": None, "conditional": "",
+        "session_file": "06-deepseek-v3-instant-deepthinkoff.md",
     },
     {
-        "provider": "deepseek", "model": "deepseek-v4-pro",
+        "provider": "deepseek", "model": "deepseek-v3-instant",
         "model_version": "deepthinkon",
-        "label": "DeepSeek V4 Pro — DeepThink ON", "interface": "DeepSeek chat (web)",
-        "generation_parameters": "DeepThink ON", "custom_gpt": False,
-        "variant_of": "deepthinkoff", "conditional": "",
+        "label": "DeepSeek V3 Instant — DeepThink ON", "interface": "DeepSeek chat (web)",
+        "generation_parameters": "DeepSeek-V3-Instant, DeepThink ON",
+        "custom_gpt": False, "variant_of": "deepthinkoff", "conditional": "",
+        "session_file": "07-deepseek-v3-instant-deepthinkon.md",
     },
     {
         "provider": "xai", "model": "grok", "model_version": "unknown",
         "label": "Grok", "interface": "Grok (web)",
         "generation_parameters": "unknown", "custom_gpt": False,
         "variant_of": None, "conditional": "",
+        "session_file": "08-grok-unknown.md",
     },
     {
-        "provider": "moonshot", "model": "kimi", "model_version": "unknown",
-        "label": "Kimi", "interface": "Kimi (web)",
-        "generation_parameters": "unknown", "custom_gpt": False,
-        "variant_of": None, "conditional": "",
+        "provider": "moonshot", "model": "kimi", "model_version": "k2.6-instant",
+        "label": "Kimi K2.6 Instant (Standard)", "interface": "Kimi (web)",
+        "generation_parameters": "K2.6 Instant (Standard)",
+        "custom_gpt": False, "variant_of": None, "conditional": "",
+        "session_file": "09-kimi-unknown.md",
     },
     {
-        "provider": "alibaba", "model": "qwen", "model_version": "unknown",
-        "label": "Qwen", "interface": "Qwen Chat (web)",
-        "generation_parameters": "unknown", "custom_gpt": False,
-        "variant_of": None, "conditional": "",
+        "provider": "alibaba", "model": "qwen-3.8-max", "model_version": "thinking",
+        "label": "Qwen 3.8 Max — Thinking", "interface": "Qwen Chat (web)",
+        "generation_parameters": "Qwen3.8-Max (Thinking)",
+        "custom_gpt": False, "variant_of": None, "conditional": "",
+        "session_file": "10-qwen-3.8-Max-Thinking.md",
     },
     {
-        "provider": "zhipu", "model": "glm", "model_version": "unknown",
-        "label": "GLM", "interface": "Zhipu GLM (web)",
-        "generation_parameters": "unknown", "custom_gpt": False,
-        "variant_of": None,
-        "conditional": "only if practical web access satisfies the project "
-                       "filter (§5.1/D-036)",
+        "provider": "zhipu", "model": "glm", "model_version": "4.5",
+        "label": "GLM 4.5", "interface": "Zhipu GLM (web)",
+        "generation_parameters": "GLM 4.5 (default)",
+        "custom_gpt": False, "variant_of": None,
+        "conditional": "run only if practical web access satisfies the "
+                       "project filter (§5.1/D-036)",
+        "session_file": "11-glm-unknown.md",
+    },
+    {
+        "provider": "anthropic", "model": "claude", "model_version": "sonnet-5-max",
+        "label": "Claude Sonnet 5 — max (long reasoning)", "interface": "Claude (web)",
+        "generation_parameters": "Sonnet 5 max (intensive reasoning)",
+        "custom_gpt": False, "variant_of": "sonnet-5", "conditional": "",
+        "session_file": "12-claude-sonnet-5-max.md",
+    },
+    {
+        "provider": "google", "model": "gemini-3.6-flash", "model_version": "extthinkoff",
+        "label": "Gemini 3.6 Flash — extended thinking OFF", "interface": "Google Gemini (web)",
+        "generation_parameters": "3.6 Flash, extended thinking OFF",
+        "custom_gpt": False, "variant_of": None, "conditional": "",
+        "session_file": "13-gemini-3.6-Flash-myslenierozszerzoneoff.md",
+    },
+    {
+        "provider": "google", "model": "gemini-3.6-flash", "model_version": "extthinkon",
+        "label": "Gemini 3.6 Flash — extended thinking ON", "interface": "Google Gemini (web)",
+        "generation_parameters": "3.6 Flash, extended thinking ON",
+        "custom_gpt": False, "variant_of": "extthinkoff", "conditional": "",
+        "session_file": "14-gemini-3.6-Flash-myslenierozszerzoneon.md",
+    },
+    {
+        "provider": "deepseek", "model": "deepseek-v3-expert",
+        "model_version": "deepthinkoff",
+        "label": "DeepSeek V3 Expert — DeepThink OFF", "interface": "DeepSeek chat (web)",
+        "generation_parameters": "DeepSeek-V3-Expert, DeepThink OFF",
+        "custom_gpt": False, "variant_of": None, "conditional": "",
+        "session_file": "15-deepseek-v4-pro-deepthinkoff.md",
+    },
+    {
+        "provider": "deepseek", "model": "deepseek-v3-expert",
+        "model_version": "deepthinkon",
+        "label": "DeepSeek V3 Expert — DeepThink ON", "interface": "DeepSeek chat (web)",
+        "generation_parameters": "DeepSeek-V3-Expert, DeepThink ON",
+        "custom_gpt": False, "variant_of": "deepthinkoff", "conditional": "",
+        "session_file": "16-deepseek-v4-pro-deepthinkon.md",
+    },
+    {
+        "provider": "alibaba", "model": "qwen-3.7-plus", "model_version": "thinking",
+        "label": "Qwen 3.7 Plus — Thinking", "interface": "Qwen Chat (web)",
+        "generation_parameters": "Qwen3.7-Plus (Thinking)",
+        "custom_gpt": False, "variant_of": None, "conditional": "",
+        "session_file": "17-qwen-3.7-Plus-Thinking.md",
+    },
+    {
+        "provider": "alibaba", "model": "qwen-3.7-plus", "model_version": "fast",
+        "label": "Qwen 3.7 Plus — Fast", "interface": "Qwen Chat (web)",
+        "generation_parameters": "Qwen3.7-Plus (Fast)",
+        "custom_gpt": False, "variant_of": "thinking", "conditional": "",
+        "session_file": "18-qwen-3.7-Plus-Fast.md",
+    },
+    {
+        "provider": "alibaba", "model": "qwen-3.8-max", "model_version": "fast",
+        "label": "Qwen 3.8 Max — Fast", "interface": "Qwen Chat (web)",
+        "generation_parameters": "Qwen3.8-Max (Fast)",
+        "custom_gpt": False, "variant_of": "thinking", "conditional": "",
+        "session_file": "19-qwen-3.8-Max-Fast.md",
     },
 ]
 
@@ -402,6 +535,7 @@ def run_prepare(date: str, force: bool = False) -> int:
             "custom_gpt": row["custom_gpt"],
             "variant_of": row["variant_of"],
             "conditional": row["conditional"],
+            "session_file": row["session_file"],
             "condition": CONDITION,
             "prompt_file": (str(path.relative_to(ROOT))
                             if path.is_relative_to(ROOT)
@@ -546,6 +680,145 @@ def run_collect(run_id: str, output: Path, generation_date: str,
 
 
 # ---------------------------------------------------------------------------
+# collect-session (register a raw reply extracted from an author session file)
+# ---------------------------------------------------------------------------
+
+def run_collect_session(run_id: str, session: Path, generation_date: str,
+                        model: str, provider: str, model_version: str,
+                        generation_parameters: str = "unknown",
+                        status: str = "collected_external_output",
+                        access_verdict: str = "unknown",
+                        access_note: str = "",
+                        note: str = "") -> int:
+    """Register the model reply embedded in an author session file.
+
+    The author saved each external session as one markdown file: prompt
+    header (possibly annotated) + unmodified instruction/source body + the
+    model's raw reply appended after the prompt's closing '## Output' line
+    (SODA Task 018). This function:
+
+    - verifies the run is in the plan and the session file exists;
+    - validates the session file's instruction+source body against the
+      canonical prompt body for the run (byte-identical clean-baseline
+      invariant; rejects altered instructions);
+    - extracts the reply (everything after the '## Output\\n' marker),
+      stored byte-for-byte as outputs/<run_id>/output.txt — never modified,
+      never overwritten;
+    - records meta.json with the canonical prompt hash, the session-file
+      SHA-256 + name, the reply SHA-256, status, access verdict, and notes.
+    """
+    row = roster_entry(run_id)
+    if row is None:
+        print(f"error: unknown run id {run_id!r} (not a roster row)",
+              file=sys.stderr)
+        return 2
+    if status not in STATUSES:
+        print(f"error: unknown status {status!r}", file=sys.stderr)
+        return 2
+    if access_verdict not in ACCESS_VERDICTS:
+        print(f"error: unknown access verdict {access_verdict!r}",
+              file=sys.stderr)
+        return 2
+    plan = load_plan()
+    plan_entry = next((r for r in plan.get("runs", [])
+                       if r["run_id"] == run_id), None)
+    if plan_entry is None:
+        print("error: run not in the plan; run "
+              "`scripts/run_exp004_phase1.py prepare --date <date>` first",
+              file=sys.stderr)
+        return 2
+    if not session.is_file():
+        print(f"error: session file not found: {session}", file=sys.stderr)
+        return 2
+
+    out_dir = OUTPUTS_DIR / run_id
+    dst = out_dir / "output.txt"
+    if dst.exists():
+        print(f"error: {dst} already exists; refusing to overwrite "
+              "(never overwrite an existing run)", file=sys.stderr)
+        return 2
+
+    # integrity: the session file must carry the canonical instruction body
+    session_bytes = session.read_bytes()
+    session_text = session_bytes.decode("utf-8", errors="replace")
+    pf = OPERATOR_PROMPTS / Path(plan_entry["prompt_file"]).name
+    canonical_text = pf.read_text(encoding="utf-8")
+    if instruction_body(session_text) != instruction_body(canonical_text):
+        print(f"error: session file's instruction body does not match the "
+              f"canonical prompt for {run_id}; refusing to collect "
+              "(altered instruction = broken clean-baseline invariant)",
+              file=sys.stderr)
+        return 2
+
+    prefix, reply = split_session_reply(session_bytes)
+    if not reply.strip():
+        print(f"error: no model reply found after the '## Output' marker "
+              f"in {session.name}", file=sys.stderr)
+        return 2
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    dst.write_bytes(reply)  # byte-for-byte raw reply, never modified
+
+    parts = parse_run_id(run_id)
+    meta = {
+        "run_id": run_id,
+        "experiment_id": "exp004",
+        "phase": "1",
+        "condition": CONDITION,
+        "label": row["label"],
+        "interface": row["interface"],
+        "model": model if model != "unknown" else row["model"],
+        "provider": (provider if provider != "unknown"
+                     else row["provider"]),
+        "model_version": (model_version if model_version != "unknown"
+                          else row["model_version"]),
+        "generation_parameters": (generation_parameters
+                                  if generation_parameters != "unknown"
+                                  else row["generation_parameters"]),
+        "generation_date": generation_date if generation_date != "unknown"
+                           else parts["date"],
+        "status": status,
+        "access": {
+            "filter_verdict": access_verdict,
+            "quota_observed": access_note,
+            "criteria": "D-036/§5.1: web/chat interface; free access with "
+                        "practical quota >= 1 full story/day or every other "
+                        "day; not a one-time trial; usable by the project "
+                        "author. Reconciled from the actual session evidence "
+                        "(Task 018).",
+        },
+        "collected_at": datetime.now(timezone.utc).isoformat(),
+        "collected_by": "scripts/run_exp004_phase1.py collect-session",
+        "prompt": {"file": plan_entry["prompt_file"],
+                   "sha256": plan_entry["prompt_sha256"]},
+        "source": {"sha256": plan_entry["source_sha256"]},
+        "session": {
+            "file": str(session),
+            "name": session.name,
+            "sha256": sha256_bytes(session_bytes),
+            "reply_extracted_from": "suffix after the prompt's closing "
+                                    "'## Output' line",
+        },
+        "output": {"file": str(dst), "sha256": sha256_bytes(reply),
+                   "bytes": len(reply)},
+        "resources": resource_versions(),
+        "note": ("Raw model reply extracted from the author's session file "
+                 "and stored byte-for-byte; never modified. The session file "
+                 "itself is preserved unmodified under collected-sessions/."
+                 + (f" {note}" if note else "")),
+    }
+    (out_dir / "meta.json").write_text(
+        json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[collect-session] {run_id}")
+    print(f"  session: {session.name} -> output.txt "
+          f"({len(reply)} B)")
+    print(f"  output sha256: {meta['output']['sha256']}")
+    print(f"  status: {meta['status']}; access filter: "
+          f"{meta['access']['filter_verdict']}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
 # verify (integrity + structural completeness gate, L-027)
 # ---------------------------------------------------------------------------
 
@@ -566,8 +839,9 @@ def _gate_checks(run_dir: Path, source_bytes: int,
     checks["head_sane"] = bool(nonempty) and len(nonempty[0].strip()) >= 10
     checks["end_marker"] = bool(nonempty) and bool(
         END_MARKER_RE.match(nonempty[-1]))
-    found = [name for name in NAME_TOKENS
-             if name.lower() in text.lower()]
+    folded = _fold_for_names(text)
+    found = [name for name, stems in NAME_STEMS.items()
+             if any(stem in folded for stem in stems)]
     checks["names_present"] = len(found)
     checks["names_required"] = 3
     reasons: list[str] = []
@@ -579,7 +853,7 @@ def _gate_checks(run_dir: Path, source_bytes: int,
         reasons.append("first non-empty line implausibly short "
                        "(service-error page?)")
     if not checks["end_marker"]:
-        reasons.append("final non-empty line is not KONIEC/KONĖC "
+        reasons.append("final non-empty line is not KONIEC/KONEC/KONĖC "
                        "(truncated?)")
     if checks["names_present"] < checks["names_required"]:
         reasons.append(f"only {checks['names_present']}/5 main story names "
@@ -967,6 +1241,25 @@ def main(argv: list[str] | None = None) -> int:
                        help="observed facts about the reply "
                             "(e.g. truncation)")
 
+    p_sec = sub.add_parser(
+        "collect-session",
+        help="register the raw reply embedded in an author session file "
+             "(prompt + reply in one file, Task 018)")
+    p_sec.add_argument("--run", required=True, dest="run_id")
+    p_sec.add_argument("--session", required=True, type=Path,
+                       help="author session file (prompt+reply, unmodified)")
+    p_sec.add_argument("--generation-date", default="unknown")
+    p_sec.add_argument("--model", default="unknown")
+    p_sec.add_argument("--provider", default="unknown")
+    p_sec.add_argument("--model-version", default="unknown")
+    p_sec.add_argument("--generation-parameters", default="unknown")
+    p_sec.add_argument("--status", default="collected_external_output",
+                       choices=STATUSES)
+    p_sec.add_argument("--access-verdict", default="unknown",
+                       choices=ACCESS_VERDICTS)
+    p_sec.add_argument("--access-note", default="")
+    p_sec.add_argument("--note", default="")
+
     p_ver = sub.add_parser("verify", help="integrity + completeness gate")
     p_ver.add_argument("--run", default=None, dest="run_id")
     p_ver.add_argument("--size-floor", type=int, default=None)
@@ -987,6 +1280,13 @@ def main(argv: list[str] | None = None) -> int:
                            args.model, args.provider, args.model_version,
                            args.generation_parameters, args.status,
                            args.access_verdict, args.access_note, args.note)
+    if args.command == "collect-session":
+        return run_collect_session(args.run_id, args.session,
+                                   args.generation_date, args.model,
+                                   args.provider, args.model_version,
+                                   args.generation_parameters, args.status,
+                                   args.access_verdict, args.access_note,
+                                   args.note)
     if args.command == "verify":
         return run_verify(args.run_id, args.size_floor, args.no_plan)
     if args.command == "evaluate":

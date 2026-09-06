@@ -1,46 +1,64 @@
-# EXP-004 Phase 1 — operator prompts
+# EXP-004 Phase 1 — operator prompts (canonical package)
 
-One self-contained Markdown file per roster row. **No manual assembly is
-needed**: each file contains the experiment header (target model/provider/
-version/settings, condition `direct`), the complete Phase 1 instruction
-(identical for every row), and the full Polish source story. The prompts are
-written by `scripts/run_exp004_phase1.py prepare`; the prompt files embed
-the copyrighted story and are **gitignored** — they stay local. The
-committed `manifest.json` records prompt hashes only.
+One self-contained Markdown file per reconciled roster row (19 rows, Task
+018). **No manual assembly is needed**: each file contains the experiment
+header (target model/provider/version/settings, condition `direct`), the
+complete Phase 1 instruction (identical for every row), and the full Polish
+source story. The prompts are written by `scripts/run_exp004_phase1.py
+prepare`; the prompt files embed the copyrighted story and are
+**gitignored** — they stay local. The committed `manifest.json` records
+prompt hashes only.
 
-## Files
+These files are the **canonical prompts** (identity of record for each run:
+`meta.prompt.sha256` points here). The prompts as actually pasted during the
+screening sessions are not independently recoverable byte-for-byte: the
+author annotated some headers before running (e.g. recording the exact model
+label shown by the interface) and saved the whole session (prompt + reply)
+as one file. Those **raw session files** are preserved unmodified under
+`../collected-sessions/` (Task 018). Header annotation never changed the
+instruction/source body, which is byte-identical in every session file
+(verified by `scripts/audit_exp004_collected.py`).
 
-| File | Roster row | Paste into |
+## Files (canonical prompt per reconciled roster row)
+
+| File | Reconciled roster row | Paste into |
 |---|---|---|
 | `01-gpt-5.6-luna-thinkoff.md` | GPT-5.6 Luna — thinking OFF | ChatGPT (web) |
 | `02-gpt-5.6-luna-thinkon.md` | GPT-5.6 Luna — thinking ON | ChatGPT (web) |
 | `03-gpt-isv-teacher-unknown.md` | GPT Interslavic Teacher (custom GPT) | ChatGPT custom GPT |
-| `04-claude-sonnet-5.md` | Claude Sonnet 5 | Claude (web) |
-| `05-gemini-unknown.md` | Gemini | Gemini (web) |
-| `06-deepseek-v4-pro-deepthinkoff.md` | DeepSeek V4 Pro — DeepThink OFF | DeepSeek chat |
-| `07-deepseek-v4-pro-deepthinkon.md` | DeepSeek V4 Pro — DeepThink ON | DeepSeek chat |
+| `04-claude-sonnet-5.md` | Claude Sonnet 5 — Medium (default) | Claude (web) |
+| `05-gemini-3.1-pro-extthinkon.md` | Gemini 3.1 Pro — extended thinking ON | Gemini (web) |
+| `06-deepseek-v3-instant-deepthinkoff.md` | DeepSeek V3 Instant — DeepThink OFF | DeepSeek chat |
+| `07-deepseek-v3-instant-deepthinkon.md` | DeepSeek V3 Instant — DeepThink ON | DeepSeek chat |
 | `08-grok-unknown.md` | Grok | Grok (web) |
-| `09-kimi-unknown.md` | Kimi | Kimi (web) |
-| `10-qwen-unknown.md` | Qwen | Qwen Chat |
-| `11-glm-unknown.md` | GLM | Zhipu GLM (web) |
+| `09-kimi-k2.6-instant.md` | Kimi K2.6 Instant (Standard) | Kimi (web) |
+| `10-qwen-3.8-max-thinking.md` | Qwen 3.8 Max — Thinking | Qwen Chat |
+| `11-glm-4.5.md` | GLM 4.5 | Zhipu GLM (web) |
+| `12-claude-sonnet-5-max.md` | Claude Sonnet 5 — max (long reasoning) | Claude (web) |
+| `13-gemini-3.6-flash-extthinkoff.md` | Gemini 3.6 Flash — ext. thinking OFF | Gemini (web) |
+| `14-gemini-3.6-flash-extthinkon.md` | Gemini 3.6 Flash — ext. thinking ON | Gemini (web) |
+| `15-deepseek-v3-expert-deepthinkoff.md` | DeepSeek V3 Expert — DeepThink OFF | DeepSeek chat |
+| `16-deepseek-v3-expert-deepthinkon.md` | DeepSeek V3 Expert — DeepThink ON | DeepSeek chat |
+| `17-qwen-3.7-plus-thinking.md` | Qwen 3.7 Plus — Thinking | Qwen Chat |
+| `18-qwen-3.7-plus-fast.md` | Qwen 3.7 Plus — Fast | Qwen Chat |
+| `19-qwen-3.8-max-fast.md` | Qwen 3.8 Max — Fast | Qwen Chat |
 
-Rows 5 (Gemini) and 11 (GLM) are **conditional**: they are used only if the
-practical free-access/quota criterion of DESIGN §5.1 (D-036) is satisfied —
-≥ 1 full story per day or every other day on the ordinary free tier, usable
-by the project author. If a conditional row fails that check at execution
-time, do NOT run it; record the exclusion (see below).
+Rows 5/13/14 (Gemini) and 11 (GLM) were **conditional** (DESIGN §5.1/D-036).
+Gemini satisfied the practical free-access/quota criterion in execution and
+was run; GLM 4.5 could not execute (repeated service errors) and its
+artifact is preserved as a failed external output.
 
-## How to execute one run
+## How to execute one run (operator workflow, as used)
 
 ```text
-1. Open operator-prompts/<file>.md.
-2. Copy the entire file.
-3. Paste it into the specified model (row-specific interface/settings, e.g.
+1. Open a canonical operator-prompts/<file>.md OR the corresponding session
+   template, copy the entire file.
+2. Paste it into the specified model (row-specific interface/settings, e.g.
    thinking toggle ON/OFF, DeepThink ON/OFF, the custom GPT).
-4. Save the model's complete reply byte-for-byte (no cleaning, no trimming).
-5. If the model refuses or truncates the reply, save the partial reply and
+3. Save the model's complete reply byte-for-byte (no cleaning, no trimming).
+4. If the model refuses or truncates the reply, save the partial reply and
    record the failure exactly as it happened — do not shorten the prompt.
-6. Register the reply with the collect step:
+5. Register the reply with the collect step:
    python scripts/run_exp004_phase1.py collect \
      --run <run_id> --output <reply-file> \
      --generation-date <actual date> \
@@ -52,6 +70,11 @@ time, do NOT run it; record the exclusion (see below).
          python scripts/run_exp004_phase1.py evaluate --run <run_id>
 ```
 
+When the operator saves prompt+reply as ONE session file, use
+`collect-session --run <run_id> --session <file>` instead of `collect`
+(Task 018): it validates the instruction body against the canonical prompt
+and extracts the raw reply after the prompt's closing `## Output` line.
+
 ## Prompt-control policy
 
 - Every row receives the **same direct-translation instruction** (from
@@ -59,26 +82,25 @@ time, do NOT run it; record the exclusion (see below).
   grammar annotations, no previous translations, no evaluator feedback, no
   iterative repair (EXP-004 DESIGN §6.2).
 - Rows of the same provider differ only in the documented generation setting
-  (thinking / DeepThink), never in linguistic content.
+  (thinking / DeepThink / extended thinking / Fast), never in linguistic
+  content.
 - The custom GPT row receives the same visible instruction; its built-in
   system prompt is unknown and is recorded as a confound (D-018) — the row
   is exploratory and kept separate from plain ChatGPT.
 - Byte-for-byte preservation of prompts and raw replies is a hard rule
   (D-023/D-035); never clean, trim, or rephrase a reply before collecting.
+- The canonical prompt files are deterministic: `prepare --force
+  --date <date>` regenerates byte-identical prompts + manifest (repository
+  evidence of the package).
 
-## Access filter (D-036 / DESIGN §5.1) — record the verdict per row
+## Access filter (D-036 / DESIGN §5.1) — recorded verdicts
 
-Before a row is used in the quantitative screening, verify in the actual
-interface that it satisfies **all** of:
-
-1. usable through a normal web/chat interface (no local install);
-2. free access;
-3. enough practical free quota for at least one complete story per day or
-   every other day (not merely a one-time trial/credit allocation);
-4. realistically usable by the project author.
-
-Document the observed verdict in the collect step (`--access-verdict`,
-`--access-note`). If access is technically free but the quota is too
-restrictive for this project, classify it as **practically unavailable**
-(verdict `fail`) and exclude it from the quantitative screening — the
-exclusion and reason are recorded, and the row is not run.
+The per-row access verdicts recorded in `outputs/<run_id>/meta.json` were
+reconciled in Task 018 from the actual execution evidence: rows that
+produced a complete story translation in one session received `pass`
+(Gemini conditional rows included); GLM 4.5 received `fail` (no usable
+output; repeated interface errors); Claude Sonnet 5 max received `pass`
+with the recorded constraint that the single run took >45 min and exhausted
+the free-tier allowance (practical-availability data, not a quality score).
+Daily free-quota sufficiency beyond the observed single run was not
+independently verified and is recorded as such.

@@ -660,6 +660,73 @@ the project author's external web sessions, operator role per D-007):
   roster table → Phase 1 report and an evidence-based Phase 2 shortlist
   (3–5 models). Phase 2 must not start before that.
 
+### 4.16 EXP-004 Phase 1 — author's 19 external sessions audited, reconciled, and evaluated (SODA Task 018, 2026-09-06)
+
+The author executed the Phase 1 screening in the external web/chat
+interfaces. Task 018's finding: the planned 11-row roster expanded during
+collection into **19 concrete model/configuration runs**, and the collected
+set contained annotation drift that had to be reconciled against
+deterministic evidence before any evaluation. What was done and learned:
+
+- **Session-level provenance preserved.** Each author session (prompt +
+  raw reply in a single markdown file) is archived byte-for-byte under
+  `experiments/exp004-modelscreen/collected-sessions/` (gitignored; README
+  + audit reports committed). `scripts/audit_exp004_collected.py`
+  (read-only) + the `collect-session` subcommand of
+  `run_exp004_phase1.py` verify the invariant that matters for a clean
+  baseline: the instruction + source-text body inside each archived session
+  is **byte-identical to the canonical operator prompt** (all 19 passed).
+  Replies are then cut deterministically after the prompt's closing
+  `## Output` line, so prompt material is never misread as output
+  (L-035 §2, D-045). No duplicate replies found.
+- **Identity is decided by evidence, not by author filenames/headers.**
+  Filenames and headers carried stale or copied labels; the reconciliation
+  matched each session to exactly one plan row via prompt hash + body
+  identity + header settings, and resolved the remaining contradictions
+  with the author (15/16 = DeepSeek V3 Expert, not the planned V4 Pro —
+  the interface offered V3 Instant/V3 Expert, and all four DeepSeek rows
+  executed on those; 19 = Qwen 3.8 Max **Fast**, header copy error; 05 =
+  Gemini 3.1 Pro extended-thinking **ON**). The executed set is therefore:
+  GPT-5.6 Luna OFF/ON; GPT Interslavic Teacher; Claude Sonnet 5 Medium +
+  max; DeepSeek V3 Instant OFF/ON + V3 Expert OFF/ON; Qwen 3.8 Max
+  Thinking + Fast, 3.7 Plus Thinking + Fast; Gemini 3.1 Pro ext-thinking
+  ON, 3.6 Flash ext-thinking OFF/ON; Grok (version unknown, fallback
+  label); Kimi K2.6 Instant (Standard); GLM 4.5 (failed). This is also a
+  practical-access observation in its own right: the operator's free
+  interfaces do not all expose the "planned" versions, and vendor
+  version labeling is not a reliable record — record what the interface
+  shows at execution time.
+- **GLM decided by the protocol, not by expectation.** The GLM 4.5
+  session contains only the service error page ("The request couldn't be
+  processed…", 75 B; no translation, no end marker) after repeated
+  interface errors (~1000 tokens displayed, 0 used). Under the intake
+  criteria that is a `failed_external_output` → intake `failed` →
+  excluded from quantitative evaluation; the artifact is preserved, the
+  exclusion documented. No special GLM rule was needed (D-045).
+- **Claude Sonnet 5 max: complete and slow.** The intensive reasoning run
+  took >45 min and exhausted the free-tier allowance (author observation,
+  preserved verbatim). The output is complete and passes intake, so the
+  run is evaluated; runtime is availability data, not a quality score —
+  no inference from runtime (D-045).
+- **Completeness gate recalibration was evidence-driven (D-045, L-035).**
+  Two complete outputs (Kimi, DeepSeek V3 Expert OFF) initially failed the
+  gate's exact-token proper-name check because the models transliterate
+  the Polish names into ISV forms (Bronisława → Bronislava, Przemysław →
+  Przemyslava/Przemyslav, Antoni → Anton/Antonij, Julianna → Julianna/
+  Julijana), and one output closed with `KONEC` (not the pre-registered
+  KONIEC/KONĖC). The gate now checks **ISV-tolerant, case/diacritic-
+  folded name stems** (3/5) and accepts KONIEC/KONEC/KONĖC — a calibrated
+  gate change, applied uniformly, before evaluation; no output text was
+  touched (the translation text remains verbatim).
+- **Resulting evidence table.** 19 collected → 18 intake `complete`,
+  evaluated as usable; GLM 4.5 excluded as failed. Per-run evaluation +
+  orthography artifacts under each `outputs/<run>/`; the Phase 1 roster
+  (`outputs/roster.md`) keeps canonical coverage, broader-supported
+  coverage, unresolved rate, orthography-out, access verdict, and
+  completeness as **separate dimensions** (no composite score, no
+  coverage-only ranking — L-033). Preliminary Phase 2 observations belong
+  to the Phase 1 report; Phase 2 itself remains closed.
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - The letter inventory for a constructed-language output audit comes from the

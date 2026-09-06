@@ -885,3 +885,58 @@ Rationale: screening requires comparable, reproducible, complete baseline
 runs; a data-driven gate replaces ad-hoc judgment at intake, and the
 pre-registered access verdict keeps the "practically usable for one story
 per day" criterion (D-036) enforceable row by row rather than assumed.
+
+## D-045 · 2026-09-06 · EXP-004 Phase 1 collection reconciliation: session provenance, ISV-tolerant name stems in the completeness gate, and author-annotation authority (Task 018)
+
+**Context.** The author executed the 19 EXP-004 Phase 1 screening sessions
+in external web/chat interfaces and saved each session as one markdown file
+(prompt header + instruction/source body + raw reply appended after the
+prompt's closing `## Output` line). The planned 11-row roster expanded into
+19 concrete runs. Reconciliation of filenames, model identity, reasoning
+settings, and intake metadata is needed before evaluation.
+
+**Decision.**
+
+1. **Session files are provenance; never edited.** The 19 raw session files
+   are preserved byte-for-byte under
+   `experiments/exp004-modelscreen/collected-sessions/` (gitignored). Model
+   replies are registered by extracting the deterministic suffix after the
+   prompt's closing `## Output` line (`collect-session`), validated by the
+   byte-identity of the instruction/source body against the canonical
+   prompt (clean-baseline invariant). No reply text is ever corrected,
+   normalized, trimmed beyond the prompt/reply boundary, or overwritten
+   (D-035).
+2. **Identity is reconciled from repository evidence, not author naming.**
+   The canonical prompt package + `manifest.json` are the identity of
+   record. Filenames/headers are treated as *declared* annotations.
+   Contradictory annotations that could not be resolved deterministically
+   were resolved with the author (2026-09-06): rows 15/16 = **DeepSeek V3
+   Expert** (stale `v4-pro` filenames), row 19 = **Qwen 3.8 Max Fast**
+   (header copy error), row 05 = **Gemini 3.1 Pro extended-thinking ON**.
+   Where no annotation exists (e.g. Grok version), the D-018 `unknown`
+   fallback is used and marked.
+3. **Completeness-gate name check is stem-based, not exact-token.** Models
+   transliterate Polish proper names (Bronisława → Bronislava/Bronisława;
+   Przemysław → Przemyslava/Przemysław; Antoni → Anton/Antonij; Julianna →
+   Julianna/Julijana). The gate now matches five ISV-tolerant, folded
+   w/v-compatible stems (≥3 of 5 required). This is a calibration of the
+   pre-registered gate (D-044), applied uniformly before evaluation —
+   not a per-model exception.
+4. **GLM disposition follows the protocol, not the author's expectation.**
+   The GLM 4.5 artifact is a service-error page (75 B, no translation, no
+   end marker): `failed_external_output`, intake `failed`, excluded from
+   quantitative evaluation. No special GLM rule was created.
+5. **Claude Sonnet 5 max runtime is availability data.** The >45 min,
+   free-tier-exhausting execution is recorded in `meta.json` access notes
+   and the roster as a practical constraint; the complete output is
+   evaluated normally. Runtime never becomes a quality score.
+6. **Access verdicts were reconciled from execution evidence.** Rows with a
+   complete one-session story translation received `pass`; GLM `fail`;
+   Claude Sonnet 5 max `pass` with the recorded quota constraint. Daily
+   free-quota sufficiency beyond the observed single run is recorded as not
+   independently verified.
+
+**Consequences.** 19 collected outputs → 19 reconciled runs (18 complete +
+1 failed/excluded). Evidence tables stay per-dimension (coverage, broader
+coverage, unresolved rate, orthography, completeness, access, anomalies);
+no composite score and no coverage-only ranking.

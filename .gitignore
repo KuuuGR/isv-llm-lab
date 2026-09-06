@@ -31,6 +31,11 @@ experiments/**/operator-prompts/*
 !experiments/**/operator-prompts/README.md
 !experiments/**/operator-prompts/manifest.json
 
+# EXP-004 collected raw sessions (author-saved prompt+reply files, contain
+# the copyrighted source story + raw model outputs; never committed)
+experiments/**/collected-sessions/*
+!experiments/**/collected-sessions/README.md
+
 # Raw experiment input set (source story + model outputs, copyrighted)
 opowiadania-set-isv/
 

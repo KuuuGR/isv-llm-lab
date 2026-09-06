@@ -3,7 +3,7 @@
   "experiment_id": "exp004",
   "date": "2026-09-06",
   "generator": "scripts/run_exp004_phase1.py prepare",
-  "generator_commit": "4b48d64a6e11061c5ce46550454d9d0af8f83b49",
+  "generator_commit": "bc626edc878c7a054a5c79088126a1bf577d2f12",
   "note": "Prompt files embed the copyrighted story and stay local (gitignored); this manifest records prompt hashes only.",
   "files": [
     {
@@ -27,26 +27,26 @@
     {
       "file": "04-claude-sonnet-5.md",
       "run_id": "2026-09-06__anthropic__claude__sonnet-5__direct",
-      "prompt_sha256": "809e21b83fd4e7c3447186bf803baae3cb3cc0cddfed0e75f22a866fd97e549d",
-      "bytes": 11985
+      "prompt_sha256": "b44d8ed466f738a29b7885309fdce9a75c4c860e097a70f8dbc81174ac235144",
+      "bytes": 12044
     },
     {
-      "file": "05-gemini-unknown.md",
-      "run_id": "2026-09-06__google__gemini__unknown__direct",
-      "prompt_sha256": "79a166784bd49549134d7684aab4a60543f4cfd8e01fb06c34631d18f744f188",
-      "bytes": 12071
+      "file": "05-gemini-3.1-pro-extthinkon.md",
+      "run_id": "2026-09-06__google__gemini-3.1-pro__extthinkon__direct",
+      "prompt_sha256": "2734b1cbefc976375ff6209782d6987f2987c18b425bb6491eb0bfe0265632c9",
+      "bytes": 12214
     },
     {
-      "file": "06-deepseek-v4-pro-deepthinkoff.md",
-      "run_id": "2026-09-06__deepseek__deepseek-v4-pro__deepthinkoff__direct",
-      "prompt_sha256": "28793fd6c74ac75a77356d0db5d610bfdcb5bd016022d4b9d8cbf3966162ca43",
-      "bytes": 12043
+      "file": "06-deepseek-v3-instant-deepthinkoff.md",
+      "run_id": "2026-09-06__deepseek__deepseek-v3-instant__deepthinkoff__direct",
+      "prompt_sha256": "b9b7d203587aaff9389ce889da5a9a6f720ea0e52649caa324fa7aaf021bc16d",
+      "bytes": 12072
     },
     {
-      "file": "07-deepseek-v4-pro-deepthinkon.md",
-      "run_id": "2026-09-06__deepseek__deepseek-v4-pro__deepthinkon__direct",
-      "prompt_sha256": "14b2175e6e1f3ee70a88965fd05760fd31cc2f9346d0b7babc6070b30986baeb",
-      "bytes": 12039
+      "file": "07-deepseek-v3-instant-deepthinkon.md",
+      "run_id": "2026-09-06__deepseek__deepseek-v3-instant__deepthinkon__direct",
+      "prompt_sha256": "99efb34a7d73cc503626b0b524e3decc7fea5d86a81fa183bb5086e756ceecb4",
+      "bytes": 12068
     },
     {
       "file": "08-grok-unknown.md",
@@ -55,22 +55,70 @@
       "bytes": 11951
     },
     {
-      "file": "09-kimi-unknown.md",
-      "run_id": "2026-09-06__moonshot__kimi__unknown__direct",
-      "prompt_sha256": "838e967ff7e986f7e662f858d06f4cc0e7dbf06bc9c37ce75eba388e223f8a48",
-      "bytes": 11956
+      "file": "09-kimi-k2.6-instant.md",
+      "run_id": "2026-09-06__moonshot__kimi__k2.6-instant__direct",
+      "prompt_sha256": "96d384e6f6789fa9d409560a5c52c11068462fe936b3dd3f868b0661a37051fa",
+      "bytes": 12025
     },
     {
-      "file": "10-qwen-unknown.md",
-      "run_id": "2026-09-06__alibaba__qwen__unknown__direct",
-      "prompt_sha256": "d424dc8149d35c5df60bf1f20593a9e7cb841cf863d90fae0501198487146c3b",
-      "bytes": 11965
+      "file": "10-qwen-3.8-max-thinking.md",
+      "run_id": "2026-09-06__alibaba__qwen-3.8-max__thinking__direct",
+      "prompt_sha256": "f069142b7f16b4b33f54b04091384f6eb87431ce1cefabca54f621f82e584e9a",
+      "bytes": 12023
     },
     {
-      "file": "11-glm-unknown.md",
-      "run_id": "2026-09-06__zhipu__glm__unknown__direct",
-      "prompt_sha256": "0469268b84bcc4cb807777c269f383e612027bdf23aad8998e192f241958860c",
-      "bytes": 12031
+      "file": "11-glm-4.5.md",
+      "run_id": "2026-09-06__zhipu__glm__4.5__direct",
+      "prompt_sha256": "dc5f3a465c370c6afe394880f4b7eface1774e50f7989fd9def9b5731bdad248",
+      "bytes": 12049
+    },
+    {
+      "file": "12-claude-sonnet-5-max.md",
+      "run_id": "2026-09-06__anthropic__claude__sonnet-5-max__direct",
+      "prompt_sha256": "616dd6272eca049f34d613cfe0abee643e207a5c57d156e20ad9e4f96c86a35c",
+      "bytes": 12065
+    },
+    {
+      "file": "13-gemini-3.6-flash-extthinkoff.md",
+      "run_id": "2026-09-06__google__gemini-3.6-flash__extthinkoff__direct",
+      "prompt_sha256": "eccfb446b16a935e9189ae56675aec9a846a38f3e7f3f46a8ed82e6e0b50975d",
+      "bytes": 12077
+    },
+    {
+      "file": "14-gemini-3.6-flash-extthinkon.md",
+      "run_id": "2026-09-06__google__gemini-3.6-flash__extthinkon__direct",
+      "prompt_sha256": "2c822296bee585c0bf6f989d5a2b112127558e28acc78e2bf18fc77ca279801b",
+      "bytes": 12073
+    },
+    {
+      "file": "15-deepseek-v3-expert-deepthinkoff.md",
+      "run_id": "2026-09-06__deepseek__deepseek-v3-expert__deepthinkoff__direct",
+      "prompt_sha256": "78f26108b220f25a93d8da043c4ba51a9f32b400ef45dedaeb71e337536d098e",
+      "bytes": 12069
+    },
+    {
+      "file": "16-deepseek-v3-expert-deepthinkon.md",
+      "run_id": "2026-09-06__deepseek__deepseek-v3-expert__deepthinkon__direct",
+      "prompt_sha256": "3515726fff91e7e0f43050808a1681991c2521097fde6f34ff22859fddc528df",
+      "bytes": 12065
+    },
+    {
+      "file": "17-qwen-3.7-plus-thinking.md",
+      "run_id": "2026-09-06__alibaba__qwen-3.7-plus__thinking__direct",
+      "prompt_sha256": "d464e5d5ba4549a5cf7ae085221a87cd5c26f6b85e8824fb7119b7a0a4eeb578",
+      "bytes": 12026
+    },
+    {
+      "file": "18-qwen-3.7-plus-fast.md",
+      "run_id": "2026-09-06__alibaba__qwen-3.7-plus__fast__direct",
+      "prompt_sha256": "90967a8a83c16fb0f5bfaf386999eb4ec6b555b4a6c442d6555a7b6d101e66a2",
+      "bytes": 12010
+    },
+    {
+      "file": "19-qwen-3.8-max-fast.md",
+      "run_id": "2026-09-06__alibaba__qwen-3.8-max__fast__direct",
+      "prompt_sha256": "56d452b551cce260ed8a080719bfaf4d0b14db0bb1a32e6646d8667d9675d7f1",
+      "bytes": 12007
     }
   ]
 }

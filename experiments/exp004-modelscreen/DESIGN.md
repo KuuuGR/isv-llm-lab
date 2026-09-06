@@ -486,4 +486,37 @@ EXP-001/002/003 and starts no LLM run.
    yet**: the remaining step is external execution by the project author
    (operator role) in the models' web/chat interfaces and byte-for-byte
    collection, followed by evaluation and this phase's report.
+- **Execution completed; collected outputs audited and reconciled (SODA
+   Task 018, 2026-09-06).** The author executed the screening sessions in the
+   external web/chat interfaces. The planned 11-row roster (§5.2) expanded
+   during collection into **19 concrete model/configuration runs**
+   (the reconciled executed roster; see `outputs/roster.md` and
+   `collected-sessions/collection_audit.md`):
+   - Claude split into **Sonnet 5 Medium (default)** and **Sonnet 5 max**
+     (the max run took >45 min and exhausted the free-tier allowance — an
+     execution observation only, kept separate from translation quality);
+   - DeepSeek's planned V4-Pro rows were executed on the models the
+     interface offered: **V3 Instant** (DeepThink OFF/ON) and **V3 Expert**
+     (DeepThink OFF/ON) — no V4-Pro output exists;
+   - Qwen ran as four concrete variants (**3.8 Max Thinking, 3.7 Plus
+     Thinking, 3.7 Plus Fast, 3.8 Max Fast**);
+   - Gemini (conditional rows) ran as **3.1 Pro extended-thinking ON** and
+     **3.6 Flash extended-thinking OFF/ON**;
+   - **GLM 4.5** produced only a service-error page (repeated interface
+     errors; ~1000 tokens shown, 0 used — author report). Its artifact is
+     preserved as `failed_external_output` and, per the intake protocol
+     (D-044), it is excluded from quantitative evaluation.
+   Reconciliation (identity, filenames, prompt/run mapping, intake
+   metadata) used the deterministic prompt package + manifest as the source
+   of truth; three contradictory author annotations were resolved with the
+   author (rows 15/16 = DeepSeek V3 Expert; row 19 = Qwen 3.8 Max Fast;
+   row 05 = Gemini 3.1 Pro extended-thinking ON). All 19 raw session files
+   are preserved byte-for-byte under `collected-sessions/`; model replies
+   are extracted deterministically after the prompt's closing `## Output`
+   marker. **18 runs passed the intake gate (complete) and were evaluated;
+   GLM 4.5 is the single failed/excluded run.** The completeness gate's
+   story-name check was recalibrated to ISV-tolerant name stems after three
+   complete outputs (Kimi, DeepSeek V3 Expert OFF, and others using
+   transliterated names such as Bronislava/Przemyslava/Julijana) failed an
+   exact Polish-token match (D-045, L-035). Phase 2 remains closed.
 

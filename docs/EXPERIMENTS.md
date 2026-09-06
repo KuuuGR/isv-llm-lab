@@ -242,7 +242,7 @@ coverage):
 Full report: `experiments/exp002-pilot/REPORT.md`; per-run detail in
 `comparison/<run>/` (local, gitignored).
 
-## Activity log — follow-ups after EXP-002 (SODA Tasks 007–016)
+## Activity log — follow-ups after EXP-002 (SODA Tasks 007–018)
 
 The pending-work list for the current state of the project is at the end of
 this file under **"Planned (not started) — current"**; the blocks below are
@@ -677,7 +677,62 @@ Phase 2 shortlist (3–5 models), which this task must NOT produce from
 assumptions or start before the runs exist.
 
 
-## Planned (not started) — current (2026-09-05, SODA Task 017)
+### Follow-up: EXP-004 Phase 1 executed — collected outputs audited, reconciled, and evaluated (Task 018, 2026-09-06)
+
+The author executed the Phase 1 screening sessions in the external web/chat
+interfaces. The planned 11-row roster expanded into **19 concrete
+model/configuration runs**; the collected set was audited and reconciled
+before evaluation:
+
+- **Raw provenance:** the 19 author session files (prompt + raw reply in
+  one markdown file) are preserved byte-for-byte under
+  `experiments/exp004-modelscreen/collected-sessions/` (gitignored; README
+  committed). `scripts/audit_exp004_collected.py` verified that every
+  session's instruction+source body is byte-identical to the canonical
+  prompt (clean-baseline invariant holds for all 19), located each reply
+  after the prompt's closing `## Output` line, and found **no duplicate
+  replies**.
+- **Reconciliation (identity from repository evidence, D-045):** DeepSeek's
+  planned V4-Pro rows were executed on the models the interface offered —
+  **V3 Instant** (DeepThink OFF/ON) and **V3 Expert** (DeepThink OFF/ON);
+  Claude split into **Sonnet 5 Medium (default)** and **Sonnet 5 max**;
+  Qwen ran as **3.8 Max Thinking, 3.7 Plus Thinking, 3.7 Plus Fast, 3.8
+  Max Fast**; Gemini (conditional) ran as **3.1 Pro extended-thinking ON**
+  and **3.6 Flash extended-thinking OFF/ON**; Kimi annotated **K2.6
+  Instant (Standard)**; Grok version not annotated (recorded `unknown`,
+  D-018). Three contradictory author annotations were resolved with the
+  author: rows 15/16 = DeepSeek V3 Expert (stale `v4-pro` filenames),
+  row 19 = Qwen 3.8 Max **Fast** (header copy error), row 05 = Gemini 3.1
+  Pro extended-thinking **ON**.
+- **GLM disposition (evidence, no special rule):** the GLM 4.5 session
+  artifact is the service error page ("The request couldn't be processed…",
+  75 B, no translation, no end marker) after repeated interface errors
+  (author report; ~1000 tokens shown, 0 used). It is classified
+  `failed_external_output` → intake `failed` and **excluded from
+  quantitative evaluation** exactly as the intake protocol specifies; the
+  artifact is preserved.
+- **Claude Sonnet 5 max (long-reasoning run):** preserved as an execution
+  observation (>45 min; exhausted the free-tier allowance). The output is
+  complete and passes the intake gate, so the run **is evaluated**; runtime
+  is recorded as practical-availability data, not a quality score.
+- **Gate calibration (D-045, L-035):** the completeness gate's story-name
+  check is now stem-based (ISV-tolerant, case/diacritic-folded, w/v
+  variants) because several complete outputs transliterate proper names
+  (Bronisława → Bronislava, Przemysław → Przemyslava/Przemyslava, Antoni →
+  Anton/Antonij, Julianna → Julianna/Julijana); the end marker accepts
+  KONIEC/KONEC/KONĖC. Applied uniformly before evaluation.
+- **Results:** 19 collected runs → **18 intake `complete` and evaluated
+  (usable); GLM 4.5 is the single failed/excluded run.** The Phase 1
+  evidence table (`experiments/exp004-modelscreen/outputs/roster.md`)
+  reports per dimension — canonical/broader coverage, unresolved rate,
+  orthography-out, access verdict, completeness — with **no composite score
+  and no coverage-only ranking**. Preliminary Phase 2 observations (not the
+  final selection) are for the Phase 1 report; Phase 2 remains closed.
+- **Tests:** 8 added (collect-session, stem gate, audit helpers +
+  end-to-end); full suite green (Task 018). Docs updated: D-045, L-035,
+  DESIGN §12, exp004 READMEs, STATE, ROADMAP, RESEARCH_NOTES.
+
+## Planned (not started) — current (2026-09-06, SODA Task 018)
 
 Status categories are kept distinct:
 - **Completed experiments:** EXP-001 (baseline, historical), EXP-002
@@ -698,44 +753,51 @@ Status categories are kept distinct:
   (`orthography_report.{json,md}`).
 - **No further human-evaluation exercise** will be designed: EXP-003
   collected the planned human signal (D-042).
-- **Planned experiments:** EXP-004 model screening — **Phase 1 roster and
-  screening protocol finalized (Task 016, §12 of its DESIGN); APPROVED and
-  packaged for execution (Task 017)** — execution kit ready (prompts + plan
-  + intake/verify/evaluate pipeline), no LLM output yet; the remaining step
-  is the project author's external web sessions and the Phase 1 report.
+- **Planned experiments:** EXP-004 model screening — **Phase 1 EXECUTED and
+  RECONCILED (Task 018, 2026-09-06)**: 19 collected runs, 18 intake-complete
+  and evaluated (evidence table in `outputs/roster.md`); GLM 4.5
+  failed/excluded per protocol; Phase 1 report + evidence-based Phase 2
+  shortlist are the next step. Phase 2 (guidance methods) stays closed
+  until then.
 
 Planned (not started):
 
 - **Manual linguistic review** of the EXP-001 unresolved sample (Task 004
   artifacts; human-only, no automatic classification).
-- **EXP-004 Phase 1 — practical model screening (APPROVED — KIT READY,
-  EXECUTION PENDING AUTHOR WEB SESSIONS)**: design at
+- **EXP-004 Phase 1 — practical model screening (EXECUTED — COLLECTED SET
+  RECONCILED + EVALUATED, Task 018, 2026-09-06)**: design at
   `experiments/exp004-modelscreen/DESIGN.md` (Task
   013 design; Task 016 finalized the roster and protocol; Task 017 approved
-  execution and prepared the kit). Phase 1 screens
-  the practically available models on a **clean direct-translation
+  execution and prepared the kit; Task 018 audited/reconciled the author's
+  19 collected sessions and ran intake/evaluation/orthography). Phase 1
+  screens the practically available models on a **clean direct-translation
   baseline** (no scaffolding) under the practical access filter (D-036):
   usable via a web/chat interface, free access, enough practical free quota
   for at least one full story per day or every other day (not a one-time
-  trial), practically usable by the project author. Roster: GPT-5.6 Luna
-  thinking OFF, GPT-5.6 Luna thinking ON, GPT Interslavic Teacher custom
-  GPT, Claude Sonnet 5, Gemini (only if it passes the free-access/quota
-  criterion), DeepSeek V4 Pro DeepThink OFF, DeepSeek V4 Pro DeepThink ON,
-  Grok, Kimi, Qwen, GLM (if practical web access satisfies the filter).
-  Exclusions: Venice AI (not an independent model), local/self-hosted
-  models (out of practical scope), Bielik (already-observed negative
-  qualitative case — no new full baseline unless a methodological reason
-  arises). Full recording, byte-for-byte collection (D-035), Task 008
-  two-tier evaluator unmodified, no manual word-by-word classification, no
-  composite score, no human evaluation. After Phase 1 selects the
-  strongest/practical models, Phase 2 tests the assistance methods
+  trial), practically usable by the project author. Planned roster:
+  GPT-5.6 Luna thinking OFF, GPT-5.6 Luna thinking ON, GPT Interslavic
+  Teacher custom GPT, Claude Sonnet 5, Gemini (only if it passes the
+  free-access/quota criterion), DeepSeek V4 Pro DeepThink OFF, DeepSeek V4
+  Pro DeepThink ON, Grok, Kimi, Qwen, GLM (if practical web access
+  satisfies the filter). **Executed roster (actual):** Claude Sonnet 5
+  Medium + max; DeepSeek V3 Instant + V3 Expert × DeepThink OFF/ON (the
+  planned V4-Pro rows ran on the models the interface offered — no V4-Pro
+  output); Qwen 3.8 Max Thinking/Fast + 3.7 Plus Thinking/Fast; Gemini 3.1
+  Pro (ext. thinking ON) + 3.6 Flash (OFF/ON); GPT-5.6 Luna OFF/ON; ISV
+  Teacher; Grok; Kimi K2.6 Instant; GLM 4.5 (**failed**, service-error
+  artifact, excluded per protocol). Exclusions: Venice AI (not an
+  independent model), local/self-hosted models (out of practical scope),
+  Bielik (already-observed negative qualitative case — no new full baseline
+  unless a methodological reason arises). Full recording, byte-for-byte
+  collection (D-035), Task 008 two-tier evaluator unmodified, no manual
+  word-by-word classification, no composite score, no human evaluation.
+  **Result:** 18/19 runs intake `complete` and evaluated (usable) — evidence
+  table `outputs/roster.md`; GLM 4.5 failed/excluded. After Phase 1 selects
+  the strongest/practical models, Phase 2 tests the assistance methods
   systematically (1. direct translation; 2. lexical candidate guidance;
   3. multiple resource-supported alternatives; 4. POS/morphology guidance;
   5. grammar guidance; 6. lexical + morphology/grammar combinations;
   7. evaluator/repair loop) to identify the best model × method
-  combination rather than a blind matrix. **As of Task 017**: prompts +
-  plan + pipeline exist (`run_exp004_phase1.py`, run ids
-  `…__direct`, condition `direct`); run the author's external sessions,
-  collect with per-row `--status`/`--access-verdict`, then
-  verify → evaluate → roster. Do not start Phase 2 before Phase 1 is
-  complete and reported.
+  combination rather than a blind matrix. **Next:** Phase 1 report +
+  evidence-based Phase 2 shortlist (3–5 models). Do not start Phase 2
+  before Phase 1 is complete and reported.

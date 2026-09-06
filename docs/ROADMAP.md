@@ -1,14 +1,12 @@
 # Roadmap
 
-Status: updated 2026-09-05 (Task 017 — EXP-004 Phase 1 practical model
-screening APPROVED and packaged: execution kit ready — 11 operator prompts
-from one shared direct-translation instruction, fixed plan, byte-for-byte
-intake + completeness gate + Task 008 evaluation + orthographic audit
-pipeline, tests green. No LLM output exists yet: the next step is the
-project author executing the prompts in the models' web/chat interfaces and
-returning the raw replies; then collect/verify/evaluate/roster and the
-Phase 1 report with the evidence-based Phase 2 shortlist. Phase 2 must not
-start before then).
+Status: updated 2026-09-06 (Task 018 — EXP-004 Phase 1 execution COMPLETED:
+the author's 19 external sessions were audited and reconciled against the
+deterministic prompt package; 18 runs are intake-complete and evaluated
+(evidence table `experiments/exp004-modelscreen/outputs/roster.md`); GLM 4.5
+failed/excluded per protocol; Claude Sonnet 5 max runtime + free-tier
+exhaustion preserved as availability data. Next: the Phase 1 report and the
+evidence-based Phase 2 shortlist. Phase 2 must not start before then).
 
 ## Done
 
@@ -445,7 +443,8 @@ start before then).
         **Not executed** — gated on design approval + access confirmations.
 - [x] **Task 017 — EXP-004 Phase 1 execution: screening kit prepared
       (approved; LLM output pending the author's external sessions,
-      2026-09-05).**
+      2026-09-05)** → the external sessions then happened and are recorded
+      in Task 018 below.
   - [x] Design approved for execution (§12) — EXP-003 closed, no new human
         evaluation (D-042).
   - [x] `base_instruction.txt`: single direct-translation instruction
@@ -468,11 +467,45 @@ start before then).
         (11 files; gitignored), prompt manifest + READMEs committed.
   - [x] Docs updated (DECISIONS D-044, LESSONS L-034, STATE, ROADMAP,
         EXPERIMENTS follow-up + status, exp004 DESIGN §12 + README).
-  - [x] **Remaining:** author executes the 11 operator prompts in the
-        models' web/chat interfaces (recording per-row status + access
-        verdict), returns raw replies byte-for-byte → collect/verify/
-        evaluate/roster → Phase 1 report + Phase 2 shortlist. Phase 2 must
-        not start before then.
+  - [x] **Remaining (now DONE — Task 018 below):** author executes the 11
+        operator prompts in the models' web/chat interfaces (recording per-
+        row status + access verdict), returns raw replies byte-for-byte →
+        collect/verify/evaluate/roster → Phase 1 report + Phase 2
+        shortlist. Phase 2 must not start before then.
+- [x] **Task 018 — EXP-004 Phase 1 collected outputs audited + reconciled
+      (execution completed by the author; 2026-09-06).**
+  - [x] Author executed 19 sessions externally; planned 11-row roster
+        expanded into 19 concrete runs (Claude Sonnet 5 Medium + max;
+        DeepSeek V3 Instant + V3 Expert × DeepThink OFF/ON; Qwen 3.8 Max
+        Thinking/Fast + 3.7 Plus Thinking/Fast; Gemini 3.1 Pro ext-thinking
+        ON + 3.6 Flash OFF/ON; GPT-5.6 Luna OFF/ON; ISV Teacher custom GPT;
+        Grok; Kimi K2.6 Instant; GLM 4.5 failed).
+  - [x] `collected-sessions/` archive: 19 raw session files (prompt+reply)
+        preserved byte-for-byte (gitignored; README committed).
+  - [x] `scripts/audit_exp004_collected.py`: read-only audit (instruction-
+        body byte identity vs canonical prompts — all 19 OK; reply
+        extraction boundary; end markers; duplicate detection — none).
+  - [x] `run_exp004_phase1.py collect-session`: deterministic reply
+        extraction + integrity check + refusal to overwrite; 19 runs
+        registered (meta records session SHA-256 + canonical prompt hash +
+        access verdicts reconciled from execution evidence).
+  - [x] Reconciliation resolved author-naming drift with the author:
+        15/16 = DeepSeek V3 Expert (stale `v4-pro` filenames); 19 = Qwen
+        3.8 Max Fast (header copy error); 05 = Gemini 3.1 Pro ext-thinking
+        ON. GLM disposition from evidence (service-error artifact →
+        `failed_external_output`, excluded per protocol — no special rule).
+        Claude Sonnet 5 max >45 min / free-tier exhaustion kept as
+        availability data only.
+  - [x] Completeness gate name check recalibrated to ISV-tolerant folded
+        stems (Kimi/DeepSeek V3 Expert OFF and others transliterate proper
+        names); end marker accepts KONIEC/KONEC/KONĖC (D-045, L-035).
+  - [x] Intake: **18/19 complete; GLM failed**. Evaluate + orthography
+        audit on all eligible runs; roster regenerated (18 usable rows +
+        GLM excluded). Tests: +8 (collect-session, stem gate, audit
+        helpers/end-to-end); full suite green.
+  - [x] Docs updated (D-045, L-035, DESIGN §12, exp004 README +
+        operator-prompts/collected-sessions/outputs READMEs, STATE, ROADMAP,
+        EXPERIMENTS, RESEARCH_NOTES).
 
 ## Next recommended task (single)
 
@@ -486,26 +519,25 @@ start before then).
   score. Provenance artifacts Q58/Q67 recorded (D-043). One verbatim
   participant comment preserved. Lessons L-032/L-033, decisions D-042/D-043.
 - [x] ~~EXP-004 Phase 1 — practical model screening (NEXT, not started)~~ —
-  **KIT READY (Task 017)**: roster/protocol finalized (Task 016; §11.7/§12
-  of `experiments/exp004-modelscreen/DESIGN.md`), execution approved and
-  packaged (Task 017). Clean direct-translation
-  baseline only (no scaffolding), models with practical web/chat access and
-  sufficient free quota (GPT-5.6 Luna OFF/ON, GPT Interslavic Teacher,
-  Claude Sonnet 5, Gemini conditional, DeepSeek V4 Pro OFF/ON, Grok, Kimi,
-  Qwen, GLM conditional; Venice excluded, local/self-hosted excluded,
-  Bielik documented as an already-observed negative qualitative case — no
-  new full baseline without a methodological reason). The gates are
-  satisfied: EXP-003 review recorded + report written, design approved.
-- [ ] **EXP-004 Phase 1 — execute the author's external web sessions
-  (NEXT, human operator step, not yet done)** — for each of the 11 rows:
-  open `experiments/exp004-modelscreen/operator-prompts/<file>.md`, copy the
-  ENTIRE file into the model's web/chat interface with the row's settings,
-  save the complete reply byte-for-byte, then
-  `run_exp004_phase1.py collect --run <run_id> --output <reply> --status …
-  --access-verdict pass|fail|unknown --access-note "…"` (Gemini/GLM run
-  only if the practical free quota passes; otherwise record the exclusion
-  with verdict `fail`), then `verify`, `evaluate --run <run_id>`, and after
-  all rows `roster`. Only after Phase 1 selects the
+  **EXECUTED AND RECONCILED (Task 018, 2026-09-06)**: the author ran 19
+  sessions in the external web/chat interfaces; all raw sessions are
+  preserved and audited; 18 runs are intake-complete and evaluated, GLM 4.5
+  failed/excluded per protocol. Evidence table:
+  `experiments/exp004-modelscreen/outputs/roster.md` (per-dimension metrics;
+  no composite score, no coverage-only ranking). Clean direct-translation
+  baseline only (no scaffolding). Models that actually ran: GPT-5.6 Luna
+  OFF/ON, GPT Interslavic Teacher, Claude Sonnet 5 Medium + max, Gemini 3.1
+  Pro + 3.6 Flash, DeepSeek V3 Instant + V3 Expert, Grok, Kimi K2.6 Instant,
+  Qwen 3.8 Max + 3.7 Plus. Venice/local/Bielik remain excluded as before.
+- [ ] **EXP-004 Phase 1 report + Phase 2 shortlist (NEXT)** — write the
+  Phase 1 report from `outputs/roster.md` + per-run evaluation/orthography
+  artifacts (18 usable runs; GLM preserved as the failed/excluded case;
+  Claude Sonnet 5 max runtime recorded as availability data), and select
+  the small evidence-based Phase 2 shortlist (~3–5 models) using the
+  documented multi-dimensional judgment (practical availability,
+  completeness/reliability, lexical/resource evidence, orthographic
+  cleanliness, morphology/evidence, obvious quality issues — NOT coverage
+  ranking alone, per the EXP-003 lesson). Only after Phase 1 selects the
   strongest/practical models are the assistance methods tested
   systematically (1. direct translation; 2. lexical candidate guidance;
   3. multiple resource-supported alternatives; 4. POS/morphology guidance;
