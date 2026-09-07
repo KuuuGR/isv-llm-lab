@@ -31,10 +31,15 @@ Raw outputs embed the copyrighted story's translation and are **gitignored**
   `extend-direct --date 2026-09-07` appended two exploratory Phase-1
   DIRECT rows for Dola 3.8 Fast/Pro (run ids
   `…__bytedance__dola-3.8__fast|pro__direct`, status
-  `pending_manual_collection`, `exploratory: true`)** — prepared, NOT
-  collected: they have no `output.txt`/`meta.json`/`intake.json`/
-  `evaluation.json` yet, and no placeholder result exists. The original 18
-  usable baselines are unchanged.
+  `pending_manual_collection`, `exploratory: true`)**. **Task 023
+  (2026-09-07): both baselines were executed by the author and collected
+  through the Phase-1 `collect-session` intake (msg2-style records — the
+  raw reply lives inside the canonical operator prompt file, which is the
+  session record); they passed `verify` (verdict `complete`, usable) and
+  were evaluated, so the two Dola rows now have real
+  `intake.json`/`evaluation.json`/`orthography.json` under `outputs/` and
+  no longer report a pending status.** The original 18 usable baselines
+  are unchanged.
 - `roster.json` / `roster.md` — Phase 1 evidence table (access verdict,
   intake, usability, canonical/broader coverage, unresolved rate, token
   count, orthography-out count per row; no ranking, no composite score),

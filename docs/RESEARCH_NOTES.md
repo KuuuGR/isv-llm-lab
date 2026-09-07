@@ -858,14 +858,16 @@ through the unmodified deterministic pipeline. Key recorded facts:
   observations are documented in `phase2a/README.md` and shape the
   experiment's practical reproducibility story (D-048, L-038).
 
-### 4.21 EXP-004 Phase 2A — Phase-1 DIRECT baselines for the exploratory Dola configurations prepared, pending manual execution (SODA Task 022, 2026-09-07)
+### 4.21 EXP-004 Phase 2A — Phase-1 DIRECT baselines for the exploratory Dola configurations prepared (SODA Task 022, 2026-09-07)
 
 Dola 3.8 was discovered **after the original 18-configuration roster was
 fixed** (Task 021), so its Phase-2A runs (20/21) carried no Phase-1
-baseline. Task 022 prepares the two missing Phase-1 direct baselines
-**retrospectively** through the existing Phase-1 direct protocol — an
-**exploratory extension**, not part of the original planned 18. Recorded
-facts (no LLM called; no Phase-2A output or corpus file touched):
+baseline at that time. Task 022 prepared the two missing Phase-1 direct
+baselines **retrospectively** through the existing Phase-1 direct
+protocol — an **exploratory extension**, not part of the original planned
+18. Recorded facts (no LLM called; no Phase-2A output or corpus file
+touched; the author executed + collected + evaluated the two baselines in
+Task 023 — §4.22 below):
 
 - **Canonical operator prompts rendered** by
   `scripts/run_exp004_phase1.py extend-direct --date 2026-09-07` (Phase-1
@@ -883,16 +885,61 @@ facts (no LLM called; no Phase-2A output or corpus file touched):
   labels `Dola 3.8 — Fast` / `Dola 3.8 — Pro`, `exploratory: true` — all
   carried over from Task 021 as author-recorded evidence-based naming; no
   independently verified provider/model claim is introduced.
-- **Pending status, never fabricated.** Phase-1 plan + manifest rows are
-  `pending_manual_collection`; no outputs, metrics or placeholder results
-  were created; the original 18 Phase-1 baselines are unchanged.
+- **Pending status, never fabricated.** Phase-1 plan + manifest rows
+  were appended as `pending_manual_collection` at preparation time; no
+  outputs, metrics or placeholder results were created then; the original
+  18 Phase-1 baselines are unchanged.
 - **Unambiguous pairing for the future comparison.** Phase-2A
   `link-baselines` set the Dola p2a-primed rows' `baseline_run_id` to the
   prepared direct ids (`baseline_status: pending_collection`): `fast`
-  direct ↔ Phase-2A run 20, `pro` direct ↔ Phase-2A run 21. `compare`
-  reports them pending; after the author collects + evaluates the two
-  direct runs the deterministic pipeline reports the **within-Dola
-  Phase 1 → Phase 2A** deltas. No priming effect is claimed (D-049, L-039).
+  direct ↔ Phase-2A run 20, `pro` direct ↔ Phase-2A run 21. No priming
+  effect was claimed at that point (D-049, L-039).
+
+### 4.22 EXP-004 Phase 2A — Dola Phase-1 DIRECT baselines executed, collected, validated and compared (SODA Task 023, 2026-09-07)
+
+Follow-up to §4.21: the author executed both prepared Phase-1 direct
+baselines and the records entered the same deterministic pipeline. Dola
+remains an **exploratory extension** — this section records the actual
+measurement without rewriting the §4.20/4.21 history (Dola had no Phase-1
+baseline at Task 021; that record stands). Recorded facts (no LLM called;
+no Phase-2A output or corpus file touched; raw replies byte-immutable):
+
+- **Execution + collection.** Each baseline ran in a fresh ByteDance
+  session (`Dola 3.8 — Fast` / `Dola 3.8 — Pro` per the recorded operator
+  note), direct translation only — same Polish source story, same
+  direct-translation instruction, no corpus, no scaffold, no dictionary,
+  no previous Dola conversation. The author saved each raw reply
+  **msg2-style inside its operator prompt file**
+  (`operator-prompts/20-dola-3.8-fast.md`, `21-dola-3.8-pro.md`): the
+  prompt part through the closing `## Output` marker is byte-identical to
+  the canonical prompt, and the trailing "Return the complete …"
+  boilerplate was replaced by the reply — the same record shape the
+  Phase-2A runs used in Task 021.
+- **Intake + verification.** Both records passed the Phase-1
+  `collect-session` intake and `verify` completeness gate (verdict
+  `complete`, usable): correct Dola configuration per the operator note,
+  exact Phase-1 DIRECT prompt, fresh-session/direct condition, corpus-free
+  (no Medžuslovjansky reference), exact Polish story, exact
+  direct-translation instruction, complete raw reply with the expected
+  ending marker, no accidental Phase-2A continuation, no contamination.
+  The Phase-1 verifier was extended so a session record that IS the
+  canonical prompt file (msg2-style) is not falsely reported as
+  prompt-drift: immutability is checked against the session SHA-256
+  recorded at collection instead of the pristine canonical-prompt hash.
+- **Evaluation.** Both baselines were evaluated with the existing
+  deterministic pipeline (evaluation.json + orthography.json under the
+  Phase-1 outputs; same metrics as the other 18 baselines).
+- **Comparison (real deltas, exploratory).** Pairing verified: Dola Fast
+  direct ↔ Phase-2A run 20, Dola Pro direct ↔ Phase-2A run 21. `compare`
+  now reports the **within-Dola Phase 1 → Phase 2A** deltas — canonical
+  coverage: Fast 38.87 % → 67.07 % [+28.20 pp]; Pro 65.08 % → 71.75 %
+  [+6.67 pp]; broader coverage: Fast 51.67 % → 78.81 % [+27.14 pp]; Pro
+  82.27 % → 82.26 % [−0.01 pp]; unresolved rate: Fast 61.13 % → 32.93 %
+  [−28.20 pp]; Pro 34.92 % → 28.25 % [−6.67 pp]; lexical tokens: Fast
+  1438 → 1491 [+53]; Pro 1472 → 1494 [+22]; A/B/C and orthography
+  deltas in `phase2a/outputs/compare.md`. These are recorded deltas from
+  the existing pipeline — no composite score, no ranking, and **no priming
+  effect is claimed** (D-050, L-040).
 
 ## 5. Standing methodological rules learned so far (research-relevant)
 

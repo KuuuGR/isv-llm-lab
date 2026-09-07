@@ -2,8 +2,8 @@
 
 One self-contained Markdown file per reconciled roster row (19 rows, Task
 018) **plus two exploratory Phase-1 DIRECT prompts for Dola 3.8 Fast/Pro
-added retrospectively by Task 022 `extend-direct`** (pending manual
-collection — see below; NOT part of the 19-row roster).
+added retrospectively by Task 022 `extend-direct`** (collected + evaluated
+Task 023 — see below; NOT part of the 19-row roster).
 **No manual assembly is needed**: each file contains the experiment
 header (target model/provider/version/settings, condition `direct`), the
 complete Phase 1 instruction (identical for every row), and the full Polish
@@ -51,9 +51,9 @@ Gemini satisfied the practical free-access/quota criterion in execution and
 was run; GLM 4.5 could not execute (repeated service errors) and its
 artifact is preserved as a failed external output.
 
-## Exploratory Phase-1 DIRECT prompts added retrospectively (Task 022 — pending)
+## Exploratory Phase-1 DIRECT prompts added retrospectively (Task 022), collected + evaluated (Task 023)
 
-| File | Configuration | Prepared baseline run id | Pairs with Phase-2A |
+| File | Configuration | Collected baseline run id | Pairs with Phase-2A |
 |---|---|---|---|
 | `20-dola-3.8-fast.md` | Dola 3.8 — Fast (exploratory) | `2026-09-07__bytedance__dola-3.8__fast__direct` | run 20 (`…__fast__p2a-primed`) |
 | `21-dola-3.8-pro.md` | Dola 3.8 — Pro (exploratory) | `2026-09-07__bytedance__dola-3.8__pro__direct` | run 21 (`…__pro__p2a-primed`) |
@@ -67,11 +67,21 @@ configuration to select, fresh session, Phase-1 direct baseline, exact text
 to submit, where to record the raw reply). These are **NOT part of the
 original 19-row reconciled roster**: the Dola configurations are
 exploratory (discovered Task 021; `exploratory: true` preserved) and the
-plan/manifest rows are `pending_manual_collection` — nothing is collected
-or claimed yet, and the original 18 usable Phase-1 baselines are unchanged.
-Register replies exactly as described below (prefer
-`collect-session`), then `verify` + `evaluate`; the Phase-2A `compare` then
-reports the within-Dola Phase 1 → Phase 2A deltas for runs 20/21.
+original 18 usable Phase-1 baselines are unchanged.
+
+**Task 023 (2026-09-07): both baselines are now EXECUTED + COLLECTED +
+EVALUATED.** The author ran each prompt in a fresh ByteDance session
+(direct translation only) and saved the raw reply **msg2-style inside the
+prompt file itself**: the prompt part through the closing `## Output`
+marker is byte-identical to the canonical prompt and the trailing "Return
+the complete …" boilerplate was replaced by the reply (the same record
+shape used for the Phase-2A runs in Task 021). Both files were registered
+with the Phase-1 `collect-session` intake (which accepts the prompt file
+itself as the session record for msg2-style runs), passed `verify`
+(verdict `complete`, usable) and were evaluated with the same deterministic
+pipeline. The Phase-2A `compare` now reports the within-Dola
+Phase 1 → Phase 2A deltas for runs 20/21. **Do not regenerate these two
+files with `prepare --force`** — the collected replies live inside them.
 
 ## How to execute one run (operator workflow, as used)
 

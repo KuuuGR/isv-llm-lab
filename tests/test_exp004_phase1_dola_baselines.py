@@ -17,7 +17,13 @@ run 21 = Pro) whose Phase-2A primed runs were integrated in Task 021:
   (idempotent) and never creates a false completed baseline (no output
   dir, no meta.json, no metrics);
 - once the author executes a baseline, the existing Phase-1
-  collect-session / verify pipeline registers and gates it;
+  collect-session / verify pipeline registers and gates it; Task 023 also
+  covers the msg2-style record shape the author used (raw reply saved
+  inside the canonical operator prompt file, replacing the trailing
+  'Return the complete …' boilerplate after the '## Output' marker) and
+  verify's acceptance of that record without a false prompt-drift error,
+  while a record edited after collection is still caught via the session
+  SHA-256 check;
 - link-baselines pairs each Dola p2a-primed plan row's baseline_run_id
   with its direct run id (idempotent, requires the Phase-1 rows), and
   compare reports the baseline as pending until collected; after
@@ -357,6 +363,71 @@ def test_phase1_collect_session_registers_dola_direct_baseline(kit):
         DOLA_FAST_DIRECT,
         kit["phase1_prompts"] / "20-dola-3.8-Fast-bad.md",
         DATE, "unknown", "unknown", "unknown") == 2
+
+
+def test_msg2_style_record_collect_verify_accepts_prompt_file(kit):
+    """Task-023 record shape: the author saved the raw reply INSIDE the
+    canonical operator prompt file itself (replacing the trailing
+    'Return the complete …' boilerplate after the closing '## Output'
+    marker — same shape as the Phase-2A msg2 files of Task 021). The
+    prompt part through the marker is byte-identical to the canonical
+    prompt. collect-session registers the reply; verify must NOT report a
+    false 'prompt file content no longer matches recorded hash' integrity
+    error (the on-disk prompt file legitimately differs from the recorded
+    canonical prompt hash: it now carries the raw reply)."""
+    p1 = kit["p1"]
+    phase1_prepare(kit)
+    assert p1.run_extend_direct(DATE) == 0
+    pf = kit["phase1_prompts"] / "20-dola-3.8-fast.md"
+    canon = pf.read_text(encoding="utf-8")
+    cut = canon.rfind("Return the complete")
+    # author's msg2-style record: canonical prompt through the marker +
+    # raw reply (trailing boilerplate replaced)
+    pf.write_bytes(canon[:cut].encode("utf-8") + _REPLY.encode("utf-8"))
+    assert p1.run_collect_session(
+        DOLA_FAST_DIRECT, pf, DATE, "unknown", "unknown", "unknown",
+        "unknown", "collected_external_output", "pass",
+        "complete in one free session", "") == 0
+    out_dir = kit["phase1_outputs"] / DOLA_FAST_DIRECT
+    assert (out_dir / "output.txt").read_text(encoding="utf-8") == _REPLY
+    meta = json.loads((out_dir / "meta.json").read_text(encoding="utf-8"))
+    # the collected record IS the canonical prompt file (msg2-style)
+    assert Path(meta["session"]["file"]).resolve() == pf.resolve()
+    assert Path(meta["prompt"]["file"]).name == "20-dola-3.8-fast.md"
+    # verify passes: no false prompt-drift error, gate complete
+    assert p1.run_verify(DOLA_FAST_DIRECT) == 0
+    intake = json.loads((out_dir / "intake.json").read_text(
+        encoding="utf-8"))
+    assert intake["verdict"] == "complete"
+    assert intake["integrity_errors"] == []
+
+
+def test_msg2_style_record_tamper_after_collection_is_caught(kit):
+    """The msg2-style accommodation only relaxes the prompt-hash check for
+    the reply-in-prompt-file record; a record that changed after collection
+    (e.g. an edited instruction body) is still caught by the session
+    SHA-256 check in verify."""
+    p1 = kit["p1"]
+    phase1_prepare(kit)
+    assert p1.run_extend_direct(DATE) == 0
+    pf = kit["phase1_prompts"] / "20-dola-3.8-fast.md"
+    canon = pf.read_text(encoding="utf-8")
+    cut = canon.rfind("Return the complete")
+    pf.write_bytes(canon[:cut].encode("utf-8") + _REPLY.encode("utf-8"))
+    assert p1.run_collect_session(
+        DOLA_FAST_DIRECT, pf, DATE, "unknown", "unknown", "unknown",
+        "unknown", "collected_external_output", "pass",
+        "complete in one free session", "") == 0
+    assert p1.run_verify(DOLA_FAST_DIRECT) == 0
+    # simulate an edit of the collected record after registration
+    pf.write_bytes(pf.read_bytes().replace(
+        TRANSLATION_START.encode("utf-8"),
+        b"Translate the Polish fable below into Interslavic"))
+    assert p1.run_verify(DOLA_FAST_DIRECT) == 1
+    intake = json.loads((kit["phase1_outputs"] / DOLA_FAST_DIRECT /
+                         "intake.json").read_text(encoding="utf-8"))
+    assert any("session sha256 mismatch" in e
+               for e in intake["integrity_errors"])
 
 
 # ---------------------------------------------------------------------------

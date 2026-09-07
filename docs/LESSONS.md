@@ -914,3 +914,33 @@ an independently verified claim just because new prompts are generated.
 (3) Assert the "clean prompt" property (exact source/instruction, no
 corpus, no scaffold, no Phase-2A link) in code for every retrospectively
 prepared prompt.
+
+## L-040 · 2026-09-07 · A record-format convention that embeds the reply in the prompt file needs an explicit integrity rule, not a silent bypass (Task 023)
+
+**Observed.** The author saved the two collected Dola Phase-1 direct
+baselines (Task 023) msg2-style — the raw reply appended inside the
+canonical operator prompt file, replacing the trailing "Return the
+complete …" boilerplate after the closing `## Output` marker (the same
+record shape the Phase-2A runs used in Task 021). The on-disk prompt file
+therefore differs from the pristine canonical-prompt hash recorded in the
+plan, and a naive integrity check reported the legitimate record as
+"prompt hash differs from plan".
+
+**Interpretation.** When the collected session record IS the canonical
+prompt file, "prompt drift" is not evidence of tampering — it is the
+recording convention. The verifier must detect that case explicitly
+(`_session_is_prompt_record`: session file path resolves to the canonical
+prompt file) and enforce the right invariant instead: the prompt portion
+through the closing `## Output` marker stays byte-identical to the
+canonical prompt, and the file's bytes are immutable since collection
+(session SHA-256 recorded in meta.json). Explicit detection keeps the
+check honest; a blanket relaxation would have let real tampering through.
+
+**Next time.** (1) When a reply is legitimately stored inside its prompt
+file, record at collection time that the session file IS the prompt file,
+so verifiers can choose the correct immutability anchor (session SHA-256)
+instead of failing on the pristine prompt hash. (2) Add tests for both
+sides of the rule: the msg2-style record verifies cleanly, and any
+post-collection modification of that record is still caught. (3) Keep the
+reply bytes immutable and treat the recording convention as data, not as
+something to "repair".

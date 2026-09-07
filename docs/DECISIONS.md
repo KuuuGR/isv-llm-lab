@@ -1187,3 +1187,45 @@ Phase-1 baselines, and free of any accidental corpus/context priming.
    runs, `compare` reports the Dola rows as pending; only then does the
    deterministic pipeline report the within-Dola Phase 1 → Phase 2A deltas
    for runs 20/21. Task-021 historical results are unchanged.
+
+## D-050 · 2026-09-07 · EXP-004 Phase 2A: Dola Phase-1 DIRECT baselines — collected + evaluated; verifier accepts msg2-style records; real within-Dola deltas reported without causal claims (Task 023)
+
+**Context.** D-049 prepared the two retrospective Phase-1 direct baselines
+for the exploratory Dola 3.8 configurations (runs 20/21) as `pending`.
+The author executed both baselines (Task 023) and saved each raw reply
+msg2-style inside its operator prompt file — the prompt part through the
+closing `## Output` marker byte-identical to the canonical prompt, the
+trailing "Return the complete …" boilerplate replaced by the reply (the
+same record shape the Phase-2A runs used in Task 021). The collected files
+therefore legitimately differ from the pristine canonical-prompt hash
+recorded in the plan, which a naive integrity check would misreport as
+prompt drift.
+
+**Decision.**
+
+1. **A collected record whose session file IS the canonical prompt file
+   (msg2-style) is accepted by the Phase-1 verifier without a false
+   prompt-drift FAIL.** `run_exp004_phase1.py` detects this case
+   (`_session_is_prompt_record`: the meta-recorded session file path
+   resolves to the same file as the run's canonical operator prompt) and
+   verifies immutability against the session SHA-256 recorded at
+   collection time instead of the pristine canonical-prompt hash. The
+   prompt portion up to the closing `## Output` marker stays
+   byte-identical to the canonical prompt; the reply bytes after the
+   marker are immutable; post-collection tampering is still caught
+   (session SHA-256 mismatch).
+2. **Collected records are registered and reported through the existing
+   deterministic pipeline — no parallel evaluation path.** Both Dola
+   Phase-1 baselines passed the Phase-1 `collect-session` intake and
+   `verify` completeness gate (verdict `complete`, usable) and were
+   evaluated with the same evaluator/orthography audit as the original 18
+   baselines; their Phase-1 plan rows are no longer pending.
+3. **`compare` reports the real within-Dola Phase 1 → Phase 2A deltas for
+   runs 20/21, still without causal claims.** Dola remains an
+   **exploratory extension** (`exploratory: true` preserved, not part of
+   the original 18-configuration roster); the Task-020/021 record that
+   Dola had no Phase-1 baseline at that time is not rewritten; no priming
+   effect is claimed beyond the recorded per-dimension deltas.
+4. **Raw model replies stay immutable** (no normalization, no repair);
+   protocol deviations, if any, are recorded as data under the existing
+   deviation framework.

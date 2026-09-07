@@ -1084,6 +1084,25 @@ def _intake_verdict(gate: dict) -> str:
     return "complete"
 
 
+def _session_is_prompt_record(meta: dict, prompt_path: Path) -> bool:
+    """True when a run's collected session record IS its canonical prompt
+    file (the author saved the raw reply inside the prompt file itself,
+    replacing the trailing 'Return the complete …' boilerplate after the
+    closing '## Output' marker — msg2-style, Task 023, mirroring the
+    Phase-2A msg2 convention of Task 021). The on-disk prompt file then
+    legitimately differs from the canonical prompt hash recorded in the
+    plan; the prompt part through the '## Output' marker stays byte-
+    identical to the canonical prompt and immutability is checked against
+    the recorded session-file SHA-256 instead."""
+    sfile = meta.get("session", {}).get("file")
+    if not sfile:
+        return False
+    try:
+        return Path(sfile).resolve() == prompt_path.resolve()
+    except OSError:
+        return False
+
+
 def _verify_integrity(run_id: str, plan_entry: dict | None) -> list[str]:
     errors: list[str] = []
     out_dir = OUTPUTS_DIR / run_id
@@ -1113,6 +1132,17 @@ def _verify_integrity(run_id: str, plan_entry: dict | None) -> list[str]:
             errors.append("meta.json prompt has no file")
         elif not pf.is_file():
             errors.append(f"prompt file missing: {pf}")
+        elif _session_is_prompt_record(meta, pf):
+            # msg2-style record: see _session_is_prompt_record. The file's
+            # reply part was never hashed as a canonical prompt, so verify
+            # the raw record is unchanged since collection instead of
+            # comparing it to the recorded canonical prompt hash.
+            sess_sha = meta.get("session", {}).get("sha256")
+            if sess_sha is None:
+                errors.append("msg2-style record has no session sha256")
+            elif sha256_bytes(pf.read_bytes()) != sess_sha:
+                errors.append("msg2-style record file changed since "
+                              "collection (session sha256 mismatch)")
         elif sha256_bytes(pf.read_bytes()) != meta["prompt"]["sha256"]:
             errors.append("prompt file content no longer matches recorded "
                           "hash")
