@@ -1101,3 +1101,47 @@ deterministic builder `scripts/build_phase2a_corpus.py`; updated
 added. No LLM call happened in Task 020: the corpus is still **prepared,
 not executed**, and the author's next operator step is the 18 manual primed
 sessions.
+
+## D-048 · 2026-09-07 · EXP-004 Phase 2A: newly discovered models join as exploratory runs; msg2-only records are an accepted provenance mode (Task 021)
+
+**Context.** During manual Phase-2A execution the author additionally ran
+two primed sessions of a newly discovered model/service recorded as
+**Dola 3.8** (runs 20/21; labels "Dola 3.8 — Fast" / "Dola 3.8 — Pro";
+author-recorded header identity "ByteDance — official web interface",
+proprietary). The saved records for ALL 20 completed primed runs (18
+original + 2 Dola) are the operator msg2 prompt files with the raw model
+reply appended after the closing `## Output` marker — no full same-session
+transcripts were stored.
+
+**Decision.**
+
+1. **A model discovered after roster preregistration joins as an
+   exploratory addition, never by roster mutation.** Dola 3.8 runs 20/21
+   are distinct plan rows (`baseline_run_id: null`) and manifest entries
+   (`"exploratory": true`); they are never merged into the 18-model
+   roster, never collapsed into one observation, never advertised as part
+   of the original design, and never given a fabricated Phase-1 baseline.
+   Where model identity cannot be established beyond the author-recorded
+   header, that is stated explicitly and the run is still preserved.
+2. **A prompt+reply file is a valid collection record when it is the
+   actual artifact the operator produced.** The msg2 prompt file with the
+   reply appended after `## Output` is accepted as the run record; the
+   reply is sliced at the marker byte-for-byte and registered as
+   `output.txt` via `collect-msg2`. The metadata records msg2-only
+   provenance: no machine same-session proof is claimed for the corpus
+   delivery (it rests on the prepared, corpus-verified msg1 files and the
+   author's execution notes) — this is a documented protocol deviation,
+   not a hidden fix. Consequently `prepare --force` is forbidden on the
+   real kit after collection (replies live inside the operator-prompts
+   msg2 files).
+3. **Interface-driven manual workarounds are recorded execution
+   conditions, not run failures and not evaluator changes.** The Gemini
+   two-message corpus delivery (~83% + ~17% continuation), the Gemini 3.1
+   Pro corpus-ingestion-in-3.6-Flash / translation-in-3.1-Pro split, the
+   Gemini extended-thinking reset per prompt, and the Claude token-limit
+   continuations are documented per configuration in `phase2a/README.md`
+   and RESEARCH_NOTES §4.20. The ingestion-model ≠ translation-model
+   distinction is recorded for the 3.1 Pro run without causal inference.
+   Raw outputs stay immutable; no run is excluded merely because its
+   interface required a documented workaround; intake deviations (run 12's
+   partial end-marker) are recorded under the existing rules.

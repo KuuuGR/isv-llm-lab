@@ -4,7 +4,7 @@ Files in this directory are **gitignored** (they embed the copyrighted
 Polish source story and the reference corpus, which is local-only); this
 README and `manifest.json` (hashes only) are committed.
 
-## Inventory (54 prompt files, 18 configurations)
+## Inventory (58 prompt files, 18 original configurations + 2 exploratory)
 
 - `ctl-<NN>-<model>-<version>.md` (18) — control condition, single message:
   identical task to Phase-1's baseline. Only needed if the author chooses
@@ -29,6 +29,40 @@ prompt maps back to its Phase-1 identity. The translation instruction +
 story body is byte-identical across all control and msg2 files (headers and
 the msg2 lead sentence differ only).
 
+**Exploratory additions (Task 021, runs 20/21) — author-created, NOT part
+of the 18-configuration kit and not produced by `prepare`:**
+
+- `primed-20-dola-3.8-Fast-msg1.md` / `primed-20-dola-3.8-Fast-msg2.md` —
+  Dola 3.8 — Fast (run 20);
+- `primed-21-dola-3.8-Pro-msg1.md` / `primed-21-dola-3.8-Pro-msg2.md` —
+  Dola 3.8 — Pro (run 21).
+
+These were built by the author from the Qwen-3.8-Max-THINKING kit template
+(header metadata edited; Qwen title / "COPY THIS ENTIRE FILE INTO Qwen
+Chat (web)" operator lines and a msg1 `Condition:` line mislabelled
+"(translation task)" remain as cosmetic copy-paste artifacts). Both msg1
+files embed the authoritative three-register corpus **byte-identically**;
+both msg2 bodies are byte-identical to the canonical prompt. Identity is
+author-recorded in the headers only and is not independently verifiable
+(Dola has no Phase-1 baseline). `manifest.json` records all four
+exploratory entries (58 entries total) with `"exploratory": true`.
+
+## Collected replies live inside the msg2 files (Task 021)
+
+The author saved each completed run as the **operator-prompts `*-msg2.md`
+file with the raw model reply appended after its closing `## Output`
+marker** (no full same-session transcripts were stored). Consequences:
+
+- The on-disk msg2 files of runs 01–19 therefore differ from the hashes
+  recorded in the Task-020 manifest (the reply was appended; the prompt
+  part through the `## Output` marker is byte-identical to the canonical
+  prompt). Run 08's msg1 header was also edited to record the actual model
+  ("Grok 4.5, built by xAI, fast"); its corpus region is unchanged.
+- **Never run `prepare --force` in the real kit again** — it would
+  overwrite the collected replies. Post-collection writes are only
+  `extend-exploratory` (plan/manifest rows for Dola) and `collect-msg2`
+  (registers the reply after the marker as the run output).
+
 ## Executing one primed run
 
 1. New fresh session in the target interface (see the file header).
@@ -47,4 +81,7 @@ the msg2 lead sentence differ only).
 - Never paste any other Medžuslovjansky material into a Phase-2A session.
 - `collect-session` mechanically rejects sessions that violate these rules
   (corpus missing before the translation instruction in primed runs; corpus
-  present in control sessions; altered translation instruction).
+  present in control sessions; altered translation instruction). For the
+  Task-021 msg2-only records, `collect-msg2` instead records that no
+  machine same-session proof is available (see the deviation note in
+  `collected-sessions/README.md` and `phase2a/README.md`).

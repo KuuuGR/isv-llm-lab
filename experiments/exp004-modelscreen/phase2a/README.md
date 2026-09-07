@@ -1,15 +1,20 @@
-# EXP-004 Phase 2A — full-roster corpus priming (prepared kit)
+# EXP-004 Phase 2A — full-roster corpus priming (kit + Task 021 audit)
 
-Status (Task 020, 2026-09-07): **prepared but NOT executed — the next
-operator step is the manual external execution of the 18 primed sessions
-(no LLM calls happen in this task).**
+Status (Task 021, 2026-09-07): **EXECUTED, COLLECTED AND EVALUATED.** The
+author manually completed all 18 primed sessions of the original roster
+plus two additional exploratory runs of a newly discovered model/service
+recorded as **Dola 3.8** (runs 20/21). Task 021 audited every collected
+record against the Phase-2A protocol, integrated the 20 runs into the
+deterministic pipeline, evaluated all of them, and produced the
+priming-vs-baseline comparison for the 18 original configurations (Dola has
+no Phase-1 baseline and is NOT compared for a priming effect).
 
 Phase 2A tests the project's core corpus-grounding hypothesis:
 
 > Does exposing an LLM to authentic Medžuslovjansky text immediately before
-> translation cause it to generate Medžuslovjansky that is more consistent
-> with the real language than the same model translating without that
-> exposure?
+translation cause it to generate Medžuslovjansky that is more consistent
+with the real language than the same model translating without that
+exposure?
 
 This is an **in-context learning / corpus priming / contextual grounding /
 reference-text conditioning** experiment, NOT model training (weights are
@@ -75,13 +80,44 @@ GLM 4.5 (Phase-1 #11) is excluded: its Phase-1 intake failed, so it has no
 usable baseline. The roster is derived in code from
 `run_exp004_phase1.ROSTER` and never reconstructed from filenames.
 
+## Exploratory additions (Task 021): Dola 3.8 — runs 20 and 21
+
+During manual execution the author also ran two primed sessions of a newly
+discovered model/service recorded as **Dola 3.8** on the ByteDance web
+interface. These are **NOT part of the preregistered 18-model roster** and
+must never be merged into it:
+
+| run | label | provider / model / version | primed run id |
+|---|---|---|---|
+| 20 | Dola 3.8 — Fast | bytedance / dola-3.8 / fast | `…__bytedance__dola-3.8__fast__p2a-primed` |
+| 21 | Dola 3.8 — Pro | bytedance / dola-3.8 / pro | `…__bytedance__dola-3.8__pro__p2a-primed` |
+
+Identity is **author-recorded in the prompt-file headers only**
+("ByteDance — official web interface"; "proprietary closed-source,
+decoder-only transformer architecture — default settings"; run 20 header
+says `Fast`, run 21 header says `Pro` — recorded configuration names
+`Dola 3.8 — Fast` / `Dola 3.8 — Pro`). It is not independently verifiable
+from provider metadata, UI exports or any other project evidence; the two
+runs are therefore treated as **two distinct exploratory observations**
+(preserved, never collapsed, never given a Phase-1 baseline, never compared
+for a priming effect). Their prompt files were built by copying the
+Qwen-3.8-Max-THINKING kit template and editing the header metadata; the
+translation instruction + Polish story body is byte-identical to the
+canonical prompt and both msg1 files embed the authoritative three-register
+corpus byte-identically (see Corpus integrity below). Cosmetic leftovers
+(Qwen title lines, "COPY THIS ENTIRE FILE INTO Qwen Chat (web)" operator
+line, and a msg1 `Condition:` line mislabelled "(translation task)") are
+recorded copy-paste metadata artifacts that do not alter the substantive
+instructions.
+
 ## Run ids and phases
 
 `<date>__<provider>__<model>__<model_version>__<condition>` with
 `<condition>` = `direct` (Phase 1 baseline) | `p2a-ctl` (Phase-2A control) |
 `p2a-primed` (Phase-2A corpus-primed). The three identities can never be
 confused. Every Phase-2A plan row records its `baseline_run_id` (the
-Phase-1 `direct` run of the same configuration).
+Phase-1 `direct` run of the same configuration); the exploratory Dola rows
+carry `baseline_run_id: null`.
 
 ## Corpus
 
@@ -117,6 +153,18 @@ All corpus text files are gitignored/local-only; only this README,
 `corpus/README.md` for per-register provenance, license notes,
 suitability and contamination checks.
 
+### Corpus integrity after collection (Task 021 re-run)
+
+- Combined corpus file SHA-256 still `aaad28e43935a403…` (58 459 B); all
+  three register component hashes unchanged; the corpus was NOT
+  regenerated or modified.
+- Every primed `msg1` prompt file on disk (18 original + 2 Dola) embeds a
+  corpus region **byte-identical** to the authoritative corpus tail
+  (verified Task 021).
+- No fresh `p2a-ctl` control sessions were collected; the Phase-1 `direct`
+  outputs (corpus-free by construction) serve as baselines. Existing
+  corpus tests assert control prompts contain no corpus material.
+
 ## Conversation-contamination control (critical)
 
 - Each run = a NEW fresh session. Never reuse a session that contains other
@@ -130,25 +178,55 @@ suitability and contamination checks.
   the session BEFORE the translation instruction — i.e. it proves Prompt 1
   actually ran in the same session.
 
-## Execution protocol (author)
+### Task 021 collection record — what was actually stored (deviation)
+
+For the 20 completed primed runs the author did **not** save full
+same-session transcripts under `collected-sessions/`. Instead, each run's
+collected record is the **operator-prompts `*-msg2.md` file with the raw
+model reply appended after its closing `## Output` marker** (the canonical
+message-2 prompt, whose trailing "Return the complete …" boilerplate was
+replaced by the reply). `collect-msg2` (added Task 021) registers these
+records: it deterministically extracts the bytes after the final
+`## Output` marker (the same slicing rule `collect-session` applies) and
+stores them byte-for-byte as `output.txt`, recording in `meta.json` that
+the record is message-2 only and that **no machine same-session proof is
+claimed** — the same-session corpus delivery rests on the prepared msg1
+prompt files (all present and corpus-verified) and the author's execution
+notes. This is the central Task-021 protocol deviation; it does not alter
+the raw reply bytes that were evaluated.
+
+**Do not run `prepare --force` against the real kit anymore**: collected
+replies now live inside `operator-prompts/*-msg2.md`; regeneration would
+destroy them. `extend-exploratory` and `collect-msg2` are the only
+post-collection writes to the prompt/manifest/outputs areas.
+
+## Execution protocol (author) — as actually executed (Task 021)
 
 1. Open a **new fresh session** per run in the model's interface.
 2. **Primed run**: copy `*-msg1.md` → send → wait for the short
    confirmation → copy `*-msg2.md` → send.
    **Control run (optional)**: copy `ctl-*.md` → send.
-3. Save the final translation byte-for-byte (D-035): either the whole
-   session file under `collected-sessions/` (then
-   `collect-session --run <id> --session <file>`), or the plain reply file
-   (then `collect --run <id> --output <file>`). Never edit, truncate or
-   paraphrase the reply.
+3. Save the final translation byte-for-byte (D-035): Task 021 saved the
+   message-2 prompt + reply as the author's `*-msg2.md` record (see above);
+   never edit, truncate or paraphrase the reply.
 4. Record the practical free-access verdict (pass/fail/unknown) and any
-   quota observation — same discipline as Phase 1 (D-036/§5.1).
+   quota observation — same discipline as Phase 1 (D-036/§5.1). For the 20
+   Task-021 runs the verdict is recorded as `unknown` (no per-run quota
+   note was stored with the files); the operator observations below are
+   recorded instead.
 
-Claude Sonnet 5 — max (run #12) took >45 minutes in Phase 1 with repeated
-continuations and free-tier exhaustion (see RESEARCH_NOTES §4.16/§4.17).
-It stays in the roster; if a primed session is impractical on the day,
-record it as an execution limitation — do not silently substitute another
-model or another corpus.
+### Manual execution constraints and protocol deviations (author report, Task 021)
+
+| Configuration | Constraint | Actual workaround | Effect on validity |
+|---|---|---|---|
+| Gemini 3.6 Flash (runs 13/14) and Gemini 3.1 Pro (run 05) | corpus exceeded a one-message context/interface limit | Prompt 1 split into two messages: ≈83% of the corpus first, then the remaining ≈17% opened with `continue previous prompt` | Split is a documented execution constraint, not a failed run; the split itself is not storable in the saved msg2 records (not verifiable from files); combined corpus was present before the translation request per the author's report |
+| Gemini 3.1 Pro (run 05) | a second prompt cannot be sent while remaining in 3.1 Pro (interface auto-switches to 3.6 Flash) | corpus messages sent in Gemini 3.6 Flash; model switched to 3.1 Pro only for the translation request | **Corpus ingestion model/interface = Gemini 3.6 Flash; translation-generation model = Gemini 3.1 Pro.** Documented execution condition (protocol deviation under the deviation framework): do NOT describe the session as if 3.1 Pro ingested the corpus; no causal claim is drawn from the arrangement |
+| Gemini 3.6 Flash extended thinking (run 14) | thinking setting reset to OFF after each completed prompt | extended thinking manually re-enabled for each subsequent prompt | Per-message thinking state is not storable from the saved files; do not assume every message ran with thinking ON |
+| Claude Sonnet 5 (run 04) and Sonnet 5 max (run 12) | free-tier token allowance exhausted repeatedly; Claude instructed the author to wait | three attempts/continuations with waiting; final translation eventually completed and saved | Saved replies are complete to their end markers and evaluable; the raw continuity history (how the concatenation happened) was not stored — recorded as an interruption/continuation protocol deviation, not silently merged or rewritten; run 12's intake is `partial` under the existing end-marker rule (final line `**KONEC**` is bold-wrapped) |
+
+Raw model outputs are immutable: nothing above was cleaned, normalized,
+merged or corrected in the stored files; all of it is documentation of the
+execution conditions.
 
 ## Orchestration (never calls an LLM)
 
@@ -156,6 +234,15 @@ model or another corpus.
 # regenerate the kit for a different execution date (prompts identical;
 # run ids/manifest/plan dates change) — commit the refreshed manifest
 python3 scripts/run_exp004_phase2a.py prepare --date YYYY-MM-DD [--force]
+#   ^ NEVER with --force after collection (author msg2 replies live in
+#     operator-prompts/); see "Task 021 collection record" above.
+
+python3 scripts/run_exp004_phase2a.py extend-exploratory --date 2026-09-07
+#   appends the Dola 3.8 exploratory rows (20/21) to plan + manifest (Task 021)
+
+python3 scripts/run_exp004_phase2a.py collect-msg2 \
+    --run <run_id> --generation-date YYYY-MM-DD
+#   registers a primed run from the author's *-msg2.md prompt+reply file
 
 python3 scripts/run_exp004_phase2a.py status                 # progress
 python3 scripts/run_exp004_phase2a.py roster                 # joined roster
@@ -167,6 +254,25 @@ commands (see `scripts/run_exp004_phase2a.py` docstring for details).
 Outputs land under `phase2a/outputs/` (gitignored; `outputs/README.md`
 committed). Nothing is evaluated without a collected file; outputs are
 never modified or deleted; no composite scores are produced.
+
+## Task 021 results (summary; full evidence under `outputs/`)
+
+- **20 primed runs collected and evaluated** (18 original + 2 exploratory
+  Dola). Intake under the existing gate: **19 `complete`, 1 `partial`**
+  (run 12 — Claude Sonnet 5 max — final line `**KONEC**` not the bare
+  end-marker; evaluated, `usable = no` by the existing rule).
+- **Phase 1 → Phase 2A (18 configurations with baselines):** per-dimension
+  deltas in `outputs/compare.md` — small positive canonical-coverage
+  deltas (+0.02…+0.14 pp) and correspondingly lower unresolved rates;
+  no composite score, no ranking (see `compare`).
+- **Dola 3.8 (runs 20/21):** exploratory only. Evaluated with the same
+  deterministic pipeline (`outputs/roster.md`); **no Phase-1 baseline
+  exists, so no priming effect is claimed and no comparison row is
+  produced** (compare reports `no baseline metrics … available` for both).
+- Full per-run table: `phase2a/outputs/roster.md` (38 rows incl. the
+  not-collected controls); `evaluation.md`/`evaluation.json` and
+  `orthography.json` per run; manifests and hashes in
+  `operator-prompts/manifest.json` (58 entries incl. 4 exploratory).
 
 ## Future Phase 2B (documented, NOT executed)
 

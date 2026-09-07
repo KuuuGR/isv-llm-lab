@@ -135,6 +135,38 @@ Commands:
            ranking. The main question is "how much does authentic ISV corpus
            exposure change each model's output?", not "which model wins?".
 
+Exploratory additions (SODA Task 021, 2026-09-07): during manual Phase-2A
+execution the author also ran two primed sessions of a newly discovered
+model/service recorded as "Dola 3.8" (Fast and Pro) on the ByteDance web
+interface. These runs (20/21) are NOT part of the preregistered 18-model
+roster. Identity is author-recorded in the operator prompt headers only and
+is not independently verifiable from provider metadata or UI exports.
+EXPLORATORY_ROWS carries them; run_extend_exploratory() adds their plan
+rows and manifest entries; run_collect_msg2() registers their message-2
+outputs. They are evaluated by the same deterministic pipeline but never
+given a Phase-1 baseline and never compared for a priming effect.
+
+collect-msg2  [--run <run_id>] --generation-date <date>
+           register a primed run whose collected record is the author's
+           operator-prompts *-msg2.md file (canonical message-2 prompt with
+           the raw model reply appended after its closing '## Output'
+           marker). The reply is extracted deterministically at that marker
+           (same slicing rule as collect-session) and stored byte-for-byte
+           as output.txt. Full same-session transcripts (msg1 + confirmation
+           + msg2 + reply) were NOT stored for these runs, so no machine
+           same-session corpus-before-translation proof is claimed; the
+           priming record is documented from the prepared msg1 prompt files
+           and the author's execution notes instead (Task 021 protocol
+           deviation).
+
+extend-exploratory  --date <YYYY-MM-DD>
+           append the exploratory Dola 3.8 rows (runs 20/21) to
+           outputs/plan.json and their prompt entries to
+           operator-prompts/manifest.json, idempotently. Never regenerates
+           prompt files (the author's collected msg2 files live in
+           operator-prompts/ and MUST NOT be overwritten: do not run
+           `prepare --force` against the real kit after collection).
+
 Phase 2B (a Wikipedia-length authentic Medžuslovjansky reference text
 paired with an independently written Polish story inspired by its subject
 matter, without translating or reconstructing the reference text) is
@@ -235,6 +267,50 @@ def phase2a_roster() -> list[dict]:
 
 ROSTER = phase2a_roster()
 
+# ---------------------------------------------------------------------------
+# Exploratory additions (SODA Task 021, 2026-09-07) — NOT part of the
+# preregistered 18-configuration roster and never merged into it.
+#
+# The author discovered a model/service recorded as "Dola 3.8" on the
+# ByteDance web interface during manual Phase-2A execution and saved two
+# primed runs (20 = Fast, 21 = Pro). The only on-disk evidence of identity
+# is the author-created operator prompt headers (copied from the
+# Qwen-3.8-Max-THINKING kit template and edited): "Dola (Fast)"/"Dola
+# (Pro)", "ByteDance — official web interface", "proprietary
+# closed-source, decoder-only transformer architecture — default settings".
+# No provider metadata or UI export exists, so the configuration is
+# author-recorded only and treated as exploratory: it has no Phase-1
+# baseline, participates in no priming-effect comparison, and its two runs
+# are preserved as two distinct observations (never collapsed).
+# ---------------------------------------------------------------------------
+DOLA_IDENTITY_NOTE = (
+    "Author-recorded in the operator prompt headers only (ByteDance — "
+    "official web interface; 'proprietary closed-source, decoder-only "
+    "transformer architecture — default settings'); template copied from "
+    "the Qwen-3.8-Max-THINKING kit prompts. Not independently verifiable "
+    "from provider metadata or UI exports; exploratory configuration with "
+    "no Phase-1 baseline.")
+EXPLORATORY_ROWS = [
+    {"provider": "bytedance", "model": "dola-3.8", "model_version": "fast",
+     "label": "Dola 3.8 — Fast",
+     "interface": "ByteDance — official web interface",
+     "generation_parameters": "proprietary closed-source, decoder-only "
+     "transformer architecture — default settings",
+     "custom_gpt": False, "exploratory": True,
+     "identity_note": DOLA_IDENTITY_NOTE,
+     "prompt_files": ["primed-20-dola-3.8-Fast-msg1.md",
+                      "primed-20-dola-3.8-Fast-msg2.md"]},
+    {"provider": "bytedance", "model": "dola-3.8", "model_version": "pro",
+     "label": "Dola 3.8 — Pro",
+     "interface": "ByteDance — official web interface",
+     "generation_parameters": "proprietary closed-source, decoder-only "
+     "transformer architecture — default settings",
+     "custom_gpt": False, "exploratory": True,
+     "identity_note": DOLA_IDENTITY_NOTE,
+     "prompt_files": ["primed-21-dola-3.8-Pro-msg1.md",
+                      "primed-21-dola-3.8-Pro-msg2.md"]},
+]
+
 
 def phase1_number(row: dict) -> int:
     """Row's number in the Phase-1 roster (1..19, GLM=11 skipped here)."""
@@ -263,11 +339,12 @@ def roster_entry(run_id: str) -> dict | None:
         parts = parse_run_id(run_id)
     except ValueError:
         return None
-    for row in ROSTER:
-        if (row["provider"] == parts["provider"]
-                and row["model"] == parts["model"]
-                and row["model_version"] == parts["model_version"]):
-            return row
+    for pool in (ROSTER, EXPLORATORY_ROWS):
+        for row in pool:
+            if (row["provider"] == parts["provider"]
+                    and row["model"] == parts["model"]
+                    and row["model_version"] == parts["model_version"]):
+                return row
     return None
 
 
@@ -944,6 +1021,228 @@ def run_collect_session(run_id: str, session: Path, generation_date: str,
 
 
 # ---------------------------------------------------------------------------
+# collect-msg2 / extend-exploratory (SODA Task 021)
+# ---------------------------------------------------------------------------
+
+def _msg2_prompt_part_bytes(raw: bytes) -> bytes:
+    """Prompt part of an author msg2 prompt+reply file: everything through
+    the closing '## Output' marker line (the reply follows the marker).
+    Mirrors how a canonical message-2 prompt is bounded."""
+    marker = b"## Output\n"
+    idx = raw.rfind(marker)
+    if idx < 0:
+        return raw
+    return raw[:idx + len(marker)]
+
+
+def run_collect_msg2(run_id: str, generation_date: str = "unknown",
+                     status: str = "collected_external_output",
+                     access_verdict: str = "unknown",
+                     access_note: str = "", note: str = "") -> int:
+    """Register a primed run from the author's operator-prompts *-msg2.md
+    file (canonical message-2 prompt + raw model reply appended after the
+    closing '## Output' marker). Full same-session transcripts (msg1 +
+    confirmation + msg2 + reply) were not stored for these runs (Task 021
+    audit); the reply is extracted deterministically at the marker with the
+    same slicing rule the collector applies to a 2-message session and is
+    stored byte-for-byte as output.txt. No machine same-session
+    corpus-before-translation proof is claimed."""
+    row = roster_entry(run_id)
+    if row is None:
+        print(f"error: unknown run id {run_id!r} (not a Phase-2A roster "
+              f"or exploratory row)", file=sys.stderr)
+        return 2
+    if status not in p1.STATUSES:
+        print(f"error: unknown status {status!r}", file=sys.stderr)
+        return 2
+    if access_verdict not in p1.ACCESS_VERDICTS:
+        print(f"error: unknown access verdict {access_verdict!r}",
+              file=sys.stderr)
+        return 2
+    plan_entry = _plan_entry(run_id)
+    if plan_entry is None:
+        print("error: run not in the Phase-2A plan; run "
+              "`scripts/run_exp004_phase2a.py prepare --date <date>` (and "
+              "`extend-exploratory --date <date>` for Dola runs) first",
+              file=sys.stderr)
+        return 2
+    if plan_entry["condition"] != PRIMED:
+        print("error: collect-msg2 applies to p2a-primed runs only",
+              file=sys.stderr)
+        return 2
+    out_dir = OUTPUTS_DIR / run_id
+    dst = out_dir / "output.txt"
+    if dst.exists():
+        print(f"error: {dst} already exists; refusing to overwrite "
+              "(never overwrite an existing run)", file=sys.stderr)
+        return 2
+
+    msg2_name = plan_entry["prompt_files"][-1]
+    msg1_name = plan_entry["prompt_files"][0]
+    src = OPERATOR_PROMPTS / msg2_name
+    if not src.is_file():
+        print(f"error: author msg2 file not found: {src}",
+              file=sys.stderr)
+        return 2
+    raw = src.read_bytes()
+    if TRANSLATION_START.encode("utf-8") not in raw:
+        print(f"error: {src.name} does not contain the translation "
+              f"instruction ({TRANSLATION_START!r}); not a msg2 file",
+              file=sys.stderr)
+        return 2
+    _prefix, reply = _split_primed_reply(raw)
+    if not reply.strip():
+        print(f"error: no model reply found after the '## Output' marker "
+              f"in {src.name}", file=sys.stderr)
+        return 2
+
+    msg1 = OPERATOR_PROMPTS / msg1_name
+    anchors = _corpus_fingerprints()
+    msg1_corpus_ok = (msg1.is_file()
+                      and all(a in msg1.read_bytes() for a in anchors))
+    out_dir.mkdir(parents=True, exist_ok=True)
+    dst.write_bytes(reply)  # byte-for-byte raw reply, never modified
+
+    meta = _meta_base(run_id, plan_entry, row, generation_date)
+    meta.update({
+        "status": status,
+        "access": {
+            "filter_verdict": access_verdict,
+            "quota_observed": access_note,
+            "criteria": "D-036/§5.1; observed by the operator at execution "
+                        "time.",
+        },
+        "collected_at": datetime.now(timezone.utc).isoformat(),
+        "collected_by": "scripts/run_exp004_phase2a.py collect-msg2",
+        "prompt": {"files": plan_entry["prompt_files"],
+                   "translation_prompt_sha256":
+                       plan_entry["translation_prompt_sha256"]},
+        "session": {
+            "file": str(src),
+            "name": src.name,
+            "sha256": sha256_bytes(raw),
+            "condition": plan_entry["condition"],
+            "record": ("author msg2 prompt+reply file (message-2 only); "
+                       "the msg1 corpus prompt is a separate file and no "
+                       "full same-session transcript was stored"),
+            "corpus_anchors": list(CORPUS_ANCHORS),
+            "contamination_checks": {
+                "corpus_in_msg1_prompt_file": msg1_corpus_ok,
+                "machine_same_session_proof": False,
+            },
+            "note": "Task 021 audit: same-session corpus delivery before "
+                    "the translation request rests on the prepared msg1 "
+                    "prompt file and the author's execution notes "
+                    "(operator constraints), not on a machine-verifiable "
+                    "transcript; documented as a protocol deviation.",
+        },
+        "output": {"file": str(dst), "sha256": sha256_bytes(reply),
+                   "bytes": len(reply)},
+        "note": ("Raw model reply extracted at the closing '## Output' "
+                 "marker of the author's msg2 prompt+reply file and stored "
+                 "byte-for-byte; never modified. The source file is "
+                 "preserved unmodified." + (f" {note}" if note else "")),
+    })
+    (out_dir / "meta.json").write_text(
+        json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"[collect-msg2] {run_id}")
+    print(f"  label/interface: {row['label']} / {row['interface']}")
+    print(f"  source: {src.name} -> output.txt ({len(reply)} B)")
+    print(f"  output sha256: {meta['output']['sha256']}")
+    print(f"  msg1 prompt file corpus anchors: "
+          f"{'present' if msg1_corpus_ok else 'MISSING'}")
+    print(f"  status: {meta['status']}; access filter: "
+          f"{meta['access']['filter_verdict']}")
+    return 0
+
+
+def run_extend_exploratory(date: str) -> int:
+    """Append the exploratory Dola 3.8 rows (runs 20/21) to the Phase-2A
+    plan and their prompt entries to the operator-prompt manifest,
+    idempotently. Never regenerates prompt files (collected msg2 replies
+    live inside operator-prompts/ after Task 021 and must not be
+    overwritten by `prepare --force`)."""
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date or ""):
+        print("error: --date YYYY-MM-DD is required", file=sys.stderr)
+        return 2
+    plan_path = OUTPUTS_DIR / "plan.json"
+    manifest_path = OPERATOR_PROMPTS / "manifest.json"
+    if not plan_path.is_file() or not manifest_path.is_file():
+        print("error: plan/manifest missing; run "
+              "`prepare --date YYYY-MM-DD` first", file=sys.stderr)
+        return 2
+    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    if plan.get("corpus", {}).get("sha256") != AUTH_CORPUS_SHA256:
+        print("error: plan corpus hash does not match the authoritative "
+              "corpus; refusing to extend a foreign plan", file=sys.stderr)
+        return 2
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+
+    existing_runs = {r["run_id"] for r in plan["runs"]}
+    existing_files = {f["file"] for f in manifest["files"]}
+    added_runs = 0
+    added_files = 0
+    for row in EXPLORATORY_ROWS:
+        run_id = run_id_for(date, row, PRIMED)
+        msg1_name, msg2_name = row["prompt_files"]
+        m2 = OPERATOR_PROMPTS / msg2_name
+        m1 = OPERATOR_PROMPTS / msg1_name
+        if not m1.is_file() or not m2.is_file():
+            print(f"error: exploratory prompt files missing for {row['label']} "
+                  f"({msg1_name}, {msg2_name}); expected the author-created "
+                  "files under operator-prompts/", file=sys.stderr)
+            return 2
+        m2_raw = m2.read_bytes()
+        m2_prompt = _msg2_prompt_part_bytes(m2_raw)
+        m2_sha = sha256_bytes(m2_prompt)
+        m1_sha = sha256_bytes(m1.read_bytes())
+        if run_id not in existing_runs:
+            plan["runs"].append({
+                "run_id": run_id,
+                "phase": "2a", "condition": PRIMED,
+                "phase1_number": None,
+                "provider": row["provider"], "model": row["model"],
+                "model_version": row["model_version"], "label": row["label"],
+                "interface": row["interface"],
+                "generation_parameters": row["generation_parameters"],
+                "custom_gpt": row["custom_gpt"],
+                "exploratory": True,
+                "prompt_files": [msg1_name, msg2_name],
+                "translation_prompt_sha256": m2_sha,
+                "baseline_run_id": None,
+                "identity_note": row["identity_note"],
+            })
+            added_runs += 1
+        for message, fname, sha, content in (
+                (1, msg1_name, m1_sha, m1.read_bytes()),
+                (2, msg2_name, m2_sha, m2_prompt)):
+            if fname not in existing_files:
+                manifest["files"].append({
+                    "file": fname, "run_id": run_id,
+                    "condition": PRIMED, "message": message,
+                    "prompt_sha256": sha, "bytes": len(content),
+                    "exploratory": True,
+                })
+                existing_files.add(fname)
+                added_files += 1
+    if added_runs or added_files:
+        manifest["files"] = sorted(manifest["files"],
+                                   key=lambda f: f["file"])
+        plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2),
+                             encoding="utf-8")
+        manifest_path.write_text(
+            json.dumps(manifest, ensure_ascii=False, indent=2),
+            encoding="utf-8")
+    print(f"[extend-exploratory] plan runs +{added_runs} "
+          f"(now {len(plan['runs'])}); manifest files +{added_files} "
+          f"(now {len(manifest['files'])})")
+    for row in EXPLORATORY_ROWS:
+        run_id = run_id_for(date, row, PRIMED)
+        print(f"  {run_id}")
+    return 0
+
+
+# ---------------------------------------------------------------------------
 # verify (integrity + Phase-1 completeness gate)
 # ---------------------------------------------------------------------------
 
@@ -1293,7 +1592,11 @@ def _baseline_metrics(plan_entry: dict) -> tuple[dict | None, str]:
     """(metrics, source) of the baseline for a primed run. Preference:
     1) a freshly collected Phase-2A control (p2a-ctl) of the same
     configuration (same run date as the primed run); 2) the Phase-1 direct
-    baseline output."""
+    baseline output. Exploratory configurations (no baseline_run_id, e.g.
+    the Dola 3.8 runs) have no baseline by design: they are never compared
+    for a priming effect."""
+    if plan_entry.get("baseline_run_id") is None:
+        return None, "no-baseline"
     primed_parts = plan_entry["run_id"].split("__")
     p2a_ctl_id = "__".join(primed_parts[:4] + [CTL])
     m = _run_metrics(p2a_ctl_id)
@@ -1493,6 +1796,25 @@ def main(argv: list[str] | None = None) -> int:
     p_sec.add_argument("--access-note", default="")
     p_sec.add_argument("--note", default="")
 
+    p_m2 = sub.add_parser(
+        "collect-msg2",
+        help="register a primed run from the author's operator-prompts "
+             "*-msg2.md file (message-2 prompt + raw reply; Task 021)")
+    p_m2.add_argument("--run", required=True, dest="run_id")
+    p_m2.add_argument("--generation-date", default="unknown")
+    p_m2.add_argument("--status", default="collected_external_output",
+                      choices=p1.STATUSES)
+    p_m2.add_argument("--access-verdict", default="unknown",
+                      choices=p1.ACCESS_VERDICTS)
+    p_m2.add_argument("--access-note", default="")
+    p_m2.add_argument("--note", default="")
+
+    p_ext = sub.add_parser(
+        "extend-exploratory",
+        help="append the exploratory Dola 3.8 rows (runs 20/21) to plan "
+             "and manifest, idempotently (never regenerates prompts)")
+    p_ext.add_argument("--date", required=True, help="YYYY-MM-DD")
+
     p_ver = sub.add_parser("verify", help="integrity + completeness gate")
     p_ver.add_argument("--run", default=None, dest="run_id")
     p_ver.add_argument("--size-floor", type=int, default=None)
@@ -1520,6 +1842,12 @@ def main(argv: list[str] | None = None) -> int:
                                    args.generation_date, args.status,
                                    args.access_verdict, args.access_note,
                                    args.note)
+    if args.command == "collect-msg2":
+        return run_collect_msg2(args.run_id, args.generation_date,
+                                args.status, args.access_verdict,
+                                args.access_note, args.note)
+    if args.command == "extend-exploratory":
+        return run_extend_exploratory(args.date)
     if args.command == "verify":
         return run_verify(args.run_id, args.size_floor)
     if args.command == "evaluate":

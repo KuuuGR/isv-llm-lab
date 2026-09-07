@@ -449,6 +449,42 @@
       "message": 2,
       "prompt_sha256": "aca4f01a8030ca7c455476c0dcc99df7b948957a8eb76bfab562ccabbb9310fc",
       "bytes": 12217
+    },
+    {
+      "file": "primed-20-dola-3.8-Fast-msg1.md",
+      "run_id": "2026-09-07__bytedance__dola-3.8__fast__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "baf879e66ca303cd2241fa149dcbc0d118b90438abdf47dd52820db7607b41f7",
+      "bytes": 60966,
+      "exploratory": true
+    },
+    {
+      "file": "primed-20-dola-3.8-Fast-msg2.md",
+      "run_id": "2026-09-07__bytedance__dola-3.8__fast__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "63985eddeffbc0b4b9cc6544db2b4bc4a81b36a592b168d805885e6108883fd0",
+      "bytes": 12199,
+      "exploratory": true
+    },
+    {
+      "file": "primed-21-dola-3.8-Pro-msg1.md",
+      "run_id": "2026-09-07__bytedance__dola-3.8__pro__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 1,
+      "prompt_sha256": "bb51ebd3f15dd4ecfc8aef611986583daf228ab07e7869c0bd943c066c7c733b",
+      "bytes": 60970,
+      "exploratory": true
+    },
+    {
+      "file": "primed-21-dola-3.8-Pro-msg2.md",
+      "run_id": "2026-09-07__bytedance__dola-3.8__pro__p2a-primed",
+      "condition": "p2a-primed",
+      "message": 2,
+      "prompt_sha256": "221ea9b6a545a8fa8dfe5f9e8c1ac445740733b42e73bbe830c586714505b967",
+      "bytes": 12203,
+      "exploratory": true
     }
   ]
 }

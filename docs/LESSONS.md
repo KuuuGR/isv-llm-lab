@@ -855,3 +855,33 @@ an authentic corpus). (2) Keep a register-diverse corpus
 (narrative/poetic/encyclopedic) so priming grounds generation across styles,
 not one template. (3) Pin hashes per component AND for the combined file — a
 corpus change is a new version, never a silent edit.
+
+## L-038 · 2026-09-07 · A collected-run record's provenance shape must be recorded as data, and real interface constraints are reproducibility conditions (Task 021)
+
+**Observed.** Phase-2A records were saved as msg2 prompt files with raw
+replies appended after `## Output` (no full transcripts); a newly
+discovered model ("Dola 3.8", runs 20/21) was added after roster
+preregistration; Gemini split corpus delivery across two messages, Gemini
+3.1 Pro ingested the corpus in 3.6 Flash before switching models for the
+translation, Gemini extended-thinking reset per prompt, and Claude needed
+token-limit continuations.
+
+**Interpretation.** What was NOT stored (a machine same-session transcript,
+the exact continuation boundaries, per-message thinking state) is itself
+provenance data and must be recorded as such (`machine_same_session_proof:
+false`, "message-2 only", "continuation history not stored") instead of
+being silently assumed or repaired. Interface workarounds describe how a
+configuration is *practically* runnable in a free web/chat tier; they are
+reproducibility conditions of the experiment and belong in the research
+record, without becoming quality judgments or evaluator changes. A model
+discovered mid-experiment can only ever be an exploratory observation
+unless a matching control/baseline exists — never a retroactive roster
+member, never a fabricated comparison.
+
+**Next time.** (1) Fix the record format BEFORE execution (full session
+saves, or a defined prompt+reply convention with the reply clearly
+separated) and note which proof each format can and cannot provide. (2)
+Record the UI-level execution trace per run (message count, model switch,
+thinking toggles, continuations) at collection time — it is usually
+unrecoverable afterwards. (3) Preregister the rule for late-discovered
+models (exploratory, no baseline) before the next experiment phase.

@@ -829,7 +829,69 @@ authentic corpus below; the kit stays execution-ready.
   Phase 2B (Wikipedia-length authentic reference + independent Polish
   story) is documented as future work.
 
-## Planned (not started) — current (2026-09-07, SODA Task 020)
+### Task 021 (2026-09-07): Phase 2A executed — audit, Dola 3.8 exploratory integration, evaluation
+
+The author completed all 18 Phase-2A primed sessions **and** added two
+primed runs of a newly discovered model/service recorded as **Dola 3.8**
+("ByteDance — official web interface"; proprietary; runs 20/21, labels
+**"Dola 3.8 — Fast"** and **"Dola 3.8 — Pro"**, author-recorded in the
+prompt-file headers only — not independently verifiable from provider
+metadata, UI exports or other project evidence). Task 021 treated these as
+**exploratory additions beyond the original 18-configuration roster**:
+distinct plan rows (`baseline_run_id: null`), distinct manifest entries
+(`"exploratory": true`), never merged into the roster, never collapsed into
+one observation, and never given a Phase-1 baseline.
+
+- **What was actually collected (protocol deviation).** No full
+  same-session transcripts were stored. Each of the 20 runs is recorded as
+  the operator-prompts `*-msg2.md` file with the raw model reply appended
+  after its closing `## Output` marker. New `collect-msg2` registers these
+  (reply sliced at the marker — same rule as `collect-session` — stored
+  byte-for-byte; `meta.json` records no machine same-session proof). The
+  same-session corpus delivery therefore rests on the prepared msg1 prompt
+  files (all present; corpus region byte-identical in all 20) and the
+  author's execution notes. Raw replies were never edited; **`prepare
+  --force` must not be re-run** (replies now live inside the msg2 files).
+- **Dola prompt origin.** The four Dola prompt files were copied from the
+  Qwen-3.8-Max-THINKING template with the header metadata edited; the
+  translation instruction + Polish story body is byte-identical to the
+  canonical prompt and both msg1 files embed the authoritative corpus
+  byte-identically. Cosmetic leftovers recorded (Qwen title lines,
+  "COPY THIS ENTIRE FILE INTO Qwen Chat (web)" operator line, a msg1
+  `Condition:` line mislabelled "(translation task)").
+- **Corpus integrity.** Combined corpus SHA-256 still
+  `aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857`
+  (58 459 B); corpus NOT regenerated; all 20 primed msg1 corpus tails
+  byte-identical; controls remain corpus-free.
+- **Verify/evaluate.** Intake: **19 `complete`**, 1 `partial` (run 12,
+  Claude Sonnet 5 max — final line `**KONEC**` bold-wrapped). All 20
+  evaluated through the unmodified Task 008 evaluator + Task 015
+  orthography audit (`phase2a/outputs/`); roster 38 rows; `compare`
+  produced the 18-row primed-vs-Phase-1 delta table — the Dola rows report
+  **no baseline metrics available** and no priming effect is claimed for
+  them.
+- **Manual execution constraints (author report), recorded as protocol
+  conditions, not quality judgments** (see `phase2a/README.md`):
+  - Gemini 3.6 Flash: corpus delivered as two messages (~83% + ~17%,
+    continuation opened `continue previous prompt`);
+  - Gemini 3.1 Pro: corpus ingested in **Gemini 3.6 Flash**, then the model
+    was switched to 3.1 Pro for the translation request (interface cannot
+    send a second message while remaining in 3.1 Pro) — ingestion model ≠
+    translation model;
+  - Gemini 3.6 Flash extended thinking: the setting reset to OFF after each
+    prompt and was manually re-enabled per prompt (per-message state not
+    storable from the saved files);
+  - Claude Sonnet 5 / Sonnet 5 max: free-tier token allowance exhausted —
+    three attempts/continuations with waiting; final replies are complete
+    to their markers and evaluable; the raw continuity history was not
+    stored (recorded, never merged/cleaned).
+- **Tests:** `tests/test_exp004_phase2a_exploratory.py` (3 new: Dola
+  distinctness from the 18 roster; extend-exploratory idempotency;
+  collect-msg2 extraction/rejection; no-baseline guard for compare); full
+  suite green. No Phase 2B work; no model selection (the research lead
+  decides what the results mean).
+
+## Planned (not started) — current (2026-09-07, SODA Task 021)
 
 Status categories are kept distinct:
 - **Completed experiments:** EXP-001 (baseline, historical), EXP-002
@@ -854,9 +916,10 @@ Status categories are kept distinct:
   RECONCILED (Task 018, 2026-09-06)**: 19 collected runs, 18 intake-complete
   and evaluated (evidence table in `outputs/roster.md`); GLM 4.5
   failed/excluded per protocol. **Phase 2A (full-roster corpus priming)
-  PREPARED and execution-ready (Task 019, 2026-09-06; corpus revised to
-  three authentic registers, Task 020, 2026-09-07)** — no LLM run
-  performed yet; author's external primed sessions are the next step;
+  EXECUTED, COLLECTED, AUDITED AND EVALUATED (Task 021, 2026-09-07)** —
+  20 primed runs evaluated (18 baseline-backed original configurations +
+  2 exploratory Dola 3.8 runs without a baseline); primed-vs-baseline
+  evidence in `phase2a/outputs/compare.md`;
   Phase 2B documented as future work. Phase 2 guidance methods stay closed
   until Phase 1 is complete and reported.
 

@@ -1,17 +1,21 @@
 # Roadmap
 
-Status: updated 2026-09-07 (Task 020 — EXP-004 Phase 2A corpus revised to
-a combined three-register authentic corpus — literary/narrative +
-artistic/poetic + informative/encyclopedic; combined file 58 459 B,
-≈8 200 tokens, sha256 `aaad28e4…`, corpus id `phase2a-authentic-isv` v1)
-PREPARED and execution-ready: same 36-run plan (18 Phase-1-usable
-configurations × control/corpus-primed) + 54 operator prompt files +
-contamination-controlled collection + compare tooling under
-`experiments/exp004-modelscreen/phase2a/`; deterministic corpus builder
-`scripts/build_phase2a_corpus.py`; tests updated + new real-corpus suite.
-**No external LLM run was performed in Task 020** — execution of the
-primed sessions is the author's next operator step; Phase 1 remains
-executed/evaluated (Task 018).
+Status: updated 2026-09-07 (Task 021 — EXP-004 Phase 2A **executed,
+collected, audited and evaluated**: all 18 primed sessions completed by the
+author + two exploratory runs of a newly discovered model recorded as
+**Dola 3.8** (runs 20/21; "ByteDance — official web interface",
+author-recorded header identity only, NOT part of the original 18-model
+roster, NO Phase-1 baseline, no priming effect claimed); records registered
+via `collect-msg2` (operator msg2 prompt + raw reply after `## Output`;
+msg2-only provenance — documented protocol deviation); corpus integrity
+re-verified (`aaad28e4…` in all 20 primed msg1 files, corpus NOT
+regenerated); all 20 evaluated deterministically (19 complete, 1 partial)
+and the 18 baseline-backed configurations compared primed-vs-Phase-1
+(`experiments/exp004-modelscreen/phase2a/outputs/compare.md`);
+manual-execution constraints (Gemini two-message corpus / 3.1 Pro
+ingestion-vs-translation model split / extended-thinking reset; Claude
+token-limit continuations) documented; tests updated + new exploratory
+suite — full suite green). Phase 1 remains executed/evaluated (Task 018).
 
 ## Done
 
@@ -611,6 +615,54 @@ executed/evaluated (Task 018).
         `p2a-ctl` + corpus-primed `p2a-primed` per Phase-1-usable
         configuration).
 
+- [x] **Task 021 — EXP-004 Phase 2A executed, collected, audited and
+      evaluated (2026-09-07).** No LLM call in this task.
+  - [x] Inventory + validation of the author's completed runs: all 18
+        original primed configurations + two exploratory primed runs of a
+        newly discovered model recorded as **Dola 3.8** (runs 20/21;
+        author-recorded "ByteDance — official web interface", proprietary;
+        labels "Dola 3.8 — Fast"/"Dola 3.8 — Pro"; NOT part of the
+        original 18-model roster, NO Phase-1 baseline, preserved as two
+        distinct exploratory observations). Dola prompt files were copied
+        from the Qwen-3.8-Max-THINKING template with header metadata
+        edited (leftover Qwen title/"COPY THIS ENTIRE FILE INTO Qwen
+        Chat (web)" lines + a msg1 `Condition:` label mislabelled
+        "(translation task)" recorded as cosmetic artifacts); msg1 corpus
+        regions byte-identical to the authoritative corpus in all 20 runs;
+        msg2 Polish-story bodies byte-identical.
+  - [x] Collection: no full same-session transcripts were stored — each
+        run's record is the operator msg2 prompt file with the raw model
+        reply appended after the closing `## Output` marker; new
+        `collect-msg2` command registers these (reply sliced at the
+        marker, stored byte-for-byte; meta records no machine same-session
+        proof — documented protocol deviation; raw bytes never edited).
+  - [x] `extend-exploratory` appended the two Dola rows to `plan.json`
+        (38 rows; `baseline_run_id: null`) and 4 manifest entries
+        (`exploratory: true`; 58 total) idempotently — the original 36-run
+        / 54-file preregistered protocol was never modified.
+  - [x] Corpus integrity re-run: combined file still SHA-256 `aaad28e4…a857`
+        (58 459 B); 20/20 primed msg1 corpus tails byte-identical;
+        controls corpus-free; corpus NOT regenerated.
+  - [x] Verify + evaluate: 19 runs intake `complete`, 1 `partial` (run 12 —
+        Claude Sonnet 5 max — final line `**KONEC**` bold-wrapped); all 20
+        evaluated through the unmodified deterministic pipeline
+        (`phase2a/outputs/` per-run evaluation + orthography; roster 38
+        rows); `compare` = 18-row primed-vs-Phase-1 delta table, Dola rows
+        report no-baseline (no priming effect claimed).
+  - [x] Manual execution constraints recorded (Gemini two-message corpus
+        ~83%+~17%; Gemini 3.1 Pro corpus ingestion in 3.6 Flash then
+        switch to 3.1 Pro for the translation — ingestion model ≠
+        translation model; Gemini extended-thinking reset per prompt;
+        Claude token-limit continuations) — protocol conditions, not
+        quality judgments, evaluator unchanged.
+  - [x] Tests: `tests/test_exp004_phase2a_exploratory.py` (3 new; Dola
+        distinctness, extend-exploratory idempotency, collect-msg2 reply
+        extraction/rejection, no-baseline guard); full suite green.
+  - [x] Docs updated (STATE, EXPERIMENTS, RESEARCH_NOTES §4.20, DECISIONS
+        D-048, LESSONS L-038, ROADMAP this file; exp004 README +
+        phase2a READMEs). No Phase 2B work; no model selection — the
+        research lead decides what the results mean.
+
 ## Next recommended task (single)
 
 - [x] ~~Project Owner answers the EXP-003 sentence-level questionnaire~~ —
@@ -633,21 +685,23 @@ executed/evaluated (Task 018).
   OFF/ON, GPT Interslavic Teacher, Claude Sonnet 5 Medium + max, Gemini 3.1
   Pro + 3.6 Flash, DeepSeek V3 Instant + V3 Expert, Grok, Kimi K2.6 Instant,
   Qwen 3.8 Max + 3.7 Plus. Venice/local/Bielik remain excluded as before.
-- [ ] **EXP-004 Phase 2A — corpus priming: execute the primed sessions
-      (NEXT)** — the author runs the 18 corpus-primed sessions externally
-  per `experiments/exp004-modelscreen/phase2a/README.md` (fresh session per
-  run; msg1 = three-register authentic corpus (narrative/artistic/
-  encyclopedic) + study instruction, wait for the short confirmation,
-  msg2 = the same Polish story as Phase 1 in the SAME session; save
-  byte-for-byte), then
-  collect/collect-session → verify → evaluate → **compare** (primed vs
-  Phase-1 baseline per-dimension deltas; no composite score, no ranking).
-  The Phase-1 baseline outputs serve as the control condition (`p2a-ctl`);
-  the author may re-execute selected fresh controls with the provided
-  `ctl-*.md` prompts (compare prefers a fresh control when one exists).
-  Claude Sonnet 5 max row: known >45-min/free-tier constraint
-  (availability data only — RESEARCH_NOTES §4.17); if impractical on the
-  day, record it as an execution limitation, never substitute silently.
+- [x] **EXP-004 Phase 2A — corpus priming: execute the primed sessions** —
+  **EXECUTED, COLLECTED, AUDITED AND EVALUATED (Task 021, 2026-09-07)**:
+  the author completed all 18 corpus-primed sessions + two exploratory
+  Dola 3.8 runs (20/21; separate from the 18-model roster, no Phase-1
+  baseline); records registered via `collect-msg2` (operator msg2
+  prompt+reply files; msg2-only provenance, no machine same-session
+  proof — documented deviation), verified (19 complete / 1 partial
+  end-marker), evaluated through the unmodified deterministic pipeline,
+  and **compare** produced the 18-row primed-vs-Phase-1 delta table
+  (`experiments/exp004-modelscreen/phase2a/outputs/compare.md`; no
+  composite score, no ranking; Dola rows no-baseline). Phase-1 baseline
+  outputs served as the control condition (`p2a-ctl`); no fresh controls
+  were collected. Claude Sonnet 5 max: executed despite the known
+  >45-min/free-tier constraint; its reply needed three token-limit
+  continuations (documented, raw history not stored); intake `partial`
+  (final line `**KONEC**` bold-wrapped) — recorded, preserved, not
+  repaired.
 - [ ] **EXP-004 Phase 1 report** — write the Phase 1 report from
   `outputs/roster.md` + per-run evaluation/orthography artifacts (18 usable
   runs; GLM preserved as the failed/excluded case; Claude Sonnet 5 max
@@ -656,7 +710,8 @@ executed/evaluated (Task 018).
   reliability, lexical/resource evidence, orthographic cleanliness,
   morphology/evidence, obvious quality issues — NOT coverage ranking alone,
   per the EXP-003 lesson). No human-evaluation exercise in EXP-004
-  (D-042).
+  (D-042). A Phase-2A addendum section should then fold in the Task-021
+  primed-vs-baseline evidence and the Dola exploratory observations.
 
 ## After the EXP-003 human review is recorded and reported
 

@@ -816,6 +816,48 @@ language reference across the three registers, with the poetic section
 flagged as not a grammatical template; msg2 is unchanged. Corpus still
 **prepared, not executed** — no LLM call in Task 020 (D-047, L-037).
 
+### 4.20 EXP-004 Phase 2A — executed and audited; Dola 3.8 exploratory runs; real interface constraints (SODA Task 021, 2026-09-07)
+
+The author completed all 18 Phase-2A primed sessions and added two primed
+runs of a newly discovered model recorded as **Dola 3.8** (runs 20/21 —
+labels "Dola 3.8 — Fast"/"Dola 3.8 — Pro"; author-recorded header identity
+"ByteDance — official web interface", proprietary; **not independently
+verifiable** from provider metadata/UI exports). Task 021 audited all 20
+records, kept the Dola runs as **exploratory additions distinct from the
+preregistered 18-configuration roster** (never merged, never collapsed, no
+Phase-1 baseline, no priming effect claimed) and evaluated everything
+through the unmodified deterministic pipeline. Key recorded facts:
+
+- **Collection record (deviation):** each run's saved record is the
+  operator msg2 prompt file with the raw reply appended after `## Output`
+  (no full same-session transcripts). `collect-msg2` registers these with
+  msg2-only provenance (`machine_same_session_proof: false`); same-session
+  corpus delivery rests on the prepared msg1 files (corpus byte-identical
+  in all 20) + author's execution notes. `prepare --force` must not be
+  re-run on the real kit.
+- **Corpus integrity:** combined corpus SHA-256 unchanged
+  (`aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857`,
+  58 459 B); all 20 primed msg1 corpus tails byte-identical; controls
+  corpus-free.
+- **Outcome:** intake 19 `complete` / 1 `partial` (run 12 Claude Sonnet 5
+  max — bold-wrapped `**KONEC**` end-marker); 20/20 evaluated; `compare`
+  produced the 18-row primed-vs-Phase-1 delta table; the Dola rows are
+  no-baseline observations.
+- **Real interface constraints (author report — reproducibility
+  conditions, not quality judgments):** (1) Gemini corpus prompts were
+  split ~83%+~17% across two messages (`continue previous prompt`) —
+  two-message corpus delivery, not a failed run; (2) Gemini 3.1 Pro cannot
+  receive a second message (auto-switch to 3.6 Flash), so the corpus was
+  ingested in **3.6 Flash** and the translation generated after switching
+  to **3.1 Pro** — corpus-ingestion model ≠ translation-generation model,
+  recorded without causal inference; (3) Gemini 3.6 Flash extended thinking
+  reset to OFF after each prompt (manually re-enabled; per-message state
+  not storable from the saved files); (4) Claude Sonnet 5 / Sonnet 5 max
+  needed three token-limit continuations with waiting — final replies
+  complete and evaluable, raw continuity history not stored. These
+  observations are documented in `phase2a/README.md` and shape the
+  experiment's practical reproducibility story (D-048, L-038).
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - The letter inventory for a constructed-language output audit comes from the

@@ -679,6 +679,18 @@ resource-supported coverage, unresolved rate, lexical tokens, A/B/C counts,
 orthography-out — with no ranking. Nothing is evaluated without a collected
 file; outputs are never modified or deleted.
 
+Task 021 added two collection-path subcommands for the actual execution
+records: `collect-msg2` registers a primed run from the author's
+operator-prompts `*-msg2.md` file (canonical message-2 prompt with the raw
+model reply appended after the closing `## Output` marker), slicing the
+reply at the marker exactly like `collect-session` and recording that no
+machine same-session proof exists (msg2-only provenance), and
+`extend-exploratory` appends the Dola 3.8 exploratory rows
+(`baseline_run_id: null`) to the plan and manifest idempotently without
+regenerating any prompt file. Exploratory rows resolve through the roster
+but are never merged into the 18-configuration roster and never produce a
+baseline comparison (no fabricated priming effect).
+
 ### 13.7 Future Phase 2B (documented, NOT executed)
 
 Phase 2B would test corpus length/complexity and content effects with a
@@ -696,7 +708,8 @@ decoupled). Phase 2B is not implemented here.
   kit (README, prompts, manifest, plan — 36 runs, 18 configurations ×
   control/primed; 54 operator prompt files);
   `scripts/run_exp004_phase2a.py`
-  (prepare/collect/collect-session/verify/evaluate/status/roster/compare)
+  (prepare/collect/collect-session/collect-msg2/extend-exploratory/
+  verify/evaluate/status/roster/compare)
   pins `AUTH_CORPUS_SHA256` and `CORPUS_ANCHORS` (three fingerprint phrases,
   one per register) and requires all three anchors in primed prefixes while
   rejecting any anchor in control sessions; prompts regenerated
@@ -706,9 +719,28 @@ decoupled). Phase 2B is not implemented here.
   identity, condition separation, corpus/source hash consistency, prompt
   separation, all-three-anchors-in-primed, any-anchor-rejects-control, and
   complete roster coverage (full suite green).
-- **NOT executed:** no external LLM call was made in Task 019 or Task 020;
-  execution is the author's next operator step — the 18 manual primed
-  sessions (fresh sessions per run; the Claude Sonnet 5 — max row carries
-  its known >45-min/free-tier constraint (§12/README row 12; RESEARCH_NOTES
-  §4.16/§4.17)).
+- **Executed, collected and evaluated (SODA Task 021, 2026-09-07):** the
+  author manually completed all 18 primed sessions, plus two exploratory
+  runs of a newly discovered model recorded as **Dola 3.8** ("ByteDance —
+  official web interface", proprietary; runs 20/21, labels "Dola 3.8 —
+  Fast"/"Dola 3.8 — Pro", author-recorded in prompt-file headers only and
+  not independently verifiable). Task 021 audited all 20 records against
+  the §13 protocol (Prompt-1 corpus byte-identical to
+  `aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857` in
+  all 20 msg1 files; Prompt-2 story byte-identical; no unexpected
+  contamination), registered them with `collect-msg2`, evaluated all 20
+  through the §13.6 pipeline (19 complete, 1 partial end-marker — run 12,
+  recorded with its known >45-min/free-tier constraint (§12/README row 12;
+  RESEARCH_NOTES §4.16/§4.17)), and produced the 18-row primed-vs-baseline
+  `compare` (Dola rows report no baseline — no priming effect is claimed).
+  Collection-path deviations and the author's manual-execution constraints
+  (Gemini two-message corpus delivery; Gemini 3.1 Pro
+  corpus-ingestion-vs-translation model split; Gemini extended-thinking
+  reset; Claude token-limit continuations) are documented in
+  `phase2a/README.md`; they are execution conditions, not quality
+  judgments, and do not alter the evaluator.
+- **Design unchanged:** Phase 2A remains a clean corpus-priming test (no
+  guidance scaffolding, no dictionary injection, no repair, no Phase 2B
+  work); the Dola runs are exploratory additions beyond the preregistered
+  roster and are not part of the original 18-model design.
 

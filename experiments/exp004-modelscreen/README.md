@@ -1,16 +1,23 @@
 # EXP-004 — practical LLM model screening (Polish → Medžuslovjansky)
 
-**Status: PHASE 1 EXECUTED + Phase 2A (corpus priming) PREPARED (SODA
-Tasks 017/018/019, 2026-09-05/06).** EXP-003 is closed; no further human
-evaluation will be designed or requested (D-042). The project author
-executed the Phase 1 screening sessions in the external web/chat
-interfaces; the collected material was audited and reconciled against the
-deterministic prompt package (Task 018) and the reconciled runs were run
-through the intake gate, the deterministic evaluator, and the orthography
-audit. **18 of 19 runs are complete and quantitatively usable; GLM 4.5 is
-the single failed/excluded run (service-error artifact).** The Phase 1
-evidence table is `outputs/roster.md`; the raw sessions are preserved
-byte-for-byte under `collected-sessions/`.
+**Status: PHASE 1 EXECUTED + PHASE 2A (corpus priming) EXECUTED, COLLECTED
+AND EVALUATED (SODA Tasks 017/018/019/020/021, 2026-09-05…07).** EXP-003
+is closed; no further human evaluation will be designed or requested
+(D-042). The project author executed the Phase 1 screening sessions in the
+external web/chat interfaces; the collected material was audited and
+reconciled against the deterministic prompt package (Task 018) and the
+reconciled runs were run through the intake gate, the deterministic
+evaluator, and the orthography audit. **18 of 19 Phase-1 runs are complete
+and quantitatively usable; GLM 4.5 is the single failed/excluded run
+(service-error artifact).** The author then executed all 18 Phase-2A
+corpus-primed sessions plus two exploratory runs of a newly discovered
+model recorded as **Dola 3.8** (runs 20/21); Task 021 audited all 20
+records, integrated the Dola runs as exploratory additions (separate from
+the 18-model roster, no Phase-1 baseline), and evaluated everything through
+the same deterministic pipeline. The Phase 1 evidence table is
+`outputs/roster.md`; the Phase-2A evidence is under
+`phase2a/outputs/roster.md` (38 rows) and `phase2a/outputs/compare.md`;
+the raw sessions are preserved byte-for-byte under `collected-sessions/`.
 
 Purpose: screen which LLMs are practically usable by the project (web/chat
 interface, free access sufficient for ~1 story/day, identifiable
@@ -20,9 +27,11 @@ experiments (Phase 2).
 
 Design: `DESIGN.md` (Task 013; roster + protocol finalized Tasks 016/017;
 execution + reconciliation Tasks 017/018; Phase 2A corpus-priming kit
-prepared Task 019).
+prepared Task 019; corpus revised to three authentic registers Task 020;
+Phase-2A execution audited + evaluated + Dola 3.8 exploratory runs
+integrated Task 021).
 
-## Phase 2A — full-roster corpus priming (prepared, NOT executed)
+## Phase 2A — full-roster corpus priming (executed and evaluated, Task 021)
 
 Phase 2A tests whether authentic Medžuslovjansky corpus exposure
 immediately before translation changes each model's generation
@@ -33,13 +42,28 @@ Phase-1-usable configuration (18; GLM excluded) it prepares:
 - **control** (`p2a-ctl`): the Phase-1 clean direct task — the Phase-1
   baseline outputs satisfy this condition;
 - **corpus-primed** (`p2a-primed`): Prompt 1 = fixed authentic reference
-  text ("Tuta historija" excerpt, author-supplied, 4 820 B, sha256
-  `413830fa…`) with study-as-reference instructions; Prompt 2 = the same
-  Polish story, translated using the reference — both in ONE fresh session.
+  text — the combined three-register corpus ("Tuta historija" excerpt +
+  Latin-script *Ahoj, Slovjani!* songs + ISV Wikipedia *Sadovničstvo*;
+  ≈58 KB, ~8 200 tokens, sha256 `aaad28e4…`, corpus id
+  `phase2a-authentic-isv` v1) with study-as-reference instructions;
+  Prompt 2 = the same Polish story, translated using the reference — both
+  in ONE fresh session.
 
-See `phase2a/README.md` (kit + 18-config roster + protocol), the DESIGN
-§13, and `phase2a/outputs/plan.json` (36 run ids). The kit is
-execution-ready (Task 019); **no external LLM run has been performed**.
+The author completed all 18 primed sessions **and** two exploratory Dola
+3.8 runs (20/21; author-recorded "ByteDance" identity, added after the
+18-model roster was prepared — see `phase2a/README.md`). Task 021 audited
+all 20 runs, registered them via `collect-msg2` (each run's record is the
+operator msg2 prompt file with the raw reply appended after `## Output`),
+verified corpus integrity (corpus SHA-256
+`aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857`
+byte-identical in all 20 primed msg1 files), evaluated all 20 through the
+deterministic pipeline, and compared the 18 baseline-backed configurations
+primed-vs-Phase-1. Dola has **no Phase-1 baseline** — it is reported as an
+exploratory observation only, and no priming effect is claimed for it.
+
+See `phase2a/README.md` (kit + 18-config roster + Dola exploratory section
++ protocol + Task-021 deviations and manual-execution constraints), the
+DESIGN §13, and `phase2a/outputs/` (38-row plan; roster; compare).
 
 ## Phase 1 executed roster (19 concrete runs, reconciled Task 018)
 
@@ -124,15 +148,19 @@ is complete and evaluated.
   read-only `collection_audit.*` evidence committed).
 - `outputs/` — plan.json, collected runs, intake/evaluation/orthography,
   roster (gitignored; `README.md` committed).
-- `phase2a/` — Phase 2A corpus-priming kit (Task 019): `README.md`,
-  `corpus/` (author-supplied "Tuta historija" excerpt, local), 54 operator
-  prompt files + `manifest.json` (hashes only), `outputs/plan.json` (36
-  run ids) — all execution-ready, no LLM run performed.
+- `phase2a/` — Phase 2A corpus-priming kit (Tasks 019/020/021): `README.md`
+  (protocol + 18-config roster + Dola exploratory section + Task-021
+  record), `corpus/` (authoritative three-register combined corpus, local),
+  58 operator prompt files + `manifest.json` (hashes only; 4 exploratory
+  Dola entries), `outputs/` (38-row plan incl. 2 exploratory Dola rows;
+  collected+verified+evaluated runs; roster; compare) — executed and
+  evaluated Task 021.
 - `scripts/run_exp004_phase1.py` — prepare / collect / collect-session /
   verify / evaluate / status / roster.
 - `scripts/run_exp004_phase2a.py` — Phase 2A prepare / collect /
-  collect-session (contamination-controlled) / verify / evaluate / status /
-  roster / compare (Task 019).
+  collect-session (contamination-controlled) / collect-msg2 /
+  extend-exploratory / verify / evaluate / status / roster / compare
+  (Tasks 019/020/021).
 - `scripts/audit_exp004_collected.py` — read-only collection audit +
    110|  reconciliation evidence (Task 018).
 - `scripts/check_orthography.py` — includes EXP-004 in the character-level
@@ -143,8 +171,9 @@ is complete and evaluated.
 Phase 2 (guidance-method and corpus-priming experiments) must NOT start
 before this Phase 1 screening is complete and reported. Task 018 records
 only a preliminary screening observation about promising Phase 2
-candidates. **Phase 2A (full-roster corpus priming) is now prepared and
-execution-ready (Task 019)**; the author's next step is the external
-sessions per `phase2a/README.md`, then collection/verify/evaluate/compare.
-Phase 2B (Wikipedia-style authentic reference + independent story) is
-documented as future work and not started.
+candidates. **Phase 2A (full-roster corpus priming) was executed and
+evaluated in Task 021** (20 primed runs: the 18 baseline-backed original
+configurations + two Dola 3.8 exploratory runs without a baseline); the
+primed-vs-baseline evidence is in `phase2a/outputs/compare.md`. Phase 2B
+(Wikipedia-style authentic reference + independent story) is documented as
+future work and not started.

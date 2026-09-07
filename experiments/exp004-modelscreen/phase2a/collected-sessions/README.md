@@ -31,6 +31,26 @@ story body matches the canonical Prompt-2 bytes. It extracts the final
 reply and stores it as `output.txt` — the session file itself is never
 modified.
 
+## Task 021 addendum — the actual collected records (msg2 prompt+reply files)
+
+For the 20 completed Phase-2A primed runs the author saved each run as the
+**operator-prompts `*-msg2.md` file with the raw model reply appended after
+its closing `## Output` marker** (18 original runs + the two exploratory
+Dola runs 20/21). No full same-session transcripts were stored in this
+directory for those runs.
+
+These msg2 files were therefore registered with the Task-021
+`collect-msg2` command (see `scripts/run_exp004_phase2a.py`): the reply is
+extracted deterministically at the final `## Output` marker — the same
+slicing rule `collect-session` applies to a 2-message session — and stored
+byte-for-byte as `output.txt`. Because no full transcript exists, no
+machine corpus-before-translation (same-session) proof is claimed for these
+runs; that condition rests on the prepared msg1 prompt files (corpus
+verified byte-identical) and the author's execution notes, and is recorded
+as a protocol deviation (see `phase2a/README.md`, "Task 021 collection
+record"). Raw replies were never edited; the msg2 files remain preserved
+unmodified.
+
 ## What a control session file must contain
 
 Only the single control prompt (or its copy with the reply starting after
