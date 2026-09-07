@@ -1,7 +1,10 @@
 # EXP-004 Phase 1 — operator prompts (canonical package)
 
 One self-contained Markdown file per reconciled roster row (19 rows, Task
-018). **No manual assembly is needed**: each file contains the experiment
+018) **plus two exploratory Phase-1 DIRECT prompts for Dola 3.8 Fast/Pro
+added retrospectively by Task 022 `extend-direct`** (pending manual
+collection — see below; NOT part of the 19-row roster).
+**No manual assembly is needed**: each file contains the experiment
 header (target model/provider/version/settings, condition `direct`), the
 complete Phase 1 instruction (identical for every row), and the full Polish
 source story. The prompts are written by `scripts/run_exp004_phase1.py
@@ -47,6 +50,28 @@ Rows 5/13/14 (Gemini) and 11 (GLM) were **conditional** (DESIGN §5.1/D-036).
 Gemini satisfied the practical free-access/quota criterion in execution and
 was run; GLM 4.5 could not execute (repeated service errors) and its
 artifact is preserved as a failed external output.
+
+## Exploratory Phase-1 DIRECT prompts added retrospectively (Task 022 — pending)
+
+| File | Configuration | Prepared baseline run id | Pairs with Phase-2A |
+|---|---|---|---|
+| `20-dola-3.8-fast.md` | Dola 3.8 — Fast (exploratory) | `2026-09-07__bytedance__dola-3.8__fast__direct` | run 20 (`…__fast__p2a-primed`) |
+| `21-dola-3.8-pro.md` | Dola 3.8 — Pro (exploratory) | `2026-09-07__bytedance__dola-3.8__pro__direct` | run 21 (`…__pro__p2a-primed`) |
+
+Rendered by `scripts/run_exp004_phase1.py extend-direct --date 2026-09-07`
+(Task 022) with the same direct-translation instruction and the same Polish
+source story as the 19 canonical rows above — **corpus-free by
+construction, no scaffold/dictionary/morphology/grammar material, no
+previous Dola conversation** — and explicit operator notes (Dola
+configuration to select, fresh session, Phase-1 direct baseline, exact text
+to submit, where to record the raw reply). These are **NOT part of the
+original 19-row reconciled roster**: the Dola configurations are
+exploratory (discovered Task 021; `exploratory: true` preserved) and the
+plan/manifest rows are `pending_manual_collection` — nothing is collected
+or claimed yet, and the original 18 usable Phase-1 baselines are unchanged.
+Register replies exactly as described below (prefer
+`collect-session`), then `verify` + `evaluate`; the Phase-2A `compare` then
+reports the within-Dola Phase 1 → Phase 2A deltas for runs 20/21.
 
 ## How to execute one run (operator workflow, as used)
 

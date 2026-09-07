@@ -16,6 +16,15 @@ manual-execution constraints (Gemini two-message corpus / 3.1 Pro
 ingestion-vs-translation model split / extended-thinking reset; Claude
 token-limit continuations) documented; tests updated + new exploratory
 suite — full suite green). Phase 1 remains executed/evaluated (Task 018).
+**Task 022 (2026-09-07) prepared — PENDING manual execution — the Phase-1
+DIRECT baselines for the two exploratory Dola 3.8 configurations**
+(`run_exp004_phase1.py extend-direct --date 2026-09-07` → Phase-1 operator
+prompts `20-dola-3.8-fast.md` / `21-dola-3.8-pro.md`, plan rows
+`pending_manual_collection` — nothing collected or claimed; `link-baselines`
+wired the Phase-2A Dola rows to those direct ids). After the author
+executes the two baselines, a within-Dola Phase 1 → Phase 2A comparison
+becomes possible through the existing deterministic pipeline; no priming
+effect is claimed yet.
 
 ## Done
 
@@ -662,6 +671,46 @@ suite — full suite green). Phase 1 remains executed/evaluated (Task 018).
         D-048, LESSONS L-038, ROADMAP this file; exp004 README +
         phase2a READMEs). No Phase 2B work; no model selection — the
         research lead decides what the results mean.
+- [x] **Task 022 — Phase-1 DIRECT baselines prepared (pending) for the two
+      exploratory Dola 3.8 configurations (2026-09-07).** No LLM call in
+      this task.
+  - [x] Prepared the two missing Phase-1 direct baselines retrospectively
+        through the existing Phase-1 direct protocol — Dola was discovered
+        after the 18-configuration roster was fixed (Task 021), so this is
+        an **exploratory extension**, NOT part of the original planned 18:
+        `scripts/run_exp004_phase1.py extend-direct --date 2026-09-07`
+        rendered the canonical direct operator prompts
+        (`operator-prompts/20-dola-3.8-fast.md` = run id
+        `2026-09-07__bytedance__dola-3.8__fast__direct`;
+        `21-dola-3.8-pro.md` = `…__pro__direct`) — exact same Polish source
+        story and direct-translation instruction as the original 18,
+        corpus-free, no scaffold/dictionary/morphology/grammar material,
+        no previous Dola conversation, fresh-session requirement explicit,
+        Dola configuration named per configuration (`Dola 3.8 — Fast` /
+        `Dola 3.8 — Pro`; author-recorded ByteDance identity preserved,
+        `exploratory: true` kept, no independently verified claim).
+  - [x] Plan/manifest rows appended as `pending_manual_collection`
+        (idempotent; manifest entries + sha256 hashes) — **nothing
+        collected, no metrics, no placeholder results, no false completed
+        baseline**; the original 18 Phase-1 baselines untouched.
+  - [x] `scripts/run_exp004_phase2a.py link-baselines` wired each Dola
+        p2a-primed plan row's `baseline_run_id` to its prepared direct id
+        (`baseline_status: pending_collection`); `compare` reports those
+        rows as pending (no fabricated deltas). Pairing is unambiguous:
+        direct `fast` ↔ Phase-2A run 20 (`…__fast__p2a-primed`); direct
+        `pro` ↔ Phase-2A run 21 (`…__pro__p2a-primed`).
+  - [x] Tests: `tests/test_exp004_phase1_dola_baselines.py` (new module:
+        corpus-free prompts with exact Polish source/instruction, distinct
+        Dola metadata, no Phase-2A link, no false completed baseline,
+        unambiguous pairing, original 18 unchanged, full lifecycle
+        pending→collected→delta); full suite green.
+  - [x] Docs updated (STATE, EXPERIMENTS, RESEARCH_NOTES §4.21, DECISIONS
+        D-049, LESSONS L-039, ROADMAP this file; exp004 README +
+        phase2a README). **Next: the author manually executes exactly the
+        two Phase-1 baselines (fresh sessions, direct translation only),
+        then `collect-session`/`verify`/`evaluate` + `compare` report the
+        within-Dola Phase 1 → Phase 2A deltas for runs 20/21 — no priming
+        effect is claimed before that.**
 
 ## Next recommended task (single)
 
@@ -702,6 +751,20 @@ suite — full suite green). Phase 1 remains executed/evaluated (Task 018).
   continuations (documented, raw history not stored); intake `partial`
   (final line `**KONEC**` bold-wrapped) — recorded, preserved, not
   repaired.
+- [ ] **EXP-004 — Dola Phase-1 DIRECT baselines: author executes the two
+  prepared baselines (Task 022 follow-up)** — the deterministic kit is
+  ready (`experiments/exp004-modelscreen/operator-prompts/
+  20-dola-3.8-fast.md` + `21-dola-3.8-pro.md`; Phase-1 plan rows
+  `pending_manual_collection`; Phase-2A Dola rows already wired via
+  `link-baselines`). For each Dola configuration (Fast ↔ Phase-2A run 20;
+  Pro ↔ Phase-2A run 21) the author opens a **fresh session** in the
+  ByteDance web interface, selects the recorded configuration
+  (`Dola 3.8 — Fast` / `Dola 3.8 — Pro`), submits ONLY the canonical
+  direct-translation prompt (Polish story + direct instruction — no
+  corpus, no scaffold, no dictionary, no previous Dola conversation) and
+  records the raw reply per the Phase-1 protocol; then
+  `collect-session`/`verify`/`evaluate` + `compare` report the within-Dola
+  Phase 1 → Phase 2A deltas. Nothing is claimed before that.
 - [ ] **EXP-004 Phase 1 report** — write the Phase 1 report from
   `outputs/roster.md` + per-run evaluation/orthography artifacts (18 usable
   runs; GLM preserved as the failed/excluded case; Claude Sonnet 5 max
@@ -711,7 +774,9 @@ suite — full suite green). Phase 1 remains executed/evaluated (Task 018).
   morphology/evidence, obvious quality issues — NOT coverage ranking alone,
   per the EXP-003 lesson). No human-evaluation exercise in EXP-004
   (D-042). A Phase-2A addendum section should then fold in the Task-021
-  primed-vs-baseline evidence and the Dola exploratory observations.
+  primed-vs-baseline evidence, the Dola exploratory observations, and —
+  once the author has executed the two Task-022 Phase-1 baselines — the
+  within-Dola Phase 1 → Phase 2A deltas for runs 20/21.
 
 ## After the EXP-003 human review is recorded and reported
 

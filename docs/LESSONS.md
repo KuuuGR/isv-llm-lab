@@ -885,3 +885,32 @@ Record the UI-level execution trace per run (message count, model switch,
 thinking toggles, continuations) at collection time — it is usually
 unrecoverable afterwards. (3) Preregister the rule for late-discovered
 models (exploratory, no baseline) before the next experiment phase.
+
+## L-039 · 2026-09-07 · A missing control/baseline can be prepared deterministically afterwards without ever pretending it exists (Task 022)
+
+**Observed.** The two exploratory Dola 3.8 Phase-2A runs (20/21) had no
+Phase-1 direct baseline. Task 022 built the complete deterministic
+operator kit for them retrospectively: canonical Phase-1 direct prompts
+(same Polish story + same instruction as the original 18, corpus-free by
+construction), plan/manifest rows marked `pending_manual_collection`, and
+Phase-2A `link-baselines` wiring each p2a-primed row's `baseline_run_id`
+to its prepared direct id — with `compare` reporting pending until real
+outputs exist.
+
+**Interpretation.** "Preparing" a baseline is not "collecting" it. The
+pipeline only ever evaluates collected files, so a pending row can be wired
+and paired in advance without fabricating metrics or risking a false
+"completed baseline". Rendered prompts are deterministic artifacts whose
+freedom from corpus/scaffold/previous-conversation content is testable —
+the no-priming property belongs in the automated tests, not just in the
+operator instructions.
+
+**Next time.** (1) When a configuration lacks a control condition, prepare
+the full deterministic kit (prompts + pending plan rows + unambiguous
+baseline↔run pairing) as soon as the gap is known, so manual execution
+later is mechanical. (2) Keep identity metadata at the evidence level that
+was actually recorded — never upgrade an author-recorded configuration to
+an independently verified claim just because new prompts are generated.
+(3) Assert the "clean prompt" property (exact source/instruction, no
+corpus, no scaffold, no Phase-2A link) in code for every retrospectively
+prepared prompt.

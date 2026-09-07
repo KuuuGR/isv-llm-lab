@@ -891,7 +891,54 @@ one observation, and never given a Phase-1 baseline.
   suite green. No Phase 2B work; no model selection (the research lead
   decides what the results mean).
 
-## Planned (not started) — current (2026-09-07, SODA Task 021)
+### Task 022 (2026-09-07): Phase-1 DIRECT baselines for the exploratory Dola configurations — prepared, pending manual execution
+
+Dola 3.8 was discovered after the original 18-configuration roster was
+fixed, so its two Phase-2A runs (20/21) had **no Phase-1 baseline** at Task
+021. Task 022 prepares the two missing Phase-1 direct baselines
+**retrospectively** through the existing Phase-1 direct protocol — an
+**exploratory extension** (not part of the original planned 18), preserving
+the Dola configurations' `exploratory: true` status and their
+author-recorded identity ("ByteDance — official web interface";
+`dola-3.8`; versions `fast`/`pro`; labels `Dola 3.8 — Fast` / `Dola 3.8 —
+Pro`) without upgrading it to an independently verified claim. No LLM was
+called; no Phase-2A output or corpus file was touched.
+
+- **Prompts prepared.** `scripts/run_exp004_phase1.py extend-direct --date
+  2026-09-07` rendered two canonical Phase-1 direct operator prompts under
+  the Phase-1 kit:
+  - `operator-prompts/20-dola-3.8-fast.md` — baseline id
+    `2026-09-07__bytedance__dola-3.8__fast__direct`;
+  - `operator-prompts/21-dola-3.8-pro.md` — baseline id
+    `2026-09-07__bytedance__dola-3.8__pro__direct`.
+  Each prompt = fresh-session, single-message, same Polish source story and
+  same direct-translation instruction as the original 18 Phase-1 baselines
+  — NO authentic-ISV corpus, NO lexical scaffold, NO dictionary, NO
+  morphology/grammar material, NO previous Dola conversation, NO Phase-2A
+  explanation; explicit operator notes state the Dola configuration to
+  select, that it is a Phase-1 direct baseline, the fresh-session rule,
+  what exact text to submit, and where to record the raw reply.
+- **Status = pending, never fabricated.** Plan + manifest rows appended as
+  `pending_manual_collection` (idempotent); **no outputs, no metrics, no
+  placeholder results**; the original 18 Phase-1 baselines are unchanged.
+- **Pairing (unambiguous).** `link-baselines` (Phase-2A script) set each
+  Dola p2a-primed plan row's `baseline_run_id` to its prepared direct id
+  (`baseline_status: pending_collection`): `…__dola-3.8__fast__direct` ↔
+  Phase-2A run 20; `…__dola-3.8__pro__direct` ↔ Phase-2A run 21. `compare`
+  reports those rows as pending; after the author collects + evaluates the
+  two direct runs, the existing deterministic pipeline reports the
+  **within-Dola Phase 1 → Phase 2A** deltas. No priming effect is claimed
+  yet.
+- **Tests:** `tests/test_exp004_phase1_dola_baselines.py` (new module:
+  corpus-free prompts with exact Polish source/instruction, distinct Dola
+  configuration metadata, no Phase-2A prompt link, no false completed
+  baseline, unambiguous baseline↔Phase-2A pairing, original 18 unchanged,
+  full pending→collected→delta lifecycle); full suite green.
+- **Next:** the author manually executes exactly these two Phase-1
+  baselines (fresh ByteDance sessions, direct translation only), then
+  `collect-session`/`verify`/`evaluate` (Phase-1) + `compare` (Phase-2A).
+
+## Planned (not started) — current (2026-09-07, SODA Task 022)
 
 Status categories are kept distinct:
 - **Completed experiments:** EXP-001 (baseline, historical), EXP-002
@@ -919,7 +966,13 @@ Status categories are kept distinct:
   EXECUTED, COLLECTED, AUDITED AND EVALUATED (Task 021, 2026-09-07)** —
   20 primed runs evaluated (18 baseline-backed original configurations +
   2 exploratory Dola 3.8 runs without a baseline); primed-vs-baseline
-  evidence in `phase2a/outputs/compare.md`;
+  evidence in `phase2a/outputs/compare.md`; **Task 022 (2026-09-07)
+  prepared — PENDING — the Phase-1 DIRECT baselines for the two
+  exploratory Dola 3.8 configurations** (canonical direct prompts
+  `20-dola-3.8-fast.md`/`21-dola-3.8-pro.md`, plan rows
+  `pending_manual_collection`, Dola p2a-primed rows wired via
+  `link-baselines`) so a within-Dola Phase 1 → Phase 2A comparison becomes
+  possible after the author executes them — no priming effect claimed yet;
   Phase 2B documented as future work. Phase 2 guidance methods stay closed
   until Phase 1 is complete and reported.
 

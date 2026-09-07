@@ -30,6 +30,18 @@ Commands:
            Deterministic: regenerating with the same --date yields
            byte-identical prompts, manifest, and plan.
 
+  extend-direct  --date YYYY-MM-DD
+           append the two exploratory Phase-1 DIRECT baselines for the
+           author-discovered Dola 3.8 configurations (runs 20/21 — Fast and
+           Pro; SODA Task 022) to outputs/plan.json and their operator
+           prompts to operator-prompts/ (+ manifest entries), idempotently.
+           The prompts use the identical Phase-1 direct protocol (same base
+           instruction + same Polish source story, fresh session, NO corpus/
+           scaffold/dictionary/morphology content) and are marked
+           exploratory + pending manual collection — nothing is fabricated.
+           Do not re-run `prepare --force` afterwards (it would drop the
+           appended rows).
+
   collect  --run <run_id> --output <path>
            register an externally generated raw output: copied byte-for-byte,
            never modified, never overwritten; meta.json records prompt/source
@@ -328,6 +340,56 @@ ROSTER = [
     },
 ]
 
+# ---------------------------------------------------------------------------
+# Exploratory Phase-1 DIRECT baselines (SODA Task 022, 2026-09-07) — NOT
+# part of the reconciled 19-row executed roster and never merged into it.
+#
+# During manual Phase-2A execution the author discovered a model/service
+# recorded as "Dola 3.8" (Fast = run 20, Pro = run 21) on the ByteDance web
+# interface (see run_exp004_phase2a.EXPLORATORY_ROWS, Task 021). Those two
+# Phase-2A primed runs exist and are valid, but they have no Phase-1 direct
+# baseline. Task 022 prepares those baselines RETROSPECTIVELY with the
+# identical Phase-1 direct protocol: same base instruction + same Polish
+# source story, fresh session, direct translation only, no corpus/scaffold/
+# dictionary/morphology content. Identity is author-recorded in operator
+# prompt headers only and is not independently verifiable; the rows are
+# exploratory and stay pending manual collection (extend-direct never
+# fabricates outputs or metrics). run_number keeps the author's 20/21
+# numbering; session_file is the suggested future author session filename.
+# ---------------------------------------------------------------------------
+DOLA_IDENTITY_NOTE = (
+    "Author-recorded in the operator prompt headers only (ByteDance — "
+    "official web interface; 'proprietary closed-source, decoder-only "
+    "transformer architecture — default settings'); template copied from "
+    "the Qwen-3.8-Max-THINKING kit prompts. Not independently verifiable "
+    "from provider metadata or UI exports. Exploratory configuration: at "
+    "Task 021 it had no Phase-1 baseline; Task 022 prepares a Phase-1 "
+    "direct baseline retrospectively (pending manual collection).")
+DIRECT_EXPLORATORY_ROWS = [
+    {
+        "provider": "bytedance", "model": "dola-3.8", "model_version": "fast",
+        "label": "Dola 3.8 — Fast",
+        "interface": "ByteDance — official web interface",
+        "generation_parameters": "proprietary closed-source, decoder-only "
+        "transformer architecture — default settings",
+        "custom_gpt": False, "variant_of": None, "conditional": "",
+        "exploratory": True, "run_number": 20,
+        "session_file": "20-dola-3.8-Fast.md",
+        "identity_note": DOLA_IDENTITY_NOTE,
+    },
+    {
+        "provider": "bytedance", "model": "dola-3.8", "model_version": "pro",
+        "label": "Dola 3.8 — Pro",
+        "interface": "ByteDance — official web interface",
+        "generation_parameters": "proprietary closed-source, decoder-only "
+        "transformer architecture — default settings",
+        "custom_gpt": False, "variant_of": None, "conditional": "",
+        "exploratory": True, "run_number": 21,
+        "session_file": "21-dola-3.8-Pro.md",
+        "identity_note": DOLA_IDENTITY_NOTE,
+    },
+]
+
 STATUSES = ("collected_external_output", "collected_partial_output",
             "failed_external_output")
 ACCESS_VERDICTS = ("pass", "fail", "unknown")
@@ -361,11 +423,12 @@ def roster_entry(run_id: str) -> dict | None:
         parts = parse_run_id(run_id)
     except ValueError:
         return None
-    for row in ROSTER:
-        if (row["provider"] == parts["provider"]
-                and row["model"] == parts["model"]
-                and row["model_version"] == parts["model_version"]):
-            return row
+    for pool in (ROSTER, DIRECT_EXPLORATORY_ROWS):
+        for row in pool:
+            if (row["provider"] == parts["provider"]
+                    and row["model"] == parts["model"]
+                    and row["model_version"] == parts["model_version"]):
+                return row
     return None
 
 
@@ -457,16 +520,25 @@ def _prompt_filename(row: dict) -> str:
     return f"{nn:02d}-{row['model']}-{row['model_version']}.md"
 
 
-def _render_prompt(row: dict, source_text: str) -> str:
+def _render_prompt(row: dict, source_text: str,
+                   extra_operator_lines: tuple = ()) -> str:
+    """Canonical Phase-1 direct prompt. extra_operator_lines are additional
+    '> ' header lines for the operator (e.g. Task-022 Dola baseline notes);
+    they sit in the editable header region only, so the instruction+source
+    body stays byte-identical across every direct baseline."""
     setting = row["generation_parameters"]
     cond = f"conditional filter: {row['conditional']}" if row[
         "conditional"] else "no conditional filter"
-    return "\n".join([
+    lines = [
         f"# EXP-004 — Phase 1 — direct baseline — {row['label']}",
         "",
         "> COPY THIS ENTIRE FILE INTO " + row["interface"] + ".",
         "> Do not modify anything. Save the model's complete reply",
         "> byte-for-byte and hand it to the collect step.",
+    ]
+    for note in extra_operator_lines:
+        lines.append("> " + note)
+    lines += [
         "",
         "---",
         "",
@@ -483,7 +555,8 @@ def _render_prompt(row: dict, source_text: str) -> str:
         "",
         BASE_INSTRUCTION.read_text(encoding="utf-8").replace(
             "{STORY}", source_text).rstrip() + "\n",
-    ])
+    ]
+    return "\n".join(lines)
 
 
 def run_prepare(date: str, force: bool = False) -> int:
@@ -581,6 +654,142 @@ def run_prepare(date: str, force: bool = False) -> int:
     for r in runs:
         print(f"  {r['run_id']:64s} prompt {r['prompt_sha256'][:12]}")
     print(f"{len(runs)} planned run(s); source sha256 {source_sha[:16]}...")
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# extend-direct (SODA Task 022: retrospective Phase-1 direct baselines for
+# the exploratory Dola 3.8 configurations — runs 20/21)
+# ---------------------------------------------------------------------------
+
+def _direct_prompt_filename(row: dict) -> str:
+    """Prompt file name following the NN-model-model_version.md convention
+    with the author's run number (20/21) as NN."""
+    return (f"{row['run_number']:02d}-{row['model']}-"
+            f"{row['model_version']}.md")
+
+
+def _direct_operator_notes(row: dict, run_id: str) -> tuple[str, ...]:
+    """Header-only operator notes for the Dola Phase-1 direct prompts. They
+    make the task unambiguous to the author (which configuration, Phase-1
+    direct baseline, fresh session, no priming material, exact run id to
+    record) while the instruction+source body below stays byte-identical to
+    every Phase-1 direct baseline of the original roster."""
+    return (
+        f"Exploratory Phase-1 DIRECT baseline for the Dola 3.8 "
+        f"configuration '{row['label']}' (Phase-2A run "
+        f"{row['run_number']}; SODA Task 022) — retrospective baseline, "
+        "NOT part of the original 18-configuration roster.",
+        "Open a NEW, FRESH session — never continue an earlier "
+        "conversation (in particular not the Phase-2A primed session).",
+        "This session must contain ONLY this single message: no reference "
+        "text, no Medžuslovjansky examples, no dictionary material, no "
+        "previous translation.",
+        "Select exactly the configuration named in 'Target model' below "
+        "in the interface before sending.",
+        f"When the reply is complete, save it byte-for-byte; the planned "
+        f"run id is {run_id}.",
+    )
+
+
+def run_extend_direct(date: str) -> int:
+    """Append the exploratory Dola 3.8 Phase-1 DIRECT baseline rows (runs
+    20/21) to outputs/plan.json, render their operator prompts into
+    operator-prompts/ (same canonical Phase-1 direct template, byte-identical
+    instruction+source body), and add their entries to
+    operator-prompts/manifest.json — idempotently. Rows are marked
+    exploratory and pending_manual_collection; nothing is collected or
+    evaluated here. Do not re-run `prepare --force` afterwards: it would
+    rewrite the plan/manifest from ROSTER only and drop these rows."""
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date or ""):
+        print("error: --date YYYY-MM-DD is required (run ids carry the "
+              "planned generation date)", file=sys.stderr)
+        return 2
+    plan_path = OUTPUTS_DIR / "plan.json"
+    manifest_path = OPERATOR_PROMPTS / "manifest.json"
+    if not plan_path.is_file() or not manifest_path.is_file():
+        print("error: Phase-1 plan/manifest missing; run "
+              "`scripts/run_exp004_phase1.py prepare --date YYYY-MM-DD` "
+              "first", file=sys.stderr)
+        return 2
+    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    if plan.get("source", {}).get("sha256") != EXP003_SOURCE_SHA256:
+        print("error: plan source hash does not match the canonical "
+              "EXP-003 source; refusing to extend a foreign plan",
+              file=sys.stderr)
+        return 2
+    source = _ensure_source(date)
+    source_text = source.read_text(encoding="utf-8")
+    source_sha = sha256_bytes(source_text.encode("utf-8"))
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    existing_runs = {r["run_id"] for r in plan["runs"]}
+    existing_files = {f["file"] for f in manifest["files"]}
+    added_runs = added_files = 0
+    for row in DIRECT_EXPLORATORY_ROWS:
+        run_id = run_id_for(date, row)
+        fname = _direct_prompt_filename(row)
+        prompt_text = _render_prompt(
+            row, source_text,
+            _direct_operator_notes(row, run_id))
+        prompt_sha = sha256_bytes(prompt_text.encode("utf-8"))
+        path = OPERATOR_PROMPTS / fname
+        if path.is_file():
+            if sha256_bytes(path.read_bytes()) != prompt_sha:
+                print(f"error: {path} exists with different content; "
+                      "refusing to overwrite", file=sys.stderr)
+                return 2
+        else:
+            path.write_text(prompt_text, encoding="utf-8")
+        if run_id not in existing_runs:
+            plan["runs"].append({
+                "run_id": run_id,
+                "provider": row["provider"],
+                "model": row["model"],
+                "model_version": row["model_version"],
+                "label": row["label"],
+                "interface": row["interface"],
+                "generation_parameters": row["generation_parameters"],
+                "custom_gpt": row["custom_gpt"],
+                "variant_of": row["variant_of"],
+                "conditional": row["conditional"],
+                "session_file": row["session_file"],
+                "condition": CONDITION,
+                "prompt_file": (str(path.relative_to(ROOT))
+                                if path.is_relative_to(ROOT)
+                                else str(path)),
+                "prompt_sha256": prompt_sha,
+                "source_sha256": source_sha,
+                "exploratory": True,
+                "run_number": row["run_number"],
+                "identity_note": row["identity_note"],
+                "status": "pending_manual_collection",
+            })
+            existing_runs.add(run_id)
+            added_runs += 1
+        if fname not in existing_files:
+            manifest["files"].append({
+                "file": fname, "run_id": run_id,
+                "prompt_sha256": prompt_sha,
+                "bytes": len(prompt_text.encode("utf-8")),
+                "exploratory": True,
+            })
+            existing_files.add(fname)
+            added_files += 1
+    if added_runs or added_files:
+        manifest["files"] = sorted(manifest["files"],
+                                   key=lambda f: f["file"])
+        plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2),
+                             encoding="utf-8")
+        manifest_path.write_text(
+            json.dumps(manifest, ensure_ascii=False, indent=2),
+            encoding="utf-8")
+    print(f"[extend-direct] plan runs +{added_runs} "
+          f"(now {len(plan['runs'])}); manifest files +{added_files} "
+          f"(now {len(manifest['files'])})")
+    for row in DIRECT_EXPLORATORY_ROWS:
+        print(f"  {run_id_for(date, row)}  "
+              f"prompt {_direct_prompt_filename(row)}  "
+              f"pending_manual_collection")
     return 0
 
 
@@ -1271,10 +1480,18 @@ def main(argv: list[str] | None = None) -> int:
 
     sub.add_parser("status", help="show run progress")
     sub.add_parser("roster", help="write the screening roster summary")
+    p_ext = sub.add_parser(
+        "extend-direct",
+        help="append the exploratory Dola 3.8 Phase-1 DIRECT baseline rows "
+             "(runs 20/21) to plan and manifest + render their operator "
+             "prompts, idempotently (Task 022; pending manual collection)")
+    p_ext.add_argument("--date", required=True, help="YYYY-MM-DD")
     args = parser.parse_args(argv)
 
     if args.command == "prepare":
         return run_prepare(args.date, args.force)
+    if args.command == "extend-direct":
+        return run_extend_direct(args.date)
     if args.command == "collect":
         return run_collect(args.run_id, args.output, args.generation_date,
                            args.model, args.provider, args.model_version,

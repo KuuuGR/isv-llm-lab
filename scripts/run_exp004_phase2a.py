@@ -143,8 +143,20 @@ roster. Identity is author-recorded in the operator prompt headers only and
 is not independently verifiable from provider metadata or UI exports.
 EXPLORATORY_ROWS carries them; run_extend_exploratory() adds their plan
 rows and manifest entries; run_collect_msg2() registers their message-2
-outputs. They are evaluated by the same deterministic pipeline but never
-given a Phase-1 baseline and never compared for a priming effect.
+outputs. At Task 021 they had no Phase-1 baseline and were never compared
+for a priming effect.
+
+Phase-1 direct baselines for the exploratory Dola configurations (SODA
+Task 022, 2026-09-07): the author executes the two missing Phase-1 direct
+baselines manually. run_exp004_phase1.py extend-direct prepares the
+canonical Phase-1 direct operator prompts + plan/manifest rows for Dola 3.8
+Fast and Pro (marked exploratory, pending_manual_collection — nothing is
+collected or evaluated there); this script's link-baselines wires each Dola
+p2a-primed plan row's baseline_run_id to its prepared direct run id. Until
+the author collects + evaluates the direct runs, `compare` reports the
+baseline as pending (never fabricated); afterwards the same deterministic
+pipeline reports a within-Dola Phase 1 → Phase 2A delta. Dola stays an
+exploratory configuration; Task 021 historical results are not rewritten.
 
 collect-msg2  [--run <run_id>] --generation-date <date>
            register a primed run whose collected record is the author's
@@ -166,6 +178,16 @@ extend-exploratory  --date <YYYY-MM-DD>
            prompt files (the author's collected msg2 files live in
            operator-prompts/ and MUST NOT be overwritten: do not run
            `prepare --force` against the real kit after collection).
+
+link-baselines  --date <YYYY-MM-DD>
+           (Task 022) wire the retrospectively prepared Phase-1 direct
+           baselines into the Phase-2A plan: set each Dola p2a-primed
+           exploratory row's baseline_run_id to its direct run id
+           (<date>__bytedance__dola-3.8__fast|pro__direct) and record
+           baseline_status pending_collection. Requires the Phase-1 direct
+           rows to exist (run `scripts/run_exp004_phase1.py extend-direct
+           --date <same date>` first). Idempotent; never fabricates a
+           baseline and never modifies collected outputs or meta.json.
 
 Phase 2B (a Wikipedia-length authentic Medžuslovjansky reference text
 paired with an independently written Polish story inspired by its subject
@@ -279,17 +301,15 @@ ROSTER = phase2a_roster()
 # (Pro)", "ByteDance — official web interface", "proprietary
 # closed-source, decoder-only transformer architecture — default settings".
 # No provider metadata or UI export exists, so the configuration is
-# author-recorded only and treated as exploratory: it has no Phase-1
-# baseline, participates in no priming-effect comparison, and its two runs
-# are preserved as two distinct observations (never collapsed).
+# author-recorded only and treated as exploratory. At Task 021 it had no
+# Phase-1 baseline and participated in no priming-effect comparison; Task
+# 022 prepares a Phase-1 direct baseline retrospectively (pending author
+# execution). Its two runs are preserved as two distinct observations
+# (never collapsed).
 # ---------------------------------------------------------------------------
-DOLA_IDENTITY_NOTE = (
-    "Author-recorded in the operator prompt headers only (ByteDance — "
-    "official web interface; 'proprietary closed-source, decoder-only "
-    "transformer architecture — default settings'); template copied from "
-    "the Qwen-3.8-Max-THINKING kit prompts. Not independently verifiable "
-    "from provider metadata or UI exports; exploratory configuration with "
-    "no Phase-1 baseline.")
+# Single source of the identity note: run_exp004_phase1.DOLA_IDENTITY_NOTE
+# (the Phase-1 exploratory direct rows carry the same text).
+DOLA_IDENTITY_NOTE = p1.DOLA_IDENTITY_NOTE
 EXPLORATORY_ROWS = [
     {"provider": "bytedance", "model": "dola-3.8", "model_version": "fast",
      "label": "Dola 3.8 — Fast",
@@ -1242,6 +1262,79 @@ def run_extend_exploratory(date: str) -> int:
     return 0
 
 
+def run_link_baselines(date: str) -> int:
+    """(SODA Task 022) Wire the retrospectively prepared Phase-1 direct
+    baselines into the Phase-2A plan: set each exploratory Dola p2a-primed
+    row's baseline_run_id to its Phase-1 direct run id
+    (<date>__bytedance__dola-3.8__fast|pro__direct) and record
+    baseline_status 'pending_collection'. Requires the Phase-1 direct plan
+    rows to exist first (run `scripts/run_exp004_phase1.py extend-direct
+    --date <same date>`). Idempotent; never fabricates a baseline, never
+    rewrites the collected Dola outputs or their meta.json (the Task-021
+    collect-time record that had no baseline stays intact)."""
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date or ""):
+        print("error: --date YYYY-MM-DD is required", file=sys.stderr)
+        return 2
+    plan_path = OUTPUTS_DIR / "plan.json"
+    if not plan_path.is_file():
+        print("error: Phase-2A plan missing; run "
+              "`prepare --date YYYY-MM-DD` (+ `extend-exploratory`) first",
+              file=sys.stderr)
+        return 2
+    plan = json.loads(plan_path.read_text(encoding="utf-8"))
+    if plan.get("corpus", {}).get("sha256") != AUTH_CORPUS_SHA256:
+        print("error: plan corpus hash does not match the authoritative "
+              "corpus; refusing to link a foreign plan", file=sys.stderr)
+        return 2
+    p1_runs = {r["run_id"]: r for r in p1.load_plan().get("runs", [])}
+    changed = 0
+    for row in EXPLORATORY_ROWS:
+        primed = next((r for r in plan["runs"]
+                       if r.get("exploratory") and r["condition"] == PRIMED
+                       and r["provider"] == row["provider"]
+                       and r["model"] == row["model"]
+                       and r["model_version"] == row["model_version"]), None)
+        if primed is None:
+            print(f"error: exploratory primed row for {row['label']} not in "
+                  "the plan; run `extend-exploratory --date <date>` first",
+                  file=sys.stderr)
+            return 2
+        direct_id = (f"{date}__{row['provider']}__{row['model']}__"
+                     f"{row['model_version']}__direct")
+        p1_row = p1_runs.get(direct_id)
+        if p1_row is None or p1_row.get("exploratory") is not True:
+            print(f"error: Phase-1 direct baseline row {direct_id} not "
+                  "found; run `scripts/run_exp004_phase1.py extend-direct "
+                  f"--date {date}` first", file=sys.stderr)
+            return 2
+        current = primed.get("baseline_run_id")
+        if current == direct_id:
+            continue
+        if current is not None:
+            print(f"error: {primed['run_id']} already linked to baseline "
+                  f"{current}; refusing to relink", file=sys.stderr)
+            return 2
+        primed["baseline_run_id"] = direct_id
+        primed["baseline_status"] = "pending_collection"
+        primed["baseline_task"] = "022"
+        changed += 1
+    if changed:
+        plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2),
+                             encoding="utf-8")
+    print(f"[link-baselines] Dola Phase-1 direct baselines linked "
+          f"({changed} updated; status pending_collection)")
+    for row in EXPLORATORY_ROWS:
+        direct_id = (f"{date}__{row['provider']}__{row['model']}__"
+                     f"{row['model_version']}__direct")
+        primed = next((r for r in plan["runs"]
+                       if r.get("exploratory") and r["condition"] == PRIMED
+                       and r["provider"] == row["provider"]
+                       and r["model"] == row["model"]
+                       and r["model_version"] == row["model_version"]), None)
+        print(f"  {primed['run_id'] if primed else '?'} <- baseline {direct_id}")
+    return 0
+
+
 # ---------------------------------------------------------------------------
 # verify (integrity + Phase-1 completeness gate)
 # ---------------------------------------------------------------------------
@@ -1592,9 +1685,12 @@ def _baseline_metrics(plan_entry: dict) -> tuple[dict | None, str]:
     """(metrics, source) of the baseline for a primed run. Preference:
     1) a freshly collected Phase-2A control (p2a-ctl) of the same
     configuration (same run date as the primed run); 2) the Phase-1 direct
-    baseline output. Exploratory configurations (no baseline_run_id, e.g.
-    the Dola 3.8 runs) have no baseline by design: they are never compared
-    for a priming effect."""
+    baseline output. Exploratory configurations whose baseline_run_id is
+    still None (e.g. the Dola 3.8 runs before Task-022 link-baselines) have
+    no baseline by design. After link-baselines the Dola rows carry a
+    Phase-1 direct baseline id; until the author collects + evaluates it the
+    metrics stay None (source 'phase1-baseline') and `compare` reports the
+    baseline as pending — a priming effect is never fabricated."""
     if plan_entry.get("baseline_run_id") is None:
         return None, "no-baseline"
     primed_parts = plan_entry["run_id"].split("__")
@@ -1650,12 +1746,20 @@ def run_compare(run_id: str | None = None) -> int:
                          "error": "primed run not evaluated yet"})
             continue
         if bm is None:
+            b = r.get("baseline_run_id")
+            pending = ""
+            if b and not (p1.OUTPUTS_DIR / b / "evaluation.json").is_file():
+                pending = (f"; Phase-1 baseline {b} is prepared but not yet "
+                           "collected/evaluated (pending manual collection, "
+                           "Task 022)")
             rows.append({"run_id": rid, "label": r["label"],
                          "primed_intake": intake.get("verdict"),
                          "baseline_run_id": r["baseline_run_id"],
-                         "baseline_source": "missing",
+                         "baseline_source": (base_source
+                                             if base_source != "no-baseline"
+                                             else "missing"),
                          "error": "no baseline metrics (fresh p2a-ctl or "
-                                  "Phase-1 baseline) available"})
+                                  f"Phase-1 baseline) available{pending}"})
             continue
         row = {
             "run_id": rid,
@@ -1815,6 +1919,13 @@ def main(argv: list[str] | None = None) -> int:
              "and manifest, idempotently (never regenerates prompts)")
     p_ext.add_argument("--date", required=True, help="YYYY-MM-DD")
 
+    p_link = sub.add_parser(
+        "link-baselines",
+        help="(Task 022) wire the prepared Phase-1 direct baselines of the "
+             "exploratory Dola runs into the plan (baseline_run_id + "
+             "pending_collection), idempotently")
+    p_link.add_argument("--date", required=True, help="YYYY-MM-DD")
+
     p_ver = sub.add_parser("verify", help="integrity + completeness gate")
     p_ver.add_argument("--run", default=None, dest="run_id")
     p_ver.add_argument("--size-floor", type=int, default=None)
@@ -1848,6 +1959,8 @@ def main(argv: list[str] | None = None) -> int:
                                 args.access_note, args.note)
     if args.command == "extend-exploratory":
         return run_extend_exploratory(args.date)
+    if args.command == "link-baselines":
+        return run_link_baselines(args.date)
     if args.command == "verify":
         return run_verify(args.run_id, args.size_floor)
     if args.command == "evaluate":

@@ -1,7 +1,9 @@
 # EXP-004 — practical LLM model screening (Polish → Medžuslovjansky)
 
 **Status: PHASE 1 EXECUTED + PHASE 2A (corpus priming) EXECUTED, COLLECTED
-AND EVALUATED (SODA Tasks 017/018/019/020/021, 2026-09-05…07).** EXP-003
+AND EVALUATED (SODA Tasks 017/018/019/020/021, 2026-09-05…07); TASK 022
+(2026-09-07) PREPARED — PENDING — THE DOLA 3.8 PHASE-1 DIRECT
+BASELINES.** EXP-003
 is closed; no further human evaluation will be designed or requested
 (D-042). The project author executed the Phase 1 screening sessions in the
 external web/chat interfaces; the collected material was audited and
@@ -14,7 +16,12 @@ corpus-primed sessions plus two exploratory runs of a newly discovered
 model recorded as **Dola 3.8** (runs 20/21); Task 021 audited all 20
 records, integrated the Dola runs as exploratory additions (separate from
 the 18-model roster, no Phase-1 baseline), and evaluated everything through
-the same deterministic pipeline. The Phase 1 evidence table is
+the same deterministic pipeline. **Task 022 (2026-09-07) prepares the two
+missing Phase-1 DIRECT baselines for Dola 3.8 Fast/Pro retrospectively**
+(canonical direct operator prompts in `operator-prompts/`, plan rows
+`pending_manual_collection`; `link-baselines` wired the Phase-2A Dola rows
+to them) — **pending manual execution by the author; nothing is collected
+or claimed yet.** The Phase 1 evidence table is
 `outputs/roster.md`; the Phase-2A evidence is under
 `phase2a/outputs/roster.md` (38 rows) and `phase2a/outputs/compare.md`;
 the raw sessions are preserved byte-for-byte under `collected-sessions/`.
@@ -29,7 +36,8 @@ Design: `DESIGN.md` (Task 013; roster + protocol finalized Tasks 016/017;
 execution + reconciliation Tasks 017/018; Phase 2A corpus-priming kit
 prepared Task 019; corpus revised to three authentic registers Task 020;
 Phase-2A execution audited + evaluated + Dola 3.8 exploratory runs
-integrated Task 021).
+integrated Task 021; Dola Phase-1 direct baselines prepared — pending —
+Task 022).
 
 ## Phase 2A — full-roster corpus priming (executed and evaluated, Task 021)
 
@@ -58,8 +66,23 @@ verified corpus integrity (corpus SHA-256
 `aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857`
 byte-identical in all 20 primed msg1 files), evaluated all 20 through the
 deterministic pipeline, and compared the 18 baseline-backed configurations
-primed-vs-Phase-1. Dola has **no Phase-1 baseline** — it is reported as an
-exploratory observation only, and no priming effect is claimed for it.
+primed-vs-Phase-1. Dola had **no Phase-1 baseline** at Task 021 — it was
+reported as an exploratory observation only, and no priming effect was
+claimed.
+
+**Task 022 (2026-09-07) — Phase-1 baselines for Dola prepared, pending:**
+the two missing Phase-1 DIRECT baselines for the exploratory Dola
+configurations are prepared retrospectively through the existing Phase-1
+direct protocol (`scripts/run_exp004_phase1.py extend-direct --date
+2026-09-07` → `operator-prompts/20-dola-3.8-fast.md` +
+`21-dola-3.8-pro.md`, plan rows `pending_manual_collection`; then
+`link-baselines` wires the Phase-2A Dola rows' `baseline_run_id`). This is
+an exploratory extension, NOT part of the original planned 18. After the
+author executes the two baselines (fresh session, direct translation only —
+no corpus, no scaffold, no dictionary, no previous Dola conversation), the
+existing deterministic pipeline evaluates them and `compare` reports a
+**within-Dola Phase 1 → Phase 2A** result for runs 20/21. No priming effect
+is claimed yet.
 
 See `phase2a/README.md` (kit + 18-config roster + Dola exploratory section
 + protocol + Task-021 deviations and manual-execution constraints), the
@@ -155,12 +178,13 @@ is complete and evaluated.
   Dola entries), `outputs/` (38-row plan incl. 2 exploratory Dola rows;
   collected+verified+evaluated runs; roster; compare) — executed and
   evaluated Task 021.
-- `scripts/run_exp004_phase1.py` — prepare / collect / collect-session /
-  verify / evaluate / status / roster.
+- `scripts/run_exp004_phase1.py` — prepare / **extend-direct (Task 022)** /
+  collect / collect-session / verify / evaluate / status / roster.
 - `scripts/run_exp004_phase2a.py` — Phase 2A prepare / collect /
   collect-session (contamination-controlled) / collect-msg2 /
-  extend-exploratory / verify / evaluate / status / roster / compare
-  (Tasks 019/020/021).
+  extend-exploratory / **link-baselines (Task 022)** / verify / evaluate /
+  status / roster / compare
+  (Tasks 019/020/021/022).
 - `scripts/audit_exp004_collected.py` — read-only collection audit +
    110|  reconciliation evidence (Task 018).
 - `scripts/check_orthography.py` — includes EXP-004 in the character-level
@@ -173,7 +197,11 @@ before this Phase 1 screening is complete and reported. Task 018 records
 only a preliminary screening observation about promising Phase 2
 candidates. **Phase 2A (full-roster corpus priming) was executed and
 evaluated in Task 021** (20 primed runs: the 18 baseline-backed original
-configurations + two Dola 3.8 exploratory runs without a baseline); the
-primed-vs-baseline evidence is in `phase2a/outputs/compare.md`. Phase 2B
+configurations + two Dola 3.8 exploratory runs); the
+primed-vs-baseline evidence is in `phase2a/outputs/compare.md`. **Task 022
+prepared the Phase-1 DIRECT baselines for the two Dola exploratory runs
+(pending manual execution)**, which will make a within-Dola Phase 1 →
+Phase 2A comparison possible after collection; no priming effect is claimed
+yet. Phase 2B
 (Wikipedia-style authentic reference + independent story) is documented as
 future work and not started.

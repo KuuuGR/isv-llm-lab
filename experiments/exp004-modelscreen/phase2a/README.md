@@ -1,4 +1,4 @@
-# EXP-004 Phase 2A — full-roster corpus priming (kit + Task 021 audit)
+# EXP-004 Phase 2A — full-roster corpus priming (kit + Task 021 audit; Task 022 prepared Dola Phase-1 baselines)
 
 Status (Task 021, 2026-09-07): **EXECUTED, COLLECTED AND EVALUATED.** The
 author manually completed all 18 primed sessions of the original roster
@@ -6,8 +6,23 @@ plus two additional exploratory runs of a newly discovered model/service
 recorded as **Dola 3.8** (runs 20/21). Task 021 audited every collected
 record against the Phase-2A protocol, integrated the 20 runs into the
 deterministic pipeline, evaluated all of them, and produced the
-priming-vs-baseline comparison for the 18 original configurations (Dola has
-no Phase-1 baseline and is NOT compared for a priming effect).
+priming-vs-baseline comparison for the 18 original configurations (the two
+Dola runs had no Phase-1 baseline and were NOT compared for a priming
+effect).
+
+Status (Task 022, 2026-09-07): the **Phase-1 direct baselines for the two
+exploratory Dola configurations are now PREPARED but PENDING manual
+collection** — `scripts/run_exp004_phase1.py extend-direct --date
+2026-09-07` rendered the two canonical direct operator prompts
+(`operator-prompts/20-dola-3.8-fast.md`, `21-dola-3.8-pro.md` under the
+Phase-1 kit) and appended their plan/manifest rows as
+`pending_manual_collection`; `link-baselines` (this script) wired each Dola
+p2a-primed plan row's `baseline_run_id` to its prepared direct run id
+(`baseline_status: pending_collection`). Until the author executes the two
+baselines, `compare` reports them as pending and claims no priming effect;
+after collection + evaluation the same deterministic pipeline will report a
+**within-Dola Phase 1 → Phase 2A** delta for runs 20/21. Dola stays an
+exploratory configuration; Task-021 historical results are unchanged.
 
 Phase 2A tests the project's core corpus-grounding hypothesis:
 
@@ -87,10 +102,10 @@ discovered model/service recorded as **Dola 3.8** on the ByteDance web
 interface. These are **NOT part of the preregistered 18-model roster** and
 must never be merged into it:
 
-| run | label | provider / model / version | primed run id |
-|---|---|---|---|
-| 20 | Dola 3.8 — Fast | bytedance / dola-3.8 / fast | `…__bytedance__dola-3.8__fast__p2a-primed` |
-| 21 | Dola 3.8 — Pro | bytedance / dola-3.8 / pro | `…__bytedance__dola-3.8__pro__p2a-primed` |
+| run | label | provider / model / version | primed run id | Phase-1 direct baseline (Task 022, pending) |
+|---|---|---|---|---|
+| 20 | Dola 3.8 — Fast | bytedance / dola-3.8 / fast | `…__bytedance__dola-3.8__fast__p2a-primed` | `2026-09-07__bytedance__dola-3.8__fast__direct` |
+| 21 | Dola 3.8 — Pro | bytedance / dola-3.8 / pro | `…__bytedance__dola-3.8__pro__p2a-primed` | `2026-09-07__bytedance__dola-3.8__pro__direct` |
 
 Identity is **author-recorded in the prompt-file headers only**
 ("ByteDance — official web interface"; "proprietary closed-source,
@@ -99,9 +114,10 @@ says `Fast`, run 21 header says `Pro` — recorded configuration names
 `Dola 3.8 — Fast` / `Dola 3.8 — Pro`). It is not independently verifiable
 from provider metadata, UI exports or any other project evidence; the two
 runs are therefore treated as **two distinct exploratory observations**
-(preserved, never collapsed, never given a Phase-1 baseline, never compared
-for a priming effect). Their prompt files were built by copying the
-Qwen-3.8-Max-THINKING kit template and editing the header metadata; the
+(preserved, never collapsed). At Task 021 they had no Phase-1 baseline and
+were never compared for a priming effect. Their prompt files were built by
+copying the Qwen-3.8-Max-THINKING kit template and editing the header
+metadata; the
 translation instruction + Polish story body is byte-identical to the
 canonical prompt and both msg1 files embed the authoritative three-register
 corpus byte-identically (see Corpus integrity below). Cosmetic leftovers
@@ -110,6 +126,27 @@ line, and a msg1 `Condition:` line mislabelled "(translation task)") are
 recorded copy-paste metadata artifacts that do not alter the substantive
 instructions.
 
+### Phase-1 direct baselines prepared retrospectively (Task 022 — pending)
+
+Task 022 prepares the two **missing Phase-1 direct baselines** so that a
+proper within-configuration Phase 1 → Phase 2A comparison becomes possible
+for Dola after the author executes them. This is an **exploratory
+extension** of the original 18-configuration design (Dola was discovered
+after the roster was fixed). The two baseline prompts live in the
+**Phase-1** operator-prompts kit
+(`experiments/exp004-modelscreen/operator-prompts/20-dola-3.8-fast.md` and
+`21-dola-3.8-pro.md`): each is a fresh-session, single-message prompt with
+the exact Phase-1 direct protocol — same Polish source story, same
+direct-translation instruction, NO authentic-ISV corpus, NO scaffold, NO
+dictionary, NO morphology/grammar material, NO previous Dola conversation.
+Nothing has been collected yet: the Phase-1 plan rows are
+`pending_manual_collection`, and this plan's Dola rows now point at them
+via `baseline_run_id` (`baseline_status: pending_collection`).
+`compare` reports those rows as pending (no fabricated deltas); once the
+author collects and evaluates the two direct runs with the Phase-1
+pipeline, the existing deterministic `compare` reports the within-Dola
+deltas automatically.
+
 ## Run ids and phases
 
 `<date>__<provider>__<model>__<model_version>__<condition>` with
@@ -117,7 +154,9 @@ instructions.
 `p2a-primed` (Phase-2A corpus-primed). The three identities can never be
 confused. Every Phase-2A plan row records its `baseline_run_id` (the
 Phase-1 `direct` run of the same configuration); the exploratory Dola rows
-carry `baseline_run_id: null`.
+carry the prepared direct ids added by Task 022 (`2026-09-07__bytedance__
+dola-3.8__fast|pro__direct`, status `pending_collection`) instead of the
+Task-021 `null`.
 
 ## Corpus
 
@@ -239,6 +278,18 @@ python3 scripts/run_exp004_phase2a.py prepare --date YYYY-MM-DD [--force]
 
 python3 scripts/run_exp004_phase2a.py extend-exploratory --date 2026-09-07
 #   appends the Dola 3.8 exploratory rows (20/21) to plan + manifest (Task 021)
+
+# Task 022 — retrospective Phase-1 direct baselines for the Dola rows:
+python3 scripts/run_exp004_phase1.py extend-direct --date 2026-09-07
+#   renders the two Dola Phase-1 DIRECT operator prompts (Phase-1 kit,
+#   20-dola-3.8-fast.md / 21-dola-3.8-pro.md) and appends their plan +
+#   manifest rows as pending_manual_collection (NOT collected yet)
+python3 scripts/run_exp004_phase2a.py link-baselines --date 2026-09-07
+#   wires each Dola p2a-primed plan row's baseline_run_id to its prepared
+#   direct run id (baseline_status: pending_collection; no outputs touched)
+#   -> after the author executes + collects + evaluates the two direct runs
+#      (scripts/run_exp004_phase1.py collect-session/verify/evaluate),
+#      `compare` reports the within-Dola Phase 1 -> Phase 2A deltas
 
 python3 scripts/run_exp004_phase2a.py collect-msg2 \
     --run <run_id> --generation-date YYYY-MM-DD

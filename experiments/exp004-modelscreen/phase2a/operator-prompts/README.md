@@ -44,8 +44,19 @@ Chat (web)" operator lines and a msg1 `Condition:` line mislabelled
 files embed the authoritative three-register corpus **byte-identically**;
 both msg2 bodies are byte-identical to the canonical prompt. Identity is
 author-recorded in the headers only and is not independently verifiable
-(Dola has no Phase-1 baseline). `manifest.json` records all four
+(Dola had no Phase-1 baseline at Task 021). `manifest.json` records all four
 exploratory entries (58 entries total) with `"exploratory": true`.
+
+**Task 022 — the Phase-1 DIRECT baselines for the two Dola configurations
+are prepared (pending) in the Phase-1 kit, NOT here:** see
+`../operator-prompts/20-dola-3.8-fast.md` and
+`../operator-prompts/21-dola-3.8-pro.md` under `experiments/
+exp004-modelscreen/operator-prompts/` (rendered by
+`scripts/run_exp004_phase1.py extend-direct`; Phase-1 plan rows
+`pending_manual_collection`). They are corpus-free fresh-session Phase-1
+direct prompts; the Phase-2A Dola rows point at them via `baseline_run_id`
+(`link-baselines`, Task 022) and `compare` reports them pending until the
+author collects + evaluates them.
 
 ## Collected replies live inside the msg2 files (Task 021)
 

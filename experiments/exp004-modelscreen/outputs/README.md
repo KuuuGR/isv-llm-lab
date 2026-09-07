@@ -27,7 +27,14 @@ Raw outputs embed the copyrighted story's translation and are **gitignored**
   written by `scripts/run_exp004_phase1.py prepare --date 2026-09-06`. The
   original planned 11-row package (Task 017) is reproducible from the same
   command; the committed `operator-prompts/manifest.json` records the
-  canonical prompt hashes of the executed set.
+  canonical prompt hashes of the executed set. **Task 022 (2026-09-07):
+  `extend-direct --date 2026-09-07` appended two exploratory Phase-1
+  DIRECT rows for Dola 3.8 Fast/Pro (run ids
+  `…__bytedance__dola-3.8__fast|pro__direct`, status
+  `pending_manual_collection`, `exploratory: true`)** — prepared, NOT
+  collected: they have no `output.txt`/`meta.json`/`intake.json`/
+  `evaluation.json` yet, and no placeholder result exists. The original 18
+  usable baselines are unchanged.
 - `roster.json` / `roster.md` — Phase 1 evidence table (access verdict,
   intake, usability, canonical/broader coverage, unresolved rate, token
   count, orthography-out count per row; no ranking, no composite score),

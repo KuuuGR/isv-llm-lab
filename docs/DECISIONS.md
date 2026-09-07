@@ -1145,3 +1145,45 @@ transcripts were stored.
    Raw outputs stay immutable; no run is excluded merely because its
    interface required a documented workaround; intake deviations (run 12's
    partial end-marker) are recorded under the existing rules.
+
+## D-049 · 2026-09-07 · EXP-004 Phase 2A: retrospective Phase-1 DIRECT baselines for exploratory Dola configurations — prepared as pending, never fabricated (Task 022)
+
+**Context.** Dola 3.8 (runs 20/21) was added after the 18-configuration
+roster was preregistered and therefore had **no Phase-1 baseline** at Task
+021 (D-048 §1). The author is willing to execute the two missing Phase-1
+direct translations manually; the deterministic operator kit must make
+those future baseline runs unambiguous, comparable to the original 18
+Phase-1 baselines, and free of any accidental corpus/context priming.
+
+**Decision.**
+
+1. **A retrospectively added baseline uses the established Phase-1 direct
+   protocol and the canonical operator-prompt structure — no new parallel
+   convention.** `run_exp004_phase1.py extend-direct --date 2026-09-07`
+   renders the two Dola prompts from the same base instruction and same
+   Polish source story as the original 18 (fresh session; no corpus, no
+   lexical scaffold, no dictionary, no morphology/grammar annotations, no
+   previous Dola conversation; direct translation only), with explicit
+   operator notes naming the Dola configuration to select, the Phase-1
+   direct-baseline purpose, the fresh-session/no-priming rule, the exact
+   text to submit and where to record the raw reply.
+2. **Baselines are registered as `pending`, never as collected.** The plan
+   and manifest rows are added as `pending_manual_collection`; no outputs,
+   no metrics, and no placeholder evaluation results are created that
+   could be mistaken for real results. The original 18 Phase-1 baselines
+   are never modified. The two runs are paired unambiguously with their
+   Phase-2A primed runs via `link-baselines` (`baseline_run_id` +
+   `baseline_status: pending_collection`): Dola Fast direct ↔ Phase-2A
+   run 20; Dola Pro direct ↔ Phase-2A run 21.
+3. **Configuration identity is preserved at the Task-021 evidence level,
+   not upgraded.** Labels `Dola 3.8 — Fast` / `Dola 3.8 — Pro`, provider/
+   interface "ByteDance — official web interface", model id `dola-3.8`,
+   versions `fast`/`pro`, and `exploratory: true` are carried over as
+   author-recorded evidence-based naming; nothing in the Phase-1 prompts
+   or metadata upgrades this into an independently verified provider/model
+   claim.
+4. **No priming-effect claim is made before the baselines exist.** Until
+   the author executes and the pipeline collects/evaluates the two direct
+   runs, `compare` reports the Dola rows as pending; only then does the
+   deterministic pipeline report the within-Dola Phase 1 → Phase 2A deltas
+   for runs 20/21. Task-021 historical results are unchanged.
