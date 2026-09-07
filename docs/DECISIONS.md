@@ -1229,3 +1229,43 @@ prompt drift.
 4. **Raw model replies stay immutable** (no normalization, no repair);
    protocol deviations, if any, are recorded as data under the existing
    deviation framework.
+
+## D-051 · 2026-09-07 · EXP-004 Task-024 analysis framing: deterministic read-only analysis, no winner score, deltas reported with their decomposition caveat (Task 024)
+
+**Context.** Phase-1 and Phase-2A collection is complete for 18 original
+configurations plus 2 exploratory Dola 3.8 configurations (each with its
+retrospective Phase-1 baseline, Tasks 022/023). Task 024 produced the full
+research analysis. The temptation at this point is to (a) rank models on a
+single invented composite, (b) read each Phase-1 → Phase-2A delta as a
+measured "priming effect", and (c) pick a winner. The data cannot support
+any of those: each configuration contributed exactly one direct and one
+primed generation, and the observed deltas visibly correlate with Phase-1
+baseline level (descriptive Spearman ρ ≈ −0.86 canonical / −0.84 broader
+over the original 18).
+
+**Decision.**
+
+1. **The analysis is a read-only, deterministic transformation of the
+   recorded evidence.** `scripts/analyze_exp004_phase2a.py` (standard
+   library only) regenerates `analysis/` byte-identically for all derived
+   figures and deterministically for tables/stats (only the recorded
+   generation timestamp varies). No LLM call, no raw-output/corpus
+   modification, no new evaluator, no changed evaluation definition.
+2. **No composite score and no single winner score anywhere.** Rankings
+   stay on the four separate existing dimensions (canonical coverage,
+   broader coverage, unresolved rate, orthography cleanliness); the
+   research-facing master table and all charts keep every dimension
+   separate. "Candidates deserving further investigation" are labelled as
+   research candidates, not winners.
+3. **Deltas are reported WITH their decomposition caveat.** Every
+   P1 → P2A delta is presented as the combination of any corpus-priming
+   effect + stochastic generation variation + model/interface behaviour +
+   configuration differences + possible baseline dependence; exploratory
+   paired tests (exact sign test, exact sign-flip permutation test over
+   the original 18) are labelled exploratory, and no causal estimate is
+   stated. Large observed changes (e.g. Dola Fast +28.20 pp canonical) are
+   explicitly not claimed as evidence of stronger corpus learning.
+4. **Exploratory Dola status is preserved through the whole analysis**
+   (`exploratory: true`, never merged into the original 18; paired to runs
+   20/21; identity limitation recorded). Phase 2B remains not executed;
+   next experiments are recommendations only.

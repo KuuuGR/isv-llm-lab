@@ -743,4 +743,21 @@ decoupled). Phase 2B is not implemented here.
   guidance scaffolding, no dictionary injection, no repair, no Phase 2B
   work); the Dola runs are exploratory additions beyond the preregistered
   roster and are not part of the original 18-model design.
+- **Dola Phase-1 direct baselines collected (SODA Task 023, 2026-09-07):**
+  the two retrospective Phase-1 baselines (Fast ↔ Phase-2A run 20; Pro ↔
+  Phase-2A run 21) were executed by the author in fresh ByteDance sessions,
+  collected through the Phase-1 `collect-session` intake (msg2-style
+  records), verified complete and evaluated through the §13.6 pipeline;
+  `compare` now reports the within-Dola Phase 1 → Phase 2A deltas.
+- **Full analysis executed (SODA Task 024, 2026-09-07):** deterministic,
+  read-only research analysis of the completed 20-configuration dataset
+  (18 original + 2 exploratory Dola) via
+  `scripts/analyze_exp004_phase2a.py` → `analysis/` (dataset/analysis
+  JSON+MD, rankings on four separate dimensions, priming Δ table,
+  descriptive statistics + exploratory exact paired tests, descriptive
+  Spearman baseline-dependence and baseline-vs-primed correlations,
+  family/orthography analyses, research-facing master table, charts A–G,
+  poster draft). Conclusions are labelled supported / suggestive /
+  not-established; no composite score, no winner; Phase 2B remains not
+  implemented and not executed.
 

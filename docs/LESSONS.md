@@ -944,3 +944,32 @@ sides of the rule: the msg2-style record verifies cleanly, and any
 post-collection modification of that record is still caught. (3) Keep the
 reply bytes immutable and treat the recording convention as data, not as
 something to "repair".
+
+## L-041 · 2026-09-07 · One paired generation per configuration: report the delta, then decompose what it cannot mean (Task 024)
+
+**Observed.** EXP-004 Phase 1 → Phase 2A gave exactly one direct and one
+primed generation per configuration (n = 18 original; +2 exploratory Dola
+rows). The largest observed canonical-coverage delta belongs to Dola Fast
+(+28.20 pp, from the experiment's lowest Phase-1 baseline, 38.87 %), and
+over the original 18 the deltas correlate negatively with the Phase-1
+baseline (descriptive Spearman ρ ≈ −0.86 canonical, −0.84 broader).
+
+**Interpretation.** A single paired delta is not a measurement of a
+priming effect — it is an observation that also contains stochastic
+variation, model/interface behaviour, configuration differences and
+baseline dependence. "Large observed change" and "evidence that priming
+causes a large improvement" are different claims; only the first is
+available from this design. Similarly, low-baseline configurations gaining
+more is consistent with regression to the middle and with a priming
+gradient — the correlation alone distinguishes neither.
+
+**Next time.** (1) Always report the descriptive correlation between the
+baseline level and the change alongside any "responded strongly" claim —
+otherwise the largest deltas will be over-interpreted. (2) When n per
+condition is 1, label any paired test exploratory and state the n = 1
+limitation in the same sentence as the p-value. (3) Keep the four metric
+dimensions separate and never promote a single configuration to "winner"
+from one run per condition. (4) Mark deviations that are execution
+constraints (Claude continuation, Gemini two-message corpus, Dola identity
+recorded-but-unverifiable) as data in their own practical-usability
+dimension, separate from the linguistic metrics.

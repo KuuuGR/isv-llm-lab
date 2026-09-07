@@ -1,36 +1,19 @@
 # Roadmap
 
-Status: updated 2026-09-07 (Task 021 — EXP-004 Phase 2A **executed,
-collected, audited and evaluated**: all 18 primed sessions completed by the
-author + two exploratory runs of a newly discovered model recorded as
-**Dola 3.8** (runs 20/21; "ByteDance — official web interface",
-author-recorded header identity only, NOT part of the original 18-model
-roster, NO Phase-1 baseline, no priming effect claimed); records registered
-via `collect-msg2` (operator msg2 prompt + raw reply after `## Output`;
-msg2-only provenance — documented protocol deviation); corpus integrity
-re-verified (`aaad28e4…` in all 20 primed msg1 files, corpus NOT
-regenerated); all 20 evaluated deterministically (19 complete, 1 partial)
-and the 18 baseline-backed configurations compared primed-vs-Phase-1
-(`experiments/exp004-modelscreen/phase2a/outputs/compare.md`);
-manual-execution constraints (Gemini two-message corpus / 3.1 Pro
-ingestion-vs-translation model split / extended-thinking reset; Claude
-token-limit continuations) documented; tests updated + new exploratory
-suite — full suite green). Phase 1 remains executed/evaluated (Task 018).
-**Task 022 (2026-09-07) prepared the Phase-1 DIRECT baselines for the two
-exploratory Dola 3.8 configurations**
-(`run_exp004_phase1.py extend-direct --date 2026-09-07` → Phase-1 operator
-prompts `20-dola-3.8-fast.md` / `21-dola-3.8-pro.md`, plan rows
-`pending_manual_collection` — nothing collected at that point; `link-baselines`
-wired the Phase-2A Dola rows to those direct ids). **Task 023 (2026-09-07):
-the author executed both Dola Phase-1 direct baselines; the raw replies
-were collected through the existing Phase-1 `collect-session` intake
-(msg2-style records inside the operator prompt files), verified complete,
-and evaluated with the same deterministic pipeline — `compare` now reports
-the REAL within-Dola Phase 1 → Phase 2A deltas** for runs 20/21 (canonical
-coverage: Fast 38.87 % → 67.07 % [+28.20 pp]; Pro 65.08 % → 71.75 %
-[+6.67 pp]). Dola stays an exploratory extension (not part of the original
-18-configuration roster); no priming effect is claimed beyond the recorded
-deltas.
+Status: updated 2026-09-07 (Task 024 — EXP-004 FULL ANALYSIS COMPLETE:
+the deterministic research analysis of the whole 20-configuration dataset
+(18 original + 2 exploratory Dola 3.8) — `scripts/analyze_exp004_phase2a.py`
+→ `experiments/exp004-modelscreen/analysis/` (README committed;
+dataset/analysis JSON+MD, charts A–G, poster draft gitignored); rankings
+on four separate dimensions, priming Δ table, descriptive statistics +
+exploratory exact paired tests, descriptive Spearman baseline-dependence
+(ρ ≈ −0.86 canonical / −0.84 broader) and baseline-vs-primed
+correlations, family + orthography analyses, practical-usability
+dimension, master table, supported/suggestive/not-established conclusions,
+research candidates, ≤ 3 recommended next experiments — no composite
+score, no winner; Phase 2B not executed). Phase-1/Phase-2A collection and
+evaluation were completed in Tasks 018/021; the Dola Phase-1 baselines in
+Task 023.
 
 ## Done
 
@@ -753,6 +736,70 @@ deltas.
   - [x] Docs updated (STATE, EXPERIMENTS, RESEARCH_NOTES §4.22, DECISIONS
         D-050, LESSONS L-040, ROADMAP this file; exp004 README +
         phase2a README).
+- [x] **Task 024 — EXP-004 full analysis: Phase 1 → Phase 2A corpus
+      priming (2026-09-07).** Research-analysis task. No LLM call; no new
+      model outputs; no raw-output/corpus modification; no Phase 2B; no
+      human evaluation; no new evaluator; evaluation definitions
+      unchanged.
+  - [x] Deterministic 20-configuration dataset (18 original + 2
+        exploratory Dola 3.8) from the Phase-1 roster + Phase-2A roster +
+        `compare.json` via `scripts/analyze_exp004_phase2a.py` (std-lib
+        only; every recomputed delta cross-checked against `compare`; Dola
+        rows keep `exploratory: true` and their run 20/21 pairing; input
+        SHA-256s recorded).
+  - [x] Phase-1 and Phase-2A landscape rankings on four separate
+        dimensions (canonical / broader / unresolved / orthography) — no
+        composite, no "best model score".
+  - [x] Priming Δ table sorted by Δ canonical then Δ broader (original 18:
+        mean +6.00 pp, median +4.92 pp, sd 3.39 pp, min +1.74, max +14.33,
+        positive 18/18; broader mean +2.36 pp, median +2.14, −0.92 …
+        +11.23, positive 14/18; the 20-config set reported separately as
+        exploratory, mean +7.15 pp).
+  - [x] Exploratory exact paired tests over the original 18 (two-sided
+        sign test canonical p ≈ 7.6e-6, broader p ≈ 0.031; exact
+        sign-flip permutation test on the mean p ≈ 7.6e-6 / 9.6e-4) with
+        the n = 1-per-condition limitation stated alongside; descriptive
+        Spearman baseline-dependence (P1 canonical vs Δ canonical
+        ρ = −0.86; broader ρ = −0.84) and baseline-vs-primed (ρ = +0.45 /
+        +0.37, n = 18).
+  - [x] Dola analysed separately: Fast +28.20 pp canonical from the
+        experiment's lowest Phase-1 baseline (38.87 %), Pro +6.67 pp from
+        65.08 % — recorded as **large observed changes consistent with
+        baseline dependence**, NOT as evidence of stronger corpus
+        learning; both Dola rows highlighted in the figures without
+        altering the data.
+  - [x] Family (GPT/Claude/Gemini/DeepSeek/Qwen/Dola), orthography
+        (outside-inventory by audit category, high-coverage + zero-anomaly
+        configurations listed without a composite), and separate
+        practical-usability dimensions (Claude interruptions/
+        continuations; Gemini two-message corpus + 3.1 Pro ingestion-model
+        split + thinking-toggle reset; Dola identity recorded-but-
+        unverifiable; GLM exclusion) — reproduced in the master table
+        Notes column.
+  - [x] Research-facing master table (20 rows; status incl.
+        `exploratory` for Dola; P1/P2A/Δ canonical + broader, P2A
+        unresolved + orthography-out, notes), charts A–G (deterministic
+        SVG in `analysis/figures/`), and a first poster draft
+        (`analysis/poster.{md,html}`) — no winner score anywhere.
+  - [x] Interpretation split into supported / suggestive / not-established
+        (incl. the nine candidate statements from the brief); research
+        candidates (Claude Sonnet 5 Medium, DeepSeek V3 Expert ON/OFF,
+        Qwen 3.8 Max Fast, Gemini 3.6 Flash ON, Dola Fast/Pro —
+        exploratory) and ≤ 3 next-experiment recommendations (controlled
+        repeated generation; Phase 2B unseen-topic transfer; matched-
+        variant comparison under strict interface controls) — none
+        executed; Phase 2B not started.
+  - [x] Artifacts under `experiments/exp004-modelscreen/analysis/`
+        (committed README; gitignored dataset/analysis JSON+MD, figures,
+        poster); tests `tests/test_analyze_exp004_phase2a.py` (19 new:
+        20-config composition, original/Dola separation, Dola pairing,
+        exact deltas + `compare` agreement, loud failure on missing
+        metrics/baseline, no fabricated metrics, deterministic ordering/
+        stats/chart inputs, byte-identical chart regeneration); full suite
+        green (212).
+  - [x] Docs updated (STATE, EXPERIMENTS, RESEARCH_NOTES §4.23 + §5/§6,
+        DECISIONS D-051, LESSONS L-041, ROADMAP this file; exp004 README +
+        DESIGN §13.8 + new analysis README).
 
 ## Next recommended task (single)
 
@@ -817,7 +864,13 @@ deltas.
   (D-042). A Phase-2A addendum section should then fold in the Task-021
   primed-vs-baseline evidence, the Dola exploratory observations, and the
   Task-023 within-Dola Phase 1 → Phase 2A deltas for runs 20/21
-  (`experiments/exp004-modelscreen/phase2a/outputs/compare.md`).
+  (`experiments/exp004-modelscreen/phase2a/outputs/compare.md`). **Task
+  024 (2026-09-07) completed the full deterministic research analysis**
+  (`experiments/exp004-modelscreen/analysis/` — README committed;
+  dataset/analysis JSON+MD, charts A–G, poster draft gitignored) that the
+  report should cite as its quantitative evidence base; the analysis
+  itself does not select a winner and leaves the multi-dimensional
+  judgment to the report.
 
 ## After the EXP-003 human review is recorded and reported
 

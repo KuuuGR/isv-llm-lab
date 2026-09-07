@@ -41,6 +41,13 @@ experiments/**/collected-sessions/*
 experiments/**/phase2a/corpus/*
 !experiments/**/phase2a/corpus/README.md
 
+# EXP-004 Task-024 analysis artifacts (deterministic derived outputs —
+# dataset.json / analysis.json / analysis.md / figures / poster; derived
+# from raw outputs, stay local like all EXP-004 outputs; the README below
+# is committed and documents the analysis)
+experiments/exp004-modelscreen/analysis/*
+!experiments/exp004-modelscreen/analysis/README.md
+
 # Raw experiment input set (source story + model outputs, copyrighted)
 opowiadania-set-isv/
 

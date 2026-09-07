@@ -976,7 +976,71 @@ Phase-2A output or corpus file was touched; raw replies byte-immutable.
   (msg2-style collect + verify accepts the prompt file as record; tamper
   after collection caught; compare produces real deltas); full suite green.
 
-## Planned (not started) — current (2026-09-07, SODA Task 023)
+### Task 024 (2026-09-07): EXP-004 full analysis — Phase 1 → Phase 2A corpus priming (research analysis)
+
+Read-only, deterministic research analysis of the completed
+20-configuration dataset (18 original + 2 exploratory Dola 3.8). No LLM
+was called, no raw output or corpus file was touched, no new evaluator was
+introduced, no composite score was invented, and Phase 2B was NOT
+executed.
+
+- **Dataset.** `scripts/analyze_exp004_phase2a.py` assembles one
+  deterministic dataset from the Phase-1 roster, the Phase-2A roster and
+  `compare.json` (join on `baseline_run_id`; every recomputed delta
+  cross-checked against `compare` — no drift): P1 + P2A metrics
+  (canonical/broader coverage, unresolved, tokens), orthography buckets
+  (A/B/C + outside-inventory), all established anomaly counts and the
+  exact P1 → P2A deltas for all 20 configurations. Dola rows preserve
+  `exploratory: true` and their exploratory pairing; they are analysed but
+  never merged into the original 18.
+- **Rankings.** Phase-1 and Phase-2A landscapes ranked on four separate
+  dimensions (canonical coverage, broader coverage, unresolved rate,
+  orthography cleanliness); no single "best model score".
+- **Priming Δ table.** Sorted by Δ canonical coverage, then Δ broader;
+  original-18 vs exploratory Dola rows kept visually and conceptually
+  distinct. Original 18: Δ canonical mean +6.00 pp, median +4.92 pp, sd
+  3.39 pp, min +1.74 pp, max +14.33 pp (positive 18/18); Δ broader mean
+  +2.36 pp, median +2.14 pp, min −0.92 pp, max +11.23 pp (positive 14/18).
+  20-configuration (exploratory) set: Δ canonical mean +7.15 pp, sd 5.90 pp
+  — labelled exploratory.
+- **Exploratory statistics.** Exact two-sided sign test (canonical 18+/0−,
+  p ≈ 7.6e-6; broader 14+/4−, p ≈ 0.031) and exact sign-flip permutation
+  test on the mean (canonical p ≈ 7.6e-6, broader p ≈ 9.6e-4) over the
+  original 18 — explicitly exploratory: one direct + one primed generation
+  per configuration, no causal estimate.
+- **Baseline dependence (descriptive).** Spearman over the original 18:
+  P1 canonical vs Δ canonical ρ = −0.86; P1 broader vs Δ broader ρ = −0.84
+  (n = 18). Lower Phase-1 baselines gained more — the largest observed
+  changes (Dola Fast +28.20 pp, Gemini 3.6 Flash ON +14.33 pp) come from
+  the lowest baselines. P1 vs P2A: canonical ρ = +0.45, broader ρ = +0.37
+  (n = 18) — priming shifts the ordering, not just the level.
+- **Dola analysis.** Fast 38.87 % → 67.07 % canonical (+28.20 pp) and
+  broader 51.67 % → 78.81 % (+27.14 pp) from the experiment's lowest
+  baseline; Pro 65.08 % → 71.75 % (+6.67 pp) from a mid-high baseline.
+  Reported as **large observed changes**, not as evidence of stronger
+  corpus learning; both are consistent with the original-18
+  baseline-dependence pattern.
+- **Families + orthography + usability.** Descriptive per-family
+  comparisons (GPT / Claude / Gemini / DeepSeek / Qwen / Dola); orthography
+  analysed separately from coverage (outside-inventory by audit category;
+  high-coverage + zero-anomaly configurations listed; no composite);
+  practical interface constraints (Claude interruptions/continuations,
+  Gemini two-message corpus + model-split ingestion + toggle reset, Dola
+  identity recorded-but-unverifiable, GLM exclusion) kept in a separate
+  dimension and reproduced in the master-table Notes column.
+- **Artifacts (all gitignored except the README).** `analysis/dataset.json`,
+  `analysis/analysis.{json,md}`, `analysis/figures/chart_a..g.svg`,
+  `analysis/poster.{md,html}` + committed `analysis/README.md`
+  (interpretation levels supported/suggestive/not-established, research
+  candidates, next-experiment recommendations, methodology + input
+  hashes).
+- **Tests.** `tests/test_analyze_exp004_phase2a.py` (19 tests): 20-config
+  composition, original/Dola separation, Dola pairing, exact deltas +
+  agreement with `compare.json`, loud failure on missing metrics/baseline,
+  no fabricated metrics, deterministic ordering/stats/chart inputs,
+  byte-identical chart regeneration. Full suite green (212 tests).
+
+## Planned (not started) — current (2026-09-07, SODA Task 024)
 
 Status categories are kept distinct:
 - **Completed experiments:** EXP-001 (baseline, historical), EXP-002
@@ -1014,7 +1078,14 @@ Status categories are kept distinct:
   Phase 1 → Phase 2A deltas for runs 20/21 (canonical coverage: Fast
   38.87 % → 67.07 % [+28.20 pp]; Pro 65.08 % → 71.75 % [+6.67 pp]); Dola
   stays exploratory; no priming effect is claimed beyond the recorded
-  deltas. Phase 2B documented as future work. Phase 2 guidance methods
+  deltas. **Task 024 (2026-09-07) completed the FULL deterministic
+  research analysis** (see the Task-024 entry below; artifacts +
+  interpretation in `experiments/exp004-modelscreen/analysis/`): Phase-1
+  and Phase-2A rankings, the priming Δ table, descriptive + exploratory
+  statistics, baseline-dependence and baseline-vs-primed correlations,
+  family/orthography analyses, master table, charts A–G, poster draft and
+  supported/suggestive/not-established conclusions — no winner score;
+  Phase 2B documented as future work. Phase 2 guidance methods
   stay closed until Phase 1 is complete and reported.
 
 Planned (not started):
@@ -1081,4 +1152,7 @@ Planned (not started):
   per-dimension `compare` deltas (no composite score, no ranking). Kit +
   protocol: `experiments/exp004-modelscreen/phase2a/README.md` (DESIGN
   §13, D-046); deterministic builder `scripts/build_phase2a_corpus.py`.
-  **No external LLM run exists yet.**
+  **Status at plan time (Task 019): no external LLM run existed.**
+  Execution/collection/audit/evaluation followed in Tasks 021–023 and the
+  full deterministic research analysis in Task 024 — see the entries
+  above; Phase 2B remains not executed.

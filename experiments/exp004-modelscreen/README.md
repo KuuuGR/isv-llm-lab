@@ -3,7 +3,8 @@
 **Status: PHASE 1 EXECUTED + PHASE 2A (corpus priming) EXECUTED, COLLECTED
 AND EVALUATED (SODA Tasks 017/018/019/020/021, 2026-09-05…07); TASK 022
 (2026-09-07) PREPARED AND TASK 023 (2026-09-07) COLLECTED + EVALUATED —
-THE DOLA 3.8 PHASE-1 DIRECT BASELINES.** EXP-003
+THE DOLA 3.8 PHASE-1 DIRECT BASELINES; TASK 024 (2026-09-07) FULL
+ANALYSIS COMPLETE — PHASE 1 → PHASE 2A CORPUS-PRIMING EVIDENCE BASE.** EXP-003
 is closed; no further human evaluation will be designed or requested
 (D-042). The project author executed the Phase 1 screening sessions in the
 external web/chat interfaces; the collected material was audited and
@@ -26,7 +27,16 @@ Phase-1 `collect-session` intake (msg2-style records inside the operator
 prompt files), verified complete, and evaluated with the same deterministic
 pipeline** — the Phase-2A `compare` now reports real within-Dola
 Phase 1 → Phase 2A deltas for runs 20/21 (see `phase2a/outputs/compare.md`).
-Dola remains an exploratory extension. The Phase 1 evidence table is
+Dola remains an exploratory extension. **Task 024 (2026-09-07) turned the
+completed dataset into a deterministic, read-only research analysis**
+(`analysis/` directory + `scripts/analyze_exp004_phase2a.py`): a
+20-configuration dataset, Phase-1 and Phase-2A rankings (four separate
+dimensions), the priming Δ table, descriptive statistics + exploratory
+exact paired tests, baseline-dependence and baseline-vs-primed Spearman
+correlations, family and orthography analyses, a master table, charts A–G
+and a poster draft — with explicit supported / suggestive / not-established
+conclusions and **no single winner score**. Dola stays `exploratory:
+true`; Phase 2B is documented but NOT executed. The Phase 1 evidence table is
 `outputs/roster.md`; the Phase-2A evidence is under
 `phase2a/outputs/roster.md` (38 rows) and `phase2a/outputs/compare.md`;
 the raw sessions are preserved byte-for-byte under `collected-sessions/`.
@@ -42,7 +52,8 @@ execution + reconciliation Tasks 017/018; Phase 2A corpus-priming kit
 prepared Task 019; corpus revised to three authentic registers Task 020;
 Phase-2A execution audited + evaluated + Dola 3.8 exploratory runs
 integrated Task 021; Dola Phase-1 direct baselines prepared Task 022,
-executed + collected + evaluated Task 023).
+executed + collected + evaluated Task 023; full Phase 1 → Phase 2A
+research analysis Task 024).
 
 ## Phase 2A — full-roster corpus priming (executed and evaluated, Task 021)
 
@@ -181,13 +192,17 @@ is complete and evaluated.
   (identical for every row; no guidance of any kind).
 - `input/` — story-only source (gitignored, local) + derivation record.
 - `operator-prompts/` — one self-contained canonical prompt per reconciled
-   100|  roster row (gitignored; `README.md` + `manifest.json` with prompt hashes
+  roster row (gitignored; `README.md` + `manifest.json` with prompt hashes
   are committed).
 - `collected-sessions/` — the author's 19 raw session files (prompt + reply
   in one file), preserved byte-for-byte (gitignored; `README.md` + the
   read-only `collection_audit.*` evidence committed).
 - `outputs/` — plan.json, collected runs, intake/evaluation/orthography,
   roster (gitignored; `README.md` committed).
+- `analysis/` — Task-024 research analysis: `README.md` (committed;
+  interpretation, candidates, next experiments) + gitignored
+  `dataset.json` / `analysis.json` / `analysis.md`, `figures/chart_a..g.svg`
+  and `poster.{md,html}`.
 - `phase2a/` — Phase 2A corpus-priming kit (Tasks 019/020/021): `README.md`
   (protocol + 18-config roster + Dola exploratory section + Task-021
   record), `corpus/` (authoritative three-register combined corpus, local),
@@ -204,7 +219,11 @@ is complete and evaluated.
   (Tasks 019/020/021/022; Dola Phase-1 baselines executed + collected via
   `collect-session` + evaluated Task 023).
 - `scripts/audit_exp004_collected.py` — read-only collection audit +
-   110|  reconciliation evidence (Task 018).
+  reconciliation evidence (Task 018).
+- `scripts/analyze_exp004_phase2a.py` — deterministic Task-024 analysis
+  generator (dataset / rankings / Δ table / stats + exploratory tests /
+  correlations / families / orthography / master table / charts A–G /
+  poster).
 - `scripts/check_orthography.py` — includes EXP-004 in the character-level
   audit (Task 015 inventory).
 
@@ -220,6 +239,13 @@ primed-vs-baseline evidence is in `phase2a/outputs/compare.md`. **Task 022
 prepared the Phase-1 DIRECT baselines for the two Dola exploratory runs;
 Task 023 executed, collected and evaluated them**, so `compare` now reports
 the within-Dola Phase 1 → Phase 2A deltas; no priming effect is claimed
-beyond the recorded deltas. Phase 2B
+beyond the recorded deltas. **Task 024 (2026-09-07) completed the full
+deterministic research analysis of the 20-configuration dataset**
+(`analysis/` README + gitignored dataset/analysis JSON/MD, charts A–G,
+poster draft; generator `scripts/analyze_exp004_phase2a.py`): rankings,
+priming Δ table, descriptive + exploratory statistics, baseline-dependence
+and baseline-vs-primed correlations, family/orthography analyses,
+supported/suggestive/not-established conclusions, research candidates and
+≤ 3 recommended next experiments — no winner score. Phase 2B
 (Wikipedia-style authentic reference + independent story) is documented as
 future work and not started.

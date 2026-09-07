@@ -941,6 +941,64 @@ no Phase-2A output or corpus file touched; raw replies byte-immutable):
   the existing pipeline — no composite score, no ranking, and **no priming
   effect is claimed** (D-050, L-040).
 
+### 4.23 EXP-004 — FULL ANALYSIS: Phase 1 → Phase 2A corpus priming (SODA Task 024, 2026-09-07)
+
+Read-only research analysis of the complete 20-configuration dataset
+(18 original + 2 exploratory Dola 3.8), generated deterministically by
+`scripts/analyze_exp004_phase2a.py` (standard library only — no plotting
+or statistics dependency exists in the repo and none was added). No LLM
+was called, no raw output or corpus file was modified, no evaluator or
+evaluation definition changed, no composite score was created, and
+Phase 2B was not executed. Artifacts: `analysis/` under the experiment
+(README committed; dataset/analysis JSON+MD, charts A–G, poster draft
+gitignored); input SHA-256 hashes recorded in the artifacts.
+
+Key recorded facts:
+
+- **Baseline dependence dominates the observed deltas.** Spearman over the
+  original 18 (descriptive): Phase-1 canonical coverage vs Δ canonical
+  ρ = −0.86; Phase-1 broader vs Δ broader ρ = −0.84 (n = 18). The largest
+  observed changes sit at the lowest baselines (Dola Fast P1 38.87 %;
+  Gemini 3.6 Flash ON +14.33 pp from P1 50.12 %). Phase-1 vs Phase-2A
+  correlation is only moderate (canonical ρ = +0.45, broader ρ = +0.37,
+  n = 18) — priming changed the ordering, not just the level.
+- **Original-18 deltas are positive and small-to-moderate:** Δ canonical
+  mean +6.00 pp (median +4.92, sd 3.39, +1.74 … +14.33; 18/18 positive);
+  Δ broader mean +2.36 pp (median +2.14, −0.92 … +11.23; 14/18 positive).
+  Including Dola (exploratory, n = 20): mean +7.15 pp, sd 5.90 pp — the
+  tails are dominated by Dola Fast.
+- **Exploratory paired tests (original 18 only):** exact two-sided sign
+  test canonical 18+/0− (p ≈ 7.6e-6) and broader 14+/4− (p ≈ 0.031);
+  exact sign-flip permutation test on the mean p ≈ 7.6e-6 (canonical) and
+  p ≈ 9.6e-4 (broader). Clearly exploratory: one direct + one primed
+  generation per configuration ⇒ no causal estimate, no manufactured
+  significance.
+- **Dola:** Fast canonical 38.87 % → 67.07 % (+28.20 pp) from the
+  experiment's lowest baseline; Pro 65.08 % → 71.75 % (+6.67 pp). Both
+  are consistent with the original-18 baseline-dependence relation; the
+  analysis therefore records "large observed change" and explicitly does
+  NOT claim evidence of stronger corpus learning. Pro's P2A orthography
+  outside-inventory fell 63 → 17; Fast's 468 → 24 (the P1 Fast baseline
+  carries the experiment's largest orthography anomaly count — recorded,
+  not re-interpreted).
+- **Highest Phase-2A canonical within the original 18:** DeepSeek V3
+  Expert ON 85.63 %, Qwen 3.8 Max Fast 85.38 %, Claude Sonnet 5 (Medium)
+  84.63 %, Qwen 3.7 Plus Fast 83.65 %, DeepSeek V3 Expert OFF 83.55 %,
+  GPT-5.6 Luna OFF 82.96 % (6 of the top-7 by P2A canonical have **zero**
+  outside-inventory characters). Orthography and coverage remain separate
+  dimensions — no composite.
+- **Methodological caution formalised (§5 additions below):** an observed
+  P1 → P2A delta combines any corpus-priming effect with stochastic
+  generation variation, model/interface behaviour, configuration
+  differences and baseline dependence; n = 1 per condition per
+  configuration. The analysis labels conclusions supported / suggestive /
+  not-established and names research candidates (Claude Sonnet 5 Medium,
+  DeepSeek V3 Expert ON/OFF, Qwen 3.8 Max Fast, Gemini 3.6 Flash ON, Dola
+  Fast — explicitly exploratory) plus ≤ 3 next experiments
+  (controlled repeated generation; Phase 2B unseen-topic transfer;
+  matched-variant comparison under strict interface controls) — none
+  executed.
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - The letter inventory for a constructed-language output audit comes from the
@@ -1010,6 +1068,21 @@ no Phase-2A output or corpus file touched; raw replies byte-immutable):
   verdict (free quota sufficient for ≥ 1 full task/day or every other day,
   not a one-time trial) as part of each run's metadata at execution time —
   do not assume an advertised free tier is usable (Task 017; D-036).
+- With one paired generation per configuration, an observed Phase-1 →
+  Phase-2A delta is not a measured "priming effect": it also contains
+  stochastic generation variation, model/interface behaviour,
+  configuration differences and baseline dependence. Report deltas with
+  that decomposition caveat, label exploratory paired tests as
+  exploratory (n = 1 per condition), and always check the descriptive
+  correlation between the baseline level and the change before reading a
+  large delta (EXP-004 Task-024: ρ ≈ −0.86 canonical / −0.84 broader over
+  the original 18; D-051, L-041).
+- Research analysis of a completed experiment is deterministic,
+  read-only, and free of composite/winner scores: dimensions stay
+  separate, "large observed change" ≠ "evidence of a large causal
+  effect", exploratory additions (Dola) keep their status everywhere, and
+  interpretation is stated as supported / suggestive / not-established
+  (Task 024; D-051, L-041).
 
 ## 6. Open questions for future work
 
@@ -1050,3 +1123,18 @@ no Phase-2A output or corpus file touched; raw replies byte-immutable):
   versioned no-guidance baselines on the canonical story compare (EXP-004
   Phase A)? How large is each model's headroom (unresolved rate) before
   guidance-method experiments are scoped to it?
+- **Answered by Task 021/023:** EXP-004 Phase-2A corpus-primed runs for
+  all 18 usable configurations + two exploratory Dola runs, and the Dola
+  retrospective Phase-1 baselines — see §4.20–4.22.
+- **Open after Task 024 (EXP-004 analysis):** (1) does the P1 → P2A
+  canonical-coverage rise (18/18, mean +6.0 pp, descriptive) survive
+  repeated direct/primed generation per configuration, or is part of it
+  stochastic/baseline-dependent (ρ ≈ −0.86)? (2) is Dola Fast's +28.20 pp
+  a Fast property or a low-baseline artifact (Pro +6.67 pp from a 65 %
+  baseline ≈ the original-18 low-baseline pattern)? (3) does the priming
+  gain transfer to an unseen-topic Wikipedia-style story (Phase 2B)? (4)
+  are the DeepSeek/Gemini/Qwen ON-vs-OFF and Fast-vs-Thinking pair gaps
+  model behaviour or interface artifacts (Gemini toggle reset, corpus
+  delivery constraints)? (5) which of the research candidates (Claude
+  Sonnet 5 Medium, DeepSeek V3 Expert, Qwen 3.8 Max Fast, Gemini 3.6
+  Flash ON, Dola Fast/Pro — exploratory) deserve a controlled repeat?

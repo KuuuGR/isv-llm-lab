@@ -1,11 +1,25 @@
 # Project State
 
-Updated: 2026-09-07 (SODA Task 021 — EXP-004 Phase 2A **executed,
-collected, audited and evaluated**: all 18 primed sessions completed by the
-author + two exploratory runs of a newly discovered model recorded as
-**Dola 3.8** (runs 20/21, "ByteDance — official web interface",
-author-recorded header identity only, NOT part of the 18-model roster, NO
-Phase-1 baseline at that time, no priming effect claimed); records
+Updated: 2026-09-07 (SODA Task 024 — EXP-004 FULL ANALYSIS COMPLETE:
+Phase 1 → Phase 2A corpus-priming evidence base over the whole
+20-configuration dataset, 18 original + 2 exploratory Dola 3.8, generated
+deterministically by `scripts/analyze_exp004_phase2a.py`; artifacts under
+`experiments/exp004-modelscreen/analysis/` — dataset/analysis JSON+MD,
+charts A–G, poster draft, committed README; rankings on four separate
+dimensions, priming Δ table, descriptive statistics + exploratory exact
+paired tests, descriptive Spearman baseline-dependence (ρ ≈ −0.86
+canonical / −0.84 broader over the original 18) and baseline-vs-primed
+correlations, family + orthography analyses, practical-usability
+dimension, master table, supported/suggestive/not-established
+conclusions, research candidates, ≤ 3 recommended next experiments — **no
+composite score, no winner**; Phase 2B not executed).
+
+SODA Task 021 (2026-09-07) executed, collected, audited and evaluated
+EXP-004 Phase 2A — all 18 primed sessions completed by the author + two
+exploratory runs of a newly discovered model recorded as **Dola 3.8**
+(runs 20/21, "ByteDance — official web interface", author-recorded header
+identity only, NOT part of the 18-model roster, NO Phase-1 baseline at
+that time, no priming effect claimed); records
 registered via `collect-msg2` (each run's operator msg2 prompt file + raw
 reply appended after `## Output`; no machine same-session proof —
 documented protocol deviation); corpus integrity re-verified (combined
@@ -16,7 +30,7 @@ baseline-backed configurations compared primed-vs-Phase-1
 (`phase2a/outputs/compare.md`); manual-execution constraints (Gemini
 two-message corpus delivery / 3.1 Pro ingestion-vs- translation model
 split / extended-thinking reset; Claude token-limit continuations)
-documented; tests updated + new exploratory suite — full suite green).
+documented; tests updated + new exploratory suite — full suite green.
 **SODA Task 022 (2026-09-07) prepared the Phase-1 DIRECT baselines for the
 two exploratory Dola 3.8 configurations** (runs 20/21 Fast/Pro):
 canonical Phase-1 direct operator prompts rendered via
@@ -52,7 +66,7 @@ Research hypothesis:
 This is a hypothesis. The first experiment must establish a baseline before
 any constrained system is judged against it.
 
-## Current status (as of SODA Task 023)
+## Current status (as of SODA Task 024)
 
 | Area | Status |
 |---|---|
@@ -85,6 +99,7 @@ any constrained system is judged against it.
 | **EXP-004 Phase 2A corpus priming prepared (Task 019); corpus revised to three authentic registers (Task 020)** | ✅ **PREPARED — EXECUTION-READY, NOT EXECUTED** — full-roster (18 Phase-1-usable configurations; GLM excluded) corpus-priming kit under `experiments/exp004-modelscreen/phase2a/`; reference corpus revised by Task 020 to a combined three-register authentic corpus (corpus id `phase2a-authentic-isv` v1; corpus files local/gitignored, README + hashes committed): literary/narrative `tuta-historija-excerpt.txt` (unchanged Task-019 excerpt, 4 820 B, SHA-256 `413830fa…`); artistic/poetic `album-ahoj-slovjani-artistic-isv.txt` (complete Latin-script album "Ahoj, Slovjani!" — 11 songs in order, 76 unique stanzas, 322 lines, 9 407 B, SHA-256 `7e25a56f…`; Cyrillic duplicates + HTML removed, 24 verbatim repeats deduplicated, forms NOT normalized); informative/encyclopedic `wiki-sadovnistvo-encyclopedic-isv.txt` (authentic retrieved ISV Wikipedia article "Sadovničstvo", 2026-09-07 wikitext API, cleaned running prose, 84 paragraphs, 44 101 B, SHA-256 `b03402fe…`, CC BY-SA 4.0); authoritative combined file `phase2a-authentic-isv-corpus.txt` = 58 459 B, ≈8 200 tokens, SHA-256 `aaad28e4…`; two conditions per configuration — control `p2a-ctl` (the Phase-1 clean direct task; Phase-1 outputs satisfy it, fresh control optional) and corpus-primed `p2a-primed` (msg1 = study reference text as language reference — no translation/summary/imitation/questions; msg2 = same Polish story, standard instruction + reference cue, SAME session); contamination control mechanical (corpus-before-translation required in primed session files; corpus in a control session rejected); run ids `<date>__…__p2a-ctl|p2a-primed` each linked to its Phase-1 `baseline_run_id`; 36-run plan + 54 operator prompt files + manifest (hashes only); `scripts/run_exp004_phase2a.py` (prepare/collect/collect-session/verify/evaluate/status/roster/**compare** — per-dimension deltas, no composite); 19 new tests in Task 019 (155 total green); Task 020 updated `tests/test_exp004_phase2a.py` and added the real-corpus suite `tests/test_exp004_phase2a_corpus.py` (all green). **No LLM called.** Next step: author executes the primed sessions externally (fresh session per run; Claude Sonnet 5 max row carries its known >45-min/free-tier constraint), then collect/verify/evaluate/compare. Phase 2B (Wikipedia-length authentic reference + independent story) documented as future work |
 | **EXP-004 Phase 2A executed + audited + evaluated (Task 021)** | ✅ **EXECUTED, COLLECTED, AUDITED, EVALUATED** — the author completed all 18 primed sessions and added two exploratory primed runs of a newly discovered model recorded as **Dola 3.8** ("ByteDance — official web interface", proprietary; runs 20/21 = "Dola 3.8 — Fast"/"Dola 3.8 — Pro", author-recorded in prompt-file headers only, not independently verifiable — **NOT part of the original 18-model roster, NO Phase-1 baseline, treated as two distinct exploratory observations, never collapsed**). Task 021: (1) audited all 20 runs — Prompt-1 corpus region byte-identical to authoritative `aaad28e4…` in all 20 msg1 files; Prompt-2 Polish story byte-identical; (2) registered each run via new `collect-msg2` (record = operator msg2 prompt file + raw reply after `## Output`; reply sliced at the marker, stored byte-for-byte; meta records no machine same-session proof — central protocol deviation; raw bytes never edited; **`prepare --force` must not be re-run**, replies now live in operator-prompts); (3) `extend-exploratory` appended Dola rows to plan (38 rows) + manifest (58 entries) idempotently; (4) corpus-integrity re-run (20/20 primed msg1 corpus tails identical; combined file SHA-256 unchanged; controls corpus-free); (5) evaluated all 20 via the unmodified deterministic pipeline — intake 19 complete + 1 partial (run 12 Claude Sonnet 5 max, final line `**KONEC**` bold-wrapped; end-marker rule) — and `compare` produced the 18-row primed-vs-Phase-1 delta table (Dola rows: no-baseline, no priming effect claimed); (6) manual-execution constraints documented (Gemini two-message corpus ~83%+~17%; Gemini 3.1 Pro corpus ingested in 3.6 Flash then model switched to 3.1 Pro for translation — ingestion model ≠ translation model; Gemini extended-thinking reset per prompt; Claude token-limit 3-attempt continuations — raw history not stored) as protocol conditions, not quality judgments. Full evidence `phase2a/outputs/roster.md` + `compare.md`; 3 new tests (`tests/test_exp004_phase2a_exploratory.py`); full suite green. **No Phase 2B work; no model selection** — research lead decides next |
 | **EXP-004 Dola Phase-1 baselines prepared (Task 022), collected + evaluated (Task 023)** | ✅ **PREPARED (022) → COLLECTED + EVALUATED (023)** — retrospective Phase-1 DIRECT baselines for the two exploratory Dola 3.8 configurations (Fast/Pro, runs 20/21) that were added without a baseline at Task 021. `scripts/run_exp004_phase1.py extend-direct --date 2026-09-07` rendered the two canonical Phase-1 direct operator prompts (`operator-prompts/20-dola-3.8-fast.md`, `21-dola-3.8-pro.md` — same Polish source story + same direct-translation instruction as the original 18; corpus-free, no scaffold/dictionary/grammar material, fresh-session requirement explicit) and appended their plan/manifest rows as `pending_manual_collection`; `scripts/run_exp004_phase2a.py link-baselines` then wired each Dola p2a-primed row's `baseline_run_id` to its prepared direct id (`baseline_status: pending_collection`). **Task 023 (2026-09-07): the author executed both baselines in fresh ByteDance sessions (direct translation only) and saved each raw reply msg2-style inside its operator prompt file; both records passed the Phase-1 `collect-session` intake + `verify` completeness gate (verdict complete, usable) and were evaluated with the same deterministic pipeline. `compare` now reports the real within-Dola Phase 1 → Phase 2A deltas** (canonical coverage: Dola Fast 38.87 % → 67.07 % [+28.20 pp]; Dola Pro 65.08 % → 71.75 % [+6.67 pp]; broader/unresolved/token deltas in `phase2a/outputs/compare.md`). Dola stays `exploratory: true` (not part of the original 18-configuration roster); Task-020/021 historical results unchanged; no priming effect claimed beyond the recorded deltas. New tests in `tests/test_exp004_phase1_dola_baselines.py` (msg2-style collect + verify, no false prompt-drift FAIL, real compare deltas); full suite green |
+| **EXP-004 FULL ANALYSIS (Task 024, 2026-09-07)** | ✅ **COMPLETE — PHASE 1 → PHASE 2A CORPUS-PRIMING EVIDENCE BASE** — deterministic, read-only research analysis of the whole 20-configuration dataset (18 original + 2 exploratory Dola 3.8) via `scripts/analyze_exp004_phase2a.py` (std-lib only; byte-identical chart regeneration, deterministic tables): 20-config dataset (`analysis/dataset.json`; Dola rows `exploratory: true`, never merged), Phase-1 + Phase-2A rankings on four separate dimensions (canonical / broader / unresolved / orthography — no composite, no winner), priming Δ table sorted by Δ canonical (original 18: mean +6.00 pp, median +4.92 pp, sd 3.39 pp, 18/18 positive; broader mean +2.36 pp, 14/18 positive; 20-config set labelled exploratory), exploratory exact paired tests (sign test canonical p ≈ 7.6e-6, broader p ≈ 0.031; sign-flip permutation p ≈ 7.6e-6 / 9.6e-4 — n = 1 per condition caveat explicit), descriptive Spearman baseline-dependence (P1 canonical vs Δ canonical ρ = −0.86; broader ρ = −0.84; n = 18), P1-vs-P2A ρ = +0.45 / +0.37, family tables (GPT/Claude/Gemini/DeepSeek/Qwen/Dola), orthography-bucket analysis, separate practical-usability dimension, research-facing master table, charts A–G (`analysis/figures/`), poster draft (`analysis/poster.{md,html}`) + committed `analysis/README.md` (supported/suggestive/not-established conclusions; research candidates: Claude Sonnet 5 Medium, DeepSeek V3 Expert ON/OFF, Qwen 3.8 Max Fast, Gemini 3.6 Flash ON, Dola Fast/Pro — exploratory; ≤ 3 recommended next experiments, none executed). Dola Fast's +28.20 pp is reported as a large observed change consistent with baseline dependence, NOT as evidence of stronger corpus learning. Phase 2B not executed. `tests/test_analyze_exp004_phase2a.py` (19 tests); full suite green (212) |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
 
 ### Experiment 001 headline numbers
@@ -139,6 +154,7 @@ scripts/
   run_exp004_phase2a.py      — EXP-004 Phase 2A orchestrator (prepare/collect/collect-session/collect-msg2/extend-exploratory/link-baselines/verify/evaluate/status/roster/compare; Tasks 019/020/021/022/023)
   build_phase2a_corpus.py    — EXP-004 Phase 2A deterministic corpus builder (Task 020)
   audit_exp004_collected.py  — EXP-004 collection audit + reconciliation evidence (Task 018)
+  analyze_exp004_phase2a.py  — EXP-004 Task-024 deterministic full analysis (dataset/rankings/Δ table/stats + exploratory tests/correlations/families/orthography/master table/charts A–G/poster; std-lib only)
 data/
   dictionary/README.md       — how to regenerate the (gitignored) data
   dictionary/audit/          — downloaded audit inputs (hunspell, frequency, slovnik), gitignored
@@ -181,6 +197,7 @@ experiments/
     input/  operator-prompts/  outputs/  collected-sessions/
                              — Phase 1 artifacts (all gitignored except committed READMEs + manifest/audit evidence; 18 evaluated runs, Task 018; Dola direct prompts 20/21 prepared Task 022 + collected/evaluated msg2-style records Task 023)
     phase2a/                 — Phase 2A corpus-priming kit (Tasks 019/020/021/022/023): README (protocol + 18-config roster + Dola exploratory + Task-021 record + Task-022 prepared / Task-023 collected+evaluated Phase-1 baselines) + corpus/ (three-register authentic corpus — narrative/artistic/encyclopedic — local; README provenance committed) + operator-prompts/ (58 prompt files incl. 4 exploratory Dola entries; manifest committed; msg2 files carry the collected replies after `## Output`) + outputs/ (38-run plan incl. 2 exploratory Dola rows; collected+verified+evaluated runs; roster + compare incl. real Dola deltas; gitignored) + collected-sessions/ (author saves raw sessions here; Task-021 records are the msg2 prompt+reply files above)
+    analysis/                — Task-024 full analysis: README.md (committed; interpretation levels, candidates, next experiments) + dataset.json / analysis.{json,md} / figures/chart_a..g.svg / poster.{md,html} (gitignored, deterministic outputs of scripts/analyze_exp004_phase2a.py)
 ```
 
 ## Working agreements
