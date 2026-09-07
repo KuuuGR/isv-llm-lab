@@ -1,19 +1,35 @@
 # Roadmap
 
-Status: updated 2026-09-07 (Task 024 — EXP-004 FULL ANALYSIS COMPLETE:
-the deterministic research analysis of the whole 20-configuration dataset
-(18 original + 2 exploratory Dola 3.8) — `scripts/analyze_exp004_phase2a.py`
-→ `experiments/exp004-modelscreen/analysis/` (README committed;
-dataset/analysis JSON+MD, charts A–G, poster draft gitignored); rankings
-on four separate dimensions, priming Δ table, descriptive statistics +
-exploratory exact paired tests, descriptive Spearman baseline-dependence
-(ρ ≈ −0.86 canonical / −0.84 broader) and baseline-vs-primed
-correlations, family + orthography analyses, practical-usability
-dimension, master table, supported/suggestive/not-established conclusions,
-research candidates, ≤ 3 recommended next experiments — no composite
-score, no winner; Phase 2B not executed). Phase-1/Phase-2A collection and
-evaluation were completed in Tasks 018/021; the Dola Phase-1 baselines in
-Task 023.
+Status: updated 2026-09-07 (Task 025 — EXP-004 CONTROLLED REPEATED
+GENERATION KIT PREPARED, execution-ready, no LLM results yet: estimate
+run-to-run stochastic variation for the original 18 usable
+configurations (direct/primed × 3 fresh-session replicates; 108 primary
+planned generations) + optional exploratory Dola 3.8 Fast/Pro repeats (12
+more; never merged into primary statistics). Deterministic hash-gated
+preparation (`scripts/run_exp004_repeats.py prepare --date 2026-09-08` →
+`experiments/exp004-modelscreen/repeats/`: 120-run plan + hash-only
+manifest + collection checklist; 180 prompt files; source `5de968a6…` /
+Phase-2A corpus `aaad28e4…` byte-identical; replicate linguistic prompt
+bytes identical within (configuration, condition)); collect/verify/
+evaluate/roster reuse the Phase-1/2A gate + Task-008 evaluator
+unmodified; deterministic analysis (`scripts/analyze_exp004_repeats.py`)
+replaces the single-run delta with `mean(primed) − mean(direct)` +
+figures A–E + selection views; interpretation split supported /
+suggestive / not-established. 25 new tests; full suite 237 green. No LLM
+called — the research lead executes the prepared prompts. Task 024
+(2026-09-07) completed the deterministic research analysis of the whole
+20-configuration dataset (18 original + 2 exploratory Dola 3.8) —
+`scripts/analyze_exp004_phase2a.py` → `experiments/exp004-modelscreen/
+analysis/` (README committed; dataset/analysis JSON+MD, charts A–G,
+poster draft gitignored); rankings on four separate dimensions, priming Δ
+table, descriptive statistics + exploratory exact paired tests,
+descriptive Spearman baseline-dependence (ρ ≈ −0.86 canonical / −0.84
+broader) and baseline-vs-primed correlations, family + orthography
+analyses, practical-usability dimension, master table,
+supported/suggestive/not-established conclusions, research candidates,
+≤ 3 recommended next experiments — no composite score, no winner; Phase
+2B not executed). Phase-1/Phase-2A collection and evaluation were
+completed in Tasks 018/021; the Dola Phase-1 baselines in Task 023.
 
 ## Done
 
@@ -800,6 +816,57 @@ Task 023.
   - [x] Docs updated (STATE, EXPERIMENTS, RESEARCH_NOTES §4.23 + §5/§6,
         DECISIONS D-051, LESSONS L-041, ROADMAP this file; exp004 README +
         DESIGN §13.8 + new analysis README).
+- [x] **Task 025 — EXP-004 controlled repeated generation: estimate
+      stochastic variation (2026-09-07).** Preparation task. No LLM call;
+      no new model outputs yet; no raw-output modification; no Phase 2B;
+      no human evaluation; no evaluator change.
+  - [x] Kit layout + 6-field run-ID scheme (`<date>__<provider>__<model>__
+        <version>__<condition>__<replicate>`, condition `direct|primed`,
+        replicate `r01|r02|r03`; no collision with the 5-field Phase-1/P2A
+        ids) + manifest schema (experiment/phase/condition/replicate/
+        primary/exploratory/model/provider/source-hash/corpus-hash/prompt-
+        hash/collection metadata/usability).
+  - [x] Deterministic prompt-prep + manifest generator
+        (`scripts/run_exp004_repeats.py prepare`): 18 primary configs ×
+        2 conditions × 3 replicates = **108 rows** + Dola Fast/Pro × 6 =
+        **12 exploratory rows** (120 total); 180 prompt files;
+        source/corpus SHA-256 byte-gates fail loudly on drift; replicate
+        prompt linguistic bodies byte-identical within (config, condition);
+        plan.json + hash-only operator-prompts/manifest.json + human
+        collection-checklist.md; replicate-block ordering (r01 direct+
+        primed → r02 → r03) and full interface/deviations metadata fields.
+  - [x] Collect/verify/intake support reusing Phase-1/P2A machinery:
+        `collect-session` (direct standalone transcripts + full primed
+        msg1+msg2 transcripts + msg2-style prompt-file records) and
+        `collect-msg2` (primed only); corpus-in-direct contamination
+        rejection; corpus-before-translation requirement for primed
+        transcripts; raw outputs byte-for-byte, never overwritten; verify
+        = completeness gate + integrity checks (hash re-checks);
+        evaluate = Task-008 evaluator + orthography audit unmodified.
+  - [x] Deterministic analysis (`scripts/analyze_exp004_repeats.py`):
+        n=3 small-sample descriptive stats (mean/median/sd/min/max/range);
+        `mean(primed replicates) − mean(direct replicates)` as the primary
+        quantity, explicitly distinct from `P2A_single − P1_single`;
+        block differences secondary/descriptive only; old-vs-new delta
+        join from the Phase-1/2A rosters; figures A–E (replicate
+        distributions, priming-delta distribution, stochastic spread,
+        old-vs-new delta, baseline-dependence revisit vs Task-024
+        ρ ≈ −0.86); three selection views (absolute quality / stability /
+        priming responsiveness) + orthography dimension; candidate focus
+        (Claude Sonnet 5 Medium, DeepSeek V3 Expert ON/OFF, Qwen 3.8 Max
+        Fast, Gemini 3.6 Flash ON/OFF, Dola Fast/Pro); supported /
+        suggestive / not-established rules; explicit no-results scaffold
+        when nothing collected.
+  - [x] 25 deterministic tests (`tests/test_exp004_repeats.py`): exactly
+        108+12 planned runs, no duplicate ids, direct/primed separation,
+        prompt/source/corpus hashes, replicate byte-identity, msg2-style
+        records, contamination rejection, exact stats/deltas (incl.
+        old-delta join + no-Dola-contamination), deterministic figures;
+        full suite green (237).
+  - [x] Docs + READMEs + `repeats/REPORT.md` (no results yet) + analysis
+        scaffold (status no_results). Next: the research lead executes the
+        prepared prompts (replicate blocks), then collect → verify →
+        evaluate → roster → analyze.
 
 ## Next recommended task (single)
 
@@ -853,6 +920,20 @@ Task 023.
   `experiments/exp004-modelscreen/phase2a/outputs/compare.md`). Dola
   remains an exploratory extension; no priming effect is claimed beyond
   the recorded deltas.
+- [ ] **EXP-004 phase repeat — author executes the prepared replicates
+  (Task 025 follow-up)** — **KIT PREPARED (2026-09-07), execution is the
+  immediate next step**: 120 planned runs
+  (`experiments/exp004-modelscreen/repeats/`: 108 primary = 18
+  configurations × direct/primed × 3 fresh-session replicates r01–r03 +
+  12 exploratory Dola Fast/Pro rows — never merged into primary
+  statistics). The research lead executes the replicate blocks (r01
+  direct+primed → r02 → r03) with fresh sessions and identical prompt
+  bytes, records interface settings + deviations, saves raw outputs
+  msg2-style or as transcripts; then `collect-session` / `collect-msg2` →
+  `verify` → `evaluate` → `roster` → `scripts/analyze_exp004_repeats.py`
+  (mean-primed−mean-direct vs old single delta, figures A–E, selection
+  views, `repeats/REPORT.md` results). No Phase 2B and no human
+  evaluation in this task.
 - [ ] **EXP-004 Phase 1 report** — write the Phase 1 report from
   `outputs/roster.md` + per-run evaluation/orthography artifacts (18 usable
   runs; GLM preserved as the failed/excluded case; Claude Sonnet 5 max

@@ -364,6 +364,16 @@ never modified or deleted; no composite scores are produced.
   `orthography.json` per run; manifests and hashes in
   `operator-prompts/manifest.json` (58 entries incl. 4 exploratory).
 
+## Controlled repetition of Phase 2A (SODA Task 025, prepared 2026-09-07)
+
+Because every Phase-2A observation is one primed generation per
+configuration, the controlled repeated-generation kit under `../repeats/`
+prepares 3 independent fresh-session replicates of both the direct
+(Phase-1) and the primed (this Phase-2A protocol, same corpus
+`phase2a-authentic-isv` v1) conditions for the original 18 configurations
+(+ optional exploratory Dola repeats). Kit, protocol and the dedicated
+report: `../repeats/README.md` and `../repeats/REPORT.md`. No results yet.
+
 ## Future Phase 2B (documented, NOT executed)
 
 A follow-up with a longer authentic reference text (an actual ISV

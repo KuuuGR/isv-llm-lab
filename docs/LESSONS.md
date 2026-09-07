@@ -973,3 +973,37 @@ from one run per condition. (4) Mark deviations that are execution
 constraints (Claude continuation, Gemini two-message corpus, Dola identity
 recorded-but-unverifiable) as data in their own practical-usability
 dimension, separate from the linguistic metrics.
+
+## L-042 · 2026-09-07 · A single-run delta is a point estimate; turn the question into "shift vs. spread" before trusting it (Task 025)
+
+**Observed.** Task 024's whole priming comparison rested on one direct and
+one primed generation per configuration. Any of those numbers could move
+purely from the model's stochastic run-to-run variation; the analysis
+could only state the caveat, not size it. Task 025 therefore prepares 3
+independent fresh-session replicates per condition for the same 18
+configurations (108 primary planned generations; +12 optional exploratory
+Dola runs), so the claim becomes a distribution statement:
+`mean(primed replicates) − mean(direct replicates)` against each model's
+own within-condition spread.
+
+**Interpretation.** A measurement that does not repeat cannot separate a
+stable effect from a lucky draw — especially for configurations whose
+observed deltas sit near the plausible stochastic spread, and especially
+for low-baseline outliers (Dola Fast +28.20 pp) that may be regression to
+the middle. "The delta was large once" and "the distribution shifts by
+approximately this amount" are different claims; only the second supports
+a priming statement.
+
+**Next time.** (1) Before claiming any effect, estimate the stochastic
+spread of the same prompt: 3 replicates per condition give a descriptive
+mean/median/sd/min/max/range and a crude but honest shift-vs-spread
+picture — do not dress n = 3 in normality-based statistics. (2) Keep the
+replicate labels as blocks, not matched samples; the distribution
+comparison is the primary view and block differences are secondary. (3)
+When preparing repetitions, keep the prompt bytes identical, force fresh
+sessions, record visible interface settings and deviations, and gate the
+whole kit on the authoritative source/corpus hashes — repetition only
+measures stochasticity if everything else is pinned. (4) Recheck the
+Task-024 descriptive baseline-dependence (ρ ≈ −0.86) against the repeated
+direct means — a correlation computed on one point per configuration may
+itself be unstable.

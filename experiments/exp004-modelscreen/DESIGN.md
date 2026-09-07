@@ -761,3 +761,62 @@ decoupled). Phase 2B is not implemented here.
   not-established; no composite score, no winner; Phase 2B remains not
   implemented and not executed.
 
+
+## 14. Phase repeat — controlled repeated generation (prepared, SODA Task 025)
+
+**Research question.** For the same model/configuration and the same
+translation task, how much does measured Interslavic resource coverage
+vary between independent generations, and is the observed Phase-2A
+corpus-priming shift larger than that variation? This follows directly
+from the Task-024 caveat (§13.7/§13.8, L-041/D-051): every single
+P1 → P2A delta mixes priming with stochastic variation.
+
+**Design.** For each of the original 18 usable configurations
+(GLM 4.5 excluded; no new primary models):
+
+- Condition A — direct: 3 independent fresh-session generations using the
+  authoritative Phase-1 direct prompt (same Polish source story; no ISV
+  corpus/dictionary/examples/scaffolding).
+- Condition B — corpus-primed: 3 independent fresh-session generations
+  using the Phase-2A protocol (fresh session → authentic Medžuslovjansky
+  corpus `phase2a-authentic-isv` v1, byte-identical → exact Polish source
+  + translation instruction → translation).
+- 108 primary planned generations; optional exploratory extension: the
+  same 6-run scheme for Dola 3.8 Fast/Pro (12 runs, `exploratory: true`,
+  never merged into the primary n=18 statistics).
+
+Replicates `r01`/`r02`/`r03` are replication blocks — independent fresh
+sessions, identical prompt bytes, no session reuse/feedback/hints/repair.
+Only stochastic generation and unavoidable interface/server variation
+differ; visible interface settings, continuations/retries and deviations
+are recorded as metadata (known Phase-2A deviations preserved: Gemini
+corpus delivery/toggle, Claude free-tier/token-limit and max-runtime
+limits, GPT-ISV Teacher unknown custom prompt, Dola identity
+recorded-but-unverifiable). Collection order is replicate blocks per
+configuration (r01 direct+primed → r02 → r03).
+
+**Protocol and machinery.** Deterministic preparation via
+`scripts/run_exp004_repeats.py prepare` (hash-gated on source
+`5de968a6…` and corpus `aaad28e4…`; 180 prompt files; 120-run plan +
+hash-only manifest + human collection checklist). Intake/verify/evaluate/
+roster reuse the Phase-1/2A machinery unchanged (completeness gate +
+integrity checks; Task-008 evaluator + orthography audit — metric
+definitions unchanged). Raw outputs immutable; unusable runs preserved +
+marked; re-run gets a new id.
+
+**Analysis.** `scripts/analyze_exp004_repeats.py` (stdlib, deterministic):
+n=3 small-sample descriptive statistics; primary quantity
+`mean(primed replicates) − mean(direct replicates)`, explicitly distinct
+from `P2A_single − P1_single`; block differences secondary/descriptive
+only; figures A–E; three selection views + orthography; candidate focus
+(Claude Sonnet 5 Medium, DeepSeek V3 Expert ON/OFF, Qwen 3.8 Max Fast,
+Gemini 3.6 Flash ON/OFF, Dola Fast/Pro); supported/suggestive/not-
+established interpretation. No winner score; no Phase 2B; no human
+evaluation.
+
+**Status (2026-09-07).** Kit prepared and tested
+(`tests/test_exp004_repeats.py`, 25 tests; full suite 237 green);
+analysis scaffold written with status `no_results`. Execution-ready:
+the research lead runs the replicate blocks, then collect → verify →
+evaluate → roster → analyze. Results will be reported in
+`experiments/exp004-modelscreen/repeats/REPORT.md`.

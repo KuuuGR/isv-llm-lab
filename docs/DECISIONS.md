@@ -1269,3 +1269,51 @@ over the original 18).
    (`exploratory: true`, never merged into the original 18; paired to runs
    20/21; identity limitation recorded). Phase 2B remains not executed;
    next experiments are recommendations only.
+
+## D-052 · 2026-09-07 · EXP-004 phase repeat: controlled repeated generation to estimate stochastic variation before any causal or "priming works" claim (Task 025)
+
+**Context.** Task 024 measured one direct and one primed generation per
+configuration; every reported P1 → P2A delta therefore mixes any corpus
+priming with the model's own stochastic run-to-run variation. The
+Task-025 brief asks for 3 independent fresh-session repetitions of each
+condition for the original 18 configurations (plus an optional exploratory
+Dola extension) so the priming comparison becomes
+`mean(primed) − mean(direct)` over replicate distributions.
+
+**Decision.**
+
+1. **The primary scientific quantity becomes a distribution shift, not a
+   single delta.** Per configuration the report gives
+   `mean(primed replicates) − mean(direct replicates)` (n = 3 small-sample
+   descriptive statistics: mean/median/sd/min/max/range) and keeps it
+   explicitly distinct from the old `P2A_single − P1_single`. r01/r02/r03
+   are replication blocks, never matched linguistic samples; block
+   differences appear only as a secondary descriptive view, and no
+   normality-based or paired-test claim is made for n = 3.
+2. **Independent repetitions are a hard protocol invariant.** Every
+   replicate starts a fresh session with the exact same prompt bytes; no
+   session continuation, no feeding previous translations, no improvement
+   requests, no evaluation results, no reused corpus-primed session, no
+   "repeat" cue, no wording change; only stochastic generation and
+   unavoidable interface/server variation may differ — and visible
+   interface settings, continuations/retries and deviations are recorded
+   as metadata. Known Phase-2A deviations (Gemini corpus delivery/toggle,
+   Claude free-tier/token-limit and max-runtime limits, GPT-ISV Teacher
+   unknown custom prompt, Dola identity recorded-but-unverifiable) are
+   preserved, not silently normalized.
+3. **Everything deterministic stays deterministic and gated.** Prompt
+   preparation is scripted (no LLM for prompt generation), hash-gated
+   against the authoritative source (`5de968a6…`) and Phase-2A corpus
+   (`aaad28e4…`, `phase2a-authentic-isv` v1, byte-identical across all
+   replicates), with replicate prompt linguistic bodies byte-identical
+   within (configuration, condition). Intake reuses the Phase-1/2A
+   completeness gate + integrity checks; raw outputs are immutable;
+   unusable runs are preserved + marked with the reason and a re-run gets
+   a NEW run id (never an overwrite). Evaluation definitions (canonical /
+   broader coverage, unresolved rate, orthography audit) are unchanged.
+4. **The primary n=18 and the exploratory Dola rows never mix.** Dola
+   Fast/Pro repeats are prepared with `exploratory: true`; if the research
+   lead executes them they are analysed in a clearly separate section and
+   are never merged into the primary statistics. No Phase 2B and no human
+   evaluation are prepared in this task; interpretation follows the
+   supported / suggestive / not-established split.

@@ -1040,7 +1040,107 @@ executed.
   no fabricated metrics, deterministic ordering/stats/chart inputs,
   byte-identical chart regeneration. Full suite green (212 tests).
 
-## Planned (not started) — current (2026-09-07, SODA Task 024)
+### Task 025 (2026-09-07): EXP-004 phase repeat — controlled repeated generation, kit prepared (no results yet)
+
+Preparation of the stochastic-repeat experiment that turns the Task-024
+single-run comparison into a distribution-shift-vs-variation statement.
+**No LLM was called; no model output exists yet** — the research lead will
+manually execute the prepared prompts in fresh sessions and return the
+raw outputs for the deterministic pipeline. No raw output or corpus file
+was modified, no new evaluator was introduced, no Phase 2B was prepared,
+and no human-evaluation task was created (D-042).
+
+- **Design.** For each of the **original 18 usable EXP-004 configurations**
+  (GLM 4.5 excluded; no new primary models): Condition A **direct** = 3
+  independent fresh-session generations with the exact Phase-1 direct
+  prompt; Condition B **corpus-primed** = 3 independent fresh-session
+  generations with the exact Phase-2A protocol (fresh session → authentic
+  Medžuslovjansky corpus `phase2a-authentic-isv` v1 → Polish source +
+  translation instruction → translation). Replicates `r01`/`r02`/`r03` are
+  replication blocks, NOT matched samples; only the model's stochasticity
+  and interface/server variation may differ — the same prompt bytes, no
+  session reuse, no feedback, no hints, no scaffolding. **108 primary
+  planned generations.** Optional exploratory extension: the same 6-run
+  scheme for Dola 3.8 Fast and Dola 3.8 Pro (12 rows, `exploratory: true`,
+  never merged into primary n=18) — the research lead decides whether to
+  execute. Collection structured as replicate blocks per configuration
+  (r01 direct+primed → r02 → r03); timestamps, visible interface
+  settings, continuations/retries and deviations recorded as metadata
+  (known deviations preserved: Gemini corpus delivery/toggle behaviour,
+  Claude free-tier/token-limit continuations, GPT-ISV Teacher's unknown
+  custom prompt, Dola identity recorded-but-unverifiable).
+- **Run IDs.** Six-field extension of the canonical scheme —
+  `<date>__<provider>__<model>__<version>__<condition>__<replicate>`
+  (condition `direct|primed`, replicate `r01..r03`) — no collision with
+  the 5-field Phase-1 (`…__direct`) or Phase-2A (`…__p2a-ctl|p2a-primed`)
+  ids. Machine-readable metadata per run: experiment `EXP-004`, phase
+  `repeat`, condition, replicate, primary/exploratory, model/config,
+  provider, source hash, corpus hash (primed), prompt hash, collection
+  metadata, usability status.
+- **Prompt preparation.** `scripts/run_exp004_repeats.py prepare --date
+  2026-09-08` (deterministic, std-lib only, no LLM): reuses the
+  authoritative Polish source and Phase-1 direct prompt content and the
+  authoritative Phase-2A corpus byte-for-byte with fail-loud SHA-256 gates
+  (source `5de968a6…`, corpus `aaad28e4…`); exactly 3 replicate prompts
+  per condition/config; only run metadata differs across replicates
+  (linguistic prompt bodies byte-identical within (config, condition) —
+  verified by tests); every prompt hashed. 120-run plan
+  (`outputs/plan.json`), hash-only manifest
+  (`operator-prompts/manifest.json`, committed), human collection
+  checklist (`outputs/collection-checklist.md`) in replicate-block order;
+  ordering makes omitting/duplicating runs, direct/primed confusion,
+  variant confusion and exploratory/primary mixing impossible.
+- **Intake.** Reuses the Phase-1/2A completeness gate + integrity checks
+  unchanged: output present/non-empty/end-marker, no source echo,
+  plausible length, meta/hash match to plan, corpus hash for primed runs,
+  no corpus contamination in direct records (fingerprint rejection), no
+  corruption. Raw outputs are immutable — unusable runs are preserved,
+  marked and explained; a re-run receives a NEW run id.
+- **Evaluation.** Unmodified Task-008 evaluator + orthography audit:
+  lexical token count, canonical coverage, broader resource-supported
+  coverage, unresolved rate, orthography anomaly buckets — definitions
+  unchanged for comparability with Phase 1 / Phase 2A.
+- **Analysis.** `scripts/analyze_exp004_repeats.py` (std-lib, fully
+  deterministic): per (config, condition) n=3 small-sample descriptive
+  statistics (n/mean/median/sd/min/max/range for canonical, broader,
+  unresolved; orthography anomaly mean/min/max — explicitly labelled
+  descriptive, no normality claims); the primary quantity is
+  **mean(primed replicates) − mean(direct replicates)**, kept explicitly
+  distinct from the old `P2A_single − P1_single`; block r01/r02/r03
+  differences reported as a secondary descriptive view only (not paired
+  tests). Conference-quality figures A–E (replicate distributions /
+  priming-delta distribution / stochastic spread / old-vs-new delta /
+  baseline-dependence revisit vs Task-024 ρ ≈ −0.86) + three
+  research-facing selection views (absolute quality, stability, priming
+  responsiveness) + orthography cleanliness dimension — no "winner
+  score". Special candidate focus: Claude Sonnet 5 Medium (72.97 → 84.63,
+  +11.66 pp), DeepSeek V3 Expert ON (79.92/80.49 → 84.62/85.63), Qwen 3.8
+  Max Fast (82.35 → 85.38, +3.04 pp), Gemini 3.6 Flash ON (69.86 → 84.19,
+  +14.33 pp), Dola Fast (38.87 → 67.07, +28.20 pp — exploratory) — does
+  the previous observation survive repetition? Nothing assumed.
+- **Interpretation rules.** Explicitly separate Directly supported /
+  Suggestive / Not established; never claim causality, "priming generally
+  improves ISV", a "best" model, coverage = naturalness, reasoning-mode
+  superiority, a Dola special learning ability, or that three repetitions
+  establish population-level behaviour.
+- **Artifacts.** `experiments/exp004-modelscreen/repeats/`: committed
+  README.md + REPORT.md (research question/design/sample/manifest/
+  protocol/deviations/validation/metrics/statistical approach/figures/
+  Task-024 comparison/limitations/next step — results sections say "no
+  results yet") + `operator-prompts/manifest.json` (hash-only); gitignored
+  operator prompt files (embed source + corpus), `outputs/` (plan,
+  collection checklist, later roster/run dirs), `analysis/` (dataset/
+  analysis JSON+MD + figure placeholders; README committed).
+- **Tests.** `tests/test_exp004_repeats.py` (25 tests): exactly 18
+  primary configs × 2 conditions × 3 replicates = 108 planned runs + 12
+  exploratory; no duplicate run ids; direct/primed separation; prompt/
+  source/corpus hashes; replicate prompt byte-identity; prompt-body
+  fidelity vs Phase-1/P2A; contamination rejection; msg2-style records;
+  no overwrite; exact stats/deltas incl. old-delta join and
+  no-Dola-contamination; deterministic report ordering + byte-identical
+  figure regeneration; no-results scaffold. Full suite green (237).
+
+## Planned (not started) — current (2026-09-07, SODA Task 025)
 
 Status categories are kept distinct:
 - **Completed experiments:** EXP-001 (baseline, historical), EXP-002
@@ -1085,7 +1185,17 @@ Status categories are kept distinct:
   statistics, baseline-dependence and baseline-vs-primed correlations,
   family/orthography analyses, master table, charts A–G, poster draft and
   supported/suggestive/not-established conclusions — no winner score;
-  Phase 2B documented as future work. Phase 2 guidance methods
+  Phase 2B documented as future work. **Task 025 (2026-09-07) PREPARED
+  the controlled repeated-generation kit** (`experiments/exp004-modelscreen/
+  repeats/`; see the Task-025 entry below): 108 primary planned runs
+  (18 configurations × direct/primed × 3 independent fresh-session
+  replicates r01–r03) + 12 exploratory Dola Fast/Pro rows (`exploratory:
+  true`, never merged into primary statistics) — execution-ready, **no
+  LLM results yet**: the research lead executes the replicate blocks,
+  then collect → verify → evaluate → roster → deterministic analysis
+  (`scripts/analyze_exp004_repeats.py`; mean-primed−mean-direct vs old
+  single delta, figures A–E, selection views). Phase 2B stays gated on
+  the repeated-generation results. Phase 2 guidance methods
   stay closed until Phase 1 is complete and reported.
 
 Planned (not started):

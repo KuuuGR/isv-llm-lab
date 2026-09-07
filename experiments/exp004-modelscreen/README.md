@@ -4,7 +4,9 @@
 AND EVALUATED (SODA Tasks 017/018/019/020/021, 2026-09-05…07); TASK 022
 (2026-09-07) PREPARED AND TASK 023 (2026-09-07) COLLECTED + EVALUATED —
 THE DOLA 3.8 PHASE-1 DIRECT BASELINES; TASK 024 (2026-09-07) FULL
-ANALYSIS COMPLETE — PHASE 1 → PHASE 2A CORPUS-PRIMING EVIDENCE BASE.** EXP-003
+ANALYSIS COMPLETE — PHASE 1 → PHASE 2A CORPUS-PRIMING EVIDENCE BASE;
+**TASK 025 (2026-09-07) PHASE-REPEAT KIT PREPARED — controlled repeated
+generation, execution-ready, NO LLM RESULTS YET.** EXP-003
 is closed; no further human evaluation will be designed or requested
 (D-042). The project author executed the Phase 1 screening sessions in the
 external web/chat interfaces; the collected material was audited and
@@ -40,6 +42,19 @@ true`; Phase 2B is documented but NOT executed. The Phase 1 evidence table is
 `outputs/roster.md`; the Phase-2A evidence is under
 `phase2a/outputs/roster.md` (38 rows) and `phase2a/outputs/compare.md`;
 the raw sessions are preserved byte-for-byte under `collected-sessions/`.
+**Task 025 (2026-09-07) prepared the controlled repeated-generation kit**
+under `repeats/` (see `repeats/README.md` and `repeats/REPORT.md`):
+108 primary planned runs (the original 18 configurations ×
+direct/primed × 3 independent fresh-session replicates r01–r03) + 12
+exploratory Dola 3.8 Fast/Pro runs (`exploratory: true`, never merged
+into the primary n=18 statistics) — deterministic, hash-gated prompt
+preparation (`scripts/run_exp004_repeats.py prepare --date 2026-09-08`),
+collection/verify/evaluate reusing the existing machinery, and a
+deterministic analysis kit that replaces the single Task-024 delta with
+`mean(primed) − mean(direct)` over replicate distributions
+(`scripts/analyze_exp004_repeats.py`, figures A–E). **No LLM was called;
+no repeat results exist yet** — the research lead executes the prepared
+prompts, then collect → verify → evaluate → roster → analyze.
 
 Purpose: screen which LLMs are practically usable by the project (web/chat
 interface, free access sufficient for ~1 story/day, identifiable
@@ -53,7 +68,7 @@ prepared Task 019; corpus revised to three authentic registers Task 020;
 Phase-2A execution audited + evaluated + Dola 3.8 exploratory runs
 integrated Task 021; Dola Phase-1 direct baselines prepared Task 022,
 executed + collected + evaluated Task 023; full Phase 1 → Phase 2A
-research analysis Task 024).
+research analysis Task 024; phase-repeat kit prepared Task 025 — §14).
 
 ## Phase 2A — full-roster corpus priming (executed and evaluated, Task 021)
 
@@ -224,6 +239,20 @@ is complete and evaluated.
   generator (dataset / rankings / Δ table / stats + exploratory tests /
   correlations / families / orthography / master table / charts A–G /
   poster).
+- `repeats/` — phase-repeat kit (Task 025): `README.md` (protocol +
+  collection record) + `REPORT.md` (dedicated experiment report; no
+  results yet) + `operator-prompts/` (180 prompt files — direct / primed
+  msg1+msg2 × r01–r03 × 18 primary + 2 exploratory Dola configs;
+  gitignored; `manifest.json` hash-only committed) + `outputs/` (120-run
+  plan dated 2026-09-08, collection checklist, roster — gitignored;
+  `README.md` committed) + `analysis/` (no-results scaffold; `README.md`
+  committed).
+- `scripts/run_exp004_repeats.py` — phase-repeat orchestrator
+  (prepare / collect-session / collect-msg2 / verify / evaluate / status /
+  roster; Task 025).
+- `scripts/analyze_exp004_repeats.py` — deterministic Task-025
+  repeated-generation analysis (stochastic stats, mean-primed−mean-direct
+  vs old delta, figures A–E, selection views; std-lib only).
 - `scripts/check_orthography.py` — includes EXP-004 in the character-level
   audit (Task 015 inventory).
 
@@ -246,6 +275,11 @@ poster draft; generator `scripts/analyze_exp004_phase2a.py`): rankings,
 priming Δ table, descriptive + exploratory statistics, baseline-dependence
 and baseline-vs-primed correlations, family/orthography analyses,
 supported/suggestive/not-established conclusions, research candidates and
-≤ 3 recommended next experiments — no winner score. Phase 2B
+≤ 3 recommended next experiments — no winner score. **Task 025
+(2026-09-07) prepared the controlled repeated-generation kit**
+(`repeats/`): 108 primary planned runs (18 configurations ×
+direct/primed × 3 fresh-session replicates) + 12 exploratory Dola runs;
+the deterministic analysis will report whether the observed Task-024
+priming deltas exceed the models' own stochastic variation. Phase 2B
 (Wikipedia-style authentic reference + independent story) is documented as
 future work and not started.

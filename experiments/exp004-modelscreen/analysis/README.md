@@ -218,3 +218,17 @@ agreement with `compare.json`, loud failure on missing metrics/baseline,
 no fabricated metrics, deterministic master-table/Δ-table ordering,
 deterministic + known statistics and p-values, deterministic chart inputs,
 byte-identical chart regeneration. Full suite: green.
+
+## Follow-up: controlled repeated generation (Task 025, prepared 2026-09-07)
+
+Because every delta in this analysis rests on one direct + one primed
+generation per configuration (n = 1 per condition), the recommended
+controlled-repeat experiment was prepared under
+`../repeats/` (`README.md`, `REPORT.md`): 3 independent fresh-session
+replicates per condition for the original 18 configurations (108 primary
+planned runs) + optional exploratory Dola repeats (12). Once collected and
+analysed (`scripts/analyze_exp004_repeats.py`, figures A–E at
+`../repeats/analysis/`), it will show which Task-024 deltas exceed the
+models' own stochastic variation and whether the descriptive
+baseline-dependence ρ ≈ −0.86 survives repetition.
+

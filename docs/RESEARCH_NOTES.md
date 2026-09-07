@@ -1004,6 +1004,81 @@ Key recorded facts:
   matched-variant comparison under strict interface controls) — none
   executed.
 
+### 4.24 EXP-004 — CONTROLLED REPEATED GENERATION: ESTIMATING STOCHASTIC VARIATION (SODA Task 025, 2026-09-07 — kit prepared, no results yet)
+
+Preparation of the experiment that measures run-to-run stochastic
+variation for the original 18 usable EXP-004 configurations and asks
+whether the observed Phase-2A corpus-priming shift is larger than that
+variation. **No LLM was called; there are no model outputs yet** — the
+research lead executes the prepared prompts manually. Kit under
+`experiments/exp004-modelscreen/repeats/`.
+
+Key recorded facts (planned design — all numbers below are planned
+sample sizes, NOT results):
+
+- **Planned sample:** 108 primary generations = 18 configurations × 2
+  conditions (direct / corpus-primed) × 3 independent fresh-session
+  replicates (`r01`/`r02`/`r03`); + 12 exploratory Dola 3.8 Fast/Pro
+  generations (same 6-run scheme; `exploratory: true`; never merged into
+  the primary n=18 statistics; the research lead decides whether to
+  execute them). GLM 4.5 excluded (Phase 1 failed); no new primary models.
+- **Replicate discipline (encoded in the operator kit):** every replicate
+  is a fresh independent session; exact same prompt bytes; no session
+  continuation, no previous translation fed back, no improvement requests,
+  no evaluation results shown, no corpus-primed session reused, no
+  "this is a repeat" cue, no wording change; only stochastic generation
+  and unavoidable interface/server variation differ. No scaffolding,
+  dictionary candidates, morphology hints, grammar annotations, post-hoc
+  repair, evaluator feedback, or human guidance anywhere.
+- **Conditions reuse the authoritative inputs byte-for-byte:** direct =
+  Phase-1 direct prompt (same Polish source story `5de968a6…`; no ISV
+  corpus/dictionary/examples); primed = Phase-2A protocol (fresh session →
+  authentic Medžuslovjansky corpus `phase2a-authentic-isv` v1, SHA-256
+  `aaad28e4…`, three registers: literary/narrative `Tuta historija`,
+  artistic/poetic Latin-only deduplicated album, informative/encyclopedic
+  ISV Wikipedia "Sadovničstvo" → exact Polish source + translation
+  instruction → translation collected). Corpus byte-identical across every
+  replicate; no explanation/hints about corpus purpose or style. All known
+  Phase-2A interface deviations preserved + recorded as metadata (Gemini
+  corpus delivery/toggle; Claude free-tier/token-limit continuations and
+  max runtime limits; GPT-ISV Teacher unknown custom prompt; Dola identity
+  recorded-but-unverifiable).
+- **Determinism and gates:** `scripts/run_exp004_repeats.py prepare`
+  generates 180 prompt files + 120-run plan + hash-only manifest +
+  replicate-block collection checklist; source/corpus byte gates fail
+  loudly on any drift; replicate linguistic prompt bodies are
+  byte-identical within (configuration, condition) — only run metadata
+  changes. Collection (msg2-style records and full transcripts supported,
+  direct-vs-primed contamination controls, corpus-in-direct rejection),
+  verify (Phase-1/2A gate + integrity), evaluate (Task-008 evaluator +
+  orthography audit, definitions unchanged) and roster all reuse the
+  existing machinery; raw outputs immutable, unusable runs preserved +
+  marked, re-run gets a new id.
+- **Statistical framing:** per (configuration, condition) the report gives
+  n=3 small-sample descriptive statistics (mean/median/sd/min/max/range
+  for canonical, broader, unresolved; orthography anomaly mean/min/max)
+  labelled descriptive, no normality-based claims. The primary priming
+  quantity becomes `mean(primed replicates) − mean(direct replicates)`,
+  explicitly distinguished from the Task-024 `P2A_single − P1_single`;
+  replicate-block differences are a secondary descriptive view, NOT paired
+  tests. Figures A–E (replicate distributions; priming-delta
+  distribution; stochastic spread; old-vs-new delta; baseline-dependence
+  revisit vs Task-024 ρ ≈ −0.86 — descriptive follow-up). Three
+  research-facing selection views (absolute quality, stability, priming
+  responsiveness) + orthography dimension; no winner score. Candidate
+  reproducibility questions posed, not answered: Claude Medium
+  (+11.66 pp recurs?), DeepSeek Expert ON (high primed performance
+  stable?), Qwen 3.8 Max Fast (high + stable?), Gemini 3.6 Flash ON
+  (+14.33 pp reproducible?), Dola Fast (+28.20 pp anything similar? —
+  exploratory).
+- **Interpretation rules:** supported (observed variation, observed
+  mean/range/SD, observed repeated differences, reproducibility of
+  Task-024 patterns) / suggestive (robust candidates, low-variance
+  candidates, possible baseline dependence) / not established (causality,
+  priming generally improves ISV, "best" model, coverage = naturalness,
+  reasoning-mode superiority, Dola learning ability, three repetitions =
+  population behaviour).
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - The letter inventory for a constructed-language output audit comes from the
@@ -1143,3 +1218,10 @@ Key recorded facts:
   delivery constraints)? (5) which of the research candidates (Claude
   Sonnet 5 Medium, DeepSeek V3 Expert, Qwen 3.8 Max Fast, Gemini 3.6
   Flash ON, Dola Fast/Pro — exploratory) deserve a controlled repeat?
+- **Task 025 prepared the controlled repeat for (1), (2) and (5)** (kit
+  under `experiments/exp004-modelscreen/repeats/`; no results yet — see
+  §4.24): once the 108 primary + optional 12 Dola runs are collected, the
+  repeated mean delta and within-condition spread will say whether the
+  Task-024 deltas exceed the models' own stochastic variation, whether
+  Dola Fast's change is reproduced, and whether the baseline-dependence
+  ρ ≈ −0.86 survives repetition.

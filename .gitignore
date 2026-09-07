@@ -48,6 +48,12 @@ experiments/**/phase2a/corpus/*
 experiments/exp004-modelscreen/analysis/*
 !experiments/exp004-modelscreen/analysis/README.md
 
+# EXP-004 Task-025 phase-repeat analysis artifacts (deterministic derived
+# outputs — stay local like all EXP-004 outputs; the README below is
+# committed and documents the analysis)
+experiments/exp004-modelscreen/repeats/analysis/*
+!experiments/exp004-modelscreen/repeats/analysis/README.md
+
 # Raw experiment input set (source story + model outputs, copyrighted)
 opowiadania-set-isv/
 
