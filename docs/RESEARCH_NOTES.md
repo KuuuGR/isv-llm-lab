@@ -959,7 +959,8 @@ Key recorded facts:
   original 18 (descriptive): Phase-1 canonical coverage vs Δ canonical
   ρ = −0.86; Phase-1 broader vs Δ broader ρ = −0.84 (n = 18). The largest
   observed changes sit at the lowest baselines (Dola Fast P1 38.87 %;
-  Gemini 3.6 Flash ON +14.33 pp from P1 50.12 %). Phase-1 vs Phase-2A
+  Gemini 3.6 Flash ON +14.33 pp from P1 69.86 %; Qwen 3.7 Plus Fast
+  +8.94 pp from P1 66.42 %). Phase-1 vs Phase-2A
   correlation is only moderate (canonical ρ = +0.45, broader ρ = +0.37,
   n = 18) — priming changed the ordering, not just the level.
 - **Original-18 deltas are positive and small-to-moderate:** Δ canonical
@@ -983,9 +984,13 @@ Key recorded facts:
   not re-interpreted).
 - **Highest Phase-2A canonical within the original 18:** DeepSeek V3
   Expert ON 85.63 %, Qwen 3.8 Max Fast 85.38 %, Claude Sonnet 5 (Medium)
-  84.63 %, Qwen 3.7 Plus Fast 83.65 %, DeepSeek V3 Expert OFF 83.55 %,
-  GPT-5.6 Luna OFF 82.96 % (6 of the top-7 by P2A canonical have **zero**
-  outside-inventory characters). Orthography and coverage remain separate
+  84.63 %, DeepSeek V3 Expert OFF 84.62 %, Gemini 3.6 Flash OFF 84.27 %,
+  Gemini 3.6 Flash ON 84.19 %, Claude Sonnet 5 max 83.03 %, Gemini 3.1 Pro
+  ON 83.01 %. Zero outside-inventory characters at Phase-2A: DeepSeek V3
+  Expert ON (85.63 %), Claude Sonnet 5 Medium (84.63 %), Gemini 3.1 Pro
+  ON (83.01 %), Grok (82.38 %) — high canonical coverage does NOT
+  guarantee orthographic cleanliness (Qwen 3.8 Max Fast 85.38 % has 22
+  outside-inventory chars). Orthography and coverage remain separate
   dimensions — no composite.
 - **Methodological caution formalised (§5 additions below):** an observed
   P1 → P2A delta combines any corpus-priming effect with stochastic
