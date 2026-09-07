@@ -47,9 +47,11 @@ _COMPLETE = (
     + "\nKONIEC\n"
 )
 
-# Synthetic corpus: short authentic-ISV-looking text that carries the two
-# fingerprint phrases used by the contamination checks.
+# Synthetic corpus: short authentic-ISV-looking three-register text that
+# carries the three per-register fingerprint anchors used by the
+# contamination checks (register 1 narrative, 2 artistic, 3 encyclopedic).
 _CORPUS = (
+    "=== REGISTER 1: LITERARY / NARRATIVE ===\n\n"
     "Prolog\n"
     "Ljudi govoret, že v tamtoj denj bylo je veliko spokojno. Čisto "
     "nebo bylo jasno, a větr je byl silny, kako v zimě. V tamtoj denj "
@@ -58,11 +60,26 @@ _CORPUS = (
     "- Pytanje zvuči v krčmě. Seljani sut silni, no dolgo tako ne "
     "smožemo žiti.\n"
     "Seljani načeli sut organizovati jedanje i vsako dobro, ktoro jest "
-    "potrěbno, da by prěžiti v tutoj težkoj době.\n"
+    "potrěbno, da by prěžiti v tutoj težkoj době.\n\n"
+    "=== REGISTER 2: ARTISTIC / POETIC ===\n\n"
+    "Velerman\n\n"
+    "Toj korab znajut ljudi vsi\n"
+    "A jego ime jest Billy of Tea\n\n"
+    "Morske Opověsti\n\n"
+    "Hej ho, nalijte vino\n"
+    "Hej ho, prineste čaše\n\n"
+    "=== REGISTER 3: INFORMATIVE / ENCYCLOPEDIC ===\n\n"
+    "Sadovničstvo jest proces raščenja rastlin zaradi jih zeleniny, "
+    "ovočev, cvětov i zelěnosti. Odomašnjenje rastlin sčitaje se "
+    "narodženjem zemjeděljstva.\n"
 )
 
-FP_START = "Ljudi govoret, že v tamtoj denj bylo je veliko spokojno"
-FP_END = "da by prěžiti v tutoj težkoj době"
+# One fingerprint phrase per corpus register (mirrors run_mod.CORPUS_ANCHORS)
+ANCHORS = (
+    "Ljudi govoret, že v tamtoj denj bylo je veliko spokojno",
+    "Toj korab znajut ljudi vsi",
+    "Sadovničstvo jest proces raščenja rastlin",
+)
 STORY_START = "Translate the Polish story below into Interslavic"
 STORY_TITLE = "Opowieść o Słów, Które Były Jak Siostry"
 
@@ -99,7 +116,7 @@ def setup(run_mod, tmp_path, monkeypatch):
         run_mod.sha256_bytes(_SOURCE.encode("utf-8")))
     monkeypatch.setattr(run_mod, "CORPUS_FILE", corpus)
     monkeypatch.setattr(
-        run_mod, "TUTA_EXCERPT_SHA256",
+        run_mod, "AUTH_CORPUS_SHA256",
         run_mod.sha256_bytes(_CORPUS.encode("utf-8")))
     monkeypatch.setattr(run_mod, "OPERATOR_PROMPTS", prompts)
     monkeypatch.setattr(run_mod, "OUTPUTS_DIR", outputs)
@@ -196,8 +213,9 @@ def test_prepare_packages_36_runs_and_54_prompt_files(run_mod, setup):
     assert len(plan["runs"]) == 36
     assert plan["phase"] == "2a"
     assert plan["source"]["sha256"] == run_mod.SOURCE_SHA256
-    assert plan["corpus"]["id"] == "tuta-historija"
-    assert plan["corpus"]["sha256"] == run_mod.TUTA_EXCERPT_SHA256
+    assert plan["corpus"]["id"] == "phase2a-authentic-isv"
+    assert plan["corpus"]["sha256"] == run_mod.AUTH_CORPUS_SHA256
+    assert [r["n"] for r in plan["corpus"]["registers"]] == [1, 2, 3]
     files = sorted(p.name for p in
                    (setup["tmp"] / "operator-prompts").glob("*.md"))
     assert len(files) == 54
@@ -217,7 +235,7 @@ def test_prompt_separation_and_identical_translation_bodies(run_mod, setup):
     bodies = []
     for f in sorted(op.glob("*.md")):
         text = f.read_text(encoding="utf-8")
-        has_corpus = FP_START in text or FP_END in text
+        has_corpus = any(a in text for a in ANCHORS)
         has_story_start = STORY_START in text
         has_title = STORY_TITLE in text
         if f.name.startswith("ctl-") or f.name.endswith("-msg2.md"):
@@ -228,6 +246,9 @@ def test_prompt_separation_and_identical_translation_bodies(run_mod, setup):
         else:
             # msg1: corpus present, story absent
             assert has_corpus and not has_story_start and not has_title
+            # Prompt 1 describes the three registers and the poetic note
+            assert "three different registers" in text
+            assert "artistic / poetic" in text
             assert not text.rstrip("\n").endswith(
                 "Return the complete Interslavic translation")
     # the invariant translation instruction+story body is IDENTICAL across
@@ -262,7 +283,8 @@ def test_prepare_deterministic_and_hash_consistency(run_mod, setup):
     corpus_sha = run_mod.sha256_bytes(_CORPUS.encode("utf-8"))
     assert manifest["corpus"]["sha256"] == corpus_sha
     assert plan["corpus"]["sha256"] == corpus_sha
-    assert corpus_sha == run_mod.TUTA_EXCERPT_SHA256
+    assert corpus_sha == run_mod.AUTH_CORPUS_SHA256
+    assert manifest["corpus"]["id"] == "phase2a-authentic-isv"
     # source hash consistency: file == plan == pinned constant
     source_sha = run_mod.sha256_bytes(_SOURCE.encode("utf-8"))
     assert plan["source"]["sha256"] == source_sha
@@ -319,7 +341,7 @@ def test_collect_byte_for_byte_and_meta(run_mod, setup):
         assert meta["condition"] == run_id.split("__")[4]
         assert meta["baseline_run_id"].endswith("__direct")
         assert meta["output"]["sha256"] == run_mod.sha256_bytes(data)
-        assert meta["corpus"]["sha256"] == run_mod.TUTA_EXCERPT_SHA256
+        assert meta["corpus"]["sha256"] == run_mod.AUTH_CORPUS_SHA256
         assert meta["source"]["sha256"] == run_mod.SOURCE_SHA256
         p = _plan_run(plan, run_id)
         assert meta["prompt"]["translation_prompt_sha256"] == \
@@ -424,6 +446,32 @@ def test_collect_session_primed_requires_corpus_in_session(
     row_on = row_for(run_mod, "openai", "gpt-5.6-luna", "thinkon")
     pri_on = run_mod.run_id_for(DATE, row_on, "p2a-primed")
     assert run_mod.run_collect_session(pri_on, no_corpus, DATE) == 2
+
+
+def test_collect_session_primed_rejects_partial_corpus(run_mod, setup):
+    """msg1 that lost one register (e.g. a truncated corpus) must not pass
+    the priming check: all three register anchors must precede msg2."""
+    prepare(run_mod, setup)
+    ctl, m1, m2 = _file_names_for(run_mod, BASE_PRI)
+    m1_text = (setup["tmp"] / "operator-prompts" / m1).read_text(
+        encoding="utf-8")
+    # remove register-3 material (drop everything from its register header)
+    cut = m1_text.find("=== REGISTER 3: INFORMATIVE / ENCYCLOPEDIC ===")
+    assert cut > 0
+    truncated = m1_text[:cut]
+    assert any(a in truncated for a in ANCHORS[:2])
+    assert not any(a in truncated for a in ANCHORS[2:])
+    m2b = (setup["tmp"] / "operator-prompts" / m2).read_text(
+        encoding="utf-8")
+    cut2 = m2b.rfind("Return the complete")
+    raw = (truncated.encode("utf-8") + b"\n\nPonjal.\n\n"
+           + m2b[:cut2].encode("utf-8") + _COMPLETE.encode("utf-8"))
+    bad = setup["tmp"] / "partial-corpus-primed.md"
+    bad.write_bytes(raw)
+    row_on = row_for(run_mod, "openai", "gpt-5.6-luna", "thinkon")
+    pri_on = run_mod.run_id_for(DATE, row_on, "p2a-primed")
+    assert run_mod.run_collect_session(pri_on, bad, DATE) == 2
+    assert not (setup["tmp"] / "outputs" / pri_on / "output.txt").exists()
 
 
 def test_collect_session_rejects_altered_translation_instruction(

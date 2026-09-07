@@ -967,7 +967,14 @@ baselines.
    instruction overrides any earlier textbook/PDF corpus discussion: no
    external fetch, no subsetting of other material. Corpus distribution
    status is not recorded → the text stays local (gitignored) like the
-   Polish story; provenance, size and hash are committed.
+   Polish story; provenance, size and hash are committed. *(Decision
+   superseded in corpus content by D-047, Task 020, 2026-09-07: the fixed
+   corpus was replaced/extended from this single narrative excerpt to a
+   combined three-register corpus — this excerpt remains register 1
+   (literary/narrative) with the same bytes and hash; the decision
+   rationale here — fixed corpus, embedded in Prompt 1, local-only, hashes
+   committed — still holds, and the contamination fingerprint changed
+   accordingly (see D-047).)*
 3. **Two conditions.** Control (`p2a-ctl`) = the Phase-1 clean direct task;
    the Phase-1 baseline outputs satisfy this condition, and a freshly
    collected control is preferred by the compare step when the author
@@ -1014,3 +1021,83 @@ prepare/collect/collect-session/verify/evaluate/status/roster/compare, 19
 new tests). No external LLM call was made in Task 019; execution is the
 author's next operator step. The compare table is the Phase-2A deliverable
 format; whether priming "helps" is an empirical question left open.
+
+## D-047 · 2026-09-07 · EXP-004 Phase 2A corpus: three authentic registers; authentic artistic material is not normalized (Task 020)
+
+**Context.** D-046 fixed one author-supplied narrative excerpt ("Tuta
+historija") as the Phase-2A priming corpus. Task 020 revised the fixed
+corpus to a **combined corpus of three authentic Medžuslovjansky
+registers** — literary/narrative, artistic/poetic and
+informative/encyclopedic — so priming grounds the models in broader real
+existing usage across registers rather than in a prescriptive single-genre
+sample. The scientific goal is exposure: the corpus is the language
+reference the model studies immediately before translating; it is not a
+grammar the project imposes on authentic source text.
+
+**Decision.**
+
+1. **Three authentic registers replace the single-register corpus.** The
+   fixed reference corpus is `phase2a-authentic-isv` v1, a combined
+   plain-text corpus with headers `=== REGISTER 1: LITERARY / NARRATIVE ===`,
+   `=== REGISTER 2: ARTISTIC / POETIC ===` and `=== REGISTER 3: INFORMATIVE /
+   ENCYCLOPEDIC ===`. The authoritative combined file
+   `phase2a-authentic-isv-corpus.txt` is 58 459 B (~8 184 whitespace
+   tokens), SHA-256
+   `aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857`; it is
+   embedded byte-identically in all 18 primed configurations' Prompt-1
+   files.
+2. **Component sources, sizes and hashes.** All components live under
+   `experiments/exp004-modelscreen/phase2a/corpus/` (local-only; see (e)):
+   (1) `tuta-historija-excerpt.txt` — literary/narrative, unchanged from
+   Task 019 (D-046), author-supplied, 4 820 B, SHA-256
+   `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c`;
+   (2) `album-ahoj-slovjani-artistic-isv.txt` — artistic/poetic, the
+   complete Latin-script album "Ahoj, Slovjani!" (11 songs in order,
+   76 unique stanzas / 322 lines), cleaned from the author-supplied copy of
+   https://melacpise.wordpress.com/album-ahoj-slovjani-teksty-pesnej/,
+   9 407 B, SHA-256
+   `7e25a56f67a52976083f625fabf040b6cd5ae399317cb36a59a302a3a52dcacf`;
+   (3) `wiki-sadovnistvo-encyclopedic-isv.txt` — informative/encyclopedic,
+   cleaned running prose of the existing Medžuslovjansky Wikipedia article
+   "Sadovničstvo" (retrieved 2026-09-07 from the Wikimedia MediaWiki
+   wikitext API; raw kept at `corpus/sources/sadovnistvo.wikitext`),
+   84 paragraphs, 44 101 B, SHA-256
+   `b03402fef2384730b90a5ab879af78be63b5e6d0e4fa00db4c3c3525844c8345`.
+   Combined size/hash above; ~58 KB / ~8 200 tokens fits every roster
+   model's context without truncation.
+3. **Artistic cleanup is structural only — Latin-script-only and verbatim
+   dedup, never linguistic.** The artistic component had Cyrillic
+   duplicates and webpage/HTML material removed, and only exact verbatim
+   repeated stanzas/refrains were deduplicated (24 repeats dropped; wording
+   preserved). Linguistic forms are NOT normalized or corrected: the
+   artistic register may contain deliberate poetic choices for
+   rhyme/rhythm/meter and is not a normative grammar sample.
+4. **The project evaluator is not a normative filter over authentic source
+   text.** Corpus forms are not deleted or altered because they are absent
+   from the canonical dictionary/evaluator, look unusual, are poetic,
+   resemble another Slavic language, or are low-frequency or
+   historical-looking. The canonical evaluator is a measurement tool; it
+   does not license editing the source text it measures.
+5. **The wiki component is the authentic existing ISV article.** It is the
+   real Medžuslovjansky Wikipedia article "Sadovničstvo" retrieved from
+   Wikimedia — not a project translation and not a translation of another
+   language's version (boilerplate/templates/links removed). It is
+   CC BY-SA 4.0. All corpus files stay local (gitignored) like the Polish
+   story; only hashes and provenance are committed, and no URL is ever
+   given to the model or the operator.
+6. **Contamination control now uses three anchors.** `CORPUS_ANCHORS` = 3
+   fingerprint phrases, one per register: `collect-session` requires ALL
+   THREE anchors to appear before the translation instruction in primed
+   sessions (same-session proof) and rejects a control session containing
+   ANY anchor. msg2 (the Polish translation task) is unchanged; the 18
+   primed configurations receive a byte-identical corpus; regeneration is
+   deterministic and the manifest was regenerated (54 prompt files).
+
+**Consequences.** Phase-2A priming now exposes every roster model to
+authentic narrative, poetic and encyclopedic Medžuslovjansky. New
+deterministic builder `scripts/build_phase2a_corpus.py`; updated
+`scripts/run_exp004_phase2a.py` (pins `AUTH_CORPUS_SHA256` and
+`CORPUS_ANCHORS`); tests updated and `tests/test_exp004_phase2a_corpus.py`
+added. No LLM call happened in Task 020: the corpus is still **prepared,
+not executed**, and the author's next operator step is the 18 manual primed
+sessions.

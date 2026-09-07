@@ -801,6 +801,21 @@ Methodological naming fixed from here on: **in-context learning / corpus
 priming / contextual grounding / reference-text conditioning** — never
 "training" (weights are never changed).
 
+### 4.19 EXP-004 Phase 2A — priming corpus revised to a combined three-register corpus (SODA Task 020, 2026-09-07)
+
+The fixed corpus that now primes Phase 2A is a combined three-register
+authentic corpus (`phase2a-authentic-isv` v1; ≈58 KB / ~8 200 whitespace
+tokens — fits every roster model's context without truncation): register 1
+literary/narrative (the "Tuta historija" excerpt, unchanged from Task 019),
+register 2 artistic/poetic (the Latin-script album "Ahoj, Slovjani!",
+cleaned structurally only — Cyrillic/webpage material removed, verbatim
+repeats deduplicated, linguistic forms never normalized), register 3
+informative/encyclopedic (the authentic retrieved ISV Wikipedia article
+"Sadovničstvo", CC BY-SA 4.0). msg1 asks the model to study the corpus as a
+language reference across the three registers, with the poetic section
+flagged as not a grammatical template; msg2 is unchanged. Corpus still
+**prepared, not executed** — no LLM call in Task 020 (D-047, L-037).
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - The letter inventory for a constructed-language output audit comes from the

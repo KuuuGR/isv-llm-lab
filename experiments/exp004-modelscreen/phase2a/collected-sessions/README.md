@@ -10,7 +10,7 @@ python3 scripts/run_exp004_phase2a.py collect-session \
 ```
 
 Files here are **gitignored** (they contain the copyrighted Polish source
-story, the author-supplied corpus, and raw model outputs); this README is
+story, the reference corpus, and raw model outputs); this README is
 committed.
 
 ## Naming convention (mirrors Phase 1)

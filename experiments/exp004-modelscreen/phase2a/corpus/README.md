@@ -1,84 +1,167 @@
-# EXP-004 Phase 2A — corpus (author-supplied reference text)
+# EXP-004 Phase 2A — corpus (three authentic Medžuslovjansky registers)
 
-The Phase 2A corpus-priming reference text lives in this directory:
+The Phase 2A corpus-priming reference material is a **combined corpus of
+three authentic Medžuslovjansky registers** (SODA Task 020, 2026-09-07):
 
-- `tuta-historija-excerpt.txt` — **gitignored**, stays local.
+| # | Register | Source | File |
+|---|----------|--------|------|
+| 1 | literary / narrative | `Tuta historija` excerpt (Task 019) | `tuta-historija-excerpt.txt` |
+| 2 | artistic / poetic | song album **Ahoj, Slovjani!** (complete, Latin-script, deduplicated) | `album-ahoj-slovjani-artistic-isv.txt` |
+| 3 | informative / encyclopedic | Medžuslovjansky Wikipedia article **Sadovničstvo** (Wikimedia source) | `wiki-sadovnistvo-encyclopedic-isv.txt` |
 
-## The text
+The **authoritative corpus file** consumed by Phase 2A Prompt 1 is the
+deterministic combination of the three:
 
-- **Work / corpus id:** `tuta-historija` — "Tuta historija", an authentic
-  Medžuslovjansky (Interslavic) text **supplied directly by the project
-  author in SODA Task 019 (2026-09-06)**.
-- **Excerpt:** `Prolog` + `Razděl 1. Věčna Zima`, beginning
+- **`phase2a-authentic-isv-corpus.txt`** — combined, with plain-text
+  section headers:
+  - `=== REGISTER 1: LITERARY / NARRATIVE ===`
+  - `=== REGISTER 2: ARTISTIC / POETIC ===`
+  - `=== REGISTER 3: INFORMATIVE / ENCYCLOPEDIC ===`
+
+The headers are metadata for the LLM (they label the register of the
+following text) and are not part of the linguistic source texts.
+
+All corpus text files (including the three component files above and the
+raw sources in `sources/`) are **gitignored and stay local**; only this
+README and the pinned hashes are committed.
+
+---
+
+## Register 1 — literary / narrative: `Tuta historija`
+
+- **Source title:** *Tuta historija* (author-supplied excerpt).
+- **Register:** literary / narrative prose with dialogue.
+- **Provenance:** supplied in full by the project author (SODA Task 019,
+  2026-09-06). No URL; nothing fetched from the web.
+- **Included range:** `Prolog` + `Razděl 1. Věčna Zima`, beginning
   "Ljudi govoret, že v tamtoj denj bylo je veliko spokojno…" and ending
-  "…da by prěžiti v tutoj težkoj době." The excerpt contains both narrative
-  prose and dialogue (description, character speech, questions, answers,
-  everyday constructions). The internal line "„Utračena Krajina", prolog"
-  is part of the supplied text and is preserved verbatim.
-- **Spelling / structure:** the file is byte-for-byte as supplied in the
-  task (no reflow, no spelling/punctuation changes). Line breaks within a
-  paragraph are preserved verbatim and are a paste artifact of the author's
-  message, not linguistic structure; blank lines mark paragraphs.
+  "…da by prěžiti v tutoj težkoj době." Preserved **byte-for-byte** as
+  supplied — no rewriting, normalization or "correction".
+- **Transformation policy:** none (source text copied verbatim).
+- **License / distribution status:** not established; author-supplied for
+  the fixed Phase 2A reference corpus → **local-only**.
+- **Size:** 4 820 bytes (≈ 791 whitespace tokens) · SHA-256
+  `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c`
 
-## Provenance & license/copyright
+---
 
-- Source: supplied in full by the project author (SODA Task 019,
-  2026-09-06). No URL is referenced; nothing was fetched from the web.
-- License/copyright status: the author supplied the text for use as the
-  fixed Phase 2A reference corpus. Distribution status is not recorded in
-  the repository, so the text is **kept local (gitignored)** like the
-  Polish source story; only hashes and this provenance record are
-  committed. It is embedded into the generated operator Prompt-1 files,
-  which are likewise gitignored.
+## Register 2 — artistic / poetic: album *Ahoj, Slovjani!*
 
-## Size & hash (v1, 2026-09-06)
+- **Source title:** song album *Ahoj, Slovjani!* — **Morske Opověsti** and
+  10 further songs by the same Medžuslovjansky creators, as published on
+  the page *"Songs interslavis text source"*.
+- **Register:** artistic / poetic (sea-shanty style song lyrics).
+- **Provenance:** the project author supplied a complete copied webpage
+  (Latin-script songs followed by Cyrillic duplicates, with WordPress
+  navigation/widget/iframe material). Copied page URL:
+  `https://melacpise.wordpress.com/album-ahoj-slovjani-teksty-pesnej/`
+  (source retained locally under `sources/`).
+- **Included range:** the complete set of **all 11 songs in original page
+  order** — Velerman, Santiana, Nikogda Vyše, Rěka Essekibo, Slovjanske
+  Děvčiny, Idi, Džoni, Idi, Ješče Raz!, Primorje Barbari, Stara Maui,
+  Morske Opověsti, Bude Dobro — as **Latin-script text only**: 11 song
+  sections, 76 unique stanzas, 322 retained lines.
+- **Transformation policy** (explicitly):
+  > Latin-script song text was retained; Cyrillic duplicate versions and
+  > webpage/HTML material were removed; repeated song stanzas/refrains
+  > were deduplicated; linguistic forms themselves were **not** normalized
+  > or corrected.
+  Deduplication removed only **verbatim repeated stanza/refrain blocks
+  within a song** (24 such repeats dropped). Ordinary repeated words,
+  short repeated phrases, linguistically meaningful repetitions, and
+  whole different songs were never merged or removed. Original wording —
+  including unusual, rhyme/rhythm-driven or otherwise poetic forms — was
+  preserved exactly as sung/written. This is an authentic artistic sample,
+  **not** a normative grammar reference.
+- **License / distribution status:** not established (author-supplied copy
+  of a public blog page) → **local-only**.
+- **Size:** 9 407 bytes (≈ 1 600 whitespace tokens) · SHA-256
+  `7e25a56f67a52976083f625fabf040b6cd5ae399317cb36a59a302a3a52dcacf`
 
-| Field | Value |
-|---|---:|
-| bytes | 4 820 |
-| characters | 4 563 |
-| approximate words | 791 |
-| paragraphs (blank-line separated) | 9 |
-| lines | 85 |
-| SHA-256 | `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c` |
+---
 
-The hash is pinned in `scripts/run_exp004_phase2a.py`
-(`TUTA_EXCERPT_SHA256`) and asserted by the test suite; any accidental edit
-of the corpus file is therefore detected. A corpus change is a **new corpus
-version** (id `tuta-historija`, version token + new hash), never a silent
-edit.
+## Register 3 — informative / encyclopedic: Wikipedia *Sadovničstvo*
 
-## Why this text is suitable
+- **Source title:** Medžuslovjansky Wikipedia article **Sadovničstvo**
+  ("Gardening"), article `Wp/isv/Medžuslovjansky jezyk` on
+  isv.wikipedia.org.
+- **Register:** informative / encyclopedic prose.
+- **Provenance:** **retrieved externally** from the actual Wikimedia
+  source during corpus preparation (2026-09-07) via the MediaWiki API —
+  it is the existing Medžuslovjansky article itself, **not** a translation
+  produced by this project and not a translation of another-language
+  version.
+  - Source URL:
+    `https://isv.wikipedia.org/wiki/Sadovni%C4%8Dstvo`
+  - API: `…/w/api.php?action=parse&page=Sadovničstvo&prop=wikitext&format=json`
+  - Raw wikitext retained locally under `sources/` (`sadovnistvo.wikitext`).
+- **Included range:** the article's **running encyclopedic prose from the
+  lead through the final body section** — first paragraph
+  "Sadovničstvo jest proces raščenja rastlin zaradi jih zeleniny,
+  ovočev…" through the final sentence "…Asocijacije profesionalnyh
+  krajobraznyh dizajnerov." (84 paragraphs). Section headings of the
+  article are preserved in the running text (Prědhistorija, Ameriky,
+  Historija, Koristi, Kako umětnost, …). Boilerplate was removed:
+  navigation/categories, `Gledite takože`/`Iztočniky` tails, file
+  inclusions, references, templates (incl. the name-gloss `LatCyr`
+  template, of which only the Latin-script gloss was kept), internal
+  links and other MediaWiki markup. The article's own Latin orthography
+  and wording were **not** rewritten or normalized.
+- **Transformation policy:** mechanical MediaWiki cleanup only; no
+  linguistic editing, no translation, no content substitution.
+- **License:** CC BY-SA 4.0 (per isv.wikipedia.org). The cleaned prose is
+  derived from the retrieved article text, so it is kept **local-only**
+  with the rest of the corpus until repository distribution policy is
+  decided; this README records source URL, retrieval date, size and hash.
+- **Size:** 44 101 bytes (≈ 5 772 whitespace tokens) · SHA-256
+  `b03402fef2384730b90a5ab879af78be63b5e6d0e4fa00db4c3c3525844c8345`
 
-- **Genuinely Medžuslovjansky:** the text is authentic ISV source material
-  (official Latin orthography with `ě š ž č ć`, Medžuslovjansky lexicon and
-  morphology). It is not machine-made scaffolding and not a translation of
-  the target story.
-- **Language reference content:** continuous prose with ordinary narrative
-  and dialogue constructions — vocabulary, morphology, syntax, word
-  formation, orthography and style can be studied from it.
-- **Thematic relation to the Polish story:** the Polish source story
-  ("Opowieść o Słów, Które Były Jak Siostry" — a fable about two languages)
-  and this text (a fantasy narrative about an eternal winter) share **no
-  plot, characters, setting or sentences**. A contamination probe over the
-  corpus confirmed that none of the story's title words, character names
-  (Bronisława, Teofil, Julianna, Przemysława, Antoni), or the place name
-  Międzyrzecze appear in the corpus, and the corpus is not a translation of
-  the story. Phase 2A tests assert this separation.
-- **Role:** the text is a **language reference only**. It is never the
-  target to reproduce, translate, summarize, continue or answer questions
-  about. The model is asked to study it in-context (Prompt 1) and then to
-  produce a NEW translation of the Polish story (Prompt 2). Different
-  wording and sentence structures from the reference text are expected and
-  are not a failure — Phase 2A tests contextual grounding (in-context
-  learning / corpus priming / reference-text conditioning), **not** textual
-  reconstruction and **not** model training (weights are never changed).
+---
 
-## Fairness note
+## Combined corpus (`phase2a-authentic-isv-corpus.txt`)
 
-Every model in the primed condition receives exactly this same corpus
-(Prompt 1) in a fresh session; the corpus is short enough (≈4.5 KB) to fit
-all 18 Phase-1-usable interfaces, so no per-model truncation or subset is
-needed. If an interface ever cannot accept the full corpus, that run is
-recorded as an execution/access limitation — the corpus is never silently
-shortened per model.
+- Built deterministically by `scripts/build_phase2a_corpus.py` from the
+  three component texts above.
+- **Size:** 58 459 bytes · 55 990 characters · **≈ 8 184 whitespace
+  tokens** (rough upper-bound token estimate; actual token count depends
+  on the tokenizer).
+- **SHA-256:**
+  `aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857`
+- Pinned in `scripts/run_exp004_phase2a.py` (`AUTH_CORPUS_SHA256`) and
+  asserted by the test suite; any edit of the corpus is detected. A corpus
+  change is a **new corpus version**, never a silent edit.
+- The **exact same bytes** are embedded in every primed `msg1` for all 18
+  Phase-1-usable configurations; control prompts contain no corpus; `msg2`
+  is unchanged.
+
+### Context-window risk
+
+≈58 KB (≈8 200 tokens) is well within every roster model's context
+window, but it is **not** silently truncated or per-model subsetted to
+make any single interface easier. If an interface ever cannot accept the
+full corpus, that run is recorded as an execution/access limitation —
+context-window variability is an already recorded Phase 2A methodological
+risk (see `phase2a/README.md`).
+
+## Why these three registers
+
+Medžuslovjansky is used in genuinely different registers by its
+community. Register 1 shows literary/dialogue narrative prose, register 2
+shows artistic/poetic language (with the deliberate stylistic choices such
+language entails), register 3 shows informative/expository prose. Exposing
+the LLM to **real existing usage across registers** grounds its generation
+in observed vocabulary, morphology, syntax, phraseology, orthography and
+style, rather than in an imagined or prescriptively reconstructed Slavic
+language. The corpus is reference material — **not** evaluation output and
+**not** a normative grammar. In particular, the project's canonical
+evaluator is never used as a filter to delete authentic corpus forms
+(e.g. artistic forms absent from the dictionary); the artistic section is
+explicitly labelled as potentially containing poetic choices.
+
+## Contamination control
+
+None of the registers shares plot, characters, setting or sentences with
+the Polish source story ("Opowieść o Słów, Które Były Jak Siostry"); the
+corpus is not a translation of the story. Phase 2A tests assert the
+three-register anchors appear in every primed prompt and in no control
+prompt, and that `msg2` never contains corpus bytes.

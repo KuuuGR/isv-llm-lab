@@ -520,7 +520,7 @@ EXP-001/002/003 and starts no LLM run.
    transliterated names such as Bronislava/Przemyslava/Julijana) failed an
    exact Polish-token match (D-045, L-035). Phase 2 remains closed.
 
-## 13. Phase 2A — full-roster corpus priming (prepared, SODA Task 019)
+## 13. Phase 2A — full-roster corpus priming (prepared, SODA Task 019; fixed corpus revised to three registers, SODA Task 020)
 
 ### 13.1 What Phase 2A tests and what it is not
 
@@ -557,12 +557,19 @@ from filenames).
   executes one, otherwise the Phase-1 output of the same configuration.
 - **Corpus-primed (`p2a-primed`)** — two sequential prompts in ONE fresh
   session:
-  - **Prompt 1** — a substantial authentic Medžuslovjansky text (the fixed
-    author-supplied "Tuta historija" excerpt, ~4.5 KB; §13.3) with an
-    explicit study-as-language-reference instruction (vocabulary, word
-    formation, morphology, syntax, orthography, style). No translation is
-    requested; the model must not translate/summarize/reproduce/continue/
-    imitate the text or answer questions about its content.
+  - **Prompt 1** — the fixed combined three-register corpus of authentic
+    Medžuslovjansky text (§13.3; ~58 KB / ~8 200 tokens) with an explicit
+    study-as-language-reference instruction. The model is asked to study the
+    corpus as a language reference covering vocabulary, morphology, syntax,
+    word formation, phraseology, orthography and stylistic patterns, and is
+    told the corpus spans three declared authentic registers
+    (literary/narrative, artistic/poetic, informative/encyclopedic). The
+    instruction notes that the artistic section may contain deliberate
+    poetic choices and is not a grammatical template. No translation is
+    requested; the prompt gives no word-level correctness claims, dictionary
+    candidates, grammatical annotations, or translations, and the model must
+    not translate/summarize/reproduce/continue/imitate/analyze the corpus or
+    answer questions about its content.
   - **Prompt 2** — the exact same Polish source story as Phase 1 with the
     standard direct-translation instruction plus a one-sentence reference
     cue pointing at the preceding authentic text. The story bytes are
@@ -577,24 +584,57 @@ ranking).
 
 ### 13.3 Fixed reference corpus
 
-- **Corpus id:** `tuta-historija` v1 — an excerpt ("Prolog" + Razděl 1
-  "Věčna Zima") of the authentic Medžuslovjansky work "Tuta historija",
-  supplied in full by the project author in Task 019 (2026-09-06). No URL,
-  nothing fetched.
-- **Content:** narrative prose and dialogue — descriptions, character
-  speech, questions, answers, everyday constructions — so the reference
-  covers vocabulary, morphology, syntax, word formation, orthography and
-  style.
-- **Size/hash:** 4 820 bytes; SHA-256
-  `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c`
-  (pinned in the orchestrator + tests; a corpus change is a new version,
-  never a silent edit). Same corpus for every model — no per-model
-  truncation; if an interface cannot accept it, that run is recorded as an
-  execution/access limitation.
-- **License/copyright:** author-supplied; distribution status not recorded,
-  so the text stays local (gitignored) like the Polish story; only hashes
-  and provenance are committed. It is embedded directly in the generated
-  Prompt-1 files (no URL is ever given to the model or the operator).
+The corpus is a **combined corpus of three authentic Medžuslovjansky
+registers** (corpus id `phase2a-authentic-isv` v1; decision D-047). The
+authoritative file is `phase2a-authentic-isv-corpus.txt` — 58 459 B
+(~8 184 whitespace tokens), SHA-256
+`aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857` — with
+plain-text register headers `=== REGISTER 1: LITERARY / NARRATIVE ===`,
+`=== REGISTER 2: ARTISTIC / POETIC ===`, `=== REGISTER 3: INFORMATIVE /
+ENCYCLOPEDIC ===`. All component files live under
+`experiments/exp004-modelscreen/phase2a/corpus/` (gitignored/local-only);
+the combined file is embedded directly in the generated Prompt-1 files.
+Component registers:
+
+1. **Literary / narrative** — `tuta-historija-excerpt.txt`, unchanged from
+   Task 019: an excerpt ("Prolog" + Razděl 1 "Věčna Zima") of the authentic
+   author-supplied work "Tuta historija". 4 820 B; SHA-256
+   `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c`.
+   Narrative prose and dialogue — descriptions, character speech, questions,
+   answers, everyday constructions.
+2. **Artistic / poetic** — `album-ahoj-slovjani-artistic-isv.txt`: the
+   complete Latin-script album "Ahoj, Slovjani!" (11 songs in order, 76
+   unique stanzas / 322 lines), cleaned from the author-supplied copy of
+   https://melacpise.wordpress.com/album-ahoj-slovjani-teksty-pesnej/ by
+   removing Cyrillic duplicates and webpage/HTML material and deduplicating
+   verbatim repeated stanzas/refrains (24 repeats dropped; wording
+   preserved). 9 407 B; SHA-256
+   `7e25a56f67a52976083f625fabf040b6cd5ae399317cb36a59a302a3a52dcacf`.
+   Linguistic forms are NOT normalized or corrected: this register may
+   contain deliberate poetic choices for rhyme/rhythm/meter and is not a
+   normative grammar sample.
+3. **Informative / encyclopedic** — `wiki-sadovnistvo-encyclopedic-isv.txt`:
+   cleaned running prose of the existing Medžuslovjansky Wikipedia article
+   "Sadovničstvo" (isv.wikipedia.org), retrieved 2026-09-07 from the
+   Wikimedia MediaWiki wikitext API (raw wikitext kept at
+   `corpus/sources/sadovnistvo.wikitext`); boilerplate/templates/links
+   removed. 84 paragraphs; 44 101 B; SHA-256
+   `b03402fef2384730b90a5ab879af78be63b5e6d0e4fa00db4c3c3525844c8345`.
+   Authentic existing ISV article text — not a project translation and not
+   a translation of another-language version.
+
+- **Size/hash:** component hashes and the combined-file hash above are
+  pinned in the orchestrator + tests (`AUTH_CORPUS_SHA256`); a corpus change
+  is a new version, never a silent edit. The same byte-identical combined
+  corpus goes to every model — at ~58 KB / ~8 200 tokens it fits all roster
+  models' contexts without truncation; if an interface still cannot accept
+  it, that run is recorded as an execution/access limitation.
+- **License/copyright:** register 1 is author-supplied (distribution status
+  not recorded) and register 2 is cleaned from an author-supplied webpage
+  copy → both stay local like the Polish story; register 3 is the authentic
+  existing Wikipedia article, CC BY-SA 4.0. All corpus files stay local
+  (gitignored); only hashes and provenance are committed. No URL is ever
+  given to the model or the operator.
 - **Contamination probe:** the corpus shares no plot, characters, setting
   or sentences with the Polish story; title words, character names and the
   place name of the story do not occur in it, and it is not a translation
@@ -606,11 +646,13 @@ ranking).
   unrelated ISV material.
 - Primed runs must keep Prompt 1 and Prompt 2 in the **same session** — the
   priming effect is context retention; the collector mechanically requires
-  the corpus to appear in the session BEFORE the translation instruction
-  (same-session proof) and rejects altered translation instructions.
+  all three register anchor phrases (`CORPUS_ANCHORS`, one fingerprint
+  phrase per register) to appear in the session BEFORE the translation
+  instruction (same-session proof) and rejects altered translation
+  instructions.
 - Control sessions must never contain any ISV reference material; the
-  collector **rejects** a control session containing the corpus
-  fingerprint.
+  collector **rejects** a control session containing ANY of the three
+  register anchor phrases.
 - The author attestation and access/quota verdicts are recorded exactly as
   in Phase 1 (D-036/§5.1). Terminology is fixed: in-context learning /
   corpus priming / contextual grounding / reference-text conditioning —
@@ -647,15 +689,26 @@ decoupled). Phase 2B is not implemented here.
 
 ### 13.8 Status
 
-- **Prepared (SODA Task 019, 2026-09-06):** protocol above; corpus file +
-  provenance; `phase2a/` kit (README, prompts, manifest, plan — 36 runs,
-  18 configurations × control/primed); `scripts/run_exp004_phase2a.py`
-  (prepare/collect/collect-session/verify/evaluate/status/roster/compare);
-  tests for identity, condition separation, corpus/source hash consistency,
-  prompt separation, no-corpus-in-control, and complete roster coverage
-  (19 new tests; full suite green).
-- **NOT executed:** no external LLM call was made in Task 019; execution is
-  the author's next operator step (fresh sessions per run; the Claude
-  Sonnet 5 — max row carries its known >45-min/free-tier constraint
-  (§12/README row 12; RESEARCH_NOTES §4.16/§4.17)).
+- **Prepared (SODA Task 019, 2026-09-06); fixed corpus revised (SODA Task
+  020, 2026-09-07):** protocol above; the fixed reference corpus is now the
+  combined three-register corpus `phase2a-authentic-isv` v1 (D-047), with
+  the deterministic builder `scripts/build_phase2a_corpus.py`; `phase2a/`
+  kit (README, prompts, manifest, plan — 36 runs, 18 configurations ×
+  control/primed; 54 operator prompt files);
+  `scripts/run_exp004_phase2a.py`
+  (prepare/collect/collect-session/verify/evaluate/status/roster/compare)
+  pins `AUTH_CORPUS_SHA256` and `CORPUS_ANCHORS` (three fingerprint phrases,
+  one per register) and requires all three anchors in primed prefixes while
+  rejecting any anchor in control sessions; prompts regenerated
+  deterministically with the revised Prompt-1 wording (byte-identical
+  corpus across the 18 primed configurations); manifest regenerated; tests
+  updated + `tests/test_exp004_phase2a_corpus.py` added — tests for
+  identity, condition separation, corpus/source hash consistency, prompt
+  separation, all-three-anchors-in-primed, any-anchor-rejects-control, and
+  complete roster coverage (full suite green).
+- **NOT executed:** no external LLM call was made in Task 019 or Task 020;
+  execution is the author's next operator step — the 18 manual primed
+  sessions (fresh sessions per run; the Claude Sonnet 5 — max row carries
+  its known >45-min/free-tier constraint (§12/README row 12; RESEARCH_NOTES
+  §4.16/§4.17)).
 

@@ -1,8 +1,8 @@
 # Phase 2A operator prompts (EXP-004)
 
 Files in this directory are **gitignored** (they embed the copyrighted
-Polish source story and the author-supplied reference corpus); this README
-and `manifest.json` (hashes only) are committed.
+Polish source story and the reference corpus, which is local-only); this
+README and `manifest.json` (hashes only) are committed.
 
 ## Inventory (54 prompt files, 18 configurations)
 
@@ -11,8 +11,15 @@ and `manifest.json` (hashes only) are committed.
   to re-execute a fresh control; otherwise the Phase-1 baseline output IS
   the control data.
 - `primed-<NN>-<model>-<version>-msg1.md` (18) — corpus-priming message 1:
-  study the authentic Medžuslovjansky reference text ("Tuta historija"
-  excerpt) as a language reference. NO translation requested.
+  study the combined reference corpus of three authentic Medžuslovjansky
+  registers (literary/narrative, artistic/poetic, informative/encyclopedic)
+  as a language reference only (vocabulary, morphology, syntax, word
+  formation, phraseology, orthography, stylistic patterns). The artistic
+  register is not normalized and may contain deliberate poetic choices — it
+  is not a normative grammar template. NO translation requested; the model
+  must not translate/summarize/reproduce/continue/analyze the corpus or
+  answer questions about it, and receives no word-level correctness claims,
+  dictionary candidates, grammatical annotations or translations.
 - `primed-<NN>-<model>-<version>-msg2.md` (18) — corpus-priming message 2:
   the same Polish source story as Phase 1, translated using the preceding
   text as reference.

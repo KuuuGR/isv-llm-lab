@@ -830,3 +830,28 @@ ran it correctly" as unverified until the stored session bytes prove it.
 and store the messages so the reply boundary is unambiguous even when the
 model's first reply contains prompt-like markers — split after the
 translation instruction's own marker, never by scanning the whole file.
+
+## L-037 · 2026-09-07 · An authentic multi-register corpus must be cleaned structurally, never linguistically (Task 020)
+
+**Observed.** Task 020 replaced the single narrative priming corpus with a
+combined three-register corpus (narrative + poetic + encyclopedic). The
+artistic component — real songs by an experienced Medžuslovjansky creator —
+contains deliberate, unusual forms chosen for rhyme/rhythm/meter that the
+canonical dictionary/evaluator does not cover. Treating the evaluator as a
+normative filter over that source text would have "cleaned" those forms away
+and silently destroyed the linguistic evidence the corpus exists to provide.
+
+**Interpretation.** Structural cleanup (scripts, webpage material,
+duplicated verbatim stanzas/refrains, Latin-script-only selection) is corpus
+packaging; linguistic normalization is not. Register diversity is what makes
+the priming corpus a grounding sample of real existing usage rather than a
+single-genre template — and authenticity, including deliberate poetic
+deviations, is the point. The evaluator measures; it does not license edits
+to the source text it measures.
+
+**Next time.** (1) Separate structural cleanup (scripts, duplicates,
+webpage material, Latin-only) from linguistic normalization (never normalize
+an authentic corpus). (2) Keep a register-diverse corpus
+(narrative/poetic/encyclopedic) so priming grounds generation across styles,
+not one template. (3) Pin hashes per component AND for the combined file — a
+corpus change is a new version, never a silent edit.

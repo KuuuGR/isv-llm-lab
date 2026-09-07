@@ -732,12 +732,14 @@ before evaluation:
   end-to-end); full suite green (Task 018). Docs updated: D-045, L-035,
   DESIGN §12, exp004 READMEs, STATE, ROADMAP, RESEARCH_NOTES.
 
-### Follow-up: EXP-004 Phase 2A corpus priming — full-roster kit prepared (Task 019, 2026-09-06)
+### Follow-up: EXP-004 Phase 2A corpus priming — full-roster kit prepared (Task 019, 2026-09-06); reference corpus revised to three authentic registers (Task 020, 2026-09-07)
 
-Phase 2A is the corpus-grounding experiment prepared but NOT executed in
-this task (no external LLM call). Kit:
+Phase 2A is the corpus-grounding experiment PREPARED but NOT executed in
+Task 019 or Task 020 (no external LLM call). Kit:
 `experiments/exp004-modelscreen/phase2a/`; design: DESIGN §13; decision:
-D-046.
+D-046. Task 020 (2026-09-07) revised the fixed reference corpus from the
+single Task-019 "Tuta historija" excerpt to the combined three-register
+authentic corpus below; the kit stays execution-ready.
 
 - **What is tested:** does exposing an LLM to authentic Medžuslovjansky
   immediately before translation change its generated Medžuslovjansky?
@@ -748,12 +750,46 @@ D-046.
   excluded), per the author's Task-019 instruction that Phase 2A must not
   be narrowed to a hand-picked shortlist before any corpus experiment. The
   roster is derived in code from `run_exp004_phase1.ROSTER`.
-- **Fixed reference corpus:** "Tuta historija" excerpt (Prolog + Razděl 1
-  "Věčna Zima") supplied by the author in the task text — authentic ISV
-  narrative prose + dialogue; 4 820 B; SHA-256
-  `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c`;
-  embedded directly in the Prompt-1 files (no URL anywhere); kept local
-  (gitignored); provenance + contamination probe in `corpus/README.md`.
+- **Reference corpus — combined three-register authentic corpus (revised
+  by Task 020):** under `experiments/exp004-modelscreen/phase2a/corpus/`;
+  corpus id `phase2a-authentic-isv` v1; all corpus text files are
+  local/gitignored; the committed `corpus/README.md` records provenance +
+  hashes.
+  1. **Literary / narrative** — `tuta-historija-excerpt.txt` (unchanged
+     Task-019 author-supplied "Tuta historija" excerpt — Prolog + Razděl 1
+     "Věčna Zima"; 4 820 B; SHA-256 `413830fa…67a29c`).
+  2. **Artistic / poetic** — `album-ahoj-slovjani-artistic-isv.txt`
+     (complete Latin-script album "Ahoj, Slovjani!" in original order —
+     11 songs, 76 unique stanzas, 322 lines, 9 407 B; SHA-256
+     `7e25a56f…52dcacf`; source: author-supplied copy of
+     melacpise.wordpress.com/album-ahoj-slovjani-teksty-pesnej/; Cyrillic
+     duplicates + webpage/HTML removed; 24 verbatim repeated stanzas/
+     refrains deduplicated; linguistic forms NOT normalized/corrected;
+     license/distribution status not established → local-only).
+  3. **Informative / encyclopedic** —
+     `wiki-sadovnistvo-encyclopedic-isv.txt` (cleaned running prose of the
+     existing authentic Medžuslovjansky Wikipedia article "Sadovničstvo"
+     (isv.wikipedia.org), retrieved 2026-09-07 from the actual Wikimedia
+     MediaWiki wikitext API — raw wikitext kept at `corpus/sources/`;
+     boilerplate/templates/links removed; 84 paragraphs; 44 101 B;
+     SHA-256 `b03402fe…4c8345`; CC BY-SA 4.0; authentic ISV article, NOT a
+     project translation of any other-language version).
+  The authoritative combined file `phase2a-authentic-isv-corpus.txt`
+  (58 459 B, ≈8 184 whitespace tokens, SHA-256 `aaad28e4…a857`) joins the
+  three under the headers `=== REGISTER 1: LITERARY / NARRATIVE ===`,
+  `=== REGISTER 2: ARTISTIC / POETIC ===`, `=== REGISTER 3: INFORMATIVE /
+  ENCYCLOPEDIC ===` and is built deterministically by
+  `scripts/build_phase2a_corpus.py`. Every primed msg1 embeds the SAME
+  combined corpus bytes for all 18 configurations.
+- **Prompt-1/msg1 (three-register wording, Task 020):** declares the three
+  authentic registers and asks the model to study the corpus as a language
+  reference (vocabulary, morphology, syntax, word formation, phraseology,
+  orthography, stylistic patterns); warns the artistic register may contain
+  deliberate poetic choices and is not a normative grammar template;
+  forbids translating/summarizing/reproducing/continuing/analyzing the
+  corpus or answering questions about it. msg2 (same Polish story task)
+  unchanged; control prompts corpus-free; prompt regeneration
+  deterministic; manifest regenerated (54 prompt files).
 - **Conditions:** control (`p2a-ctl`; the Phase-1 clean direct task — the
   Phase-1 baseline outputs satisfy it, fresh controls optional) and
   corpus-primed (`p2a-primed`; msg1 = study reference text as language
@@ -765,7 +801,11 @@ D-046.
 - **Contamination control:** mechanical — `collect-session` requires the
   corpus BEFORE the translation instruction in primed sessions (same-
   session proof), rejects control sessions containing corpus material, and
-  rejects altered translation instructions; fresh session per run.
+  rejects altered translation instructions; fresh session per run. Task 020
+  added 3 `CORPUS_ANCHORS` fingerprint phrases (one per register;
+  `AUTH_CORPUS_SHA256 = aaad28e4…a857`): ALL THREE anchors must appear
+  before the translation instruction in primed sessions; ANY anchor in a
+  control session is rejected.
 - **Run identity:** `<date>__<provider>__<model>__<model_version>__`
   `p2a-ctl|p2a-primed`; every run linked to its Phase-1 `baseline_run_id`;
   36-run plan + 54 prompt files + manifest (hashes); deterministic kit
@@ -779,15 +819,17 @@ D-046.
   (>45 min, continuations, free-tier exhaustion in Phase 1) stays in the
   roster as an availability constraint; an impractical session is recorded
   as an execution limitation, never silently substituted.
-- **Tests:** 19 added (identity/condition separation, hash consistency,
-  prompt separation, no-corpus-in-control, roster coverage, contamination
-  rejection, compare); full suite **155 green**.
+- **Tests:** Task 019 added 19 (identity/condition separation, hash
+  consistency, prompt separation, no-corpus-in-control, roster coverage,
+  contamination rejection, compare; full suite **155 green**). Task 020
+  updated `tests/test_exp004_phase2a.py` and added the new real-corpus
+  suite `tests/test_exp004_phase2a_corpus.py`; full suite green.
 - **Next:** the author executes the 18 primed sessions externally (operator
   protocol in `phase2a/README.md`), then collect/verify/evaluate/compare.
   Phase 2B (Wikipedia-length authentic reference + independent Polish
   story) is documented as future work.
 
-## Planned (not started) — current (2026-09-06, SODA Task 019)
+## Planned (not started) — current (2026-09-07, SODA Task 020)
 
 Status categories are kept distinct:
 - **Completed experiments:** EXP-001 (baseline, historical), EXP-002
@@ -812,7 +854,8 @@ Status categories are kept distinct:
   RECONCILED (Task 018, 2026-09-06)**: 19 collected runs, 18 intake-complete
   and evaluated (evidence table in `outputs/roster.md`); GLM 4.5
   failed/excluded per protocol. **Phase 2A (full-roster corpus priming)
-  PREPARED and execution-ready (Task 019, 2026-09-06)** — no LLM run
+  PREPARED and execution-ready (Task 019, 2026-09-06; corpus revised to
+  three authentic registers, Task 020, 2026-09-07)** — no LLM run
   performed yet; author's external primed sessions are the next step;
   Phase 2B documented as future work. Phase 2 guidance methods stay closed
   until Phase 1 is complete and reported.
@@ -861,14 +904,24 @@ Planned (not started):
   collect/verify/evaluate/compare. Do not start further Phase 2 work
   before Phase 1 is complete and reported.
 - **EXP-004 Phase 2A — full-roster corpus priming (PREPARED — NOT
-  EXECUTED, Task 019, 2026-09-06)**: tests the core corpus-grounding
+  EXECUTED, Task 019, 2026-09-06; corpus revised to three authentic
+  registers in Task 020, 2026-09-07)**: tests the core corpus-grounding
   hypothesis on ALL 18 Phase-1-usable configurations: does authentic ISV
   exposure immediately before translation change generation? Two
-  conditions (control = Phase-1 baseline; corpus-primed = msg1 authentic
-  "Tuta historija" reference + msg2 same Polish story in one session);
-  fixed corpus identical for every model (4 820 B, sha256 `413830fa…`);
-  run ids `…__p2a-ctl|p2a-primed` linked to Phase-1 baselines;
-  contamination-controlled collection; per-dimension `compare` deltas
-  (no composite score, no ranking). Kit + protocol:
-  `experiments/exp004-modelscreen/phase2a/README.md` (DESIGN §13, D-046).
+  conditions (control = Phase-1 baseline; corpus-primed = msg1 study of a
+  three-register authentic corpus — narrative
+  (`tuta-historija-excerpt.txt`, 4 820 B) / artistic-poetic
+  (`album-ahoj-slovjani-artistic-isv.txt`, 9 407 B, Latin-only, verbatim
+  repeats deduplicated, NOT normalized) / encyclopedic
+  (`wiki-sadovnistvo-encyclopedic-isv.txt`, 44 101 B, authentic retrieved
+  ISV Wikipedia article "Sadovničstvo", CC BY-SA 4.0) + msg2 same Polish
+  story in one session); corpus id `phase2a-authentic-isv`, combined file
+  58 459 B ≈8 200 tokens, sha256 `aaad28e4…`, identical for every model
+  (the Task-019 corpus was the single 4 820 B "Tuta historija" excerpt,
+  sha256 `413830fa…`); run ids `…__p2a-ctl|p2a-primed` linked to Phase-1
+  baselines; contamination-controlled collection (3 anchors — one per
+  register — all required in primed prefix, any in control rejected);
+  per-dimension `compare` deltas (no composite score, no ranking). Kit +
+  protocol: `experiments/exp004-modelscreen/phase2a/README.md` (DESIGN
+  §13, D-046); deterministic builder `scripts/build_phase2a_corpus.py`.
   **No external LLM run exists yet.**

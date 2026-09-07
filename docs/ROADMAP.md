@@ -1,14 +1,17 @@
 # Roadmap
 
-Status: updated 2026-09-06 (Task 019 — EXP-004 Phase 2A (full-roster corpus
-priming) PREPARED and execution-ready: fixed author-supplied reference
-corpus ("Tuta historija" excerpt, 4 820 B, sha256 `413830fa…`) + 36-run
-plan (18 Phase-1-usable configurations × control/corpus-primed) + 54
-operator prompt files + contamination-controlled collection + compare
-tooling under `experiments/exp004-modelscreen/phase2a/`; 19 new tests
-(155 total green). **No external LLM run was performed in Task 019** —
-execution of the primed sessions is the author's next operator step; Phase
-1 remains executed/evaluated (Task 018).
+Status: updated 2026-09-07 (Task 020 — EXP-004 Phase 2A corpus revised to
+a combined three-register authentic corpus — literary/narrative +
+artistic/poetic + informative/encyclopedic; combined file 58 459 B,
+≈8 200 tokens, sha256 `aaad28e4…`, corpus id `phase2a-authentic-isv` v1)
+PREPARED and execution-ready: same 36-run plan (18 Phase-1-usable
+configurations × control/corpus-primed) + 54 operator prompt files +
+contamination-controlled collection + compare tooling under
+`experiments/exp004-modelscreen/phase2a/`; deterministic corpus builder
+`scripts/build_phase2a_corpus.py`; tests updated + new real-corpus suite.
+**No external LLM run was performed in Task 020** — execution of the
+primed sessions is the author's next operator step; Phase 1 remains
+executed/evaluated (Task 018).
 
 ## Done
 
@@ -522,7 +525,8 @@ execution of the primed sessions is the author's next operator step; Phase
         embedded directly in Prompt-1 files; 4 820 B; SHA-256
         `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c`;
         local/gitignored (distribution status not recorded); provenance +
-        contamination probe in `phase2a/corpus/README.md`.
+        contamination probe in `phase2a/corpus/README.md`. (Revised by Task
+        020: combined three-register corpus — see the next entry.)
   - [x] Two conditions: control `p2a-ctl` (Phase-1 clean direct task —
         Phase-1 outputs satisfy it; fresh control optional and preferred by
         compare when executed) and corpus-primed `p2a-primed` (msg1 = study
@@ -551,6 +555,61 @@ execution of the primed sessions is the author's next operator step; Phase
         README + phase2a READMEs, STATE, ROADMAP, EXPERIMENTS).
   - [x] Phase 2B (Wikipedia-length authentic reference + independent Polish
         story) documented as future work — not started.
+- [x] **Task 020 — EXP-004 Phase 2A corpus revised to three authentic
+      registers PREPARED (execution-ready; 2026-09-07).** No external LLM
+      call in this task.
+  - [x] Combined three-register corpus under
+        `experiments/exp004-modelscreen/phase2a/corpus/` (all corpus text
+        files local/gitignored; corpus README provenance + hashes
+        committed; corpus id `phase2a-authentic-isv` v1):
+        1. literary/narrative — `tuta-historija-excerpt.txt` (unchanged
+           Task-019 excerpt, 4 820 B, SHA-256 `413830fa…67a29c`);
+        2. artistic/poetic — `album-ahoj-slovjani-artistic-isv.txt`
+           (complete Latin-script album "Ahoj, Slovjani!" — 11 songs in
+           order, 76 unique stanzas, 322 lines, 9 407 B, SHA-256
+           `7e25a56f…52dcacf`; source: author-supplied copy of
+           melacpise.wordpress.com/album-ahoj-slovjani-teksty-pesnej/;
+           Cyrillic duplicates + webpage/HTML removed; 24 verbatim
+           repeated stanzas/refrains deduplicated; linguistic forms NOT
+           normalized/corrected; license/distribution status not
+           established → local-only);
+        3. informative/encyclopedic —
+           `wiki-sadovnistvo-encyclopedic-isv.txt` (cleaned running prose
+           of the authentic Medžuslovjansky Wikipedia article
+           "Sadovničstvo", retrieved 2026-09-07 from the Wikimedia
+           MediaWiki wikitext API — raw kept at `corpus/sources/`;
+           boilerplate/templates/links removed; 84 paragraphs, 44 101 B,
+           SHA-256 `b03402fe…4c8345`; CC BY-SA 4.0; authentic ISV
+           article, NOT a project translation of any other-language
+           version).
+  - [x] Authoritative combined file `phase2a-authentic-isv-corpus.txt`:
+        58 459 B, ≈8 184 whitespace tokens, SHA-256 `aaad28e4…a857`;
+        register section headers `=== REGISTER 1: LITERARY / NARRATIVE ===`
+        … `=== REGISTER 3: INFORMATIVE / ENCYCLOPEDIC ===`; built
+        deterministically by `scripts/build_phase2a_corpus.py`.
+  - [x] Prompt-1/msg1 declares the three authentic registers and asks the
+        model to study the corpus as a language reference (vocabulary,
+        morphology, syntax, word formation, phraseology, orthography,
+        stylistic patterns); warns the artistic register may contain
+        deliberate poetic choices and is not a normative grammar template;
+        forbids translating/summarizing/reproducing/continuing/analyzing
+        the corpus or answering questions about it. msg2 (same Polish
+        story task) unchanged; control prompts corpus-free; every primed
+        msg1 embeds the SAME corpus bytes for all 18 configurations;
+        prompt regeneration deterministic; manifest regenerated (54 prompt
+        files).
+  - [x] `scripts/run_exp004_phase2a.py` updated: `AUTH_CORPUS_SHA256` =
+        `aaad28e4…a857`; `CORPUS_ANCHORS` = 3 fingerprint phrases (one per
+        register); collect-session requires ALL THREE anchors before the
+        translation instruction in primed sessions, rejects ANY anchor in
+        control sessions. Tests updated (`tests/test_exp004_phase2a.py`) +
+        new real-corpus suite (`tests/test_exp004_phase2a_corpus.py`).
+  - [x] Docs updated (STATE, EXPERIMENTS, this file; corpus README records
+        provenance).
+  - [x] Kit remains execution-ready, NOT executed — next operator step:
+        the author executes the 18 primed sessions externally (control
+        `p2a-ctl` + corpus-primed `p2a-primed` per Phase-1-usable
+        configuration).
 
 ## Next recommended task (single)
 
@@ -577,9 +636,10 @@ execution of the primed sessions is the author's next operator step; Phase
 - [ ] **EXP-004 Phase 2A — corpus priming: execute the primed sessions
       (NEXT)** — the author runs the 18 corpus-primed sessions externally
   per `experiments/exp004-modelscreen/phase2a/README.md` (fresh session per
-  run; msg1 = authentic "Tuta historija" reference text + study
-  instruction, wait for the short confirmation, msg2 = the same Polish
-  story as Phase 1 in the SAME session; save byte-for-byte), then
+  run; msg1 = three-register authentic corpus (narrative/artistic/
+  encyclopedic) + study instruction, wait for the short confirmation,
+  msg2 = the same Polish story as Phase 1 in the SAME session; save
+  byte-for-byte), then
   collect/collect-session → verify → evaluate → **compare** (primed vs
   Phase-1 baseline per-dimension deltas; no composite score, no ranking).
   The Phase-1 baseline outputs serve as the control condition (`p2a-ctl`);

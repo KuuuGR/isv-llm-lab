@@ -26,16 +26,21 @@ imported from run_exp004_phase1.ROSTER, never reconstructed from filenames):
 
   Condition B — corpus primed (condition token 'p2a-primed')
       TWO sequential prompts in ONE fresh conversation/session:
-        Prompt 1 (msg1): the fixed authentic Medžuslovjansky reference text
-            ("Tuta historija" excerpt, corpus id tuta-historija v1) with an
-            explicit study-as-language-reference instruction. The model is
-            told NOT to translate/summarize/reproduce/modify/continue the
-            text, NOT to imitate its sentences, and NOT to answer questions
-            about it; it should retain the language information for the next
-            task. NO translation is requested in Prompt 1.
+        Prompt 1 (msg1): the fixed authentic Medžuslovjansky reference
+            corpus (corpus id phase2a-authentic-isv v1 — THREE registers:
+            literary/narrative prose from "Tuta historija", artistic/
+            poetic song language from the "Ahoj, Slovjani!" album, and
+            informative/encyclopedic prose from the Medžuslovjansky
+            Wikipedia article "Sadovničstvo") with an explicit
+            study-as-language-reference instruction. The model is told
+            NOT to translate/summarize/reproduce/modify/continue the
+            texts, NOT to imitate particular sentences, NOT to reproduce
+            the songs, and NOT to answer questions about the content; it
+            should retain the language information for the next task. NO
+            translation is requested in Prompt 1.
         Prompt 2 (msg2): the SAME Polish source story as Phase 1 with the
             standard direct-translation instruction, asking the model to
-            translate using the preceding authentic text as a language
+            translate using the preceding authentic texts as a language
             reference. The Polish story bytes are unchanged; no lexical
             scaffolding, no candidate lists, no dictionary injection, no
             morphology annotations, no repair instructions (Phase 2A must
@@ -130,10 +135,11 @@ Commands:
            ranking. The main question is "how much does authentic ISV corpus
            exposure change each model's output?", not "which model wins?".
 
-Phase 2B (authentic ISV Wikipedia article + an independently written Polish
-story inspired by its subject) is documented as future work and is NOT
-implemented here. Phase 2 must not execute any external LLM call from this
-repository.
+Phase 2B (a Wikipedia-length authentic Medžuslovjansky reference text
+paired with an independently written Polish story inspired by its subject
+matter, without translating or reconstructing the reference text) is
+documented as future work and is NOT implemented here. Phase 2 must not
+execute any external LLM call from this repository.
 """
 from __future__ import annotations
 
@@ -162,14 +168,22 @@ CORPUS_DIR = P2A / "corpus"
 OPERATOR_PROMPTS = P2A / "operator-prompts"
 OUTPUTS_DIR = P2A / "outputs"
 SESSION_DIR = P2A / "collected-sessions"
-CORPUS_FILE = CORPUS_DIR / "tuta-historija-excerpt.txt"
+CORPUS_FILE = CORPUS_DIR / "phase2a-authentic-isv-corpus.txt"
 SOURCE_FILE = EXP / "input" / "source.txt"
 
-# Fixed author-supplied reference corpus (SODA Task 019, 2026-09-06).
-CORPUS_ID = "tuta-historija"
+# Authoritative combined three-register reference corpus (SODA Task 020,
+# 2026-09-07). Registers:
+#   1. literary/narrative prose  — "Tuta historija" excerpt (Task 019);
+#   2. artistic/poetic language  — complete unique Latin-script song
+#      material of the album "Ahoj, Slovjani!" (MELAC PIŠE);
+#   3. informative/encyclopedic  — existing Medžuslovjansky Wikipedia
+#      article "Sadovničstvo" (running prose; retrieved 2026-09-07).
+# Built deterministically by scripts/build_phase2a_corpus.py from the
+# local sources under phase2a/corpus/sources/ (see corpus/README.md).
+CORPUS_ID = "phase2a-authentic-isv"
 CORPUS_VERSION = "v1"
-TUTA_EXCERPT_SHA256 = (
-    "413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c")
+AUTH_CORPUS_SHA256 = (
+    "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857")
 
 # Canonical Polish source story (EXP-001..EXP-004 Phase 1 lineage).
 SOURCE_SHA256 = p1.EXP003_SOURCE_SHA256
@@ -177,9 +191,15 @@ SOURCE_SHA256 = p1.EXP003_SOURCE_SHA256
 P2A_CONDITIONS = ("p2a-ctl", "p2a-primed")
 CTL, PRIMED = P2A_CONDITIONS
 
-# Fingerprints used for prompt-separation and contamination checks.
-CORPUS_FP_START = ("Ljudi govoret, že v tamtoj denj bylo je veliko spokojno")
-CORPUS_FP_END = "da by prěžiti v tutoj težkoj době"
+# Fingerprint anchors used for prompt-separation and contamination checks —
+# one distinctive phrase per corpus register, so a primed session must
+# demonstrably contain register 1, 2 AND 3 before the translation task, and
+# a control session must contain none of them.
+CORPUS_ANCHORS = (
+    "Ljudi govoret, že v tamtoj denj bylo je veliko spokojno",  # register 1
+    "Toj korab znajut ljudi vsi",                                # register 2
+    "Sadovničstvo jest proces raščenja rastlin",                 # register 3
+)
 # The story markers used to locate the translation prompt inside a session.
 STORY_TITLE = "Opowieść o Słów, Które Były Jak Siostry"
 TRANSLATION_START = "Translate the Polish story below into Interslavic"
@@ -349,31 +369,47 @@ def _render_primed_msg1(row: dict, corpus_text: str) -> str:
         "",
         "---",
         "",
-        "Below is an authentic text written in Medžuslovjansky "
-        "(Interslavic). Treat it as REFERENCE MATERIAL ONLY.",
+        "Below are three authentic texts written in Medžuslovjansky "
+        "(Interslavic) by experienced users of the language. Treat them "
+        "as REFERENCE MATERIAL ONLY.",
         "",
-        "Study this text carefully as a language reference. Pay attention "
-        "to:",
+        "The three texts show Medžuslovjansky used in three different "
+        "registers:",
+        "- REGISTER 1 — literary / narrative: a prose excerpt with "
+        "narration and dialogue (\"Tuta historija\");",
+        "- REGISTER 2 — artistic / poetic: lyrics of songs and sea "
+        "shanties (album \"Ahoj, Slovjani!\"). Songs are poetry: they may "
+        "contain unusual or stylised forms chosen deliberately for rhyme, "
+        "rhythm, metre or musical effect, and should NOT automatically be "
+        "treated as grammatical templates;",
+        "- REGISTER 3 — informative / encyclopedic: a Wikipedia article "
+        "(\"Sadovničstvo\") written in ordinary expository prose.",
+        "",
+        "Study the texts carefully as language reference material. Pay "
+        "attention to:",
         "- vocabulary and word formation;",
         "- morphology (noun and adjective endings, verb forms, pronouns, "
         "cases);",
         "- syntax and word order;",
+        "- phraseology and natural collocations;",
         "- orthography and spelling conventions;",
-        "- stylistic and narrative patterns.",
+        "- stylistic patterns in each register.",
         "",
-        "Do NOT translate, summarize, reproduce, modify or continue this "
-        "text.",
-        "Do NOT imitate its particular sentences. Do NOT answer questions "
-        "about its story or content. Do NOT produce any Medžuslovjansky "
+        "The three sections demonstrate that Medžuslovjansky is used "
+        "across different registers of real communication. Do NOT "
+        "translate, summarize, reproduce, modify or continue these texts.",
+        "Do NOT imitate their particular sentences. Do NOT answer "
+        "questions about their content. Do NOT reproduce the songs or "
+        "imitate their subject matter. Do NOT produce any Medžuslovjansky "
         "text in this message.",
         "",
         "Retain the useful language information — vocabulary, morphology, "
-        "syntax, orthography and style — for the translation task in the "
-        "next message of this same conversation. If you have understood "
-        "and are ready, reply with a short confirmation only (one or two "
-        "sentences). No translation.",
+        "syntax, phraseology, orthography and style — for the translation "
+        "task in the next message of this same conversation. If you have "
+        "understood and are ready, reply with a short confirmation only "
+        "(one or two sentences). No translation.",
         "",
-        "## Reference text (authentic Medžuslovjansky)",
+        "## Reference texts (authentic Medžuslovjansky, three registers)",
         "",
         corpus_text.rstrip("\n"),
     ]) + "\n"
@@ -431,13 +467,14 @@ def _ensure_source() -> Path:
 def _ensure_corpus() -> Path:
     if not CORPUS_FILE.is_file():
         raise RuntimeError(
-            f"reference corpus missing at {CORPUS_FILE}; it is the "
-            "author-supplied Phase-2A text (SODA Task 019)")
+            f"reference corpus missing at {CORPUS_FILE}; build it with "
+            "scripts/build_phase2a_corpus.py (three-register combined "
+            "corpus, SODA Task 020)")
     actual = sha256_file(CORPUS_FILE)
-    if actual != TUTA_EXCERPT_SHA256:
+    if actual != AUTH_CORPUS_SHA256:
         raise RuntimeError(
             f"{CORPUS_FILE} sha256 {actual[:16]}... does not match the "
-            f"recorded corpus {TUTA_EXCERPT_SHA256[:16]}...; an accidental "
+            f"recorded corpus {AUTH_CORPUS_SHA256[:16]}...; an accidental "
             "edit would break the fixed-corpus fairness invariant")
     return CORPUS_FILE
 
@@ -546,10 +583,25 @@ def run_prepare(date: str, force: bool = False) -> int:
                             else str(corpus)),
                    "sha256": corpus_sha,
                    "bytes": corpus.stat().st_size,
-                   "note": "Fixed authentic Medžuslovjansky reference text "
-                           "supplied by the project author (Task 019); "
-                           "identical for every model in the primed "
-                           "condition"},
+                   "registers": [
+                       {"n": 1, "label": "literary / narrative",
+                        "source": "\"Tuta historija\" excerpt (author-"
+                                  "supplied, Task 019)"},
+                       {"n": 2, "label": "artistic / poetic",
+                        "source": "album \"Ahoj, Slovjani!\" — complete "
+                                  "unique Latin-script song material "
+                                  "(MELAC PIŠE)"},
+                       {"n": 3, "label": "informative / encyclopedic",
+                        "source": "Medžuslovjansky Wikipedia article "
+                                  "\"Sadovničstvo\""},
+                   ],
+                   "note": "Fixed authentic three-register Medžuslovjansky "
+                           "reference corpus (SODA Task 020): narrative "
+                           "prose + poetic song language + encyclopedic "
+                           "prose, identical for every model in the primed "
+                           "condition; register texts are authentic "
+                           "existing ISV usage, never a project "
+                           "translation"},
         "conditions": {
             CTL: "control — same clean direct-translation task as Phase 1, "
                  "fresh session, no corpus (Phase-1 outputs satisfy it; a "
@@ -579,8 +631,9 @@ def run_prepare(date: str, force: bool = False) -> int:
                    "sha256": corpus_sha, "bytes": corpus.stat().st_size},
         "source": {"file": plan["source"]["file"], "sha256": source_sha},
         "note": "Prompt files embed the copyrighted Polish story and the "
-                "author-supplied corpus and stay local (gitignored); this "
-                "manifest records prompt hashes only.",
+                "author-supplied / locally-held three-register corpus "
+                "(register 3 is CC BY-SA 4.0) and stay local (gitignored); "
+                "this manifest records prompt hashes only.",
         "files": sorted(files, key=lambda f: f["file"]),
     }
     (OPERATOR_PROMPTS / "manifest.json").write_text(
@@ -699,10 +752,9 @@ def run_collect(run_id: str, output: Path, generation_date: str,
 # collect-session (contamination-controlled extraction)
 # ---------------------------------------------------------------------------
 
-def _corpus_fingerprints() -> tuple[bytes, bytes]:
-    text = CORPUS_FILE.read_text(encoding="utf-8")
-    return (CORPUS_FP_START.encode("utf-8"),
-            CORPUS_FP_END.encode("utf-8"))
+def _corpus_fingerprints() -> tuple[bytes, ...]:
+    """One fingerprint phrase per corpus register (see CORPUS_ANCHORS)."""
+    return tuple(a.encode("utf-8") for a in CORPUS_ANCHORS)
 
 
 def _translation_body(text: str) -> str:
@@ -789,7 +841,7 @@ def run_collect_session(run_id: str, session: Path, generation_date: str,
     session_bytes = session.read_bytes()
     session_text = session_bytes.decode("utf-8", errors="replace")
     condition = plan_entry["condition"]
-    fp_start, fp_end = _corpus_fingerprints()
+    anchors = _corpus_fingerprints()
 
     # canonical translation prompt (the file whose reply is the output)
     trans_file = (OPERATOR_PROMPTS / plan_entry["prompt_files"][-1])
@@ -808,26 +860,27 @@ def run_collect_session(run_id: str, session: Path, generation_date: str,
                   f"not match the canonical control prompt for {run_id}; "
                   "refusing to collect", file=sys.stderr)
             return 2
-        if (fp_start in session_bytes or fp_end in session_bytes):
+        if any(a in session_bytes for a in anchors):
             print(f"error: control session for {run_id} CONTAINS the "
-                  "reference corpus (or its fingerprint) — the control "
-                  "condition must never include ISV reference material; "
-                  "refusing to collect (conversation contamination)",
-                  file=sys.stderr)
+                  "reference corpus (or one of its register fingerprints) "
+                  "— the control condition must never include ISV "
+                  "reference material; refusing to collect (conversation "
+                  "contamination)", file=sys.stderr)
             return 2
         prefix, reply = p1.split_session_reply(session_bytes)
         reply = _strip_trailing_prompt_boilerplate(reply)
     else:
-        # primed: msg1 (corpus) must precede the translation instruction;
-        # msg2 body must match the canonical msg2 prompt.
+        # primed: msg1 (the whole three-register corpus) must precede the
+        # translation instruction; msg2 body must match the canonical msg2
+        # prompt.
         body_start = session_text.find(TRANSLATION_START)
         before = session_bytes[:body_start] if body_start >= 0 else b""
-        if not (fp_start in before and fp_end in before):
-            print(f"error: primed session for {run_id} does not contain the "
-                  "reference corpus BEFORE the translation instruction — "
-                  "the priming condition requires msg1 (corpus) and msg2 "
-                  "(translation) in the same session; refusing to collect",
-                  file=sys.stderr)
+        if not all(a in before for a in anchors):
+            print(f"error: primed session for {run_id} does not contain all "
+                  "three corpus registers BEFORE the translation "
+                  "instruction — the priming condition requires msg1 (the "
+                  "complete three-register corpus) and msg2 (translation) "
+                  "in the same session; refusing to collect", file=sys.stderr)
             return 2
         if _translation_body(session_text) != canonical_body:
             print(f"error: session file's translation instruction body does "
@@ -863,12 +916,13 @@ def run_collect_session(run_id: str, session: Path, generation_date: str,
             "name": session.name,
             "sha256": sha256_bytes(session_bytes),
             "condition": condition,
+            "corpus_anchors": list(CORPUS_ANCHORS),
             "contamination_checks": {
                 "corpus_before_translation":
                     condition == PRIMED and
-                    (fp_start in session_bytes and fp_end in session_bytes),
-                "corpus_in_control": condition == CTL and (
-                    fp_start in session_bytes or fp_end in session_bytes),
+                    all(a in session_bytes for a in anchors),
+                "corpus_in_control": condition == CTL and
+                    any(a in session_bytes for a in anchors),
             },
         },
         "output": {"file": str(dst), "sha256": sha256_bytes(reply),

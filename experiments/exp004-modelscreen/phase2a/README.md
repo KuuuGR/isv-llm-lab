@@ -1,7 +1,8 @@
 # EXP-004 Phase 2A — full-roster corpus priming (prepared kit)
 
-Status (Task 019, 2026-09-06): **prepared and execution-ready — no external
-LLM runs performed in this task.**
+Status (Task 020, 2026-09-07): **prepared but NOT executed — the next
+operator step is the manual external execution of the 18 primed sessions
+(no LLM calls happen in this task).**
 
 Phase 2A tests the project's core corpus-grounding hypothesis:
 
@@ -27,12 +28,17 @@ GLM excluded) Phase 2A prepares two conditions:
   executes one, otherwise the Phase-1 output of the same configuration.
 - **Corpus-primed (`p2a-primed`)** — two sequential prompts in ONE fresh
   session:
-  - Prompt 1 (`*-msg1.md`): the fixed authentic Medžuslovjansky reference
-    text (author-supplied "Tuta historija" excerpt, ~4.5 KB — see
-    `corpus/README.md`) with an explicit study-as-language-reference
-    instruction. No translation is requested; the model must not
-    translate/summarize/reproduce/continue/imitate the text or answer
-    questions about it.
+  - Prompt 1 (`*-msg1.md`): the fixed combined corpus of THREE authentic
+    Medžuslovjansky registers — literary/narrative, artistic/poetic and
+    informative/encyclopedic (≈58 KB / ≈8 200 tokens — see
+    `corpus/README.md`) — with an explicit study-as-language-reference
+    instruction (vocabulary, morphology, syntax, word formation,
+    phraseology, orthography, stylistic patterns). The artistic section
+    may contain deliberate poetic choices and is not a normative grammar
+    template. No translation is requested; the model must not
+    translate/summarize/reproduce/continue/analyze the corpus or answer
+    questions about it, and receives no word-level correctness claims,
+    dictionary candidates, grammatical annotations or translations.
   - Prompt 2 (`*-msg2.md`): the SAME Polish source story as Phase 1 with
     the standard direct-translation instruction and an explicit reference
     to the preceding authentic text. The story bytes are unchanged; there
@@ -79,11 +85,36 @@ Phase-1 `direct` run of the same configuration).
 
 ## Corpus
 
-Fixed authentic reference text: "Tuta historija" excerpt (Prolog + Razděl 1
-"Věčna Zima"), supplied by the author in Task 019, 4 820 bytes,
-SHA-256 `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c`.
-Same corpus for every model in the primed condition (no per-model
-truncation). See `corpus/README.md` for provenance, license note,
+Fixed combined corpus of THREE authentic Medžuslovjansky registers
+(SODA Task 020, 2026-09-07), all under `corpus/`:
+
+1. **Register 1 — literary / narrative:** "Tuta historija" excerpt
+   (Prolog + Razděl 1 "Věčna Zima"; Task 019, unchanged) — 4 820 B,
+   SHA-256 `413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c`.
+2. **Register 2 — artistic / poetic:** complete Latin-script song album
+   *Ahoj, Slovjani!* in original order (11 songs, 76 unique stanzas /
+   322 lines), from the author-supplied copy of the public album page;
+   Cyrillic duplicates and webpage/HTML material removed, verbatim
+   repeated stanzas/refrains deduplicated, linguistic forms NOT
+   normalized or corrected — 9 407 B, SHA-256
+   `7e25a56f67a52976083f625fabf040b6cd5ae399317cb36a59a302a3a52dcacf`.
+3. **Register 3 — informative / encyclopedic:** cleaned running prose of
+   the authentic Medžuslovjansky Wikipedia article *Sadovničstvo*
+   (isv.wikipedia.org, retrieved 2026-09-07 from the Wikimedia wikitext
+   API; the ISV article itself, not a translation) — 84 paragraphs,
+   44 101 B, SHA-256
+   `b03402fef2384730b90a5ab879af78be63b5e6d0e4fa00db4c3c3525844c8345`.
+
+The **authoritative combined file** `phase2a-authentic-isv-corpus.txt`
+(58 459 B, ≈ 8 184 whitespace tokens, SHA-256
+`aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857`; corpus
+id `phase2a-authentic-isv`, v1), with plain-text `=== REGISTER … ===`
+section headers, is embedded byte-identically in every primed `msg1` for
+all 18 configurations. ≈58 KB / ≈8 200 tokens is well within every roster
+model's context window and is **not** truncated or subsetted per model.
+All corpus text files are gitignored/local-only; only this README,
+`corpus/README.md` and the pinned hashes are committed. See
+`corpus/README.md` for per-register provenance, license notes,
 suitability and contamination checks.
 
 ## Conversation-contamination control (critical)

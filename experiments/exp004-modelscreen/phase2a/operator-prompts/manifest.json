@@ -4,19 +4,19 @@
   "phase": "2a",
   "date": "2026-09-07",
   "generator": "scripts/run_exp004_phase2a.py prepare",
-  "generator_commit": "f395cea14fc616e510f627f90f8dc4add077ddbd",
+  "generator_commit": "26b9f6349a1874587ac5ceabd7039a713ed47df1",
   "corpus": {
-    "id": "tuta-historija",
+    "id": "phase2a-authentic-isv",
     "version": "v1",
-    "file": "experiments/exp004-modelscreen/phase2a/corpus/tuta-historija-excerpt.txt",
-    "sha256": "413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c",
-    "bytes": 4820
+    "file": "experiments/exp004-modelscreen/phase2a/corpus/phase2a-authentic-isv-corpus.txt",
+    "sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+    "bytes": 58459
   },
   "source": {
     "file": "experiments/exp004-modelscreen/input/source.txt",
     "sha256": "5de968a6214d3d64bdb586b5121f494c4bb107e33546487a86bf8ecc57280723"
   },
-  "note": "Prompt files embed the copyrighted Polish story and the author-supplied corpus and stay local (gitignored); this manifest records prompt hashes only.",
+  "note": "Prompt files embed the copyrighted Polish story and the author-supplied / locally-held three-register corpus (register 3 is CC BY-SA 4.0) and stay local (gitignored); this manifest records prompt hashes only.",
   "files": [
     {
       "file": "ctl-01-gpt-5.6-luna-thinkoff.md",
@@ -167,8 +167,8 @@
       "run_id": "2026-09-07__openai__gpt-5.6-luna__thinkoff__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "5d7508cf32d52851a330a7fc0fec5470b57bf9c78f3b5bfdf4fe8c1a8f17752b",
-      "bytes": 6428
+      "prompt_sha256": "0dc673d36fe362bc478e02222dec095476d164ca609a36acaacf2d5ae89e4e15",
+      "bytes": 60945
     },
     {
       "file": "primed-01-gpt-5.6-luna-thinkoff-msg2.md",
@@ -183,8 +183,8 @@
       "run_id": "2026-09-07__openai__gpt-5.6-luna__thinkon__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "bd69a7849c306dbfd1da0747586136d1685635b5501207b8a07bcc30a5770986",
-      "bytes": 6424
+      "prompt_sha256": "26f5adab0a5a0c0ddf18711a423a4afc15e8b0aa3824e6ee88ddacb5bbd8a51d",
+      "bytes": 60941
     },
     {
       "file": "primed-02-gpt-5.6-luna-thinkon-msg2.md",
@@ -199,8 +199,8 @@
       "run_id": "2026-09-07__openai__gpt-isv-teacher__unknown__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "61cb98e0848f84495d9ed23664e3cc18681de6ecbde3f4ff54e02c0710676685",
-      "bytes": 6493
+      "prompt_sha256": "2aada012eab46e91e8e7b60527a786f40b2b368eeb76b7c33d1ae87538be5277",
+      "bytes": 61010
     },
     {
       "file": "primed-03-gpt-isv-teacher-unknown-msg2.md",
@@ -215,8 +215,8 @@
       "run_id": "2026-09-07__anthropic__claude__sonnet-5__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "0edfda38f8dffee098c646529aaa27a0ec392998ed8bc9fa7fe922721eacbfaa",
-      "bytes": 6456
+      "prompt_sha256": "2a35bd09281399e7ff99eb681b574483b9eb23bbad7811f03f81266a44fd8c36",
+      "bytes": 60973
     },
     {
       "file": "primed-04-claude-sonnet-5-msg2.md",
@@ -231,8 +231,8 @@
       "run_id": "2026-09-07__google__gemini-3.1-pro__extthinkon__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "6a210143415c7aaaa9258cdaadad1900b6511ee0b0964a166b9fec832d8f7b01",
-      "bytes": 6527
+      "prompt_sha256": "0ae18938f95a7311b74d21560567c75f14189faf0c0ce16065b60f03a3cf0e1b",
+      "bytes": 61044
     },
     {
       "file": "primed-05-gemini-3.1-pro-extthinkon-msg2.md",
@@ -247,8 +247,8 @@
       "run_id": "2026-09-07__deepseek__deepseek-v3-instant__deepthinkoff__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "0768d959cdf1b02469645361c070976cc881a085052125c79731e4f558cbe645",
-      "bytes": 6484
+      "prompt_sha256": "4e74b7931c7271373b8295c87b6063bc52ab2acc06bd79355fa2802f0291961c",
+      "bytes": 61001
     },
     {
       "file": "primed-06-deepseek-v3-instant-deepthinkoff-msg2.md",
@@ -263,8 +263,8 @@
       "run_id": "2026-09-07__deepseek__deepseek-v3-instant__deepthinkon__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "47b598d577f83fd57c5318ecdcfc8ab2f84e556570da6c0f18de4ab6809cc771",
-      "bytes": 6480
+      "prompt_sha256": "7c488680e69f7a3fc1882811537169dcae1e2d3958feedaa50ed0df2ea53afdd",
+      "bytes": 60997
     },
     {
       "file": "primed-07-deepseek-v3-instant-deepthinkon-msg2.md",
@@ -279,8 +279,8 @@
       "run_id": "2026-09-07__xai__grok__unknown__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "905c3c84593d376af762ed2dcc709b7eb6997f7b8e84acd3d2793928f2119885",
-      "bytes": 6363
+      "prompt_sha256": "454c13238a9a465e391fc85c13f73498b6ff24d9d04c50638a29f64880acea82",
+      "bytes": 60880
     },
     {
       "file": "primed-08-grok-unknown-msg2.md",
@@ -295,8 +295,8 @@
       "run_id": "2026-09-07__moonshot__kimi__k2.6-instant__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "84a58eb76e9511b741c59c4b87c6588d6699e3eed94e404d06fba9bae006a7a3",
-      "bytes": 6437
+      "prompt_sha256": "25a8068e136f48645cf4c984f25a8a26ff4d98c2340d17802b65634d4f6a2e96",
+      "bytes": 60954
     },
     {
       "file": "primed-09-kimi-k2.6-instant-msg2.md",
@@ -311,8 +311,8 @@
       "run_id": "2026-09-07__alibaba__qwen-3.8-max__thinking__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "a77e168a98fd2bc54acfdf777273429f80a12553f08f2b248b3f9dca607629e8",
-      "bytes": 6435
+      "prompt_sha256": "43216688f432508d43eebb5a78643fff325fb48a2021072d4ee482e3115e9441",
+      "bytes": 60952
     },
     {
       "file": "primed-10-qwen-3.8-max-thinking-msg2.md",
@@ -327,8 +327,8 @@
       "run_id": "2026-09-07__anthropic__claude__sonnet-5-max__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "c5db17e0ec52ffae4738a06094a0ab6278b15bb5ed0c6d0e836ad1c7ea27c8cd",
-      "bytes": 6477
+      "prompt_sha256": "6bdb2034fff6bc8c63da235cfa57b24b372345cc31f6dc007ada09b1119f97cf",
+      "bytes": 60994
     },
     {
       "file": "primed-12-claude-sonnet-5-max-msg2.md",
@@ -343,8 +343,8 @@
       "run_id": "2026-09-07__google__gemini-3.6-flash__extthinkoff__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "fcbc932c8ab72c63921c2854701d3fd409b51302be71ef3a7ba9eb679dc2b2de",
-      "bytes": 6489
+      "prompt_sha256": "601fbdb422eceab9ac7a510b8b839375f6c905c457cc35835d892cd562f67088",
+      "bytes": 61006
     },
     {
       "file": "primed-13-gemini-3.6-flash-extthinkoff-msg2.md",
@@ -359,8 +359,8 @@
       "run_id": "2026-09-07__google__gemini-3.6-flash__extthinkon__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "660ea9f4af0ce0df64422d1e6fef2fbb055bd3fec9b96aa1412eac8c0e23ec0b",
-      "bytes": 6485
+      "prompt_sha256": "16bedba0214c0a7a4e3563157d5849c7ba3a4a7ce2f2df14aa6e94a6496896d1",
+      "bytes": 61002
     },
     {
       "file": "primed-14-gemini-3.6-flash-extthinkon-msg2.md",
@@ -375,8 +375,8 @@
       "run_id": "2026-09-07__deepseek__deepseek-v3-expert__deepthinkoff__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "8941220e1f601c611faa43bb2b4868882b2621fb1af40ab33fe638b9ca6a3141",
-      "bytes": 6481
+      "prompt_sha256": "7ddeb881373cebd55d0d2a5d5937455dc24780ca17d39ce462ad2bf96c5eff5c",
+      "bytes": 60998
     },
     {
       "file": "primed-15-deepseek-v3-expert-deepthinkoff-msg2.md",
@@ -391,8 +391,8 @@
       "run_id": "2026-09-07__deepseek__deepseek-v3-expert__deepthinkon__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "da8080e186180dae7f401d425826a4f0411b1efc44c5bfe878a2dcf972749bb1",
-      "bytes": 6477
+      "prompt_sha256": "f90a3b4694cad278c919092fe7940ae407418de35b6fa05aa3e70ce5e3444398",
+      "bytes": 60994
     },
     {
       "file": "primed-16-deepseek-v3-expert-deepthinkon-msg2.md",
@@ -407,8 +407,8 @@
       "run_id": "2026-09-07__alibaba__qwen-3.7-plus__thinking__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "b4a590366f9d7bb9d29049c3a755d0da5c1bfddf7985b0081e10497cf8ba0565",
-      "bytes": 6438
+      "prompt_sha256": "a90fa4966c82fe71832c222c33482fc98969d849b99527b4210581a3e1cee522",
+      "bytes": 60955
     },
     {
       "file": "primed-17-qwen-3.7-plus-thinking-msg2.md",
@@ -423,8 +423,8 @@
       "run_id": "2026-09-07__alibaba__qwen-3.7-plus__fast__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "aa95da9f60290a6f1a2328d0daa9cdbf27f85b0bed5314acef286e46e93a5dfc",
-      "bytes": 6422
+      "prompt_sha256": "5d33b68bcdc295788707bc08187618165fe07afbb83e6265864b8ea0b69f3301",
+      "bytes": 60939
     },
     {
       "file": "primed-18-qwen-3.7-plus-fast-msg2.md",
@@ -439,8 +439,8 @@
       "run_id": "2026-09-07__alibaba__qwen-3.8-max__fast__p2a-primed",
       "condition": "p2a-primed",
       "message": 1,
-      "prompt_sha256": "7f0c68d431a931ca7e821c86160b009358fb525c33e0640fabad7c43c29257fb",
-      "bytes": 6419
+      "prompt_sha256": "410a9df101d22d0ecfee663a0862a3141cbbc4d166338e7c2b9fa33ef34f84b8",
+      "bytes": 60936
     },
     {
       "file": "primed-19-qwen-3.8-max-fast-msg2.md",
