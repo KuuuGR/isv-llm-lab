@@ -139,7 +139,7 @@ replicates of each condition:
 | DeepSeek V3 Instant — ON | 3 | 74.75 (0.73) | 2 | 81.31 (0.19) | +6.56 | +8.55 |
 | DeepSeek V3 Expert — OFF | 3 | 78.35 (3.67) | 3 | 84.81 (0.99) | +6.47 | +4.70 |
 | DeepSeek V3 Expert — ON | 3 | 81.33 (1.50) | 3 | 85.10 (0.64) | +3.77 | +5.14 |
-| Grok | 3 | 79.33 (2.01) | 3 | 83.83 (0.88) | +4.50 | +7.18 |
+| Grok 4.5 Fast | 3 | 79.33 (2.01) | 3 | 83.83 (0.88) | +4.50 | +7.18 |
 | Kimi K2.6 Instant | 3 | 74.03 (0.81) | 3 | 80.11 (0.69) | +6.08 | +3.06 |
 | Qwen 3.8 Max — Fast | 3 | 80.09 (1.52) | 3 | 81.82 (5.83) | +1.72 | +3.04 |
 | Qwen 3.8 Max — Thinking | 3 | 78.76 (0.90) | 0 | — | n/a | +3.07 |
@@ -148,6 +148,11 @@ replicates of each condition:
 
 SD = sample SD over n usable replicates (pp); with n = 3 these are
 noisy descriptive quantities, not precise population estimates.
+
+Rows use the canonical configuration labels (Task 031). The Grok row is
+**Grok 4.5 Fast** — operator-reported identity `Grok 4.5, built by xAI
+(fast)`, not independently verified; the historical Phase-1/2A roster
+token `unknown` is preserved in run metadata, see `../grok-identity.md`.
 
 ### Exploratory Dola (separate; never primary)
 
@@ -197,8 +202,8 @@ the old single-run Δ. Magnitudes on the same 15 rows: old mean +6.33 pp
   DeepSeek Expert ON (+3.77 vs +5.14), DeepSeek Instant OFF (+6.89 vs
   +7.58), DeepSeek Instant ON (+6.56 vs +8.55), DeepSeek Expert OFF
   (+6.47 vs +4.70), GPT-5.6 Luna OFF (+5.67 vs +4.14), GPT-5.6 Luna ON
-  (+4.71 vs +3.76), GPT Interslavic Teacher (+8.35 vs +6.18), Grok
-  (+4.50 vs +7.18) — 12 rows.
+  (+4.71 vs +3.76), GPT Interslavic Teacher (+8.35 vs +6.18), Grok 4.5
+  Fast (+4.50 vs +7.18) — 12 rows.
 - **Substantially larger under repetition (new > old + 3 pp):** Gemini
   3.6 Flash OFF (+11.88 vs +3.20), Kimi (+6.08 vs +3.06) — 2 rows.
 - **Same direction, slightly larger:** Gemini 3.6 Flash ON (+15.91 vs

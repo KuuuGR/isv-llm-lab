@@ -94,7 +94,7 @@ model/configuration** (delta per dimension; no composite score, no ranking).
 | 05 | Gemini 3.1 Pro — extended thinking ON | google / gemini-3.1-pro / extthinkon | `…__gemini-3.1-pro__extthinkon__p2a-primed` |
 | 06 | DeepSeek V3 Instant — DeepThink OFF | deepseek / deepseek-v3-instant / deepthinkoff | `…__deepseek-v3-instant__deepthinkoff__p2a-primed` |
 | 07 | DeepSeek V3 Instant — DeepThink ON | deepseek / deepseek-v3-instant / deepthinkon | `…__deepseek-v3-instant__deepthinkon__p2a-primed` |
-| 08 | Grok | xai / grok / unknown | `…__grok__unknown__p2a-primed` |
+| 08 | Grok 4.5 Fast (operator-reported)\* | xai / grok / unknown | `…__grok__unknown__p2a-primed` |
 | 09 | Kimi K2.6 Instant (Standard) | moonshot / kimi / k2.6-instant | `…__kimi__k2.6-instant__p2a-primed` |
 | 10 | Qwen 3.8 Max — Thinking | alibaba / qwen-3.8-max / thinking | `…__qwen-3.8-max__thinking__p2a-primed` |
 | 12 | Claude Sonnet 5 — max (long reasoning) | anthropic / claude / sonnet-5-max | `…__claude__sonnet-5-max__p2a-primed` |
@@ -109,6 +109,13 @@ model/configuration** (delta per dimension; no composite score, no ranking).
 GLM 4.5 (Phase-1 #11) is excluded: its Phase-1 intake failed, so it has no
 usable baseline. The roster is derived in code from
 `run_exp004_phase1.ROSTER` and never reconstructed from filenames.
+
+\* **Row 08 — canonical Grok identity (Task 031):** the row-08 configuration
+is **Grok 4.5 Fast**, operator-reported (`Grok 4.5, built by xAI (fast)`,
+recorded Tasks 021/026; not independently verified). The run-id/file token
+`unknown` is the historical value recorded at generation time (Task 018)
+and is preserved as provenance; canonical alias id `xai__grok__fast`. See
+`../grok-identity.md` (authoritative) and `../grok-identity-map.json`.
 
 ## Exploratory additions (Task 021): Dola 3.8 — runs 20 and 21
 

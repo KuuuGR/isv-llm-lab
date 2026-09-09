@@ -180,6 +180,12 @@ and the plan is approved.
 | 11 | GLM | Zhipu GLM | no repo evidence | **conditional**: only if current web access satisfies §5.1 |
 | 12 | (custom GPT variant of row 3 is NOT a separate model) | — | — | — |
 
+Row 8 (Grok): this row records the **design-time** state (version
+genuinely unknown then). The executed/current configuration is
+**Grok 4.5 Fast** (operator-reported identity "Grok 4.5, built by xAI
+(fast)", recorded Tasks 021/026; not independently verified) — see
+`grok-identity.md` (authoritative) and `grok-identity-map.json`.
+
 ### 5.3 Explicit exclusions and statuses
 
 - **Bielik** — not in the main roster. Observed evidence (EXP-003, preserved):

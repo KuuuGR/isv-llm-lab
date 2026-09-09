@@ -25,7 +25,7 @@ The 19 raw session files (author naming, preserved as-is):
 | `05-gemini-3.1-Pro-rozszerzony.md` | gemini-3.1-pro-extthinkon |
 | `06-deepseek-v3-instant-deepthinkoff.md` | deepseek-v3-instant-deepthinkoff |
 | `07-deepseek-v3-instant-deepthinkon.md` | deepseek-v3-instant-deepthinkon |
-| `08-grok-unknown.md` | grok-unknown |
+| `08-grok-unknown.md` | grok-unknown\* |
 | `09-kimi-unknown.md` | kimi-k2.6-instant |
 | `10-qwen-3.8-Max-Thinking.md` | qwen-3.8-max-thinking |
 | `11-glm-unknown.md` | glm-4.5 (failed artifact: service-error page) |
@@ -48,6 +48,14 @@ byte-identity, reply end-marker, duplicates) by
 header said `Max-Thinking` (**Fast** confirmed by the author); Qwen session
 headers carry an `EXP-004q` typo; GLM's file contains only the service
 error page, not a translation.
+
+\* **Row 08 — canonical Grok identity (Task 031):** the row-08 session is
+the **Grok 4.5 Fast** configuration, operator-reported (`Grok 4.5, built
+by xAI (fast)`, recorded Tasks 021/026; not independently verified). The
+author's session filename / reconciled token `grok-unknown` are the
+historical values recorded at Task 018 and are preserved; canonical alias
+`xai__grok__fast`. See `../grok-identity.md` (authoritative) +
+`../grok-identity-map.json`.
 
 ## Audit evidence
 

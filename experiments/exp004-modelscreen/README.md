@@ -182,7 +182,7 @@ package + manifest + author confirmation — see
 | 5 | Gemini 3.1 Pro — extended thinking ON | Google Gemini | pass | complete |
 | 6 | DeepSeek V3 Instant — DeepThink OFF | DeepSeek chat | pass | complete |
 | 7 | DeepSeek V3 Instant — DeepThink ON | DeepSeek chat | pass | complete |
-| 8 | Grok | xAI Grok | pass | complete |
+| 8 | Grok 4.5 Fast\* | xAI Grok | pass | complete |
 | 9 | Kimi K2.6 Instant (Standard) | Moonshot Kimi | pass | complete |
 | 10 | Qwen 3.8 Max — Thinking | Alibaba Qwen Chat | pass | complete |
 | 11 | GLM 4.5 | Zhipu GLM | **fail** | **failed** |
@@ -194,6 +194,14 @@ package + manifest + author confirmation — see
 | 17 | Qwen 3.7 Plus — Thinking | Alibaba Qwen Chat | pass | complete |
 | 18 | Qwen 3.7 Plus — Fast | Alibaba Qwen Chat | pass | complete |
 | 19 | Qwen 3.8 Max — Fast | Alibaba Qwen Chat | pass | complete |
+
+\* Row 8 (Grok): the configuration is **Grok 4.5 Fast** —
+operator-reported identity "Grok 4.5, built by xAI (fast)" (recorded in
+the row-08 line, Tasks 021/026; not independently verified). The
+row-08 prompt-file / run-id token `unknown` was genuinely recorded at
+Task 018 and is preserved as historical provenance; canonical alias
+`xai__grok__fast`. See `grok-identity.md` (authoritative) and
+`grok-identity-map.json`.
 
 \* Row 12 (Claude Sonnet 5 max): the run completed but took >45 min and
 exhausted the free-tier allowance (author report) — preserved as a
@@ -237,6 +245,11 @@ is complete and evaluated.
 - `DESIGN.md` — experiment design (Task 013), roster + protocol finalized
   (Task 016), execution approved (Task 017), execution + reconciliation
   recorded (Task 018), Phase 2A corpus-priming design §13 (Task 019).
+- `grok-identity.md` / `grok-identity-map.json` — **authoritative canonical
+  Grok configuration note + machine-readable audit map (Task 031)**:
+  "Grok 4.5 Fast" (operator-reported) for the current line, historical
+  `unknown` identifiers preserved with canonical alias `xai__grok__fast`,
+  no Grok Build run in repository evidence.
 - `base_instruction.txt` — the single direct-translation instruction
   (identical for every row; no guidance of any kind).
 - `input/` — story-only source (gitignored, local) + derivation record.

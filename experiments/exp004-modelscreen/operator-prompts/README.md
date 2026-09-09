@@ -33,7 +33,7 @@ instruction/source body, which is byte-identical in every session file
 | `05-gemini-3.1-pro-extthinkon.md` | Gemini 3.1 Pro — extended thinking ON | Gemini (web) |
 | `06-deepseek-v3-instant-deepthinkoff.md` | DeepSeek V3 Instant — DeepThink OFF | DeepSeek chat |
 | `07-deepseek-v3-instant-deepthinkon.md` | DeepSeek V3 Instant — DeepThink ON | DeepSeek chat |
-| `08-grok-unknown.md` | Grok | Grok (web) |
+| `08-grok-unknown.md` | Grok 4.5 Fast (operator-reported)\* | Grok (web) |
 | `09-kimi-k2.6-instant.md` | Kimi K2.6 Instant (Standard) | Kimi (web) |
 | `10-qwen-3.8-max-thinking.md` | Qwen 3.8 Max — Thinking | Qwen Chat |
 | `11-glm-4.5.md` | GLM 4.5 | Zhipu GLM (web) |
@@ -50,6 +50,13 @@ Rows 5/13/14 (Gemini) and 11 (GLM) were **conditional** (DESIGN §5.1/D-036).
 Gemini satisfied the practical free-access/quota criterion in execution and
 was run; GLM 4.5 could not execute (repeated service errors) and its
 artifact is preserved as a failed external output.
+
+\* **Row 08 — canonical Grok identity (Task 031):** the configuration is
+**Grok 4.5 Fast**, operator-reported (`Grok 4.5, built by xAI (fast)`,
+recorded Tasks 021/026; not independently verified). The prompt-file /
+run-id token `unknown` is the historical value recorded at Task 018 and is
+preserved; canonical alias `xai__grok__fast`. See
+`../grok-identity.md` (authoritative) + `../grok-identity-map.json`.
 
 ## Exploratory Phase-1 DIRECT prompts added retrospectively (Task 022), collected + evaluated (Task 023)
 
