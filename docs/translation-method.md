@@ -175,14 +175,33 @@ Baseline:           76 %
 The desired final product is a reproducible method that can say: "Given
 this Polish input, use configuration X, then perform steps Y and Z."
 
-**Phase-2B status (Task 029):** the Phase-2B HIGH-overlap test kit (7
-configurations × direct/primed × 3 replicates = 42 planned translations)
-is prepared but not executed
-(`experiments/exp004-modelscreen/phase2b/`, `docs/research-roadmap.md`
-§10–11); the corpus self-evaluation reference point for reading coverage
-numbers lives in `experiments/exp004-modelscreen/phase2a/
-corpus-selfeval/`. The pipeline-optimization experiment above remains
-after Phase 2B, as scoped.
+**Phase-2B status (Tasks 029/030):** the Phase-2B HIGH-overlap test kit
+(7 configurations × direct/primed × 3 replicates = 42 planned
+translations) is frozen (story v1, 2026-09-09) and prepared but **not
+executed** (`experiments/exp004-modelscreen/phase2b/`,
+`docs/research-roadmap.md` §10–11); the corpus self-evaluation
+reference point for reading coverage numbers lives in
+`experiments/exp004-modelscreen/phase2a/corpus-selfeval/`. The
+pipeline-optimization experiment above remains after Phase 2B, as
+scoped.
+
+**HIGH-overlap is evidence about corpus-context behaviour — NOT a
+production method (Task 030).** The HIGH-overlap condition deliberately
+uses a source story (`Iskra i Wieloryb`) written to be strongly aligned
+with the authentic corpus, to measure how corpus priming behaves under a
+controlled source/corpus relationship. It is not a recommendation that
+production users translate corpus-like texts, and it is not itself a
+pipeline step: real user text may be unrelated to the corpus, so a
+HIGH-overlap effect (if measured later) would be scientifically
+informative without being directly transferable to production. The
+practical status of authentic-corpus priming therefore remains what §6
+records: a *candidate pipeline stage* whose usefulness for arbitrary
+Polish input is measured by the LOW-overlap (`Podkłady`, next stage) and
+UNSEEN-domain tests. Future production-method work will test
+combinations of the §4/§6 ingredients — lexical intervention,
+morphology/grammar intervention, authentic corpus priming, targeted
+lexical repair, grammar repair — **without yet claiming an optimal
+ordering** (all §6 orderings remain hypotheses).
 
 ## 8. Evaluation philosophy for the future software
 
@@ -215,5 +234,5 @@ silent black-box translation.
 | EXP-003 (scaffolding A–D + human test) | `docs/EXPERIMENTS.md` §EXP-003, `experiments/exp003-scaffold/DESIGN.md` + `REPORT.md` |
 | EXP-004 (corpus priming + repeats) | `experiments/exp004-modelscreen/DESIGN.md`, `repeats/REPORT.md`, `assistant-research-bundle/` |
 | Corpus self-evaluation (reference ceiling) | `experiments/exp004-modelscreen/phase2a/corpus-selfeval/` (Task 029) |
-| Phase-2B HIGH-overlap test (prepared) | `experiments/exp004-modelscreen/phase2b/` (Task 029) |
+| Phase-2B HIGH-overlap test (frozen + prepared, not executed) | `experiments/exp004-modelscreen/phase2b/` (Tasks 029/030) |
 | Machine-readable results | `experiments/exp004-modelscreen/assistant-research-bundle/results.json`, `summary.json` |

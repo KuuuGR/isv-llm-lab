@@ -877,7 +877,7 @@ Phase-2B unseen-topic transfer test (see REPORT §15). Task 029 prepared
 the Phase-2B HIGH-overlap kit (see §15 below); collection has not
 started.
 
-## 15. Phase 2B — source-text regimes and HIGH-overlap kit (`PROPOSED` design; HIGH kit `PREPARED` but NOT executed, SODA Task 029)
+## 15. Phase 2B — source-text regimes and HIGH-overlap kit (`PROPOSED` design; HIGH story `FROZEN` + kit `PREPARED`, NOT executed — SODA Tasks 029/030)
 
 **Scientific question (unchanged from §14 tail / Task-028 roadmap).**
 Does authentic ISV corpus priming generalize to source material whose
@@ -885,10 +885,10 @@ topic/theme is absent from the priming corpus? Task 029 records the
 three source-text regimes used to answer it (see
 `docs/research-roadmap.md` §11.1–11.3):
 
-| Regime | Test item | Status (Task 029) |
+| Regime | Test item | Status (Tasks 029/030) |
 |---|---|---|
-| HIGH-overlap | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` (classification `high_overlap_corpus_inspired` — deliberately NOT `independent_same_topic`) | kit prepared; not executed |
-| LOW-overlap | `Opowieść o sygnale` and/or `Podkłady` | scoped; not prepared |
+| HIGH-overlap | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` (classification `high_overlap_corpus_inspired` — deliberately NOT `independent_same_topic`); frozen v1 Task 030 | frozen + kit prepared; not executed |
+| LOW-overlap | **`Podkłady`** (author's bank section 4; pinned Task 030). `Opowieść o sygnale` remains banked, not selected | reserved for the NEXT stage; not prepared |
 | UNSEEN DOMAIN | future biomedical-physics / electromedicine educational material | scoped; not prepared |
 
 **HIGH-overlap design.** 7 representative configurations (roadmap §10)
@@ -907,16 +907,32 @@ produce a larger improvement when the target text is strongly aligned
 with the priming corpus) is recorded as a hypothesis; interpretation
 compares Δ_HIGH vs Δ_LOW vs Δ_UNSEEN, none of which is claimed yet.
 
+**Source story frozen (Task 030).** The HIGH-overlap story was supplied
+inside the author's multi-story bank `InterslavicTesty.md` (outside the
+repo; sha256 `3662cda9…`), section `# 3.`. It was extracted
+deterministically (`scripts/extract_phase2b_high_story.py`: only
+Markdown structural markers removed — H1 section number, `## ` heading
+prefixes, `> ` song prefixes, `*` emphasis, `---` rules; blank runs
+collapsed; all 227 story content lines preserved exactly, verified
+parity) and frozen as **v1** (2026-09-09): SHA-256
+`ab8a0dcf7352789c09c4aca132c086999c861407e4cd682ee9414aab5b792f63`,
+30 061 B / 440 lines. Full record: `phase2b/input/README.md`. Bank
+sections 1 (`Opowieść o Faktach…`) and 2 (`Opowieść o sygnale`) are
+retained in the bank, unused; section 4 (`Podkłady`) is reserved as the
+LOW-overlap source for the next stage.
+
 **Deterministic kit.** `experiments/exp004-modelscreen/phase2b/` +
 `scripts/run_exp004_phase2b.py` (freeze-story / prepare; extends the
-repeats machinery `scripts/run_exp004_repeats.py`; never calls an LLM).
-Run ids: `<date>__p2b-high__<provider>__<model>__<model_version>__
+repeats machinery `scripts/run_exp004_repeats.py`; never calls an LLM)
++ `scripts/extract_phase2b_high_story.py` (bank extraction). Run ids:
+`<date>__p2b-high__<provider>__<model>__<model_version>__
 direct|primed__rNN` (7-field; cannot collide with Task-025 repeat ids).
-The frozen story text is an author input not yet supplied
-(`phase2b/input/README.md`); `prepare` fails loudly until it exists —
-nothing is fabricated.
+Prepared 2026-09-09 for the frozen v1 story (`prepare --date
+2026-09-09`; 42-run plan, 63 prompt files, manifest; regeneration
+byte-identical, verified). No LLM was called and no translation exists.
 
-**Corpus self-evaluation (Task 029, COMPLETED).** The authentic corpus
+**Corpus self-evaluation (Task 029, COMPLETED; reproducibility
+re-verified Task 030).** The authentic corpus
 itself was measured with the unchanged evaluation stack used for model
 outputs (reference point for interpreting model coverage; not a
 correctness claim): combined corpus canonical 80.50 % / broader 89.17 % /
@@ -925,4 +941,5 @@ unresolved 19.50 % / orthography-out 47 (8 096 lexical tokens); Register 1
 100.00 % broader; Register 3 (encyclopedic) 75.72 % canonical. Full
 record: `phase2a/corpus-selfeval/`; cross-register composition is
 exploratory (61 lexical surfaces shared by all three of 3 425 unique),
-not a quality score.
+not a quality score. Re-running the deterministic self-evaluation
+(Task 030) reproduces the stored reports byte-identically.

@@ -1,13 +1,29 @@
 # Project State
 
-Updated: 2026-09-09 (SODA Task 029 — HIGH-OVERLAP TEST PREPARATION +
-AUTHENTIC-CORPUS SELF-EVALUATION: deterministic Phase-2B HIGH-overlap
-kit prepared (7 configs × direct/primed × 3 replicates = 42 planned
-translations, story to be frozen by the author — NOT executed, no LLM
-calls) + the authentic corpus itself evaluated with the unchanged
-evaluation stack as a reference point (combined 80.50 % canonical /
-89.17 % broader / 19.50 % unresolved; per-register results) — see the
-Task-029 paragraph below. SODA Task 028 — RESEARCH-STATE RECONSTRUCTION,
+Updated: 2026-09-09 (SODA Task 030 — HIGH-OVERLAP EXPERIMENT EXECUTION
+PREPARATION: HIGH-overlap source story extracted from the author's bank
+`InterslavicTesty.md` section `# 3.` (only Markdown structural markers
+removed; all 227 story content lines preserved exactly, verified parity)
+and frozen as v1 — sha256 `ab8a0dcf…`, 30 061 B / 440 lines,
+classification `high_overlap_corpus_inspired` — by the deterministic
+`scripts/extract_phase2b_high_story.py` + `run_exp004_phase2b.py
+freeze-story`; the 42-run HIGH kit (7 configs × direct/primed × 3
+replicates = 42 planned translations) was generated
+(`prepare --date 2026-09-09`; 63 prompt files + plan + manifest;
+regeneration byte-identical, verified) — **no translations exist**, the
+42 runs remain the next manual operator step; bank sections 1/2
+preserved-unused and section 4 `Podkłady` reserved as the LOW-overlap
+source for the NEXT stage (NOT prepared); corpus self-evaluation
+reproducibility re-verified (stored reports reproduced byte-identically)
+— see the Task-030 paragraph below. SODA Task 029 — HIGH-OVERLAP TEST
+PREPARATION + AUTHENTIC-CORPUS SELF-EVALUATION: deterministic Phase-2B
+HIGH-overlap kit prepared (7 configs × direct/primed × 3 replicates =
+42 planned translations, story to be frozen by the author — NOT
+executed, no LLM calls) + the authentic corpus itself evaluated with the
+unchanged evaluation stack as a reference point (combined 80.50 %
+canonical / 89.17 % broader / 19.50 % unresolved; per-register results)
+— see the Task-029 paragraph below. SODA Task 028 —
+RESEARCH-STATE RECONSTRUCTION,
 ROADMAP + TRANSLATION-METHOD SPECIFICATION: externally-discussed research
 direction recorded in-repo — `docs/research-roadmap.md` (hypothesis,
 completed-experiment record, key findings, Phase-2B shortlist + plan,
@@ -125,6 +141,45 @@ median SD 1.49/0.87 pp; Qwen 3.8 Max Fast exception) — 15/15 checks
 green; generator run twice → byte-identical.** Raw outputs are NOT
 copied (raw/README.md explains on-demand export by run ID). Docs:
 EXP-004 README + repeats/analysis README updated; full suite green.
+
+SODA Task 030 (2026-09-09) — EXTRACTED + FROZE THE HIGH-OVERLAP STORY
+AND GENERATED THE 42-RUN HIGH KIT (deterministic; no LLM calls, no
+translations collected, no raw data modified, LOW-overlap NOT touched).
+**(1) Story extraction + freezing.** The research lead supplied the
+multi-story bank `InterslavicTesty.md` (outside the repo; sha256
+`3662cda9…`) with four sections: 1 `Opowieść o Faktach…`, 2 `Opowieść
+o sygnale`, 3 `Iskra i Wieloryb — wersja z oryginalnymi nazwami`
+(HIGH-overlap), 4 `Podkłady` (LOW-overlap). New deterministic
+`scripts/extract_phase2b_high_story.py` extracts section 3 only: it
+removes Markdown structural markers (H1 section number `# 3.`, `## `
+heading prefixes, `> ` song-blockquote prefixes, `*` emphasis, lone
+`---` rules), collapses blank runs and prepends the story title line;
+all 227 story content lines are preserved exactly (verified parity).
+The extraction (sha256 `ab8a0dcf7352789c09c4aca132c086999c861407e4cd682ee9414aab5b792f63`,
+30 061 B / 440 lines) was frozen as **v1** via `run_exp004_phase2b.py
+freeze-story` (`phase2b/input/versions/iskra-wieloryb-original-names-v1.txt`
++ provenance `high-overlap-story.meta.json`; classification
+`high_overlap_corpus_inspired`, NOT `independent_same_topic`). Bank
+sections 1 and 2 are retained in the bank but unused; **section 4
+`Podkłady` is the reserved LOW-overlap source for the next stage — not
+prepared, not mixed into any manifest**. **(2) 42-run kit generated.**
+`run_exp004_phase2b.py prepare --date 2026-09-09` hash-gated the frozen
+story (ab8a0dcf…) and the authoritative corpus (aaad28e4…) and wrote
+the 42-run plan (21 direct + 21 primed; 7 shortlisted configs × 3
+replicates), 63 prompt files (direct corpus-free; primed msg1 full
+corpus; msg2 translation task) and the committed hash-only manifest.
+Regeneration is byte-identical (verified with `--force`).
+**No translations exist — the 42 runs are the next manual operator
+step** (`phase2b/outputs/collection-checklist.md`). **(3) Corpus
+self-evaluation reproducibility re-verified**: re-running
+`selfeval_exp004_corpus.py --reuse-scratch` reproduces
+`corpus_selfeval.json` / `corpus_selfeval.md` / `model_comparison.md`
+byte-identically (combined canonical 80.50 % / broader 89.17 % /
+unresolved 19.50 % / orthography-out 47 unchanged). Tests added
+(`tests/test_extract_phase2b_high_story.py`, 10 incl. two real-bank
+pinned checks); docs updated (roadmap §9.1/§10/§11/§13.1/§17;
+translation-method §7/§10; DESIGN §15; EXP-004 README; phase2b
+READMEs; STATE/ROADMAP); full suite green.
 
 SODA Task 029 (2026-09-09) — PREPARED THE PHASE-2B HIGH-OVERLAP TEST
 AND SELF-EVALUATED THE AUTHENTIC CORPUS (deterministic; no LLM calls,
@@ -302,7 +357,7 @@ Research hypothesis:
 This is a hypothesis. The first experiment must establish a baseline before
 any constrained system is judged against it.
 
-## Current status (as of SODA Task 029)
+## Current status (as of SODA Task 030)
 
 | Area | Status |
 |---|---|
@@ -343,6 +398,7 @@ any constrained system is judged against it.
 | **Research-state reconstruction (Task 028, 2026-09-09)** | ✅ **COMPLETE — DOCUMENTATION ONLY** — `docs/research-roadmap.md` (high-level source of truth: framing, COMPLETED experiment record EXP-001→EXP-004 + EXP-005 audit, interpretation, PROPOSED Phase-2B shortlist 7 configs × 3 reps × 2 conditions = 42 translations, 2B-A/2B-B variants, publication direction, stopping rule) + `docs/translation-method.md` (evaluation layers, intervention ladder A–E, pipeline hypotheses, proposed pipeline-optimization experiment, conceptual software). Indexed from README; numbers cross-checked against repo records; no historical correction needed; no tests changed; no experiments run |
 | **EXP-004 corpus self-evaluation (Task 029, 2026-09-09)** | ✅ **COMPLETE — REFERENCE POINT** — authentic corpus measured with the unchanged evaluation stack (`phase2a/corpus-selfeval/`): combined 8 096 tokens — canonical 80.50 %, broader 89.17 %, unresolved 19.50 %, orthography-out 47; Register 1 narrative 95.97/99.48 %; Register 2 artistic 90.56/100.00 %; Register 3 encyclopedic 75.72/84.83 %. Evidence that low canonical model coverage can partly reflect resource limits; corpus orthography clean (does not explain model contamination); exploratory cross-register composition (61/3 425 shared surfaces). Descriptive only — no "corpus score", no correctness claim |
 | **EXP-004 Phase-2B HIGH-overlap kit (Task 029, 2026-09-09)** | ✅ **PREPARED — NOT EXECUTED** — deterministic 42-run HIGH-overlap kit (`experiments/exp004-modelscreen/phase2b/` + `scripts/run_exp004_phase2b.py`): 7 shortlisted configs × direct/primed × 3 replicates; source regime `high_overlap_corpus_inspired` (`Iskra i Wieloryb`); direct corpus-free, primed full-corpus hash-gated (`aaad28e4…`); H-HIGH hypothesis recorded; **story text still to be frozen by the author — `prepare` fails loudly until then; no translations exist; next manual step is the 42 translations** |
+| **EXP-004 HIGH-overlap story frozen + kit generated (Task 030, 2026-09-09)** | ✅ **FROZEN + GENERATED — NOT EXECUTED** — story `Iskra i Wieloryb` extracted from the author's bank section `# 3.` (`scripts/extract_phase2b_high_story.py`, deterministic; Markdown markers removed only; 227 content lines preserved exactly) and frozen v1 (sha256 `ab8a0dcf…`, 30 061 B / 440 lines; classification `high_overlap_corpus_inspired`); 42-run kit generated (`prepare --date 2026-09-09`; 63 prompt files; regeneration byte-identical); bank sections 1/2 unused, **`Podkłady` (section 4) reserved as LOW-overlap source for the NEXT stage — not prepared**; corpus self-evaluation reproducibility re-verified |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
 
 
@@ -404,6 +460,7 @@ scripts/
   analyze_exp004_repeats.py  — EXP-004 Task-025/026 deterministic repeated-generation analysis (stochastic stats, mean-primed−mean-direct vs old delta, figures A–E, selection views; std-lib only)
   build_assistant_research_bundle.py — EXP-004 assistant-research-bundle generator + standalone verifier (Task 027; deterministic, std-lib)
   run_exp004_phase2b.py      — EXP-004 Phase-2B HIGH-overlap kit prep (freeze-story/prepare; 7 configs × 2 conditions × 3 replicates = 42 planned runs; hash-gated; Task 029; extends run_exp004_repeats.py; never calls an LLM)
+  extract_phase2b_high_story.py — EXP-004 Phase-2B HIGH-overlap story extraction from the author's story bank (section `# 3.`; Markdown structural markers removed only; deterministic; Task 030)
   selfeval_exp004_corpus.py  — EXP-004 authentic-corpus self-evaluation (combined + 3 registers through the unchanged Task-008 evaluator + orthography audit; cross-register composition; model comparison; Task 029; deterministic)
 data/
   dictionary/README.md       — how to regenerate the (gitignored) data
@@ -453,7 +510,7 @@ experiments/
     repeats/                 — Phase-repeat experiment (Tasks 025/026): README.md (protocol + manifest + collection record + audit record) + REPORT.md (dedicated report — status: COLLECTED, AUDITED, ANALYSED; results written 2026-09-09) + operator-prompts/ (180 prompt files incl. 12 exploratory Dola; collected raw replies live msg2-style after `## Output`; gitignored — embed source/corpus; manifest.json hash-only committed) + outputs/ (120-run plan dated 2026-09-08, collection-checklist.md, roster.json/md, audit.json/md, run dirs; gitignored except README.md) + analysis/ (README.md committed with results summary; dataset/analysis JSON+MD + figures A–E — deterministic outputs of analyze_exp004_repeats.py, gitignored)
     assistant-research-bundle/  — EXP-004 compact machine-readable research export for independent analysis (Task 027): results.json/csv, summary.json, audit.json, deviations.json, provenance.json, manifest.json, methodology.md, raw/README.md, figures A–E — committed; generator + standalone verifier scripts/build_assistant_research_bundle.py
     phase2a/corpus-selfeval/ — EXP-004 authentic-corpus self-evaluation reference point (Task 029): corpus_selfeval.json/md (combined + per-register canonical/broader/unresolved/orthography) + model_comparison.md (descriptive vs Phase-1/Phase-2A/repeated outputs) + README.md — committed; per-dataset isv-eval CLI scratch in .scratch/ (gitignored)
-    phase2b/                 — Phase-2B HIGH-overlap test (Task 029; PREPARED — NOT EXECUTED): README.md (protocol: 7 shortlisted configs × direct/primed × 3 replicates = 42 planned translations; H-HIGH hypothesis; regime table HIGH/LOW/UNSEEN) + input/ (story to be frozen by the author; provenance note) + operator-prompts/ (generated prompt files after `prepare`; README committed) + outputs/ (plan.json + collection-checklist.md after `prepare`; README committed)
+    phase2b/                 — Phase-2B HIGH-overlap test (Tasks 029/030; story FROZEN v1 + kit GENERATED — NOT EXECUTED): README.md (protocol: 7 shortlisted configs × direct/primed × 3 replicates = 42 planned translations; H-HIGH hypothesis; regime table HIGH/LOW/UNSEEN with LOW pinned to `Podkłady` for the next stage) + input/ (frozen story v1 `versions/iskra-wieloryb-original-names-v1.txt` + provenance `high-overlap-story.meta.json` + extraction copy `_extracted/` — local; README committed with sha256/bytes/lines) + operator-prompts/ (63 generated prompt files + committed hash-only manifest) + outputs/ (plan.json dated 2026-09-09 + collection-checklist.md; README committed)
 ```
 
 ## Working agreements

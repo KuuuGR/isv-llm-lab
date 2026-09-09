@@ -11,7 +11,10 @@ is closed; no further human evaluation will be designed or requested
 (D-042). **TASK 026 (2026-09-09) REPEAT COLLECTION AUDITED +
 EVALUATED + ANALYSED; TASK 027 (2026-09-09) ASSISTANT-RESEARCH-BUNDLE
 BUILT; TASK 029 (2026-09-09) PHASE-2B HIGH-OVERLAP KIT PREPARED (NOT
-EXECUTED) + AUTHENTIC-CORPUS SELF-EVALUATION COMPLETE.** The project author executed the Phase 1 screening sessions in the
+EXECUTED) + AUTHENTIC-CORPUS SELF-EVALUATION COMPLETE; TASK 030
+(2026-09-09) HIGH-OVERLAP STORY FROZEN (v1) + 42-RUN KIT GENERATED —
+STILL NOT EXECUTED; LOW-OVERLAP (`Podkłady`) RESERVED FOR THE NEXT
+STAGE.** The project author executed the Phase 1 screening sessions in the
 external web/chat interfaces; the collected material was audited and
 reconciled against the deterministic prompt package (Task 018) and the
 reconciled runs were run through the intake gate, the deterministic
@@ -66,15 +69,23 @@ the HIGH-overlap kit (`phase2b/` + `scripts/run_exp004_phase2b.py`) plans
 42 deterministic runs (7 shortlisted configurations × direct/primed × 3
 fresh-session replicates) on the deliberately corpus-inspired story
 `Iskra i Wieloryb` (regime `high_overlap_corpus_inspired`, NOT
-`independent_same_topic`); the story text still needs the author's
-freeze (`phase2b/input/README.md`) and **no translations exist** — the
-next manual operator step is the 42 HIGH-overlap translations. The
+`independent_same_topic`). **Task 030 (2026-09-09) extracted and froze
+the HIGH-overlap story (v1: sha256 `ab8a0dcf…`, 30 061 B / 440 lines,
+from the author's story bank section `# 3.` via the deterministic
+`scripts/extract_phase2b_high_story.py`) and generated the 42-run kit
+(`prepare --date 2026-09-09`; regeneration byte-identical, verified)** —
+**no translations exist**, and the next manual operator step is the 42
+HIGH-overlap translations (`phase2b/outputs/collection-checklist.md`);
+the LOW-overlap source `Podkłady` (bank section 4) is reserved for the
+next stage and was NOT prepared. The
 corpus self-evaluation (`phase2a/corpus-selfeval/` +
 `scripts/selfeval_exp004_corpus.py`) measured the authentic corpus itself
 with the unchanged evaluation stack as a reference point: combined
 8 096 lexical tokens — canonical 80.50 %, broader 89.17 %, unresolved
 19.50 %, orthography-out 47; per-register numbers in §9.1 of
-`docs/research-roadmap.md`. No LLM was ever called by any
+`docs/research-roadmap.md`. **Task 030 re-verified reproducibility**:
+re-running the deterministic self-evaluation reproduces the stored
+reports byte-identically. No LLM was ever called by any
 preparation/audit/analysis script.
 
 Purpose: screen which LLMs are practically usable by the project (web/chat
@@ -90,8 +101,8 @@ Phase-2A execution audited + evaluated + Dola 3.8 exploratory runs
 integrated Task 021; Dola Phase-1 direct baselines prepared Task 022,
 executed + collected + evaluated Task 023; full Phase 1 → Phase 2A
 research analysis Task 024; phase-repeat kit prepared Task 025 — §14;
-Phase-2B HIGH-overlap kit prepared + corpus self-evaluation Task 029 —
-§15).
+Phase-2B HIGH-overlap kit prepared + corpus self-evaluation Task 029,
+HIGH-overlap story frozen + 42-run kit generated Task 030 — §15).
 
 ## Phase 2A — full-roster corpus priming (executed and evaluated, Task 021)
 

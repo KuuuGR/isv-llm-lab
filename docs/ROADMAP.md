@@ -5,7 +5,7 @@
 > record, Phase 2B plan, publication direction, stopping rule) lives in
 > `docs/research-roadmap.md`.
 
-Status: updated 2026-09-09 (Task 029 — HIGH-OVERLAP TEST PREPARATION + AUTHENTIC-CORPUS SELF-EVALUATION: deterministic Phase-2B HIGH-overlap kit prepared (7 configs × direct/primed × 3 replicates = 42 planned translations; author freeze of the `Iskra i Wieloryb` story still required — NOT executed) + authentic-corpus self-evaluation reference point under the unchanged evaluation stack (combined 80.50 % canonical / 89.17 % broader / 19.50 % unresolved; per-register metrics) — see the Task-029 entry below; Task 028 — RESEARCH-STATE RECONSTRUCTION, ROADMAP + TRANSLATION-METHOD SPECIFICATION: external research direction recorded in-repo — `docs/research-roadmap.md` + `docs/translation-method.md`;
+Status: updated 2026-09-09 (Task 030 — HIGH-OVERLAP EXPERIMENT EXECUTION PREPARATION: HIGH-overlap story `Iskra i Wieloryb` extracted from the author's story bank section `# 3.` and frozen v1 (sha256 `ab8a0dcf…`, 30 061 B / 440 lines; `high_overlap_corpus_inspired`) + 42-run HIGH kit generated (`prepare --date 2026-09-09`; 21 direct + 21 primed; 63 prompt files; byte-deterministic) — NOT executed, no translations exist; `Podkłady` (bank section 4) reserved as the LOW-overlap source for the next stage; corpus self-evaluation reproducibility re-verified — see the Task-030 entry below; Task 029 — HIGH-OVERLAP TEST PREPARATION + AUTHENTIC-CORPUS SELF-EVALUATION: deterministic Phase-2B HIGH-overlap kit prepared (7 configs × direct/primed × 3 replicates = 42 planned translations; author freeze of the `Iskra i Wieloryb` story still required — NOT executed) + authentic-corpus self-evaluation reference point under the unchanged evaluation stack (combined 80.50 % canonical / 89.17 % broader / 19.50 % unresolved; per-register metrics) — see the Task-029 entry below; Task 028 — RESEARCH-STATE RECONSTRUCTION, ROADMAP + TRANSLATION-METHOD SPECIFICATION: external research direction recorded in-repo — `docs/research-roadmap.md` + `docs/translation-method.md`;
 Task 027 — EXP-004 ASSISTANT RESEARCH BUNDLE
 FOR INDEPENDENT ANALYSIS: compact deterministic machine-readable export of the
 Task-024/025/026 results under `experiments/exp004-modelscreen/
@@ -1062,6 +1062,33 @@ completed in Tasks 018/021; the Dola Phase-1 baselines in Task 023.
       records; no historical correction required (one clarification:
       EXP-001/002 `op-pl.txt` `e3164ffc…` vs EXP-003/004 canonical
       story-only `5de968a6…`). No tests changed; full suite green.
+- [x] **Task 030 — HIGH-overlap experiment execution preparation
+      (2026-09-09): story extracted + frozen, 42-run kit generated.** No
+      LLM calls, no translations collected, no raw data/corpus modified;
+      LOW-overlap NOT touched. (1) Author supplied multi-story bank
+      `InterslavicTesty.md` (sections 1–4). New deterministic
+      `scripts/extract_phase2b_high_story.py` extracts section
+      `# 3. Iskra i Wieloryb — wersja z oryginalnymi nazwami` only:
+      Markdown structural markers removed (H1 section number, `## `
+      prefixes, `> ` song prefixes, `*` emphasis, `---` rules), blank
+      runs collapsed, title prepended; all 227 story content lines
+      preserved exactly (verified parity). Extracted text (sha256
+      `ab8a0dcf7352789c09c4aca132c086999c861407e4cd682ee9414aab5b792f63`,
+      30 061 B / 440 lines) frozen as v1 (`freeze-story`;
+      `phase2b/input/versions/`; provenance + classification
+      `high_overlap_corpus_inspired`). Bank sections 1 (`Opowieść o
+      Faktach…`) and 2 (`Opowieść o sygnale`) preserved-unused; section 4
+      `Podkłady` reserved as the LOW-overlap source for the NEXT stage —
+      not prepared, not in any manifest. (2) `prepare --date 2026-09-09`
+      generated the 42-run HIGH kit: 21 direct + 21 primed, 63 prompt
+      files, plan + committed manifest (story `ab8a0dcf…` / corpus
+      `aaad28e4…` hash-gated); regeneration byte-identical (verified).
+      **No results exist — the 42 translations are the next manual
+      operator step.** (3) Corpus self-evaluation reproducibility
+      re-verified (reports reproduced byte-identically). Docs updated:
+      roadmap §9.1/§10/§11/§13.1/§17, translation-method §7/§10, DESIGN
+      §15, EXP-004 README, phase2b READMEs, STATE/ROADMAP. New tests
+      `tests/test_extract_phase2b_high_story.py` (10); full suite green.
 - [x] **Task 029 — HIGH-overlap test preparation + authentic-corpus
       self-evaluation (2026-09-09).** Deterministic preparation only — no
       LLM calls, no translations collected, no raw data/corpus modified.
@@ -1092,21 +1119,49 @@ completed in Tasks 018/021; the Dola Phase-1 baselines in Task 023.
       README, STATE/ROADMAP. New tests
       `tests/test_exp004_phase2b.py`; full suite green. **Next manual
       operator step: the 42 HIGH-overlap translations.**
-- [ ] **EXP-004 Phase 2B — HIGH-overlap test (prepared Task 029; story
-  freeze + collection NOT started)** — kit under
+- [x] **Task 030 — HIGH-overlap experiment execution preparation
+      (2026-09-09): story extracted + frozen, 42-run kit generated.** No
+      LLM calls, no translations collected, no raw data/corpus modified;
+      LOW-overlap NOT touched. (1) Author supplied multi-story bank
+      `InterslavicTesty.md` (sections 1–4). New deterministic
+      `scripts/extract_phase2b_high_story.py` extracts section
+      `# 3. Iskra i Wieloryb — wersja z oryginalnymi nazwami` only:
+      Markdown structural markers removed (H1 section number, `## `
+      prefixes, `> ` song prefixes, `*` emphasis, `---` rules), blank
+      runs collapsed, title prepended; all 227 story content lines
+      preserved exactly (verified parity). Extracted text (sha256
+      `ab8a0dcf7352789c09c4aca132c086999c861407e4cd682ee9414aab5b792f63`,
+      30 061 B / 440 lines) frozen as v1 (`freeze-story`;
+      `phase2b/input/versions/`; provenance + classification
+      `high_overlap_corpus_inspired`). Bank sections 1 (`Opowieść o
+      Faktach…`) and 2 (`Opowieść o sygnale`) preserved-unused; section 4
+      `Podkłady` reserved as the LOW-overlap source for the NEXT stage —
+      not prepared, not in any manifest. (2) `prepare --date 2026-09-09`
+      generated the 42-run HIGH kit: 21 direct + 21 primed, 63 prompt
+      files, plan + committed manifest (story `ab8a0dcf…` / corpus
+      `aaad28e4…` hash-gated); regeneration byte-identical (verified).
+      **No results exist — the 42 translations are the next manual
+      operator step.** (3) Corpus self-evaluation reproducibility
+      re-verified (reports reproduced byte-identically). Docs updated:
+      roadmap §9.1/§10/§11/§13.1/§17, translation-method §7/§10, DESIGN
+      §15, EXP-004 README, phase2b READMEs, STATE/ROADMAP. New tests
+      `tests/test_extract_phase2b_high_story.py` (10); full suite green.
+- [ ] **EXP-004 Phase 2B — HIGH-overlap test (story FROZEN v1 + kit
+  GENERATED Task 030; collection NOT started)** — kit under
   `experiments/exp004-modelscreen/phase2b/`: 7 shortlisted configurations
   (Gemini 3.6 Flash ON/OFF, Claude Sonnet 5 Medium, DeepSeek V3 Expert
   ON, Qwen 3.8 Max Fast, GPT-5.6 Luna, Grok 4.5 Fast) × direct/primed ×
   3 fresh-session replicates = 42 planned translations, 21 paired
-  comparisons. Source text: HIGH-overlap `Iskra i Wieloryb` (author
-  freezes it first via `run_exp004_phase2b.py freeze-story`). Direct =
+  comparisons. Source text: HIGH-overlap `Iskra i Wieloryb` (frozen v1,
+  sha256 `ab8a0dcf…`). Direct =
   Phase-1 direct instruction; primed = full authoritative corpus msg1 +
   translation msg2. Corpus stays complete for every model (Gemini
   split delivery recorded as deviation, corpus not shortened); no
   dictionary/morphology/human guidance; no human evaluation. H-HIGH
   hypothesis + Δ_HIGH-vs-Δ_LOW-vs-Δ_UNSEEN comparison plan recorded in
-  `docs/research-roadmap.md` §11. LOW-overlap and UNSEEN-DOMAIN tests
-  are future tasks, not started.
+  `docs/research-roadmap.md` §11. **Next: manual collection of the 42
+  runs, then verify + evaluate + analyse.** LOW-overlap
+  (`Podkłady`) and UNSEEN-DOMAIN tests are future tasks, not started.
 - [ ] **EXP-004 Phase 2B — unseen-topic corpus transfer (recommended
   generalization test; Task 028 scoping, NOT started)** — full plan in
   `docs/research-roadmap.md` §10–11: 7 representative configurations
@@ -1201,3 +1256,11 @@ completed in Tasks 018/021; the Dola Phase-1 baselines in Task 023.
   (`compare_exp001.py` / `compare_exp002.py`) as a standard additive signal.
 - Corpus building: collected raw model outputs + validated analysis as a seed
   evaluation set for later experiments.
+- **Round-trip recoverability experiment (FUTURE / HYPOTHESIS only — recorded
+  Task 030, do NOT implement or execute now):** authentic ISV corpus → Polish
+  translation → Polish → ISV reconstruction. Purpose: a potential study of
+  target-language recoverability (how much of the authentic corpus's
+  lexico-grammatical content survives a full round trip through an LLM).
+  Distinct from the Phase-2B source-regime sequence (HIGH → LOW → UNSEEN);
+  it is a separate future scientific question. Not designed, not scheduled,
+  no claims attached.

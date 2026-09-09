@@ -442,6 +442,11 @@ metrics + Task-015 orthography audit) to the authentic reference corpus
 itself — the same stack used for every generated output — as a reference
 point for interpreting model coverage. Full record:
 `experiments/exp004-modelscreen/phase2a/corpus-selfeval/README.md`.
+**Reproducibility (verified Task 030):** re-running the deterministic
+self-evaluation script reproduces `corpus_selfeval.json`,
+`corpus_selfeval.md` and `model_comparison.md` byte-identically
+(cached `isv-eval` results reused via the documented
+`--reuse-scratch` path).
 
 | Dataset | Tokens | Canonical | Broader | Unresolved | Orthography out |
 |---|---:|---:|---:|---:|---:|
@@ -490,10 +495,13 @@ Phase 2B repeated testing is scoped as **7 configurations × 3
 repetitions × 2 conditions = 42 translations**, giving **21 direct/primed
 paired comparisons** — considered a reasonable, manageable next
 experiment. **HIGH-overlap collection is NOT started**: SODA Task 029
-prepared the deterministic 42-run HIGH-overlap kit (machinery, prompts,
+prepared the deterministic 42-run HIGH-overlap kit machinery (prompts,
 hashes, config metadata — see `experiments/exp004-modelscreen/phase2b/`
-and §11.2), pending the frozen story text from the author. LOW-overlap
-and UNSEEN-domain kits are not prepared.
+and §11.2); SODA Task 030 then extracted and froze the HIGH-overlap
+story (v1) and generated the 42-run kit (`prepare --date 2026-09-09`).
+The 42 translations remain the next manual operator step. LOW-overlap
+(`Podkłady`, reserved for the next stage) and UNSEEN-domain kits are not
+prepared.
 
 ## 11. Phase 2B experimental questions (`PROPOSED`, framing updated Task 029)
 
@@ -560,9 +568,15 @@ but it is a future experiment and must **not** be mixed into Phase 2B.
 
 | Regime | Definition | Test item | Status |
 |---|---|---|---|
-| **HIGH-overlap** | a new Polish story strongly inspired by the corpus, deliberately sharing substantial themes/motifs/imagery/narrative patterns/world-building with it | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` | kit prepared (Task 029); not executed |
-| **LOW-overlap** | a new Polish story with very little thematic/fabular overlap with the corpus | `Opowieść o sygnale` and/or `Podkłady` | scoped; NOT prepared |
+| **HIGH-overlap** | a new Polish story strongly inspired by the corpus, deliberately sharing substantial themes/motifs/imagery/narrative patterns/world-building with it | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` (bank section 3; frozen v1 Task 030) | kit frozen + prepared (Tasks 029/030); NOT executed |
+| **LOW-overlap** | a new Polish story with very little thematic/fabular overlap with the corpus | **`Podkłady`** (bank section 4; pinned Task 030). `Opowieść o sygnale` (bank section 2) remains banked but is not the selected LOW item | reserved for the NEXT stage; NOT prepared |
 | **UNSEEN DOMAIN** | a Polish scientific/educational source from a domain absent from the corpus | future biomedical-physics / electromedicine educational material | scoped; NOT prepared |
+
+The current experimental source set (Task 030): HIGH = `Iskra i
+Wieloryb` (frozen, kit prepared); LOW = `Podkłady` (future only). Bank
+sections 1 (`Opowieść o Faktach…`) and 2 (`Opowieść o sygnale`) are
+retained in the author's bank but are not part of any planned
+experiment.
 
 HIGH-overlap is **not** an independent control and is **not** a
 stronger-generalization test than LOW-overlap or UNSEEN DOMAIN; it tests
@@ -570,12 +584,20 @@ whether corpus priming produces *especially strong* gains when the test
 text is strongly aligned with the priming material. Do not start
 LOW-overlap or UNSEEN-domain experiments yet.
 
-### 11.2 HIGH-overlap test (`PREPARED`, SODA Task 029; NOT executed)
+### 11.2 HIGH-overlap test (`FROZEN` + `PREPARED` — SODA Tasks 029/030; NOT executed)
 
 - Story identity: **"Iskra i Wieloryb — wersja z oryginalnymi nazwami"**
   (author-owned Polish story; keep local). Classification:
   **`high_overlap_corpus_inspired`** — deliberately **NOT**
   `independent_same_topic`.
+- **Source + provenance (frozen v1, Task 030):** the story was supplied
+  inside the author's multi-story bank `InterslavicTesty.md` (outside
+  the repo; sha256 `3662cda9…`), section `# 3.`. It was extracted
+  deterministically (`scripts/extract_phase2b_high_story.py` — Markdown
+  structural markers removed only; all 227 story content lines
+  preserved exactly, verified parity) and frozen as **v1**: SHA-256
+  `ab8a0dcf7352789c09c4aca132c086999c861407e4cd682ee9414aab5b792f63`,
+  30 061 bytes / 440 lines. Record: `phase2b/input/README.md`.
 - The story shares corpus motifs (eternal winter; the Red/Scarlet
   Spark; Zimorodzice; an inherited key; a grandfather's legacy; Mogiła
   Szronu; songs used as narrative mechanisms; whale imagery; the Heart
@@ -593,10 +615,13 @@ LOW-overlap or UNSEEN-domain experiments yet.
   splits remain recorded deviations).
 - Kit + machinery: `experiments/exp004-modelscreen/phase2b/` with
   `scripts/run_exp004_phase2b.py` (deterministic `freeze-story` /
-  `prepare`; extends the repeats machinery; never calls an LLM).
+  `prepare`; extends the repeats machinery; never calls an LLM) and
+  `scripts/extract_phase2b_high_story.py` (bank extraction).
+- **Prepared 2026-09-09** (Task 030): 42-run plan + 63 prompt files +
+  manifest generated for the frozen v1 story (deterministic;
+  regeneration byte-identical, verified).
 - **No results exist.** The 42 translations are the next manual operator
-  step, after the author supplies the frozen story text
-  (`phase2b/input/README.md`).
+  step (`phase2b/outputs/collection-checklist.md`).
 - The corpus self-evaluation reference point for interpreting these
   outputs: §9.1 and `phase2a/corpus-selfeval/`.
 
@@ -609,12 +634,22 @@ strongly thematically/motivically aligned with the priming corpus.
 Potential alternative explanation: the model may simply benefit from
 stronger lexical/topic overlap or may reproduce corpus-specific
 structures. The experiment measures the magnitude of the context-aligned
-effect. Interpretation will compare `Δ_HIGH` (this kit) vs `Δ_LOW`
-(`Opowieść o sygnale` / `Podkłady`) vs `Δ_UNSEEN` (future biomedical
-physics / electromedicine): the research question is whether corpus
-priming becomes stronger as the target source is more similar to the
-corpus. **No such relationship is claimed until those tests are
+effect. Interpretation will compare `Δ_HIGH` (`Iskra i Wieloryb`, this
+kit) vs `Δ_LOW` (`Podkłady`, next stage) vs `Δ_UNSEEN` (future
+biomedical physics / electromedicine): the research question is whether
+corpus priming becomes stronger as the target source is more similar to
+the corpus. **No such relationship is claimed until those tests are
 actually run.**
+
+### 11.4 Future round-trip recoverability experiment (`FUTURE` / `HYPOTHESIS`, recorded Task 030)
+
+A separate, not-yet-designed future idea (do **not** implement or
+execute it now): authentic ISV corpus → Polish translation → Polish →
+ISV reconstruction. This would be a potential study of
+*target-language recoverability* — how much of the authentic corpus's
+lexico-grammatical content survives a full LLM round trip. It is
+distinct from the Phase-2B source-regime sequence (HIGH → LOW →
+UNSEEN DOMAIN) and carries no claims until designed and run.
 
 ## 12. Dictionary/morphology intervention status (`COMPLETED` + `PROPOSED`)
 
@@ -652,6 +687,63 @@ validity, human naturalness, generalization, model-specific behaviour.
 An affiliation to a medical-biophysics department can be naturally
 connected to the later biomedical/electromedicine application case but
 must not misrepresent the origin or scope of the research.
+
+### 13.1 Paper material for the source/corpus-relationship question (`PROPOSED`, recorded SODA Task 030)
+
+Task 030 adds explicit paper material for the second-generation research
+question: *does the effect of authentic-corpus priming depend on the
+relationship between the source text and the reference corpus?* The
+following observations must be preserved for the article:
+
+- **Why HIGH-overlap was deliberately chosen.** The HIGH-overlap story
+  (`Iskra i Wieloryb`) is a *corpus-inspired* input: the author wrote it
+  to deliberately share substantial themes, motifs, imagery and
+  narrative patterns with the authentic corpus (eternal winter; the
+  Red/Scarlet Spark; Zimorodzice; an inherited key; a grandfather's
+  legacy; Mogiła Szronu; songs as narrative mechanisms; whale imagery;
+  the Heart of the Earth; sacrifice and transformation; maritime/storm
+  imagery). The test asks whether priming produces a *particularly
+  strong* improvement under strong source/corpus alignment — it is
+  **not** an independent control and **not** a pure-generalization test.
+- **Source/corpus relationship taxonomy** (needed by the paper to avoid
+  over-claiming): `corpus-derived` (material taken from the corpus
+  itself — never used as an experimental source), `corpus-inspired` /
+  HIGH-overlap (new text deliberately aligned with the corpus — this
+  story), `independent same-topic` (author-original text on corpus-like
+  themes but *not* designed around them — NOT the classification of this
+  story), and `unseen-topic` (LOW-overlap and UNSEEN-DOMAIN future
+  tests). The paper must not conflate these.
+- **Source provenance** (frozen record): author's bank
+  `InterslavicTesty.md` section `# 3.` (bank sha256 `3662cda9…`),
+  extracted deterministically (structural Markdown markers removed only;
+  all 227 content lines preserved exactly, verified) → frozen v1 with
+  SHA-256 `ab8a0dcf…`, 30 061 B / 440 lines
+  (`experiments/exp004-modelscreen/phase2b/input/README.md`).
+- **Design record for the paper:** 7 configurations × direct/primed ×
+  3 replicates = 42 planned translations; direct = fresh session +
+  HIGH story + the standard direct instruction; primed = fresh session +
+  complete authoritative three-register corpus (never shortened per
+  model; Gemini interface splits recorded as deviations) + translation
+  task; byte-deterministic prompt files/manifest/plan; no dictionary or
+  morphology guidance; replicates are fresh independent sessions.
+- **Caveats to state in the article:** a large HIGH-overlap effect would
+  show that priming *can* be strong for corpus-aligned text — it would
+  not prove priming generally helps all texts, and it would not be a
+  generalization claim; the comparison set `Δ_HIGH` vs `Δ_LOW`
+  (`Podkłady`, next stage) vs `Δ_UNSEEN` (future biomedical-physics /
+  electromedicine) is planned but no relationship is claimed before the
+  LOW/UNSEEN tests exist. High overlap also leaves open alternative
+  explanations (lexical overlap; thematic overlap; narrative-pattern
+  overlap; direct reuse/recombination of corpus motifs; stronger
+  contextual compatibility; a model tendency to reproduce salient
+  corpus material) — these must remain visible in the interpretation.
+- **Dual-goal framing for the article and the practical track:** a
+  HIGH-overlap effect may be scientifically interesting but not directly
+  transferable to production translation, because real user text may be
+  unrelated to the corpus; conversely, small stable lexical-repair
+  improvements can be practically useful even when scientifically less
+  dramatic. The paper and the pipeline documentation
+  (`docs/translation-method.md`) keep these two readings separate.
 
 ## 14. Literature-review direction (`PROPOSED`)
 
@@ -707,5 +799,5 @@ interpretation and a reproducible translation method".
 | EXP-004 repeated-generation report | `experiments/exp004-modelscreen/repeats/REPORT.md` |
 | Compact machine-readable research export | `experiments/exp004-modelscreen/assistant-research-bundle/` (Task 027) |
 | Authentic-corpus self-evaluation (reference point) | `experiments/exp004-modelscreen/phase2a/corpus-selfeval/` (Task 029) |
-| Phase-2B HIGH-overlap test kit (prepared, not executed) | `experiments/exp004-modelscreen/phase2b/` (Task 029) |
+| Phase-2B HIGH-overlap test kit (frozen + prepared, not executed) | `experiments/exp004-modelscreen/phase2b/` (Tasks 029/030) |
 | Intervention ladder + pipelines + evaluation layers | `docs/translation-method.md` |
