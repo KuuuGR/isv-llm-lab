@@ -106,6 +106,6 @@
 <text x="640" y="470" font-family="Helvetica,Arial" font-size="9.5" fill="#333">15 = GPT-5.6 Luna — thinking OFF</text>
 <text x="640" y="484" font-family="Helvetica,Arial" font-size="9.5" fill="#333">16 = GPT-5.6 Luna — thinking ON</text>
 <text x="640" y="498" font-family="Helvetica,Arial" font-size="9.5" fill="#333">17 = GPT Interslavic Teacher (custom GPT)</text>
-<text x="640" y="512" font-family="Helvetica,Arial" font-size="9.5" fill="#333">18 = Grok</text>
+<text x="640" y="512" font-family="Helvetica,Arial" font-size="9.5" fill="#333">18 = Grok 4.5 Fast</text>
 <text x="70" y="526" font-family="Helvetica,Arial" font-size="9.5" fill="#555">Grey square = Task-024 single delta (P2A_single − P1_single); green circle = repeated estimate mean(primed) − mean(direct); n=3 per condition. Task-024 single-run delta = Phase-2A primed single generation − Phase-1 direct single generation (same definitions as analyze_exp004_phase2a.py).</text>
 </svg>

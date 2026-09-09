@@ -5,7 +5,7 @@
   "regime": "high",
   "date": "2026-09-09",
   "generator": "scripts/run_exp004_phase2b.py prepare",
-  "generator_commit": "42c873f59bbe83e87095741cf266cd8f9c22c3fa",
+  "generator_commit": "794011adf462db722c3cf7ee9853c0b0209615d3",
   "source": {
     "story_id": "iskra-wieloryb-original-names",
     "title": "Iskra i Wieloryb — wersja z oryginalnymi nazwami",
@@ -215,34 +215,34 @@
       "bytes": 31558
     },
     {
-      "file": "high-direct-07-grok-unknown-r01.md",
-      "run_id": "2026-09-09__p2b-high__xai__grok__unknown__direct__r01",
+      "file": "high-direct-07-grok-fast-r01.md",
+      "run_id": "2026-09-09__p2b-high__xai__grok__fast__direct__r01",
       "condition": "direct",
       "replicate": "r01",
       "message": null,
       "regime": "high",
-      "prompt_sha256": "50930c2ddab1a4d54b5a5d460ac8daa5f19d0d1b27d0badc99866f8b1d5738ed",
-      "bytes": 31522
+      "prompt_sha256": "9336ace8dbb0032fbe3abaf33bb37d9afa462ce840e118efff248ff2e2786f62",
+      "bytes": 31674
     },
     {
-      "file": "high-direct-07-grok-unknown-r02.md",
-      "run_id": "2026-09-09__p2b-high__xai__grok__unknown__direct__r02",
+      "file": "high-direct-07-grok-fast-r02.md",
+      "run_id": "2026-09-09__p2b-high__xai__grok__fast__direct__r02",
       "condition": "direct",
       "replicate": "r02",
       "message": null,
       "regime": "high",
-      "prompt_sha256": "50930c2ddab1a4d54b5a5d460ac8daa5f19d0d1b27d0badc99866f8b1d5738ed",
-      "bytes": 31522
+      "prompt_sha256": "9336ace8dbb0032fbe3abaf33bb37d9afa462ce840e118efff248ff2e2786f62",
+      "bytes": 31674
     },
     {
-      "file": "high-direct-07-grok-unknown-r03.md",
-      "run_id": "2026-09-09__p2b-high__xai__grok__unknown__direct__r03",
+      "file": "high-direct-07-grok-fast-r03.md",
+      "run_id": "2026-09-09__p2b-high__xai__grok__fast__direct__r03",
       "condition": "direct",
       "replicate": "r03",
       "message": null,
       "regime": "high",
-      "prompt_sha256": "50930c2ddab1a4d54b5a5d460ac8daa5f19d0d1b27d0badc99866f8b1d5738ed",
-      "bytes": 31522
+      "prompt_sha256": "9336ace8dbb0032fbe3abaf33bb37d9afa462ce840e118efff248ff2e2786f62",
+      "bytes": 31674
     },
     {
       "file": "high-primed-01-gemini-3.6-flash-extthinkon-r01-msg1.md",
@@ -605,64 +605,64 @@
       "bytes": 31712
     },
     {
-      "file": "high-primed-07-grok-unknown-r01-msg1.md",
-      "run_id": "2026-09-09__p2b-high__xai__grok__unknown__primed__r01",
+      "file": "high-primed-07-grok-fast-r01-msg1.md",
+      "run_id": "2026-09-09__p2b-high__xai__grok__fast__primed__r01",
       "condition": "primed",
       "replicate": "r01",
       "message": 1,
       "regime": "high",
-      "prompt_sha256": "e6d611a6abe732ed531a60748895fb7e1b531036e63cf4b9c600a175dd20ddbc",
-      "bytes": 61033
+      "prompt_sha256": "d410e3bbaf8fbb59bdc7cba7f3a232d783da88ec2d9d202b733a3342b4e0383c",
+      "bytes": 61185
     },
     {
-      "file": "high-primed-07-grok-unknown-r01-msg2.md",
-      "run_id": "2026-09-09__p2b-high__xai__grok__unknown__primed__r01",
+      "file": "high-primed-07-grok-fast-r01-msg2.md",
+      "run_id": "2026-09-09__p2b-high__xai__grok__fast__primed__r01",
       "condition": "primed",
       "replicate": "r01",
       "message": 2,
       "regime": "high",
-      "prompt_sha256": "d952833804edd2c9ec1225d7bb5401cc5f6403f43d824906ef401ff017f55ad9",
-      "bytes": 31676
+      "prompt_sha256": "d25ac16d2ce880b72730ee503599bc517abf2c2638a8fc57493d709c65a41fb9",
+      "bytes": 31828
     },
     {
-      "file": "high-primed-07-grok-unknown-r02-msg1.md",
-      "run_id": "2026-09-09__p2b-high__xai__grok__unknown__primed__r02",
+      "file": "high-primed-07-grok-fast-r02-msg1.md",
+      "run_id": "2026-09-09__p2b-high__xai__grok__fast__primed__r02",
       "condition": "primed",
       "replicate": "r02",
       "message": 1,
       "regime": "high",
-      "prompt_sha256": "e6d611a6abe732ed531a60748895fb7e1b531036e63cf4b9c600a175dd20ddbc",
-      "bytes": 61033
+      "prompt_sha256": "d410e3bbaf8fbb59bdc7cba7f3a232d783da88ec2d9d202b733a3342b4e0383c",
+      "bytes": 61185
     },
     {
-      "file": "high-primed-07-grok-unknown-r02-msg2.md",
-      "run_id": "2026-09-09__p2b-high__xai__grok__unknown__primed__r02",
+      "file": "high-primed-07-grok-fast-r02-msg2.md",
+      "run_id": "2026-09-09__p2b-high__xai__grok__fast__primed__r02",
       "condition": "primed",
       "replicate": "r02",
       "message": 2,
       "regime": "high",
-      "prompt_sha256": "d952833804edd2c9ec1225d7bb5401cc5f6403f43d824906ef401ff017f55ad9",
-      "bytes": 31676
+      "prompt_sha256": "d25ac16d2ce880b72730ee503599bc517abf2c2638a8fc57493d709c65a41fb9",
+      "bytes": 31828
     },
     {
-      "file": "high-primed-07-grok-unknown-r03-msg1.md",
-      "run_id": "2026-09-09__p2b-high__xai__grok__unknown__primed__r03",
+      "file": "high-primed-07-grok-fast-r03-msg1.md",
+      "run_id": "2026-09-09__p2b-high__xai__grok__fast__primed__r03",
       "condition": "primed",
       "replicate": "r03",
       "message": 1,
       "regime": "high",
-      "prompt_sha256": "e6d611a6abe732ed531a60748895fb7e1b531036e63cf4b9c600a175dd20ddbc",
-      "bytes": 61033
+      "prompt_sha256": "d410e3bbaf8fbb59bdc7cba7f3a232d783da88ec2d9d202b733a3342b4e0383c",
+      "bytes": 61185
     },
     {
-      "file": "high-primed-07-grok-unknown-r03-msg2.md",
-      "run_id": "2026-09-09__p2b-high__xai__grok__unknown__primed__r03",
+      "file": "high-primed-07-grok-fast-r03-msg2.md",
+      "run_id": "2026-09-09__p2b-high__xai__grok__fast__primed__r03",
       "condition": "primed",
       "replicate": "r03",
       "message": 2,
       "regime": "high",
-      "prompt_sha256": "d952833804edd2c9ec1225d7bb5401cc5f6403f43d824906ef401ff017f55ad9",
-      "bytes": 31676
+      "prompt_sha256": "d25ac16d2ce880b72730ee503599bc517abf2c2638a8fc57493d709c65a41fb9",
+      "bytes": 31828
     }
   ]
 }

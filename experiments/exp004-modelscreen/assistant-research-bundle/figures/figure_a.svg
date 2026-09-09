@@ -266,6 +266,6 @@
 <text x="640" y="500" font-family="Helvetica,Arial" font-size="9.5" fill="#333">15 = GPT-5.6 Luna — thinking OFF</text>
 <text x="640" y="514" font-family="Helvetica,Arial" font-size="9.5" fill="#333">16 = GPT-5.6 Luna — thinking ON</text>
 <text x="640" y="528" font-family="Helvetica,Arial" font-size="9.5" fill="#333">17 = GPT Interslavic Teacher (custom GPT)</text>
-<text x="640" y="542" font-family="Helvetica,Arial" font-size="9.5" fill="#333">18 = Grok</text>
+<text x="640" y="542" font-family="Helvetica,Arial" font-size="9.5" fill="#333">18 = Grok 4.5 Fast</text>
 <text x="70" y="570" font-family="Helvetica,Arial" font-size="9.5" fill="#555">Direct (blue) = independent fresh-session translations without corpus; primed (red) = corpus-primed fresh sessions. Vertical bar = replicate min–max range; circles = the 3 replicate observations; bold tick = replicate mean; dashed line connects the two means.</text>
 </svg>

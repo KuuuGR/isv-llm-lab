@@ -37,7 +37,7 @@
  "experiment_id": "exp004",
  "generated_at_git_head": {
   "note": "short SHA of the repository working-tree HEAD when this bundle was generated; the bundle and its generator are committed with Task 027",
-  "sha": "048c026"
+  "sha": "19bdabf"
  },
  "no_secrets_note": "This bundle intentionally contains no API keys, cookies, session tokens or private account information.",
  "runtime": {

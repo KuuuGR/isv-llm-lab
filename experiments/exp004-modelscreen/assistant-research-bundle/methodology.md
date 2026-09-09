@@ -116,9 +116,12 @@ view).
 - **Claude Sonnet 5 — max:** thinking/reasoning OFF during the repeats
   (operationally impractical when enabled). Configuration name preserved;
   results not comparable with its Task-024 record without this caveat.
-- **Grok:** model identity operator-reported as "Grok 4.5, built by xAI
-  (fast)" (files originally said `unknown`); not independently verified;
-  prompt bodies unchanged.
+- **Grok:** canonical configuration identity **"Grok 4.5 Fast"**
+  (operator-reported: "Grok 4.5, built by xAI (fast)"; files originally
+  said `unknown`); not independently verified; prompt bodies unchanged;
+  the run-id/file token `unknown` is the historical value recorded at
+  generation time (canonical alias `xai__grok__fast`, see
+  `experiments/exp004-modelscreen/grok-identity.md`).
 - **Gemini:** primed corpus delivered in two messages (interface limit,
   `continue last prompt:` continuation); stored records verify the full
   corpus was delivered — usable with recorded deviation.

@@ -111,7 +111,7 @@
 <text x="70" y="400" font-family="Helvetica,Arial" font-size="9.5" fill="#333">1 = Qwen 3.8 Max — Fast</text>
 <text x="70" y="414" font-family="Helvetica,Arial" font-size="9.5" fill="#333">2 = Qwen 3.7 Plus — Thinking</text>
 <text x="70" y="428" font-family="Helvetica,Arial" font-size="9.5" fill="#333">3 = DeepSeek V3 Expert — DeepThink ON</text>
-<text x="70" y="442" font-family="Helvetica,Arial" font-size="9.5" fill="#333">4 = Grok</text>
+<text x="70" y="442" font-family="Helvetica,Arial" font-size="9.5" fill="#333">4 = Grok 4.5 Fast</text>
 <text x="70" y="456" font-family="Helvetica,Arial" font-size="9.5" fill="#333">5 = GPT-5.6 Luna — thinking ON</text>
 <text x="70" y="470" font-family="Helvetica,Arial" font-size="9.5" fill="#333">6 = GPT-5.6 Luna — thinking OFF</text>
 <text x="70" y="484" font-family="Helvetica,Arial" font-size="9.5" fill="#333">7 = Kimi K2.6 Instant (Standard)</text>
