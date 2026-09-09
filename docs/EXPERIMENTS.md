@@ -1140,7 +1140,114 @@ and no human-evaluation task was created (D-042).
   no-Dola-contamination; deterministic report ordering + byte-identical
   figure regeneration; no-results scaffold. Full suite green (237).
 
-## Planned (not started) — current (2026-09-07, SODA Task 025)
+### Task 026 (2026-09-09): EXP-004 phase repeat — collection audited, runs evaluated, repeated-generation analysis complete
+
+The research lead manually collected the repeated-generation dataset;
+Task 026 audited that collection without touching any raw output,
+evaluated every usable run with the unmodified pipeline and ran the
+repeated-generation analysis. Historical Task-024 conclusions were not
+rewritten; where repetition changes confidence they are documented as
+new follow-up findings in `repeats/REPORT.md`.
+
+- **Audit** (`scripts/audit_exp004_repeats.py`, new; `tests/
+  test_audit_exp004_repeats.py`, 10 tests). Every planned run was
+  reconciled against the Task-025 manifest and the authoritative
+  deterministic renders: prompt-part byte checks for direct/msg1/msg2
+  records (operator-metadata header edits tolerated and separated from
+  model-facing content), reply extraction + structural flags (end
+  marker, boilerplate, size floor), manifest/on-disk consistency,
+  duplicate/extra/missing detection, source + corpus hash gates (all
+  OK). Machine-readable `repeats/outputs/audit.json` + human `audit.md`
+  (local, gitignored). **No duplicate output, source echo, cross-run
+  contamination, wrong model/condition/replicate, stale file or
+  malformed metadata was found.** `fresh_session_proof: unavailable`
+  (msg2-style records carry no machine-visible session provenance).
+- **Reconciliation (counts from the files):**
+
+  | population | planned | collected | usable | partial | invalid | missing |
+  |---|---|---:|---:|---:|---:|---:|
+  | Primary (18 configs) | 108 | 102 | 99 | 3 | 0 | 6 |
+  | Exploratory (Dola) | 12 | 12 | 7 | 5 | 0 | 0 |
+  | Total | 120 | 114 | 106 | 8 | 0 | 6 |
+
+  Missing (never collected, not fabricated): Gemini 3.1 Pro extended
+  thinking ON primed r01–r03 and Qwen 3.8 Max Thinking primed r01–r03
+  (pristine prompt files) → those two configurations have no repeated
+  primed condition. Partial = markdown-wrapped end markers only
+  (`## KONEC`/`# KONEC`/`**KONEC**`…), content complete; preserved and
+  excluded from usable statistics per the unmodified gate.
+- **Recorded deviations (not repaired):** (1) Grok identity
+  operator-metadata header edit in all 6 Grok runs (`unknown (unknown)`
+  → `Grok 4.5, built by xAI (fast)`; operator-reported, model-facing
+  bytes identical to the kit — recorded as operator-reported, not
+  independently verifiable); (2) **Claude Sonnet 5 — max ran with
+  thinking/reasoning OFF for all 6 repeats** (execution deviation; the
+  configuration is NOT renamed; its results are not silently merged with
+  the Task-024 record and comparability is affected); (3) Gemini primed
+  reference-corpus message delivered in two messages (`continue last
+  prompt:`-style) for all 6 Gemini 3.6 Flash primed runs — stored msg1
+  records verified to carry the byte-identical study instruction + full
+  authoritative corpus (complete corpus available before the task; same
+  deviation class as Task-021/024 — usable with recorded interface
+  deviation); (4) Dola Pro primed r03 msg1: one extra blank line in the
+  operator header (trivial, corpus tail intact).
+- **Evaluation.** All 106 usable runs evaluated with the unchanged
+  completeness gate, Task-008 evaluator (canonical + broader coverage,
+  unresolved rate) and Task-015 orthography audit. No metric was
+  redefined.
+- **Repeated-generation analysis** (`scripts/analyze_exp004_repeats.py`
+  → `repeats/analysis/`, deterministic, std-lib; figures A–E). For every
+  (configuration, condition): n/mean/median/sd/min/max/range for
+  canonical + broader coverage, unresolved rate and orthography
+  anomalies. Primary quantity: repeated Δ = `mean(primed replicates) −
+  mean(direct replicates)`, compared with the Task-024 single-run delta.
+- **Headline quantitative results (descriptive):**
+  - repeated Δ canonical **positive for 16/16** primary configurations
+    with both conditions usable; mean **+6.93 pp** (range +1.72 …
+    +15.91 pp); broader mean +3.88 pp (16/16 positive);
+  - Task-024 single-run direction **replicated in 15/15** rows with an
+    old delta; mean old +6.33 pp vs mean repeated +6.73 pp on the same
+    15 rows (12 similar magnitude, 2 substantially larger — Gemini 3.6
+    Flash OFF +3.20 → +11.88, Kimi +3.06 → +6.08 —, 1 slightly larger —
+    Gemini 3.6 Flash ON +14.33 → +15.91); never reversed;
+  - within-condition stochastic spread is typically smaller than the
+    shift: median SD ≈ 1.49 pp direct / ≈ 0.87 pp primed (max direct
+    3.67 pp DeepSeek Expert OFF; max primed 5.83 pp Qwen 3.8 Max Fast);
+    the shift exceeds the primed spread in 15/16 configs — the single
+    exception is Qwen 3.8 Max Fast (Δ +1.72 pp vs primed SD 5.83 pp);
+  - candidates: Claude Sonnet 5 Medium old +11.66 → repeated +9.12
+    (primed SD 0.80, operationally clean); Gemini 3.6 Flash ON old
+    +14.33 → repeated +15.91 (primed SD 0.63); DeepSeek V3 Expert ON
+    +5.14 → +3.77 (primed mean 85.10 stable, ON > OFF in both
+    conditions); Qwen 3.8 Max Fast +3.04 → +1.72 (high baseline, little
+    and noisy priming room); Claude Sonnet 5 max repeated +9.91 pp —
+    **thinking OFF deviation**, not directly comparable with Task 024;
+    Gemini 3.1 Pro ON and Qwen 3.8 Max Thinking — no repeated primed
+    condition (missing), not assessable;
+  - exploratory Dola (never primary): Pro repeated Δ +12.41 pp
+    (direct SD 6.96 — wide baseline spread; larger than its old
+    +6.67 pp); Fast's old +28.20 pp is **not re-estimable** — the
+    repeated direct condition is entirely intake-partial;
+  - baseline dependence persists under repetition (ρ ≈ −0.84 vs
+    Task-024 ≈ −0.86).
+- **Interpretation.** Directly supported: priming shift direction
+  survives repetition; its magnitude is usually reproduced within a few
+  pp; for most configurations the shift is larger than measured
+  run-to-run variation. Suggestive: lower-baseline configurations show
+  larger measured shifts; primed conditions were typically less variable
+  than direct conditions. Not established: causality, generality, model
+  superiority, any conclusion for the two missing-primed
+  configurations, population behaviour from n = 3. Recommended next
+  experiment: Phase-2B unseen-topic transfer test (optionally after
+  completing the six missing primed runs).
+- **Artifacts.** `repeats/REPORT.md` rewritten with the full Task-026
+  record (collection audit / quantitative results / interface deviations
+  / interpretation / limitations — separate sections); READMEs +
+  `analysis/README.md` updated; DESIGN §14 status updated. Analysis
+  figures/datasets and audit outputs are deterministic local artifacts
+  (gitignored by policy).
+
+## Planned (not started) — current (2026-09-09, SODA Task 026)
 
 Status categories are kept distinct:
 - **Completed experiments:** EXP-001 (baseline, historical), EXP-002
@@ -1194,7 +1301,14 @@ Status categories are kept distinct:
   LLM results yet**: the research lead executes the replicate blocks,
   then collect → verify → evaluate → roster → deterministic analysis
   (`scripts/analyze_exp004_repeats.py`; mean-primed−mean-direct vs old
-  single delta, figures A–E, selection views). Phase 2B stays gated on
+  single delta, figures A–E, selection views). **Task 026 (2026-09-09)
+  EXECUTED + AUDITED + ANALYSED the repeated generation** — 114/120
+  collected, 106 usable, 8 partial, 6 missing; repeated Δ canonical
+  positive 16/16 (mean +6.93 pp); Task-024 direction replicated 15/15;
+  deviations recorded (Grok identity header edit, Claude Sonnet 5 max
+  thinking OFF, Gemini two-message corpus, Dola Pro r03 msg1 blank
+  line); results in `repeats/REPORT.md` + `repeats/analysis/`; full
+  suite green. Phase 2B stays gated on
   the repeated-generation results. Phase 2 guidance methods
   stay closed until Phase 1 is complete and reported.
 

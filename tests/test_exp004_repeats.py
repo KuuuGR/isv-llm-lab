@@ -720,3 +720,37 @@ def test_analysis_spearman_and_figures_deterministic(ana_mod, tmp_path):
     assert an["counts"]["primary_configs_with_data"] == 2
     assert (out1 / "analysis.md").read_text(encoding="utf-8").startswith(
         "# EXP-004 Phase repeat")
+
+
+def test_analysis_selection_table_handles_missing_and_small_n(ana_mod):
+    """Regression: with a configuration whose primed condition was not
+    collected (n=0) or has only one usable replicate (sd None), the
+    selection table must render n/a instead of crashing or fabricating
+    nonsense deltas."""
+    # config A: primed condition entirely missing -> no repeated delta
+    obs_a = [_obs(f"a-d{i}", "direct", f"r0{i + 1}", True, 0.78, 0.86,
+                  provider="pa", model="ma", version="va")
+             for i in range(3)]
+    # config B: direct n=1 + primed n=1 -> means exist, SDs are None
+    obs_b = [_obs("b-d0", "direct", "r01", True, 0.74, 0.83,
+                  provider="pb", model="mb", version="vb"),
+             _obs("b-p0", "primed", "r01", True, 0.84, 0.91,
+                  provider="pb", model="mb", version="vb")]
+    ds = ana_mod.build_dataset(obs_a)
+    rec = ds["primary"][0]
+    assert rec["primed"]["canonical"]["n"] == 0
+    assert rec["deltas"]["mean_canonical"] is None
+    ds2 = ana_mod.build_dataset(obs_a + obs_b)
+    by_key = {tuple(r["config"]): r for r in ds2["primary"]}
+    rec_a = by_key[("pa", "ma", "va")]
+    rec_b = by_key[("pb", "mb", "vb")]
+    # n=0 primed -> sd/range/mean are None
+    assert rec_a["primed"]["canonical"]["n"] == 0
+    assert rec_a["primed"]["canonical"]["sd"] is None
+    # n=1 -> mean exists, sd is 0.0 (no spread estimable), delta present
+    assert rec_b["primed"]["canonical"]["n"] == 1
+    assert rec_b["primed"]["canonical"]["sd"] == 0.0
+    table_a = ana_mod._selection_table_md([ana_mod._row(rec_a)])
+    table_b = ana_mod._selection_table_md([ana_mod._row(rec_b)])
+    assert "n/a" in table_a and "n/a" in table_b
+    assert "-88.12" not in table_a and "-2166" not in table_a

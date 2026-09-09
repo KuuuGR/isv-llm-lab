@@ -1,7 +1,7 @@
 # Phase repeat — controlled repeated generation (EXP-004, SODA Task 025)
 
-**Status: KIT PREPARED AND TESTED (2026-09-07), EXECUTION-READY — NO LLM
-RESULTS YET.** This directory prepares the controlled repeated-generation
+**Status: COMPLETED — COLLECTED, AUDITED AND ANALYSED (Task 026,
+2026-09-09).** This directory runs the controlled repeated-generation
 experiment that estimates run-to-run **stochastic variation** in EXP-004
 and turns the single-run Phase 1 → Phase 2A delta into a
 distribution-shift-vs-variation statement:
@@ -11,23 +11,29 @@ distribution-shift-vs-variation statement:
 > generations, and is the observed Phase-2A corpus-priming shift larger
 > than that variation?
 
-No LLM has been called by any script here. The research lead executes the
-prepared prompts manually in the model interfaces; the raw outputs are
-then returned for the deterministic collection/evaluation/analysis
-pipeline. Do NOT report experimental results before collection.
+Headline (descriptive): the research lead collected **114/120** planned
+runs; the Task-026 audit kept every raw output untouched, recorded the
+deviations, and found **106 usable** runs (8 partial, 0 invalid, 6 never
+collected). The repeated mean Δ `mean(primed) − mean(direct)` canonical
+was positive for **16/16** configurations with both conditions usable
+(mean **+6.93 pp**), the Task-024 single-run direction reproduced in
+**15/15** rows with an old delta, and for most configurations the shift
+is larger than the measured within-condition spread (median SD ≈ 1.5 pp
+direct / ≈ 0.9 pp primed). Full evidence, tables and figures in
+`REPORT.md` + `analysis/`.
 
 ## Kit layout (committed vs local)
 
 | path | tracked | content |
 |---|---|---|
 | `README.md` | committed | this file (protocol, kit, collection record) |
-| `REPORT.md` | committed | dedicated experiment report (research question, design, sample, manifest, protocol, deviations, validation, metrics, statistics, results, figures, Task-024 comparison, limitations, next step) — results sections say **no results yet** |
-| `operator-prompts/manifest.json` | committed | hash-only prompt manifest (180 files: prompt hashes + run ids + source/corpus hashes); no story/corpus text |
-| `operator-prompts/*.md` | **gitignored** | 180 operator prompt files (embed the copyrighted Polish story and/or the reference corpus — local only) |
+| `REPORT.md` | committed | dedicated experiment report (research question, design, collection audit + reconciliation, deviations, validation, metrics, repeated statistics, Task-024 comparison, figures, limitations, next step) — **results written (Task 026)** |
+| `operator-prompts/manifest.json` | committed | hash-only prompt manifest (files: prompt hashes + run ids + source/corpus hashes); no story/corpus text |
+| `operator-prompts/*.md` | **gitignored** | operator prompt files incl. the collected raw replies (embed the copyrighted Polish story and/or the reference corpus — local only) |
 | `outputs/README.md` | committed | outputs index (below) |
-| `outputs/plan.json`, `outputs/collection-checklist.md`, later roster/run dirs | **gitignored** | deterministic plan + human checklist + collected outputs |
-| `analysis/README.md` | committed | analysis index + no-results scaffold explanation |
-| `analysis/*` (dataset/analysis JSON+MD, figure placeholders) | **gitignored** | deterministic derived outputs of `scripts/analyze_exp004_repeats.py` |
+| `outputs/plan.json`, `outputs/collection-checklist.md`, `outputs/audit.json`+`audit.md`, `outputs/roster.json`+`roster.md`, run dirs | **gitignored** | deterministic plan + human checklist + Task-026 machine-readable audit + intake roster + collected outputs (local only) |
+| `analysis/README.md` | committed | analysis index + results summary |
+| `analysis/*` (dataset/analysis JSON+MD, figures A–E) | **gitignored** | deterministic derived outputs of `scripts/analyze_exp004_repeats.py` |
 
 ## Planned sample
 
@@ -123,6 +129,28 @@ only run metadata changes between replicates.
 - **Dola (exploratory):** identity recorded from the interface header,
   not independently verifiable.
 
+## Collection record (Task 026 audit, 2026-09-09)
+
+- 114/120 runs collected by the research lead (102 primary + 12
+  exploratory); 6 primary primed runs were **never collected** (Gemini
+  3.1 Pro and Qwen 3.8 Max Thinking, all 3 replicates) — pristine prompt
+  files, preserved, not fabricated.
+- Task-026 audit (`scripts/audit_exp004_repeats.py` → local
+  `outputs/audit.json`/`audit.md`): every collected record validated
+  against the Task-025 manifest and the authoritative deterministic
+  renders (prompt hash gates OK, source/corpus SHA-256 OK); no duplicate
+  output, no source echo, no cross-run contamination.
+- Intake: **106 usable (complete)**, 8 partial (end-marker soft
+  failures only — `## KONEC`-style wrapped markers), 0 failed. Partial
+  outputs are preserved and excluded from usable statistics.
+- Recorded deviations (not repaired): Grok identity operator-header edit
+  (6 runs; model-facing bytes identical); Claude Sonnet 5 — max ran with
+  thinking/reasoning **OFF** (6 runs; configuration not renamed, not
+  silently merged with its Task-024 record); Gemini primed corpus
+  delivered in two messages (6 runs; corpus tail verified intact);
+  Dola Pro r03 msg1 one extra blank header line (1 run).
+  `fresh_session_proof: unavailable` for all runs.
+
 ## Commands
 
 ```bash
@@ -158,12 +186,24 @@ buckets — definitions unchanged for comparability).
 
 ## Tests
 
-`tests/test_exp004_repeats.py` (25 tests): exactly 18 primary
+`tests/test_exp004_repeats.py` (26 tests): exactly 18 primary
 configurations × 2 conditions × 3 replicates = 108 planned runs + 12
 exploratory; no duplicate run ids; direct/primed separation; prompt/
 source/corpus hashes; replicate prompt byte-identity; prompt-body fidelity
 vs Phase-1/Phase-2A; contamination rejection (corpus-in-direct, corpus
 order in primed transcripts); msg2-style records; no overwrite; exact
 stats/deltas (incl. old-delta join, no-Dola-contamination of primary);
-deterministic ordering + byte-identical figures; no-results scaffold.
-Run with `.venv/bin/python -m pytest tests/test_exp004_repeats.py`.
+deterministic ordering + byte-identical figures; no-results scaffold;
+partial/missing-results handling in the selection table (n=0 → n/a, n=1 →
+no SD overreach).
+
+`tests/test_audit_exp004_repeats.py` (10 tests): audit script on a
+synthetic kit — missing-run detection (pristine files never fabricated),
+collected-run detection, prompt-part byte validation (direct/msg1/msg2),
+operator-metadata header-edit tolerance (Grok-style), msg1 corpus-tail
+integrity, end-marker/structural flags, reply preservation, manifest
+consistency (dup/extra/missing), deviation registry presence, roster
+verdict merge into reconciliation counts.
+
+Run both with `.venv/bin/python -m pytest tests/test_exp004_repeats.py
+tests/test_audit_exp004_repeats.py`.

@@ -762,7 +762,7 @@ decoupled). Phase 2B is not implemented here.
   implemented and not executed.
 
 
-## 14. Phase repeat — controlled repeated generation (prepared, SODA Task 025)
+## 14. Phase repeat — controlled repeated generation (executed + audited, SODA Task 025/026)
 
 **Research question.** For the same model/configuration and the same
 translation task, how much does measured Interslavic resource coverage
@@ -818,5 +818,59 @@ evaluation.
 (`tests/test_exp004_repeats.py`, 25 tests; full suite 237 green);
 analysis scaffold written with status `no_results`. Execution-ready:
 the research lead runs the replicate blocks, then collect → verify →
-evaluate → roster → analyze. Results will be reported in
+evaluate → roster → analyze. Results are reported in
 `experiments/exp004-modelscreen/repeats/REPORT.md`.
+
+**Executed, audited and analysed (SODA Task 026, 2026-09-09).** The
+research lead collected 114/120 planned runs (102 primary + 12
+exploratory; msg2-style records). The Task-026 audit
+(`scripts/audit_exp004_repeats.py` → `repeats/outputs/audit.{json,md}`,
+machine-readable + human) reconciled every run against the Task-025
+manifest and the authoritative deterministic renders without touching a
+single raw output:
+
+- **Reconciliation:** planned 120 (108 primary + 12 exploratory);
+  collected 114; **usable 106** (99 primary + 7 exploratory); partial 8
+  (3 primary + 5 exploratory — markdown-wrapped end markers only, content
+  complete, preserved and excluded from usable stats); invalid 0;
+  **missing 6** — Gemini 3.1 Pro ext-think-ON primed r01–r03 and Qwen 3.8
+  Max Thinking primed r01–r03 were never collected (pristine prompt
+  files); their repeated Δ is n/a and nothing was fabricated.
+- **Recorded deviations** (not repaired): Grok identity
+  operator-metadata header edit (6 runs; model-facing bytes identical;
+  operator-reported "Grok 4.5, built by xAI (fast)"); **Claude Sonnet 5 —
+  max ran with thinking/reasoning OFF** for all 6 repeats (execution
+  deviation; configuration identity NOT renamed; not silently merged with
+  the Task-024 record); Gemini primed reference-corpus message delivered
+  in two messages with a continuation (6 runs; stored msg1 records carry
+  the byte-identical study instruction + full corpus, so corpus integrity
+  verified — same class as the Task-021/024 Gemini deviation); Dola Pro
+  primed r03 msg1 one extra blank header line (trivial). No duplicate
+  output, source echo, cross-run contamination, wrong model/condition/
+  replicate, or stale file was found. `fresh_session_proof: unavailable`
+  for all runs (msg2-style records carry no machine-visible session
+  provenance; absence of proof is not proof of violation).
+- **Evaluation and analysis:** all usable runs evaluated with the
+  unmodified evaluator + orthography audit; `analyze_exp004_repeats.py`
+  produced the full descriptive statistics, repeated Δ
+  (`mean(primed) − mean(direct)`), Task-024 old-vs-new comparison and
+  figures A–E.
+
+**Headline result (descriptive; details in `repeats/REPORT.md` and
+`repeats/analysis/`):** the repeated mean Δ canonical is positive for
+**16/16** primary configurations with both conditions usable (mean
+**+6.93 pp**, range +1.72…+15.91); the Task-024 single-run direction was
+replicated in **15/15** rows with an old delta (mean old +6.33 pp vs
+mean repeated +6.73 pp); within-condition stochastic spread is typically
+smaller than the shift (median SD ≈ 1.49 pp direct / ≈ 0.87 pp primed;
+max primed SD 5.83 pp = Qwen 3.8 Max Fast, whose Δ +1.72 pp is the only
+one below its own primed SD). Gemini 3.6 Flash ON's large shift
+reproduced (+14.33 → +15.91); Claude Sonnet 5 Medium reproduced
+(+11.66 → +9.12, stable primed SD 0.80); DeepSeek Expert ON reproduced
+smaller (+5.14 → +3.77, primed SD 0.64, ON > OFF in both conditions);
+Qwen 3.8 Max Fast's high baseline shows little and noisy priming room;
+Dola Pro repeated Δ +12.41 pp (exploratory), Dola Fast's old +28.20 pp
+is not re-estimable (direct condition unusable). Baseline dependence
+persists (repeated ρ ≈ −0.84 vs old ≈ −0.86). Phase 2B remains not
+implemented and not executed; the recommended next experiment is the
+Phase-2B unseen-topic transfer test (see REPORT §15).

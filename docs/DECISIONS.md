@@ -1317,3 +1317,64 @@ Dola extension) so the priming comparison becomes
    are never merged into the primary statistics. No Phase 2B and no human
    evaluation are prepared in this task; interpretation follows the
    supported / suggestive / not-established split.
+
+## D-053 · 2026-09-09 · EXP-004 phase repeat: audit-before-analysis, preservation of raw evidence, and execution-deviation recording (Task 026)
+
+**Context.** The research lead collected 114/120 planned repeated runs
+manually and explicitly stated "I do not guarantee that I didn't make a
+mistake somewhere because there are many files". Task 026 must determine
+dataset integrity without altering evidence, document every deviation
+(Claude Sonnet 5 — max thinking disabled during repeats; Grok model
+identity originally `unknown` then entered into the files; Gemini primed
+corpus delivered in two messages; a Dola Pro msg1 blank line), evaluate
+only what passes the existing usability gate, and answer whether the
+Task-024 priming shift survives repetition.
+
+**Decision.**
+
+1. **Audit before analysis, with the operator's doubt treated as a
+   design feature, never as blame.** Every planned run is reconciled
+   against the Task-025 manifest and the byte-identical authoritative
+   renders (`scripts/audit_exp004_repeats.py`): missing / duplicate /
+   wrong-model-condition-replicate / stale / prompt-body-mismatch /
+   hash-drift detection, plus structural reply checks. Missing runs are
+   never fabricated; a machine-readable audit result (`audit.json`) plus a
+   human summary (`audit.md`) are produced, and the audit runs again after
+   intake to merge usable/partial/invalid verdicts.
+2. **Raw model outputs remain immutable experimental evidence.** No
+   rewrite, normalization, spelling fix, formatting change, model-name
+   edit inside raw content, end-marker repair, replacement, or automatic
+   re-run. Errors and deviations are preserved and described in metadata /
+   reporting only.
+3. **The configuration identity `Claude Sonnet 5 — max` is NOT renamed
+   when an execution setting changes.** The thinking/reasoning-OFF mode
+   used during all six repeated runs is recorded as separate
+   execution/configuration metadata (an execution deviation differing
+   from the Task-024 collection condition); Task-024 data and the
+   historical configuration name are untouched, and the repeated results
+   are never silently merged as if they were identical configurations.
+4. **Operator-entered model identity is evidence, not independently
+   verified fact.** The Grok header edit (`unknown (unknown)` → `Grok 4.5,
+   built by xAI (fast)`) leaves the model-facing prompt bytes identical;
+   the roster records the identity as operator-reported and does not
+   modify any raw output. Conflicting or unverifiable identities are
+   labelled accordingly, with a canonical research label used only where
+   justified.
+5. **Split/delayed delivery is not automatically invalid.** A Gemini
+   primed reference-corpus message split into two messages with a
+   `continue last prompt:`-style continuation is classified as an
+   interface deviation: usable when the stored records demonstrate that
+   the complete authoritative corpus and task content were delivered
+   under the intended configuration; marked invalid only for content
+   loss/corruption/model-switching/substantive protocol failure. Absence
+   of fresh-session proof is recorded as `fresh_session_proof:
+   unavailable` — never invented, and absence of proof is not proof of
+   violation.
+6. **Usability gates and metric definitions are unchanged.** Runs pass
+   the existing completeness gate (markdown-wrapped end markers such as
+   `## KONEC` remain partial, are preserved, and are excluded from usable
+   statistics — not repaired); evaluation uses the unmodified Task-008
+   evaluator + Task-015 orthography audit. The repeated-generation
+   analysis compares `mean(primed) − mean(direct)` with the Task-024
+   single-run deltas descriptively; Dola stays exploratory and is never
+   merged into the primary n=18 statistics.

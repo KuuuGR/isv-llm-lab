@@ -1079,6 +1079,87 @@ sample sizes, NOT results):
   reasoning-mode superiority, Dola learning ability, three repetitions =
   population behaviour).
 
+### 4.25 EXP-004 — CONTROLLED REPEATED GENERATION: COLLECTION AUDITED, ANALYSIS COMPLETE (SODA Task 026, 2026-09-09 — results written)
+
+The research lead collected the Task-025 kit (114/120 runs); Task 026
+audited the collection without changing evidence, evaluated all usable
+runs and ran the repeated-generation analysis. Full record:
+`experiments/exp004-modelscreen/repeats/REPORT.md` (results) +
+`repeats/analysis/`; audit artifact `repeats/outputs/audit.{json,md}`
+(local). Historical Task-024 conclusions were NOT rewritten; where the
+repetition changes confidence this is documented as follow-up findings.
+
+Key recorded facts (observed numbers, descriptive):
+
+- **Collection audit:** planned 120 (108 primary + 12 exploratory Dola);
+  collected 114 (102 primary + 12 exploratory); **usable 106** (99 + 7);
+  partial 8 (3 + 5 — markdown-wrapped end markers only, e.g. `## KONEC`;
+  content complete; preserved; excluded from usable stats by the
+  unmodified gate); invalid 0; **missing 6** — Gemini 3.1 Pro ext
+  thinking ON primed r01–r03 and Qwen 3.8 Max Thinking primed r01–r03
+  were never collected (pristine prompt files; never fabricated; their
+  repeated Δ is n/a). Hash gates OK (source `5de968a6…`, corpus
+  `aaad28e4…`); no duplicate output / source echo / cross-run
+  contamination / wrong model-condition-replicate / stale file found.
+  Fresh-session proof: `unavailable` (msg2-style records carry no
+  machine-visible session provenance).
+- **Recorded deviations (not repaired):** (1) Grok identity
+  operator-metadata header edit (all 6 Grok runs; `unknown (unknown)` →
+  `Grok 4.5, built by xAI (fast)`; operator-reported, model-facing bytes
+  identical to the kit); (2) **Claude Sonnet 5 — max ran with
+  thinking/reasoning OFF during all 6 repeats** — execution deviation,
+  configuration NOT renamed, results not silently merged with the
+  Task-024 record, comparability affected; (3) Gemini 3.6 Flash primed
+  corpus message delivered in two messages with a `continue last
+  prompt:`-style continuation (6 runs) — stored msg1 records verified to
+  contain the byte-identical study instruction + full authoritative
+  corpus, so the complete corpus was delivered (same deviation class as
+  Task 021/024; usable with recorded interface deviation); (4) Dola Pro
+  primed r03 msg1 one extra blank operator-header line (trivial).
+- **Headline observed results (repeated Δ = mean(primed) − mean(direct),
+  canonical coverage):**
+  - positive for **16/16** primary configurations with both conditions
+    usable; mean **+6.93 pp**, range +1.72 … +15.91 pp; broader mean
+    +3.88 pp (16/16 positive);
+  - Task-024 single-run direction **replicated in 15/15** rows with an
+    old delta; magnitudes on the same 15 rows: old mean +6.33 pp vs
+    repeated mean +6.73 pp — mostly similar, 2 substantially larger
+    under repetition (Gemini 3.6 Flash OFF +3.20 → +11.88; Kimi +3.06 →
+    +6.08), Gemini 3.6 Flash ON slightly larger (+14.33 → +15.91),
+    never reversed (Figure D);
+  - stochastic variation vs shift: median SD ≈ 1.49 pp direct / ≈ 0.87
+    pp primed; shift > primed spread in 15/16 configurations; the
+    exception is Qwen 3.8 Max Fast (Δ +1.72 pp vs primed SD 5.83 pp —
+    one replicate at 75.09 %);
+  - candidate follow-ups: Claude Sonnet 5 Medium +11.66 → **+9.12**
+    (primed SD 0.80; repeated runs operationally clean);
+    Gemini 3.6 Flash ON +14.33 → **+15.91** (primed SD 0.63 — the
+    unusually large shift reproduced);
+    DeepSeek V3 Expert ON +5.14 → **+3.77** (primed mean 85.10 % stable,
+    ON > OFF in both conditions under repetition);
+    Qwen 3.8 Max Fast +3.04 → **+1.72** (high baseline, little + noisy
+    priming room); Claude Sonnet 5 max repeated **+9.91 pp but thinking
+    OFF** — not directly comparable with Task 024; Gemini 3.1 Pro ON and
+    Qwen 3.8 Max Thinking — **no repeated primed condition (missing), not
+    assessable**; Dola Pro (exploratory) repeated Δ **+12.41 pp** (direct
+    SD 6.96 pp); Dola Fast's old +28.20 pp is **not re-estimable**
+    (repeated direct condition entirely intake-partial);
+  - baseline dependence persists under repetition: ρ ≈ −0.84 (n = 16)
+    vs Task-024 ρ ≈ −0.86 (Figure E).
+- **Interpretation (levels of §4.24 unchanged):** the direction of the
+  observed priming shift survives repetition for every configuration with
+  both conditions usable; the magnitudes are usually reproduced within a
+  few pp and, for most configurations, the shift is larger than the
+  measured within-condition spread — consistent with (not proof of) a
+  corpus-priming effect on these measures. Not established: causality,
+  generality, model superiority, reasoning-mode effects (Claude Max
+  deviation), anything about the two missing-primed configurations,
+  population behaviour from n = 3.
+- **Recommended next experiment:** Phase-2B unseen-topic transfer test —
+  does the shift survive when the translated story shares no topic with
+  the reference corpus? Optionally complete the six missing primed runs
+  first.
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - The letter inventory for a constructed-language output audit comes from the
@@ -1163,6 +1244,19 @@ sample sizes, NOT results):
   effect", exploratory additions (Dola) keep their status everywhere, and
   interpretation is stated as supported / suggestive / not-established
   (Task 024; D-051, L-041).
+- A single generation per condition confounds the experimental variable
+  with stochastic generation variation; controlled repetition with 3
+  fresh-session replicates per condition turns a single-run delta into a
+  distribution-shift-vs-variation statement, and the direction of a
+  single-run delta can still be a useful prior even when magnitudes
+  fluctuate (Task 025/026; L-042, L-043).
+- Collection at scale must be audited before analysis, treating the
+  operator's "I may have made a mistake" as a design feature: reconcile
+  every planned run against the manifest and byte-identical authoritative
+  renders (missing/duplicate/wrong/stale detection), preserve raw outputs
+  untouched, and record execution deviations (mode changes, header
+  edits, split messages) as metadata with a usability assessment rather
+  than repairing or renaming anything (Task 026; L-044).
 
 ## 6. Open questions for future work
 
@@ -1225,3 +1319,15 @@ sample sizes, NOT results):
   Task-024 deltas exceed the models' own stochastic variation, whether
   Dola Fast's change is reproduced, and whether the baseline-dependence
   ρ ≈ −0.86 survives repetition.
+- **Task 026 answered parts of (1), (2) and (5) descriptively** (see
+  §4.25): the repeated Δ direction is positive 16/16 (mean +6.93 pp),
+  Task-024 directions replicated 15/15, baseline dependence persists
+  (ρ ≈ −0.84), Dola Fast's +28.20 pp is NOT re-estimable (repeated
+  direct condition unusable), and the priming shift generally exceeds
+  within-condition variation except for Qwen 3.8 Max Fast. Still open:
+  (3) unseen-topic transfer (Phase 2B); (4) ON-vs-OFF / Fast-vs-Thinking
+  pair gaps — now with added evidence for Gemini OFF > its old single
+  delta and DeepSeek Expert ON stable above OFF, but Claude Max
+  comparability limited by its thinking-OFF execution deviation; and the
+  two configurations with uncollected primed conditions (Gemini 3.1 Pro
+  ON, Qwen 3.8 Max Thinking) remain unassessed under repetition.

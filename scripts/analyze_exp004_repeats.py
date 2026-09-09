@@ -903,6 +903,21 @@ def _row(r: dict) -> dict:
 
 
 def _selection_table_md(rows: list[dict]) -> str:
+    def pp(v):
+        return _fmt_pp(v)
+
+    def diff_pp(a, b):
+        """a - b in pp when both present, else n/a (never fabricate)."""
+        if a is None or b is None:
+            return "n/a"
+        return f"{(a - b) * 100:+.2f} pp"
+
+    def diff_count(a, b):
+        """a - b as a plain count (orthography anomalies), else n/a."""
+        if a is None or b is None:
+            return "n/a"
+        return f"{a - b:+.1f}"
+
     out = [
         "| config | dir mean | dir SD | dir range | primed mean | primed SD | "
         "primed range | Δ mean | old Δ | broader Δ | unres Δ | ortho Δ |",
@@ -911,16 +926,16 @@ def _selection_table_md(rows: list[dict]) -> str:
     for r in rows:
         out.append(
             f"| {r['label']} | {_fmt_pct(r['canonical_direct_mean'])} | "
-            f"{_fmt_pp(r['canonical_direct_sd'] * 1)} | "
-            f"{_fmt_pp(r['canonical_direct_range'] * 1)} | "
+            f"{pp(r['canonical_direct_sd'])} | "
+            f"{pp(r['canonical_direct_range'])} | "
             f"{_fmt_pct(r['canonical_primed_mean'])} | "
-            f"{_fmt_pp(r['canonical_primed_sd'] * 1)} | "
-            f"{_fmt_pp(r['canonical_primed_range'] * 1)} | "
-            f"{_fmt_pp(r['delta_mean_canonical'])} | "
-            f"{_fmt_pp(r['old_delta_canonical'])} | "
-            f"{_fmt_pp((r['broader_primed_mean'] or 0) - (r['broader_direct_mean'] or 0))} | "
-            f"{_fmt_pp((r['unresolved_primed_mean'] or 0) - (r['unresolved_direct_mean'] or 0))} | "
-            f"{_fmt_pp((r['ortho_primed_mean'] or 0) - (r['ortho_direct_mean'] or 0))} |")
+            f"{pp(r['canonical_primed_sd'])} | "
+            f"{pp(r['canonical_primed_range'])} | "
+            f"{pp(r['delta_mean_canonical'])} | "
+            f"{pp(r['old_delta_canonical'])} | "
+            f"{diff_pp(r['broader_primed_mean'], r['broader_direct_mean'])} | "
+            f"{diff_pp(r['unresolved_primed_mean'], r['unresolved_direct_mean'])} | "
+            f"{diff_count(r['ortho_primed_mean'], r['ortho_direct_mean'])} |")
     return "\n".join(out)
 
 

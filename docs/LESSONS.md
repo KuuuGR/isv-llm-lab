@@ -1007,3 +1007,81 @@ measures stochasticity if everything else is pinned. (4) Recheck the
 Task-024 descriptive baseline-dependence (ρ ≈ −0.86) against the repeated
 direct means — a correlation computed on one point per configuration may
 itself be unstable.
+
+## L-043 · 2026-09-09 · Under repetition, single-run priming directions reproduced but magnitudes are loose — report both (Task 026)
+
+**Observed.** With 3 fresh-session replicates per condition (106 usable
+runs of 114 collected), the repeated mean Δ canonical
+`mean(primed) − mean(direct)` was positive for 16/16 primary
+configurations with both conditions usable (mean +6.93 pp, range
++1.72…+15.91 pp), and the Task-024 single-run direction was reproduced in
+15/15 rows with an old delta. Magnitudes were looser: mean old +6.33 pp
+vs mean repeated +6.73 pp on the same rows, with two rows substantially
+larger under repetition (Gemini 3.6 Flash OFF +3.20 → +11.88; Kimi +3.06
+→ +6.08) and one smaller-noisy (Qwen 3.8 Max Fast +3.04 → +1.72, whose
+primed SD of 5.83 pp exceeded its own repeated Δ). Within-condition
+spread (median SD ≈ 1.49 pp direct, ≈ 0.87 pp primed) was smaller than
+the shift for most but not all configurations.
+
+**Interpretation.** Direction survived repetition almost universally on
+this roster; exact magnitudes did not — a single-run delta that is
+"reproduced" within a few pp is the norm, and a delta below the model's
+own primed SD is not a reliable estimate at all. The Task-024 headline
+pattern (18/18 positive, low-baseline configurations gaining more,
+ρ ≈ −0.86) was itself consistent with the repeated data (16/16 positive,
+ρ ≈ −0.84) — descriptive direction and baseline dependence were the
+robust parts; individual point values were not.
+
+**Next time.** (1) State single-run and repeated deltas side by side
+(Table: P1 single | P2A single | old Δ | direct mean | primed mean |
+repeated Δ | direct SD | primed SD) and classify rows descriptively —
+same direction/similar magnitude, smaller/larger, reversed, insufficient
+data — without inventing threshold claims. (2) Always print the
+within-condition SD/range next to the repeated Δ so a shift smaller than
+its own spread (Qwen 3.8 Max Fast) is visible as such. (3) Keep Dola
+exploratory and separate: an old +28.20 pp from a 38.87 % baseline cannot
+be re-estimated when the repeated direct condition is unusable — report
+"not re-estimable", never a fabricated substitute.
+
+## L-044 · 2026-09-09 · Operator-collected datasets at scale: audit before analysis, treat "I may have made a mistake" as data (Task 026)
+
+**Observed.** The research lead collected 114 msg2-style records by hand
+and explicitly warned that mistakes were possible across so many files.
+The Task-026 audit reconciled every planned run against the manifest and
+the byte-identical authoritative renders and found: 6 runs never
+collected (Gemini 3.1 Pro ON and Qwen 3.8 Max Thinking primed r01–r03 —
+pristine prompt files), 8 intake-partial runs whose only defect is a
+markdown-wrapped end marker (`## KONEC`, `# KONEC`, `**KONEC**`,
+`# KONĘC`), operator-metadata header edits in all 6 Grok files (model
+identity `unknown` → `Grok 4.5, built by xAI (fast)`), a mode deviation
+for all 6 Claude Sonnet 5 — max runs (thinking/reasoning OFF), a split
+reference-corpus message for all 6 Gemini primed runs, and one trivial
+Dola Pro blank header line. No duplicate, cross-run contamination,
+source echo, wrong-model/wrong-condition/wrong-replicate file or stale
+copy was found; no raw output was modified.
+
+**Interpretation.** Scale is where small collection errors hide; a
+checklist manifest and careful operator do not make the audit redundant.
+Every one of the found issues was either invisible in the raw output
+itself (missing runs, header edits, mode changes, split messages) or
+needed a machine rule to spot (wrapped end markers). None required
+repairing evidence — each was resolvable by (a) not fabricating missing
+data, (b) recording deviations as metadata with a usability assessment,
+and (c) keeping the unchanged gate. The operator's uncertainty statement
+was the reason the audit happened, not an accusation to investigate.
+
+**Next time.** (1) For any multi-file manual collection, run a
+manifest/authoritative-render reconciliation before analysis and keep
+its machine-readable output with the run metadata. (2) Separate
+operator-metadata header edits from model-facing content by comparing the
+model-facing invariant region (study instruction + corpus tail for msg1;
+translation instruction + source body for msg2-style records) to the
+deterministic render — that single comparison classifies most
+"mismatches" instantly. (3) Treat mode/settings changes (Claude max
+thinking OFF), identity header edits (Grok), split messages (Gemini) and
+missing end markers as four distinct deviation types with their own
+usability rules — do not merge them into one "something is wrong"
+bucket, and never mark a run invalid just because the interface needed
+two messages. (4) Record `fresh_session_proof: unavailable` where the
+record format carries no session provenance; absence of proof is not
+proof of violation.

@@ -1,10 +1,15 @@
 # Project State
 
-Updated: 2026-09-07 (SODA Task 025 — EXP-004 PHASE-REPEAT KIT
+Updated: 2026-09-09 (SODA Task 026 — EXP-004 PHASE-REPEAT
+EXECUTED, AUDITED AND ANALYSED: 114/120 planned runs collected by the
+research lead, full Task-026 audit of the collected dataset against the
+Task-025 manifest/authoritative renders with every raw output preserved,
+**106 usable** runs (99 primary + 7 exploratory) evaluated through the
+unmodified pipeline, repeated-generation analysis complete — see the
+Task-026 paragraph below; Task 025 — EXP-004 PHASE-REPEAT KIT
 PREPARED: controlled repeated generation to estimate run-to-run
 stochastic variation and replace the single-run Phase-1 → Phase-2A delta
-with a distribution-shift-vs-variation statement; kit execution-ready,
-no LLM results yet — see the Task-025 paragraph below; Task 024 — EXP-004
+with a distribution-shift-vs-variation statement; Task 024 — EXP-004
 FULL ANALYSIS COMPLETE:
 Phase 1 → Phase 2A corpus-priming evidence base over the whole
 20-configuration dataset, 18 original + 2 exploratory Dola 3.8, generated
@@ -18,6 +23,63 @@ correlations, family + orthography analyses, practical-usability
 dimension, master table, supported/suggestive/not-established
 conclusions, research candidates, ≤ 3 recommended next experiments — **no
 composite score, no winner**; Phase 2B not executed).
+
+SODA Task 026 (2026-09-09) — AUDITED THE COLLECTED REPEATED-GENERATION
+DATASET AND RAN THE REPEATED-GENERATION ANALYSIS. The research lead
+collected **114/120** planned runs (102 primary + 12 exploratory Dola;
+msg2-style records — raw reply appended to the canonical prompt file
+after its `## Output` marker). `scripts/audit_exp004_repeats.py` (new;
+tests `tests/test_audit_exp004_repeats.py`, 10) reconciled every run
+against the Task-025 manifest + authoritative deterministic renders
+without modifying any raw output; machine-readable + human audit in
+`repeats/outputs/audit.{json,md}` (local, gitignored).
+**Reconciliation: planned 120 (108 primary + 12 exploratory); collected
+114; usable 106 (99 primary + 7 exploratory); partial 8 (3 primary + 5
+exploratory — markdown-wrapped end markers only, e.g. `## KONEC`;
+content complete; preserved and excluded from usable stats); invalid 0;
+missing 6** — Gemini 3.1 Pro ext-think-ON primed r01–r03 and Qwen 3.8
+Max Thinking primed r01–r03 were never collected (pristine prompt
+files); no runs were fabricated and their repeated Δ is n/a. Hash gates
+(source `5de968a6…`, corpus `aaad28e4…`, per-run plan shas) all OK; no
+duplicate output, source echo, cross-run contamination, wrong
+model/condition/replicate, stale file or malformed metadata found.
+**Recorded deviations (not repaired):** (1) Grok identity
+operator-metadata header edit in all 6 Grok runs (`unknown (unknown)` →
+`Grok 4.5, built by xAI (fast)`, operator-reported, model-facing bytes
+identical — identity recorded as operator-reported, not independently
+verifiable); (2) **Claude Sonnet 5 — max ran with thinking/reasoning OFF
+for all 6 repeats** (execution deviation; configuration identity NOT
+renamed; not silently merged with the Task-024 record — comparability
+affected); (3) Gemini primed reference-corpus message delivered in two
+messages (`continue last prompt:`-style) for all 6 Gemini 3.6 Flash
+primed runs — stored msg1 records verified to carry the byte-identical
+study instruction + full authoritative corpus, so corpus integrity is
+established; same class as the Task-021/024 Gemini deviation; (4) Dola
+Pro primed r03 msg1 one extra blank header line (trivial).
+`fresh_session_proof: unavailable` for all runs (msg2-style records carry
+no machine-visible session provenance — absence of proof is not proof of
+violation). All usable runs evaluated with the unmodified Task-008
+evaluator + orthography audit; `scripts/analyze_exp004_repeats.py` wrote
+the full deterministic results (`repeats/analysis/`, local). **Headline
+(descriptive): repeated mean Δ canonical `mean(primed) − mean(direct)`
+positive for 16/16 primary configurations with both conditions usable —
+mean +6.93 pp (range +1.72…+15.91); Task-024 single-run direction
+replicated in 15/15 rows with an old delta (mean old +6.33 pp vs mean
+repeated +6.73 pp); stochastic spread typically smaller than the shift
+(median SD ≈ 1.49 pp direct / ≈ 0.87 pp primed; only Qwen 3.8 Max Fast's
+Δ +1.72 pp is below its own primed SD 5.83 pp); Gemini 3.6 Flash ON
++14.33 → +15.91 reproduced; Claude Sonnet 5 Medium +11.66 → +9.12
+(stable primed SD 0.80, operationally clean); DeepSeek Expert ON
++5.14 → +3.77 (ON > OFF in both conditions); Dola Pro exploratory
++12.41 pp; Dola Fast's old +28.20 pp not re-estimable (repeated direct
+condition unusable — intake partial); baseline dependence persists
+(ρ ≈ −0.84 vs old ≈ −0.86).** Tests updated (`tests/
+test_exp004_repeats.py` 26) + new audit suite; full suite green.
+Recommended next experiment: Phase-2B unseen-topic transfer test.
+Historical Task-024 conclusions untouched (reported as new follow-up
+findings where repetition changed confidence). Full record:
+`experiments/exp004-modelscreen/repeats/REPORT.md` (results written) +
+`repeats/analysis/`; DESIGN §14 status updated.
 
 SODA Task 025 (2026-09-08 planned generation date; kit prepared
 2026-09-07) — prepared the deterministic controlled-repeat kit under
@@ -111,7 +173,7 @@ Research hypothesis:
 This is a hypothesis. The first experiment must establish a baseline before
 any constrained system is judged against it.
 
-## Current status (as of SODA Task 025)
+## Current status (as of SODA Task 026)
 
 | Area | Status |
 |---|---|
@@ -146,6 +208,7 @@ any constrained system is judged against it.
 | **EXP-004 Dola Phase-1 baselines prepared (Task 022), collected + evaluated (Task 023)** | ✅ **PREPARED (022) → COLLECTED + EVALUATED (023)** — retrospective Phase-1 DIRECT baselines for the two exploratory Dola 3.8 configurations (Fast/Pro, runs 20/21) that were added without a baseline at Task 021. `scripts/run_exp004_phase1.py extend-direct --date 2026-09-07` rendered the two canonical Phase-1 direct operator prompts (`operator-prompts/20-dola-3.8-fast.md`, `21-dola-3.8-pro.md` — same Polish source story + same direct-translation instruction as the original 18; corpus-free, no scaffold/dictionary/grammar material, fresh-session requirement explicit) and appended their plan/manifest rows as `pending_manual_collection`; `scripts/run_exp004_phase2a.py link-baselines` then wired each Dola p2a-primed row's `baseline_run_id` to its prepared direct id (`baseline_status: pending_collection`). **Task 023 (2026-09-07): the author executed both baselines in fresh ByteDance sessions (direct translation only) and saved each raw reply msg2-style inside its operator prompt file; both records passed the Phase-1 `collect-session` intake + `verify` completeness gate (verdict complete, usable) and were evaluated with the same deterministic pipeline. `compare` now reports the real within-Dola Phase 1 → Phase 2A deltas** (canonical coverage: Dola Fast 38.87 % → 67.07 % [+28.20 pp]; Dola Pro 65.08 % → 71.75 % [+6.67 pp]; broader/unresolved/token deltas in `phase2a/outputs/compare.md`). Dola stays `exploratory: true` (not part of the original 18-configuration roster); Task-020/021 historical results unchanged; no priming effect claimed beyond the recorded deltas. New tests in `tests/test_exp004_phase1_dola_baselines.py` (msg2-style collect + verify, no false prompt-drift FAIL, real compare deltas); full suite green |
 | **EXP-004 FULL ANALYSIS (Task 024, 2026-09-07)** | ✅ **COMPLETE — PHASE 1 → PHASE 2A CORPUS-PRIMING EVIDENCE BASE** — deterministic, read-only research analysis of the whole 20-configuration dataset (18 original + 2 exploratory Dola 3.8) via `scripts/analyze_exp004_phase2a.py` (std-lib only; byte-identical chart regeneration, deterministic tables): 20-config dataset (`analysis/dataset.json`; Dola rows `exploratory: true`, never merged), Phase-1 + Phase-2A rankings on four separate dimensions (canonical / broader / unresolved / orthography — no composite, no winner), priming Δ table sorted by Δ canonical (original 18: mean +6.00 pp, median +4.92 pp, sd 3.39 pp, 18/18 positive; broader mean +2.36 pp, 14/18 positive; 20-config set labelled exploratory), exploratory exact paired tests (sign test canonical p ≈ 7.6e-6, broader p ≈ 0.031; sign-flip permutation p ≈ 7.6e-6 / 9.6e-4 — n = 1 per condition caveat explicit), descriptive Spearman baseline-dependence (P1 canonical vs Δ canonical ρ = −0.86; broader ρ = −0.84; n = 18), P1-vs-P2A ρ = +0.45 / +0.37, family tables (GPT/Claude/Gemini/DeepSeek/Qwen/Dola), orthography-bucket analysis, separate practical-usability dimension, research-facing master table, charts A–G (`analysis/figures/`), poster draft (`analysis/poster.{md,html}`) + committed `analysis/README.md` (supported/suggestive/not-established conclusions; research candidates: Claude Sonnet 5 Medium, DeepSeek V3 Expert ON/OFF, Qwen 3.8 Max Fast, Gemini 3.6 Flash ON, Dola Fast/Pro — exploratory; ≤ 3 recommended next experiments, none executed). Dola Fast's +28.20 pp is reported as a large observed change consistent with baseline dependence, NOT as evidence of stronger corpus learning. Phase 2B not executed. `tests/test_analyze_exp004_phase2a.py` (19 tests); full suite green (212) |
 | **EXP-004 PHASE REPEAT (Task 025, 2026-09-07)** | ✅ **PREPARED — EXECUTION-READY, NO LLM RESULTS YET** — controlled repeated-generation kit (`experiments/exp004-modelscreen/repeats/`) to estimate run-to-run stochastic variation in EXP-004: **108 primary planned generations** (the original 18 usable configurations × `direct`/`primed` × 3 independent fresh-session replicates r01–r03) + **12 exploratory Dola 3.8 Fast/Pro rows** (`exploratory: true`, never merged into primary n=18; research lead decides whether to execute). Deterministic hash-gated prompt prep (`scripts/run_exp004_repeats.py prepare --date 2026-09-08` → 120-run `outputs/plan.json` + hash-only `operator-prompts/manifest.json` + human `outputs/collection-checklist.md`; 180 prompt files, source `5de968a6…`/corpus `aaad28e4…` byte-gates, replicate contents byte-identical within (config, condition), fresh-session rule encoded, no scaffolding/hints). Collection/verify/evaluate/roster reuse the Phase-1/2A completeness gate + integrity checks + Task-008 evaluator + orthography audit unmodified (msg2-style records; corpus-in-direct contamination rejected; raw outputs never repaired; unusable runs preserved + marked; re-run gets a new id). Analysis (`scripts/analyze_exp004_repeats.py`, std-lib): n=3 small-sample descriptive stats; primary quantity `mean(primed) − mean(direct)` vs old single delta; block differences secondary only; figures A–E; three selection views + ortho; candidate focus; supported/suggestive/not-established rules; explicit no-results scaffold written. 25 new tests (`tests/test_exp004_repeats.py`); full suite **237 green**. `REPORT.md` (no results yet) + READMEs committed; analysis scaffold `repeats/analysis/` status `no_results`. Next: research lead executes the prepared prompts (replicate blocks r01→r03), then collect/verify/evaluate/analyze. No Phase 2B; no human evaluation |
+| **EXP-004 PHASE REPEAT EXECUTED + AUDITED (Task 026, 2026-09-09)** | ✅ **EXECUTED, AUDITED, EVALUATED, ANALYSED** — 114/120 planned runs collected (msg2-style); Task-026 audit script `scripts/audit_exp004_repeats.py` + `tests/test_audit_exp004_repeats.py` (10) reconciled every run against the Task-025 manifest + authoritative renders with raw outputs untouched (`repeats/outputs/audit.{json,md}` local). **Counts: planned 120 (108 primary + 12 exploratory) / collected 114 (102 + 12) / usable 106 (99 + 7) / partial 8 (3 + 5; markdown-wrapped end markers only) / invalid 0 / missing 6** (Gemini 3.1 Pro ON + Qwen 3.8 Max Thinking primed r01–r03 — never collected, not fabricated; repeated Δ n/a for those two). Hash gates OK; no duplicates/source-echo/cross-run contamination/stale files. Deviations recorded, not repaired: Grok identity operator-header edit (6 runs; operator-reported "Grok 4.5, built by xAI (fast)"; model-facing bytes identical); **Claude Sonnet 5 — max thinking/reasoning OFF for all repeats** (execution deviation; not renamed; comparability with Task 024 affected); Gemini primed corpus two-message delivery (6 runs; corpus tail byte-verified — same class as Task-021/024); Dola Pro r03 msg1 blank header line (trivial). `fresh_session_proof: unavailable`. **Results (descriptive): repeated Δ canonical positive 16/16 (mean +6.93 pp); Task-024 direction replicated 15/15 (mean old +6.33 pp vs repeated +6.73 pp); shift > within-condition spread for most configs (median SD ≈ 1.49 pp direct / ≈ 0.87 pp primed); Gemini Flash ON +15.91, Claude Medium +9.12 (stable), DeepSeek Expert ON +3.77 (ON > OFF), Qwen 3.8 Max Fast +1.72 with primed SD 5.83; Dola Pro +12.41, Dola Fast not re-estimable.** `REPORT.md` results + `analysis/` complete; full suite green; recommended next: Phase-2B unseen-topic transfer. Phase 2B not executed; no human evaluation |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
 
 ### Experiment 001 headline numbers
@@ -202,7 +265,8 @@ scripts/
   audit_exp004_collected.py  — EXP-004 collection audit + reconciliation evidence (Task 018)
   analyze_exp004_phase2a.py  — EXP-004 Task-024 deterministic full analysis (dataset/rankings/Δ table/stats + exploratory tests/correlations/families/orthography/master table/charts A–G/poster; std-lib only)
   run_exp004_repeats.py      — EXP-004 phase-repeat orchestrator (prepare/collect-session/collect-msg2/verify/evaluate/status/roster; Task 025; hash-gated 108+12-run plan)
-  analyze_exp004_repeats.py  — EXP-004 Task-025 deterministic repeated-generation analysis (stochastic stats, mean-primed−mean-direct vs old delta, figures A–E, selection views; std-lib only)
+  audit_exp004_repeats.py   — EXP-004 phase-repeat collection audit + reconciliation evidence (Task 026; machine-readable audit.json + audit.md; roster-verdict merge)
+  analyze_exp004_repeats.py  — EXP-004 Task-025/026 deterministic repeated-generation analysis (stochastic stats, mean-primed−mean-direct vs old delta, figures A–E, selection views; std-lib only)
 data/
   dictionary/README.md       — how to regenerate the (gitignored) data
   dictionary/audit/          — downloaded audit inputs (hunspell, frequency, slovnik), gitignored
@@ -246,7 +310,7 @@ experiments/
                              — Phase 1 artifacts (all gitignored except committed READMEs + manifest/audit evidence; 18 evaluated runs, Task 018; Dola direct prompts 20/21 prepared Task 022 + collected/evaluated msg2-style records Task 023)
     phase2a/                 — Phase 2A corpus-priming kit (Tasks 019/020/021/022/023): README (protocol + 18-config roster + Dola exploratory + Task-021 record + Task-022 prepared / Task-023 collected+evaluated Phase-1 baselines) + corpus/ (three-register authentic corpus — narrative/artistic/encyclopedic — local; README provenance committed) + operator-prompts/ (58 prompt files incl. 4 exploratory Dola entries; manifest committed; msg2 files carry the collected replies after `## Output`) + outputs/ (38-run plan incl. 2 exploratory Dola rows; collected+verified+evaluated runs; roster + compare incl. real Dola deltas; gitignored) + collected-sessions/ (author saves raw sessions here; Task-021 records are the msg2 prompt+reply files above)
     analysis/                — Task-024 full analysis: README.md (committed; interpretation levels, candidates, next experiments) + dataset.json / analysis.{json,md} / figures/chart_a..g.svg / poster.{md,html} (gitignored, deterministic outputs of scripts/analyze_exp004_phase2a.py)
-    repeats/                 — Phase-repeat kit (Task 025): README.md (protocol + manifest + collection record) + REPORT.md (dedicated experiment report, no results yet) + operator-prompts/ (180 prompt files incl. 12 exploratory Dola; gitignored — embed source/corpus; manifest.json hash-only committed) + outputs/ (120-run plan dated 2026-09-08, collection-checklist.md, roster; gitignored except README.md) + analysis/ (README.md committed; no-results scaffold — dataset/analysis JSON+MD + figure placeholders, gitignored)
+    repeats/                 — Phase-repeat experiment (Tasks 025/026): README.md (protocol + manifest + collection record + audit record) + REPORT.md (dedicated report — status: COLLECTED, AUDITED, ANALYSED; results written 2026-09-09) + operator-prompts/ (180 prompt files incl. 12 exploratory Dola; collected raw replies live msg2-style after `## Output`; gitignored — embed source/corpus; manifest.json hash-only committed) + outputs/ (120-run plan dated 2026-09-08, collection-checklist.md, roster.json/md, audit.json/md, run dirs; gitignored except README.md) + analysis/ (README.md committed with results summary; dataset/analysis JSON+MD + figures A–E — deterministic outputs of analyze_exp004_repeats.py, gitignored)
 ```
 
 ## Working agreements

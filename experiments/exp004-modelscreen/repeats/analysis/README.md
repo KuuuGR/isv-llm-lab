@@ -4,31 +4,29 @@ Derived artifacts in this directory are **gitignored** (deterministic
 outputs of `scripts/analyze_exp004_repeats.py`, derived from raw outputs
 that stay local); this README is committed.
 
-## Current state (2026-09-07): no results scaffold
+## Current state (2026-09-09): results written (Task 026)
 
-The repeat kit is prepared but **no LLM generation has been collected yet**,
-so this directory holds an explicit no-results scaffold written by the
-analysis script:
+The repeated-generation collection was completed, audited (Task 026:
+114/120 collected, 106 usable) and evaluated with the unmodified
+pipeline. `scripts/analyze_exp004_repeats.py` was re-run and wrote the
+full deterministic result set here:
 
 | file | content |
 |---|---|
-| `dataset.json` | per-configuration observation + stats dataset — empty until usable observations exist |
-| `analysis.json` | machine-readable analysis — `status: no_results` |
-| `analysis.md` | narrative report — "NO RESULTS YET", design/stats method + interpretation rules |
-| `figures/figure_a..e.svg` | placeholder files ("figure not generated: no usable repeat observations yet") |
+| `dataset.json` | per-configuration observation + stats dataset (usable replicates only; per-observation rows, direct/primed, primary/exploratory, orthography, replicate blocks) |
+| `analysis.json` | machine-readable analysis — `status: results`; counts, stats, repeated Δ canonical + broader, old-vs-new rows, figure data |
+| `analysis.md` | narrative report — collection summary, stats tables, candidate re-evaluation, figures |
+| `figures/figure_a..e.svg` | Figure A replicate distributions; B repeated mean Δ (sorted); C within-condition spread; D Task-024 single vs repeated Δ; E baseline vs repeated Δ — Dola kept visually distinct + labelled exploratory |
 
-No empty or fabricated charts are produced. After the research lead
-collects and the pipeline evaluates usable replicates
-(`run_exp004_repeats.py collect-msg2/collect-session` → `verify` →
-`evaluate` → `roster`), re-running
-`scripts/analyze_exp004_repeats.py` writes the real results here:
-per-(configuration, condition) n=3 small-sample descriptive statistics,
-`mean(primed) − mean(direct)` deltas (explicitly distinct from the
-Task-024 single-run deltas), figures A–E, three research-facing selection
-views (absolute quality / stability / priming responsiveness) plus the
-orthography dimension, candidate reproducibility answers and
-supported/suggestive/not-established conclusions. No composite score, no
-winner.
+Key numbers (see `analysis.md`, `REPORT.md`): repeated Δ canonical mean
+**+6.93 pp** over 16 primary configurations with both conditions usable
+(16/16 positive); Task-024 direction reproduced in 15/15 rows with an
+old delta; mean old Δ +6.33 pp vs mean repeated Δ +6.73 pp on the same
+rows. 6 runs were never collected (Gemini 3.1 Pro and Qwen 3.8 Max
+Thinking primed → repeated Δ n/a) and 8 collected runs are intake
+partial (end-marker soft failures) and excluded from usable stats. Dola
+Fast's old +28.20 pp cannot be re-estimated (direct condition unusable);
+Dola Pro repeated Δ +12.41 pp.
 
 ## Method (deterministic, standard library only)
 
