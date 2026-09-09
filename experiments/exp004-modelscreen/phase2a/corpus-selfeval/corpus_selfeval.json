@@ -1,0 +1,432 @@
+{
+  "experiment_id": "exp004",
+  "artifact": "corpus_selfeval",
+  "corpus": {
+    "id": "phase2a-authentic-isv",
+    "version": "v1",
+    "sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857"
+  },
+  "note": "Deterministic self-evaluation of the authentic corpus with the unchanged EXP-004 evaluation stack (isv-eval metrics + Task-015 orthography audit). Reference point for interpreting model coverage; not linguistic-correctness claims; no composite score.",
+  "datasets": [
+    {
+      "dataset_id": "combined",
+      "label": "Combined authentic corpus",
+      "register": null,
+      "file": "experiments/exp004-modelscreen/phase2a/corpus/phase2a-authentic-isv-corpus.txt",
+      "sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "bytes": 58459,
+      "evaluator": {
+        "name": "isv-eval",
+        "version": "0.1.0",
+        "commit": "52f347b5c33d118283a34119523d6e1b0c7aa50f"
+      },
+      "metrics": {
+        "total_tokens": 8096,
+        "tokens_total": 9596,
+        "non_lexical_tokens": 1500,
+        "exact_dictionary_matches": 6516,
+        "morphologically_valid_forms": 1,
+        "unresolved_forms": 1579,
+        "exact_dictionary_coverage": 0.804842,
+        "morphologically_valid_coverage": 0.804965,
+        "unresolved_rate": 0.195035,
+        "canonical_supported_tokens": 6517,
+        "canonical_coverage": 0.804965,
+        "broader_resource_supported_tokens": 7219,
+        "broader_resource_supported_coverage": 0.891675,
+        "unresolved_tokens": 1579,
+        "denominator_policy": "coverage denominators are lexical tokens (word-like tokens); punctuation and numbers are excluded; canonical_coverage = (A + B) / lexical_tokens (= morphologically_valid_coverage, historical name); broader_resource_supported_coverage = (canonical-supported + exact alternative-resource attestation) / lexical_tokens; the broader tier is an evidence estimate, never a validity claim",
+        "bucket_counts": {
+          "A": 6516,
+          "B": 1,
+          "C": 1579,
+          "non_lexical": 1500
+        }
+      },
+      "orthography": {
+        "total_chars": 55990,
+        "allowed_letters": 46037,
+        "accepted_nonletters": 9906,
+        "outside_inventory": 47,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 7,
+        "other_script": 0,
+        "unexpected_nonletters": 40,
+        "unexpected": {
+          "%": {
+            "char": "%",
+            "name": "PERCENT SIGN",
+            "category": "unexpected",
+            "count": 2,
+            "lines": [
+              694
+            ]
+          },
+          "*": {
+            "char": "*",
+            "name": "ASTERISK",
+            "category": "unexpected",
+            "count": 11,
+            "lines": [
+              576,
+              577,
+              578,
+              579,
+              580,
+              581,
+              582,
+              583,
+              584,
+              585,
+              586
+            ]
+          },
+          "/": {
+            "char": "/",
+            "name": "SOLIDUS",
+            "category": "unexpected",
+            "count": 7,
+            "lines": [
+              1,
+              49,
+              89,
+              501,
+              549,
+              648
+            ]
+          },
+          "=": {
+            "char": "=",
+            "name": "EQUALS SIGN",
+            "category": "unexpected",
+            "count": 18,
+            "lines": [
+              1,
+              89,
+              501
+            ]
+          },
+          "W": {
+            "char": "W",
+            "name": "LATIN CAPITAL LETTER W",
+            "category": "other_latin_letter",
+            "count": 1,
+            "lines": [
+              530
+            ]
+          },
+          "w": {
+            "char": "w",
+            "name": "LATIN SMALL LETTER W",
+            "category": "other_latin_letter",
+            "count": 6,
+            "lines": [
+              526,
+              565,
+              580,
+              586,
+              676
+            ]
+          },
+          "°": {
+            "char": "°",
+            "name": "DEGREE SIGN",
+            "category": "unexpected",
+            "count": 1,
+            "lines": [
+              684
+            ]
+          },
+          "×": {
+            "char": "×",
+            "name": "MULTIPLICATION SIGN",
+            "category": "unexpected",
+            "count": 1,
+            "lines": [
+              600
+            ]
+          }
+        }
+      }
+    },
+    {
+      "dataset_id": "register1",
+      "label": "Register 1 — literary / narrative",
+      "register": 1,
+      "file": "experiments/exp004-modelscreen/phase2a/corpus/tuta-historija-excerpt.txt",
+      "sha256": "413830fa4ff6aaa8833895a22e7ef1fa5fa3807e5a5a105b7e4050cf7b67a29c",
+      "bytes": 4820,
+      "evaluator": {
+        "name": "isv-eval",
+        "version": "0.1.0",
+        "commit": "52f347b5c33d118283a34119523d6e1b0c7aa50f"
+      },
+      "metrics": {
+        "total_tokens": 770,
+        "tokens_total": 960,
+        "non_lexical_tokens": 190,
+        "exact_dictionary_matches": 739,
+        "morphologically_valid_forms": 0,
+        "unresolved_forms": 31,
+        "exact_dictionary_coverage": 0.95974,
+        "morphologically_valid_coverage": 0.95974,
+        "unresolved_rate": 0.04026,
+        "canonical_supported_tokens": 739,
+        "canonical_coverage": 0.95974,
+        "broader_resource_supported_tokens": 766,
+        "broader_resource_supported_coverage": 0.994805,
+        "unresolved_tokens": 31,
+        "denominator_policy": "coverage denominators are lexical tokens (word-like tokens); punctuation and numbers are excluded; canonical_coverage = (A + B) / lexical_tokens (= morphologically_valid_coverage, historical name); broader_resource_supported_coverage = (canonical-supported + exact alternative-resource attestation) / lexical_tokens; the broader tier is an evidence estimate, never a validity claim",
+        "bucket_counts": {
+          "A": 739,
+          "B": 0,
+          "C": 31,
+          "non_lexical": 190
+        }
+      },
+      "orthography": {
+        "total_chars": 4563,
+        "allowed_letters": 3562,
+        "accepted_nonletters": 1000,
+        "outside_inventory": 1,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 0,
+        "other_script": 0,
+        "unexpected_nonletters": 1,
+        "unexpected": {
+          "/": {
+            "char": "/",
+            "name": "SOLIDUS",
+            "category": "unexpected",
+            "count": 1,
+            "lines": [
+              47
+            ]
+          }
+        }
+      }
+    },
+    {
+      "dataset_id": "register2",
+      "label": "Register 2 — artistic / poetic",
+      "register": 2,
+      "file": "experiments/exp004-modelscreen/phase2a/corpus/album-ahoj-slovjani-artistic-isv.txt",
+      "sha256": "7e25a56f67a52976083f625fabf040b6cd5ae399317cb36a59a302a3a52dcacf",
+      "bytes": 9407,
+      "evaluator": {
+        "name": "isv-eval",
+        "version": "0.1.0",
+        "commit": "52f347b5c33d118283a34119523d6e1b0c7aa50f"
+      },
+      "metrics": {
+        "total_tokens": 1600,
+        "tokens_total": 1786,
+        "non_lexical_tokens": 186,
+        "exact_dictionary_matches": 1449,
+        "morphologically_valid_forms": 0,
+        "unresolved_forms": 151,
+        "exact_dictionary_coverage": 0.905625,
+        "morphologically_valid_coverage": 0.905625,
+        "unresolved_rate": 0.094375,
+        "canonical_supported_tokens": 1449,
+        "canonical_coverage": 0.905625,
+        "broader_resource_supported_tokens": 1600,
+        "broader_resource_supported_coverage": 1.0,
+        "unresolved_tokens": 151,
+        "denominator_policy": "coverage denominators are lexical tokens (word-like tokens); punctuation and numbers are excluded; canonical_coverage = (A + B) / lexical_tokens (= morphologically_valid_coverage, historical name); broader_resource_supported_coverage = (canonical-supported + exact alternative-resource attestation) / lexical_tokens; the broader tier is an evidence estimate, never a validity claim",
+        "bucket_counts": {
+          "A": 1449,
+          "B": 0,
+          "C": 151,
+          "non_lexical": 186
+        }
+      },
+      "orthography": {
+        "total_chars": 9015,
+        "allowed_letters": 7153,
+        "accepted_nonletters": 1862,
+        "outside_inventory": 0,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 0,
+        "other_script": 0,
+        "unexpected_nonletters": 0,
+        "unexpected": {}
+      }
+    },
+    {
+      "dataset_id": "register3",
+      "label": "Register 3 — informative / encyclopedic",
+      "register": 3,
+      "file": "experiments/exp004-modelscreen/phase2a/corpus/wiki-sadovnistvo-encyclopedic-isv.txt",
+      "sha256": "b03402fef2384730b90a5ab879af78be63b5e6d0e4fa00db4c3c3525844c8345",
+      "bytes": 44101,
+      "evaluator": {
+        "name": "isv-eval",
+        "version": "0.1.0",
+        "commit": "52f347b5c33d118283a34119523d6e1b0c7aa50f"
+      },
+      "metrics": {
+        "total_tokens": 5717,
+        "tokens_total": 6814,
+        "non_lexical_tokens": 1097,
+        "exact_dictionary_matches": 4328,
+        "morphologically_valid_forms": 1,
+        "unresolved_forms": 1388,
+        "exact_dictionary_coverage": 0.75704,
+        "morphologically_valid_coverage": 0.757215,
+        "unresolved_rate": 0.242785,
+        "canonical_supported_tokens": 4329,
+        "canonical_coverage": 0.757215,
+        "broader_resource_supported_tokens": 4850,
+        "broader_resource_supported_coverage": 0.848347,
+        "unresolved_tokens": 1388,
+        "denominator_policy": "coverage denominators are lexical tokens (word-like tokens); punctuation and numbers are excluded; canonical_coverage = (A + B) / lexical_tokens (= morphologically_valid_coverage, historical name); broader_resource_supported_coverage = (canonical-supported + exact alternative-resource attestation) / lexical_tokens; the broader tier is an evidence estimate, never a validity claim",
+        "bucket_counts": {
+          "A": 4328,
+          "B": 1,
+          "C": 1388,
+          "non_lexical": 1097
+        }
+      },
+      "orthography": {
+        "total_chars": 42281,
+        "allowed_letters": 35244,
+        "accepted_nonletters": 7012,
+        "outside_inventory": 25,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 7,
+        "other_script": 0,
+        "unexpected_nonletters": 18,
+        "unexpected": {
+          "%": {
+            "char": "%",
+            "name": "PERCENT SIGN",
+            "category": "unexpected",
+            "count": 2,
+            "lines": [
+              192
+            ]
+          },
+          "*": {
+            "char": "*",
+            "name": "ASTERISK",
+            "category": "unexpected",
+            "count": 11,
+            "lines": [
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82,
+              83,
+              84
+            ]
+          },
+          "/": {
+            "char": "/",
+            "name": "SOLIDUS",
+            "category": "unexpected",
+            "count": 3,
+            "lines": [
+              47,
+              146
+            ]
+          },
+          "W": {
+            "char": "W",
+            "name": "LATIN CAPITAL LETTER W",
+            "category": "other_latin_letter",
+            "count": 1,
+            "lines": [
+              28
+            ]
+          },
+          "w": {
+            "char": "w",
+            "name": "LATIN SMALL LETTER W",
+            "category": "other_latin_letter",
+            "count": 6,
+            "lines": [
+              24,
+              63,
+              78,
+              84,
+              174
+            ]
+          },
+          "°": {
+            "char": "°",
+            "name": "DEGREE SIGN",
+            "category": "unexpected",
+            "count": 1,
+            "lines": [
+              182
+            ]
+          },
+          "×": {
+            "char": "×",
+            "name": "MULTIPLICATION SIGN",
+            "category": "unexpected",
+            "count": 1,
+            "lines": [
+              98
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "cross_register": {
+    "per_register_unique_surfaces": {
+      "1": 410,
+      "2": 655,
+      "3": 2639
+    },
+    "register_labels": {
+      "1": "Register 1 — literary / narrative",
+      "2": "Register 2 — artistic / poetic",
+      "3": "Register 3 — informative / encyclopedic"
+    },
+    "pairwise": {
+      "1_x_2": {
+        "registers": [
+          1,
+          2
+        ],
+        "shared_surfaces": 113,
+        "only_in_first": 297,
+        "only_in_second": 542
+      },
+      "1_x_3": {
+        "registers": [
+          1,
+          3
+        ],
+        "shared_surfaces": 109,
+        "only_in_first": 301,
+        "only_in_second": 2530
+      },
+      "2_x_3": {
+        "registers": [
+          2,
+          3
+        ],
+        "shared_surfaces": 118,
+        "only_in_first": 537,
+        "only_in_second": 2521
+      }
+    },
+    "all_three_shared": 61,
+    "union_all_registers": 3425,
+    "note": "Exploratory corpus-composition analysis (lexical surface overlap only). 'Unique to one register' does NOT mean 'incorrect'; this is NOT a quality score."
+  },
+  "generator": "scripts/selfeval_exp004_corpus.py"
+}

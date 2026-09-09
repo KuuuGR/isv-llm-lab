@@ -1,6 +1,13 @@
 # Project State
 
-Updated: 2026-09-09 (SODA Task 028 — RESEARCH-STATE RECONSTRUCTION,
+Updated: 2026-09-09 (SODA Task 029 — HIGH-OVERLAP TEST PREPARATION +
+AUTHENTIC-CORPUS SELF-EVALUATION: deterministic Phase-2B HIGH-overlap
+kit prepared (7 configs × direct/primed × 3 replicates = 42 planned
+translations, story to be frozen by the author — NOT executed, no LLM
+calls) + the authentic corpus itself evaluated with the unchanged
+evaluation stack as a reference point (combined 80.50 % canonical /
+89.17 % broader / 19.50 % unresolved; per-register results) — see the
+Task-029 paragraph below. SODA Task 028 — RESEARCH-STATE RECONSTRUCTION,
 ROADMAP + TRANSLATION-METHOD SPECIFICATION: externally-discussed research
 direction recorded in-repo — `docs/research-roadmap.md` (hypothesis,
 completed-experiment record, key findings, Phase-2B shortlist + plan,
@@ -118,6 +125,52 @@ median SD 1.49/0.87 pp; Qwen 3.8 Max Fast exception) — 15/15 checks
 green; generator run twice → byte-identical.** Raw outputs are NOT
 copied (raw/README.md explains on-demand export by run ID). Docs:
 EXP-004 README + repeats/analysis README updated; full suite green.
+
+SODA Task 029 (2026-09-09) — PREPARED THE PHASE-2B HIGH-OVERLAP TEST
+AND SELF-EVALUATED THE AUTHENTIC CORPUS (deterministic; no LLM calls,
+no translations collected, no raw data modified). **(1) HIGH-overlap
+test preparation.** The project now distinguishes three source-text
+regimes (roadmap §11.1): HIGH-overlap (`Iskra i Wieloryb — wersja z
+oryginalnymi nazwami`, classification `high_overlap_corpus_inspired` —
+deliberately NOT `independent_same_topic`; shares eternal winter,
+Red/Scarlet Spark, Zimorodzice, inherited key, grandfather's legacy,
+Mogiła Szronu, song mechanisms, whale imagery, Heart of the Earth,
+sacrifice/transformation, maritime/storm motifs), LOW-overlap
+(`Opowieść o sygnale` / `Podkłady`), UNSEEN DOMAIN (future
+biomedical-physics/electromedicine). New `scripts/run_exp004_phase2b.py`
+(deterministic `freeze-story`/`prepare`, extends the repeats machinery;
+never calls an LLM) prepares the **42-run HIGH kit** (7 shortlisted
+configs × direct/primed × 3 fresh-session replicates = 42 planned
+translations, 21 paired comparisons; 7-field run ids
+`<date>__p2b-high__<provider>__<model>__<version>__direct|primed__rNN`)
+under `experiments/exp004-modelscreen/phase2b/`. Direct prompts are
+corpus-free; primed msg1 carries the full authoritative corpus
+`aaad28e4…` (never shortened for Gemini — split delivery stays a
+recorded interface deviation); story and corpus hash-gated;
+`prepare` fails loudly until the author freezes the story
+(`phase2b/input/README.md`). **No results exist — the 42 translations
+are the next manual operator step.** **(2) Corpus self-evaluation.**
+`scripts/selfeval_exp004_corpus.py` ran the unchanged Task-008 evaluator
++ orthography audit on the authentic corpus itself (reference point for
+model coverage, not a correctness claim; no special "corpus score"):
+combined 8 096 lexical tokens — canonical 80.50 %, broader 89.17 %,
+unresolved 19.50 %, orthography-out 47 (0 Cyrillic / 0 Polish-specific);
+Register 1 literary/narrative 95.97 % canonical / 99.48 % broader /
+1 ortho-out; Register 2 artistic/poetic 90.56 % canonical / 100.00 %
+broader / 0 ortho-out; Register 3 informative/encyclopedic 75.72 %
+canonical / 84.83 % broader / 25 ortho-out. Descriptive reading:
+low model canonical coverage can partly arise from resource limits
+(corpus itself only 80.5 % canonical; thinnest in the encyclopedic
+register); corpus orthography is essentially clean, so it does not
+explain model orthographic contamination; cross-register composition is
+lexically diverse (only 61 surfaces shared by all three of 3 425
+unique). Reports: `phase2a/corpus-selfeval/{corpus_selfeval.json,
+corpus_selfeval.md, model_comparison.md, README.md}` (scratch gitignored).
+H-HIGH (priming may produce a larger improvement under strong
+text-corpus alignment) recorded as a hypothesis; interpretation will
+compare Δ_HIGH vs Δ_LOW vs Δ_UNSEEN — nothing claimed yet. Docs updated
+(roadmap §9.1/§11; translation-method §7/§10; DESIGN §15; EXP-004 README;
+STATE/ROADMAP); new tests `tests/test_exp004_phase2b.py`; full suite green.
 
 SODA Task 028 (2026-09-09) — RECONSTRUCTED THE RESEARCH STATE AND
 DIRECTION IN THE REPOSITORY (documentation only; no LLM calls, no new
@@ -249,7 +302,7 @@ Research hypothesis:
 This is a hypothesis. The first experiment must establish a baseline before
 any constrained system is judged against it.
 
-## Current status (as of SODA Task 028)
+## Current status (as of SODA Task 029)
 
 | Area | Status |
 |---|---|
@@ -288,6 +341,8 @@ any constrained system is judged against it.
 
 | **EXP-004 ASSISTANT RESEARCH BUNDLE (Task 027, 2026-09-09)** | ✅ **COMPLETE — COMPACT MACHINE-READABLE EXPORT FOR INDEPENDENT ANALYSIS** — `experiments/exp004-modelscreen/assistant-research-bundle/` (1.5 MB): `results.json`/`results.csv` (120 planned runs, one record per run, replicate metrics, hashes, deviations), `summary.json` (per-config descriptive stats + repeated Δ + Task-024 old singles as `historical_task024`), `audit.json`, `deviations.json`, `provenance.json`, `manifest.json` (per-file SHA-256), `methodology.md`, figures A–E PNG+SVG; standalone verifier reconstructs every Task-026 headline from the bundle alone (15/15 checks); deterministic (two builds byte-identical); no raw outputs, no secrets |
 | **Research-state reconstruction (Task 028, 2026-09-09)** | ✅ **COMPLETE — DOCUMENTATION ONLY** — `docs/research-roadmap.md` (high-level source of truth: framing, COMPLETED experiment record EXP-001→EXP-004 + EXP-005 audit, interpretation, PROPOSED Phase-2B shortlist 7 configs × 3 reps × 2 conditions = 42 translations, 2B-A/2B-B variants, publication direction, stopping rule) + `docs/translation-method.md` (evaluation layers, intervention ladder A–E, pipeline hypotheses, proposed pipeline-optimization experiment, conceptual software). Indexed from README; numbers cross-checked against repo records; no historical correction needed; no tests changed; no experiments run |
+| **EXP-004 corpus self-evaluation (Task 029, 2026-09-09)** | ✅ **COMPLETE — REFERENCE POINT** — authentic corpus measured with the unchanged evaluation stack (`phase2a/corpus-selfeval/`): combined 8 096 tokens — canonical 80.50 %, broader 89.17 %, unresolved 19.50 %, orthography-out 47; Register 1 narrative 95.97/99.48 %; Register 2 artistic 90.56/100.00 %; Register 3 encyclopedic 75.72/84.83 %. Evidence that low canonical model coverage can partly reflect resource limits; corpus orthography clean (does not explain model contamination); exploratory cross-register composition (61/3 425 shared surfaces). Descriptive only — no "corpus score", no correctness claim |
+| **EXP-004 Phase-2B HIGH-overlap kit (Task 029, 2026-09-09)** | ✅ **PREPARED — NOT EXECUTED** — deterministic 42-run HIGH-overlap kit (`experiments/exp004-modelscreen/phase2b/` + `scripts/run_exp004_phase2b.py`): 7 shortlisted configs × direct/primed × 3 replicates; source regime `high_overlap_corpus_inspired` (`Iskra i Wieloryb`); direct corpus-free, primed full-corpus hash-gated (`aaad28e4…`); H-HIGH hypothesis recorded; **story text still to be frozen by the author — `prepare` fails loudly until then; no translations exist; next manual step is the 42 translations** |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
 
 
@@ -348,6 +403,8 @@ scripts/
   audit_exp004_repeats.py   — EXP-004 phase-repeat collection audit + reconciliation evidence (Task 026; machine-readable audit.json + audit.md; roster-verdict merge)
   analyze_exp004_repeats.py  — EXP-004 Task-025/026 deterministic repeated-generation analysis (stochastic stats, mean-primed−mean-direct vs old delta, figures A–E, selection views; std-lib only)
   build_assistant_research_bundle.py — EXP-004 assistant-research-bundle generator + standalone verifier (Task 027; deterministic, std-lib)
+  run_exp004_phase2b.py      — EXP-004 Phase-2B HIGH-overlap kit prep (freeze-story/prepare; 7 configs × 2 conditions × 3 replicates = 42 planned runs; hash-gated; Task 029; extends run_exp004_repeats.py; never calls an LLM)
+  selfeval_exp004_corpus.py  — EXP-004 authentic-corpus self-evaluation (combined + 3 registers through the unchanged Task-008 evaluator + orthography audit; cross-register composition; model comparison; Task 029; deterministic)
 data/
   dictionary/README.md       — how to regenerate the (gitignored) data
   dictionary/audit/          — downloaded audit inputs (hunspell, frequency, slovnik), gitignored
@@ -395,6 +452,8 @@ experiments/
     analysis/                — Task-024 full analysis: README.md (committed; interpretation levels, candidates, next experiments) + dataset.json / analysis.{json,md} / figures/chart_a..g.svg / poster.{md,html} (gitignored, deterministic outputs of scripts/analyze_exp004_phase2a.py)
     repeats/                 — Phase-repeat experiment (Tasks 025/026): README.md (protocol + manifest + collection record + audit record) + REPORT.md (dedicated report — status: COLLECTED, AUDITED, ANALYSED; results written 2026-09-09) + operator-prompts/ (180 prompt files incl. 12 exploratory Dola; collected raw replies live msg2-style after `## Output`; gitignored — embed source/corpus; manifest.json hash-only committed) + outputs/ (120-run plan dated 2026-09-08, collection-checklist.md, roster.json/md, audit.json/md, run dirs; gitignored except README.md) + analysis/ (README.md committed with results summary; dataset/analysis JSON+MD + figures A–E — deterministic outputs of analyze_exp004_repeats.py, gitignored)
     assistant-research-bundle/  — EXP-004 compact machine-readable research export for independent analysis (Task 027): results.json/csv, summary.json, audit.json, deviations.json, provenance.json, manifest.json, methodology.md, raw/README.md, figures A–E — committed; generator + standalone verifier scripts/build_assistant_research_bundle.py
+    phase2a/corpus-selfeval/ — EXP-004 authentic-corpus self-evaluation reference point (Task 029): corpus_selfeval.json/md (combined + per-register canonical/broader/unresolved/orthography) + model_comparison.md (descriptive vs Phase-1/Phase-2A/repeated outputs) + README.md — committed; per-dataset isv-eval CLI scratch in .scratch/ (gitignored)
+    phase2b/                 — Phase-2B HIGH-overlap test (Task 029; PREPARED — NOT EXECUTED): README.md (protocol: 7 shortlisted configs × direct/primed × 3 replicates = 42 planned translations; H-HIGH hypothesis; regime table HIGH/LOW/UNSEEN) + input/ (story to be frozen by the author; provenance note) + operator-prompts/ (generated prompt files after `prepare`; README committed) + outputs/ (plan.json + collection-checklist.md after `prepare`; README committed)
 ```
 
 ## Working agreements

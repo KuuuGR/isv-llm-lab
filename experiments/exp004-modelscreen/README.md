@@ -8,7 +8,10 @@ ANALYSIS COMPLETE — PHASE 1 → PHASE 2A CORPUS-PRIMING EVIDENCE BASE;
 **TASK 025 (2026-09-07) PHASE-REPEAT KIT PREPARED — controlled repeated
 generation, execution-ready, NO LLM RESULTS YET.** EXP-003
 is closed; no further human evaluation will be designed or requested
-(D-042). The project author executed the Phase 1 screening sessions in the
+(D-042). **TASK 026 (2026-09-09) REPEAT COLLECTION AUDITED +
+EVALUATED + ANALYSED; TASK 027 (2026-09-09) ASSISTANT-RESEARCH-BUNDLE
+BUILT; TASK 029 (2026-09-09) PHASE-2B HIGH-OVERLAP KIT PREPARED (NOT
+EXECUTED) + AUTHENTIC-CORPUS SELF-EVALUATION COMPLETE.** The project author executed the Phase 1 screening sessions in the
 external web/chat interfaces; the collected material was audited and
 reconciled against the deterministic prompt package (Task 018) and the
 reconciled runs were run through the intake gate, the deterministic
@@ -57,6 +60,21 @@ deterministic analysis kit that replaces the single Task-024 delta with
 `repeats/README.md`, `repeats/REPORT.md`, `repeats/analysis/README.md`
 and the compact independent-analysis export in
 `assistant-research-bundle/`, Task 027). No LLM was ever called by any
+preparation/audit/analysis script. **Task 029 (2026-09-09) prepared the
+Phase-2B HIGH-overlap test and self-evaluated the authentic corpus**:
+the HIGH-overlap kit (`phase2b/` + `scripts/run_exp004_phase2b.py`) plans
+42 deterministic runs (7 shortlisted configurations × direct/primed × 3
+fresh-session replicates) on the deliberately corpus-inspired story
+`Iskra i Wieloryb` (regime `high_overlap_corpus_inspired`, NOT
+`independent_same_topic`); the story text still needs the author's
+freeze (`phase2b/input/README.md`) and **no translations exist** — the
+next manual operator step is the 42 HIGH-overlap translations. The
+corpus self-evaluation (`phase2a/corpus-selfeval/` +
+`scripts/selfeval_exp004_corpus.py`) measured the authentic corpus itself
+with the unchanged evaluation stack as a reference point: combined
+8 096 lexical tokens — canonical 80.50 %, broader 89.17 %, unresolved
+19.50 %, orthography-out 47; per-register numbers in §9.1 of
+`docs/research-roadmap.md`. No LLM was ever called by any
 preparation/audit/analysis script.
 
 Purpose: screen which LLMs are practically usable by the project (web/chat
@@ -71,7 +89,9 @@ prepared Task 019; corpus revised to three authentic registers Task 020;
 Phase-2A execution audited + evaluated + Dola 3.8 exploratory runs
 integrated Task 021; Dola Phase-1 direct baselines prepared Task 022,
 executed + collected + evaluated Task 023; full Phase 1 → Phase 2A
-research analysis Task 024; phase-repeat kit prepared Task 025 — §14).
+research analysis Task 024; phase-repeat kit prepared Task 025 — §14;
+Phase-2B HIGH-overlap kit prepared + corpus self-evaluation Task 029 —
+§15).
 
 ## Phase 2A — full-roster corpus priming (executed and evaluated, Task 021)
 
@@ -258,6 +278,20 @@ is complete and evaluated.
   and figures A–E (PNG + SVG). Self-contained and deterministic — an
   independent analyst can reconstruct every Task-026 quantitative
   conclusion from it without the raw experiment directory.
+- `phase2a/corpus-selfeval/` — **authentic-corpus self-evaluation
+  reference point (Task 029)**: `corpus_selfeval.json` + `.md`
+  (combined + per-register canonical/broader/unresolved/orthography
+  metrics through the unchanged Task-008 evaluator + orthography audit),
+  `model_comparison.md` (descriptive corpus-vs-model-output comparison),
+  `README.md`; per-dataset isv-eval CLI scratch in `.scratch/`
+  (gitignored).
+- `phase2b/` — **Phase-2B HIGH-overlap test (Task 029; PREPARED — NOT
+  EXECUTED)**: `README.md` (protocol: 7 shortlisted configs ×
+  direct/primed × 3 replicates = 42 planned translations; H-HIGH
+  hypothesis; HIGH/LOW/UNSEEN regime table), `input/` (author-freezes
+  the story here; provenance note), `operator-prompts/` (generated
+  prompts after `prepare`), `outputs/` (plan + checklist after
+  `prepare`).
 - `scripts/run_exp004_repeats.py` — phase-repeat orchestrator
   (prepare / collect-session / collect-msg2 / verify / evaluate / status /
   roster; Task 025).
@@ -268,6 +302,14 @@ is complete and evaluated.
   figures A–E, selection views; std-lib only).
 - `scripts/build_assistant_research_bundle.py` — deterministic
   assistant-research-bundle generator + standalone verifier (Task 027).
+- `scripts/run_exp004_phase2b.py` — Phase-2B HIGH-overlap kit prep
+  (`freeze-story` / `prepare`; 7 configs × 2 conditions × 3 replicates
+  = 42 planned runs; hash-gated; extends `run_exp004_repeats.py`;
+  Task 029; never calls an LLM).
+- `scripts/selfeval_exp004_corpus.py` — authentic-corpus self-evaluation
+  (combined + 3 registers through the unchanged evaluator + orthography
+  audit; cross-register composition; corpus-vs-model comparison;
+  Task 029; deterministic).
 - `scripts/check_orthography.py` — includes EXP-004 in the character-level
   audit (Task 015 inventory).
 
@@ -302,6 +344,15 @@ single-run direction is reproduced in 15/15 rows with an old delta, and
 the stochastic spread (median SD ≈ 1.49 pp direct / 0.87 pp primed) is
 typically smaller than the shift. Full results: `repeats/REPORT.md` +
 `repeats/analysis/`; the compact export for independent analysis is
-`assistant-research-bundle/` (Task 027). Phase 2B (Wikipedia-style
-authentic reference + independent story) is documented as future work
-and not started.
+`assistant-research-bundle/` (Task 027). **Task 029 (2026-09-09)
+prepared the Phase-2B HIGH-overlap test** (`phase2b/`): 42 planned
+translations on the deliberately corpus-inspired story `Iskra i
+Wieloryb` (regime `high_overlap_corpus_inspired`) with the seven
+shortlisted configurations — direct prompts corpus-free, primed prompts
+full-corpus hash-gated, corpus never shortened for Gemini. The author's
+story freeze is still required and **nothing has been executed**; the
+next manual operator step is the 42 HIGH-overlap translations.
+LOW-overlap and UNSEEN-DOMAIN variants remain future work. The
+authentic-corpus self-evaluation reference point (Task 029) is in
+`phase2a/corpus-selfeval/`; combined corpus canonical coverage is
+80.50 % under the same metrics used for model outputs (roadmap §9.1).

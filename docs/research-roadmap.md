@@ -435,7 +435,44 @@ Do **NOT** claim (`docs/ROADMAP.md`, `repeats/REPORT.md` §11,
 - reasoning/thinking *causes* the observed differences;
 - the current results prove generalization to unseen topics.
 
-## 10. Current preferred Phase 2B shortlist (`PROPOSED`, recorded Task 028)
+### 9.1 Corpus self-evaluation reference point (`COMPLETED`, SODA Task 029)
+
+Task 029 applied the unchanged EXP-004 evaluation stack (`isv-eval`
+metrics + Task-015 orthography audit) to the authentic reference corpus
+itself — the same stack used for every generated output — as a reference
+point for interpreting model coverage. Full record:
+`experiments/exp004-modelscreen/phase2a/corpus-selfeval/README.md`.
+
+| Dataset | Tokens | Canonical | Broader | Unresolved | Orthography out |
+|---|---:|---:|---:|---:|---:|
+| Combined authentic corpus | 8,096 | 80.50 % | 89.17 % | 19.50 % | 47 |
+| Register 1 — literary / narrative | 770 | 95.97 % | 99.48 % | 4.03 % | 1 |
+| Register 2 — artistic / poetic | 1,600 | 90.56 % | 100.00 % | 9.44 % | 0 |
+| Register 3 — informative / encyclopedic | 5,717 | 75.72 % | 84.83 % | 24.28 % | 25 |
+
+Descriptive consequences (recorded as evidence, not correctness claims):
+
+- Authentic Medžuslovjansky itself is only **80.5 % canonical**
+  (19.5 % unresolved): low canonical model coverage can partly arise from
+  resource limitations, not only model error. The canonical resource is
+  thinnest for the encyclopedic register (75.7 % canonical) and thickest
+  for the narrative register (96.0 %).
+- Model outputs sit **between** and around the corpus under the same
+  stack: Phase-1 direct ≈ 76.5 % canonical, Phase-2A primed ≈ 82.5 %,
+  repeated primed ≈ 82.2 %, corpus 80.5 %. Broader coverage is closer
+  (corpus 89.2 % vs repeated primed ≈ 88.8 %). Canonical coverage alone
+  does not separate authentic ISV from model output at the corpus level —
+  the reason the project never treats canonical coverage as "valid
+  Interslavic".
+- Orthography of the corpus is essentially clean (47 out-of-inventory
+  characters in 58 459 bytes; 0 Cyrillic, 0 Polish-specific); the corpus
+  does not explain orthographic contamination in model output.
+- Cross-register composition: the three registers are lexically diverse
+  (only 61 lexical surfaces of 3 425 shared by all three); combining them
+  expands resource-supported vocabulary by ≈ 30 % over Register 3 alone.
+  This is a corpus-composition fact, not a quality score.
+
+## 10. Current preferred Phase 2B shortlist (`PROPOSED`/`CURRENT`, recorded Task 028; HIGH-overlap kit prepared Task 029)
 
 Seven representative configurations (not "winners"):
 1. Gemini 3.6 Flash — extended thinking ON (strong priming effect)
@@ -443,16 +480,32 @@ Seven representative configurations (not "winners"):
 3. Claude Sonnet 5 Medium (stable high-performance configuration)
 4. DeepSeek V3 Expert — DeepThink ON (clean output, high baseline)
 5. Qwen 3.8 Max Fast (small-effect/high-variance counterexample)
-6. GPT-5.6 Luna (neutral general-purpose reference)
+6. GPT-5.6 Luna — thinking OFF, variant pinned in the Task-029 kit
+   (neutral general-purpose reference; the ON variant stays available
+   only if a later research question requires it)
 7. Grok 4.5 Fast (independent model-family reference; operator-reported
    identity)
 
 Phase 2B repeated testing is scoped as **7 configurations × 3
 repetitions × 2 conditions = 42 translations**, giving **21 direct/primed
 paired comparisons** — considered a reasonable, manageable next
-experiment. Phase 2B is **not started**.
+experiment. **HIGH-overlap collection is NOT started**: SODA Task 029
+prepared the deterministic 42-run HIGH-overlap kit (machinery, prompts,
+hashes, config metadata — see `experiments/exp004-modelscreen/phase2b/`
+and §11.2), pending the frozen story text from the author. LOW-overlap
+and UNSEEN-domain kits are not prepared.
 
-## 11. Phase 2B experimental questions (`PROPOSED`)
+## 11. Phase 2B experimental questions (`PROPOSED`, framing updated Task 029)
+
+> **Terminology update (SODA Task 029):** the project now deliberately
+> distinguishes **three source-text regimes** — HIGH-overlap,
+> LOW-overlap and UNSEEN DOMAIN (§11.1). What §11 below originally
+> called "Phase 2B-A — corpus-inspired Polish story" is now the
+> **HIGH-overlap** condition, and "Phase 2B-B — unseen-topic scientific
+> material" is now the **UNSEEN DOMAIN** condition. A LOW-overlap
+> condition was added between them. The scientific question is
+> unchanged; the historical variant labels below are kept for the
+> record.
 
 The most important scientific question:
 
@@ -502,6 +555,66 @@ future, separate **corpus-length ablation** (25 % / 50 % / 75 % / 100 %)
 may be interesting — scientific question: "How much authentic
 target-language context is sufficient to obtain the priming effect?" —
 but it is a future experiment and must **not** be mixed into Phase 2B.
+
+### 11.1 Source-text regimes (`CURRENT` taxonomy, recorded Task 029)
+
+| Regime | Definition | Test item | Status |
+|---|---|---|---|
+| **HIGH-overlap** | a new Polish story strongly inspired by the corpus, deliberately sharing substantial themes/motifs/imagery/narrative patterns/world-building with it | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` | kit prepared (Task 029); not executed |
+| **LOW-overlap** | a new Polish story with very little thematic/fabular overlap with the corpus | `Opowieść o sygnale` and/or `Podkłady` | scoped; NOT prepared |
+| **UNSEEN DOMAIN** | a Polish scientific/educational source from a domain absent from the corpus | future biomedical-physics / electromedicine educational material | scoped; NOT prepared |
+
+HIGH-overlap is **not** an independent control and is **not** a
+stronger-generalization test than LOW-overlap or UNSEEN DOMAIN; it tests
+whether corpus priming produces *especially strong* gains when the test
+text is strongly aligned with the priming material. Do not start
+LOW-overlap or UNSEEN-domain experiments yet.
+
+### 11.2 HIGH-overlap test (`PREPARED`, SODA Task 029; NOT executed)
+
+- Story identity: **"Iskra i Wieloryb — wersja z oryginalnymi nazwami"**
+  (author-owned Polish story; keep local). Classification:
+  **`high_overlap_corpus_inspired`** — deliberately **NOT**
+  `independent_same_topic`.
+- The story shares corpus motifs (eternal winter; the Red/Scarlet
+  Spark; Zimorodzice; an inherited key; a grandfather's legacy; Mogiła
+  Szronu; songs used as narrative mechanisms; whale imagery; the Heart
+  of the Earth; sacrifice and transformation; maritime and storm
+  imagery). Overlap is the point of the test; the story is **not** an
+  additional corpus component and the corpus is never modified to fit
+  it.
+- Planned sample: **42 translations** = 7 configurations (shortlist §10)
+  × 2 conditions (direct, primed) × 3 fresh-session replicates,
+  giving 21 direct/primed paired comparisons. Direct condition uses the
+  Phase-1 direct instruction; primed condition uses the complete
+  authoritative three-register corpus
+  (`phase2a-authentic-isv` v1, SHA-256
+  `aaad28e4…a857`), never shortened for any model (Gemini interface
+  splits remain recorded deviations).
+- Kit + machinery: `experiments/exp004-modelscreen/phase2b/` with
+  `scripts/run_exp004_phase2b.py` (deterministic `freeze-story` /
+  `prepare`; extends the repeats machinery; never calls an LLM).
+- **No results exist.** The 42 translations are the next manual operator
+  step, after the author supplies the frozen story text
+  (`phase2b/input/README.md`).
+- The corpus self-evaluation reference point for interpreting these
+  outputs: §9.1 and `phase2a/corpus-selfeval/`.
+
+### 11.3 H-HIGH hypothesis and comparison plan (`HYPOTHESIS`, recorded Task 029)
+
+**H-HIGH** — corpus priming may produce a larger improvement in
+resource-supported Interslavic generation when the target text is
+strongly thematically/motivically aligned with the priming corpus.
+
+Potential alternative explanation: the model may simply benefit from
+stronger lexical/topic overlap or may reproduce corpus-specific
+structures. The experiment measures the magnitude of the context-aligned
+effect. Interpretation will compare `Δ_HIGH` (this kit) vs `Δ_LOW`
+(`Opowieść o sygnale` / `Podkłady`) vs `Δ_UNSEEN` (future biomedical
+physics / electromedicine): the research question is whether corpus
+priming becomes stronger as the target source is more similar to the
+corpus. **No such relationship is claimed until those tests are
+actually run.**
 
 ## 12. Dictionary/morphology intervention status (`COMPLETED` + `PROPOSED`)
 
@@ -593,4 +706,6 @@ interpretation and a reproducible translation method".
 | EXP-004 design + corpus + protocol | `experiments/exp004-modelscreen/DESIGN.md` |
 | EXP-004 repeated-generation report | `experiments/exp004-modelscreen/repeats/REPORT.md` |
 | Compact machine-readable research export | `experiments/exp004-modelscreen/assistant-research-bundle/` (Task 027) |
+| Authentic-corpus self-evaluation (reference point) | `experiments/exp004-modelscreen/phase2a/corpus-selfeval/` (Task 029) |
+| Phase-2B HIGH-overlap test kit (prepared, not executed) | `experiments/exp004-modelscreen/phase2b/` (Task 029) |
 | Intervention ladder + pipelines + evaluation layers | `docs/translation-method.md` |

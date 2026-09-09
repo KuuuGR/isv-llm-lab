@@ -175,6 +175,15 @@ Baseline:           76 %
 The desired final product is a reproducible method that can say: "Given
 this Polish input, use configuration X, then perform steps Y and Z."
 
+**Phase-2B status (Task 029):** the Phase-2B HIGH-overlap test kit (7
+configurations × direct/primed × 3 replicates = 42 planned translations)
+is prepared but not executed
+(`experiments/exp004-modelscreen/phase2b/`, `docs/research-roadmap.md`
+§10–11); the corpus self-evaluation reference point for reading coverage
+numbers lives in `experiments/exp004-modelscreen/phase2a/
+corpus-selfeval/`. The pipeline-optimization experiment above remains
+after Phase 2B, as scoped.
+
 ## 8. Evaluation philosophy for the future software
 
 Maintain the three layers of §2 as separate reporting dimensions; never
@@ -205,4 +214,6 @@ silent black-box translation.
 | EXP-002 (post-hoc revision) | `docs/EXPERIMENTS.md` §EXP-002, `experiments/exp002-pilot/` |
 | EXP-003 (scaffolding A–D + human test) | `docs/EXPERIMENTS.md` §EXP-003, `experiments/exp003-scaffold/DESIGN.md` + `REPORT.md` |
 | EXP-004 (corpus priming + repeats) | `experiments/exp004-modelscreen/DESIGN.md`, `repeats/REPORT.md`, `assistant-research-bundle/` |
+| Corpus self-evaluation (reference ceiling) | `experiments/exp004-modelscreen/phase2a/corpus-selfeval/` (Task 029) |
+| Phase-2B HIGH-overlap test (prepared) | `experiments/exp004-modelscreen/phase2b/` (Task 029) |
 | Machine-readable results | `experiments/exp004-modelscreen/assistant-research-bundle/results.json`, `summary.json` |

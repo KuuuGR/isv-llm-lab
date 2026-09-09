@@ -5,7 +5,7 @@
 > record, Phase 2B plan, publication direction, stopping rule) lives in
 > `docs/research-roadmap.md`.
 
-Status: updated 2026-09-09 (Task 028 — RESEARCH-STATE RECONSTRUCTION, ROADMAP + TRANSLATION-METHOD SPECIFICATION: external research direction recorded in-repo — `docs/research-roadmap.md` + `docs/translation-method.md`;
+Status: updated 2026-09-09 (Task 029 — HIGH-OVERLAP TEST PREPARATION + AUTHENTIC-CORPUS SELF-EVALUATION: deterministic Phase-2B HIGH-overlap kit prepared (7 configs × direct/primed × 3 replicates = 42 planned translations; author freeze of the `Iskra i Wieloryb` story still required — NOT executed) + authentic-corpus self-evaluation reference point under the unchanged evaluation stack (combined 80.50 % canonical / 89.17 % broader / 19.50 % unresolved; per-register metrics) — see the Task-029 entry below; Task 028 — RESEARCH-STATE RECONSTRUCTION, ROADMAP + TRANSLATION-METHOD SPECIFICATION: external research direction recorded in-repo — `docs/research-roadmap.md` + `docs/translation-method.md`;
 Task 027 — EXP-004 ASSISTANT RESEARCH BUNDLE
 FOR INDEPENDENT ANALYSIS: compact deterministic machine-readable export of the
 Task-024/025/026 results under `experiments/exp004-modelscreen/
@@ -1062,21 +1062,65 @@ completed in Tasks 018/021; the Dola Phase-1 baselines in Task 023.
       records; no historical correction required (one clarification:
       EXP-001/002 `op-pl.txt` `e3164ffc…` vs EXP-003/004 canonical
       story-only `5de968a6…`). No tests changed; full suite green.
+- [x] **Task 029 — HIGH-overlap test preparation + authentic-corpus
+      self-evaluation (2026-09-09).** Deterministic preparation only — no
+      LLM calls, no translations collected, no raw data/corpus modified.
+      (1) Recorded the three source-text regimes (roadmap §11.1):
+      HIGH-overlap (`Iskra i Wieloryb — wersja z oryginalnymi nazwami`,
+      `high_overlap_corpus_inspired`, deliberately NOT
+      `independent_same_topic`), LOW-overlap (`Opowieść o sygnale` /
+      `Podkłady`), UNSEEN DOMAIN (future biomedical-physics/
+      electromedicine). (2) New `scripts/run_exp004_phase2b.py`
+      (deterministic `freeze-story`/`prepare`; extends the repeats
+      machinery) prepares the **42-run HIGH kit**
+      (`experiments/exp004-modelscreen/phase2b/`: 7 shortlisted configs ×
+      direct/primed × 3 fresh-session replicates; 7-field run ids; direct
+      prompts corpus-free; primed msg1 full-corpus hash-gated
+      `aaad28e4…`, never shortened for Gemini). The frozen story text is
+      an author input (`phase2b/input/README.md`) — `prepare` fails
+      loudly until it exists; **no results exist**. (3) New
+      `scripts/selfeval_exp004_corpus.py` evaluated the authentic corpus
+      itself with the unchanged Task-008 evaluator + orthography audit
+      (`phase2a/corpus-selfeval/`): combined 8 096 tokens — canonical
+      80.50 % / broader 89.17 % / unresolved 19.50 % / orthography-out
+      47; Register 1 narrative 95.97/99.48 %; Register 2 artistic
+      90.56/100.00 %; Register 3 encyclopedic 75.72/84.83 %; corpus
+      orthography essentially clean; exploratory cross-register
+      composition (61/3 425 shared). H-HIGH recorded as a hypothesis;
+      Δ_HIGH vs Δ_LOW vs Δ_UNSEEN not claimed until run. Docs: roadmap
+      §9.1 + §11, translation-method §7 + §10, DESIGN §15, EXP-004
+      README, STATE/ROADMAP. New tests
+      `tests/test_exp004_phase2b.py`; full suite green. **Next manual
+      operator step: the 42 HIGH-overlap translations.**
+- [ ] **EXP-004 Phase 2B — HIGH-overlap test (prepared Task 029; story
+  freeze + collection NOT started)** — kit under
+  `experiments/exp004-modelscreen/phase2b/`: 7 shortlisted configurations
+  (Gemini 3.6 Flash ON/OFF, Claude Sonnet 5 Medium, DeepSeek V3 Expert
+  ON, Qwen 3.8 Max Fast, GPT-5.6 Luna, Grok 4.5 Fast) × direct/primed ×
+  3 fresh-session replicates = 42 planned translations, 21 paired
+  comparisons. Source text: HIGH-overlap `Iskra i Wieloryb` (author
+  freezes it first via `run_exp004_phase2b.py freeze-story`). Direct =
+  Phase-1 direct instruction; primed = full authoritative corpus msg1 +
+  translation msg2. Corpus stays complete for every model (Gemini
+  split delivery recorded as deviation, corpus not shortened); no
+  dictionary/morphology/human guidance; no human evaluation. H-HIGH
+  hypothesis + Δ_HIGH-vs-Δ_LOW-vs-Δ_UNSEEN comparison plan recorded in
+  `docs/research-roadmap.md` §11. LOW-overlap and UNSEEN-DOMAIN tests
+  are future tasks, not started.
 - [ ] **EXP-004 Phase 2B — unseen-topic corpus transfer (recommended
-  next; Task 028 scoping, NOT started)** — full plan in
+  generalization test; Task 028 scoping, NOT started)** — full plan in
   `docs/research-roadmap.md` §10–11: 7 representative configurations
   (Gemini 3.6 Flash ON/OFF, Claude Sonnet 5 Medium, DeepSeek V3 Expert
   ON, Qwen 3.8 Max Fast, GPT-5.6 Luna, Grok 4.5 Fast) × 3 repetitions ×
   2 conditions = 42 translations, 21 direct/primed paired comparisons;
-  variants 2B-A (corpus-inspired Polish story, author-reviewed for
-  Polish correctness; weaker generalization test) and 2B-B (unseen-topic
-  biomedical-physics/electromedicine educational material; stronger
-  unseen-domain test). Corpus stays complete for every model (Gemini
-  two-message delivery recorded as deviation, corpus not shortened);
-  corpus-length ablation is a separate future experiment. Optionally
-  complete the six missing repeated primed runs (Gemini 3.1 Pro ON +
-  Qwen 3.8 Max Thinking) so those two configurations can be assessed
-  under repetition. No Phase 2B work was prepared by Task 028.
+  UNSEEN-DOMAIN variant (biomedical-physics/electromedicine educational
+  material; stronger unseen-domain test). Corpus stays complete for
+  every model (Gemini two-message delivery recorded as deviation, corpus
+  not shortened); corpus-length ablation is a separate future
+  experiment. Optionally complete the six missing repeated primed runs
+  (Gemini 3.1 Pro ON + Qwen 3.8 Max Thinking) so those two
+  configurations can be assessed under repetition. No Phase 2B work was
+  prepared by Task 029 beyond the HIGH-overlap kit.
 - [ ] **EXP-004 Phase 1 report** — write the Phase 1 report from
   `outputs/roster.md` + per-run evaluation/orthography artifacts (18 usable
   runs; GLM preserved as the failed/excluded case; Claude Sonnet 5 max

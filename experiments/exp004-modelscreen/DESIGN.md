@@ -873,4 +873,56 @@ Dola Pro repeated Δ +12.41 pp (exploratory), Dola Fast's old +28.20 pp
 is not re-estimable (direct condition unusable). Baseline dependence
 persists (repeated ρ ≈ −0.84 vs old ≈ −0.86). Phase 2B remains not
 implemented and not executed; the recommended next experiment is the
-Phase-2B unseen-topic transfer test (see REPORT §15).
+Phase-2B unseen-topic transfer test (see REPORT §15). Task 029 prepared
+the Phase-2B HIGH-overlap kit (see §15 below); collection has not
+started.
+
+## 15. Phase 2B — source-text regimes and HIGH-overlap kit (`PROPOSED` design; HIGH kit `PREPARED` but NOT executed, SODA Task 029)
+
+**Scientific question (unchanged from §14 tail / Task-028 roadmap).**
+Does authentic ISV corpus priming generalize to source material whose
+topic/theme is absent from the priming corpus? Task 029 records the
+three source-text regimes used to answer it (see
+`docs/research-roadmap.md` §11.1–11.3):
+
+| Regime | Test item | Status (Task 029) |
+|---|---|---|
+| HIGH-overlap | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` (classification `high_overlap_corpus_inspired` — deliberately NOT `independent_same_topic`) | kit prepared; not executed |
+| LOW-overlap | `Opowieść o sygnale` and/or `Podkłady` | scoped; not prepared |
+| UNSEEN DOMAIN | future biomedical-physics / electromedicine educational material | scoped; not prepared |
+
+**HIGH-overlap design.** 7 representative configurations (roadmap §10)
+× 2 conditions (direct; primed) × 3 fresh-session replicates = **42
+planned translations** (21 direct/primed paired comparisons). Direct:
+Phase-1 direct instruction + the HIGH-overlap Polish story, no corpus or
+scaffolding. Primed: complete authoritative three-register corpus
+`phase2a-authentic-isv` v1 (SHA-256
+`aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857`,
+never shortened per model — Gemini interface splits stay recorded
+deviations) in msg1, translation task in msg2. No dictionary candidates,
+no morphology annotations, no human guidance, no human evaluation. The
+story is an experimental input only — never added to the corpus, never
+translated into the corpus. Hypothesis H-HIGH (corpus priming may
+produce a larger improvement when the target text is strongly aligned
+with the priming corpus) is recorded as a hypothesis; interpretation
+compares Δ_HIGH vs Δ_LOW vs Δ_UNSEEN, none of which is claimed yet.
+
+**Deterministic kit.** `experiments/exp004-modelscreen/phase2b/` +
+`scripts/run_exp004_phase2b.py` (freeze-story / prepare; extends the
+repeats machinery `scripts/run_exp004_repeats.py`; never calls an LLM).
+Run ids: `<date>__p2b-high__<provider>__<model>__<model_version>__
+direct|primed__rNN` (7-field; cannot collide with Task-025 repeat ids).
+The frozen story text is an author input not yet supplied
+(`phase2b/input/README.md`); `prepare` fails loudly until it exists —
+nothing is fabricated.
+
+**Corpus self-evaluation (Task 029, COMPLETED).** The authentic corpus
+itself was measured with the unchanged evaluation stack used for model
+outputs (reference point for interpreting model coverage; not a
+correctness claim): combined corpus canonical 80.50 % / broader 89.17 % /
+unresolved 19.50 % / orthography-out 47 (8 096 lexical tokens); Register 1
+(narrative) 95.97 % canonical; Register 2 (artistic) 90.56 % canonical,
+100.00 % broader; Register 3 (encyclopedic) 75.72 % canonical. Full
+record: `phase2a/corpus-selfeval/`; cross-register composition is
+exploratory (61 lexical surfaces shared by all three of 3 425 unique),
+not a quality score.
