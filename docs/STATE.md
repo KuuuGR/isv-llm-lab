@@ -1,6 +1,13 @@
 # Project State
 
-Updated: 2026-09-09 (SODA Task 027 — EXP-004 ASSISTANT RESEARCH
+Updated: 2026-09-09 (SODA Task 028 — RESEARCH-STATE RECONSTRUCTION,
+ROADMAP + TRANSLATION-METHOD SPECIFICATION: externally-discussed research
+direction recorded in-repo — `docs/research-roadmap.md` (hypothesis,
+completed-experiment record, key findings, Phase-2B shortlist + plan,
+publication direction, stopping rule) + `docs/translation-method.md`
+(intervention ladder A–E, pipeline hypotheses, evaluation layers); no
+new experiments, no raw-output modification — see the Task-028
+paragraph below. SODA Task 027 — EXP-004 ASSISTANT RESEARCH
 BUNDLE COMPLETE: compact deterministic machine-readable export (120 per-run records, summary, audit, deviations, provenance,
 methodology, figures A–E) — see the Task-027 paragraph below; SODA Task 026 — EXP-004 PHASE-REPEAT
 EXECUTED, AUDITED AND ANALYSED: 114/120 planned runs collected by the
@@ -112,6 +119,44 @@ green; generator run twice → byte-identical.** Raw outputs are NOT
 copied (raw/README.md explains on-demand export by run ID). Docs:
 EXP-004 README + repeats/analysis README updated; full suite green.
 
+SODA Task 028 (2026-09-09) — RECONSTRUCTED THE RESEARCH STATE AND
+DIRECTION IN THE REPOSITORY (documentation only; no LLM calls, no new
+experiments, no raw-output modification, no Phase 2B; all numbers
+cross-checked against repo records — no historical correction was
+required). New high-level docs:
+`docs/research-roadmap.md` — project identity + scientific framing
+(authentic target-language corpus context can improve LLM translation
+into Interslavic without fine-tuning; generalization is the open
+question), two goals (scientific vs practical translation workflow),
+COMPLETED experiment record (EXP-001 baseline incl. broader-coverage
+estimates; EXP-002 revision; EXP-003 scaffolding + one non-expert human
+test, not repeated; EXP-005 = cross-resource audit of the 1 050
+unresolved forms; orthography audit; EXP-004 Phase 1 leaders +
+exclusions + Claude-Max >45-min limitation; Phase 2A corpus registers
+R1–R3 + protocol + single-run table; repeated generation counts +
+deviations + results), current interpretation (supported vs explicitly
+NOT-claimed), PROPOSED Phase-2B shortlist of 7 representative configs
+(Gemini 3.6 Flash ON/OFF, Claude Sonnet 5 Medium, DeepSeek V3 Expert
+ON, Qwen 3.8 Max Fast, GPT-5.6 Luna, Grok 4.5 Fast; 7 × 3 × 2 = 42
+translations, 21 paired comparisons) with variants 2B-A (corpus-inspired
+Polish story) and 2B-B (unseen-topic biomedical-physics/electromedicine
+material); original-story-not-biomedical distinction; do-not-shorten-
+corpus-for-Gemini rule + separate future corpus-length ablation;
+publication framing + working titles + paper structure; literature-
+review direction; stopping rule.
+`docs/translation-method.md` — evaluation layers 1–3 (never collapsed
+into a composite), metric definitions, intervention ladder A–E with
+COMPLETED evidence per rung (EXP-002 revision = output-side repair),
+HYPOTHESIS pipeline orderings 1–5, non-additivity principle (effects
+must be measured, not assumed to add), PROPOSED post-Phase-2B
+pipeline-optimization experiment (2–3 configs; EXAMPLE-only numbers),
+conceptual software architecture (automation with LLM calls under user
+control).
+Both are indexed from `README.md`, this layout, and `docs/ROADMAP.md`
+(Task-028 entry). One clarification recorded: EXP-001/002 used the full
+`op-pl.txt` source (`e3164ffc…`), EXP-003/004 the canonical story-only
+file (`5de968a6…`). Full suite green.
+
 SODA Task 025 (2026-09-08 planned generation date; kit prepared
 2026-09-07) — prepared the deterministic controlled-repeat kit under
 `experiments/exp004-modelscreen/repeats/` — **no LLM called, no results
@@ -204,7 +249,7 @@ Research hypothesis:
 This is a hypothesis. The first experiment must establish a baseline before
 any constrained system is judged against it.
 
-## Current status (as of SODA Task 026)
+## Current status (as of SODA Task 028)
 
 | Area | Status |
 |---|---|
@@ -242,7 +287,9 @@ any constrained system is judged against it.
 | **EXP-004 PHASE REPEAT EXECUTED + AUDITED (Task 026, 2026-09-09)** | ✅ **EXECUTED, AUDITED, EVALUATED, ANALYSED** — 114/120 planned runs collected (msg2-style); Task-026 audit script `scripts/audit_exp004_repeats.py` + `tests/test_audit_exp004_repeats.py` (10) reconciled every run against the Task-025 manifest + authoritative renders with raw outputs untouched (`repeats/outputs/audit.{json,md}` local). **Counts: planned 120 (108 primary + 12 exploratory) / collected 114 (102 + 12) / usable 106 (99 + 7) / partial 8 (3 + 5; markdown-wrapped end markers only) / invalid 0 / missing 6** (Gemini 3.1 Pro ON + Qwen 3.8 Max Thinking primed r01–r03 — never collected, not fabricated; repeated Δ n/a for those two). Hash gates OK; no duplicates/source-echo/cross-run contamination/stale files. Deviations recorded, not repaired: Grok identity operator-header edit (6 runs; operator-reported "Grok 4.5, built by xAI (fast)"; model-facing bytes identical); **Claude Sonnet 5 — max thinking/reasoning OFF for all repeats** (execution deviation; not renamed; comparability with Task 024 affected); Gemini primed corpus two-message delivery (6 runs; corpus tail byte-verified — same class as Task-021/024); Dola Pro r03 msg1 blank header line (trivial). `fresh_session_proof: unavailable`. **Results (descriptive): repeated Δ canonical positive 16/16 (mean +6.93 pp); Task-024 direction replicated 15/15 (mean old +6.33 pp vs repeated +6.73 pp); shift > within-condition spread for most configs (median SD ≈ 1.49 pp direct / ≈ 0.87 pp primed); Gemini Flash ON +15.91, Claude Medium +9.12 (stable), DeepSeek Expert ON +3.77 (ON > OFF), Qwen 3.8 Max Fast +1.72 with primed SD 5.83; Dola Pro +12.41, Dola Fast not re-estimable.** `REPORT.md` results + `analysis/` complete; full suite green; recommended next: Phase-2B unseen-topic transfer. Phase 2B not executed; no human evaluation |
 
 | **EXP-004 ASSISTANT RESEARCH BUNDLE (Task 027, 2026-09-09)** | ✅ **COMPLETE — COMPACT MACHINE-READABLE EXPORT FOR INDEPENDENT ANALYSIS** — `experiments/exp004-modelscreen/assistant-research-bundle/` (1.5 MB): `results.json`/`results.csv` (120 planned runs, one record per run, replicate metrics, hashes, deviations), `summary.json` (per-config descriptive stats + repeated Δ + Task-024 old singles as `historical_task024`), `audit.json`, `deviations.json`, `provenance.json`, `manifest.json` (per-file SHA-256), `methodology.md`, figures A–E PNG+SVG; standalone verifier reconstructs every Task-026 headline from the bundle alone (15/15 checks); deterministic (two builds byte-identical); no raw outputs, no secrets |
+| **Research-state reconstruction (Task 028, 2026-09-09)** | ✅ **COMPLETE — DOCUMENTATION ONLY** — `docs/research-roadmap.md` (high-level source of truth: framing, COMPLETED experiment record EXP-001→EXP-004 + EXP-005 audit, interpretation, PROPOSED Phase-2B shortlist 7 configs × 3 reps × 2 conditions = 42 translations, 2B-A/2B-B variants, publication direction, stopping rule) + `docs/translation-method.md` (evaluation layers, intervention ladder A–E, pipeline hypotheses, proposed pipeline-optimization experiment, conceptual software). Indexed from README; numbers cross-checked against repo records; no historical correction needed; no tests changed; no experiments run |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
+
 
 ### Experiment 001 headline numbers
 
@@ -309,13 +356,15 @@ tests/
   test_*.py                  — normalize/tokenizer/classifier/smoke/resource-evidence tests
 docs/
   STATE.md                   — this file
-  ROADMAP.md                 — roadmap + future ideas
+  ROADMAP.md                 — SODA task roadmap + future ideas (scientific direction: research-roadmap.md)
   DECISIONS.md               — decision log
   EXPERIMENTS.md             — experiment log
   GRAMMAR_AUDIT.md           — grammar consistency audit (Task 001 deliverable)
   RESOURCE_POLICY.md         — resource reconciliation + evaluation policy (Task 007 deliverable, spec for Task 008)
   LESSONS.md                 — lessons learned (SODA mechanism)
   RESEARCH_NOTES.md          — lightweight research record for a future publication (methodological taxonomy, measured numbers, standing rules; created Task 009)
+  research-roadmap.md       — high-level research state + direction (hypothesis, experiment record, key findings, Phase-2B plan, publication direction, stopping rule; Task 028)
+  translation-method.md     — translation method thread (intervention ladder A–E, pipeline hypotheses, evaluation layers; Task 028)
 experiments/
   exp001-baseline/
     DESIGN.md                — Experiment 001 design (input/storage/metrics/reproducibility)

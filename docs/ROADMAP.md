@@ -1,6 +1,12 @@
 # Roadmap
 
-Status: updated 2026-09-09 (Task 027 — EXP-004 ASSISTANT RESEARCH BUNDLE
+> Note: this file is the SODA task roadmap (task log + planned tasks).
+> The scientific research direction (hypothesis, completed-experiment
+> record, Phase 2B plan, publication direction, stopping rule) lives in
+> `docs/research-roadmap.md`.
+
+Status: updated 2026-09-09 (Task 028 — RESEARCH-STATE RECONSTRUCTION, ROADMAP + TRANSLATION-METHOD SPECIFICATION: external research direction recorded in-repo — `docs/research-roadmap.md` + `docs/translation-method.md`;
+Task 027 — EXP-004 ASSISTANT RESEARCH BUNDLE
 FOR INDEPENDENT ANALYSIS: compact deterministic machine-readable export of the
 Task-024/025/026 results under `experiments/exp004-modelscreen/
 assistant-research-bundle/` with a standalone reconstruction verifier; Task 026 — EXP-004 CONTROLLED REPEATED
@@ -1031,14 +1037,46 @@ completed in Tasks 018/021; the Dola Phase-1 baselines in Task 023.
       Qwen 3.8 Max Fast exception) — 15/15 checks; generator run twice →
       byte-identical; no raw outputs copied; no secrets. Full suite green.
       The next step is the architect's independent analysis of this bundle.
+- [x] **Task 028 — Research-state reconstruction, roadmap and
+      translation-method specification (2026-09-09).** Documentation-only
+      consolidation so future work does not depend on undocumented
+      external discussion. New `docs/research-roadmap.md` — high-level
+      source of truth: project framing (corpus priming ≠ training;
+      Interslavic = case study), two goals (scientific / practical
+      translation workflow), COMPLETED experiment record with source
+      pointers (EXP-001, EXP-002, EXP-003, EXP-005 cross-resource audit,
+      orthography audit, EXP-004 Phase 1/Phase 2A/repeats), supported-vs-
+      NOT-claimed interpretation, PROPOSED Phase-2B shortlist (7
+      representative configs × 3 repetitions × 2 conditions = 42
+      translations, 21 paired comparisons) with 2B-A corpus-inspired
+      story and 2B-B unseen-topic biomedical-physics material variants,
+      original-story-not-biomedical note, do-not-shorten-corpus-for-Gemini
+      rule, future corpus-length ablation, publication framing + paper
+      structure, literature direction, stopping rule. New
+      `docs/translation-method.md` — evaluation layers 1–3 (no composite),
+      intervention ladder A–E with tested evidence, EXP-002 as
+      output-side repair, HYPOTHESIS pipelines 1–5, non-additivity
+      principle, PROPOSED pipeline-optimization experiment (example
+      numbers only), conceptual software architecture. Indexed from
+      README/STATE/ROADMAP. All numbers cross-checked against repo
+      records; no historical correction required (one clarification:
+      EXP-001/002 `op-pl.txt` `e3164ffc…` vs EXP-003/004 canonical
+      story-only `5de968a6…`). No tests changed; full suite green.
 - [ ] **EXP-004 Phase 2B — unseen-topic corpus transfer (recommended
-  next; Task 026 follow-up)** — design + execute the transfer test the
-  repeated-generation evidence now supports: does the corpus-priming
-  shift survive when the translated story shares no topic with the
-  reference corpus (a new, independently created Polish story)? Before
-  that, optionally complete the six missing repeated primed runs (Gemini
-  3.1 Pro ON + Qwen 3.8 Max Thinking) so those two configurations can be
-  assessed under repetition. No Phase 2B work was prepared by Task 026.
+  next; Task 028 scoping, NOT started)** — full plan in
+  `docs/research-roadmap.md` §10–11: 7 representative configurations
+  (Gemini 3.6 Flash ON/OFF, Claude Sonnet 5 Medium, DeepSeek V3 Expert
+  ON, Qwen 3.8 Max Fast, GPT-5.6 Luna, Grok 4.5 Fast) × 3 repetitions ×
+  2 conditions = 42 translations, 21 direct/primed paired comparisons;
+  variants 2B-A (corpus-inspired Polish story, author-reviewed for
+  Polish correctness; weaker generalization test) and 2B-B (unseen-topic
+  biomedical-physics/electromedicine educational material; stronger
+  unseen-domain test). Corpus stays complete for every model (Gemini
+  two-message delivery recorded as deviation, corpus not shortened);
+  corpus-length ablation is a separate future experiment. Optionally
+  complete the six missing repeated primed runs (Gemini 3.1 Pro ON +
+  Qwen 3.8 Max Thinking) so those two configurations can be assessed
+  under repetition. No Phase 2B work was prepared by Task 028.
 - [ ] **EXP-004 Phase 1 report** — write the Phase 1 report from
   `outputs/roster.md` + per-run evaluation/orthography artifacts (18 usable
   runs; GLM preserved as the failed/excluded case; Claude Sonnet 5 max

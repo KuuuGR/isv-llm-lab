@@ -55,7 +55,9 @@ reproducible.
 |---|---|
 | [`SOURCES.md`](SOURCES.md) | Source & dependency inventory (licenses, commits, preservation plan) |
 | [`docs/STATE.md`](docs/STATE.md) | Project state |
-| [`docs/ROADMAP.md`](docs/ROADMAP.md) | Roadmap + future ideas |
+| [`docs/ROADMAP.md`](docs/ROADMAP.md) | SODA task roadmap + future ideas (scientific direction: [`docs/research-roadmap.md`](docs/research-roadmap.md)) |
+| [`docs/research-roadmap.md`](docs/research-roadmap.md) | High-level research state: hypothesis, completed experiments, key findings, Phase 2B plan, publication direction, stopping rule |
+| [`docs/translation-method.md`](docs/translation-method.md) | Translation method: intervention ladder A–E, pipeline orderings (hypotheses), evaluation layers |
 | [`docs/DECISIONS.md`](docs/DECISIONS.md) | Decision log |
 | [`docs/EXPERIMENTS.md`](docs/EXPERIMENTS.md) | Experiment log |
 | [`docs/GRAMMAR_AUDIT.md`](docs/GRAMMAR_AUDIT.md) | Grammar consistency audit (Steen docs vs JS vs Rust) |

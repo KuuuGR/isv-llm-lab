@@ -1378,3 +1378,63 @@ Task-024 priming shift survives repetition.
    analysis compares `mean(primed) − mean(direct)` with the Task-024
    single-run deltas descriptively; Dola stays exploratory and is never
    merged into the primary n=18 statistics.
+
+## D-054 · 2026-09-09 · Research direction after Task 026: Phase-2B scope, generalization question, pipeline-optimization scope, and no-further-human-evaluation (Task 028, recorded from external discussion)
+
+**Context.** Tasks 001–027 are recorded in the repository, but the
+current research direction and several decisions lived only in external
+research-lead discussion. Task 028 exists to reconstruct that direction
+in-repo (docs-only; no experiments run). The decisions below were made
+by the research lead and are recorded here so future tasks do not depend
+on undocumented conversation.
+
+**Decision.**
+
+1. **The scientific framing is corpus priming, not model ranking.** The
+   central hypothesis: authentic target-language corpus context can
+   improve LLM translation into Interslavic without fine-tuning, and the
+   open question is generalization beyond the priming corpus's
+   lexical/thematic content. Corpus priming is never called training or
+   fine-tuning. Interslavic is the case study of a low-resource
+   translation question, not a contest for "the best LLM".
+2. **Two goals are kept distinct.** Scientific (effect, reproducibility,
+   generalization, baseline dependence, mechanism comparison, metric
+   limits) and practical (a reproducible PL → ISV workflow that selects
+   or recommends the appropriate operations and LLM configuration). The
+   practical objective is a reliable sequence of interventions, not a
+   single chosen model.
+3. **Phase 2B is scoped, not started.** Seven representative
+   configurations (Gemini 3.6 Flash extended thinking ON/OFF, Claude
+   Sonnet 5 Medium, DeepSeek V3 Expert DeepThink ON, Qwen 3.8 Max Fast,
+   GPT-5.6 Luna, Grok 4.5 Fast) × 3 repetitions × 2 conditions = 42
+   translations, 21 direct/primed paired comparisons. The selection is
+   representative of behaviours, not a winners list. Phase-2B variants:
+   2B-A corpus-inspired Polish story (author-reviewed; weaker
+   generalization test) and 2B-B unseen-topic biomedical-physics/
+   electromedicine educational material (stronger unseen-domain test;
+   legitimate application case given the author's environment — the
+   project did NOT originate as a medical project).
+4. **The main corpus is never shortened per model.** Gemini's
+   two-message split delivery stays an interface deviation; a
+   Gemini-specific shorter corpus would be a confound. Corpus-length
+   ablation (25/50/75/100 %) is a separate future experiment, not part of
+   Phase 2B.
+5. **Dictionary-based interventions are already tested** (EXP-002,
+   EXP-003 B/C/D); future proposals must build on the A–E ladder and
+   pipeline-ordering hypotheses, not re-propose dictionary use as
+   untested. Intervention effects are not assumed to add; optimal
+   pipeline ordering must be measured.
+6. **After Phase 2B** (if still promising): a small pipeline-optimization
+   experiment with 2–3 representative configurations and a few
+   intervention sequences, measuring canonical/broader coverage +
+   orthographic anomalies + regression inspection — not dozens of models,
+   no composite score.
+7. **Publication direction** is recorded in `docs/research-roadmap.md`
+   (paper framing "…without fine-tuning?", working titles, structure),
+   and a literature-review thread (low-resource MT, ICL, corpus priming,
+   target-language conditioning, constructed languages, evaluation) is
+   maintained. Venues not yet selected.
+8. **Stopping rule adopted** (recorded in `docs/research-roadmap.md`
+   §16): no indefinite experiment growth; no extra model families
+   without a specific question; no further human evaluation without a
+   justified expert protocol (extends D-042).
