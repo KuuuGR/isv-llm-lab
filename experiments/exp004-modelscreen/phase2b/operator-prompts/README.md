@@ -1,8 +1,11 @@
 # Phase 2B HIGH-overlap — operator prompts (gitignored except this README + `manifest.json`)
 
 Generated deterministically by
-`scripts/run_exp004_phase2b.py prepare --date YYYY-MM-DD`
-(once the frozen story exists under `../input/`):
+`scripts/run_exp004_phase2b.py prepare --date YYYY-MM-DD`.
+
+**Status (Task 030, 2026-09-09): generated** for the frozen v1 story —
+63 prompt files exist locally (21 direct; 42 primed msg1+msg2) and
+`manifest.json` (committed) records their SHA-256/byte counts:
 
 - 21 direct prompt files `high-direct-<nn>-<model>-<version>-rNN.md`;
 - 42 primed prompt files `high-primed-<nn>-<model>-<version>-rNN-msg1.md`
