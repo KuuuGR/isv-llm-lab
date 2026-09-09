@@ -180,6 +180,77 @@ def split_session_reply(raw: bytes) -> tuple[bytes, bytes]:
     return raw[:idx], raw[pos:]
 
 # ---------------------------------------------------------------------------
+# Canonical Grok configuration identity (SODA Task 031)
+# ---------------------------------------------------------------------------
+# The Phase-1 roster row 08 (provider xai / model grok) was recorded with
+# model_version 'unknown' when collected (Task 018): Grok's version was not
+# annotated in the interface and was genuinely unrecorded at that time
+# (D-018 'unknown' fallback). Tasks 021/026 later established the
+# operator-observed identity for the current experimental line (row 08 and
+# its Phase-2A/repeat descendants):
+#
+#   Grok 4.5, built by xAI (fast)      [operator-reported / operator-
+#                                       observed; NOT independently
+#                                       verified from provider metadata]
+#
+# Task 031 canonicalizes the *rendered* identity to the short label
+# "Grok 4.5 Fast" while keeping historical run-id/file-name tokens
+# ('unknown') stable wherever they were recorded at generation time
+# (Phase 1 / Phase 2A / repeats). Forward-looking kit generators
+# (e.g. Phase 2B, future LOW/UNSEEN kits) apply the canonical overlay
+# (canonical_grok_row) so new kits are born canonical. There is no
+# repository evidence for any 'Grok Build' run inside EXP-004; the early
+# historical EXP-001/EXP-002 Grok condition (genuinely unannotated,
+# recorded 'unknown') stays unknown-by-record.
+GROK_HISTORICAL_KEY = ("xai", "grok", "unknown")
+GROK_CANONICAL_MODEL_VERSION = "fast"          # canonical run-id/version token
+GROK_CANONICAL_LABEL = "Grok 4.5 Fast"
+GROK_CANONICAL_IDENTITY = "Grok 4.5, built by xAI (fast)"
+GROK_IDENTITY_EVIDENCE = "operator_reported"
+GROK_CANONICAL_GENERATION_PARAMETERS = "4.5 (fast)"
+GROK_CANONICAL_ALIAS = "xai__grok__fast"
+GROK_CANONICAL_NOTE = (
+    "Canonical research configuration identity: 'Grok 4.5 Fast' "
+    "(operator-reported: 'Grok 4.5, built by xAI (fast)', recorded "
+    "Tasks 021/026); not independently verified. Historical run-id/file "
+    "token 'unknown' = the value recorded at generation time (Task 018); "
+    "canonical alias token 'fast'. See "
+    "experiments/exp004-modelscreen/grok-identity.md.")
+
+
+def is_grok_historical(row: dict) -> bool:
+    """True for the historical Phase-1/2A/repeat Grok roster row (the
+    recorded 'unknown' configuration)."""
+    return (row.get("provider") == GROK_HISTORICAL_KEY[0]
+            and row.get("model") == GROK_HISTORICAL_KEY[1]
+            and row.get("model_version") == GROK_HISTORICAL_KEY[2])
+
+
+def canonical_grok_row(row: dict) -> dict:
+    """Return a copy of a Grok roster row with the Task-031 canonical
+    overlay (label / version token / generation parameters). Identifiers
+    derived from these fields (run-id token, prompt file base name) then
+    use the canonical 'fast' representation. Historical kits keep the
+    recorded 'unknown' tokens; this is for forward-looking kits only."""
+    out = dict(row)
+    if is_grok_historical(row):
+        out["model_version"] = GROK_CANONICAL_MODEL_VERSION
+        out["label"] = GROK_CANONICAL_LABEL
+        out["generation_parameters"] = GROK_CANONICAL_GENERATION_PARAMETERS
+    return out
+
+
+def grok_run_id_alias(run_id: str) -> str:
+    """Map a historical Grok run id ('...__xai__grok__unknown__...') to its
+    canonical-alias form ('...__xai__grok__fast__...'). Identity of all
+    other run ids is unchanged. Historical run ids are never rewritten;
+    this alias exists for lookup/rendering only."""
+    if "__xai__grok__unknown__" in run_id:
+        return run_id.replace("__xai__grok__unknown__",
+                              "__xai__grok__fast__")
+    return run_id
+
+# ---------------------------------------------------------------------------
 # Reconciled executed roster (EXP-004 Phase 1, actual collected runs, SODA
 # Task 018)
 # ---------------------------------------------------------------------------

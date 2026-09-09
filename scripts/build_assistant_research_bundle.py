@@ -136,6 +136,32 @@ def config_id_of(provider: str, model: str, model_version: str) -> str:
     return "__".join([provider, model, model_version])
 
 
+# Task-031 canonical display identity for the historical Grok row
+# (operator-reported; never upgraded to independently verified).
+# Repeat plan/roster rows keep the recorded 'unknown' identifier tokens;
+# the bundle renders the canonical configuration label and exposes the
+# canonical alias + identity evidence additively. The recorded model
+# version field ('unknown') is preserved as data.
+GROK_HISTORICAL_KEY = ("xai", "grok", "unknown")
+GROK_CANONICAL_LABEL = "Grok 4.5 Fast"
+GROK_CANONICAL_MODEL_VERSION = "fast"
+GROK_CANONICAL_IDENTITY = "Grok 4.5, built by xAI (fast)"
+GROK_IDENTITY_EVIDENCE = "operator_reported"
+GROK_CANONICAL_ALIAS_ID = "xai__grok__fast"
+
+
+def _is_grok_historical(provider: str, model: str,
+                        model_version: str) -> bool:
+    return (provider, model, model_version) == GROK_HISTORICAL_KEY
+
+
+def _canonical_label(provider: str, model: str, model_version: str,
+                     fallback: str) -> str:
+    if _is_grok_historical(provider, model, model_version):
+        return GROK_CANONICAL_LABEL
+    return fallback
+
+
 def build_results(plan: dict, roster: dict, audit: dict) -> dict:
     """One record per planned run (120). Status/usable from the intake
     roster; metrics only for collected (evaluated) runs; missing runs keep
@@ -151,6 +177,8 @@ def build_results(plan: dict, roster: dict, audit: dict) -> dict:
     records = []
     for run in plan["runs"]:
         rid = run["run_id"]
+        is_grok = _is_grok_historical(run["provider"], run["model"],
+                                      run["model_version"])
         rr = by_roster.get(rid)
         ar = by_audit.get(rid)
         collected = rr is not None and rr.get("status") is not None
@@ -215,10 +243,20 @@ def build_results(plan: dict, roster: dict, audit: dict) -> dict:
             "configuration_id": config_id_of(run["provider"],
                                              run["model"],
                                              run["model_version"]),
-            "label": run.get("label"),
+            "canonical_configuration_id": GROK_CANONICAL_ALIAS_ID
+            if is_grok else None,
+            "label": (_canonical_label(run["provider"], run["model"],
+                                       run["model_version"],
+                                       run.get("label"))
+                      if run.get("label") is not None else None),
+            "canonical_config_label": GROK_CANONICAL_LABEL
+            if is_grok else None,
             "provider": run.get("provider"),
             "model": run.get("model"),
             "variant": run.get("model_version"),
+            "identity_evidence": GROK_IDENTITY_EVIDENCE if is_grok else None,
+            "operator_reported_identity": GROK_CANONICAL_IDENTITY
+            if is_grok else None,
             "interface": run.get("interface"),
             "generation_parameters": run.get("generation_parameters"),
             "custom_gpt": run.get("custom_gpt"),
@@ -864,7 +902,9 @@ def _write_json(path: Path, obj: dict) -> None:
 
 RESULTS_CSV_COLUMNS = [
     "run_id", "population", "in_primary_statistics", "configuration_id",
-    "label", "provider", "model", "variant", "condition", "replicate",
+    "canonical_configuration_id", "label", "canonical_config_label",
+    "provider", "model", "variant", "identity_evidence",
+    "operator_reported_identity", "condition", "replicate",
     "status", "usable", "analysis_included", "exclusion_reason",
     "prompt_hash", "source_sha256", "corpus_sha256", "generation_date",
     "interface_settings", "deviation_ids", "intake_verdict",
@@ -1175,9 +1215,12 @@ view).
 - **Claude Sonnet 5 — max:** thinking/reasoning OFF during the repeats
   (operationally impractical when enabled). Configuration name preserved;
   results not comparable with its Task-024 record without this caveat.
-- **Grok:** model identity operator-reported as "Grok 4.5, built by xAI
-  (fast)" (files originally said `unknown`); not independently verified;
-  prompt bodies unchanged.
+- **Grok:** canonical configuration identity **"Grok 4.5 Fast"**
+  (operator-reported: "Grok 4.5, built by xAI (fast)"; files originally
+  said `unknown`); not independently verified; prompt bodies unchanged;
+  the run-id/file token `unknown` is the historical value recorded at
+  generation time (canonical alias `xai__grok__fast`, see
+  `experiments/exp004-modelscreen/grok-identity.md`).
 - **Gemini:** primed corpus delivered in two messages (interface limit,
   `continue last prompt:` continuation); stored records verify the full
   corpus was delivered — usable with recorded deviation.

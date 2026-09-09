@@ -68,6 +68,20 @@ TASK024_DELTA_SOURCE = ("Task-024 single-run delta = Phase-2A primed single "
 
 KEYS = ("provider", "model", "model_version")
 
+# Task-031 canonical display label for the historical Grok row. Repeat
+# plan/roster rows keep the recorded 'unknown' identifier tokens
+# (provenance); every *rendered* label (tables, figures, dataset) shows
+# the canonical operator-reported configuration label.
+GROK_HISTORICAL_KEY = ("xai", "grok", "unknown")
+GROK_CANONICAL_LABEL = "Grok 4.5 Fast"
+
+
+def _display_label(provider: str, model: str, model_version: str,
+                   fallback: str) -> str:
+    if (provider, model, model_version) == GROK_HISTORICAL_KEY:
+        return GROK_CANONICAL_LABEL
+    return fallback
+
 
 def _cfg_key(o: dict) -> tuple:
     return tuple(o[k] for k in KEYS)
@@ -117,7 +131,8 @@ def load_repeat_observations(roster_path: Path) -> list[dict]:
             "replicate": r["replicate"],
             "primary": r["primary"],
             "exploratory": r["exploratory"],
-            "label": r["label"],
+            "label": _display_label(r["provider"], r["model"],
+                                    r["model_version"], r["label"]),
             "provider": r["provider"],
             "model": r["model"],
             "model_version": r["model_version"],
@@ -155,7 +170,8 @@ def load_legacy_singles(p1_roster_path: Path,
         out.append({
             "run_id": r["run_id"],
             "baseline_run_id": base["run_id"],
-            "label": r["label"],
+            "label": _display_label(r["provider"], r["model"],
+                                    r["model_version"], r["label"]),
             "provider": r["provider"],
             "model": r["model"],
             "model_version": r["model_version"],

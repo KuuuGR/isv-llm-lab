@@ -38,6 +38,10 @@ Task 029):
     same-topic control);
   - configurations: the seven representative Phase-2B configurations from
     `docs/research-roadmap.md` §10 (behavioural coverage, not winners);
+    the Grok shortlist entry is rendered with its canonical identity
+    "Grok 4.5 Fast" (operator-reported, Task 031) — the historical
+    roster token 'unknown' is mapped to the canonical 'fast' run-id/file
+    token in this forward-looking kit only;
   - per configuration: 3 direct repetitions + 3 primed repetitions, each
     replicate an independent FRESH model session with byte-identical
     prompt files within a (configuration, condition);
@@ -106,6 +110,7 @@ sys.path.insert(0, str(SCRIPTS))
 sys.path.insert(0, str(ROOT / "src"))
 
 import run_exp004_repeats as rep  # noqa: E402  (imports phase1/phase2a)
+import run_exp004_phase1 as p1  # noqa: E402  (canonical Grok identity)
 
 from isv_eval.cli import git_commit  # noqa: E402
 
@@ -154,7 +159,11 @@ SHORTLIST_KEYS = (
     ("deepseek", "deepseek-v3-expert", "deepthinkon"),  # 4 clean, high base
     ("alibaba", "qwen-3.8-max", "fast"),             # 5 counterexample
     ("openai", "gpt-5.6-luna", "thinkoff"),          # 6 neutral reference
-    ("xai", "grok", "unknown"),                      # 7 independent family
+    ("xai", "grok", "unknown"),  # 7 independent family — canonical
+    #                                identity "Grok 4.5 Fast" (operator-
+    #                                reported, Tasks 021/026); the roster
+    #                                key keeps the historical 'unknown'
+    #                                token (Task 031; overlay below)
 )
 
 SHORTLIST_ROLE = {
@@ -208,6 +217,11 @@ def shortlist_rows() -> list[dict]:
                 "authoritative Phase-1/Phase-2A roster; refusing to "
                 "prepare a Phase-2B kit against a drifted roster")
         row = dict(row)
+        # Task 031: forward-looking kits apply the canonical Grok overlay
+        # (label "Grok 4.5 Fast", version token 'fast'). The historical
+        # roster row keeps 'unknown' (Phase-1/2A/repeats provenance).
+        if p1.is_grok_historical(row):
+            row = p1.canonical_grok_row(row)
         row["primary"] = True
         row["exploratory"] = False
         row["phase2b_role"] = SHORTLIST_ROLE[key]
@@ -416,6 +430,16 @@ def _operator_block(row: dict, kind: str) -> list[str]:
     ]
 
 
+def _identity_lines(row: dict) -> list[str]:
+    """Optional operator-metadata identity lines (Task 031). Only rows with
+    a recorded identity note (currently: the canonical Grok configuration)
+    emit lines; never part of the model-visible instruction region."""
+    note = row.get("identity_note")
+    if not note:
+        return []
+    return [f"Identity note: {note}"]
+
+
 def _p2b_header(row: dict, kind: str, task_line: str,
                 condition_line: str) -> list[str]:
     """Phase-2B operator metadata block (above the first '---'). Never
@@ -433,6 +457,7 @@ def _p2b_header(row: dict, kind: str, task_line: str,
         f"Target model: {row['label']}",
         f"Provider / interface: {row['provider']} / {row['interface']}",
         f"Model version / settings: {row['model_version']} ({setting})",
+        *_identity_lines(row),
         f"Representative role: {row['phase2b_role']}",
         f"Source regime: HIGH-overlap (story: {STORY_TITLE})",
         condition_line,

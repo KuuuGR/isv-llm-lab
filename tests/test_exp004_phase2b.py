@@ -208,7 +208,7 @@ def test_prepare_42_high_runs_only(p2b_mod, kit):
          "DeepSeek V3 Expert — DeepThink ON",
          "Qwen 3.8 Max — Fast",
          "GPT-5.6 Luna — thinking OFF",
-         "Grok"])
+         "Grok 4.5 Fast"])
     for label, conds in per_cfg.items():
         assert conds == ["direct", "primed"] * 3, label
     assert all(r["source_classification"]
@@ -330,6 +330,84 @@ def test_story_corpus_hashes_pinned_in_plan(p2b_mod, kit):
         == p2b_mod.sha256_bytes(_STORY.encode("utf-8"))
     assert plan["corpus"]["sha256"] \
         == p2b_mod.sha256_bytes(_CORPUS.encode("utf-8"))
+
+
+# ---------------------------------------------------------------------------
+# canonical Grok 4.5 Fast identity (Task 031)
+# ---------------------------------------------------------------------------
+
+def _grok_runs(plan: dict) -> list[dict]:
+    return [r for r in plan["runs"] if r["provider"] == "xai"]
+
+
+def test_grok_shortlist_row_uses_canonical_fast_identity(p2b_mod, kit):
+    _freeze(p2b_mod, kit, _STORY)
+    plan = _prepare(p2b_mod, kit)
+    grok = _grok_runs(plan)
+    assert len(grok) == 6  # 3 direct + 3 primed
+    for r in grok:
+        assert r["model"] == "grok"
+        assert r["model_version"] == "fast"          # canonical token
+        assert r["label"] == "Grok 4.5 Fast"          # canonical label
+        assert r["run_id"].startswith(
+            f"{DATE}__p2b-high__xai__grok__fast__")
+        assert "unknown" not in r["run_id"]
+        assert "Grok 4.5, built by xAI (fast)" in r["identity_note"]
+        assert "__xai__grok__fast__" in r["run_id"]
+
+
+def test_grok_prompt_files_and_manifest_canonical(p2b_mod, kit):
+    _freeze(p2b_mod, kit, _STORY)
+    plan = _prepare(p2b_mod, kit)
+    manifest = json.loads((kit["prompts"] / "manifest.json")
+                          .read_text(encoding="utf-8"))
+    grok_files = sorted(
+        (kit["prompts"] / f).name for f in
+        (kit["prompts"]).glob("high-*-07-grok-fast-*.md"))
+    assert len(grok_files) == 9  # 3 direct + 3 msg1 + 3 msg2
+    for f in manifest["files"]:
+        if f["run_id"].startswith(f"{DATE}__p2b-high__xai__grok__"):
+            assert f["run_id"].startswith(
+                f"{DATE}__p2b-high__xai__grok__fast__")
+            assert "grok-fast" in f["file"]
+            assert "unknown" not in f["file"]
+    # prompt headers render the canonical identity (filename/metadata agree)
+    for name in grok_files:
+        text = (kit["prompts"] / name).read_text(encoding="utf-8")
+        assert "# EXP-004 Phase 2B — HIGH-overlap test — Grok 4.5 Fast" \
+            in text
+        assert "Target model: Grok 4.5 Fast" in text
+        assert "Identity note: Operator-reported model identity:" in text
+        assert "Grok 4.5, built by xAI (fast)" in text
+        assert "unknown" not in text
+    # no historical 'unknown' Grok artifact may enter the HIGH kit
+    blob = json.dumps(plan, ensure_ascii=False)
+    assert "xai__grok__unknown" not in blob
+    assert "grok-unknown" not in blob
+
+
+def test_historical_roster_row_keeps_recorded_unknown(p2b_mod):
+    """Task 031 preserves the historical Phase-1 roster row: the recorded
+    'unknown' identity token stays untouched (historical provenance); the
+    canonical overlay exists for forward-looking kits only."""
+    p1 = p2b_mod.p1
+    row = next(r for r in p1.ROSTER
+               if (r["provider"], r["model"], r["model_version"])
+               == p1.GROK_HISTORICAL_KEY)
+    assert row["model_version"] == "unknown"
+    assert row["label"] == "Grok"
+    assert p1.is_grok_historical(row)
+    over = p1.canonical_grok_row(row)
+    assert over["model_version"] == "fast"
+    assert over["label"] == "Grok 4.5 Fast"
+    # the historical row object itself is not mutated
+    assert row["model_version"] == "unknown"
+    alias = p1.grok_run_id_alias(
+        "2026-09-06__xai__grok__unknown__direct")
+    assert alias == "2026-09-06__xai__grok__fast__direct"
+    assert p1.grok_run_id_alias(
+        "2026-09-06__anthropic__claude__sonnet-5__direct") \
+        == "2026-09-06__anthropic__claude__sonnet-5__direct"
 
 
 # ---------------------------------------------------------------------------
