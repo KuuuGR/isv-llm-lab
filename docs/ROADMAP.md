@@ -5,7 +5,17 @@
 > record, Phase 2B plan, publication direction, stopping rule) lives in
 > `docs/research-roadmap.md`.
 
-Status: updated 2026-09-09 (Task 030 — HIGH-OVERLAP EXPERIMENT EXECUTION PREPARATION: HIGH-overlap story `Iskra i Wieloryb` extracted from the author's story bank section `# 3.` and frozen v1 (sha256 `ab8a0dcf…`, 30 061 B / 440 lines; `high_overlap_corpus_inspired`) + 42-run HIGH kit generated (`prepare --date 2026-09-09`; 21 direct + 21 primed; 63 prompt files; byte-deterministic) — NOT executed, no translations exist; `Podkłady` (bank section 4) reserved as the LOW-overlap source for the next stage; corpus self-evaluation reproducibility re-verified — see the Task-030 entry below; Task 029 — HIGH-OVERLAP TEST PREPARATION + AUTHENTIC-CORPUS SELF-EVALUATION: deterministic Phase-2B HIGH-overlap kit prepared (7 configs × direct/primed × 3 replicates = 42 planned translations; author freeze of the `Iskra i Wieloryb` story still required — NOT executed) + authentic-corpus self-evaluation reference point under the unchanged evaluation stack (combined 80.50 % canonical / 89.17 % broader / 19.50 % unresolved; per-register metrics) — see the Task-029 entry below; Task 028 — RESEARCH-STATE RECONSTRUCTION, ROADMAP + TRANSLATION-METHOD SPECIFICATION: external research direction recorded in-repo — `docs/research-roadmap.md` + `docs/translation-method.md`;
+Status: updated 2026-09-09 (Task 031 — GROK CONFIGURATION IDENTITY
+CANONICALIZED: repository-wide audit + canonicalization of the Grok
+configuration to **Grok 4.5 Fast** (operator-reported "Grok 4.5, built by
+xAI (fast)") across EXP-004 displays/rosters/summaries/generators/docs;
+historical `unknown` run identifiers preserved with canonical alias
+`xai__grok__fast`; never-collected Phase-2B kit regenerated with
+canonical `grok…fast` ids; no Grok Build run exists in repository
+evidence (EXP-001/002-era Grok stays genuinely `unknown`); metadata-only
+— no raw output or metric changes; authoritative note + map
+`experiments/exp004-modelscreen/grok-identity.{md,json}` — see the
+Task-031 entry below. Task 030 — HIGH-OVERLAP EXPERIMENT EXECUTION PREPARATION: HIGH-overlap story `Iskra i Wieloryb` extracted from the author's story bank section `# 3.` and frozen v1 (sha256 `ab8a0dcf…`, 30 061 B / 440 lines; `high_overlap_corpus_inspired`) + 42-run HIGH kit generated (`prepare --date 2026-09-09`; 21 direct + 21 primed; 63 prompt files; byte-deterministic) — NOT executed, no translations exist; `Podkłady` (bank section 4) reserved as the LOW-overlap source for the next stage; corpus self-evaluation reproducibility re-verified — see the Task-030 entry below; Task 029 — HIGH-OVERLAP TEST PREPARATION + AUTHENTIC-CORPUS SELF-EVALUATION: deterministic Phase-2B HIGH-overlap kit prepared (7 configs × direct/primed × 3 replicates = 42 planned translations; author freeze of the `Iskra i Wieloryb` story still required — NOT executed) + authentic-corpus self-evaluation reference point under the unchanged evaluation stack (combined 80.50 % canonical / 89.17 % broader / 19.50 % unresolved; per-register metrics) — see the Task-029 entry below; Task 028 — RESEARCH-STATE RECONSTRUCTION, ROADMAP + TRANSLATION-METHOD SPECIFICATION: external research direction recorded in-repo — `docs/research-roadmap.md` + `docs/translation-method.md`;
 Task 027 — EXP-004 ASSISTANT RESEARCH BUNDLE
 FOR INDEPENDENT ANALYSIS: compact deterministic machine-readable export of the
 Task-024/025/026 results under `experiments/exp004-modelscreen/
@@ -1146,6 +1156,37 @@ completed in Tasks 018/021; the Dola Phase-1 baselines in Task 023.
       roadmap §9.1/§10/§11/§13.1/§17, translation-method §7/§10, DESIGN
       §15, EXP-004 README, phase2b READMEs, STATE/ROADMAP. New tests
       `tests/test_extract_phase2b_high_story.py` (10); full suite green.
+- [x] **Task 031 — Canonicalize Grok identity across EXP-004 and
+      related records (2026-09-09): metadata/names only.** Repository-wide
+      audit + canonicalization of the Grok configuration to **Grok 4.5
+      Fast** (operator-reported identity "Grok 4.5, built by xAI (fast)",
+      marked `operator_reported`, never upgraded to independently
+      verified). Rendered labels (tables/rosters/summaries/figures/
+      headings) canonicalized across EXP-004 README, Phase-2A/2B/repeats
+      READMEs + repeats REPORT, roadmap §5/§6/§8; generators apply the
+      overlay forward (`run_exp004_phase1.py` constants + helpers
+      `canonical_grok_row`/`grok_run_id_alias`,
+      `run_exp004_phase2b.py`, `analyze_exp004_repeats.py`,
+      `build_assistant_research_bundle.py`). Pre-canonicalization run
+      ids/prompt filenames keep the recorded `unknown` token as
+      historical provenance with canonical alias `xai__grok__fast`
+      (Phase 1 row 08, Phase 2A, phase repeats); the never-collected
+      Phase-2B HIGH kit (Task 030) regenerated with canonical
+      `…__grok__fast__…` run ids/prompt files (9 stale `grok-unknown`
+      prompt files removed; manifest/plan otherwise unchanged).
+      **Historical Build exception:** repository evidence contains NO
+      Grok Build run (filenames/manifests/plans/rosters/reports/docs/git
+      searched); the early EXP-001/002-era Grok run
+      `exp002__2026-08-31__unknown__grok__unknown` was genuinely
+      unannotated and stays `unknown` — nothing relabelled as Fast or as
+      Build. Authoritative note + machine-readable map:
+      `experiments/exp004-modelscreen/grok-identity.md` +
+      `grok-identity-map.json` (new, Task 031); docs: roadmap §5–§8,
+      STATE, ROADMAP, DECISIONS (D-055); READMEs (exp004 root, phase2a,
+      operator-prompts, collected-sessions, phase2b, repeats). Canonical
+      tests       added (`tests/test_exp004_grok_identity.py`, `tests/
+      test_exp004_phase2b.py` extended); **no raw output bytes,
+      no metrics, no evaluator/conditions changed**; full suite green.
 - [ ] **EXP-004 Phase 2B — HIGH-overlap test (story FROZEN v1 + kit
   GENERATED Task 030; collection NOT started)** — kit under
   `experiments/exp004-modelscreen/phase2b/`: 7 shortlisted configurations

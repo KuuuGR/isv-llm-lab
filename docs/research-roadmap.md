@@ -227,7 +227,7 @@ separate "EXP-005" experiment directory.
   5. Gemini 3.1 Pro — extended thinking ON
   6. DeepSeek V3 Instant — DeepThink OFF
   7. DeepSeek V3 Instant — DeepThink ON
-  8. Grok
+  8. Grok 4.5 Fast
   9. Kimi K2.6 Instant (Standard)
   10. Qwen 3.8 Max — Thinking
   11. Claude Sonnet 5 — max (long reasoning)
@@ -242,6 +242,21 @@ separate "EXP-005" experiment directory.
   Venice excluded as a platform/interface rather than a model. Local /
   self-hosted models excluded from the practical screening. Bielik
   retained as a negative qualitative case, not rerun.
+
+**Grok configuration identity (Task 031):** in the current EXP-004 line
+(Phase 1 / Phase 2A / phase repeats / Phase 2B HIGH-overlap and future
+LOW / UNSEEN kits) the canonical configuration is **Grok 4.5 Fast**,
+operator-reported identity **"Grok 4.5, built by xAI (fast)"** — marked
+`operator_reported`, not independently verified. Pre-canonicalization
+files/runs carry the genuinely recorded `unknown` version token (D-018
+fallback) and keep it as historical provenance, mapping canonically via
+alias `xai__grok__fast`. The EXP-001/EXP-002-era Grok run (August 2026,
+`exp002__2026-08-31__unknown__grok__unknown`) was genuinely unannotated
+and remains `unknown`; **no "Grok Build" run exists in repository
+evidence**. Authoritative note + machine-readable map:
+`experiments/exp004-modelscreen/grok-identity.md` and
+`grok-identity-map.json`.
+
 - Phase 1 canonical leaders: Qwen 3.8 Max Fast **82.35 %**; Gemini 3.1
   Pro ext-thinking ON **81.27 %**; Gemini 3.6 Flash ext-thinking OFF
   **81.07 %**; DeepSeek V3 Expert ON **80.49 %**; DeepSeek V3 Expert OFF
@@ -299,7 +314,7 @@ separate "EXP-005" experiment directory.
 | Gemini 3.1 Pro ON | 81.27 → 83.01 | +1.74 |
 | DeepSeek V3 Instant OFF | 73.61 → 81.19 | +7.58 |
 | DeepSeek V3 Instant ON | 73.30 → 81.85 | +8.55 |
-| Grok | 75.20 → 82.38 | +7.18 |
+| Grok 4.5 Fast\* | 75.20 → 82.38 | +7.18 |
 | Kimi K2.6 Instant | 76.63 → 79.69 | +3.06 |
 | Qwen 3.8 Max Thinking | 79.87 → 82.94 | +3.07 |
 | Claude Sonnet 5 max | 74.71 → 83.03 | +8.31 |
@@ -315,6 +330,10 @@ Source: `experiments/exp004-modelscreen/analysis/` (Task-024
 deterministic dataset) + per-configuration rows reproduced in
 `repeats/REPORT.md` old-delta columns and the Phase-1 roster
 (`outputs/roster.json`, local).
+
+\* Grok row = **Grok 4.5 Fast**, operator-reported (see §5 Grok
+configuration identity note; historical run/file identifiers keep the
+recorded `unknown` token with canonical alias `xai__grok__fast`).
 
 Exploratory Dola (Tasks 021–023; identities operator-recorded, **not
 independently verified**; never part of the original 18):
@@ -377,9 +396,9 @@ Claude Sonnet 5 max **+9.91** · Claude Sonnet 5 Medium **+9.12** ·
 GPT Interslavic Teacher **+8.35** · Qwen 3.7 Plus Fast **+6.98** ·
 DeepSeek V3 Instant OFF **+6.89** · DeepSeek V3 Instant ON **+6.56** ·
 DeepSeek V3 Expert OFF **+6.47** · Kimi **+6.08** · GPT-5.6 Luna OFF
-**+5.67** · GPT-5.6 Luna ON **+4.71** · Grok **+4.50** · DeepSeek V3
-Expert ON **+3.77** · Qwen 3.7 Plus Thinking **+2.30** · Qwen 3.8 Max
-Fast **+1.72**.
+**+5.67** · GPT-5.6 Luna ON **+4.71** · Grok 4.5 Fast **+4.50** ·
+DeepSeek V3 Expert ON **+3.77** · Qwen 3.7 Plus Thinking **+2.30** ·
+Qwen 3.8 Max Fast **+1.72**.
 
 Repeated direct/primed means (mean ± SD; `repeats/REPORT.md`):
 - Gemini 3.6 Flash ON: direct 67.0 ± 2.5; primed 82.9 ± 0.6.

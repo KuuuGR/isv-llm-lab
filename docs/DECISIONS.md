@@ -1438,3 +1438,64 @@ on undocumented conversation.
    §16): no indefinite experiment growth; no extra model families
    without a specific question; no further human evaluation without a
    justified expert protocol (extends D-042).
+## D-055 · 2026-09-09 · EXP-004 Grok configuration identity canonicalization: operator-reported "Grok 4.5 Fast" as the canonical label, historical `unknown` identifiers preserved with a canonical alias, no Grok Build run in repository evidence (Task 031)
+
+**Context.** EXP-004 records rendered the Grok configuration as `unknown`
+(row 08 / run-id and prompt-file tokens `…__grok__unknown__…`,
+`*-grok-unknown-*`) because at collection time (Task 018, D-018
+`unknown` fallback) no version annotation existed. The operator later
+recorded the observed identity — "Grok 4.5, built by xAI (fast)"
+(Tasks 021/026 operator-header edits and identity notes). The research
+lead asked for a repository-wide canonicalization that must not rewrite
+immutable evidence or fabricate independently verified model metadata,
+and must preserve any historical Grok **Build** configuration exactly as
+recorded.
+
+**Decision.**
+
+1. **Canonical configuration label: `Grok 4.5 Fast`**, used in
+   filenames, run-id tokens where the naming convention permits, tables,
+   roster entries, summaries and experiment headings for the current
+   EXP-004 line (Phase 1 row 08 / Phase 2A / phase repeats / Phase 2B
+   HIGH-overlap and future LOW/UNSEEN kits). Fuller operator-observed
+   identity in metadata/provenance notes: "Grok 4.5, built by xAI
+   (fast)". Identity evidence is **`operator_reported`** only — never
+   upgraded to an independently verified model identity.
+2. **Historical transparency over uniform rewriting.** Run ids, prompt
+   filenames, manifests, raw outputs and genuinely recorded reports that
+   predate the operator-observed identity keep their `unknown` tokens
+   (they are part of the record). The canonical mapping is expressed as
+   an alias — historical `xai__grok__unknown` → canonical
+   `xai__grok__fast` (per-run map in
+   `experiments/exp004-modelscreen/grok-identity-map.json`; helper
+   `grok_run_id_alias` / `canonical_grok_row` in
+   `scripts/run_exp004_phase1.py`).
+3. **Forward-looking kits are born canonical.** Deterministic generators
+   apply the canonical overlay, so new (Phase-2B HIGH and future)
+   kits render `grok…fast` / "Grok 4.5 Fast" from day one. The
+   never-collected Phase-2B kit (Task 030, dated 2026-09-09) was
+   regenerated with canonical run ids and prompt filenames; its 9 stale
+   `*-grok-unknown-*` prompt files (superseded, unreplied) were removed.
+4. **No Grok Build run exists in repository evidence.** Filenames,
+   manifests, plans, rosters, reports, documentation and git history
+   contain no `build`/`beta`/`Grok Build` configuration for Grok in
+   EXP-004 (or elsewhere). The single early Grok condition — the
+   EXP-001/EXP-002-era run `exp002__2026-08-31__unknown__grok__unknown`
+   — was genuinely unannotated at the time and is **preserved as
+   `unknown`**, not back-ported to Fast. Nothing is relabelled as
+   "Build" either; if a Grok Build session exists outside these records,
+   it is outside EXP-004 and untouched.
+5. **Metadata canonicalization only.** No raw LLM output bytes, no
+   metrics, no evaluator definitions, no experimental conditions, no
+   coverage/orthography/replicate numbers and no historical conclusions
+   change. Regeneration of derived artifacts changes only Grok identity
+   metadata (checksum deltas, where any, are Grok-identity-only).
+6. **Authoritative source.** `experiments/exp004-modelscreen/
+   grok-identity.md` (human-readable) + `grok-identity-map.json`
+   (machine-readable) are the single authoritative statement; other
+   documents reference them instead of repeating the full note.
+7. **Canonical tests.** Deterministic tests verify that Phase-1/2A/2B
+   and repeats metadata canonicalizes to Grok 4.5 Fast, that no current
+   Fast Grok prompt retains `model unknown` where identity is
+   established, that historical identifiers remain distinguishable and
+   that regeneration is deterministic and byte-stable.

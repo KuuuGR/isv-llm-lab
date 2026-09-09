@@ -1,6 +1,16 @@
 # Project State
 
-Updated: 2026-09-09 (SODA Task 030 — HIGH-OVERLAP EXPERIMENT EXECUTION
+Updated: 2026-09-09 (SODA Task 031 — GROK CONFIGURATION IDENTITY
+CANONICALIZATION: repository-wide audit + canonicalization of the Grok
+configuration to **Grok 4.5 Fast** (operator-reported "Grok 4.5, built by
+xAI (fast)") across EXP-004 displays/rosters/summaries/generators/docs;
+historical `unknown` run identifiers preserved with canonical alias
+`xai__grok__fast`; never-collected Phase-2B kit regenerated with
+canonical `grok…fast` ids; no Grok Build run exists in repository
+evidence (EXP-001/002-era Grok stays genuinely `unknown`);
+authoritative note + map
+`experiments/exp004-modelscreen/grok-identity.{md,json}`; metadata-only,
+no raw output or metric changes — see the Task-031 row below. SODA Task 030 — HIGH-OVERLAP EXPERIMENT EXECUTION
 PREPARATION: HIGH-overlap source story extracted from the author's bank
 `InterslavicTesty.md` section `# 3.` (only Markdown structural markers
 removed; all 227 story content lines preserved exactly, verified parity)
@@ -357,7 +367,7 @@ Research hypothesis:
 This is a hypothesis. The first experiment must establish a baseline before
 any constrained system is judged against it.
 
-## Current status (as of SODA Task 030)
+## Current status (as of SODA Task 031)
 
 | Area | Status |
 |---|---|
@@ -399,6 +409,7 @@ any constrained system is judged against it.
 | **EXP-004 corpus self-evaluation (Task 029, 2026-09-09)** | ✅ **COMPLETE — REFERENCE POINT** — authentic corpus measured with the unchanged evaluation stack (`phase2a/corpus-selfeval/`): combined 8 096 tokens — canonical 80.50 %, broader 89.17 %, unresolved 19.50 %, orthography-out 47; Register 1 narrative 95.97/99.48 %; Register 2 artistic 90.56/100.00 %; Register 3 encyclopedic 75.72/84.83 %. Evidence that low canonical model coverage can partly reflect resource limits; corpus orthography clean (does not explain model contamination); exploratory cross-register composition (61/3 425 shared surfaces). Descriptive only — no "corpus score", no correctness claim |
 | **EXP-004 Phase-2B HIGH-overlap kit (Task 029, 2026-09-09)** | ✅ **PREPARED — NOT EXECUTED** — deterministic 42-run HIGH-overlap kit (`experiments/exp004-modelscreen/phase2b/` + `scripts/run_exp004_phase2b.py`): 7 shortlisted configs × direct/primed × 3 replicates; source regime `high_overlap_corpus_inspired` (`Iskra i Wieloryb`); direct corpus-free, primed full-corpus hash-gated (`aaad28e4…`); H-HIGH hypothesis recorded; **story text still to be frozen by the author — `prepare` fails loudly until then; no translations exist; next manual step is the 42 translations** |
 | **EXP-004 HIGH-overlap story frozen + kit generated (Task 030, 2026-09-09)** | ✅ **FROZEN + GENERATED — NOT EXECUTED** — story `Iskra i Wieloryb` extracted from the author's bank section `# 3.` (`scripts/extract_phase2b_high_story.py`, deterministic; Markdown markers removed only; 227 content lines preserved exactly) and frozen v1 (sha256 `ab8a0dcf…`, 30 061 B / 440 lines; classification `high_overlap_corpus_inspired`); 42-run kit generated (`prepare --date 2026-09-09`; 63 prompt files; regeneration byte-identical); bank sections 1/2 unused, **`Podkłady` (section 4) reserved as LOW-overlap source for the NEXT stage — not prepared**; corpus self-evaluation reproducibility re-verified |
+| **EXP-004 Grok configuration identity canonicalized (Task 031, 2026-09-09)** | ✅ **COMPLETE — METADATA/NAMING ONLY** — repository-wide audit + canonicalization of the Grok configuration to **Grok 4.5 Fast** (operator-reported identity "Grok 4.5, built by xAI (fast)", marked `operator_reported`, not independently verified). Rendered labels in tables/rosters/summaries/figures (EXP-004 README, Phase-2A/2B/repeats READMEs, repeats REPORT, roadmap) canonicalized; generators apply the overlay forward (`scripts/run_exp004_phase1.py` constants/helpers, `run_exp004_phase2b.py`, `analyze_exp004_repeats.py`, `build_assistant_research_bundle.py`); pre-canonicalization run ids/prompt filenames keep the recorded `unknown` token as historical provenance with canonical alias `xai__grok__fast` (Phase 1 row 08, Phase 2A, repeats); the never-collected Phase-2B HIGH kit was regenerated with canonical `…__grok__fast__…` run ids/files (9 stale `grok-unknown` prompt files removed; manifest/plan unchanged for other configs); **no Grok Build run exists in repository evidence** (searched; task-brief exception not supported by these records); EXP-001/002-era Grok run `exp002__2026-08-31__unknown__grok__unknown` preserved as genuinely `unknown`; authoritative note + machine-readable map `experiments/exp004-modelscreen/grok-identity.md` / `grok-identity-map.json`; canonicalization tests added; **no raw output bytes, no metrics, no evaluator/conditions changed**; full suite green |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
 
 
