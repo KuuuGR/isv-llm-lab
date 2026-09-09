@@ -18,6 +18,15 @@ full deterministic result set here:
 | `analysis.md` | narrative report — collection summary, stats tables, candidate re-evaluation, figures |
 | `figures/figure_a..e.svg` | Figure A replicate distributions; B repeated mean Δ (sorted); C within-condition spread; D Task-024 single vs repeated Δ; E baseline vs repeated Δ — Dola kept visually distinct + labelled exploratory |
 
+> **Independent-analysis export (Task 027):** the compact, deterministic,
+> machine-readable research package of these results (per-run
+> `results.json`/`results.csv`, `summary.json`, audit, deviations,
+> provenance, methodology and figures A–E) lives in
+> `experiments/exp004-modelscreen/assistant-research-bundle/` and is
+> sufficient to reconstruct every Task-026 quantitative conclusion
+> without the raw experiment directory (`scripts/
+> build_assistant_research_bundle.py`).
+
 Key numbers (see `analysis.md`, `REPORT.md`): repeated Δ canonical mean
 **+6.93 pp** over 16 primary configurations with both conditions usable
 (16/16 positive); Task-024 direction reproduced in 15/15 rows with an

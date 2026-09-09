@@ -1,0 +1,2520 @@
+{
+ "artifact": "exp004-assistant-research-bundle-summary",
+ "assessable_primary_configs": 16,
+ "baseline_dependence_revisited": {
+  "n": 16,
+  "new_spearman_rho": -0.841176470588,
+  "note": "Descriptive follow-up, n=18 primary configurations; not a causal test.",
+  "task024_rho": -0.86,
+  "task024_rho_note": "Task-024 baseline-dependence ρ ≈ −0.86 (single-run, n=18)"
+ },
+ "bundle_version": "1.0.0",
+ "configurations": {
+  "exploratory": [
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "bytedance__dola-3.8__fast",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": null,
+      "mean": null,
+      "median": null,
+      "min": null,
+      "n": 0,
+      "range": null,
+      "sd": null
+     },
+     "canonical": {
+      "max": null,
+      "mean": null,
+      "median": null,
+      "min": null,
+      "n": 0,
+      "range": null,
+      "sd": null
+     },
+     "n": 0,
+     "orthography": {
+      "max": null,
+      "mean": null,
+      "median": null,
+      "min": null,
+      "n": 0,
+      "range": null,
+      "sd": null
+     },
+     "unresolved": {
+      "max": null,
+      "mean": null,
+      "median": null,
+      "min": null,
+      "n": 0,
+      "range": null,
+      "sd": null
+     },
+     "usable_n": 0
+    },
+    "exploratory": true,
+    "label": "Dola 3.8 — Fast",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "exploratory",
+    "primary": false,
+    "primed": {
+     "broader": {
+      "max": 0.834794,
+      "mean": 0.834794,
+      "median": 0.834794,
+      "min": 0.834794,
+      "n": 1,
+      "range": 0.0,
+      "sd": 0.0
+     },
+     "canonical": {
+      "max": 0.713419,
+      "mean": 0.713419,
+      "median": 0.713419,
+      "min": 0.713419,
+      "n": 1,
+      "range": 0.0,
+      "sd": 0.0
+     },
+     "n": 1,
+     "orthography": {
+      "max": 25.0,
+      "mean": 25.0,
+      "median": 25.0,
+      "min": 25.0,
+      "n": 1,
+      "range": 0.0,
+      "sd": 0.0
+     },
+     "unresolved": {
+      "max": 0.286581,
+      "mean": 0.286581,
+      "median": 0.286581,
+      "min": 0.286581,
+      "n": 1,
+      "range": 0.0,
+      "sd": 0.0
+     },
+     "usable_n": 1
+    },
+    "repeated": {
+     "delta_mean_broader": null,
+     "delta_mean_canonical": null,
+     "direct_n": 0,
+     "direct_range_canonical": null,
+     "direct_sd_canonical": null,
+     "primed_n": 1,
+     "primed_range_canonical": 0.0,
+     "primed_sd_canonical": 0.0
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-07__bytedance__dola-3.8__fast__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.271372,
+     "old_delta_canonical": 0.281957,
+     "p1_broader": 0.51669,
+     "p1_canonical": 0.388734,
+     "p1_ortho_out": 468,
+     "p2a_broader": 0.788062,
+     "p2a_canonical": 0.670691,
+     "p2a_ortho_out": 24,
+     "run_id": "2026-09-07__bytedance__dola-3.8__fast__p2a-primed"
+    },
+    "task024_direction_reproduced": null,
+    "usability_notes": [
+     "direct r01 intake partial (wrapped end marker) — excluded from statistics",
+     "direct r02 intake partial (wrapped end marker) — excluded from statistics",
+     "direct r03 intake partial (wrapped end marker) — excluded from statistics",
+     "primed r01 intake partial (wrapped end marker) — excluded from statistics",
+     "primed r02 intake partial (wrapped end marker) — excluded from statistics"
+    ]
+   },
+   {
+    "comparability_status": "deviation_recorded",
+    "configuration_id": "bytedance__dola-3.8__pro",
+    "deviation_ids": [
+     "dola-pro-r03-msg1-blank-line"
+    ],
+    "direct": {
+     "broader": {
+      "max": 0.835719,
+      "mean": 0.781329666667,
+      "median": 0.81812,
+      "min": 0.69015,
+      "n": 3,
+      "range": 0.145569,
+      "sd": 0.079452689761
+     },
+     "canonical": {
+      "max": 0.677793,
+      "mean": 0.626462,
+      "median": 0.654397,
+      "min": 0.547196,
+      "n": 3,
+      "range": 0.130597,
+      "sd": 0.069635962483
+     },
+     "n": 3,
+     "orthography": {
+      "max": 233.0,
+      "mean": 89.333333333333,
+      "median": 34.0,
+      "min": 1.0,
+      "n": 3,
+      "range": 232.0,
+      "sd": 125.508299858349
+     },
+     "unresolved": {
+      "max": 0.452804,
+      "mean": 0.373538,
+      "median": 0.345603,
+      "min": 0.322207,
+      "n": 3,
+      "range": 0.130597,
+      "sd": 0.069635962483
+     },
+     "usable_n": 3
+    },
+    "exploratory": true,
+    "label": "Dola 3.8 — Pro",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "exploratory",
+    "primary": false,
+    "primed": {
+     "broader": {
+      "max": 0.848993,
+      "mean": 0.845638,
+      "median": 0.846102,
+      "min": 0.841819,
+      "n": 3,
+      "range": 0.007174,
+      "sd": 0.003609437768
+     },
+     "canonical": {
+      "max": 0.771505,
+      "mean": 0.750594333333,
+      "median": 0.742023,
+      "min": 0.738255,
+      "n": 3,
+      "range": 0.03325,
+      "sd": 0.018206906419
+     },
+     "n": 3,
+     "orthography": {
+      "max": 28.0,
+      "mean": 16.666666666667,
+      "median": 13.0,
+      "min": 9.0,
+      "n": 3,
+      "range": 19.0,
+      "sd": 10.016652800878
+     },
+     "unresolved": {
+      "max": 0.261745,
+      "mean": 0.249405666667,
+      "median": 0.257977,
+      "min": 0.228495,
+      "n": 3,
+      "range": 0.03325,
+      "sd": 0.018206906419
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.064308333333,
+     "delta_mean_canonical": 0.124132333333,
+     "direct_n": 3,
+     "direct_range_canonical": 0.130597,
+     "direct_sd_canonical": 0.069635962483,
+     "primed_n": 3,
+     "primed_range_canonical": 0.03325,
+     "primed_sd_canonical": 0.018206906419
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-07__bytedance__dola-3.8__pro__direct",
+     "historical_task024": true,
+     "old_delta_broader": -6.6e-05,
+     "old_delta_canonical": 0.066722,
+     "p1_broader": 0.82269,
+     "p1_canonical": 0.650815,
+     "p1_ortho_out": 63,
+     "p2a_broader": 0.822624,
+     "p2a_canonical": 0.717537,
+     "p2a_ortho_out": 17,
+     "run_id": "2026-09-07__bytedance__dola-3.8__pro__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   }
+  ],
+  "primary": [
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "alibaba__qwen-3.7-plus__fast",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.82337,
+      "mean": 0.808115333333,
+      "median": 0.806474,
+      "min": 0.794502,
+      "n": 3,
+      "range": 0.028868,
+      "sd": 0.014503821473
+     },
+     "canonical": {
+      "max": 0.673913,
+      "mean": 0.656021333333,
+      "median": 0.663223,
+      "min": 0.630928,
+      "n": 3,
+      "range": 0.042985,
+      "sd": 0.022379132207
+     },
+     "n": 3,
+     "orthography": {
+      "max": 135.0,
+      "mean": 109.333333333333,
+      "median": 128.0,
+      "min": 65.0,
+      "n": 3,
+      "range": 70.0,
+      "sd": 38.552993831003
+     },
+     "unresolved": {
+      "max": 0.369072,
+      "mean": 0.343978666667,
+      "median": 0.336777,
+      "min": 0.326087,
+      "n": 3,
+      "range": 0.042985,
+      "sd": 0.022379132207
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "Qwen 3.7 Plus — Fast",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.856653,
+      "mean": 0.836637666667,
+      "median": 0.85203,
+      "min": 0.80123,
+      "n": 3,
+      "range": 0.055423,
+      "sd": 0.030750937812
+     },
+     "canonical": {
+      "max": 0.759119,
+      "mean": 0.725805333333,
+      "median": 0.731139,
+      "min": 0.687158,
+      "n": 3,
+      "range": 0.071961,
+      "sd": 0.036275782284
+     },
+     "n": 3,
+     "orthography": {
+      "max": 153.0,
+      "mean": 108.333333333333,
+      "median": 91.0,
+      "min": 81.0,
+      "n": 3,
+      "range": 72.0,
+      "sd": 39.00427327016
+     },
+     "unresolved": {
+      "max": 0.312842,
+      "mean": 0.274194666667,
+      "median": 0.268861,
+      "min": 0.240881,
+      "n": 3,
+      "range": 0.071961,
+      "sd": 0.036275782284
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.028522333333,
+     "delta_mean_canonical": 0.069784,
+     "direct_n": 3,
+     "direct_range_canonical": 0.042985,
+     "direct_sd_canonical": 0.022379132207,
+     "primed_n": 3,
+     "primed_range_canonical": 0.071961,
+     "primed_sd_canonical": 0.036275782284
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__alibaba__qwen-3.7-plus__fast__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.047512,
+     "old_delta_canonical": 0.089425,
+     "p1_broader": 0.820425,
+     "p1_canonical": 0.663468,
+     "p1_ortho_out": 44,
+     "p2a_broader": 0.867937,
+     "p2a_canonical": 0.752893,
+     "p2a_ortho_out": 97,
+     "run_id": "2026-09-07__alibaba__qwen-3.7-plus__fast__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   },
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "alibaba__qwen-3.7-plus__thinking",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.882993,
+      "mean": 0.878943,
+      "median": 0.882233,
+      "min": 0.871603,
+      "n": 3,
+      "range": 0.01139,
+      "sd": 0.00636797456
+     },
+     "canonical": {
+      "max": 0.809394,
+      "mean": 0.798238666667,
+      "median": 0.796599,
+      "min": 0.788723,
+      "n": 3,
+      "range": 0.020671,
+      "sd": 0.010432590298
+     },
+     "n": 3,
+     "orthography": {
+      "max": 80.0,
+      "mean": 38.666666666667,
+      "median": 21.0,
+      "min": 15.0,
+      "n": 3,
+      "range": 65.0,
+      "sd": 35.921210076128
+     },
+     "unresolved": {
+      "max": 0.211277,
+      "mean": 0.201761333333,
+      "median": 0.203401,
+      "min": 0.190606,
+      "n": 3,
+      "range": 0.020671,
+      "sd": 0.010432590298
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "Qwen 3.7 Plus — Thinking",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.89103,
+      "mean": 0.882459333333,
+      "median": 0.881517,
+      "min": 0.874831,
+      "n": 3,
+      "range": 0.016199,
+      "sd": 0.008140509464
+     },
+     "canonical": {
+      "max": 0.832558,
+      "mean": 0.821233,
+      "median": 0.825999,
+      "min": 0.805142,
+      "n": 3,
+      "range": 0.027416,
+      "sd": 0.014315911812
+     },
+     "n": 3,
+     "orthography": {
+      "max": 26.0,
+      "mean": 20.333333333333,
+      "median": 20.0,
+      "min": 15.0,
+      "n": 3,
+      "range": 11.0,
+      "sd": 5.507570547286
+     },
+     "unresolved": {
+      "max": 0.194858,
+      "mean": 0.178767,
+      "median": 0.174001,
+      "min": 0.167442,
+      "n": 3,
+      "range": 0.027416,
+      "sd": 0.014315911812
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.003516333333,
+     "delta_mean_canonical": 0.022994333333,
+     "direct_n": 3,
+     "direct_range_canonical": 0.020671,
+     "direct_sd_canonical": 0.010432590298,
+     "primed_n": 3,
+     "primed_range_canonical": 0.027416,
+     "primed_sd_canonical": 0.014315911812
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__alibaba__qwen-3.7-plus__thinking__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.012007,
+     "old_delta_canonical": 0.034713,
+     "p1_broader": 0.879592,
+     "p1_canonical": 0.793878,
+     "p1_ortho_out": 23,
+     "p2a_broader": 0.891599,
+     "p2a_canonical": 0.828591,
+     "p2a_ortho_out": 13,
+     "run_id": "2026-09-07__alibaba__qwen-3.7-plus__thinking__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   },
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "alibaba__qwen-3.8-max__fast",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.891597,
+      "mean": 0.880877,
+      "median": 0.883825,
+      "min": 0.867209,
+      "n": 3,
+      "range": 0.024388,
+      "sd": 0.012458397329
+     },
+     "canonical": {
+      "max": 0.814625,
+      "mean": 0.800924,
+      "median": 0.803594,
+      "min": 0.784553,
+      "n": 3,
+      "range": 0.030072,
+      "sd": 0.015212756851
+     },
+     "n": 3,
+     "orthography": {
+      "max": 53.0,
+      "mean": 44.333333333333,
+      "median": 44.0,
+      "min": 36.0,
+      "n": 3,
+      "range": 17.0,
+      "sd": 8.504900548115
+     },
+     "unresolved": {
+      "max": 0.215447,
+      "mean": 0.199076,
+      "median": 0.196406,
+      "min": 0.185375,
+      "n": 3,
+      "range": 0.030072,
+      "sd": 0.015212756851
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "Qwen 3.8 Max — Fast",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.901354,
+      "mean": 0.886364,
+      "median": 0.9,
+      "min": 0.857738,
+      "n": 3,
+      "range": 0.043616,
+      "sd": 0.024800085403
+     },
+     "canonical": {
+      "max": 0.854288,
+      "mean": 0.818171333333,
+      "median": 0.849359,
+      "min": 0.750867,
+      "n": 3,
+      "range": 0.103421,
+      "sd": 0.058339341137
+     },
+     "n": 3,
+     "orthography": {
+      "max": 84.0,
+      "mean": 48.333333333333,
+      "median": 40.0,
+      "min": 21.0,
+      "n": 3,
+      "range": 63.0,
+      "sd": 32.316146634977
+     },
+     "unresolved": {
+      "max": 0.249133,
+      "mean": 0.181828666667,
+      "median": 0.150641,
+      "min": 0.145712,
+      "n": 3,
+      "range": 0.103421,
+      "sd": 0.058339341137
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.005487,
+     "delta_mean_canonical": 0.017247333333,
+     "direct_n": 3,
+     "direct_range_canonical": 0.030072,
+     "direct_sd_canonical": 0.015212756851,
+     "primed_n": 3,
+     "primed_range_canonical": 0.103421,
+     "primed_sd_canonical": 0.058339341137
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__alibaba__qwen-3.8-max__fast__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.007831,
+     "old_delta_canonical": 0.030354,
+     "p1_broader": 0.892169,
+     "p1_canonical": 0.823492,
+     "p1_ortho_out": 19,
+     "p2a_broader": 0.9,
+     "p2a_canonical": 0.853846,
+     "p2a_ortho_out": 22,
+     "run_id": "2026-09-07__alibaba__qwen-3.8-max__fast__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   },
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "alibaba__qwen-3.8-max__thinking",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.895302,
+      "mean": 0.881227333333,
+      "median": 0.877326,
+      "min": 0.871054,
+      "n": 3,
+      "range": 0.024248,
+      "sd": 0.01258597145
+     },
+     "canonical": {
+      "max": 0.795302,
+      "mean": 0.787601666667,
+      "median": 0.7898,
+      "min": 0.777703,
+      "n": 3,
+      "range": 0.017599,
+      "sd": 0.009003094042
+     },
+     "n": 3,
+     "orthography": {
+      "max": 34.0,
+      "mean": 21.666666666667,
+      "median": 24.0,
+      "min": 7.0,
+      "n": 3,
+      "range": 27.0,
+      "sd": 13.650396819629
+     },
+     "unresolved": {
+      "max": 0.222297,
+      "mean": 0.212398333333,
+      "median": 0.2102,
+      "min": 0.204698,
+      "n": 3,
+      "range": 0.017599,
+      "sd": 0.009003094042
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "Qwen 3.8 Max — Thinking",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": null,
+      "mean": null,
+      "median": null,
+      "min": null,
+      "n": 0,
+      "range": null,
+      "sd": null
+     },
+     "canonical": {
+      "max": null,
+      "mean": null,
+      "median": null,
+      "min": null,
+      "n": 0,
+      "range": null,
+      "sd": null
+     },
+     "n": 0,
+     "orthography": {
+      "max": null,
+      "mean": null,
+      "median": null,
+      "min": null,
+      "n": 0,
+      "range": null,
+      "sd": null
+     },
+     "unresolved": {
+      "max": null,
+      "mean": null,
+      "median": null,
+      "min": null,
+      "n": 0,
+      "range": null,
+      "sd": null
+     },
+     "usable_n": 0
+    },
+    "repeated": {
+     "delta_mean_broader": null,
+     "delta_mean_canonical": null,
+     "direct_n": 3,
+     "direct_range_canonical": 0.017599,
+     "direct_sd_canonical": 0.009003094042,
+     "primed_n": 0,
+     "primed_range_canonical": null,
+     "primed_sd_canonical": null
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__alibaba__qwen-3.8-max__thinking__direct",
+     "historical_task024": true,
+     "old_delta_broader": -0.004637,
+     "old_delta_canonical": 0.030672,
+     "p1_broader": 0.888235,
+     "p1_canonical": 0.798693,
+     "p1_ortho_out": 13,
+     "p2a_broader": 0.883598,
+     "p2a_canonical": 0.829365,
+     "p2a_ortho_out": 6,
+     "run_id": "2026-09-07__alibaba__qwen-3.8-max__thinking__p2a-primed"
+    },
+    "task024_direction_reproduced": null,
+    "usability_notes": [
+     "primed r01 not collected (pristine prompt file)",
+     "primed r02 not collected (pristine prompt file)",
+     "primed r03 not collected (pristine prompt file)"
+    ]
+   },
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "anthropic__claude__sonnet-5",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.877297,
+      "mean": 0.865880666667,
+      "median": 0.863576,
+      "min": 0.856769,
+      "n": 3,
+      "range": 0.020528,
+      "sd": 0.01045625709
+     },
+     "canonical": {
+      "max": 0.763244,
+      "mean": 0.745697,
+      "median": 0.749344,
+      "min": 0.724503,
+      "n": 3,
+      "range": 0.038741,
+      "sd": 0.019626301919
+     },
+     "n": 3,
+     "orthography": {
+      "max": 115.0,
+      "mean": 52.666666666667,
+      "median": 25.0,
+      "min": 18.0,
+      "n": 3,
+      "range": 97.0,
+      "sd": 54.095594398558
+     },
+     "unresolved": {
+      "max": 0.275497,
+      "mean": 0.254303,
+      "median": 0.250656,
+      "min": 0.236756,
+      "n": 3,
+      "range": 0.038741,
+      "sd": 0.019626301919
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "Claude Sonnet 5 — Medium (default)",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.908676,
+      "mean": 0.903622666667,
+      "median": 0.904824,
+      "min": 0.897368,
+      "n": 3,
+      "range": 0.011308,
+      "sd": 0.005748923146
+     },
+     "canonical": {
+      "max": 0.84485,
+      "mean": 0.836906,
+      "median": 0.836921,
+      "min": 0.828947,
+      "n": 3,
+      "range": 0.015903,
+      "sd": 0.007951510611
+     },
+     "n": 3,
+     "orthography": {
+      "max": 8.0,
+      "mean": 4.0,
+      "median": 2.0,
+      "min": 2.0,
+      "n": 3,
+      "range": 6.0,
+      "sd": 3.464101615138
+     },
+     "unresolved": {
+      "max": 0.171053,
+      "mean": 0.163094,
+      "median": 0.163079,
+      "min": 0.15515,
+      "n": 3,
+      "range": 0.015903,
+      "sd": 0.007951510611
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.037742,
+     "delta_mean_canonical": 0.091209,
+     "direct_n": 3,
+     "direct_range_canonical": 0.038741,
+     "direct_sd_canonical": 0.019626301919,
+     "primed_n": 3,
+     "primed_range_canonical": 0.015903,
+     "primed_sd_canonical": 0.007951510611
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__anthropic__claude__sonnet-5__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.04642,
+     "old_delta_canonical": 0.116607,
+     "p1_broader": 0.863548,
+     "p1_canonical": 0.729695,
+     "p1_ortho_out": 99,
+     "p2a_broader": 0.909968,
+     "p2a_canonical": 0.846302,
+     "p2a_ortho_out": 0,
+     "run_id": "2026-09-07__anthropic__claude__sonnet-5__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   },
+   {
+    "comparability_status": "deviation_recorded",
+    "configuration_id": "anthropic__claude__sonnet-5-max",
+    "deviation_ids": [
+     "claude-max-thinking-off"
+    ],
+    "direct": {
+     "broader": {
+      "max": 0.851379,
+      "mean": 0.834253333333,
+      "median": 0.836388,
+      "min": 0.814993,
+      "n": 3,
+      "range": 0.036386,
+      "sd": 0.018286685056
+     },
+     "canonical": {
+      "max": 0.746469,
+      "mean": 0.733690333333,
+      "median": 0.737271,
+      "min": 0.717331,
+      "n": 3,
+      "range": 0.029138,
+      "sd": 0.014895356368
+     },
+     "n": 3,
+     "orthography": {
+      "max": 139.0,
+      "mean": 51.0,
+      "median": 9.0,
+      "min": 5.0,
+      "n": 3,
+      "range": 134.0,
+      "sd": 76.236474210184
+     },
+     "unresolved": {
+      "max": 0.282669,
+      "mean": 0.266309666667,
+      "median": 0.262729,
+      "min": 0.253531,
+      "n": 3,
+      "range": 0.029138,
+      "sd": 0.014895356368
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "Claude Sonnet 5 — max (long reasoning)",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.901178,
+      "mean": 0.899359666667,
+      "median": 0.900662,
+      "min": 0.896239,
+      "n": 3,
+      "range": 0.004939,
+      "sd": 0.002714863594
+     },
+     "canonical": {
+      "max": 0.837086,
+      "mean": 0.832784333333,
+      "median": 0.83377,
+      "min": 0.827497,
+      "n": 3,
+      "range": 0.009589,
+      "sd": 0.004869895721
+     },
+     "n": 3,
+     "orthography": {
+      "max": 4.0,
+      "mean": 3.0,
+      "median": 3.0,
+      "min": 2.0,
+      "n": 3,
+      "range": 2.0,
+      "sd": 1.0
+     },
+     "unresolved": {
+      "max": 0.172503,
+      "mean": 0.167215666667,
+      "median": 0.16623,
+      "min": 0.162914,
+      "n": 3,
+      "range": 0.009589,
+      "sd": 0.004869895721
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.065106333333,
+     "delta_mean_canonical": 0.099094,
+     "direct_n": 3,
+     "direct_range_canonical": 0.029138,
+     "direct_sd_canonical": 0.014895356368,
+     "primed_n": 3,
+     "primed_range_canonical": 0.009589,
+     "primed_sd_canonical": 0.004869895721
+    },
+    "task024": null,
+    "task024_direction_reproduced": null,
+    "usability_notes": []
+   },
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "deepseek__deepseek-v3-expert__deepthinkoff",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.890102,
+      "mean": 0.871645,
+      "median": 0.882871,
+      "min": 0.841962,
+      "n": 3,
+      "range": 0.04814,
+      "sd": 0.025959241264
+     },
+     "canonical": {
+      "max": 0.815017,
+      "mean": 0.783450333333,
+      "median": 0.792146,
+      "min": 0.743188,
+      "n": 3,
+      "range": 0.071829,
+      "sd": 0.036695534801
+     },
+     "n": 3,
+     "orthography": {
+      "max": 3.0,
+      "mean": 1.666666666667,
+      "median": 2.0,
+      "min": 0.0,
+      "n": 3,
+      "range": 3.0,
+      "sd": 1.527525231652
+     },
+     "unresolved": {
+      "max": 0.256812,
+      "mean": 0.216549666667,
+      "median": 0.207854,
+      "min": 0.184983,
+      "n": 3,
+      "range": 0.071829,
+      "sd": 0.036695534801
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "DeepSeek V3 Expert — DeepThink OFF",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.907432,
+      "mean": 0.902945333333,
+      "median": 0.901738,
+      "min": 0.899666,
+      "n": 3,
+      "range": 0.007766,
+      "sd": 0.004021309405
+     },
+     "canonical": {
+      "max": 0.854947,
+      "mean": 0.848146333333,
+      "median": 0.852703,
+      "min": 0.836789,
+      "n": 3,
+      "range": 0.018158,
+      "sd": 0.009899527733
+     },
+     "n": 3,
+     "orthography": {
+      "max": 42.0,
+      "mean": 14.0,
+      "median": 0.0,
+      "min": 0.0,
+      "n": 3,
+      "range": 42.0,
+      "sd": 24.248711305964
+     },
+     "unresolved": {
+      "max": 0.163211,
+      "mean": 0.151853666667,
+      "median": 0.147297,
+      "min": 0.145053,
+      "n": 3,
+      "range": 0.018158,
+      "sd": 0.009899527733
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.031300333333,
+     "delta_mean_canonical": 0.064696,
+     "direct_n": 3,
+     "direct_range_canonical": 0.071829,
+     "direct_sd_canonical": 0.036695534801,
+     "primed_n": 3,
+     "primed_range_canonical": 0.018158,
+     "primed_sd_canonical": 0.009899527733
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__deepseek__deepseek-v3-expert__deepthinkoff__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.027151,
+     "old_delta_canonical": 0.047031,
+     "p1_broader": 0.873453,
+     "p1_canonical": 0.799175,
+     "p1_ortho_out": 3,
+     "p2a_broader": 0.900604,
+     "p2a_canonical": 0.846206,
+     "p2a_ortho_out": 37,
+     "run_id": "2026-09-07__deepseek__deepseek-v3-expert__deepthinkoff__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   },
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "deepseek__deepseek-v3-expert__deepthinkon",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.898305,
+      "mean": 0.891875333333,
+      "median": 0.889566,
+      "min": 0.887755,
+      "n": 3,
+      "range": 0.01055,
+      "sd": 0.005641399679
+     },
+     "canonical": {
+      "max": 0.823129,
+      "mean": 0.813309666667,
+      "median": 0.82073,
+      "min": 0.79607,
+      "n": 3,
+      "range": 0.027059,
+      "sd": 0.014978096686
+     },
+     "n": 3,
+     "orthography": {
+      "max": 73.0,
+      "mean": 25.333333333333,
+      "median": 3.0,
+      "min": 0.0,
+      "n": 3,
+      "range": 73.0,
+      "sd": 41.307787804884
+     },
+     "unresolved": {
+      "max": 0.20393,
+      "mean": 0.186690333333,
+      "median": 0.17927,
+      "min": 0.176871,
+      "n": 3,
+      "range": 0.027059,
+      "sd": 0.014978096686
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "DeepSeek V3 Expert — DeepThink ON",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.907992,
+      "mean": 0.905590333333,
+      "median": 0.90492,
+      "min": 0.903859,
+      "n": 3,
+      "range": 0.004133,
+      "sd": 0.002146493031
+     },
+     "canonical": {
+      "max": 0.854936,
+      "mean": 0.850975333333,
+      "median": 0.854388,
+      "min": 0.843602,
+      "n": 3,
+      "range": 0.011334,
+      "sd": 0.006391369911
+     },
+     "n": 3,
+     "orthography": {
+      "max": 68.0,
+      "mean": 68.0,
+      "median": 68.0,
+      "min": 68.0,
+      "n": 3,
+      "range": 0.0,
+      "sd": 0.0
+     },
+     "unresolved": {
+      "max": 0.156398,
+      "mean": 0.149024666667,
+      "median": 0.145612,
+      "min": 0.145064,
+      "n": 3,
+      "range": 0.011334,
+      "sd": 0.006391369911
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.013715,
+     "delta_mean_canonical": 0.037665666667,
+     "direct_n": 3,
+     "direct_range_canonical": 0.027059,
+     "direct_sd_canonical": 0.014978096686,
+     "primed_n": 3,
+     "primed_range_canonical": 0.011334,
+     "primed_sd_canonical": 0.006391369911
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__deepseek__deepseek-v3-expert__deepthinkon__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.016712,
+     "old_delta_canonical": 0.051384,
+     "p1_broader": 0.895309,
+     "p1_canonical": 0.804895,
+     "p1_ortho_out": 2,
+     "p2a_broader": 0.912021,
+     "p2a_canonical": 0.856279,
+     "p2a_ortho_out": 0,
+     "run_id": "2026-09-07__deepseek__deepseek-v3-expert__deepthinkon__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   },
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "deepseek__deepseek-v3-instant__deepthinkoff",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.861054,
+      "mean": 0.848746333333,
+      "median": 0.859396,
+      "min": 0.825789,
+      "n": 3,
+      "range": 0.035265,
+      "sd": 0.019898909677
+     },
+     "canonical": {
+      "max": 0.765432,
+      "mean": 0.752572666667,
+      "median": 0.748802,
+      "min": 0.743484,
+      "n": 3,
+      "range": 0.021948,
+      "sd": 0.011449546774
+     },
+     "n": 3,
+     "orthography": {
+      "max": 106.0,
+      "mean": 98.0,
+      "median": 95.0,
+      "min": 93.0,
+      "n": 3,
+      "range": 13.0,
+      "sd": 7.0
+     },
+     "unresolved": {
+      "max": 0.256516,
+      "mean": 0.247427333333,
+      "median": 0.251198,
+      "min": 0.234568,
+      "n": 3,
+      "range": 0.021948,
+      "sd": 0.011449546774
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "DeepSeek V3 Instant — DeepThink OFF",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.891143,
+      "mean": 0.886452333333,
+      "median": 0.886457,
+      "min": 0.881757,
+      "n": 3,
+      "range": 0.009386,
+      "sd": 0.00469300174
+     },
+     "canonical": {
+      "max": 0.833671,
+      "mean": 0.821511,
+      "median": 0.815541,
+      "min": 0.815321,
+      "n": 3,
+      "range": 0.01835,
+      "sd": 0.010531443396
+     },
+     "n": 3,
+     "orthography": {
+      "max": 41.0,
+      "mean": 14.333333333333,
+      "median": 2.0,
+      "min": 0.0,
+      "n": 3,
+      "range": 41.0,
+      "sd": 23.115651263448
+     },
+     "unresolved": {
+      "max": 0.184679,
+      "mean": 0.178489,
+      "median": 0.184459,
+      "min": 0.166329,
+      "n": 3,
+      "range": 0.01835,
+      "sd": 0.010531443396
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.037706,
+     "delta_mean_canonical": 0.068938333333,
+     "direct_n": 3,
+     "direct_range_canonical": 0.021948,
+     "direct_sd_canonical": 0.011449546774,
+     "primed_n": 3,
+     "primed_range_canonical": 0.01835,
+     "primed_sd_canonical": 0.010531443396
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__deepseek__deepseek-v3-instant__deepthinkoff__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.036906,
+     "old_delta_canonical": 0.075837,
+     "p1_broader": 0.8375,
+     "p1_canonical": 0.736111,
+     "p1_ortho_out": 82,
+     "p2a_broader": 0.874406,
+     "p2a_canonical": 0.811948,
+     "p2a_ortho_out": 43,
+     "run_id": "2026-09-07__deepseek__deepseek-v3-instant__deepthinkoff__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   },
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "deepseek__deepseek-v3-instant__deepthinkon",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.84573,
+      "mean": 0.839599,
+      "median": 0.842466,
+      "min": 0.830601,
+      "n": 3,
+      "range": 0.015129,
+      "sd": 0.007961559332
+     },
+     "canonical": {
+      "max": 0.754098,
+      "mean": 0.747465666667,
+      "median": 0.74863,
+      "min": 0.739669,
+      "n": 3,
+      "range": 0.014429,
+      "sd": 0.007284625202
+     },
+     "n": 3,
+     "orthography": {
+      "max": 93.0,
+      "mean": 61.666666666667,
+      "median": 71.0,
+      "min": 21.0,
+      "n": 3,
+      "range": 72.0,
+      "sd": 36.896250938725
+     },
+     "unresolved": {
+      "max": 0.260331,
+      "mean": 0.252534333333,
+      "median": 0.25137,
+      "min": 0.245902,
+      "n": 3,
+      "range": 0.014429,
+      "sd": 0.007284625202
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "DeepSeek V3 Instant — DeepThink ON",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.87247,
+      "mean": 0.871339,
+      "median": 0.871339,
+      "min": 0.870208,
+      "n": 2,
+      "range": 0.002262,
+      "sd": 0.001599475539
+     },
+     "canonical": {
+      "max": 0.81444,
+      "mean": 0.8130705,
+      "median": 0.8130705,
+      "min": 0.811701,
+      "n": 2,
+      "range": 0.002739,
+      "sd": 0.001936765474
+     },
+     "n": 2,
+     "orthography": {
+      "max": 64.0,
+      "mean": 53.5,
+      "median": 53.5,
+      "min": 43.0,
+      "n": 2,
+      "range": 21.0,
+      "sd": 14.849242404917
+     },
+     "unresolved": {
+      "max": 0.188299,
+      "mean": 0.1869295,
+      "median": 0.1869295,
+      "min": 0.18556,
+      "n": 2,
+      "range": 0.002739,
+      "sd": 0.001936765474
+     },
+     "usable_n": 2
+    },
+    "repeated": {
+     "delta_mean_broader": 0.03174,
+     "delta_mean_canonical": 0.065604833333,
+     "direct_n": 3,
+     "direct_range_canonical": 0.014429,
+     "direct_sd_canonical": 0.007284625202,
+     "primed_n": 2,
+     "primed_range_canonical": 0.002739,
+     "primed_sd_canonical": 0.001936765474
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__deepseek__deepseek-v3-instant__deepthinkon__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.038737,
+     "old_delta_canonical": 0.085479,
+     "p1_broader": 0.839806,
+     "p1_canonical": 0.73301,
+     "p1_ortho_out": 86,
+     "p2a_broader": 0.878543,
+     "p2a_canonical": 0.818489,
+     "p2a_ortho_out": 1,
+     "run_id": "2026-09-07__deepseek__deepseek-v3-instant__deepthinkon__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": [
+     "primed r02 intake partial (wrapped end marker) — excluded from statistics"
+    ]
+   },
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "google__gemini-3.1-pro__extthinkon",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.889039,
+      "mean": 0.888464,
+      "median": 0.889039,
+      "min": 0.887314,
+      "n": 3,
+      "range": 0.001725,
+      "sd": 0.000995929214
+     },
+     "canonical": {
+      "max": 0.803789,
+      "mean": 0.795858333333,
+      "median": 0.792963,
+      "min": 0.790823,
+      "n": 3,
+      "range": 0.012966,
+      "sd": 0.006951007505
+     },
+     "n": 3,
+     "orthography": {
+      "max": 69.0,
+      "mean": 68.333333333333,
+      "median": 68.0,
+      "min": 68.0,
+      "n": 3,
+      "range": 1.0,
+      "sd": 0.57735026919
+     },
+     "unresolved": {
+      "max": 0.209177,
+      "mean": 0.204141666667,
+      "median": 0.207037,
+      "min": 0.196211,
+      "n": 3,
+      "range": 0.012966,
+      "sd": 0.006951007505
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "Gemini 3.1 Pro — extended thinking ON",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": null,
+      "mean": null,
+      "median": null,
+      "min": null,
+      "n": 0,
+      "range": null,
+      "sd": null
+     },
+     "canonical": {
+      "max": null,
+      "mean": null,
+      "median": null,
+      "min": null,
+      "n": 0,
+      "range": null,
+      "sd": null
+     },
+     "n": 0,
+     "orthography": {
+      "max": null,
+      "mean": null,
+      "median": null,
+      "min": null,
+      "n": 0,
+      "range": null,
+      "sd": null
+     },
+     "unresolved": {
+      "max": null,
+      "mean": null,
+      "median": null,
+      "min": null,
+      "n": 0,
+      "range": null,
+      "sd": null
+     },
+     "usable_n": 0
+    },
+    "repeated": {
+     "delta_mean_broader": null,
+     "delta_mean_canonical": null,
+     "direct_n": 3,
+     "direct_range_canonical": 0.012966,
+     "direct_sd_canonical": 0.006951007505,
+     "primed_n": 0,
+     "primed_range_canonical": null,
+     "primed_sd_canonical": null
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__google__gemini-3.1-pro__extthinkon__direct",
+     "historical_task024": true,
+     "old_delta_broader": -0.009179,
+     "old_delta_canonical": 0.017363,
+     "p1_broader": 0.903313,
+     "p1_canonical": 0.812711,
+     "p1_ortho_out": 68,
+     "p2a_broader": 0.894134,
+     "p2a_canonical": 0.830074,
+     "p2a_ortho_out": 0,
+     "run_id": "2026-09-07__google__gemini-3.1-pro__extthinkon__p2a-primed"
+    },
+    "task024_direction_reproduced": null,
+    "usability_notes": [
+     "primed r01 not collected (pristine prompt file)",
+     "primed r02 not collected (pristine prompt file)",
+     "primed r03 not collected (pristine prompt file)"
+    ]
+   },
+   {
+    "comparability_status": "deviation_recorded",
+    "configuration_id": "google__gemini-3.6-flash__extthinkoff",
+    "deviation_ids": [
+     "gemini-primed-split-delivery"
+    ],
+    "direct": {
+     "broader": {
+      "max": 0.83109,
+      "mean": 0.813458,
+      "median": 0.81105,
+      "min": 0.798234,
+      "n": 3,
+      "range": 0.032856,
+      "sd": 0.016559831883
+     },
+     "canonical": {
+      "max": 0.742934,
+      "mean": 0.732556666667,
+      "median": 0.728513,
+      "min": 0.726223,
+      "n": 3,
+      "range": 0.016711,
+      "sd": 0.009059680476
+     },
+     "n": 3,
+     "orthography": {
+      "max": 46.0,
+      "mean": 29.666666666667,
+      "median": 27.0,
+      "min": 16.0,
+      "n": 3,
+      "range": 30.0,
+      "sd": 15.176736583776
+     },
+     "unresolved": {
+      "max": 0.273777,
+      "mean": 0.267443333333,
+      "median": 0.271487,
+      "min": 0.257066,
+      "n": 3,
+      "range": 0.016711,
+      "sd": 0.009059680476
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "Gemini 3.6 Flash — extended thinking OFF",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.901469,
+      "mean": 0.897125,
+      "median": 0.897006,
+      "min": 0.8929,
+      "n": 3,
+      "range": 0.008569,
+      "sd": 0.004285739259
+     },
+     "canonical": {
+      "max": 0.853121,
+      "mean": 0.851398,
+      "median": 0.852096,
+      "min": 0.848977,
+      "n": 3,
+      "range": 0.004144,
+      "sd": 0.00215837601
+     },
+     "n": 3,
+     "orthography": {
+      "max": 40.0,
+      "mean": 20.333333333333,
+      "median": 19.0,
+      "min": 2.0,
+      "n": 3,
+      "range": 38.0,
+      "sd": 19.035055380359
+     },
+     "unresolved": {
+      "max": 0.151023,
+      "mean": 0.148602,
+      "median": 0.147904,
+      "min": 0.146879,
+      "n": 3,
+      "range": 0.004144,
+      "sd": 0.00215837601
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.083667,
+     "delta_mean_canonical": 0.118841333333,
+     "direct_n": 3,
+     "direct_range_canonical": 0.016711,
+     "direct_sd_canonical": 0.009059680476,
+     "primed_n": 3,
+     "primed_range_canonical": 0.004144,
+     "primed_sd_canonical": 0.00215837601
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__google__gemini-3.6-flash__extthinkoff__direct",
+     "historical_task024": true,
+     "old_delta_broader": -0.007772,
+     "old_delta_canonical": 0.032034,
+     "p1_broader": 0.901285,
+     "p1_canonical": 0.810683,
+     "p1_ortho_out": 71,
+     "p2a_broader": 0.893513,
+     "p2a_canonical": 0.842717,
+     "p2a_ortho_out": 6,
+     "run_id": "2026-09-07__google__gemini-3.6-flash__extthinkoff__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   },
+   {
+    "comparability_status": "deviation_recorded",
+    "configuration_id": "google__gemini-3.6-flash__extthinkon",
+    "deviation_ids": [
+     "gemini-primed-split-delivery"
+    ],
+    "direct": {
+     "broader": {
+      "max": 0.792427,
+      "mean": 0.759661666667,
+      "median": 0.750849,
+      "min": 0.735709,
+      "n": 3,
+      "range": 0.056718,
+      "sd": 0.029368013234
+     },
+     "canonical": {
+      "max": 0.698445,
+      "mean": 0.67021,
+      "median": 0.65852,
+      "min": 0.653665,
+      "n": 3,
+      "range": 0.04478,
+      "sd": 0.024572427129
+     },
+     "n": 3,
+     "orthography": {
+      "max": 171.0,
+      "mean": 122.666666666667,
+      "median": 131.0,
+      "min": 66.0,
+      "n": 3,
+      "range": 105.0,
+      "sd": 52.993710318615
+     },
+     "unresolved": {
+      "max": 0.346335,
+      "mean": 0.32979,
+      "median": 0.34148,
+      "min": 0.301555,
+      "n": 3,
+      "range": 0.04478,
+      "sd": 0.024572427129
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "Gemini 3.6 Flash — extended thinking ON",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.888272,
+      "mean": 0.882625333333,
+      "median": 0.880835,
+      "min": 0.878769,
+      "n": 3,
+      "range": 0.009503,
+      "sd": 0.004998071862
+     },
+     "canonical": {
+      "max": 0.83642,
+      "mean": 0.829273666667,
+      "median": 0.827077,
+      "min": 0.824324,
+      "n": 3,
+      "range": 0.012096,
+      "sd": 0.006340135041
+     },
+     "n": 3,
+     "orthography": {
+      "max": 99.0,
+      "mean": 75.333333333333,
+      "median": 87.0,
+      "min": 40.0,
+      "n": 3,
+      "range": 59.0,
+      "sd": 31.182259913825
+     },
+     "unresolved": {
+      "max": 0.175676,
+      "mean": 0.170726333333,
+      "median": 0.172923,
+      "min": 0.16358,
+      "n": 3,
+      "range": 0.012096,
+      "sd": 0.006340135041
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.122963666667,
+     "delta_mean_canonical": 0.159063666667,
+     "direct_n": 3,
+     "direct_range_canonical": 0.04478,
+     "direct_sd_canonical": 0.024572427129,
+     "primed_n": 3,
+     "primed_range_canonical": 0.012096,
+     "primed_sd_canonical": 0.006340135041
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__google__gemini-3.6-flash__extthinkon__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.112299,
+     "old_delta_canonical": 0.143325,
+     "p1_broader": 0.783547,
+     "p1_canonical": 0.698584,
+     "p1_ortho_out": 125,
+     "p2a_broader": 0.895846,
+     "p2a_canonical": 0.841909,
+     "p2a_ortho_out": 22,
+     "run_id": "2026-09-07__google__gemini-3.6-flash__extthinkon__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   },
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "moonshot__kimi__k2.6-instant",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.844674,
+      "mean": 0.839606333333,
+      "median": 0.838754,
+      "min": 0.835391,
+      "n": 3,
+      "range": 0.009283,
+      "sd": 0.004699827266
+     },
+     "canonical": {
+      "max": 0.746713,
+      "mean": 0.740269,
+      "median": 0.742955,
+      "min": 0.731139,
+      "n": 3,
+      "range": 0.015574,
+      "sd": 0.008127011505
+     },
+     "n": 3,
+     "orthography": {
+      "max": 13.0,
+      "mean": 8.0,
+      "median": 7.0,
+      "min": 4.0,
+      "n": 3,
+      "range": 9.0,
+      "sd": 4.582575694956
+     },
+     "unresolved": {
+      "max": 0.268861,
+      "mean": 0.259731,
+      "median": 0.257045,
+      "min": 0.253287,
+      "n": 3,
+      "range": 0.015574,
+      "sd": 0.008127011505
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "Kimi K2.6 Instant (Standard)",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.88942,
+      "mean": 0.880546333333,
+      "median": 0.881471,
+      "min": 0.870748,
+      "n": 3,
+      "range": 0.018672,
+      "sd": 0.00937028027
+     },
+     "canonical": {
+      "max": 0.808874,
+      "mean": 0.801051,
+      "median": 0.798639,
+      "min": 0.79564,
+      "n": 3,
+      "range": 0.013234,
+      "sd": 0.006938875773
+     },
+     "n": 3,
+     "orthography": {
+      "max": 8.0,
+      "mean": 3.666666666667,
+      "median": 3.0,
+      "min": 0.0,
+      "n": 3,
+      "range": 8.0,
+      "sd": 4.041451884327
+     },
+     "unresolved": {
+      "max": 0.20436,
+      "mean": 0.198949,
+      "median": 0.201361,
+      "min": 0.191126,
+      "n": 3,
+      "range": 0.013234,
+      "sd": 0.006938875773
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.04094,
+     "delta_mean_canonical": 0.060782,
+     "direct_n": 3,
+     "direct_range_canonical": 0.015574,
+     "direct_sd_canonical": 0.008127011505,
+     "primed_n": 3,
+     "primed_range_canonical": 0.013234,
+     "primed_sd_canonical": 0.006938875773
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__moonshot__kimi__k2.6-instant__direct",
+     "historical_task024": true,
+     "old_delta_broader": -0.005607,
+     "old_delta_canonical": 0.030612,
+     "p1_broader": 0.867911,
+     "p1_canonical": 0.766252,
+     "p1_ortho_out": 5,
+     "p2a_broader": 0.862304,
+     "p2a_canonical": 0.796864,
+     "p2a_ortho_out": 2,
+     "run_id": "2026-09-07__moonshot__kimi__k2.6-instant__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   },
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "openai__gpt-5.6-luna__thinkoff",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.872497,
+      "mean": 0.864236,
+      "median": 0.863454,
+      "min": 0.856757,
+      "n": 3,
+      "range": 0.01574,
+      "sd": 0.007899084947
+     },
+     "canonical": {
+      "max": 0.772973,
+      "mean": 0.768351333333,
+      "median": 0.76769,
+      "min": 0.764391,
+      "n": 3,
+      "range": 0.008582,
+      "sd": 0.004329053284
+     },
+     "n": 3,
+     "orthography": {
+      "max": 83.0,
+      "mean": 68.333333333333,
+      "median": 76.0,
+      "min": 46.0,
+      "n": 3,
+      "range": 37.0,
+      "sd": 19.655363983741
+     },
+     "unresolved": {
+      "max": 0.235609,
+      "mean": 0.231648666667,
+      "median": 0.23231,
+      "min": 0.227027,
+      "n": 3,
+      "range": 0.008582,
+      "sd": 0.004329053284
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "GPT-5.6 Luna — thinking OFF",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.904269,
+      "mean": 0.898300333333,
+      "median": 0.902038,
+      "min": 0.888594,
+      "n": 3,
+      "range": 0.015675,
+      "sd": 0.008479623832
+     },
+     "canonical": {
+      "max": 0.835705,
+      "mean": 0.825023333333,
+      "median": 0.833662,
+      "min": 0.805703,
+      "n": 3,
+      "range": 0.030002,
+      "sd": 0.016763052298
+     },
+     "n": 3,
+     "orthography": {
+      "max": 25.0,
+      "mean": 22.333333333333,
+      "median": 22.0,
+      "min": 20.0,
+      "n": 3,
+      "range": 5.0,
+      "sd": 2.516611478424
+     },
+     "unresolved": {
+      "max": 0.194297,
+      "mean": 0.174976666667,
+      "median": 0.166338,
+      "min": 0.164295,
+      "n": 3,
+      "range": 0.030002,
+      "sd": 0.016763052298
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.034064333333,
+     "delta_mean_canonical": 0.056672,
+     "direct_n": 3,
+     "direct_range_canonical": 0.008582,
+     "direct_sd_canonical": 0.004329053284,
+     "primed_n": 3,
+     "primed_range_canonical": 0.030002,
+     "primed_sd_canonical": 0.016763052298
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__openai__gpt-5.6-luna__thinkoff__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.012277,
+     "old_delta_canonical": 0.04139,
+     "p1_broader": 0.867696,
+     "p1_canonical": 0.767629,
+     "p1_ortho_out": 22,
+     "p2a_broader": 0.879973,
+     "p2a_canonical": 0.809019,
+     "p2a_ortho_out": 72,
+     "run_id": "2026-09-07__openai__gpt-5.6-luna__thinkoff__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   },
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "openai__gpt-5.6-luna__thinkon",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.880999,
+      "mean": 0.856931,
+      "median": 0.849469,
+      "min": 0.840325,
+      "n": 3,
+      "range": 0.040674,
+      "sd": 0.02133904056
+     },
+     "canonical": {
+      "max": 0.786325,
+      "mean": 0.754160333333,
+      "median": 0.741379,
+      "min": 0.734777,
+      "n": 3,
+      "range": 0.051548,
+      "sd": 0.028050328649
+     },
+     "n": 3,
+     "orthography": {
+      "max": 79.0,
+      "mean": 74.0,
+      "median": 73.0,
+      "min": 70.0,
+      "n": 3,
+      "range": 9.0,
+      "sd": 4.582575694956
+     },
+     "unresolved": {
+      "max": 0.265223,
+      "mean": 0.245839666667,
+      "median": 0.258621,
+      "min": 0.213675,
+      "n": 3,
+      "range": 0.051548,
+      "sd": 0.028050328649
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "GPT-5.6 Luna — thinking ON",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.885065,
+      "mean": 0.877305,
+      "median": 0.874425,
+      "min": 0.872425,
+      "n": 3,
+      "range": 0.01264,
+      "sd": 0.006794350594
+     },
+     "canonical": {
+      "max": 0.814286,
+      "mean": 0.801259666667,
+      "median": 0.800789,
+      "min": 0.788704,
+      "n": 3,
+      "range": 0.025582,
+      "sd": 0.012797492971
+     },
+     "n": 3,
+     "orthography": {
+      "max": 79.0,
+      "mean": 75.666666666667,
+      "median": 76.0,
+      "min": 72.0,
+      "n": 3,
+      "range": 7.0,
+      "sd": 3.511884584284
+     },
+     "unresolved": {
+      "max": 0.211296,
+      "mean": 0.198740333333,
+      "median": 0.199211,
+      "min": 0.185714,
+      "n": 3,
+      "range": 0.025582,
+      "sd": 0.012797492971
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.020374,
+     "delta_mean_canonical": 0.047099333333,
+     "direct_n": 3,
+     "direct_range_canonical": 0.051548,
+     "direct_sd_canonical": 0.028050328649,
+     "primed_n": 3,
+     "primed_range_canonical": 0.025582,
+     "primed_sd_canonical": 0.012797492971
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__openai__gpt-5.6-luna__thinkon__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.000126,
+     "old_delta_canonical": 0.037615,
+     "p1_broader": 0.86499,
+     "p1_canonical": 0.768365,
+     "p1_ortho_out": 34,
+     "p2a_broader": 0.865116,
+     "p2a_canonical": 0.80598,
+     "p2a_ortho_out": 75,
+     "run_id": "2026-09-07__openai__gpt-5.6-luna__thinkon__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   },
+   {
+    "comparability_status": "comparable",
+    "configuration_id": "openai__gpt-isv-teacher__unknown",
+    "deviation_ids": [],
+    "direct": {
+     "broader": {
+      "max": 0.845897,
+      "mean": 0.845897,
+      "median": 0.845897,
+      "min": 0.845897,
+      "n": 1,
+      "range": 0.0,
+      "sd": 0.0
+     },
+     "canonical": {
+      "max": 0.75517,
+      "mean": 0.75517,
+      "median": 0.75517,
+      "min": 0.75517,
+      "n": 1,
+      "range": 0.0,
+      "sd": 0.0
+     },
+     "n": 1,
+     "orthography": {
+      "max": 32.0,
+      "mean": 32.0,
+      "median": 32.0,
+      "min": 32.0,
+      "n": 1,
+      "range": 0.0,
+      "sd": 0.0
+     },
+     "unresolved": {
+      "max": 0.24483,
+      "mean": 0.24483,
+      "median": 0.24483,
+      "min": 0.24483,
+      "n": 1,
+      "range": 0.0,
+      "sd": 0.0
+     },
+     "usable_n": 1
+    },
+    "exploratory": false,
+    "label": "GPT Interslavic Teacher (custom GPT)",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.911169,
+      "mean": 0.898320666667,
+      "median": 0.896506,
+      "min": 0.887287,
+      "n": 3,
+      "range": 0.023882,
+      "sd": 0.012043971203
+     },
+     "canonical": {
+      "max": 0.847812,
+      "mean": 0.838640666667,
+      "median": 0.837179,
+      "min": 0.830931,
+      "n": 3,
+      "range": 0.016881,
+      "sd": 0.008534892637
+     },
+     "n": 3,
+     "orthography": {
+      "max": 72.0,
+      "mean": 39.333333333333,
+      "median": 25.0,
+      "min": 21.0,
+      "n": 3,
+      "range": 51.0,
+      "sd": 28.360771028541
+     },
+     "unresolved": {
+      "max": 0.169069,
+      "mean": 0.161359333333,
+      "median": 0.162821,
+      "min": 0.152188,
+      "n": 3,
+      "range": 0.016881,
+      "sd": 0.008534892637
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.052423666667,
+     "delta_mean_canonical": 0.083470666667,
+     "direct_n": 1,
+     "direct_range_canonical": 0.0,
+     "direct_sd_canonical": 0.0,
+     "primed_n": 3,
+     "primed_range_canonical": 0.016881,
+     "primed_sd_canonical": 0.008534892637
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__openai__gpt-isv-teacher__unknown__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.03889,
+     "old_delta_canonical": 0.061834,
+     "p1_broader": 0.854558,
+     "p1_canonical": 0.766756,
+     "p1_ortho_out": 48,
+     "p2a_broader": 0.893448,
+     "p2a_canonical": 0.82859,
+     "p2a_ortho_out": 72,
+     "run_id": "2026-09-07__openai__gpt-isv-teacher__unknown__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": [
+     "direct r02 intake partial (wrapped end marker) — excluded from statistics",
+     "direct r03 intake partial (wrapped end marker) — excluded from statistics"
+    ]
+   },
+   {
+    "comparability_status": "deviation_recorded",
+    "configuration_id": "xai__grok__unknown",
+    "deviation_ids": [
+     "grok-identity-header-edit"
+    ],
+    "direct": {
+     "broader": {
+      "max": 0.888889,
+      "mean": 0.879660666667,
+      "median": 0.88587,
+      "min": 0.864223,
+      "n": 3,
+      "range": 0.024666,
+      "sd": 0.013454358191
+     },
+     "canonical": {
+      "max": 0.810462,
+      "mean": 0.793301666667,
+      "median": 0.798228,
+      "min": 0.771215,
+      "n": 3,
+      "range": 0.039247,
+      "sd": 0.020081915305
+     },
+     "n": 3,
+     "orthography": {
+      "max": 82.0,
+      "mean": 52.0,
+      "median": 73.0,
+      "min": 1.0,
+      "n": 3,
+      "range": 81.0,
+      "sd": 44.395945760846
+     },
+     "unresolved": {
+      "max": 0.228785,
+      "mean": 0.206698333333,
+      "median": 0.201772,
+      "min": 0.189538,
+      "n": 3,
+      "range": 0.039247,
+      "sd": 0.020081915305
+     },
+     "usable_n": 3
+    },
+    "exploratory": false,
+    "label": "Grok",
+    "planned_condition_n": {
+     "direct": 3,
+     "primed": 3
+    },
+    "population": "primary",
+    "primary": true,
+    "primed": {
+     "broader": {
+      "max": 0.898167,
+      "mean": 0.890666333333,
+      "median": 0.893805,
+      "min": 0.880027,
+      "n": 3,
+      "range": 0.01814,
+      "sd": 0.009468543781
+     },
+     "canonical": {
+      "max": 0.844535,
+      "mean": 0.838275,
+      "median": 0.842069,
+      "min": 0.828221,
+      "n": 3,
+      "range": 0.016314,
+      "sd": 0.00879388856
+     },
+     "n": 3,
+     "orthography": {
+      "max": 2.0,
+      "mean": 1.333333333333,
+      "median": 1.0,
+      "min": 1.0,
+      "n": 3,
+      "range": 1.0,
+      "sd": 0.57735026919
+     },
+     "unresolved": {
+      "max": 0.171779,
+      "mean": 0.161725,
+      "median": 0.157931,
+      "min": 0.155465,
+      "n": 3,
+      "range": 0.016314,
+      "sd": 0.00879388856
+     },
+     "usable_n": 3
+    },
+    "repeated": {
+     "delta_mean_broader": 0.011005666667,
+     "delta_mean_canonical": 0.044973333333,
+     "direct_n": 3,
+     "direct_range_canonical": 0.039247,
+     "direct_sd_canonical": 0.020081915305,
+     "primed_n": 3,
+     "primed_range_canonical": 0.016314,
+     "primed_sd_canonical": 0.00879388856
+    },
+    "task024": {
+     "baseline_run_id": "2026-09-06__xai__grok__unknown__direct",
+     "historical_task024": true,
+     "old_delta_broader": 0.026036,
+     "old_delta_canonical": 0.071766,
+     "p1_broader": 0.86376,
+     "p1_canonical": 0.752044,
+     "p1_ortho_out": 26,
+     "p2a_broader": 0.889796,
+     "p2a_canonical": 0.82381,
+     "p2a_ortho_out": 0,
+     "run_id": "2026-09-07__xai__grok__unknown__p2a-primed"
+    },
+    "task024_direction_reproduced": "same_direction",
+    "usability_notes": []
+   }
+  ]
+ },
+ "counts": {
+  "collected": 114,
+  "exploratory": {
+   "collected": 12,
+   "missing": 0,
+   "partial": 5,
+   "planned": 12,
+   "usable": 7
+  },
+  "invalid": 0,
+  "missing": 6,
+  "partial": 8,
+  "planned": 120,
+  "primary": {
+   "collected": 102,
+   "missing": 6,
+   "partial": 3,
+   "planned": 108,
+   "usable": 99
+  },
+  "usable": 106
+ },
+ "experiment_id": "exp004",
+ "missing": {
+  "configuration_ids": [
+   "alibaba__qwen-3.8-max__thinking",
+   "google__gemini-3.1-pro__extthinkon"
+  ],
+  "runs": [
+   "2026-09-08__google__gemini-3.1-pro__extthinkon__primed__r01",
+   "2026-09-08__google__gemini-3.1-pro__extthinkon__primed__r02",
+   "2026-09-08__google__gemini-3.1-pro__extthinkon__primed__r03",
+   "2026-09-08__alibaba__qwen-3.8-max__thinking__primed__r01",
+   "2026-09-08__alibaba__qwen-3.8-max__thinking__primed__r02",
+   "2026-09-08__alibaba__qwen-3.8-max__thinking__primed__r03"
+  ]
+ },
+ "note": "Statistics (direct/primed per configuration) are recomputed over usable replicate observations carried in results.json. Task-024 old single-run values are historical (marked historical_task024) and are never mixed into replicate distributions. Coverage values are fractions (multiply by 100 for pp).",
+ "old_vs_new": {
+  "mean_old_delta_pp": 6.329373333333,
+  "mean_repeated_delta_pp": 6.726945555556,
+  "note": "canonical coverage; rows where BOTH the Task-024 single-run delta and the repeated mean delta exist",
+  "rows_with_both_deltas": 15,
+  "same_direction_rows": 15
+ },
+ "partial": {
+  "count": 8,
+  "note": "markdown-wrapped end markers only (## KONEC / # KONEC / **KONEC** / # KONĘC); content complete; preserved and excluded from statistics",
+  "runs": [
+   "2026-09-08__openai__gpt-isv-teacher__unknown__direct__r02",
+   "2026-09-08__openai__gpt-isv-teacher__unknown__direct__r03",
+   "2026-09-08__deepseek__deepseek-v3-instant__deepthinkon__primed__r02",
+   "2026-09-08__bytedance__dola-3.8__fast__direct__r01",
+   "2026-09-08__bytedance__dola-3.8__fast__primed__r01",
+   "2026-09-08__bytedance__dola-3.8__fast__direct__r02",
+   "2026-09-08__bytedance__dola-3.8__fast__primed__r02",
+   "2026-09-08__bytedance__dola-3.8__fast__direct__r03"
+  ]
+ },
+ "phase": "repeat",
+ "primed_sd_exceeds_delta": {
+  "configuration_ids": [
+   "alibaba__qwen-3.8-max__fast"
+  ],
+  "count": 1
+ },
+ "repeated_delta_broader": {
+  "count_positive": 16,
+  "mean_pp": 3.876710416667,
+  "n": 16
+ },
+ "repeated_delta_canonical": {
+  "count_negative": 0,
+  "count_positive": 16,
+  "count_zero": 0,
+  "mean_pp": 6.925848958333,
+  "n": 16
+ },
+ "stochastic_spread": {
+  "direct_sd_pp_values": [
+   2.2379,
+   1.0433,
+   1.5213,
+   0.9003,
+   1.9626,
+   1.4895,
+   3.6696,
+   1.4978,
+   1.145,
+   0.7285,
+   0.6951,
+   0.906,
+   2.4572,
+   0.8127,
+   0.4329,
+   2.805,
+   2.0082
+  ],
+  "median_direct_sd_pp": 1.489535636812,
+  "median_primed_sd_pp": 0.866439059858,
+  "note": "sample SD of canonical coverage over configurations with >= 2 usable replicates in that condition; descriptive, n <= 3",
+  "primed_sd_pp_values": [
+   3.6276,
+   1.4316,
+   5.8339,
+   0.7952,
+   0.487,
+   0.99,
+   0.6391,
+   1.0531,
+   0.1937,
+   0.2158,
+   0.634,
+   0.6939,
+   1.6763,
+   1.2797,
+   0.8535,
+   0.8794
+  ]
+ },
+ "tasks_included": [
+  "024",
+  "025",
+  "026"
+ ]
+}

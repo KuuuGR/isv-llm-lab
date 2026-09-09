@@ -1,6 +1,9 @@
 # Roadmap
 
-Status: updated 2026-09-09 (Task 026 — EXP-004 CONTROLLED REPEATED
+Status: updated 2026-09-09 (Task 027 — EXP-004 ASSISTANT RESEARCH BUNDLE
+FOR INDEPENDENT ANALYSIS: compact deterministic machine-readable export of the
+Task-024/025/026 results under `experiments/exp004-modelscreen/
+assistant-research-bundle/` with a standalone reconstruction verifier; Task 026 — EXP-004 CONTROLLED REPEATED
 GENERATION EXECUTED, AUDITED AND ANALYSED: 114/120 planned runs
 collected by the research lead; full collection audit
 (`scripts/audit_exp004_repeats.py` → `repeats/outputs/audit.{json,md}`)
@@ -1007,6 +1010,27 @@ completed in Tasks 018/021; the Dola Phase-1 baselines in Task 023.
   DeepSeek Expert ON +3.77 (ON > OFF), Dola Pro +12.41 exploratory, Dola
   Fast old +28.20 pp not re-estimable. Results in `repeats/REPORT.md`.
   No Phase 2B and no human evaluation in this task.
+- [x] **Task 027 — Assistant research bundle for independent analysis
+      (2026-09-09).** Compact, self-contained, deterministic export so the
+      research architect/assistant can independently analyse EXP-004 without
+      the ~500 MB raw experiment directory. `scripts/
+      build_assistant_research_bundle.py` (std-lib; tests
+      `tests/test_assistant_research_bundle.py`) generated
+      `experiments/exp004-modelscreen/assistant-research-bundle/` (1.5 MB,
+      21 files): per-run `results.json` + `results.csv` (120 planned runs =
+      108 primary + 12 exploratory Dola; usable 106 / partial 8 / missing 6,
+      one record per run, replicate r01–r03 observations preserved, hashes,
+      orthography counts, deviation flags; no fabricated metrics),
+      `summary.json` (per-config descriptive stats over usable replicates,
+      repeated deltas, Task-024 old singles under `historical_task024`),
+      `audit.json`, `deviations.json`, `provenance.json`, `manifest.json`
+      (SHA-256 per file), `methodology.md`, figures A–E PNG+SVG, `raw/`
+      README. Standalone verifier loads ONLY results/summary/audit and
+      recomputes every Task-026 headline (16/16 positive Δ canonical mean
+      +6.93 pp; broader +3.88 pp; direction 15/15; median SD 1.49/0.87 pp;
+      Qwen 3.8 Max Fast exception) — 15/15 checks; generator run twice →
+      byte-identical; no raw outputs copied; no secrets. Full suite green.
+      The next step is the architect's independent analysis of this bundle.
 - [ ] **EXP-004 Phase 2B — unseen-topic corpus transfer (recommended
   next; Task 026 follow-up)** — design + execute the transfer test the
   repeated-generation evidence now supports: does the corpus-priming

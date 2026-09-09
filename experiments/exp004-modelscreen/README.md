@@ -52,9 +52,12 @@ preparation (`scripts/run_exp004_repeats.py prepare --date 2026-09-08`),
 collection/verify/evaluate reusing the existing machinery, and a
 deterministic analysis kit that replaces the single Task-024 delta with
 `mean(primed) − mean(direct)` over replicate distributions
-(`scripts/analyze_exp004_repeats.py`, figures A–E). **No LLM was called;
-no repeat results exist yet** — the research lead executes the prepared
-prompts, then collect → verify → evaluate → roster → analyze.
+(`scripts/analyze_exp004_repeats.py`, figures A–E). **Task 026
+(2026-09-09) audited, evaluated and analysed the collection** (see
+`repeats/README.md`, `repeats/REPORT.md`, `repeats/analysis/README.md`
+and the compact independent-analysis export in
+`assistant-research-bundle/`, Task 027). No LLM was ever called by any
+preparation/audit/analysis script.
 
 Purpose: screen which LLMs are practically usable by the project (web/chat
 interface, free access sufficient for ~1 story/day, identifiable
@@ -239,20 +242,32 @@ is complete and evaluated.
   generator (dataset / rankings / Δ table / stats + exploratory tests /
   correlations / families / orthography / master table / charts A–G /
   poster).
-- `repeats/` — phase-repeat kit (Task 025): `README.md` (protocol +
-  collection record) + `REPORT.md` (dedicated experiment report; no
-  results yet) + `operator-prompts/` (180 prompt files — direct / primed
-  msg1+msg2 × r01–r03 × 18 primary + 2 exploratory Dola configs;
+- `repeats/` — phase-repeat kit + results (Tasks 025/026): `README.md`
+  (protocol + collection record) + `REPORT.md` (dedicated experiment
+  report with results) + `operator-prompts/` (180 prompt files — direct /
+  primed msg1+msg2 × r01–r03 × 18 primary + 2 exploratory Dola configs;
   gitignored; `manifest.json` hash-only committed) + `outputs/` (120-run
-  plan dated 2026-09-08, collection checklist, roster — gitignored;
-  `README.md` committed) + `analysis/` (no-results scaffold; `README.md`
-  committed).
+  plan dated 2026-09-08, collection checklist, roster, audit — gitignored;
+  `README.md` committed) + `analysis/` (deterministic results set:
+  `dataset.json`, `analysis.json`, `analysis.md`, figures A–E — gitignored;
+  `README.md` committed).
+- `assistant-research-bundle/` — **compact machine-readable research
+  export for independent analysis (Task 027)**: per-run `results.json` +
+  `results.csv` (120 planned runs), `summary.json`, `audit.json`,
+  `deviations.json`, `provenance.json`, `manifest.json`, `methodology.md`
+  and figures A–E (PNG + SVG). Self-contained and deterministic — an
+  independent analyst can reconstruct every Task-026 quantitative
+  conclusion from it without the raw experiment directory.
 - `scripts/run_exp004_repeats.py` — phase-repeat orchestrator
   (prepare / collect-session / collect-msg2 / verify / evaluate / status /
   roster; Task 025).
-- `scripts/analyze_exp004_repeats.py` — deterministic Task-025
-  repeated-generation analysis (stochastic stats, mean-primed−mean-direct
-  vs old delta, figures A–E, selection views; std-lib only).
+- `scripts/audit_exp004_repeats.py` — read-only Task-026 collection audit
+  + reconciliation evidence (gitignored `outputs/audit.json`).
+- `scripts/analyze_exp004_repeats.py` — deterministic repeated-generation
+  analysis (stochastic stats, mean-primed−mean-direct vs old delta,
+  figures A–E, selection views; std-lib only).
+- `scripts/build_assistant_research_bundle.py` — deterministic
+  assistant-research-bundle generator + standalone verifier (Task 027).
 - `scripts/check_orthography.py` — includes EXP-004 in the character-level
   audit (Task 015 inventory).
 
@@ -279,7 +294,14 @@ supported/suggestive/not-established conclusions, research candidates and
 (2026-09-07) prepared the controlled repeated-generation kit**
 (`repeats/`): 108 primary planned runs (18 configurations ×
 direct/primed × 3 fresh-session replicates) + 12 exploratory Dola runs;
-the deterministic analysis will report whether the observed Task-024
-priming deltas exceed the models' own stochastic variation. Phase 2B
-(Wikipedia-style authentic reference + independent story) is documented as
-future work and not started.
+**Task 026 (2026-09-09) audited the collection (114 collected / 106
+usable / 8 partial / 6 missing), evaluated every usable run and analysed
+the repeated generation**: repeated Δ canonical is positive in 16/16
+assessable primary configurations (mean ≈ +6.93 pp), the Task-024
+single-run direction is reproduced in 15/15 rows with an old delta, and
+the stochastic spread (median SD ≈ 1.49 pp direct / 0.87 pp primed) is
+typically smaller than the shift. Full results: `repeats/REPORT.md` +
+`repeats/analysis/`; the compact export for independent analysis is
+`assistant-research-bundle/` (Task 027). Phase 2B (Wikipedia-style
+authentic reference + independent story) is documented as future work
+and not started.

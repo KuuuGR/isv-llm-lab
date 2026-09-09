@@ -1,0 +1,68 @@
+{
+ "analysis": {
+  "dataset_source": "experiments/exp004-modelscreen/repeats/analysis/dataset.json",
+  "note": "deterministic, std-lib, figures A-E SVG (+ PNG render)",
+  "script": "scripts/analyze_exp004_repeats.py",
+  "status": "results"
+ },
+ "artifact": "exp004-assistant-research-bundle-provenance",
+ "audit": {
+  "date": "2026-09-09",
+  "script": "scripts/audit_exp004_repeats.py"
+ },
+ "bundle_version": "1.0.0",
+ "commits": {
+  "task024_analysis_commit": "bc06858",
+  "task025_kit_commit": "2db827d",
+  "task026_audit_commit": "048c026"
+ },
+ "corpus": {
+  "file": "experiments/exp004-modelscreen/phase2a/corpus/phase2a-authentic-isv-corpus.txt",
+  "id": "phase2a-authentic-isv",
+  "note": "combined file byte-identical across every primed replicate; component hashes pinned in experiments/exp004-modelscreen/DESIGN.md §13.3",
+  "registers": [
+   "literary/narrative (Tuta historija excerpt)",
+   "artistic/poetic (Ahoj, Slovjani! album, Latin script)",
+   "informative/encyclopedic (ISV Wikipedia 'Sadovničstvo')"
+  ],
+  "sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+  "version": "v1"
+ },
+ "evaluator": {
+  "name": "isv-eval",
+  "orthography_audit": "Task-015 character-level orthography audit (official ISV alphabet) — used unmodified",
+  "reference": "Task-008 two-tier evaluator (canonical coverage + broader resource-supported coverage, unresolved rate) — used unmodified",
+  "version": "0.1.0"
+ },
+ "experiment_id": "exp004",
+ "generated_at_git_head": {
+  "note": "short SHA of the repository working-tree HEAD when this bundle was generated; the bundle and its generator are committed with Task 027",
+  "sha": "048c026"
+ },
+ "no_secrets_note": "This bundle intentionally contains no API keys, cookies, session tokens or private account information.",
+ "runtime": {
+  "note": "recorded for provenance only; no secrets, keys or account information are included",
+  "python": "3.14.5"
+ },
+ "source_story": {
+  "file": "experiments/exp004-modelscreen/input/source.txt",
+  "note": "authoritative Polish source story (Phase 1 / 2A / repeat)",
+  "sha256": "5de968a6214d3d64bdb586b5121f494c4bb107e33546487a86bf8ecc57280723"
+ },
+ "task025_kit": {
+  "plan": {
+   "date": "2026-09-08",
+   "exploratory_runs": 12,
+   "generator": "scripts/run_exp004_repeats.py prepare",
+   "generator_commit": "7c87ba144d81945de565d09315f6fe2344fe01d9",
+   "primary_runs": 108,
+   "prompt_files": 180,
+   "runs": 120
+  }
+ },
+ "tasks_included": [
+  "024",
+  "025",
+  "026"
+ ]
+}

@@ -1,0 +1,124 @@
+{
+ "artifact": "exp004-assistant-research-bundle-manifest",
+ "bundle_version": "1.0.0",
+ "counts": {
+  "collected_runs": 114,
+  "exploratory_configurations": 2,
+  "invalid_runs": 0,
+  "missing_runs": 6,
+  "partial_runs": 8,
+  "planned_runs": 120,
+  "primary_configurations": 18,
+  "usable_runs": 106
+ },
+ "experiment_id": "exp004",
+ "file_count": 20,
+ "files": [
+  {
+   "bytes": 4674,
+   "file": "README.md",
+   "sha256": "381e788769c66001364755a70772b46d3e9e85a38ef776e147d42a92a95c0fe1"
+  },
+  {
+   "bytes": 62661,
+   "file": "audit.json",
+   "sha256": "c2f1b328638971a6997c96dd3ed81d2bae46502170ec327e80f29a931b37285a"
+  },
+  {
+   "bytes": 8290,
+   "file": "deviations.json",
+   "sha256": "8ef01083f3530aac53cc3db713cc2702f257c99d6b709bc92c8aa7718f68283f"
+  },
+  {
+   "bytes": 1101,
+   "file": "figures/README.md",
+   "sha256": "92f19d61c6fbe5513df535c88fc7879618d570df69a6f7f293e514dcfb0c6005"
+  },
+  {
+   "bytes": 210999,
+   "file": "figures/figure_a.png",
+   "sha256": "e910321b5ced60e0e12005fc746b33eae30f1f116d6c8e2c3b4f05c0bab85833"
+  },
+  {
+   "bytes": 24822,
+   "file": "figures/figure_a.svg",
+   "sha256": "0127d3ab6f3ff4765062394db25b297f12859a8494dbba66497d051fc3f83b44"
+  },
+  {
+   "bytes": 167417,
+   "file": "figures/figure_b.png",
+   "sha256": "dc8e0580ebf9569622fc66d961528511cf2420cd19408da331fa2c7f331b75af"
+  },
+  {
+   "bytes": 14528,
+   "file": "figures/figure_b.svg",
+   "sha256": "2ed6c54db8b6c73a685f039c7cb85f9c352147c9d7c883a5476f47466923ebf8"
+  },
+  {
+   "bytes": 141904,
+   "file": "figures/figure_c.png",
+   "sha256": "a62ae64e58e8e6cfc9d61b1e76c98826b9372ca4e64ecb390ad12824e09dfd3e"
+  },
+  {
+   "bytes": 11600,
+   "file": "figures/figure_c.svg",
+   "sha256": "f9cdb4e61d6bd7ace011fd2b71db4182c25aa0527f3a9915769b2ebde7aa9434"
+  },
+  {
+   "bytes": 169778,
+   "file": "figures/figure_d.png",
+   "sha256": "d104cd443436e76433daab9550db0fede1f3a1a27ab6efc900b2879ee1d7f229"
+  },
+  {
+   "bytes": 11072,
+   "file": "figures/figure_d.svg",
+   "sha256": "4d6dd0b0a4f341810450a18e12ce834760d6037ad9c834e698c64e31ab3df0ea"
+  },
+  {
+   "bytes": 155476,
+   "file": "figures/figure_e.png",
+   "sha256": "843713a93b7dceeab70c48c04c1b463a7684c34bed8590b2b7a410d1cf918d03"
+  },
+  {
+   "bytes": 7776,
+   "file": "figures/figure_e.svg",
+   "sha256": "cdbc43ea1c4526386be7719254e372f335597f4bfc85b9c73efd141b782a383f"
+  },
+  {
+   "bytes": 6531,
+   "file": "methodology.md",
+   "sha256": "c4bda3b1b159c5ee1fc13e261b5223f7abc6ac19cf5aae530368b100d35fb0f9"
+  },
+  {
+   "bytes": 2499,
+   "file": "provenance.json",
+   "sha256": "8e062d5592ffb9975f2b2dfcbae422743831b99f1783d624212d74b87943408c"
+  },
+  {
+   "bytes": 1286,
+   "file": "raw/README.md",
+   "sha256": "9cbafb3b3aaca82955257117e02d4b98d194d3b73e44297521b1540d9ec6b6a8"
+  },
+  {
+   "bytes": 60489,
+   "file": "results.csv",
+   "sha256": "b7cdeacf72c14491ba6c21d85f9fe6d38411ccf62cc07ef5b20a8f39db360769"
+  },
+  {
+   "bytes": 379439,
+   "file": "results.json",
+   "sha256": "456cb69b9adcf7ec8b7c56745030b8a9e46dee602e642d1c16f2001675ab12d6"
+  },
+  {
+   "bytes": 60069,
+   "file": "summary.json",
+   "sha256": "09d2e2ff1a0e1fcce11d67ee41706e4b0bf440ef0f2be47e30128f1959d24165"
+  }
+ ],
+ "note": "Deterministic manifest (sorted relative paths). No timestamp is embedded anywhere in the bundle, so a regeneration is byte-identical.",
+ "tasks_included": [
+  "024",
+  "025",
+  "026"
+ ]
+}

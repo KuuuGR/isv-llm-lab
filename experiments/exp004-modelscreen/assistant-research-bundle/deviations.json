@@ -1,0 +1,123 @@
+{
+ "artifact": "exp004-assistant-research-bundle-deviations",
+ "bundle_version": "1.0.0",
+ "experiment_id": "exp004",
+ "items": [
+  {
+   "affected_run_count": 6,
+   "affected_run_ids": [
+    "2026-09-08__anthropic__claude__sonnet-5-max__direct__r01",
+    "2026-09-08__anthropic__claude__sonnet-5-max__primed__r01",
+    "2026-09-08__anthropic__claude__sonnet-5-max__direct__r02",
+    "2026-09-08__anthropic__claude__sonnet-5-max__primed__r02",
+    "2026-09-08__anthropic__claude__sonnet-5-max__direct__r03",
+    "2026-09-08__anthropic__claude__sonnet-5-max__primed__r03"
+   ],
+   "category": "execution",
+   "configuration_name": "Claude Sonnet 5 — max (long reasoning)",
+   "configuration_name_preserved": true,
+   "description": "Execution deviation (operator-reported): during repeated collection the research lead disabled thinking/reasoning mode for the Claude Sonnet 5 — max configuration (enabled mode operationally impractical: very long analysis, repeated token-limit interruptions, continuation requirements, hours of waiting). Differs from the Task-024 Phase-1/Phase-2A collection condition, where the configuration ran with intensive reasoning. The configuration is NOT renamed; this deviation is recorded as separate execution metadata.",
+   "evidence": "Research-lead report (Task 026 brief); no thinking-mode field is machine-visible in the msg2-style records.",
+   "id": "claude-max-thinking-off",
+   "reason": "enabled mode operationally impractical during repeated collection: very long analysis, repeated token-limit interruptions, continuation requirements, waits of several hours",
+   "severity": "moderate",
+   "task024_comparability": "Task-024 Phase-1/Phase-2A records for this configuration ran with intensive reasoning; the repeated results are NOT silently merged as identical configurations. Historical Task-024 data unchanged.",
+   "title": "Claude Sonnet 5 — max: thinking/reasoning OFF during the repeated generation",
+   "usability_assessment": "usable with recorded deviation — do not silently merge as identical configuration; comparability with Task-024 affected by mode difference."
+  },
+  {
+   "affected_run_count": 6,
+   "affected_run_ids": [
+    "2026-09-08__xai__grok__unknown__direct__r01",
+    "2026-09-08__xai__grok__unknown__primed__r01",
+    "2026-09-08__xai__grok__unknown__direct__r02",
+    "2026-09-08__xai__grok__unknown__primed__r02",
+    "2026-09-08__xai__grok__unknown__direct__r03",
+    "2026-09-08__xai__grok__unknown__primed__r03"
+   ],
+   "category": "operator-metadata-identity",
+   "description": "Operator recorded the actual model identity in the operator metadata header of the Grok prompt files ('Model version / settings: unknown (unknown)' -> 'Grok 4.5, built by xAI (fast)'). The model-facing instruction/source/corpus regions are byte-identical to the Task-025 kit. Original files were 'unknown'; the identity is operator-reported (not independently verifiable from provider metadata in these records).",
+   "evidence": "Header-line edit present in all nine Grok files (3 direct, 3 msg1, 3 msg2); translation bodies byte-identical.",
+   "handling": "reconciled in the roster as operator-reported identity; raw outputs not modified",
+   "id": "grok-identity-header-edit",
+   "identity_before": "unknown (unknown)",
+   "identity_independently_verified": false,
+   "identity_operator_reported": "Grok 4.5, built by xAI (fast)",
+   "model_facing_prompt_bytes_unchanged": true,
+   "severity": "minor",
+   "title": "Grok model identity recorded in operator metadata",
+   "usability_assessment": "usable — model-facing content unchanged; identity recorded as operator-reported."
+  },
+  {
+   "affected_run_count": 6,
+   "affected_run_ids": [
+    "2026-09-08__google__gemini-3.6-flash__extthinkoff__primed__r01",
+    "2026-09-08__google__gemini-3.6-flash__extthinkoff__primed__r02",
+    "2026-09-08__google__gemini-3.6-flash__extthinkoff__primed__r03",
+    "2026-09-08__google__gemini-3.6-flash__extthinkon__primed__r01",
+    "2026-09-08__google__gemini-3.6-flash__extthinkon__primed__r02",
+    "2026-09-08__google__gemini-3.6-flash__extthinkon__primed__r03"
+   ],
+   "category": "interface",
+   "content_loss_or_corruption_detected": false,
+   "continuation_instruction_used": true,
+   "corpus_delivered_complete": true,
+   "corpus_tail_present_verbatim": true,
+   "description": "Interface deviation (operator-reported): for Gemini primed runs the reference-texts message may have exceeded the single-message window, so the operator split message 1 into two messages with a 'continue last prompt:'-style continuation. The stored msg1 files still carry the byte-identical study instruction + full authoritative corpus, so the complete corpus was available before the translation task; the split itself is not machine-visible in these records. Matches the known Task-021/024 Gemini two-message delivery deviation.",
+   "evidence": "Research-lead report (Task 026 brief); msg1 records verified to contain the full authoritative corpus tail verbatim.",
+   "handling": "usable with recorded interface deviation; not marked invalid for splitting alone",
+   "id": "gemini-primed-split-delivery",
+   "matches_task021_024_gemini_deviation": true,
+   "model_switch_detected": false,
+   "severity": "minor",
+   "title": "Gemini primed reference-corpus message delivered as two messages",
+   "usability_assessment": "usable with recorded interface deviation where corpus integrity is verified; not marked invalid for splitting alone."
+  },
+  {
+   "affected_run_count": 1,
+   "affected_run_ids": [
+    "2026-09-08__bytedance__dola-3.8__pro__primed__r03"
+   ],
+   "category": "operator-metadata",
+   "description": "Operator-metadata header edit: one blank line inserted near the top of the msg1 record (byte offset ~741). The model-facing study instruction and the full corpus tail remain byte-identical.",
+   "evidence": "File diff vs authoritative render shows a single inserted blank line; corpus tail intact.",
+   "handling": "header whitespace only; model-facing study instruction + corpus tail byte-identical; usable",
+   "id": "dola-pro-r03-msg1-blank-line",
+   "severity": "trivial",
+   "title": "Dola Pro primed r03 msg1: extra blank header line",
+   "usability_assessment": "usable — header whitespace only."
+  },
+  {
+   "affected_run_count": 120,
+   "affected_run_ids": [],
+   "category": "provenance",
+   "description": "msg2-style operator records carry no machine-visible session provenance; the research lead reports fresh independent sessions per replicate.",
+   "evidence": "record shape msg2-style (prompt file + reply appended after '## Output') contains no session identifier",
+   "id": "fresh-session-proof-unavailable",
+   "severity": "informational",
+   "title": "No machine-visible fresh-session proof",
+   "usability_assessment": "fresh_session_proof: unavailable — absence of proof is not proof of violation"
+  },
+  {
+   "affected_run_count": 8,
+   "affected_run_ids": [
+    "2026-09-08__openai__gpt-isv-teacher__unknown__direct__r02",
+    "2026-09-08__openai__gpt-isv-teacher__unknown__direct__r03",
+    "2026-09-08__deepseek__deepseek-v3-instant__deepthinkon__primed__r02",
+    "2026-09-08__bytedance__dola-3.8__fast__direct__r01",
+    "2026-09-08__bytedance__dola-3.8__fast__primed__r01",
+    "2026-09-08__bytedance__dola-3.8__fast__direct__r02",
+    "2026-09-08__bytedance__dola-3.8__fast__primed__r02",
+    "2026-09-08__bytedance__dola-3.8__fast__direct__r03"
+   ],
+   "category": "intake",
+   "description": "8 collected runs are intake-partial solely because their final non-empty line is a markdown-wrapped end marker (## KONEC / # KONEC / **KONEC** / # KONĘC) that the unmodified completeness gate does not accept; translations are otherwise complete.",
+   "evidence": "unmodified verify gate verdicts (roster intake)",
+   "id": "intake-partial-end-marker",
+   "severity": "minor",
+   "title": "Intake-partial runs (markdown-wrapped end markers)",
+   "usability_assessment": "preserved, evaluated, excluded from usable statistics per protocol (not repaired)"
+  }
+ ],
+ "note": "Structured registry of every known protocol/interface deviation for the repeated-generation dataset. affected_run_ids derive from the Task-026 audit registry. Raw outputs were never modified to 'fix' any deviation."
+}
