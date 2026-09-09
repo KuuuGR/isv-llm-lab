@@ -6,52 +6,59 @@ Everything under `input/` is local-only (the story is author-owned and
 copyrighted, like the Phase-1 source story): only this README is
 committed.
 
-## Current status: story not yet supplied
+## Status: HIGH-overlap story frozen (Task 030, 2026-09-09)
 
-The HIGH-overlap story text itself has **not yet been provided to the
-repository** (checked 2026-09-09, Task 029). The classification and
-provenance are recorded; the frozen text is a required author input.
+The author supplied the story inside a multi-story bank file
+(`InterslavicTesty.md`, kept outside the repository, sha256
+`3662cda9…`); section `# 3. Iskra i Wieloryb — wersja z oryginalnymi
+nazwami` was extracted deterministically
+(`scripts/extract_phase2b_high_story.py`) and frozen as **v1**:
 
-- Do **not** fabricate or generate the story (no LLM may write it; it is
-  the research lead's own creative input).
-- Do **not** "clean" the story to make it independent: its deliberate
-  overlap with the corpus is the HIGH-overlap experimental condition
-  (classification `high_overlap_corpus_inspired`, never
-  `independent_same_topic`).
-- Do **not** modify the author's original file. The freeze step below
-  only reads it and stores an immutable frozen copy.
+| Field | Value |
+|---|---|
+| Story id | `iskra-wieloryb-original-names` |
+| Title | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` |
+| Version | `v1` (immutable; a revised story becomes v2, never an overwrite) |
+| Frozen file | `versions/iskra-wieloryb-original-names-v1.txt` (gitignored) |
+| SHA-256 | `ab8a0dcf7352789c09c4aca132c086999c861407e4cd682ee9414aab5b792f63` |
+| Bytes / lines | 30 061 B / 440 lines |
+| Classification | **`high_overlap_corpus_inspired`** (NOT `independent_same_topic`) |
+| Regime | `high` (HIGH-overlap Phase-2B-A) |
+| Source (read-only) | bank section 3 (lines 603–1058 of the author's file) |
 
-## Freezing the story (author or engineer step)
+**Extraction rule (documented; nothing else was edited).** The bank is a
+source bank, not an experimental input. Only Markdown structural markers
+were removed — the H1 section number (`# 3.`), `## ` heading prefixes,
+`> ` song-blockquote prefixes, `*` emphasis markers and lone `---`
+rules — and runs of blank lines were collapsed; all 227 story content
+lines were preserved exactly (verified parity) and the story title was
+added as the first line. Other bank sections were excluded and are
+retained in the bank, untouched: section 1 (`Opowieść o Faktach…`) and
+section 2 (`Opowieść o sygnale`) are not part of the current experiment;
+section 4 (`Podkłady`) is the reserved **LOW-overlap** source for the
+next stage. Do not clean or "de-corpus" this story: its deliberate
+overlap with the authentic corpus is the HIGH-overlap experimental
+condition.
+
+Provenance record (full note, frozen date, source path): gitignored
+`high-overlap-story.meta.json` in this directory.
+
+## Freezing a revised version (future, if the author supplies one)
 
 ```bash
 python scripts/run_exp004_phase2b.py freeze-story \
     --src <path-to-author-file> \
-    --version-label v1 \
-    --note "original version with original names; <any provenance note>"
+    --version-label v2 \
+    --note "..."
 ```
 
 What happens:
 
-- `versions/iskra-wieloryb-original-names-v1.txt` — an immutable frozen
-  copy (previous versions are never overwritten or deleted; a revised
-  story is a new version, e.g. `--version-label v2`).
-- `high-overlap-story.meta.json` — provenance record: title, story id
-  `iskra-wieloryb-original-names`, classification
-  `high_overlap_corpus_inspired`, version, SHA-256, bytes, read-only
-  source path, note, freeze date.
+- `versions/iskra-wieloryb-original-names-v2.txt` — a new immutable frozen
+  copy (previous versions are never overwritten or deleted).
+- `high-overlap-story.meta.json` — provenance updated: new `current_version`
+  = v2, both versions recorded.
 - The author's original file is only read, never modified.
 
-`prepare` then hash-gates the frozen story against the meta file and
+`prepare` hash-gates the current frozen story against the meta file and
 fails loudly on any byte drift (or when no story is frozen).
-
-## Provenance note (recorded in the meta file)
-
-This Polish story deliberately shares substantial motifs with the
-authentic corpus (eternal winter; the Red/Scarlet Spark; Zimorodzice; an
-inherited key; a grandfather's legacy; Mogiła Szronu; songs used as
-narrative mechanisms; whale imagery; the Heart of the Earth; sacrifice
-and transformation; maritime and storm imagery). It is an experimental
-input for the HIGH-overlap corpus-priming test — NOT an independent
-same-topic control and NOT part of the corpus. The corpus remains
-authentic reference material; the story is an independent (if
-deliberately aligned) experimental input.
