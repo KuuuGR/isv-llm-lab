@@ -17,6 +17,9 @@ Phase-2B HIGH-overlap kit (scripts/run_exp004_phase2b.py):
   UNSEEN-domain run can enter the HIGH manifest; story classification is
   `high_overlap_corpus_inspired`, never an independent control;
 - the authoritative corpus is never shortened (full bytes, SHA-256 gate).
+- intake (collect-session / collect-msg2 / verify / evaluate): msg2-style
+  registration of already-collected replies; Phase-2B gate requires no
+  KONEC and uses HIGH-story name stems; raw reply bytes are immutable.
 
 Corpus self-evaluation (scripts/selfeval_exp004_corpus.py):
 - register boundaries are preserved: the combined corpus is exactly
@@ -26,6 +29,7 @@ Corpus self-evaluation (scripts/selfeval_exp004_corpus.py):
 - the orthography audit is deterministic;
 - committed corpus_selfeval.json hashes match the on-disk corpus files.
 """
+import argparse
 import importlib.util
 import json
 from pathlib import Path
@@ -408,6 +412,127 @@ def test_historical_roster_row_keeps_recorded_unknown(p2b_mod):
     assert p1.grok_run_id_alias(
         "2026-09-06__anthropic__claude__sonnet-5__direct") \
         == "2026-09-06__anthropic__claude__sonnet-5__direct"
+
+
+# ---------------------------------------------------------------------------
+# Phase-2B HIGH intake (collect → verify → evaluate)
+# ---------------------------------------------------------------------------
+
+_HIGH_REPLY = (
+    "Iskra i Veloryb — versija s originalnymi imenami\n\n"
+    "Prolog\n\n"
+    "Ljudi govoręt o Iskrě i o Velorybě. Zimorodzice spěvali pri "
+    "Mogilě Szronu. Serce Zemi bilo teplo.\n"
+)
+
+
+def test_p2b_gate_no_koniec_required_high_names(p2b_mod, tmp_path):
+    """Phase-2B gate: missing KONEC is NOT a failure; HIGH names are."""
+    run_dir = tmp_path / "run"
+    run_dir.mkdir()
+    (run_dir / "output.txt").write_text(_HIGH_REPLY, encoding="utf-8")
+    gate = p2b_mod._p2b_gate_checks(run_dir, source_bytes=1000,
+                                    size_floor=100)
+    assert gate["checks"]["end_marker"] is False
+    assert gate["checks"]["end_marker_required"] is False
+    assert gate["checks"]["names_present"] >= 3
+    assert not any("KONIEC" in r or "KONEC" in r for r in gate["reasons"])
+    assert p2b_mod._p2b_intake_verdict(gate) == "complete"
+
+    # wrong story names → failed (hard)
+    (run_dir / "output.txt").write_text(
+        "Bronislava i Teofil idųt do domu.\n", encoding="utf-8")
+    gate2 = p2b_mod._p2b_gate_checks(run_dir, 1000, 10)
+    assert p2b_mod._p2b_intake_verdict(gate2) == "failed"
+    assert any("not a translation" in r for r in gate2["reasons"])
+
+
+def test_collect_session_direct_byte_identical(p2b_mod, kit):
+    """collect-session extracts the reply after ## Output and writes it
+    byte-for-byte; the operator prompt file is not rewritten."""
+    _freeze(p2b_mod, kit, _STORY)
+    plan = _prepare(p2b_mod, kit)
+    # pick the first direct Gemini ON row (or any direct row)
+    pe = next(r for r in plan["runs"] if r["condition"] == "direct")
+    run_id = pe["run_id"]
+    prompt = kit["prompts"] / pe["prompt_files"][0]
+    before = prompt.read_bytes()
+    # append a HIGH reply after ## Output (replace trailing boilerplate)
+    prefix, _ = p2b_mod.rep._split_reply(before)
+    reply = _HIGH_REPLY.encode("utf-8")
+    new_raw = prefix + b"## Output\n\n" + reply
+    prompt.write_bytes(new_raw)
+    expected_reply = p2b_mod.rep._strip_trailing_prompt_boilerplate(
+        p2b_mod.rep._split_reply(new_raw)[1])
+
+    ns = argparse.Namespace(
+        run=run_id, session=str(prompt), generation_date="unknown",
+        status="collected_external_output", access_verdict="unknown",
+        access_note="", interface_settings="", note="")
+    assert p2b_mod.run_collect_session(ns) == 0
+
+    out = kit["outputs"] / run_id / "output.txt"
+    meta = json.loads((kit["outputs"] / run_id / "meta.json")
+                      .read_text(encoding="utf-8"))
+    assert out.read_bytes() == expected_reply
+    assert meta["output"]["sha256"] == p2b_mod.sha256_bytes(expected_reply)
+    assert meta["condition"] == "direct"
+    assert meta["session"]["msg2_style_record"] is True
+    # operator prompt file unchanged by collect
+    assert prompt.read_bytes() == new_raw
+    # refuse overwrite
+    assert p2b_mod.run_collect_session(ns) == 2
+
+
+def test_verify_evaluate_smoke_path(p2b_mod, kit, monkeypatch):
+    """verify writes intake.json (complete without KONEC); evaluate reuses
+    isv-eval (faked here) and records usable=True."""
+    _freeze(p2b_mod, kit, _STORY)
+    plan = _prepare(p2b_mod, kit)
+    pe = next(r for r in plan["runs"] if r["condition"] == "direct")
+    run_id = pe["run_id"]
+    prompt = kit["prompts"] / pe["prompt_files"][0]
+    prefix, _ = p2b_mod.rep._split_reply(prompt.read_bytes())
+    reply = (_HIGH_REPLY * 40).encode("utf-8")  # clear the size floor
+    prompt.write_bytes(prefix + b"## Output\n\n" + reply)
+    ns = argparse.Namespace(
+        run=run_id, session=str(prompt), generation_date="unknown",
+        status="collected_external_output", access_verdict="pass",
+        access_note="", interface_settings="not exposed", note="")
+    assert p2b_mod.run_collect_session(ns) == 0
+    assert p2b_mod.run_verify(run_id) == 0
+    intake = json.loads((kit["outputs"] / run_id / "intake.json")
+                        .read_text(encoding="utf-8"))
+    assert intake["verdict"] == "complete"
+    assert intake["checks"]["end_marker_required"] is False
+    assert not intake["integrity_errors"]
+
+    # fake isv-eval subprocess
+    def _fake_run(cmd, cwd=None, capture_output=True, text=True):
+        eval_dir = Path(cmd[cmd.index("--out") + 1])
+        eval_dir.mkdir(parents=True, exist_ok=True)
+        (eval_dir / "report.json").write_text(json.dumps({
+            "evaluator": {"name": "isv-eval", "version": "test"},
+            "metrics": {
+                "total_tokens": 100, "canonical_supported_tokens": 80,
+                "canonical_coverage": 0.8,
+                "broader_resource_supported_tokens": 90,
+                "broader_resource_supported_coverage": 0.9,
+                "unresolved_tokens": 20, "unresolved_rate": 0.2,
+                "exact_dictionary_matches": 70,
+                "morphologically_valid_forms": 10,
+            },
+            "output_files": {"report": "report.json"},
+        }), encoding="utf-8")
+        return type("P", (), {"returncode": 0, "stderr": ""})()
+
+    monkeypatch.setattr(p2b_mod.subprocess, "run", _fake_run)
+    assert p2b_mod.run_evaluate(run_id) == 0
+    summary = json.loads((kit["outputs"] / run_id / "evaluation.json")
+                         .read_text(encoding="utf-8"))
+    assert summary["usable"] is True
+    assert summary["metrics"]["canonical_coverage"] == 0.8
+    assert (kit["outputs"] / run_id / "orthography.json").is_file()
 
 
 # ---------------------------------------------------------------------------
