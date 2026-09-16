@@ -35,15 +35,39 @@ lines were preserved exactly (verified parity) and the story title was
 added as the first line. Other bank sections were excluded and are
 retained in the bank, untouched: section 1 (`Opowieść o Faktach…`) and
 section 2 (`Opowieść o sygnale`) are not part of the current experiment;
-section 4 (`Podkłady`) is the reserved **LOW-overlap** source for the
-next stage. Do not clean or "de-corpus" this story: its deliberate
+section 4 (`Podkłady`) supplies the **LOW-overlap** story (clean prose
+frozen separately as `podklady-v1`; see below). Do not clean or
+"de-corpus" this HIGH story: its deliberate
 overlap with the authentic corpus is the HIGH-overlap experimental
 condition.
 
 Provenance record (full note, frozen date, source path): gitignored
 `high-overlap-story.meta.json` in this directory.
 
-## Freezing a revised version (future, if the author supplies one)
+## Status: LOW-overlap story frozen (2026-09-15)
+
+Clean prose from bank section `# 4. Podkłady` was frozen as **v1** after
+human **APPROVE** of the clean-story boundary (casting notes + ElevenLabs
+API/billing preamble excluded; trailing blanks excluded). The bank file
+was not modified.
+
+| Field | Value |
+|---|---|
+| Story id | `podklady` |
+| Title | `Podkłady` |
+| Version | `v1` (immutable) |
+| Frozen file | `versions/podklady-v1.txt` (gitignored) |
+| SHA-256 | `ce1c4fca03fe9cb2c5f8181ab45c91767759a0c785f0a066543d95bc32f5271b` |
+| Bytes / lines | 15 249 B / 141 lines |
+| Classification | **`low_overlap`** |
+| Regime | `low` |
+| Boundary | bank lines 1107–1247 (first: `Katarzyna odłożyła teczkę…`; last: `I po raz pierwszy od lat pomyślała…`) |
+| Provenance | gitignored `low-overlap-story.meta.json` |
+
+LOW prompt kit is **not** prepared yet. Do not mix LOW into the HIGH
+manifest.
+
+## Freezing a revised HIGH version (future, if the author supplies one)
 
 ```bash
 python scripts/run_exp004_phase2b.py freeze-story \

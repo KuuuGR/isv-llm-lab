@@ -1085,3 +1085,25 @@ bucket, and never mark a run invalid just because the interface needed
 two messages. (4) Record `fresh_session_proof: unavailable` where the
 record format carries no session provenance; absence of proof is not
 proof of violation.
+
+## L-045 · 2026-09-15 · Preserve Phase-2B HIGH as a descriptive paired record — mean Δ is not the whole evidence (Phase 2B HIGH)
+
+**Observation.** After 42/42 HIGH-overlap runs were collected, verified,
+evaluated, and aggregated, five of seven configurations showed a
+positive mean canonical Δ and two (both Gemini 3.6 Flash conditions)
+showed a negative mean. Three configurations (Gemini ON, Gemini OFF,
+Qwen) had mixed-sign replicate Δs, so the configuration-level mean alone
+misrepresents the sample. Orthography outside-inventory varied on a
+scale that does not track coverage cleanly.
+
+**Why it matters.** A paper-ready Phase 2B record must keep (a) individual
+D/P/Δ and run IDs, (b) explicit n=3 descriptive limits, and (c) separate
+metric dimensions. Collapsing to seven mean deltas invites overclaiming
+(causal priming, model ranking, H-HIGH confirmation) that the design
+does not support until LOW/UNSEEN exist and until scientific review
+decides what additional analysis is justified.
+
+**Next time.** (1) Always ship article-ready evidence with Observed fact /
+Interpretation / Hypothesis layers pointing at `dataset.json`. (2) Flag
+mixed-sign replicate Δs in the same place as the mean Δ. (3) Do not start
+LOW/UNSEEN or write final conclusions from HIGH means alone.

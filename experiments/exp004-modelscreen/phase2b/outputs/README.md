@@ -21,3 +21,15 @@ identical, verified):
 Raw replies, intake/verification/evaluation artifacts and rosters for
 this experiment will live here once collection happens (future task),
 following the EXP-004 conventions (`../repeats/outputs/`).
+
+## LOW-overlap kit (2026-09-15)
+
+Prepared separately under [`low/`](low/) so the HIGH plan is never
+overwritten:
+
+```bash
+.venv/bin/python scripts/run_exp004_phase2b.py prepare \
+  --regime low --date 2026-09-15
+```
+
+See `low/README.md` and committed `../operator-prompts/manifest-low.json`.

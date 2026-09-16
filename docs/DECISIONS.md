@@ -1499,3 +1499,27 @@ recorded.
    Fast Grok prompt retains `model unknown` where identity is
    established, that historical identifiers remain distinguishable and
    that regeneration is deterministic and byte-stable.
+
+## D-055 · 2026-09-15 · Phase 2B HIGH results are a descriptive paired record, not a causal finding
+
+**Context.** Phase 2B HIGH completed intake and aggregate analysis
+(42/42; integrity PASS). Canonical mean Δ varies by configuration
+(+14.49 pp Grok … −1.75 pp Gemini Flash OFF), with mixed-sign replicate
+Δs for Gemini ON, Gemini OFF, and Qwen.
+
+**Decision.**
+
+1. **Preserve, do not overclaim.** Document status as executed +
+   descriptively aggregated. Explicitly record n=3, no significance
+   tests, no causal corpus-priming claim, and no H-HIGH confirmation.
+2. **Canonical research surfaces.** Computational results stay in
+   `phase2b/analysis/`; article-ready layered record in
+   `phase2b/EVIDENCE.md` (Observed fact / Interpretation / Hypothesis);
+   project indexes updated in STATE / EXPERIMENTS / RESEARCH_NOTES /
+   LESSONS / research-roadmap.
+3. **Do not start LOW/UNSEEN** from this preservation task. Next step is
+   scientific review of the preserved HIGH results before deciding
+   whether additional analysis is justified.
+4. **Immutability.** No modification of raw outputs, frozen story,
+   frozen corpus, prompts, run IDs, configuration names, condition
+   labels, or evaluator definitions.

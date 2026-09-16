@@ -11,6 +11,10 @@ node_modules/
 # Experiment artifacts — raw story/outputs stay local (copyrighted)
 experiments/**/outputs/*
 !experiments/**/outputs/README.md
+# Phase-2B LOW kit README (plan/checklist stay local like HIGH)
+!experiments/exp004-modelscreen/phase2b/outputs/low/
+experiments/exp004-modelscreen/phase2b/outputs/low/*
+!experiments/exp004-modelscreen/phase2b/outputs/low/README.md
 experiments/**/input/*
 !experiments/**/input/README.md
 
@@ -30,6 +34,7 @@ experiments/**/scaffolds/*
 experiments/**/operator-prompts/*
 !experiments/**/operator-prompts/README.md
 !experiments/**/operator-prompts/manifest.json
+!experiments/**/operator-prompts/manifest-low.json
 
 # EXP-004 collected raw sessions (author-saved prompt+reply files, contain
 # the copyrighted source story + raw model outputs; never committed)
@@ -53,6 +58,17 @@ experiments/exp004-modelscreen/analysis/*
 # committed and documents the analysis)
 experiments/exp004-modelscreen/repeats/analysis/*
 !experiments/exp004-modelscreen/repeats/analysis/README.md
+
+# EXP-004 Phase-2B HIGH aggregate analysis (deterministic derived outputs;
+# analysis/README.md is committed and documents the analysis)
+experiments/exp004-modelscreen/phase2b/analysis/*
+!experiments/exp004-modelscreen/phase2b/analysis/README.md
+!experiments/exp004-modelscreen/phase2b/analysis/low/
+experiments/exp004-modelscreen/phase2b/analysis/low/*
+!experiments/exp004-modelscreen/phase2b/analysis/low/README.md
+!experiments/exp004-modelscreen/phase2b/analysis/low/EVIDENCE.md
+!experiments/exp004-modelscreen/phase2b/analysis/low/QUALITATIVE_AUDIT.md
+!experiments/exp004-modelscreen/phase2b/analysis/low/qualitative_audit.json
 
 # EXP-004 Task-029 corpus self-evaluation scratch (per-dataset isv-eval
 # CLI artifacts; gitignored — the reports themselves are committed)

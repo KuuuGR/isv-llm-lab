@@ -1,0 +1,670 @@
+{
+  "artifact": "phase2b_low_prompt_manifest",
+  "experiment_id": "exp004",
+  "phase": "p2b-low",
+  "regime": "low",
+  "date": "2026-09-15",
+  "generator": "scripts/run_exp004_phase2b.py prepare",
+  "generator_commit": "5c990c36cf73c2a785b9ce3f2d0e2010bdb5bf90",
+  "source": {
+    "story_id": "podklady",
+    "title": "Podkłady",
+    "classification": "low_overlap",
+    "file": "experiments/exp004-modelscreen/phase2b/input/versions/podklady-v1.txt",
+    "version": "v1",
+    "sha256": "ce1c4fca03fe9cb2c5f8181ab45c91767759a0c785f0a066543d95bc32f5271b",
+    "bytes": 15249,
+    "lines": 141
+  },
+  "corpus": {
+    "id": "phase2a-authentic-isv",
+    "version": "v1",
+    "file": "experiments/exp004-modelscreen/phase2a/corpus/phase2a-authentic-isv-corpus.txt",
+    "sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+    "bytes": 58459
+  },
+  "counts": {
+    "representative_configurations": 7,
+    "conditions": 2,
+    "replicates_per_condition": 3,
+    "runs_per_configuration_per_condition": 3,
+    "direct_runs": 21,
+    "primed_runs": 21,
+    "total_runs": 42,
+    "prompt_files": 63
+  },
+  "model_output_included": false,
+  "note": "Prompt hashes + run enumeration only (no story text, no corpus, no model output). Files under operator-prompts/ are gitignored; this manifest is the committed record.",
+  "files": [
+    {
+      "file": "low-direct-01-gemini-3.6-flash-extthinkon-r01.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "4eb8dcabfbe496478fd9b195bc15964ad30249748c356dbaf1968533a60349dc",
+      "bytes": 16769
+    },
+    {
+      "file": "low-direct-01-gemini-3.6-flash-extthinkon-r02.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "4eb8dcabfbe496478fd9b195bc15964ad30249748c356dbaf1968533a60349dc",
+      "bytes": 16769
+    },
+    {
+      "file": "low-direct-01-gemini-3.6-flash-extthinkon-r03.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "4eb8dcabfbe496478fd9b195bc15964ad30249748c356dbaf1968533a60349dc",
+      "bytes": 16769
+    },
+    {
+      "file": "low-direct-02-gemini-3.6-flash-extthinkoff-r01.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "bea212f761b13912a9b9c6093d02c823f81952a86b1494e93051fc04380e2620",
+      "bytes": 16773
+    },
+    {
+      "file": "low-direct-02-gemini-3.6-flash-extthinkoff-r02.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "bea212f761b13912a9b9c6093d02c823f81952a86b1494e93051fc04380e2620",
+      "bytes": 16773
+    },
+    {
+      "file": "low-direct-02-gemini-3.6-flash-extthinkoff-r03.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "bea212f761b13912a9b9c6093d02c823f81952a86b1494e93051fc04380e2620",
+      "bytes": 16773
+    },
+    {
+      "file": "low-direct-03-claude-sonnet-5-r01.md",
+      "run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "abbea7c69fb556a048a5062e8fefdfb9318207722dc8b5a4ded53c3d7bcd8390",
+      "bytes": 16734
+    },
+    {
+      "file": "low-direct-03-claude-sonnet-5-r02.md",
+      "run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "abbea7c69fb556a048a5062e8fefdfb9318207722dc8b5a4ded53c3d7bcd8390",
+      "bytes": 16734
+    },
+    {
+      "file": "low-direct-03-claude-sonnet-5-r03.md",
+      "run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "abbea7c69fb556a048a5062e8fefdfb9318207722dc8b5a4ded53c3d7bcd8390",
+      "bytes": 16734
+    },
+    {
+      "file": "low-direct-04-deepseek-v3-expert-deepthinkon-r01.md",
+      "run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "33050b5a7c472e2dc6593f11f997aff7882fee9582c8a2b2e30cfd72147544cc",
+      "bytes": 16745
+    },
+    {
+      "file": "low-direct-04-deepseek-v3-expert-deepthinkon-r02.md",
+      "run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "33050b5a7c472e2dc6593f11f997aff7882fee9582c8a2b2e30cfd72147544cc",
+      "bytes": 16745
+    },
+    {
+      "file": "low-direct-04-deepseek-v3-expert-deepthinkon-r03.md",
+      "run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "33050b5a7c472e2dc6593f11f997aff7882fee9582c8a2b2e30cfd72147544cc",
+      "bytes": 16745
+    },
+    {
+      "file": "low-direct-05-qwen-3.8-max-fast-r01.md",
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "99542dbfb02aaf41b5ce358dbcba7bc9e76455261d0c3bc17f310aaca4168695",
+      "bytes": 16701
+    },
+    {
+      "file": "low-direct-05-qwen-3.8-max-fast-r02.md",
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "99542dbfb02aaf41b5ce358dbcba7bc9e76455261d0c3bc17f310aaca4168695",
+      "bytes": 16701
+    },
+    {
+      "file": "low-direct-05-qwen-3.8-max-fast-r03.md",
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "99542dbfb02aaf41b5ce358dbcba7bc9e76455261d0c3bc17f310aaca4168695",
+      "bytes": 16701
+    },
+    {
+      "file": "low-direct-06-gpt-5.6-luna-thinkoff-r01.md",
+      "run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "3dd45401ade6d63a8ac6de0ff4e39a63a8d670d7010aa8bb9aa872d87a8ca0b9",
+      "bytes": 16702
+    },
+    {
+      "file": "low-direct-06-gpt-5.6-luna-thinkoff-r02.md",
+      "run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "3dd45401ade6d63a8ac6de0ff4e39a63a8d670d7010aa8bb9aa872d87a8ca0b9",
+      "bytes": 16702
+    },
+    {
+      "file": "low-direct-06-gpt-5.6-luna-thinkoff-r03.md",
+      "run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "3dd45401ade6d63a8ac6de0ff4e39a63a8d670d7010aa8bb9aa872d87a8ca0b9",
+      "bytes": 16702
+    },
+    {
+      "file": "low-direct-07-grok-fast-r01.md",
+      "run_id": "2026-09-15__p2b-low__xai__grok__fast__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "a7948c69a849b81148de2efcf4ca9f0056634d546292814e73d524df07319958",
+      "bytes": 16818
+    },
+    {
+      "file": "low-direct-07-grok-fast-r02.md",
+      "run_id": "2026-09-15__p2b-low__xai__grok__fast__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "a7948c69a849b81148de2efcf4ca9f0056634d546292814e73d524df07319958",
+      "bytes": 16818
+    },
+    {
+      "file": "low-direct-07-grok-fast-r03.md",
+      "run_id": "2026-09-15__p2b-low__xai__grok__fast__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "low",
+      "prompt_sha256": "a7948c69a849b81148de2efcf4ca9f0056634d546292814e73d524df07319958",
+      "bytes": 16818
+    },
+    {
+      "file": "low-primed-01-gemini-3.6-flash-extthinkon-r01-msg1.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "d1717cb8b59e3db0572f643c116981a5c0752bb53af24e627c86f4686be80845",
+      "bytes": 61092
+    },
+    {
+      "file": "low-primed-01-gemini-3.6-flash-extthinkon-r01-msg2.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "a1f120d205990a05a9a61962b150385652cc80c3fdba95e6a5cd071f0c0f8816",
+      "bytes": 16923
+    },
+    {
+      "file": "low-primed-01-gemini-3.6-flash-extthinkon-r02-msg1.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "d1717cb8b59e3db0572f643c116981a5c0752bb53af24e627c86f4686be80845",
+      "bytes": 61092
+    },
+    {
+      "file": "low-primed-01-gemini-3.6-flash-extthinkon-r02-msg2.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "a1f120d205990a05a9a61962b150385652cc80c3fdba95e6a5cd071f0c0f8816",
+      "bytes": 16923
+    },
+    {
+      "file": "low-primed-01-gemini-3.6-flash-extthinkon-r03-msg1.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "d1717cb8b59e3db0572f643c116981a5c0752bb53af24e627c86f4686be80845",
+      "bytes": 61092
+    },
+    {
+      "file": "low-primed-01-gemini-3.6-flash-extthinkon-r03-msg2.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "a1f120d205990a05a9a61962b150385652cc80c3fdba95e6a5cd071f0c0f8816",
+      "bytes": 16923
+    },
+    {
+      "file": "low-primed-02-gemini-3.6-flash-extthinkoff-r01-msg1.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "98fc112f2199605a4d16f527e6b8929487278a980506240f5dacb933ae846a92",
+      "bytes": 61096
+    },
+    {
+      "file": "low-primed-02-gemini-3.6-flash-extthinkoff-r01-msg2.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "d9d95d034375230248791f3401a2fbf13d7d3951d7197f755882fb77962f1331",
+      "bytes": 16927
+    },
+    {
+      "file": "low-primed-02-gemini-3.6-flash-extthinkoff-r02-msg1.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "98fc112f2199605a4d16f527e6b8929487278a980506240f5dacb933ae846a92",
+      "bytes": 61096
+    },
+    {
+      "file": "low-primed-02-gemini-3.6-flash-extthinkoff-r02-msg2.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "d9d95d034375230248791f3401a2fbf13d7d3951d7197f755882fb77962f1331",
+      "bytes": 16927
+    },
+    {
+      "file": "low-primed-02-gemini-3.6-flash-extthinkoff-r03-msg1.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "98fc112f2199605a4d16f527e6b8929487278a980506240f5dacb933ae846a92",
+      "bytes": 61096
+    },
+    {
+      "file": "low-primed-02-gemini-3.6-flash-extthinkoff-r03-msg2.md",
+      "run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "d9d95d034375230248791f3401a2fbf13d7d3951d7197f755882fb77962f1331",
+      "bytes": 16927
+    },
+    {
+      "file": "low-primed-03-claude-sonnet-5-r01-msg1.md",
+      "run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "e3880241dcd553ae4330bdbfa80c4fa80cf2178deaed680757593531a058e115",
+      "bytes": 61057
+    },
+    {
+      "file": "low-primed-03-claude-sonnet-5-r01-msg2.md",
+      "run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "e0e1e830da28e1a0edc04b66c446aa10580702efd962baeeb50105b403bb50e1",
+      "bytes": 16888
+    },
+    {
+      "file": "low-primed-03-claude-sonnet-5-r02-msg1.md",
+      "run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "e3880241dcd553ae4330bdbfa80c4fa80cf2178deaed680757593531a058e115",
+      "bytes": 61057
+    },
+    {
+      "file": "low-primed-03-claude-sonnet-5-r02-msg2.md",
+      "run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "e0e1e830da28e1a0edc04b66c446aa10580702efd962baeeb50105b403bb50e1",
+      "bytes": 16888
+    },
+    {
+      "file": "low-primed-03-claude-sonnet-5-r03-msg1.md",
+      "run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "e3880241dcd553ae4330bdbfa80c4fa80cf2178deaed680757593531a058e115",
+      "bytes": 61057
+    },
+    {
+      "file": "low-primed-03-claude-sonnet-5-r03-msg2.md",
+      "run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "e0e1e830da28e1a0edc04b66c446aa10580702efd962baeeb50105b403bb50e1",
+      "bytes": 16888
+    },
+    {
+      "file": "low-primed-04-deepseek-v3-expert-deepthinkon-r01-msg1.md",
+      "run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "efdf76002f86d85cccb7c75477050b31ebd6ff79d2df6b33d36146940c11270c",
+      "bytes": 61068
+    },
+    {
+      "file": "low-primed-04-deepseek-v3-expert-deepthinkon-r01-msg2.md",
+      "run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "dd8e298aa0d4bb984976ab2d132e2ead4bb68dc46968fbe729b87e53458614fc",
+      "bytes": 16899
+    },
+    {
+      "file": "low-primed-04-deepseek-v3-expert-deepthinkon-r02-msg1.md",
+      "run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "efdf76002f86d85cccb7c75477050b31ebd6ff79d2df6b33d36146940c11270c",
+      "bytes": 61068
+    },
+    {
+      "file": "low-primed-04-deepseek-v3-expert-deepthinkon-r02-msg2.md",
+      "run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "dd8e298aa0d4bb984976ab2d132e2ead4bb68dc46968fbe729b87e53458614fc",
+      "bytes": 16899
+    },
+    {
+      "file": "low-primed-04-deepseek-v3-expert-deepthinkon-r03-msg1.md",
+      "run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "efdf76002f86d85cccb7c75477050b31ebd6ff79d2df6b33d36146940c11270c",
+      "bytes": 61068
+    },
+    {
+      "file": "low-primed-04-deepseek-v3-expert-deepthinkon-r03-msg2.md",
+      "run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "dd8e298aa0d4bb984976ab2d132e2ead4bb68dc46968fbe729b87e53458614fc",
+      "bytes": 16899
+    },
+    {
+      "file": "low-primed-05-qwen-3.8-max-fast-r01-msg1.md",
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "697d588d6426111f456a9c7d0bd195d90b5f58fa1ba86fafd3d64404371836b2",
+      "bytes": 61024
+    },
+    {
+      "file": "low-primed-05-qwen-3.8-max-fast-r01-msg2.md",
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "edacf5d86484da4c2a2c48a162bf9abbaf5317fb46678c5174fdf14d719c96c1",
+      "bytes": 16855
+    },
+    {
+      "file": "low-primed-05-qwen-3.8-max-fast-r02-msg1.md",
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "697d588d6426111f456a9c7d0bd195d90b5f58fa1ba86fafd3d64404371836b2",
+      "bytes": 61024
+    },
+    {
+      "file": "low-primed-05-qwen-3.8-max-fast-r02-msg2.md",
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "edacf5d86484da4c2a2c48a162bf9abbaf5317fb46678c5174fdf14d719c96c1",
+      "bytes": 16855
+    },
+    {
+      "file": "low-primed-05-qwen-3.8-max-fast-r03-msg1.md",
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "697d588d6426111f456a9c7d0bd195d90b5f58fa1ba86fafd3d64404371836b2",
+      "bytes": 61024
+    },
+    {
+      "file": "low-primed-05-qwen-3.8-max-fast-r03-msg2.md",
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "edacf5d86484da4c2a2c48a162bf9abbaf5317fb46678c5174fdf14d719c96c1",
+      "bytes": 16855
+    },
+    {
+      "file": "low-primed-06-gpt-5.6-luna-thinkoff-r01-msg1.md",
+      "run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "6007e19363fe90800887288f2e38c443e0e5c50ddde54151e4b07eace9f62619",
+      "bytes": 61025
+    },
+    {
+      "file": "low-primed-06-gpt-5.6-luna-thinkoff-r01-msg2.md",
+      "run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "431b0bb58d18267b135f773f2a2456a71a601dc5a20148be9f7b93d1124c2639",
+      "bytes": 16856
+    },
+    {
+      "file": "low-primed-06-gpt-5.6-luna-thinkoff-r02-msg1.md",
+      "run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "6007e19363fe90800887288f2e38c443e0e5c50ddde54151e4b07eace9f62619",
+      "bytes": 61025
+    },
+    {
+      "file": "low-primed-06-gpt-5.6-luna-thinkoff-r02-msg2.md",
+      "run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "431b0bb58d18267b135f773f2a2456a71a601dc5a20148be9f7b93d1124c2639",
+      "bytes": 16856
+    },
+    {
+      "file": "low-primed-06-gpt-5.6-luna-thinkoff-r03-msg1.md",
+      "run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "6007e19363fe90800887288f2e38c443e0e5c50ddde54151e4b07eace9f62619",
+      "bytes": 61025
+    },
+    {
+      "file": "low-primed-06-gpt-5.6-luna-thinkoff-r03-msg2.md",
+      "run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "431b0bb58d18267b135f773f2a2456a71a601dc5a20148be9f7b93d1124c2639",
+      "bytes": 16856
+    },
+    {
+      "file": "low-primed-07-grok-fast-r01-msg1.md",
+      "run_id": "2026-09-15__p2b-low__xai__grok__fast__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "a6b24c144e400d16f8b4b42cdfb47b3747bfe6407873fe60e55bdd38145f72a5",
+      "bytes": 61141
+    },
+    {
+      "file": "low-primed-07-grok-fast-r01-msg2.md",
+      "run_id": "2026-09-15__p2b-low__xai__grok__fast__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "f3072242f1be715063e5000bebefb98f7997ea498e42fff769e63bb98a6f2b71",
+      "bytes": 16972
+    },
+    {
+      "file": "low-primed-07-grok-fast-r02-msg1.md",
+      "run_id": "2026-09-15__p2b-low__xai__grok__fast__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "a6b24c144e400d16f8b4b42cdfb47b3747bfe6407873fe60e55bdd38145f72a5",
+      "bytes": 61141
+    },
+    {
+      "file": "low-primed-07-grok-fast-r02-msg2.md",
+      "run_id": "2026-09-15__p2b-low__xai__grok__fast__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "f3072242f1be715063e5000bebefb98f7997ea498e42fff769e63bb98a6f2b71",
+      "bytes": 16972
+    },
+    {
+      "file": "low-primed-07-grok-fast-r03-msg1.md",
+      "run_id": "2026-09-15__p2b-low__xai__grok__fast__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "low",
+      "prompt_sha256": "a6b24c144e400d16f8b4b42cdfb47b3747bfe6407873fe60e55bdd38145f72a5",
+      "bytes": 61141
+    },
+    {
+      "file": "low-primed-07-grok-fast-r03-msg2.md",
+      "run_id": "2026-09-15__p2b-low__xai__grok__fast__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "low",
+      "prompt_sha256": "f3072242f1be715063e5000bebefb98f7997ea498e42fff769e63bb98a6f2b71",
+      "bytes": 16972
+    }
+  ]
+}

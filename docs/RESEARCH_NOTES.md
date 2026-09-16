@@ -1160,6 +1160,92 @@ Key recorded facts (observed numbers, descriptive):
   the reference corpus? Optionally complete the six missing primed runs
   first.
 
+### 4.25 EXP-004 Phase 2B HIGH — descriptive paired results preserved (2026-09-15)
+
+Phase 2B HIGH-overlap (`Iskra i Wieloryb` v1) is no longer “prepared
+only.” Status: **42/42 collected, verified, evaluated**; aggregate
+analysis integrity **PASS**; article-ready record
+`experiments/exp004-modelscreen/phase2b/EVIDENCE.md`; computational
+aggregates `phase2b/analysis/{dataset,analysis}.{json,md}`. Intake and
+analysis used deterministic scripts only (no LLM reruns). Raw outputs,
+frozen story (`ab8a0dcf…792f63`), frozen corpus (`aaad28e4…a857`), and
+evaluator definitions were not modified.
+
+**Observed (descriptive, n=3 per cell):**
+
+| Configuration | Direct mean | Primed mean | Mean Δ |
+|---|---:|---:|---:|
+| Gemini 3.6 Flash — ext. thinking ON | 68.68% | 68.13% | −0.55 pp |
+| Gemini 3.6 Flash — ext. thinking OFF | 67.20% | 65.45% | −1.75 pp |
+| Claude Sonnet 5 Medium | 69.29% | 83.57% | +14.28 pp |
+| DeepSeek V3 Expert ON | 74.53% | 83.78% | +9.25 pp |
+| Qwen 3.8 Max Fast | 76.36% | 81.54% | +5.18 pp |
+| GPT-5.6 Luna | 73.54% | 82.16% | +8.62 pp |
+| Grok 4.5 Fast | 68.35% | 82.84% | +14.49 pp |
+
+Supported observations (not causal claims):
+
+- Positive mean canonical Δ for **5/7** configurations; magnitude varies
+  substantially by configuration.
+- Both Gemini 3.6 Flash conditions show **negative** mean canonical Δ.
+- Gemini ON, Gemini OFF, and Qwen have **mixed-sign** replicate Δs —
+  mean Δ alone is misleading; inspect individual D/P/Δ in
+  `analysis/analysis.md`.
+- Orthography outside-inventory can vary independently of coverage and
+  must stay a separate diagnostic.
+- Unresolved rate is structurally related to canonical coverage under
+  the existing evaluator; report both.
+- The 42-run paired design is a reusable baseline for later LOW/UNSEEN
+  comparisons (`Δ_HIGH` vs `Δ_LOW` vs `Δ_UNSEEN`).
+
+**Not established:** statistical significance; causal corpus priming in
+general; H-HIGH (needs LOW/UNSEEN); model ranking; final Phase 2B
+scientific conclusions. Next step: scientific review of the preserved
+HIGH results before deciding whether additional analysis or LOW/UNSEEN
+is justified.
+
+### 4.26 EXP-004 Phase 2B LOW — descriptive paired results preserved (2026-09-16)
+
+Phase 2B LOW-overlap (`Podkłady` v1, clean prose) status: **42/42
+collected, verified, evaluated**; aggregate analysis integrity **PASS**;
+article-ready record
+`experiments/exp004-modelscreen/phase2b/analysis/low/EVIDENCE.md`;
+computational aggregates `phase2b/analysis/low/{dataset,analysis}.{json,md}`;
+qualitative audit `phase2b/analysis/low/QUALITATIVE_AUDIT.md`. Intake and
+analysis used deterministic scripts only (no LLM reruns). Raw outputs,
+frozen LOW story (`ce1c4fca…5271b`), frozen corpus (`aaad28e4…a857`),
+HIGH artifacts, and evaluator definitions were not modified.
+
+**Observed (descriptive, n=3 per cell):**
+
+| Configuration | Direct mean | Primed mean | Mean Δ | Direction |
+|---|---:|---:|---:|---|
+| Gemini 3.6 Flash — ext. thinking ON | 64.33% | 77.56% | +13.23 pp | all+ |
+| Gemini 3.6 Flash — ext. thinking OFF | 64.51% | 74.91% | +10.40 pp | all+ |
+| Claude Sonnet 5 Medium | 65.72% | 77.83% | +12.11 pp | all+ |
+| DeepSeek V3 Expert ON | 68.93% | 75.12% | +6.19 pp | all+ |
+| Qwen 3.8 Max Fast | 72.18% | 60.11% | −12.08 pp | all− |
+| GPT-5.6 Luna | 70.75% | 76.06% | +5.31 pp | all+ |
+| Grok 4.5 Fast | 69.32% | 73.27% | +3.95 pp | mixed |
+
+Supported observations (not causal claims):
+
+- Positive mean canonical Δ for **6/7** configurations; descriptive mean
+  of config mean-Δ ≈ **+5.59 pp**.
+- Gemini ON/OFF under LOW are **strongly positive with all+ replicates**
+  (contrast with HIGH near-zero/negative mixed Gemini pattern).
+- Qwen under LOW is **all-negative**; r03 is an extreme Polish-collapse /
+  orthography failure (outside-inventory 18→1066).
+- Qualitative audit: **no systematic corpus-opening near-copy** on LOW;
+  positive Δ often co-occurs with lexical borrowing / ortho cleanup while
+  Podkłady openings remain.
+- This contrast is **compatible with** (not proof of) the hypothesis that
+  large HIGH positive Δs partly reflected overlap with corpus-like
+  openings/motifs.
+
+**Not established:** significance; causal priming; model ranking; UNSEEN
+results (unexecuted); final Phase 2B conclusions.
+
 ## 5. Standing methodological rules learned so far (research-relevant)
 
 - The letter inventory for a constructed-language output audit comes from the
@@ -1306,28 +1392,29 @@ Key recorded facts (observed numbers, descriptive):
   stochastic/baseline-dependent (ρ ≈ −0.86)? (2) is Dola Fast's +28.20 pp
   a Fast property or a low-baseline artifact (Pro +6.67 pp from a 65 %
   baseline ≈ the original-18 low-baseline pattern)? (3) does the priming
-  gain transfer to an unseen-topic Wikipedia-style story (Phase 2B)? (4)
+  gain transfer to HIGH-overlap / LOW-overlap / UNSEEN source regimes
+  (Phase 2B)? (4)
   are the DeepSeek/Gemini/Qwen ON-vs-OFF and Fast-vs-Thinking pair gaps
   model behaviour or interface artifacts (Gemini toggle reset, corpus
   delivery constraints)? (5) which of the research candidates (Claude
   Sonnet 5 Medium, DeepSeek V3 Expert, Qwen 3.8 Max Fast, Gemini 3.6
   Flash ON, Dola Fast/Pro — exploratory) deserve a controlled repeat?
 - **Task 025 prepared the controlled repeat for (1), (2) and (5)** (kit
-  under `experiments/exp004-modelscreen/repeats/`; no results yet — see
-  §4.24): once the 108 primary + optional 12 Dola runs are collected, the
-  repeated mean delta and within-condition spread will say whether the
-  Task-024 deltas exceed the models' own stochastic variation, whether
-  Dola Fast's change is reproduced, and whether the baseline-dependence
-  ρ ≈ −0.86 survives repetition.
+  under `experiments/exp004-modelscreen/repeats/`; results in Task 026 /
+  §4.24). **Phase 2B HIGH (2026-09-15) answered the HIGH-overlap slice of
+  (3) descriptively** (§4.25): 42-run paired Δ_HIGH preserved; LOW and
+  UNSEEN still open. Scientific review of HIGH precedes any decision to
+  prepare LOW/UNSEEN.
 - **Task 026 answered parts of (1), (2) and (5) descriptively** (see
-  §4.25): the repeated Δ direction is positive 16/16 (mean +6.93 pp),
+  §4.24): the repeated Δ direction is positive 16/16 (mean +6.93 pp),
   Task-024 directions replicated 15/15, baseline dependence persists
   (ρ ≈ −0.84), Dola Fast's +28.20 pp is NOT re-estimable (repeated
   direct condition unusable), and the priming shift generally exceeds
-  within-condition variation except for Qwen 3.8 Max Fast. Still open:
-  (3) unseen-topic transfer (Phase 2B); (4) ON-vs-OFF / Fast-vs-Thinking
-  pair gaps — now with added evidence for Gemini OFF > its old single
-  delta and DeepSeek Expert ON stable above OFF, but Claude Max
-  comparability limited by its thinking-OFF execution deviation; and the
-  two configurations with uncollected primed conditions (Gemini 3.1 Pro
-  ON, Qwen 3.8 Max Thinking) remain unassessed under repetition.
+  within-condition variation except for Qwen 3.8 Max Fast. Still open
+  after HIGH preservation: (3) LOW-overlap and UNSEEN regimes; (4)
+  ON-vs-OFF / Fast-vs-Thinking pair gaps — with added evidence for
+  Gemini OFF > its old single delta and DeepSeek Expert ON stable above
+  OFF, but Claude Max comparability limited by its thinking-OFF
+  execution deviation; and the two configurations with uncollected
+  primed conditions (Gemini 3.1 Pro ON, Qwen 3.8 Max Thinking) remain
+  unassessed under repetition.

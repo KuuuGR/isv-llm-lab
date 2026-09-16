@@ -21,10 +21,12 @@ To answer it, the project distinguishes THREE source-text regimes (Task
                   absent from the corpus (future biomedical-physics /
                   electromedicine material — NOT prepared here).
 
-THIS MODULE prepares only the HIGH-overlap condition (`--regime high`).
-It never calls an LLM itself, never modifies raw experimental data,
-never modifies the authoritative corpus and never prepares LOW-overlap
-or UNSEEN-domain runs. It extends the EXP-004 repeated-generation
+THIS MODULE prepares HIGH-overlap (`--regime high`, default) and
+LOW-overlap (`--regime low`) kits. It never calls an LLM itself, never
+modifies raw experimental data, never modifies the authoritative corpus,
+and never prepares UNSEEN-domain runs. LOW uses the approved clean
+Podkłady freeze and writes a separate plan/manifest that does not
+overwrite HIGH. It extends the EXP-004 repeated-generation
 machinery (`scripts/run_exp004_repeats.py`) by importing its
 prompt-rendering constants and helpers — it does not re-implement or
 fork them.
@@ -161,9 +163,10 @@ REPLICATES = ("r01", "r02", "r03")
 RUN_ID_FIELDS = ("date", "phase", "provider", "model", "model_version",
                  "condition", "replicate")
 
-SUPPORTED_REGIMES = ("high",)
+SUPPORTED_REGIMES = ("high", "low")
 REGIME_LABELS = {
     "high": "HIGH-overlap",
+    "low": "LOW-overlap",
 }
 # The frozen HIGH-overlap source file + provenance (gitignored input/).
 STORY_META_NAME = "high-overlap-story.meta.json"
@@ -176,6 +179,17 @@ STORY_MOTIFS = (
     "mechanisms; whale imagery; the Heart of the Earth; sacrifice and "
     "transformation; maritime and storm imagery."
 )
+
+# Frozen LOW-overlap story (approved clean Podkłady prose; gitignored).
+LOW_STORY_META_NAME = "low-overlap-story.meta.json"
+LOW_STORY_TITLE = "Podkłady"
+LOW_STORY_ID = "podklady"
+LOW_STORY_CLASSIFICATION = "low_overlap"
+LOW_STORY_SHA256 = (
+    "ce1c4fca03fe9cb2c5f8181ab45c91767759a0c785f0a066543d95bc32f5271b"
+)
+LOW_STORY_BYTES = 15249
+LOW_STORY_LINES = 141
 
 # ---------------------------------------------------------------------------
 # Phase-2B representative shortlist (docs/research-roadmap.md §10 — the
@@ -235,6 +249,19 @@ HIGH_NAME_STEMS = {
     "serce": ("serce", "serca"),
 }
 
+# Phase-2B LOW completeness gate: distinctive stems from frozen Podkłady
+# (Katarzyna / Andrzej / Paulina / Fabryczna / podkład*). Stems are
+# diacritic-folded forms (see p1._fold_for_names) plus common ISV
+# adaptations (Katarina, Andžej/Andrej, Fabričn*). End-marker still NOT
+# required.
+LOW_NAME_STEMS = {
+    "katarzyna": ("katarzyn", "katarin"),
+    "andrzej": ("andrzej", "andrej", "andzej"),
+    "paulina": ("paulin",),
+    "fabryczna": ("fabrycz", "fabricn", "fabrycn"),
+    "podklady": ("podklad", "podlozk"),
+}
+
 
 def sha256_bytes(data: bytes) -> str:
     return rep.sha256_bytes(data)
@@ -280,24 +307,39 @@ def shortlist_rows() -> list[dict]:
     return rows
 
 
-def run_id_for(date: str, row: dict, condition: str, replicate: str) -> str:
+def run_id_for(date: str, row: dict, condition: str, replicate: str,
+               phase: str = PHASE) -> str:
     if condition not in CONDITIONS:
         raise ValueError(f"unknown phase-2B condition {condition!r}")
     if replicate not in REPLICATES:
         raise ValueError(f"unknown replicate {replicate!r}")
-    return (f"{date}__{PHASE}__{row['provider']}__{row['model']}__"
+    if phase not in ("p2b-high", "p2b-low"):
+        raise ValueError(f"unknown phase-2B phase token {phase!r}")
+    return (f"{date}__{phase}__{row['provider']}__{row['model']}__"
             f"{row['model_version']}__{condition}__{replicate}")
 
 
 def parse_run_id(run_id: str) -> dict:
     parts = run_id.split("__")
-    if len(parts) != 7 or parts[1] != PHASE \
-            or parts[5] not in CONDITIONS or parts[6] not in REPLICATES:
+    if (len(parts) != 7 or parts[1] not in ("p2b-high", "p2b-low")
+            or parts[5] not in CONDITIONS or parts[6] not in REPLICATES):
         raise ValueError(
-            f"run id must be <date>__p2b-high__<provider>__<model>__"
-            f"<model_version>__direct|primed__r01|r02|r03, got: "
-            f"{run_id!r}")
+            f"run id must be <date>__p2b-high|p2b-low__<provider>__"
+            f"<model>__<model_version>__direct|primed__r01|r02|r03, "
+            f"got: {run_id!r}")
     return dict(zip(RUN_ID_FIELDS, parts))
+
+
+def regime_from_run_id(run_id: str) -> str:
+    return "low" if parse_run_id(run_id)["phase"] == "p2b-low" else "high"
+
+
+def plan_path_for(regime: str) -> Path:
+    if regime == "low":
+        return OUTPUTS_DIR / "low" / "plan.json"
+    if regime == "high":
+        return OUTPUTS_DIR / "plan.json"
+    raise ValueError(f"unknown regime {regime!r}")
 
 
 # ---------------------------------------------------------------------------
@@ -341,6 +383,41 @@ def _ensure_story() -> tuple[Path, dict]:
             f"frozen version {version['sha256'][:16]}...; refusing to use "
             "edited story bytes (fail loudly)")
     return path, version
+
+
+def _ensure_low_story() -> tuple[Path, dict, dict]:
+    """Hash-gate the frozen LOW-overlap story (approved Podkłady clean
+    prose). Returns (path, version_dict, full_meta)."""
+    meta_path = INPUT_DIR / LOW_STORY_META_NAME
+    if not meta_path.is_file():
+        raise RuntimeError(
+            f"LOW-overlap story provenance missing at {meta_path}; freeze "
+            "the approved Podkłady clean prose before prepare --regime low")
+    meta = json.loads(meta_path.read_text(encoding="utf-8"))
+    if meta.get("boundary", {}).get("status") != "APPROVED":
+        raise RuntimeError(
+            "LOW story boundary is not APPROVED; refusing to prepare")
+    current = meta.get("current_version")
+    if not current:
+        raise RuntimeError("LOW story meta has no current_version")
+    version = meta["versions"][current]
+    path = INPUT_DIR / version["file"]
+    if not path.is_file():
+        raise RuntimeError(f"frozen LOW story missing at {path}")
+    actual = sha256_file(path)
+    if actual != version["sha256"]:
+        raise RuntimeError(
+            f"{path} sha256 {actual[:16]}... does not match recorded "
+            f"{version['sha256'][:16]}...; refusing edited story bytes")
+    if actual != LOW_STORY_SHA256:
+        raise RuntimeError(
+            f"{path} sha256 {actual} does not match the approved LOW "
+            f"story SHA-256 {LOW_STORY_SHA256}; refusing to prepare")
+    if version.get("bytes") != LOW_STORY_BYTES:
+        raise RuntimeError(
+            f"LOW story byte count {version.get('bytes')} != "
+            f"{LOW_STORY_BYTES}")
+    return path, version, meta
 
 
 def _ensure_corpus() -> Path:
@@ -487,25 +564,27 @@ def _identity_lines(row: dict) -> list[str]:
 
 
 def _p2b_header(row: dict, kind: str, task_line: str,
-                condition_line: str) -> list[str]:
+                condition_line: str, *,
+                regime_label: str = "HIGH-overlap",
+                story_title: str = STORY_TITLE) -> list[str]:
     """Phase-2B operator metadata block (above the first '---'). Never
     appears in the model-visible instruction region."""
     setting = row["generation_parameters"]
     return [
-        f"# EXP-004 Phase 2B — HIGH-overlap test — {row['label']}",
+        f"# EXP-004 Phase 2B — {regime_label} test — {row['label']}",
         "",
         *_operator_block(row, kind),
         "",
         "---",
         "",
-        "Experiment ID: EXP-004 (Phase 2B, HIGH-overlap test)",
+        f"Experiment ID: EXP-004 (Phase 2B, {regime_label} test)",
         task_line,
         f"Target model: {row['label']}",
         f"Provider / interface: {row['provider']} / {row['interface']}",
         f"Model version / settings: {row['model_version']} ({setting})",
         *_identity_lines(row),
         f"Representative role: {row['phase2b_role']}",
-        f"Source regime: HIGH-overlap (story: {STORY_TITLE})",
+        f"Source regime: {regime_label} (story: {story_title})",
         condition_line,
         "",
         "---",
@@ -513,25 +592,31 @@ def _p2b_header(row: dict, kind: str, task_line: str,
     ]
 
 
-def render_direct_prompt(row: dict, source_text: str) -> str:
+def render_direct_prompt(row: dict, source_text: str, *,
+                         regime_label: str = "HIGH-overlap",
+                         story_title: str = STORY_TITLE) -> str:
     """Direct Phase-2B prompt: Phase-2B operator header + the byte-identical
     Phase-1/Phase-2A direct instruction body (base instruction + story)."""
     lines = _p2b_header(
         row, "direct", "Task: direct translation (single message)",
-        "Condition: direct translation — no reference material")
+        "Condition: direct translation — no reference material",
+        regime_label=regime_label, story_title=story_title)
     lines.append(
         rep._base_instruction_text(source_text).rstrip("\n") + "\n")
     return "\n".join(lines)
 
 
-def render_primed_msg1(row: dict, corpus_text: str) -> str:
+def render_primed_msg1(row: dict, corpus_text: str, *,
+                       regime_label: str = "HIGH-overlap",
+                       story_title: str = STORY_TITLE) -> str:
     """Primed message 1: Phase-2B operator header + the byte-identical
     Phase-2A study instruction + the full authoritative corpus."""
     lines = _p2b_header(
         row, "msg1",
         "Task: translation with reference texts (message 1 of 2)",
         "Condition: reference texts only — no translation in this "
-        "message")
+        "message",
+        regime_label=regime_label, story_title=story_title)
     lines += [
         rep.PRIMED_MSG1_STUDY_TEXT,
         "",
@@ -542,14 +627,17 @@ def render_primed_msg1(row: dict, corpus_text: str) -> str:
     return "\n".join(lines) + "\n"
 
 
-def render_primed_msg2(row: dict, source_text: str) -> str:
+def render_primed_msg2(row: dict, source_text: str, *,
+                       regime_label: str = "HIGH-overlap",
+                       story_title: str = STORY_TITLE) -> str:
     """Primed message 2: Phase-2B operator header + the byte-identical
     Phase-2A translation task (intro sentence + base instruction)."""
     lines = _p2b_header(
         row, "msg2",
         "Task: translation with reference texts (message 2 of 2)",
         "Condition: primed — translation generated after the reference "
-        "texts in this session")
+        "texts in this session",
+        regime_label=regime_label, story_title=story_title)
     lines += [
         rep.PRIMED_MSG2_INTRO,
         "",
@@ -559,12 +647,12 @@ def render_primed_msg2(row: dict, source_text: str) -> str:
 
 
 def prompt_filenames(row: dict, condition: str, replicate: str,
-                     nn: int) -> list[str]:
+                     nn: int, *, prefix: str = "high") -> list[str]:
     base = f"{nn:02d}-{row['model']}-{row['model_version']}"
     if condition == "direct":
-        return [f"high-direct-{base}-{replicate}.md"]
-    return [f"high-primed-{base}-{replicate}-msg1.md",
-            f"high-primed-{base}-{replicate}-msg2.md"]
+        return [f"{prefix}-direct-{base}-{replicate}.md"]
+    return [f"{prefix}-primed-{base}-{replicate}-msg1.md",
+            f"{prefix}-primed-{base}-{replicate}-msg2.md"]
 
 
 # ---------------------------------------------------------------------------
@@ -582,9 +670,13 @@ def _ordered_runs(rows: list[dict]) -> list[tuple[dict, int, str, str]]:
     return out
 
 
-def _write_checklist(plan: dict, date: str) -> None:
+def _write_checklist(plan: dict, date: str, *,
+                     checklist_path: Path,
+                     regime_label: str,
+                     story_title: str,
+                     story_classification: str) -> None:
     lines = [
-        "# EXP-004 Phase 2B — HIGH-overlap test — collection checklist "
+        f"# EXP-004 Phase 2B — {regime_label} test — collection checklist "
         f"(prepared {date})",
         "",
         "Mark each row after collecting. Every replicate is a FRESH, "
@@ -594,8 +686,8 @@ def _write_checklist(plan: dict, date: str) -> None:
         "identical by design; the run id / file name carries the "
         "replicate tag.",
         "",
-        f"Source regime: HIGH-overlap — {STORY_TITLE} "
-        f"(classification {STORY_CLASSIFICATION}).",
+        f"Source regime: {regime_label} — {story_title} "
+        f"(classification {story_classification}).",
         f"Corpus: phase2a-authentic-isv v1, sha256 "
         f"{plan['corpus']['sha256']} (never shortened for any model).",
         "",
@@ -616,16 +708,87 @@ def _write_checklist(plan: dict, date: str) -> None:
             last_label = r["label"]
         files = "`, `".join(r["prompt_files"])
         lines.append(f"- [ ] {r['run_id']}  files `{files}`")
-    (OUTPUTS_DIR / "collection-checklist.md").write_text(
+    checklist_path.write_text(
         "\n".join(lines) + "\n", encoding="utf-8")
 
 
-def run_prepare(date: str, force: bool = False) -> int:
+def run_prepare(date: str, force: bool = False,
+                regime: str = "high") -> int:
+    if regime not in SUPPORTED_REGIMES:
+        print(f"error: --regime must be one of {SUPPORTED_REGIMES}, "
+              f"got {regime!r}", file=sys.stderr)
+        return 2
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date or ""):
         print("error: --date YYYY-MM-DD is required (run ids carry the "
               "planned generation date)", file=sys.stderr)
         return 2
-    story_path, story_version = _ensure_story()
+
+    if regime == "high":
+        phase_token = PHASE
+        regime_label = REGIME_LABELS["high"]
+        story_title = STORY_TITLE
+        story_id = STORY_ID
+        story_classification = STORY_CLASSIFICATION
+        file_prefix = "high"
+        plan_dir = OUTPUTS_DIR
+        plan_path = plan_dir / "plan.json"
+        checklist_path = plan_dir / "collection-checklist.md"
+        manifest_path = OPERATOR_PROMPTS / "manifest.json"
+        artifact_plan = "phase2b_high_plan"
+        artifact_manifest = "phase2b_high_prompt_manifest"
+        story_path, story_version = _ensure_story()
+        research_q = (
+            "HIGH-overlap test (Phase 2B-A): when the target Polish "
+            "story is strongly thematically/motivically aligned with the "
+            "authentic corpus (H-HIGH), does corpus priming produce a "
+            "larger improvement in resource-supported Interslavic "
+            "generation? Descriptive comparison with LOW-overlap and "
+            "UNSEEN-domain tests later; hypothesis, not a result.")
+        plan_note = (
+            "HIGH-overlap corpus-priming test (SODA Task 029). The "
+            "source story is deliberately corpus-inspired "
+            "(high_overlap_corpus_inspired) — it is NOT an independent "
+            "same-topic control and NOT part of the corpus. Replicates "
+            "are independent fresh-session generations; replicate prompt "
+            "file contents are byte-identical within a (configuration, "
+            "condition) by design. Direct prompts contain no corpus "
+            "material; primed prompts embed the complete authoritative "
+            "corpus (never shortened per model). No LLM was called by "
+            "this script; the 42 translations are the next manual "
+            "operator step.")
+    else:
+        phase_token = "p2b-low"
+        regime_label = REGIME_LABELS["low"]
+        story_title = LOW_STORY_TITLE
+        story_id = LOW_STORY_ID
+        story_classification = LOW_STORY_CLASSIFICATION
+        file_prefix = "low"
+        plan_dir = OUTPUTS_DIR / "low"
+        plan_path = plan_dir / "plan.json"
+        checklist_path = plan_dir / "collection-checklist.md"
+        manifest_path = OPERATOR_PROMPTS / "manifest-low.json"
+        artifact_plan = "phase2b_low_plan"
+        artifact_manifest = "phase2b_low_prompt_manifest"
+        story_path, story_version, low_meta = _ensure_low_story()
+        research_q = (
+            "LOW-overlap test (Phase 2B): when the target Polish story "
+            "has substantially weaker thematic/fabular overlap with the "
+            "authentic corpus than HIGH, does corpus priming still "
+            "change resource-supported Interslavic generation? "
+            "Descriptive comparison with Δ_HIGH; hypothesis, not a "
+            "result. No hints about overlap are given to the model.")
+        plan_note = (
+            "LOW-overlap corpus-priming test. Source story is the "
+            "approved clean Podkłady prose "
+            f"(sha256 {LOW_STORY_SHA256}; casting/API preamble "
+            "excluded). Same Direct/Primed protocol and shortlist as "
+            "HIGH; priming corpus is the identical authoritative "
+            "phase2a-authentic-isv v1. Direct prompts contain no corpus; "
+            "primed prompts embed the complete corpus (never shortened). "
+            "No HIGH story/output is included. No LLM was called by this "
+            "script; the 42 translations are the next manual operator "
+            "step.")
+
     corpus_path = _ensure_corpus()
     source_text = story_path.read_text(encoding="utf-8")
     corpus_text = corpus_path.read_text(encoding="utf-8")
@@ -639,8 +802,11 @@ def run_prepare(date: str, force: bool = False) -> int:
         print("error: corpus sha mismatch — refusing to proceed",
               file=sys.stderr)
         return 2
+    if regime == "low" and source_sha != LOW_STORY_SHA256:
+        print("error: LOW story sha does not match approved freeze",
+              file=sys.stderr)
+        return 2
 
-    plan_path = OUTPUTS_DIR / "plan.json"
     if plan_path.is_file() and not force:
         print(f"error: {plan_path} already exists; use --force to rewrite "
               "(regenerating is safe ONLY before any collection; after "
@@ -649,19 +815,27 @@ def run_prepare(date: str, force: bool = False) -> int:
         return 2
 
     OPERATOR_PROMPTS.mkdir(parents=True, exist_ok=True)
-    OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)
+    plan_dir.mkdir(parents=True, exist_ok=True)
 
     rows = shortlist_rows()
     runs: list[dict] = []
     files: list[dict] = []
     for row, nn, cond, rep_ in _ordered_runs(rows):
         if cond == "direct":
-            rendered = [render_direct_prompt(row, source_text)]
+            rendered = [render_direct_prompt(
+                row, source_text,
+                regime_label=regime_label, story_title=story_title)]
         else:
-            rendered = [render_primed_msg1(row, corpus_text),
-                        render_primed_msg2(row, source_text)]
-        names = prompt_filenames(row, cond, rep_, nn)
-        run_id = run_id_for(date, row, cond, rep_)
+            rendered = [
+                render_primed_msg1(
+                    row, corpus_text,
+                    regime_label=regime_label, story_title=story_title),
+                render_primed_msg2(
+                    row, source_text,
+                    regime_label=regime_label, story_title=story_title),
+            ]
+        names = prompt_filenames(row, cond, rep_, nn, prefix=file_prefix)
+        run_id = run_id_for(date, row, cond, rep_, phase=phase_token)
         run_files: list[str] = []
         for fname, text in zip(names, rendered):
             path = OPERATOR_PROMPTS / fname
@@ -679,15 +853,15 @@ def run_prepare(date: str, force: bool = False) -> int:
             files.append({
                 "file": fname, "run_id": run_id, "condition": cond,
                 "replicate": rep_, "message": message,
-                "regime": "high",
+                "regime": regime,
                 "prompt_sha256": prompt_sha,
                 "bytes": len(text.encode("utf-8")),
             })
         translation_sha = sha256_bytes(rendered[-1].encode("utf-8"))
         runs.append({
             "run_id": run_id,
-            "phase": PHASE,
-            "regime": "high",
+            "phase": phase_token,
+            "regime": regime,
             "condition": cond,
             "replicate": rep_,
             "provider": row["provider"], "model": row["model"],
@@ -698,8 +872,8 @@ def run_prepare(date: str, force: bool = False) -> int:
             "prompt_files": run_files,
             "translation_prompt_sha256": translation_sha,
             "source_sha256": source_sha,
-            "source_story_id": STORY_ID,
-            "source_classification": STORY_CLASSIFICATION,
+            "source_story_id": story_id,
+            "source_classification": story_classification,
             "corpus_sha256": corpus_sha if cond == "primed" else None,
             "identity_note": row.get("identity_note"),
             "status": "pending_manual_collection",
@@ -717,26 +891,22 @@ def run_prepare(date: str, force: bool = False) -> int:
     }
     plan = {
         "experiment_id": "exp004",
-        "artifact": "phase2b_high_plan",
-        "phase": PHASE,
-        "regime": "high",
+        "artifact": artifact_plan,
+        "phase": phase_token,
+        "regime": regime,
         "date": date,
         "generator": "scripts/run_exp004_phase2b.py prepare",
         "generator_commit": git_commit(),
-        "research_question": (
-            "HIGH-overlap test (Phase 2B-A): when the target Polish "
-            "story is strongly thematically/motivically aligned with the "
-            "authentic corpus (H-HIGH), does corpus priming produce a "
-            "larger improvement in resource-supported Interslavic "
-            "generation? Descriptive comparison with LOW-overlap and "
-            "UNSEEN-domain tests later; hypothesis, not a result."),
-        "source": {"story_id": STORY_ID,
-                   "title": STORY_TITLE,
-                   "classification": STORY_CLASSIFICATION,
+        "research_question": research_q,
+        "source": {"story_id": story_id,
+                   "title": story_title,
+                   "classification": story_classification,
                    "file": _rel_or_abs(story_path),
                    "version": story_version["version"],
                    "sha256": source_sha,
-                   "bytes": len(source_text.encode("utf-8"))},
+                   "bytes": len(source_text.encode("utf-8")),
+                   "lines": (LOW_STORY_LINES if regime == "low"
+                             else story_version.get("lines"))},
         "corpus": {"id": "phase2a-authentic-isv", "version": "v1",
                    "file": _rel_or_abs(corpus_path),
                    "sha256": corpus_sha,
@@ -744,52 +914,69 @@ def run_prepare(date: str, force: bool = False) -> int:
         "conditions": list(CONDITIONS),
         "replicates": list(REPLICATES),
         "counts": counts,
-        "note": (
-            "HIGH-overlap corpus-priming test (SODA Task 029). The "
-            "source story is deliberately corpus-inspired "
-            "(high_overlap_corpus_inspired) — it is NOT an independent "
-            "same-topic control and NOT part of the corpus. Replicates "
-            "are independent fresh-session generations; replicate prompt "
-            "file contents are byte-identical within a (configuration, "
-            "condition) by design. Direct prompts contain no corpus "
-            "material; primed prompts embed the complete authoritative "
-            "corpus (never shortened per model). No LLM was called by "
-            "this script; the 42 translations are the next manual "
-            "operator step."),
+        "note": plan_note,
+        "model_output_included": False,
         "runs": runs,
     }
     plan_path.write_text(json.dumps(plan, ensure_ascii=False, indent=2),
                          encoding="utf-8")
 
     manifest = {
-        "artifact": "phase2b_high_prompt_manifest",
+        "artifact": artifact_manifest,
         "experiment_id": "exp004",
-        "phase": PHASE,
-        "regime": "high",
+        "phase": phase_token,
+        "regime": regime,
         "date": date,
         "generator": "scripts/run_exp004_phase2b.py prepare",
         "generator_commit": git_commit(),
         "source": dict(plan["source"]),
         "corpus": dict(plan["corpus"]),
         "counts": dict(counts),
+        "model_output_included": False,
         "note": ("Prompt hashes + run enumeration only (no story text, "
                  "no corpus, no model output). Files under "
                  "operator-prompts/ are gitignored; this manifest is the "
                  "committed record."),
         "files": sorted(files, key=lambda f: f["file"]),
     }
-    (OPERATOR_PROMPTS / "manifest.json").write_text(
+    manifest_path.write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2),
         encoding="utf-8")
 
-    _write_checklist(plan, date)
-    print(f"[prepare] {date}: {len(runs)} HIGH-overlap runs "
+    _write_checklist(
+        plan, date, checklist_path=checklist_path,
+        regime_label=regime_label, story_title=story_title,
+        story_classification=story_classification)
+
+    if regime == "low":
+        # Record kit status on the local LOW meta (does not alter story bytes).
+        low_meta = json.loads(
+            (INPUT_DIR / LOW_STORY_META_NAME).read_text(encoding="utf-8"))
+        low_meta["kit_status"] = {
+            "frozen": True,
+            "prompts_prepared": True,
+            "executed": False,
+            "plan": _rel_or_abs(plan_path),
+            "manifest": _rel_or_abs(manifest_path),
+            "prepare_date": date,
+            "note": (
+                "LOW 42-run kit prepared; no LLM sessions; "
+                "model_output_included=false."
+            ),
+        }
+        (INPUT_DIR / LOW_STORY_META_NAME).write_text(
+            json.dumps(low_meta, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8")
+
+    print(f"[prepare] {date}: {len(runs)} {regime_label} runs "
           f"({counts['direct_runs']} direct + "
           f"{counts['primed_runs']} primed); {len(files)} prompt files")
     print(f"  story sha256 {source_sha}  "
-          f"({STORY_ID} {story_version['version']}, "
-          f"{STORY_CLASSIFICATION})")
+          f"({story_id} {story_version['version']}, "
+          f"{story_classification})")
     print(f"  corpus sha256 {corpus_sha}  (phase2a-authentic-isv v1)")
+    print(f"  plan {_rel_or_abs(plan_path)}")
+    print(f"  manifest {_rel_or_abs(manifest_path)}")
     return 0
 
 
@@ -806,15 +993,16 @@ def _rel_or_abs(path: Path) -> str:
 # raw reply bytes; Phase-2B gate adapted to the frozen HIGH protocol)
 # ---------------------------------------------------------------------------
 
-def load_plan() -> dict:
-    path = OUTPUTS_DIR / "plan.json"
+def load_plan(regime: str = "high") -> dict:
+    path = plan_path_for(regime)
     if not path.is_file():
         return {}
     return json.loads(path.read_text(encoding="utf-8"))
 
 
 def plan_entry(run_id: str) -> dict | None:
-    for r in load_plan().get("runs", []):
+    regime = regime_from_run_id(run_id)
+    for r in load_plan(regime).get("runs", []):
         if r["run_id"] == run_id:
             return r
     return None
@@ -840,15 +1028,23 @@ def roster_row_for(run_id: str) -> dict | None:
     return None
 
 
+def _name_stems_for(regime: str) -> dict[str, tuple[str, ...]]:
+    return LOW_NAME_STEMS if regime == "low" else HIGH_NAME_STEMS
+
+
 def _p2b_gate_checks(run_dir: Path, source_bytes: int,
-                     size_floor: int) -> dict:
-    """Phase-2B HIGH completeness gate.
+                     size_floor: int,
+                     regime: str = "high") -> dict:
+    """Phase-2B completeness gate (HIGH or LOW).
 
     Differs from Phase-1/repeats (`p1._gate_checks`) in two protocol-
-    frozen ways: (1) no KONEC/KONIEC end-marker requirement; (2) HIGH-
-    story name stems (Iskra / Veloryb / Zimorodzice / Mogiła Szronu /
-    Serce) instead of the Phase-1 Bronisława-story stems.
+    frozen ways: (1) no KONEC/KONIEC end-marker requirement; (2) regime-
+    specific story name stems (HIGH: Iskra/Veloryb/…; LOW: Katarzyna/
+    Andrzej/Paulina/Fabryczna/podkład*) instead of Phase-1 Bronisława
+    stems.
     """
+    stems_map = _name_stems_for(regime)
+    label = "LOW" if regime == "low" else "HIGH"
     output = run_dir / "output.txt"
     checks: dict = {}
     if not output.is_file():
@@ -861,17 +1057,21 @@ def _p2b_gate_checks(run_dir: Path, source_bytes: int,
     text = data.decode("utf-8", errors="replace")
     lines = text.splitlines()
     nonempty = [ln for ln in lines if ln.strip()]
-    checks["head_sane"] = bool(nonempty) and len(nonempty[0].strip()) >= 10
+    # Title-only first lines (e.g. "Katarzyna") are common and not a
+    # service-error signal when a later early line is substantial.
+    checks["head_sane"] = any(
+        len(ln.strip()) >= 10 for ln in nonempty[:5])
     # Recorded for transparency; never a failure reason in Phase 2B.
     checks["end_marker"] = bool(nonempty) and bool(
         p1.END_MARKER_RE.match(nonempty[-1]))
     checks["end_marker_required"] = False
     folded = p1._fold_for_names(text)
-    found = [name for name, stems in HIGH_NAME_STEMS.items()
+    found = [name for name, stems in stems_map.items()
              if any(stem in folded for stem in stems)]
     checks["names_present"] = len(found)
     checks["names_required"] = 3
     checks["names_found"] = found
+    checks["regime"] = regime
     reasons: list[str] = []
     if not checks["non_empty"]:
         reasons.append("empty output")
@@ -882,8 +1082,8 @@ def _p2b_gate_checks(run_dir: Path, source_bytes: int,
                        "(service-error page?)")
     if checks["names_present"] < checks["names_required"]:
         reasons.append(
-            f"only {checks['names_present']}/{len(HIGH_NAME_STEMS)} "
-            "HIGH-story names found (not a translation?)")
+            f"only {checks['names_present']}/{len(stems_map)} "
+            f"{label}-story names found (not a translation?)")
     return {"checks": checks, "reasons": reasons}
 
 
@@ -903,12 +1103,14 @@ def _p2b_intake_verdict(gate: dict) -> str:
 def _meta_base(run_id: str, row: dict, pe: dict,
                generation_date: str) -> dict:
     parts = parse_run_id(run_id)
-    plan = load_plan()
+    regime = pe.get("regime") or regime_from_run_id(run_id)
+    plan = load_plan(regime)
+    phase = parts["phase"]
     return {
         "run_id": run_id,
         "experiment_id": "exp004",
-        "phase": PHASE,
-        "regime": pe.get("regime", "high"),
+        "phase": phase,
+        "regime": regime,
         "condition": parts["condition"],
         "replicate": parts["replicate"],
         "primary": pe.get("primary", True),
@@ -927,9 +1129,13 @@ def _meta_base(run_id: str, row: dict, pe: dict,
         "source": {
             "sha256": plan.get("source", {}).get("sha256")
                       or pe.get("source_sha256"),
-            "story_id": pe.get("source_story_id", STORY_ID),
-            "classification": pe.get("source_classification",
-                                     STORY_CLASSIFICATION),
+            "story_id": pe.get("source_story_id",
+                               LOW_STORY_ID if regime == "low"
+                               else STORY_ID),
+            "classification": pe.get(
+                "source_classification",
+                LOW_STORY_CLASSIFICATION if regime == "low"
+                else STORY_CLASSIFICATION),
         },
         "corpus": (dict(plan["corpus"])
                    if pe["condition"] == "primed" and plan.get("corpus")
@@ -998,7 +1204,8 @@ def _finish_collect(run_id: str, row: dict, pe: dict, reply: bytes,
             "contamination_checks": contamination,
         },
         "note": ("Raw LLM output stored byte-for-byte; never modified. "
-                 "Phase-2B HIGH: no KONEC/KONIEC end-marker required."
+                 f"Phase-2B {str(pe.get('regime', 'high')).upper()}: "
+                 "no KONEC/KONIEC end-marker required."
                  + (f" {args.note}" if args.note else "")),
     })
     (out_dir / "meta.json").write_text(
@@ -1032,13 +1239,19 @@ def _extract_msg2_style_reply(session: Path, pe: dict) -> tuple[
             f"{session.name}")
     # Frozen story must still be present in the prompt part (byte-identical
     # region of the prepared prompt).
-    story_path, _version = _ensure_story()
+    regime = pe.get("regime") or regime_from_run_id(pe["run_id"])
+    if regime == "low":
+        story_path, _version, _meta = _ensure_low_story()
+        story_label = "LOW"
+    else:
+        story_path, _version = _ensure_story()
+        story_label = "HIGH"
     story_bytes = story_path.read_bytes()
     if story_bytes not in prompt_part and story_bytes.decode(
             "utf-8") not in prompt_part.decode("utf-8", errors="replace"):
         raise ValueError(
-            f"frozen HIGH story bytes are absent from the prompt part of "
-            f"{session.name}; refusing to collect (prompt drift)")
+            f"frozen {story_label} story bytes are absent from the prompt "
+            f"part of {session.name}; refusing to collect (prompt drift)")
     anchors = rep._corpus_fingerprints()
     contamination: dict = {
         "record_shape": "msg2-style (operator-prompts file + appended "
@@ -1189,8 +1402,11 @@ def _verify_integrity(run_id: str, pe: dict | None) -> list[str]:
 
 
 def run_verify(run_id: str | None = None,
-               size_floor: int | None = None) -> int:
-    plan = load_plan()
+               size_floor: int | None = None,
+               regime: str = "high") -> int:
+    if run_id:
+        regime = regime_from_run_id(run_id)
+    plan = load_plan(regime)
     runs: list[tuple[str, dict | None]] = []
     if run_id:
         runs.append((run_id, plan_entry(run_id)))
@@ -1204,7 +1420,10 @@ def run_verify(run_id: str | None = None,
     source_bytes = int(src.get("bytes") or 0)
     if not source_bytes:
         try:
-            sp, _ = _ensure_story()
+            if regime == "low":
+                sp, _, _ = _ensure_low_story()
+            else:
+                sp, _ = _ensure_story()
             source_bytes = sp.stat().st_size
         except RuntimeError:
             source_bytes = 0
@@ -1215,16 +1434,19 @@ def run_verify(run_id: str | None = None,
         if not (out_dir / "output.txt").is_file():
             print(f"[skip] {rid}: no collected output")
             continue
+        rid_regime = (pe or {}).get("regime") or regime_from_run_id(rid)
         integrity = _verify_integrity(rid, pe)
         floor = size_floor if size_floor is not None else int(
             0.60 * source_bytes) if source_bytes else 0
-        gate = _p2b_gate_checks(out_dir, source_bytes, floor)
+        gate = _p2b_gate_checks(out_dir, source_bytes, floor,
+                                regime=rid_regime)
         verdict = _p2b_intake_verdict(gate)
         meta = load_meta(rid)
+        phase = parse_run_id(rid)["phase"]
         intake = {
             "run_id": rid,
-            "phase": PHASE,
-            "regime": "high",
+            "phase": phase,
+            "regime": rid_regime,
             "condition": meta.get("condition"),
             "replicate": meta.get("replicate"),
             "verdict": verdict,
@@ -1233,7 +1455,8 @@ def run_verify(run_id: str | None = None,
             "floor_bytes": floor,
             "integrity_errors": integrity,
             "meta_status": meta.get("status"),
-            "gate": "phase2b_high (no KONEC required; HIGH-story names)",
+            "gate": (f"phase2b_{rid_regime} (no KONEC required; "
+                     f"{rid_regime.upper()}-story names)"),
         }
         (out_dir / "intake.json").write_text(
             json.dumps(intake, ensure_ascii=False, indent=2),
@@ -1292,11 +1515,13 @@ def run_evaluate(run_id: str, force: bool = False) -> int:
     report = json.loads((eval_dir / "report.json").read_text(
         encoding="utf-8"))
     m = report["metrics"]
+    regime = meta.get("regime") or regime_from_run_id(run_id)
+    phase = parse_run_id(run_id)["phase"]
     summary = {
         "run_id": run_id,
         "evaluator": report["evaluator"],
-        "phase": PHASE,
-        "regime": "high",
+        "phase": phase,
+        "regime": regime,
         "condition": meta.get("condition"),
         "replicate": meta.get("replicate"),
         "primary": meta.get("primary"),
@@ -1325,7 +1550,7 @@ def run_evaluate(run_id: str, force: bool = False) -> int:
     }, ensure_ascii=False, indent=2), encoding="utf-8")
 
     lines = [
-        f"# EXP-004 Phase 2B HIGH — evaluation — {run_id}",
+        f"# EXP-004 Phase 2B {str(regime).upper()} — evaluation — {run_id}",
         "",
         f"{meta.get('label', '?')} ({meta.get('provider')}, version "
         f"{meta.get('model_version')}) · {meta.get('condition')} "
@@ -1357,8 +1582,8 @@ def run_evaluate(run_id: str, force: bool = False) -> int:
         f"{od['unexpected_nonletters']} (total {od['outside_inventory']})",
         "",
         "Coverage is evidence, not linguistic correctness; no composite "
-        "quality score is assigned. Phase-2B HIGH: descriptive "
-        "replication/variance characterization (n=3).",
+        f"quality score is assigned. Phase-2B {str(regime).upper()}: "
+        "descriptive replication/variance characterization (n=3).",
         "",
     ]
     (out_dir / "evaluation.md").write_text("\n".join(lines),
@@ -1375,13 +1600,14 @@ def run_evaluate(run_id: str, force: bool = False) -> int:
     return 0
 
 
-def run_status() -> int:
-    plan = load_plan()
+def run_status(regime: str = "high") -> int:
+    plan = load_plan(regime)
     runs = plan.get("runs", [])
     if not runs:
         print("nothing planned yet; run prepare first", file=sys.stderr)
         return 2
     n_col = n_ver = n_ev = n_us = 0
+    print(f"regime={regime}")
     print(f"{'run_id':<72} {'cond':<7} {'rep':<4} {'intake':<10} "
           f"{'eval':<5} usable")
     for r in runs:
@@ -1417,7 +1643,7 @@ def run_status() -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="EXP-004 Phase 2B — HIGH-overlap kit preparation + "
+        description="EXP-004 Phase 2B — HIGH/LOW kit preparation + "
                     "intake (deterministic; never calls an LLM)")
     sub = parser.add_subparsers(dest="command")
 
@@ -1430,8 +1656,13 @@ def main(argv: list[str] | None = None) -> int:
     p_freeze.add_argument("--note", default="")
 
     p_prep = sub.add_parser(
-        "prepare", help="prepare the 42-run HIGH-overlap kit")
+        "prepare",
+        help="prepare the 42-run Phase-2B kit (--regime high|low)")
     p_prep.add_argument("--date", required=True, metavar="YYYY-MM-DD")
+    p_prep.add_argument(
+        "--regime", default="high", choices=list(SUPPORTED_REGIMES),
+        help="source-text regime (default: high). low uses frozen "
+             "Podkłady clean prose; never overwrites the HIGH plan.")
     p_prep.add_argument("--force", action="store_true",
                         help="rewrite existing plan/prompts (safe only "
                              "before any collection)")
@@ -1454,7 +1685,12 @@ def main(argv: list[str] | None = None) -> int:
                            help="Phase-2B completeness gate + integrity")
     p_ver.add_argument("--run", default=None)
     p_ver.add_argument("--size-floor", type=int, default=None)
-    p_ver.set_defaults(fn=lambda a: run_verify(a.run, a.size_floor))
+    p_ver.add_argument("--regime", default="high",
+                       choices=list(SUPPORTED_REGIMES),
+                       help="plan regime when --run is omitted "
+                            "(default: high)")
+    p_ver.set_defaults(
+        fn=lambda a: run_verify(a.run, a.size_floor, a.regime))
 
     p_ev = sub.add_parser("evaluate",
                           help="run isv-eval + orthography on a collected run")
@@ -1463,13 +1699,15 @@ def main(argv: list[str] | None = None) -> int:
     p_ev.set_defaults(fn=lambda a: run_evaluate(a.run, a.force))
 
     p_st = sub.add_parser("status", help="collection / intake progress")
-    p_st.set_defaults(fn=lambda a: run_status())
+    p_st.add_argument("--regime", default="high",
+                      choices=list(SUPPORTED_REGIMES))
+    p_st.set_defaults(fn=lambda a: run_status(a.regime))
 
     args = parser.parse_args(argv)
     if args.command == "freeze-story":
         return run_freeze_story(args.src, args.version_label, args.note)
     if args.command == "prepare":
-        return run_prepare(args.date, args.force)
+        return run_prepare(args.date, args.force, regime=args.regime)
     if hasattr(args, "fn"):
         return args.fn(args)
     parser.print_help()

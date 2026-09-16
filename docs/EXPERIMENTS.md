@@ -1247,7 +1247,69 @@ new follow-up findings in `repeats/REPORT.md`.
   figures/datasets and audit outputs are deterministic local artifacts
   (gitignored by policy).
 
-## Planned (not started) — current (2026-09-09, SODA Task 026)
+### EXP-004 Phase 2B HIGH — executed + descriptive aggregate (2026-09-15)
+
+| Field | Value |
+|---|---|
+| Status | **EXECUTED, COLLECTED 42/42, VERIFIED 42/42, EVALUATED 42/42, AGGREGATE ANALYSED** — descriptive paired summary only; no significance tests; no causal claim; LOW/UNSEEN not started; no final scientific conclusions |
+| Design | `experiments/exp004-modelscreen/phase2b/README.md` + `docs/research-roadmap.md` §11 |
+| Story | HIGH-overlap `Iskra i Wieloryb` v1, SHA-256 `ab8a0dcf7352789c09c4aca132c086999c861407e4cd682ee9414aab5b792f63` |
+| Corpus | `phase2a-authentic-isv` v1, SHA-256 `aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857` |
+| Sample | 7 configurations × direct/primed × r01–r03 = 42 runs (21 paired Δᵢ = Pᵢ − Dᵢ) |
+| Metrics | canonical coverage, broader resource-supported coverage, unresolved rate, orthography outside-inventory (unchanged evaluator) |
+| Harness | `scripts/run_exp004_phase2b.py` (intake) + `scripts/analyze_exp004_phase2b.py` (aggregate); no LLM during intake/analysis |
+| Artifacts | `phase2b/EVIDENCE.md` (article-ready); `phase2b/analysis/{dataset,analysis}.{json,md}` |
+
+**Canonical mean Δ (n=3 per cell; descriptive):**
+
+| Configuration | Direct mean | Primed mean | Mean Δ |
+|---|---:|---:|---:|
+| Gemini 3.6 Flash — ext. thinking ON | 68.68% | 68.13% | −0.55 pp |
+| Gemini 3.6 Flash — ext. thinking OFF | 67.20% | 65.45% | −1.75 pp |
+| Claude Sonnet 5 Medium | 69.29% | 83.57% | +14.28 pp |
+| DeepSeek V3 Expert ON | 74.53% | 83.78% | +9.25 pp |
+| Qwen 3.8 Max Fast | 76.36% | 81.54% | +5.18 pp |
+| GPT-5.6 Luna | 73.54% | 82.16% | +8.62 pp |
+| Grok 4.5 Fast | 68.35% | 82.84% | +14.49 pp |
+
+Supported observations only: positive mean canonical Δ in 5/7 configs;
+magnitude varies substantially by configuration; Gemini ON/OFF mean Δ
+negative; Gemini ON, Gemini OFF, and Qwen have mixed-sign replicate Δs;
+orthography-out varies independently enough not to collapse into
+canonical. Individual D/P/Δ + run IDs in `phase2b/analysis/`. H-HIGH
+remains a hypothesis until LOW/UNSEEN comparisons exist.
+
+### EXP-004 Phase 2B LOW — executed + descriptive aggregate (2026-09-16)
+
+| Field | Value |
+|---|---|
+| Status | **EXECUTED, COLLECTED 42/42, VERIFIED 42/42, EVALUATED 42/42, AGGREGATE ANALYSED** — descriptive paired summary only; no significance tests; no causal claim; UNSEEN not started; no final scientific conclusions |
+| Design | same Phase 2B shortlist / pairing as HIGH; regime `p2b-low` |
+| Story | LOW-overlap `Podkłady` v1 (clean prose), SHA-256 `ce1c4fca03fe9cb2c5f8181ab45c91767759a0c785f0a066543d95bc32f5271b` |
+| Corpus | `phase2a-authentic-isv` v1, SHA-256 `aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857` (unchanged) |
+| Sample | 7 configurations × direct/primed × r01–r03 = 42 runs (21 paired Δᵢ = Pᵢ − Dᵢ) |
+| Metrics | identical to HIGH (canonical / broader / unresolved / ortho outside-inventory) |
+| Harness | `scripts/run_exp004_phase2b.py` (LOW-aware intake) + `scripts/analyze_exp004_phase2b.py --regime low` |
+| Artifacts | `phase2b/analysis/low/EVIDENCE.md`; `phase2b/analysis/low/{dataset,analysis}.{json,md}`; `phase2b/analysis/low/QUALITATIVE_AUDIT.md` + `qualitative_audit.json` |
+
+**Canonical mean Δ (n=3 per cell; descriptive):**
+
+| Configuration | Direct mean | Primed mean | Mean Δ | Direction |
+|---|---:|---:|---:|---|
+| Gemini 3.6 Flash — ext. thinking ON | 64.33% | 77.56% | +13.23 pp | all+ |
+| Gemini 3.6 Flash — ext. thinking OFF | 64.51% | 74.91% | +10.40 pp | all+ |
+| Claude Sonnet 5 Medium | 65.72% | 77.83% | +12.11 pp | all+ |
+| DeepSeek V3 Expert ON | 68.93% | 75.12% | +6.19 pp | all+ |
+| Qwen 3.8 Max Fast | 72.18% | 60.11% | −12.08 pp | all− |
+| GPT-5.6 Luna | 70.75% | 76.06% | +5.31 pp | all+ |
+| Grok 4.5 Fast | 69.32% | 73.27% | +3.95 pp | mixed |
+
+Descriptive mean of configuration mean-Δ values: **+5.59 pp** (6/7
+positive). Qualitative audit: no systematic corpus-opening near-copy
+(unlike HIGH); Qwen r03 Polish-collapse extreme. HIGH artifacts
+untouched. UNSEEN remains unexecuted.
+
+## Planned (not started) — current (2026-09-16)
 
 Status categories are kept distinct:
 - **Completed experiments:** EXP-001 (baseline, historical), EXP-002
@@ -1291,31 +1353,33 @@ Status categories are kept distinct:
   and Phase-2A rankings, the priming Δ table, descriptive + exploratory
   statistics, baseline-dependence and baseline-vs-primed correlations,
   family/orthography analyses, master table, charts A–G, poster draft and
-  supported/suggestive/not-established conclusions — no winner score;
-  Phase 2B documented as future work. **Task 025 (2026-09-07) PREPARED
+  supported/suggestive/not-established conclusions — no winner score.
+  **Task 025 (2026-09-07) PREPARED
   the controlled repeated-generation kit** (`experiments/exp004-modelscreen/
   repeats/`; see the Task-025 entry below): 108 primary planned runs
   (18 configurations × direct/primed × 3 independent fresh-session
   replicates r01–r03) + 12 exploratory Dola Fast/Pro rows (`exploratory:
-  true`, never merged into primary statistics) — execution-ready, **no
-  LLM results yet**: the research lead executes the replicate blocks,
-  then collect → verify → evaluate → roster → deterministic analysis
-  (`scripts/analyze_exp004_repeats.py`; mean-primed−mean-direct vs old
-  single delta, figures A–E, selection views). **Task 026 (2026-09-09)
+  true`, never merged into primary statistics). **Task 026 (2026-09-09)
   EXECUTED + AUDITED + ANALYSED the repeated generation** — 114/120
   collected, 106 usable, 8 partial, 6 missing; repeated Δ canonical
   positive 16/16 (mean +6.93 pp); Task-024 direction replicated 15/15;
   deviations recorded (Grok identity header edit, Claude Sonnet 5 max
   thinking OFF, Gemini two-message corpus, Dola Pro r03 msg1 blank
   line); results in `repeats/REPORT.md` + `repeats/analysis/`; full
-  suite green. Phase 2B stays gated on
-  the repeated-generation results. Phase 2 guidance methods
-  stay closed until Phase 1 is complete and reported.
+  suite green. **Phase 2B HIGH (2026-09-15) EXECUTED + AGGREGATED** —
+  42/42 collected/verified/evaluated; descriptive paired Δ_HIGH in
+  `phase2b/analysis/` + article-ready `phase2b/EVIDENCE.md` (n=3;
+  no significance tests; no causal claim). **Phase 2B LOW (2026-09-16)
+  EXECUTED + AGGREGATED** — 42/42; descriptive Δ_LOW in
+  `phase2b/analysis/low/` + `analysis/low/EVIDENCE.md`. **UNSEEN
+  remains not prepared / not executed.**
 
 Planned (not started):
 
 - **Manual linguistic review** of the EXP-001 unresolved sample (Task 004
   artifacts; human-only, no automatic classification).
+- **EXP-004 Phase 2B UNSEEN DOMAIN** — reserved (biomedical/electromedicine);
+  not prepared; not executed.
 - **EXP-004 Phase 1 — practical model screening (EXECUTED — COLLECTED SET
   RECONCILED + EVALUATED, Task 018, 2026-09-06)**: design at
   `experiments/exp004-modelscreen/DESIGN.md` (Task
@@ -1379,4 +1443,5 @@ Planned (not started):
   **Status at plan time (Task 019): no external LLM run existed.**
   Execution/collection/audit/evaluation followed in Tasks 021–023 and the
   full deterministic research analysis in Task 024 — see the entries
-  above; Phase 2B remains not executed.
+  above. Phase 2B HIGH is now executed and aggregated (2026-09-15);
+  LOW/UNSEEN remain not prepared.

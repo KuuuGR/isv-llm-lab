@@ -7,7 +7,9 @@ that is being tested, not an established result).
 
 > This document is the **high-level source of truth** for the project's
 > scientific direction: hypothesis, research questions, completed
-> experiments, key findings, limitations, the current Phase 2B plan, the
+> experiments, key findings, limitations, the Phase 2B plan (HIGH and
+> LOW executed + aggregated descriptively as of 2026-09-16; UNSEEN
+> still proposed), the
 > publication direction, the long-term tool objective and the stopping
 > rule. It was created in SODA Task 028 (2026-09-09) to reconstruct in
 > the repository the research direction and decisions that had previously
@@ -518,9 +520,10 @@ prepared the deterministic 42-run HIGH-overlap kit machinery (prompts,
 hashes, config metadata — see `experiments/exp004-modelscreen/phase2b/`
 and §11.2); SODA Task 030 then extracted and froze the HIGH-overlap
 story (v1) and generated the 42-run kit (`prepare --date 2026-09-09`).
-The 42 translations remain the next manual operator step. LOW-overlap
-(`Podkłady`, reserved for the next stage) and UNSEEN-domain kits are not
-prepared.
+The 42 HIGH-overlap translations are complete and aggregated
+(descriptive). The 42 LOW-overlap translations (`Podkłady` v1) are also
+complete and aggregated (descriptive; 2026-09-16). UNSEEN-domain kits
+remain not prepared / not executed.
 
 ## 11. Phase 2B experimental questions (`PROPOSED`, framing updated Task 029)
 
@@ -587,8 +590,8 @@ but it is a future experiment and must **not** be mixed into Phase 2B.
 
 | Regime | Definition | Test item | Status |
 |---|---|---|---|
-| **HIGH-overlap** | a new Polish story strongly inspired by the corpus, deliberately sharing substantial themes/motifs/imagery/narrative patterns/world-building with it | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` (bank section 3; frozen v1 Task 030) | kit frozen + prepared (Tasks 029/030); NOT executed |
-| **LOW-overlap** | a new Polish story with very little thematic/fabular overlap with the corpus | **`Podkłady`** (bank section 4; pinned Task 030). `Opowieść o sygnale` (bank section 2) remains banked but is not the selected LOW item | reserved for the NEXT stage; NOT prepared |
+| **HIGH-overlap** | a new Polish story strongly inspired by the corpus, deliberately sharing substantial themes/motifs/imagery/narrative patterns/world-building with it | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` (bank section 3; frozen v1 Task 030) | **executed + aggregated** (42/42; descriptive; 2026-09-15) |
+| **LOW-overlap** | a new Polish story with very little thematic/fabular overlap with the corpus | **`Podkłady`** (bank section 4; clean prose frozen v1; casting/API preamble excluded). `Opowieść o sygnale` (bank section 2) remains banked but is not the selected LOW item | **executed + aggregated** (42/42; descriptive; 2026-09-16) |
 | **UNSEEN DOMAIN** | a Polish scientific/educational source from a domain absent from the corpus | future biomedical-physics / electromedicine educational material | scoped; NOT prepared |
 
 The current experimental source set (Task 030): HIGH = `Iskra i
@@ -603,7 +606,7 @@ whether corpus priming produces *especially strong* gains when the test
 text is strongly aligned with the priming material. Do not start
 LOW-overlap or UNSEEN-domain experiments yet.
 
-### 11.2 HIGH-overlap test (`FROZEN` + `PREPARED` — SODA Tasks 029/030; NOT executed)
+### 11.2 HIGH-overlap test (`EXECUTED` + `AGGREGATE ANALYSED` — descriptive; Tasks 029/030/031 + 2026-09-15 preservation)
 
 - Story identity: **"Iskra i Wieloryb — wersja z oryginalnymi nazwami"**
   (author-owned Polish story; keep local). Classification:
@@ -624,7 +627,7 @@ LOW-overlap or UNSEEN-domain experiments yet.
   imagery). Overlap is the point of the test; the story is **not** an
   additional corpus component and the corpus is never modified to fit
   it.
-- Planned sample: **42 translations** = 7 configurations (shortlist §10)
+- Sample: **42 translations** = 7 configurations (shortlist §10)
   × 2 conditions (direct, primed) × 3 fresh-session replicates,
   giving 21 direct/primed paired comparisons. Direct condition uses the
   Phase-1 direct instruction; primed condition uses the complete
@@ -633,14 +636,19 @@ LOW-overlap or UNSEEN-domain experiments yet.
   `aaad28e4…a857`), never shortened for any model (Gemini interface
   splits remain recorded deviations).
 - Kit + machinery: `experiments/exp004-modelscreen/phase2b/` with
-  `scripts/run_exp004_phase2b.py` (deterministic `freeze-story` /
-  `prepare`; extends the repeats machinery; never calls an LLM) and
-  `scripts/extract_phase2b_high_story.py` (bank extraction).
-- **Prepared 2026-09-09** (Task 030): 42-run plan + 63 prompt files +
-  manifest generated for the frozen v1 story (deterministic;
-  regeneration byte-identical, verified).
-- **No results exist.** The 42 translations are the next manual operator
-  step (`phase2b/outputs/collection-checklist.md`).
+  `scripts/run_exp004_phase2b.py` (freeze-story / prepare / collect /
+  verify / evaluate) and `scripts/analyze_exp004_phase2b.py`
+  (descriptive paired aggregates).
+- **Status 2026-09-15:** collection / verification / evaluation
+  **42/42 complete**; aggregate integrity **PASS**; no LLM calls during
+  intake/analysis. Canonical mean Δ (n=3): Gemini Flash ON −0.55 /
+  OFF −1.75; Claude Medium +14.28; DeepSeek Expert ON +9.25; Qwen Max
+  Fast +5.18; GPT-5.6 Luna +8.62; Grok 4.5 Fast +14.49 pp. Mixed-sign
+  replicate Δs: Gemini ON, Gemini OFF, Qwen.
+- **Research record:** `phase2b/EVIDENCE.md` (fact / interpretation /
+  hypothesis) + `phase2b/analysis/` (machine-readable, run-ID
+  traceable). Constraints: descriptive only; no significance tests; no
+  causal claim; H-HIGH still a hypothesis pending LOW/UNSEEN.
 - The corpus self-evaluation reference point for interpreting these
   outputs: §9.1 and `phase2a/corpus-selfeval/`.
 
@@ -682,7 +690,8 @@ in [`docs/translation-method.md`](translation-method.md).
 ## 13. Publication direction (`PROPOSED`)
 
 Enough experimental material exists to begin preparing a scientific paper
-while Phase 2B is completed. Framing:
+while LOW/UNSEEN (if justified after HIGH review) complete the Phase 2B
+regime sequence. Framing:
 
 > Can authentic target-language corpus context improve LLM translation
 > into a low-resource constructed language **without fine-tuning**?
@@ -788,13 +797,16 @@ where appropriate. Architecture sketch and evaluation philosophy:
 ## 16. Stopping rule (`CURRENT` rule, recorded Task 028)
 
 The project should not grow indefinitely. Intended sequence:
-1. complete the seven-configuration × three-repeat Phase 2B test;
-2. run the corpus-inspired story test (Phase 2B-A) if still useful;
-3. run the unseen-topic biomedical/electromedicine test (Phase 2B-B);
-4. analyse whether priming generalizes;
-5. begin writing the paper;
-6. optionally perform a small pipeline-optimization experiment;
-7. implement the practical translation tool.
+1. ~~complete the seven-configuration × three-repeat Phase 2B HIGH test~~
+   (**done 2026-09-15** — descriptive aggregates preserved; scientific
+   review next);
+2. decide whether LOW-overlap (`Podkłady`) and/or UNSEEN-domain tests are
+   justified after reviewing HIGH;
+3. analyse whether priming generalizes across regimes (only after those
+   datasets exist);
+4. begin writing the paper from preserved evidence records;
+5. optionally perform a small pipeline-optimization experiment;
+6. implement the practical translation tool.
 
 Do not add more model families merely to increase the model count unless
 a specific scientific question requires it. Do not run more human
@@ -818,5 +830,5 @@ interpretation and a reproducible translation method".
 | EXP-004 repeated-generation report | `experiments/exp004-modelscreen/repeats/REPORT.md` |
 | Compact machine-readable research export | `experiments/exp004-modelscreen/assistant-research-bundle/` (Task 027) |
 | Authentic-corpus self-evaluation (reference point) | `experiments/exp004-modelscreen/phase2a/corpus-selfeval/` (Task 029) |
-| Phase-2B HIGH-overlap test kit (frozen + prepared, not executed) | `experiments/exp004-modelscreen/phase2b/` (Tasks 029/030) |
+| Phase-2B HIGH-overlap test (executed + aggregated, descriptive) | `experiments/exp004-modelscreen/phase2b/` (`EVIDENCE.md` + `analysis/`) |
 | Intervention ladder + pipelines + evaluation layers | `docs/translation-method.md` |

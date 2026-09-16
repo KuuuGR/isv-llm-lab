@@ -1,0 +1,689 @@
+{
+  "artifact": "phase2b-low-qualitative-paired-audit",
+  "date": "2026-09-16",
+  "n_pairs": 21,
+  "note": "Descriptive qualitative audit of Phase 2B LOW D→P pairs (Podkłady). Not causal. Derived from raw outputs + analysis/low/dataset.json; does not modify sources.",
+  "source_aggregates": "experiments/exp004-modelscreen/phase2b/analysis/low/dataset.json",
+  "story_sha256": "ce1c4fca03fe9cb2c5f8181ab45c91767759a0c785f0a066543d95bc32f5271b",
+  "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+  "contrast_with_high": {
+    "high_opening_near_copy_common": true,
+    "low_opening_near_copy_observed": false,
+    "low_max_opening_jaccard_vs_corpus": 0.093,
+    "note": "Unlike HIGH, LOW primed openings remain Podkłady-shaped; positive Δ co-occurs with lexical borrowing/ortho cleanup rather than tuta-historija opening adoption."
+  },
+  "pairs": [
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking ON",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__direct__r01",
+      "primed_run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r01",
+      "canonical_direct": 0.623478,
+      "canonical_primed": 0.781904,
+      "canonical_delta": 0.15842600000000007,
+      "outside_inventory_direct": 61.0,
+      "outside_inventory_primed": 12.0,
+      "opening_jaccard_vs_corpus_direct": 0.066,
+      "opening_jaccard_vs_corpus_primed": 0.082,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz",
+        "tutčas",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+15.84 pp) with Podkłady opening retained; coverage/ortho improve without corpus-narrative opening adoption (opening Jaccard with tuta-historija remains low).",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "polish_chars 157→41",
+        "ortho 61.0→12.0",
+        "markersP=['jedino', 'črěz', 'tutčas', 'govoret']"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking ON",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__direct__r02",
+      "primed_run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r02",
+      "canonical_direct": 0.658619,
+      "canonical_primed": 0.772312,
+      "canonical_delta": 0.11369300000000004,
+      "outside_inventory_direct": 27.0,
+      "outside_inventory_primed": 41.0,
+      "opening_jaccard_vs_corpus_direct": 0.039,
+      "opening_jaccard_vs_corpus_primed": 0.08,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz",
+        "tutčas",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+11.37 pp) with Podkłady opening retained; coverage/ortho improve without corpus-narrative opening adoption (opening Jaccard with tuta-historija remains low).",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "polish_chars 102→32",
+        "ortho 27.0→41.0",
+        "markersP=['jedino', 'črěz', 'tutčas', 'govoret']"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking ON",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__direct__r03",
+      "primed_run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r03",
+      "canonical_direct": 0.64786,
+      "canonical_primed": 0.772629,
+      "canonical_delta": 0.12476900000000002,
+      "outside_inventory_direct": 40.0,
+      "outside_inventory_primed": 37.0,
+      "opening_jaccard_vs_corpus_direct": 0.051,
+      "opening_jaccard_vs_corpus_primed": 0.067,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz",
+        "tutčas",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+12.48 pp) with Podkłady opening retained; coverage/ortho improve without corpus-narrative opening adoption (opening Jaccard with tuta-historija remains low).",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "polish_chars 91→25",
+        "ortho 40.0→37.0",
+        "markersP=['jedino', 'črěz', 'tutčas', 'govoret']"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r03/output.txt"
+      }
+    },
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking OFF",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__direct__r01",
+      "primed_run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r01",
+      "canonical_direct": 0.635482,
+      "canonical_primed": 0.772903,
+      "canonical_delta": 0.13742100000000002,
+      "outside_inventory_direct": 73.0,
+      "outside_inventory_primed": 16.0,
+      "opening_jaccard_vs_corpus_direct": 0.08,
+      "opening_jaccard_vs_corpus_primed": 0.08,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "tutčas",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+13.74 pp) with Podkłady opening retained; coverage/ortho improve without corpus-narrative opening adoption (opening Jaccard with tuta-historija remains low).",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "polish_chars 68→36",
+        "ortho 73.0→16.0",
+        "markersP=['jedino', 'tutčas', 'govoret']"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking OFF",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__direct__r02",
+      "primed_run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r02",
+      "canonical_direct": 0.626938,
+      "canonical_primed": 0.742473,
+      "canonical_delta": 0.11553500000000005,
+      "outside_inventory_direct": 32.0,
+      "outside_inventory_primed": 23.0,
+      "opening_jaccard_vs_corpus_direct": 0.079,
+      "opening_jaccard_vs_corpus_primed": 0.065,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz",
+        "tutčas",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+11.55 pp) with Podkłady opening retained; coverage/ortho improve without corpus-narrative opening adoption (opening Jaccard with tuta-historija remains low).",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "polish_chars 102→46",
+        "ortho 32.0→23.0",
+        "markersP=['jedino', 'črěz', 'tutčas', 'govoret']"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking OFF",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__direct__r03",
+      "primed_run_id": "2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r03",
+      "canonical_direct": 0.672956,
+      "canonical_primed": 0.732067,
+      "canonical_delta": 0.059111000000000025,
+      "outside_inventory_direct": 24.0,
+      "outside_inventory_primed": 50.0,
+      "opening_jaccard_vs_corpus_direct": 0.079,
+      "opening_jaccard_vs_corpus_primed": 0.065,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz",
+        "tutčas",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+5.91 pp) with Podkłady opening retained; coverage/ortho improve without corpus-narrative opening adoption (opening Jaccard with tuta-historija remains low).",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "polish_chars 58→41",
+        "ortho 24.0→50.0",
+        "markersP=['jedino', 'črěz', 'tutčas', 'govoret']"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r03/output.txt"
+      }
+    },
+    {
+      "configuration": "Claude Sonnet 5 — Medium (default)",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__direct__r01",
+      "primed_run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r01",
+      "canonical_direct": 0.641784,
+      "canonical_primed": 0.779964,
+      "canonical_delta": 0.13817999999999997,
+      "outside_inventory_direct": 314.0,
+      "outside_inventory_primed": 30.0,
+      "opening_jaccard_vs_corpus_direct": 0.053,
+      "opening_jaccard_vs_corpus_primed": 0.052,
+      "corpus_lexeme_markers_primed": [
+        "črěz",
+        "tutčas",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+13.82 pp); urban Podkłady plot retained; primed shows increased corpus-register lexis (črěz/govoret/tutčas/jedino) without near-copy of the winter-narrative opening.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "markersP=['črěz', 'tutčas', 'govoret']",
+        "ortho 314.0→30.0"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__anthropic__claude__sonnet-5__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "Claude Sonnet 5 — Medium (default)",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__direct__r02",
+      "primed_run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r02",
+      "canonical_direct": 0.663403,
+      "canonical_primed": 0.755782,
+      "canonical_delta": 0.09237899999999999,
+      "outside_inventory_direct": 93.0,
+      "outside_inventory_primed": 7.0,
+      "opening_jaccard_vs_corpus_direct": 0.066,
+      "opening_jaccard_vs_corpus_primed": 0.052,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz",
+        "tutčas",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+9.24 pp); urban Podkłady plot retained; primed shows increased corpus-register lexis (črěz/govoret/tutčas/jedino) without near-copy of the winter-narrative opening.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "markersP=['jedino', 'črěz', 'tutčas', 'govoret']",
+        "ortho 93.0→7.0"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__anthropic__claude__sonnet-5__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "Claude Sonnet 5 — Medium (default)",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__direct__r03",
+      "primed_run_id": "2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r03",
+      "canonical_direct": 0.66651,
+      "canonical_primed": 0.799228,
+      "canonical_delta": 0.132718,
+      "outside_inventory_direct": 140.0,
+      "outside_inventory_primed": 2.0,
+      "opening_jaccard_vs_corpus_direct": 0.052,
+      "opening_jaccard_vs_corpus_primed": 0.081,
+      "corpus_lexeme_markers_primed": [
+        "črěz",
+        "tutčas",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+13.27 pp); urban Podkłady plot retained; primed shows increased corpus-register lexis (črěz/govoret/tutčas/jedino) without near-copy of the winter-narrative opening.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "markersP=['črěz', 'tutčas', 'govoret']",
+        "ortho 140.0→2.0"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__anthropic__claude__sonnet-5__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r03/output.txt"
+      }
+    },
+    {
+      "configuration": "DeepSeek V3 Expert — DeepThink ON",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__direct__r01",
+      "primed_run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r01",
+      "canonical_direct": 0.692456,
+      "canonical_primed": 0.746744,
+      "canonical_delta": 0.054288,
+      "outside_inventory_direct": 11.0,
+      "outside_inventory_primed": 10.0,
+      "opening_jaccard_vs_corpus_direct": 0.065,
+      "opening_jaccard_vs_corpus_primed": 0.065,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Moderate positive Δ (+5.43 pp); local lexical/orthographic shifts; no corpus-opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "neutral variation"
+      ],
+      "notable_observations": [
+        "markersP=['jedino', 'črěz', 'govoret']"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "DeepSeek V3 Expert — DeepThink ON",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__direct__r02",
+      "primed_run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r02",
+      "canonical_direct": 0.677966,
+      "canonical_primed": 0.757198,
+      "canonical_delta": 0.07923200000000008,
+      "outside_inventory_direct": 17.0,
+      "outside_inventory_primed": 10.0,
+      "opening_jaccard_vs_corpus_direct": 0.079,
+      "opening_jaccard_vs_corpus_primed": 0.052,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz",
+        "tutčas",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Moderate positive Δ (+7.92 pp); local lexical/orthographic shifts; no corpus-opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "neutral variation"
+      ],
+      "notable_observations": [
+        "markersP=['jedino', 'črěz', 'tutčas', 'govoret']"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "DeepSeek V3 Expert — DeepThink ON",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__direct__r03",
+      "primed_run_id": "2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r03",
+      "canonical_direct": 0.69754,
+      "canonical_primed": 0.74976,
+      "canonical_delta": 0.05221999999999993,
+      "outside_inventory_direct": 18.0,
+      "outside_inventory_primed": 18.0,
+      "opening_jaccard_vs_corpus_direct": 0.065,
+      "opening_jaccard_vs_corpus_primed": 0.066,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Moderate positive Δ (+5.22 pp); local lexical/orthographic shifts; no corpus-opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "neutral variation"
+      ],
+      "notable_observations": [
+        "markersP=['jedino', 'črěz', 'govoret']"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r03/output.txt"
+      }
+    },
+    {
+      "configuration": "Qwen 3.8 Max — Fast",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r01",
+      "primed_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01",
+      "canonical_direct": 0.724829,
+      "canonical_primed": 0.666989,
+      "canonical_delta": -0.05783999999999989,
+      "outside_inventory_direct": 34.0,
+      "outside_inventory_primed": 37.0,
+      "opening_jaccard_vs_corpus_direct": 0.052,
+      "opening_jaccard_vs_corpus_primed": 0.065,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Negative canonical Δ (-5.78 pp) despite some corpus lexical hits (govoret/črěz/jedino); opening stays Podkłady-like, not corpus-narrative rewrite.",
+      "difference_classes": [
+        "apparent degradation",
+        "ambiguous"
+      ],
+      "notable_observations": [
+        "corpus markers P=['jedino', 'govoret']",
+        "ortho 34.0→37.0"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "Qwen 3.8 Max — Fast",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r02",
+      "primed_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02",
+      "canonical_direct": 0.71959,
+      "canonical_primed": 0.682749,
+      "canonical_delta": -0.0368409999999999,
+      "outside_inventory_direct": 28.0,
+      "outside_inventory_primed": 16.0,
+      "opening_jaccard_vs_corpus_direct": 0.052,
+      "opening_jaccard_vs_corpus_primed": 0.066,
+      "corpus_lexeme_markers_primed": [
+        "črěz",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Negative canonical Δ (-3.68 pp) despite some corpus lexical hits (govoret/črěz/jedino); opening stays Podkłady-like, not corpus-narrative rewrite.",
+      "difference_classes": [
+        "apparent degradation",
+        "ambiguous"
+      ],
+      "notable_observations": [
+        "corpus markers P=['črěz', 'govoret']",
+        "ortho 28.0→16.0"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "Qwen 3.8 Max — Fast",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r03",
+      "primed_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03",
+      "canonical_direct": 0.721078,
+      "canonical_primed": 0.453415,
+      "canonical_delta": -0.267663,
+      "outside_inventory_direct": 18.0,
+      "outside_inventory_primed": 1066.0,
+      "opening_jaccard_vs_corpus_direct": 0.065,
+      "opening_jaccard_vs_corpus_primed": 0.025,
+      "corpus_lexeme_markers_primed": [
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": true,
+      "summary": "Primed output largely reverts to Polish source prose (się/który/ortho explosion); canonical Δ ≈ −26.8 pp.",
+      "difference_classes": [
+        "apparent degradation",
+        "Polish collapse"
+      ],
+      "notable_observations": [
+        "Polish-letter surge 44→983",
+        "outside-inventory 18→1066",
+        "urban Podkłady content retained"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03/output.txt"
+      }
+    },
+    {
+      "configuration": "GPT-5.6 Luna — thinking OFF",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__direct__r01",
+      "primed_run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r01",
+      "canonical_direct": 0.717391,
+      "canonical_primed": 0.765847,
+      "canonical_delta": 0.048456000000000055,
+      "outside_inventory_direct": 6.0,
+      "outside_inventory_primed": 9.0,
+      "opening_jaccard_vs_corpus_direct": 0.066,
+      "opening_jaccard_vs_corpus_primed": 0.079,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Moderate positive Δ (+4.85 pp); local lexical/orthographic shifts; no corpus-opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "neutral variation"
+      ],
+      "notable_observations": [
+        "markersP=['jedino', 'črěz', 'govoret']"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "GPT-5.6 Luna — thinking OFF",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__direct__r02",
+      "primed_run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r02",
+      "canonical_direct": 0.700674,
+      "canonical_primed": 0.764346,
+      "canonical_delta": 0.06367199999999995,
+      "outside_inventory_direct": 14.0,
+      "outside_inventory_primed": 13.0,
+      "opening_jaccard_vs_corpus_direct": 0.066,
+      "opening_jaccard_vs_corpus_primed": 0.079,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz",
+        "tutčas",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Moderate positive Δ (+6.37 pp); local lexical/orthographic shifts; no corpus-opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "neutral variation"
+      ],
+      "notable_observations": [
+        "markersP=['jedino', 'črěz', 'tutčas', 'govoret']"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "GPT-5.6 Luna — thinking OFF",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__direct__r03",
+      "primed_run_id": "2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r03",
+      "canonical_direct": 0.704381,
+      "canonical_primed": 0.751662,
+      "canonical_delta": 0.04728100000000002,
+      "outside_inventory_direct": 15.0,
+      "outside_inventory_primed": 23.0,
+      "opening_jaccard_vs_corpus_direct": 0.066,
+      "opening_jaccard_vs_corpus_primed": 0.093,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz",
+        "tutčas",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Moderate positive Δ (+4.73 pp); local lexical/orthographic shifts; no corpus-opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "neutral variation"
+      ],
+      "notable_observations": [
+        "markersP=['jedino', 'črěz', 'tutčas', 'govoret']"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r03/output.txt"
+      }
+    },
+    {
+      "configuration": "Grok 4.5 Fast",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-15__p2b-low__xai__grok__fast__direct__r01",
+      "primed_run_id": "2026-09-15__p2b-low__xai__grok__fast__primed__r01",
+      "canonical_direct": 0.693392,
+      "canonical_primed": 0.77552,
+      "canonical_delta": 0.08212799999999998,
+      "outside_inventory_direct": 21.0,
+      "outside_inventory_primed": 19.0,
+      "opening_jaccard_vs_corpus_direct": 0.065,
+      "opening_jaccard_vs_corpus_primed": 0.079,
+      "corpus_lexeme_markers_primed": [
+        "črěz",
+        "tutčas"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+8.21 pp); urban Podkłady plot retained; primed shows increased corpus-register lexis (črěz/govoret/tutčas/jedino) without near-copy of the winter-narrative opening.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "markersP=['črěz', 'tutčas']",
+        "ortho 21.0→19.0"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__xai__grok__fast__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__xai__grok__fast__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "Grok 4.5 Fast",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-15__p2b-low__xai__grok__fast__direct__r02",
+      "primed_run_id": "2026-09-15__p2b-low__xai__grok__fast__primed__r02",
+      "canonical_direct": 0.692607,
+      "canonical_primed": 0.743938,
+      "canonical_delta": 0.051331000000000016,
+      "outside_inventory_direct": 30.0,
+      "outside_inventory_primed": 42.0,
+      "opening_jaccard_vs_corpus_direct": 0.051,
+      "opening_jaccard_vs_corpus_primed": 0.065,
+      "corpus_lexeme_markers_primed": [
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": true,
+      "summary": "Moderate positive Δ (+5.13 pp); local lexical/orthographic shifts; no corpus-opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "neutral variation"
+      ],
+      "notable_observations": [
+        "markersP=['črěz']"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__xai__grok__fast__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__xai__grok__fast__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "Grok 4.5 Fast",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-15__p2b-low__xai__grok__fast__direct__r03",
+      "primed_run_id": "2026-09-15__p2b-low__xai__grok__fast__primed__r03",
+      "canonical_direct": 0.69358,
+      "canonical_primed": 0.678623,
+      "canonical_delta": -0.014956999999999998,
+      "outside_inventory_direct": 22.0,
+      "outside_inventory_primed": 153.0,
+      "opening_jaccard_vs_corpus_direct": 0.079,
+      "opening_jaccard_vs_corpus_primed": 0.065,
+      "corpus_lexeme_markers_primed": [
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": true,
+      "summary": "Small negative Δ (−1.5 pp); Podkłady narrative retained; light corpus lexeme use without opening copy.",
+      "difference_classes": [
+        "ambiguous",
+        "apparent degradation"
+      ],
+      "notable_observations": [
+        "winter_motif_bleed=True",
+        "jac opening P=0.065"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__xai__grok__fast__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__xai__grok__fast__primed__r03/output.txt"
+      }
+    }
+  ]
+}

@@ -1,14 +1,28 @@
 # Project State
 
-Updated: 2026-09-09 (SODA Task 031 — GROK CONFIGURATION IDENTITY
+Updated: 2026-09-16 (Phase 2B LOW — RESULTS PRESERVATION: 42/42
+collected, verified, evaluated; aggregate analysis integrity PASS;
+descriptive paired Δ_LOW recorded under
+`experiments/exp004-modelscreen/phase2b/analysis/low/`; article-ready
+`analysis/low/EVIDENCE.md` + qualitative audit; **n=3 descriptive only** —
+no significance tests, no causal claim, no UNSEEN, no model ranking;
+HIGH artifacts untouched; frozen Podkłady story + corpus untouched; no
+LLM sessions during intake/analysis — see Phase-2B-LOW results below.
+Prior update 2026-09-15 (Phase 2B HIGH — RESULTS PRESERVATION: 42/42
+collected, verified, evaluated; aggregate analysis integrity PASS;
+descriptive paired Δ_HIGH recorded; article-ready evidence at
+`experiments/exp004-modelscreen/phase2b/EVIDENCE.md`; computational
+aggregates under `phase2b/analysis/`; **n=3 descriptive only** — no
+significance tests, no causal claim, no final scientific
+conclusions; raw outputs and frozen inputs untouched — see the
+Phase-2B-HIGH results row below. SODA Task 031 — GROK CONFIGURATION IDENTITY
 CANONICALIZATION: repository-wide audit + canonicalization of the Grok
 configuration to **Grok 4.5 Fast** (operator-reported "Grok 4.5, built by
 xAI (fast)") across EXP-004 displays/rosters/summaries/generators/docs;
 historical `unknown` run identifiers preserved with canonical alias
-`xai__grok__fast`; never-collected Phase-2B kit regenerated with
-canonical `grok…fast` ids; no Grok Build run exists in repository
-evidence (EXP-001/002-era Grok stays genuinely `unknown`);
-authoritative note + map
+`xai__grok__fast`; Phase-2B kit uses canonical `grok…fast` ids; no Grok
+Build run exists in repository evidence (EXP-001/002-era Grok stays
+genuinely `unknown`); authoritative note + map
 `experiments/exp004-modelscreen/grok-identity.{md,json}`; metadata-only,
 no raw output or metric changes — see the Task-031 row below. SODA Task 030 — HIGH-OVERLAP EXPERIMENT EXECUTION
 PREPARATION: HIGH-overlap source story extracted from the author's bank
@@ -20,16 +34,14 @@ classification `high_overlap_corpus_inspired` — by the deterministic
 freeze-story`; the 42-run HIGH kit (7 configs × direct/primed × 3
 replicates = 42 planned translations) was generated
 (`prepare --date 2026-09-09`; 63 prompt files + plan + manifest;
-regeneration byte-identical, verified) — **no translations exist**, the
-42 runs remain the next manual operator step; bank sections 1/2
+regeneration byte-identical, verified); bank sections 1/2
 preserved-unused and section 4 `Podkłady` reserved as the LOW-overlap
-source for the NEXT stage (NOT prepared); corpus self-evaluation
+source for a later stage (NOT prepared); corpus self-evaluation
 reproducibility re-verified (stored reports reproduced byte-identically)
 — see the Task-030 paragraph below. SODA Task 029 — HIGH-OVERLAP TEST
 PREPARATION + AUTHENTIC-CORPUS SELF-EVALUATION: deterministic Phase-2B
 HIGH-overlap kit prepared (7 configs × direct/primed × 3 replicates =
-42 planned translations, story to be frozen by the author — NOT
-executed, no LLM calls) + the authentic corpus itself evaluated with the
+42 planned translations) + the authentic corpus itself evaluated with the
 unchanged evaluation stack as a reference point (combined 80.50 %
 canonical / 89.17 % broader / 19.50 % unresolved; per-register results)
 — see the Task-029 paragraph below. SODA Task 028 —
@@ -64,8 +76,32 @@ canonical / −0.84 broader over the original 18) and baseline-vs-primed
 correlations, family + orthography analyses, practical-usability
 dimension, master table, supported/suggestive/not-established
 conclusions, research candidates, ≤ 3 recommended next experiments — **no
-composite score, no winner**; Phase 2B not executed).
+composite score, no winner**).
 
+Phase 2B LOW (2026-09-16) — RESULTS PRESERVED. Operator-collected
+42/42 LOW-overlap runs intaken (collect → verify → evaluate; LOW-aware
+Phase-2B gate) and aggregated (`analyze_exp004_phase2b.py --regime low`;
+integrity PASS). Provenance pins: story SHA-256 `ce1c4fca…5271b`,
+corpus SHA-256 `aaad28e4…a857`. Canonical mean Δ (n=3): Gemini Flash ON
++13.23 / OFF +10.40; Claude Medium +12.11; DeepSeek Expert ON +6.19;
+Qwen Max Fast −12.08; GPT-5.6 Luna +5.31; Grok 4.5 Fast +3.95 pp
+(descriptive mean of config means +5.59 pp; 6/7 positive). Artifacts:
+`phase2b/analysis/low/`. Qualitative: no systematic corpus-opening
+near-copy. HIGH untouched; UNSEEN unexecuted; no LLM during intake/analysis.
+
+Phase 2B HIGH (2026-09-15) — RESULTS PRESERVED. Operator-collected
+42/42 HIGH-overlap runs were formally intaken (collect → verify →
+evaluate via `scripts/run_exp004_phase2b.py`; Phase-2B gate), then
+aggregated by `scripts/analyze_exp004_phase2b.py` (integrity PASS;
+descriptive paired analysis only). Provenance pins: story SHA-256
+`ab8a0dcf…792f63`, corpus SHA-256 `aaad28e4…a857`. Canonical mean Δ
+(n=3): Gemini Flash ON −0.55 / OFF −1.75; Claude Medium +14.28;
+DeepSeek Expert ON +9.25; Qwen Max Fast +5.18; GPT-5.6 Luna +8.62;
+Grok 4.5 Fast +14.49 pp. Mixed-sign replicate Δs: Gemini ON, Gemini
+OFF, Qwen. Article-ready record:
+`experiments/exp004-modelscreen/phase2b/EVIDENCE.md`. Computational
+results: `phase2b/analysis/{dataset,analysis}.{json,md}`. No LLM
+reruns during intake/analysis; no final scientific conclusions written.
 SODA Task 026 (2026-09-09) — AUDITED THE COLLECTED REPEATED-GENERATION
 DATASET AND RAN THE REPEATED-GENERATION ANALYSIS. The research lead
 collected **114/120** planned runs (102 primary + 12 exploratory Dola;
@@ -409,7 +445,8 @@ any constrained system is judged against it.
 | **EXP-004 corpus self-evaluation (Task 029, 2026-09-09)** | ✅ **COMPLETE — REFERENCE POINT** — authentic corpus measured with the unchanged evaluation stack (`phase2a/corpus-selfeval/`): combined 8 096 tokens — canonical 80.50 %, broader 89.17 %, unresolved 19.50 %, orthography-out 47; Register 1 narrative 95.97/99.48 %; Register 2 artistic 90.56/100.00 %; Register 3 encyclopedic 75.72/84.83 %. Evidence that low canonical model coverage can partly reflect resource limits; corpus orthography clean (does not explain model contamination); exploratory cross-register composition (61/3 425 shared surfaces). Descriptive only — no "corpus score", no correctness claim |
 | **EXP-004 Phase-2B HIGH-overlap kit (Task 029, 2026-09-09)** | ✅ **PREPARED — NOT EXECUTED** — deterministic 42-run HIGH-overlap kit (`experiments/exp004-modelscreen/phase2b/` + `scripts/run_exp004_phase2b.py`): 7 shortlisted configs × direct/primed × 3 replicates; source regime `high_overlap_corpus_inspired` (`Iskra i Wieloryb`); direct corpus-free, primed full-corpus hash-gated (`aaad28e4…`); H-HIGH hypothesis recorded; **story text still to be frozen by the author — `prepare` fails loudly until then; no translations exist; next manual step is the 42 translations** |
 | **EXP-004 HIGH-overlap story frozen + kit generated (Task 030, 2026-09-09)** | ✅ **FROZEN + GENERATED — NOT EXECUTED** — story `Iskra i Wieloryb` extracted from the author's bank section `# 3.` (`scripts/extract_phase2b_high_story.py`, deterministic; Markdown markers removed only; 227 content lines preserved exactly) and frozen v1 (sha256 `ab8a0dcf…`, 30 061 B / 440 lines; classification `high_overlap_corpus_inspired`); 42-run kit generated (`prepare --date 2026-09-09`; 63 prompt files; regeneration byte-identical); bank sections 1/2 unused, **`Podkłady` (section 4) reserved as LOW-overlap source for the NEXT stage — not prepared**; corpus self-evaluation reproducibility re-verified |
-| **EXP-004 Grok configuration identity canonicalized (Task 031, 2026-09-09)** | ✅ **COMPLETE — METADATA/NAMING ONLY** — repository-wide audit + canonicalization of the Grok configuration to **Grok 4.5 Fast** (operator-reported identity "Grok 4.5, built by xAI (fast)", marked `operator_reported`, not independently verified). Rendered labels in tables/rosters/summaries/figures (EXP-004 README, Phase-2A/2B/repeats READMEs, repeats REPORT, roadmap) canonicalized; generators apply the overlay forward (`scripts/run_exp004_phase1.py` constants/helpers, `run_exp004_phase2b.py`, `analyze_exp004_repeats.py`, `build_assistant_research_bundle.py`); pre-canonicalization run ids/prompt filenames keep the recorded `unknown` token as historical provenance with canonical alias `xai__grok__fast` (Phase 1 row 08, Phase 2A, repeats); the never-collected Phase-2B HIGH kit was regenerated with canonical `…__grok__fast__…` run ids/files (9 stale `grok-unknown` prompt files removed; manifest/plan unchanged for other configs); **no Grok Build run exists in repository evidence** (searched; task-brief exception not supported by these records); EXP-001/002-era Grok run `exp002__2026-08-31__unknown__grok__unknown` preserved as genuinely `unknown`; authoritative note + machine-readable map `experiments/exp004-modelscreen/grok-identity.md` / `grok-identity-map.json`; canonicalization tests added; **no raw output bytes, no metrics, no evaluator/conditions changed**; full suite green |
+| **EXP-004 Grok configuration identity canonicalized (Task 031, 2026-09-09)** | ✅ **COMPLETE — METADATA/NAMING ONLY** — repository-wide audit + canonicalization of the Grok configuration to **Grok 4.5 Fast** (operator-reported identity "Grok 4.5, built by xAI (fast)", marked `operator_reported`, not independently verified). Rendered labels in tables/rosters/summaries/figures (EXP-004 README, Phase-2A/2B/repeats READMEs, repeats REPORT, roadmap) canonicalized; generators apply the overlay forward (`scripts/run_exp004_phase1.py` constants/helpers, `run_exp004_phase2b.py`, `analyze_exp004_repeats.py`, `build_assistant_research_bundle.py`); pre-canonicalization run ids/prompt filenames keep the recorded `unknown` token as historical provenance with canonical alias `xai__grok__fast` (Phase 1 row 08, Phase 2A, repeats); the Phase-2B HIGH kit uses canonical `…__grok__fast__…` run ids/files; **no Grok Build run exists in repository evidence**; EXP-001/002-era Grok run `exp002__2026-08-31__unknown__grok__unknown` preserved as genuinely `unknown`; authoritative note + machine-readable map `experiments/exp004-modelscreen/grok-identity.md` / `grok-identity-map.json`; canonicalization tests added; **no raw output bytes, no metrics, no evaluator/conditions changed**; full suite green |
+| **EXP-004 Phase-2B HIGH executed + aggregated (2026-09-15)** | ✅ **EXECUTED, COLLECTED, VERIFIED, EVALUATED, AGGREGATE ANALYSED — DESCRIPTIVE ONLY** — 42/42 HIGH-overlap runs intaken (`scripts/run_exp004_phase2b.py` collect/verify/evaluate; Phase-2B gate) and aggregated (`scripts/analyze_exp004_phase2b.py`; integrity PASS). Design: 7 shortlisted configs × direct/primed × r01–r03; story SHA-256 `ab8a0dcf…792f63`; corpus SHA-256 `aaad28e4…a857`. Canonical mean Δ (n=3): Gemini Flash ON −0.55 / OFF −1.75; Claude Medium +14.28; DeepSeek Expert ON +9.25; Qwen Max Fast +5.18; GPT-5.6 Luna +8.62; Grok 4.5 Fast +14.49 pp. Mixed-sign replicate Δs for Gemini ON, Gemini OFF, Qwen. Artifacts: `phase2b/EVIDENCE.md` (article-ready fact/interpretation/hypothesis), `phase2b/analysis/{dataset,analysis}.{json,md}`, `phase2b/README.md`. Constraints recorded: n=3 descriptive; no significance tests; no causal claim; orthography separate; unresolved structurally related to canonical. **No LLM reruns during intake/analysis; raw outputs + frozen inputs untouched; LOW/UNSEEN not started; no final scientific conclusions** |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
 
 
@@ -470,8 +507,9 @@ scripts/
   audit_exp004_repeats.py   — EXP-004 phase-repeat collection audit + reconciliation evidence (Task 026; machine-readable audit.json + audit.md; roster-verdict merge)
   analyze_exp004_repeats.py  — EXP-004 Task-025/026 deterministic repeated-generation analysis (stochastic stats, mean-primed−mean-direct vs old delta, figures A–E, selection views; std-lib only)
   build_assistant_research_bundle.py — EXP-004 assistant-research-bundle generator + standalone verifier (Task 027; deterministic, std-lib)
-  run_exp004_phase2b.py      — EXP-004 Phase-2B HIGH-overlap kit prep (freeze-story/prepare; 7 configs × 2 conditions × 3 replicates = 42 planned runs; hash-gated; Task 029; extends run_exp004_repeats.py; never calls an LLM)
+  run_exp004_phase2b.py      — EXP-004 Phase-2B HIGH-overlap orchestrator (freeze-story/prepare/collect/verify/evaluate/status; 7 configs × 2 conditions × 3 replicates = 42 runs; hash-gated; Tasks 029+; extends run_exp004_repeats.py; never calls an LLM)
   extract_phase2b_high_story.py — EXP-004 Phase-2B HIGH-overlap story extraction from the author's story bank (section `# 3.`; Markdown structural markers removed only; deterministic; Task 030)
+  analyze_exp004_phase2b.py  — EXP-004 Phase-2B HIGH descriptive paired aggregate analysis (integrity gate; dataset/analysis JSON+MD; std-lib only; no LLM)
   selfeval_exp004_corpus.py  — EXP-004 authentic-corpus self-evaluation (combined + 3 registers through the unchanged Task-008 evaluator + orthography audit; cross-register composition; model comparison; Task 029; deterministic)
 data/
   dictionary/README.md       — how to regenerate the (gitignored) data
@@ -521,7 +559,7 @@ experiments/
     repeats/                 — Phase-repeat experiment (Tasks 025/026): README.md (protocol + manifest + collection record + audit record) + REPORT.md (dedicated report — status: COLLECTED, AUDITED, ANALYSED; results written 2026-09-09) + operator-prompts/ (180 prompt files incl. 12 exploratory Dola; collected raw replies live msg2-style after `## Output`; gitignored — embed source/corpus; manifest.json hash-only committed) + outputs/ (120-run plan dated 2026-09-08, collection-checklist.md, roster.json/md, audit.json/md, run dirs; gitignored except README.md) + analysis/ (README.md committed with results summary; dataset/analysis JSON+MD + figures A–E — deterministic outputs of analyze_exp004_repeats.py, gitignored)
     assistant-research-bundle/  — EXP-004 compact machine-readable research export for independent analysis (Task 027): results.json/csv, summary.json, audit.json, deviations.json, provenance.json, manifest.json, methodology.md, raw/README.md, figures A–E — committed; generator + standalone verifier scripts/build_assistant_research_bundle.py
     phase2a/corpus-selfeval/ — EXP-004 authentic-corpus self-evaluation reference point (Task 029): corpus_selfeval.json/md (combined + per-register canonical/broader/unresolved/orthography) + model_comparison.md (descriptive vs Phase-1/Phase-2A/repeated outputs) + README.md — committed; per-dataset isv-eval CLI scratch in .scratch/ (gitignored)
-    phase2b/                 — Phase-2B HIGH-overlap test (Tasks 029/030; story FROZEN v1 + kit GENERATED — NOT EXECUTED): README.md (protocol: 7 shortlisted configs × direct/primed × 3 replicates = 42 planned translations; H-HIGH hypothesis; regime table HIGH/LOW/UNSEEN with LOW pinned to `Podkłady` for the next stage) + input/ (frozen story v1 `versions/iskra-wieloryb-original-names-v1.txt` + provenance `high-overlap-story.meta.json` + extraction copy `_extracted/` — local; README committed with sha256/bytes/lines) + operator-prompts/ (63 generated prompt files + committed hash-only manifest) + outputs/ (plan.json dated 2026-09-09 + collection-checklist.md; README committed)
+    phase2b/                 — Phase-2B HIGH-overlap test (Tasks 029/030/031 + 2026-09-15 results preservation): README.md (protocol + status: 42/42 collected/verified/evaluated + aggregate analysed) + EVIDENCE.md (article-ready fact/interpretation/hypothesis) + input/ (frozen story v1 + provenance — local; README committed) + operator-prompts/ (63 files + committed hash-only manifest; collected replies msg2-style) + outputs/ (plan.json dated 2026-09-09 + per-run evaluation artifacts; gitignored except README) + analysis/ (README committed; dataset/analysis JSON+MD gitignored — outputs of analyze_exp004_phase2b.py)
 ```
 
 ## Working agreements
