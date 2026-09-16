@@ -591,20 +591,21 @@ but it is a future experiment and must **not** be mixed into Phase 2B.
 | Regime | Definition | Test item | Status |
 |---|---|---|---|
 | **HIGH-overlap** | a new Polish story strongly inspired by the corpus, deliberately sharing substantial themes/motifs/imagery/narrative patterns/world-building with it | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` (bank section 3; frozen v1 Task 030) | **executed + aggregated** (42/42; descriptive; 2026-09-15) |
-| **LOW-overlap** | a new Polish story with very little thematic/fabular overlap with the corpus | **`Podkłady`** (bank section 4; clean prose frozen v1; casting/API preamble excluded). `Opowieść o sygnale` (bank section 2) remains banked but is not the selected LOW item | **executed + aggregated** (42/42; descriptive; 2026-09-16) |
+| **LOW-overlap** | a new Polish story with very little thematic/fabular overlap with the corpus | **`Podkłady`** (bank section 4; clean prose frozen v1; casting/API preamble excluded). `Opowieść o sygnale` (bank section 2) remains banked but is not the selected LOW item | **executed + aggregated** (42/42 retained; **6 valid** paired configs; Qwen `INVALID — MODEL MISMATCH`; 2026-09-16) |
 | **UNSEEN DOMAIN** | a Polish scientific/educational source from a domain absent from the corpus | future biomedical-physics / electromedicine educational material | scoped; NOT prepared |
 
-The current experimental source set (Task 030): HIGH = `Iskra i
-Wieloryb` (frozen, kit prepared); LOW = `Podkłady` (future only). Bank
-sections 1 (`Opowieść o Faktach…`) and 2 (`Opowieść o sygnale`) are
-retained in the author's bank but are not part of any planned
-experiment.
+The current experimental source set: HIGH = `Iskra i Wieloryb` (frozen
+v1; **executed + aggregated** 2026-09-15); LOW = `Podkłady` (frozen v1;
+**executed + aggregated** 2026-09-16); UNSEEN DOMAIN remains scoped and
+**not prepared / not executed**. Bank sections 1 (`Opowieść o Faktach…`)
+and 2 (`Opowieść o sygnale`) are retained in the author's bank but are
+not part of any planned experiment.
 
 HIGH-overlap is **not** an independent control and is **not** a
 stronger-generalization test than LOW-overlap or UNSEEN DOMAIN; it tests
 whether corpus priming produces *especially strong* gains when the test
-text is strongly aligned with the priming material. Do not start
-LOW-overlap or UNSEEN-domain experiments yet.
+text is strongly aligned with the priming material. Do **not** start
+UNSEEN-domain experiments yet.
 
 ### 11.2 HIGH-overlap test (`EXECUTED` + `AGGREGATE ANALYSED` — descriptive; Tasks 029/030/031 + 2026-09-15 preservation)
 
@@ -648,11 +649,44 @@ LOW-overlap or UNSEEN-domain experiments yet.
 - **Research record:** `phase2b/EVIDENCE.md` (fact / interpretation /
   hypothesis) + `phase2b/analysis/` (machine-readable, run-ID
   traceable). Constraints: descriptive only; no significance tests; no
-  causal claim; H-HIGH still a hypothesis pending LOW/UNSEEN.
+  causal claim; H-HIGH still a hypothesis pending fuller regime
+  comparison (LOW now exists; UNSEEN does not).
 - The corpus self-evaluation reference point for interpreting these
   outputs: §9.1 and `phase2a/corpus-selfeval/`.
 
-### 11.3 H-HIGH hypothesis and comparison plan (`HYPOTHESIS`, recorded Task 029)
+### 11.2b LOW-overlap test (`EXECUTED` + `AGGREGATE ANALYSED` — descriptive; 2026-09-16)
+
+- Story identity: **`Podkłady`** (author-owned Polish story; clean prose
+  frozen v1; casting/API preamble excluded). Classification:
+  **`low_overlap`**.
+- Provenance pins: story SHA-256
+  `ce1c4fca03fe9cb2c5f8181ab45c91767759a0c785f0a066543d95bc32f5271b`;
+  corpus SHA-256
+  `aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857`
+  (identical authoritative `phase2a-authentic-isv` v1 as HIGH).
+- Sample: same 7 configurations × direct/primed × r01–r03 = **42 runs**
+  (21 paired Δᵢ = Pᵢ − Dᵢ). Metrics identical to HIGH.
+- **Status 2026-09-16 (corrected same day):** collection / verification /
+  evaluation **42/42 complete**; aggregate integrity **PASS**; **primary
+  paired analysis = 6 valid configs**. Canonical mean Δ (n=3/cell;
+  valid only): Gemini Flash ON +13.23 / OFF +10.40; Claude Medium
+  +12.11; DeepSeek Expert ON +6.19; GPT-5.6 Luna +5.31; Grok 4.5 Fast
+  +3.95 pp. Direction: Gemini ON/OFF, Claude, DeepSeek, Luna all+; Grok
+  mixed. Descriptive mean of **n=6** valid configuration mean-Δ values:
+  **+8.53 pp**. **Qwen cell:** `INVALID — MODEL MISMATCH`
+  (Direct=Qwen3.8-Max; Primed=Qwen3.7-Plus; later Qwen3.8-Max Primed
+  content-security warning; no workaround; priming **not estimated** —
+  do not cite historical −12.08 pp). Record:
+  `phase2b/analysis/low/QWEN_INCIDENT.md`.
+- **Research record:** `phase2b/analysis/low/EVIDENCE.md` +
+  `phase2b/analysis/low/` + qualitative audit (18 valid pairs). HIGH
+  artifacts untouched. Qualitative (valid cells): no systematic
+  corpus-opening near-copy (unlike HIGH). Matched 6-config HIGH↔LOW
+  sensitivity: HIGH +7.39 pp vs LOW +8.53 pp (descriptive; unequal to
+  HIGH’s published 7-config aggregate). Exploratory cross-regime
+  synthesis: `phase2b/analysis/high_low/` (not causal).
+
+### 11.3 H-HIGH hypothesis and comparison plan (`HYPOTHESIS`, recorded Task 029; LOW comparison now available)
 
 **H-HIGH** — corpus priming may produce a larger improvement in
 resource-supported Interslavic generation when the target text is
@@ -661,12 +695,14 @@ strongly thematically/motivically aligned with the priming corpus.
 Potential alternative explanation: the model may simply benefit from
 stronger lexical/topic overlap or may reproduce corpus-specific
 structures. The experiment measures the magnitude of the context-aligned
-effect. Interpretation will compare `Δ_HIGH` (`Iskra i Wieloryb`, this
-kit) vs `Δ_LOW` (`Podkłady`, next stage) vs `Δ_UNSEEN` (future
-biomedical physics / electromedicine): the research question is whether
-corpus priming becomes stronger as the target source is more similar to
-the corpus. **No such relationship is claimed until those tests are
-actually run.**
+effect. Interpretation compares `Δ_HIGH` (`Iskra i Wieloryb`) vs
+`Δ_LOW` (`Podkłady`, **executed**) vs `Δ_UNSEEN` (future biomedical
+physics / electromedicine, **not executed**): the research question is
+whether corpus priming becomes stronger as the target source is more
+similar to the corpus. Descriptive HIGH↔LOW contrasts are now available
+in `phase2b/analysis/low/EVIDENCE.md`; **no causal confirmation of
+H-HIGH is claimed**, and UNSEEN remains required for the full planned
+comparison set.
 
 ### 11.4 Future round-trip recoverability experiment (`FUTURE` / `HYPOTHESIS`, recorded Task 030)
 
@@ -758,13 +794,14 @@ following observations must be preserved for the article:
   show that priming *can* be strong for corpus-aligned text — it would
   not prove priming generally helps all texts, and it would not be a
   generalization claim; the comparison set `Δ_HIGH` vs `Δ_LOW`
-  (`Podkłady`, next stage) vs `Δ_UNSEEN` (future biomedical-physics /
-  electromedicine) is planned but no relationship is claimed before the
-  LOW/UNSEEN tests exist. High overlap also leaves open alternative
-  explanations (lexical overlap; thematic overlap; narrative-pattern
-  overlap; direct reuse/recombination of corpus motifs; stronger
-  contextual compatibility; a model tendency to reproduce salient
-  corpus material) — these must remain visible in the interpretation.
+  (`Podkłady`, **executed**) vs `Δ_UNSEEN` (future biomedical-physics /
+  electromedicine, **not executed**) now has a descriptive HIGH↔LOW
+  record, but no causal relationship is claimed and UNSEEN remains
+  unexecuted. High overlap also leaves open alternative explanations
+  (lexical overlap; thematic overlap; narrative-pattern overlap; direct
+  reuse/recombination of corpus motifs; stronger contextual
+  compatibility; a model tendency to reproduce salient corpus material)
+  — these must remain visible in the interpretation.
 - **Dual-goal framing for the article and the practical track:** a
   HIGH-overlap effect may be scientifically interesting but not directly
   transferable to production translation, because real user text may be
@@ -798,15 +835,16 @@ where appropriate. Architecture sketch and evaluation philosophy:
 
 The project should not grow indefinitely. Intended sequence:
 1. ~~complete the seven-configuration × three-repeat Phase 2B HIGH test~~
-   (**done 2026-09-15** — descriptive aggregates preserved; scientific
-   review next);
-2. decide whether LOW-overlap (`Podkłady`) and/or UNSEEN-domain tests are
-   justified after reviewing HIGH;
-3. analyse whether priming generalizes across regimes (only after those
-   datasets exist);
-4. begin writing the paper from preserved evidence records;
-5. optionally perform a small pipeline-optimization experiment;
-6. implement the practical translation tool.
+   (**done 2026-09-15** — descriptive aggregates preserved);
+2. ~~LOW-overlap (`Podkłady`)~~ (**done 2026-09-16** — descriptive
+   Δ_LOW + qualitative audit preserved under `phase2b/analysis/low/`);
+3. decide whether UNSEEN-domain tests are justified after reviewing
+   HIGH↔LOW evidence;
+4. analyse whether priming generalizes across regimes (UNSEEN still
+   missing from the planned trio);
+5. begin writing the paper from preserved evidence records;
+6. optionally perform a small pipeline-optimization experiment;
+7. implement the practical translation tool.
 
 Do not add more model families merely to increase the model count unless
 a specific scientific question requires it. Do not run more human

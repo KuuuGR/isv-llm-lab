@@ -883,7 +883,7 @@ Phase-2B unseen-topic transfer test (see REPORT §15). Task 029 prepared
 the Phase-2B HIGH-overlap kit (see §15 below); collection has not
 started.
 
-## 15. Phase 2B — source-text regimes and HIGH-overlap kit (`PROPOSED` design; HIGH story `FROZEN` + kit `PREPARED`, NOT executed — SODA Tasks 029/030)
+## 15. Phase 2B — source-text regimes and HIGH/LOW kits (`PROPOSED` design; HIGH + LOW `EXECUTED` + aggregated descriptively; UNSEEN not prepared — SODA Tasks 029/030 + 2026-09-15/16 preservation)
 
 **Scientific question (unchanged from §14 tail / Task-028 roadmap).**
 Does authentic ISV corpus priming generalize to source material whose
@@ -891,11 +891,11 @@ topic/theme is absent from the priming corpus? Task 029 records the
 three source-text regimes used to answer it (see
 `docs/research-roadmap.md` §11.1–11.3):
 
-| Regime | Test item | Status (Tasks 029/030) |
+| Regime | Test item | Status (current 2026-09-16) |
 |---|---|---|
-| HIGH-overlap | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` (classification `high_overlap_corpus_inspired` — deliberately NOT `independent_same_topic`); frozen v1 Task 030 | frozen + kit prepared; not executed |
-| LOW-overlap | **`Podkłady`** (author's bank section 4; pinned Task 030). `Opowieść o sygnale` remains banked, not selected | reserved for the NEXT stage; not prepared |
-| UNSEEN DOMAIN | future biomedical-physics / electromedicine educational material | scoped; not prepared |
+| HIGH-overlap | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` (classification `high_overlap_corpus_inspired` — deliberately NOT `independent_same_topic`); frozen v1 Task 030 | **executed + aggregated** (42/42; descriptive; 2026-09-15) |
+| LOW-overlap | **`Podkłady`** (author's bank section 4; pinned Task 030). `Opowieść o sygnale` remains banked, not selected | **executed + aggregated** (42/42; descriptive; 2026-09-16) |
+| UNSEEN DOMAIN | future biomedical-physics / electromedicine educational material | scoped; not prepared / not executed |
 
 **HIGH-overlap design.** 7 representative configurations (roadmap §10)
 × 2 conditions (direct; primed) × 3 fresh-session replicates = **42
@@ -911,7 +911,9 @@ story is an experimental input only — never added to the corpus, never
 translated into the corpus. Hypothesis H-HIGH (corpus priming may
 produce a larger improvement when the target text is strongly aligned
 with the priming corpus) is recorded as a hypothesis; interpretation
-compares Δ_HIGH vs Δ_LOW vs Δ_UNSEEN, none of which is claimed yet.
+compares Δ_HIGH vs Δ_LOW vs Δ_UNSEEN. Descriptive HIGH and LOW
+aggregates now exist; UNSEEN is not executed; **no causal relationship
+among regimes is claimed.**
 
 **Source story frozen (Task 030).** The HIGH-overlap story was supplied
 inside the author's multi-story bank `InterslavicTesty.md` (outside the

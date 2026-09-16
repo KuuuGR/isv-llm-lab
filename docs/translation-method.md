@@ -196,8 +196,9 @@ HIGH-overlap effect (if measured later) would be scientifically
 informative without being directly transferable to production. The
 practical status of authentic-corpus priming therefore remains what §6
 records: a *candidate pipeline stage* whose usefulness for arbitrary
-Polish input is measured by the LOW-overlap (`Podkłady`, next stage) and
-UNSEEN-domain tests. Future production-method work will test
+Polish input is measured by the LOW-overlap (`Podkłady`, **executed**)
+and UNSEEN-domain (**not executed**) tests. Future production-method
+work will test
 combinations of the §4/§6 ingredients — lexical intervention,
 morphology/grammar intervention, authentic corpus priming, targeted
 lexical repair, grammar repair — **without yet claiming an optimal

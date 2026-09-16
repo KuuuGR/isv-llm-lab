@@ -1,0 +1,161 @@
+{
+  "incident_id": "p2b-low-qwen-model-mismatch-2026-09-16",
+  "status": "INVALID — MODEL MISMATCH",
+  "recorded_at": "2026-09-16",
+  "regime": "low",
+  "intended_configuration": {
+    "label": "Qwen 3.8 Max — Fast",
+    "provider": "alibaba",
+    "model": "qwen-3.8-max",
+    "model_version": "fast"
+  },
+  "actual_direct_model": "Qwen 3.8 Max — Fast",
+  "actual_primed_model": "Qwen3.7-Plus (default-selected in Qwen Chat)",
+  "why_invalid": "Primed sessions were accidentally performed on Qwen3.7-Plus rather than the intended Qwen3.8-Max. Direct/Primed are not a same-model pair.",
+  "qwen38_max_primed_service_error": "Oops! There was an issue connecting to Qwen3.8-Max.\nContent security warning: output text data may contain inappropriate content!",
+  "workaround_attempted": false,
+  "workaround_forbidden": [
+    "modify/shorten/paraphrase corpus",
+    "split corpus differently to evade filter",
+    "alter experimental prompt to evade warning",
+    "substitute Qwen3.7-Plus as the official Primed model",
+    "substitute another model",
+    "retry calls merely to overcome the block"
+  ],
+  "priming_effect_estimated": false,
+  "do_not_cite_as_qwen38_low_priming": "-12.08 pp (historical invalid aggregate)",
+  "classification": "experimental execution/infrastructure incident — not a linguistic result",
+  "n_runs_retained": 6,
+  "direct_run_ids": [
+    "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r01",
+    "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r02",
+    "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r03"
+  ],
+  "primed_run_ids": [
+    "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01",
+    "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02",
+    "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03"
+  ],
+  "runs": [
+    {
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "planned_label": "Qwen 3.8 Max — Fast",
+      "operator_reported_actual_model": "Qwen 3.8 Max — Fast",
+      "pairing_validity": "INVALID — MODEL MISMATCH",
+      "output_sha256": "a5d25b34c1a7499b1482bdadb7a26ba2be956a2ce74f3bc9effe0817c533fc88",
+      "output_bytes": 14262,
+      "meta_sha256": "913c9b03ceed3161e02baddf9ff41dcf0cc5dd95d73af32b2f4e1e840e8fdeb5",
+      "evaluation_sha256": "8b17d9126764103f12e2cc4ec4f998e895e16dae62144388a8b0332dd698e6fd",
+      "paths": {
+        "dir": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r01",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r01/output.txt",
+        "meta": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r01/meta.json",
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r01/evaluation.json"
+      },
+      "raw_output_modified": false,
+      "meta_modified": false
+    },
+    {
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "planned_label": "Qwen 3.8 Max — Fast",
+      "operator_reported_actual_model": "Qwen 3.8 Max — Fast",
+      "pairing_validity": "INVALID — MODEL MISMATCH",
+      "output_sha256": "5fd1d85afa57edddaad2824eda2d06df35f37f1f71526dfba9caf049d0208967",
+      "output_bytes": 14192,
+      "meta_sha256": "ac206c31daa24c8cf5ac1220e144913015ebb65e05c1eb82ad4528c9156cb3b4",
+      "evaluation_sha256": "52d1de282f4ef8e058e09c6381b777fd39354228c5d7219dce308e18e71dfd36",
+      "paths": {
+        "dir": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r02",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r02/output.txt",
+        "meta": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r02/meta.json",
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r02/evaluation.json"
+      },
+      "raw_output_modified": false,
+      "meta_modified": false
+    },
+    {
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "planned_label": "Qwen 3.8 Max — Fast",
+      "operator_reported_actual_model": "Qwen 3.8 Max — Fast",
+      "pairing_validity": "INVALID — MODEL MISMATCH",
+      "output_sha256": "fe38356bc6b04ac69c6665842da33c061064e504bb4215bec1bb0b687d01a824",
+      "output_bytes": 14147,
+      "meta_sha256": "92d5f5cd7c498b45566895ec2479aeb42d9a38f6bf3222217e1d005f961618da",
+      "evaluation_sha256": "01fc57d10c7d3757cc911d164e3a6be09aae09e12d79fc4e439a71fa55015749",
+      "paths": {
+        "dir": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r03",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r03/output.txt",
+        "meta": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r03/meta.json",
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r03/evaluation.json"
+      },
+      "raw_output_modified": false,
+      "meta_modified": false
+    },
+    {
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "planned_label": "Qwen 3.8 Max — Fast",
+      "operator_reported_actual_model": "Qwen3.7-Plus (default-selected)",
+      "pairing_validity": "INVALID — MODEL MISMATCH",
+      "output_sha256": "e92343e9f1b667db67590e01da07426a913441565844f7b01c98d416d4efb214",
+      "output_bytes": 14297,
+      "meta_sha256": "358a5ba17b29eccf3e45e58da12096118375a747d1620cba327f6f7d9d71130f",
+      "evaluation_sha256": "8dbd49efb6301524634a145d671df5543e8716bc21111c981c099fc2e3235b12",
+      "paths": {
+        "dir": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01/output.txt",
+        "meta": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01/meta.json",
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01/evaluation.json"
+      },
+      "raw_output_modified": false,
+      "meta_modified": false
+    },
+    {
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "planned_label": "Qwen 3.8 Max — Fast",
+      "operator_reported_actual_model": "Qwen3.7-Plus (default-selected)",
+      "pairing_validity": "INVALID — MODEL MISMATCH",
+      "output_sha256": "0bde0b92a3a1f33ba888d695a411eb1a830596dcc037314067837e852c5bde75",
+      "output_bytes": 14170,
+      "meta_sha256": "160b1b3799bec85c3075559b512e15bd814c7edbad2f30849fc10849a9605987",
+      "evaluation_sha256": "c839ab025d4e77395df7757964b481398ef77f98c0ce110f473430fd1adea58d",
+      "paths": {
+        "dir": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02/output.txt",
+        "meta": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02/meta.json",
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02/evaluation.json"
+      },
+      "raw_output_modified": false,
+      "meta_modified": false
+    },
+    {
+      "run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "planned_label": "Qwen 3.8 Max — Fast",
+      "operator_reported_actual_model": "Qwen3.7-Plus (default-selected)",
+      "pairing_validity": "INVALID — MODEL MISMATCH",
+      "output_sha256": "0036f66c0f5dc8f0968bcecc78f5dad88ff3c343dc669367cc999425279a4591",
+      "output_bytes": 29557,
+      "meta_sha256": "3e8fd8b8e38b41fcae20c632c4aa9f17b9c430d9a58bb9e4658bebf8e2a312ff",
+      "evaluation_sha256": "19b3e31e77a27c71b63700c850ffb9eb5a108cbed3db29fe1fb6342d7fdcc760",
+      "paths": {
+        "dir": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03/output.txt",
+        "meta": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03/meta.json",
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03/evaluation.json"
+      },
+      "raw_output_modified": false,
+      "meta_modified": false
+    }
+  ]
+}

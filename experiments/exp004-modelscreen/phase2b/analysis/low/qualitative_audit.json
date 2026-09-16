@@ -1,8 +1,8 @@
 {
   "artifact": "phase2b-low-qualitative-paired-audit",
   "date": "2026-09-16",
-  "n_pairs": 21,
-  "note": "Descriptive qualitative audit of Phase 2B LOW D→P pairs (Podkłady). Not causal. Derived from raw outputs + analysis/low/dataset.json; does not modify sources.",
+  "n_pairs": 18,
+  "note": "Descriptive qualitative audit of Phase 2B LOW D→P pairs (Podkłady). Primary audit = 18 valid same-model pairs (6 configs). Qwen cell is INVALID — MODEL MISMATCH (Direct=Qwen3.8-Max; Primed=Qwen3.7-Plus) and is excluded from primary priming interpretation. Not causal. Derived from raw outputs + analysis/low/dataset.json; does not modify sources.",
   "source_aggregates": "experiments/exp004-modelscreen/phase2b/analysis/low/dataset.json",
   "story_sha256": "ce1c4fca03fe9cb2c5f8181ab45c91767759a0c785f0a066543d95bc32f5271b",
   "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
@@ -10,7 +10,7 @@
     "high_opening_near_copy_common": true,
     "low_opening_near_copy_observed": false,
     "low_max_opening_jaccard_vs_corpus": 0.093,
-    "note": "Unlike HIGH, LOW primed openings remain Podkłady-shaped; positive Δ co-occurs with lexical borrowing/ortho cleanup rather than tuta-historija opening adoption."
+    "note": "Unlike HIGH, LOW primed openings (valid cells) remain Podkłady-shaped; positive Δ co-occurs with lexical borrowing/ortho cleanup rather than tuta-historija opening adoption. Qwen LOW priming is not estimated."
   },
   "pairs": [
     {
@@ -45,7 +45,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__direct__r01/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r01/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "Gemini 3.6 Flash — extended thinking ON",
@@ -79,7 +81,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__direct__r02/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r02/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "Gemini 3.6 Flash — extended thinking ON",
@@ -113,7 +117,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__direct__r03/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkon__primed__r03/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "Gemini 3.6 Flash — extended thinking OFF",
@@ -146,7 +152,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__direct__r01/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r01/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "Gemini 3.6 Flash — extended thinking OFF",
@@ -180,7 +188,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__direct__r02/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r02/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "Gemini 3.6 Flash — extended thinking OFF",
@@ -214,7 +224,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__direct__r03/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__google__gemini-3.6-flash__extthinkoff__primed__r03/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "Claude Sonnet 5 — Medium (default)",
@@ -246,7 +258,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__anthropic__claude__sonnet-5__direct__r01/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r01/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "Claude Sonnet 5 — Medium (default)",
@@ -279,7 +293,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__anthropic__claude__sonnet-5__direct__r02/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r02/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "Claude Sonnet 5 — Medium (default)",
@@ -311,7 +327,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__anthropic__claude__sonnet-5__direct__r03/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__anthropic__claude__sonnet-5__primed__r03/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "DeepSeek V3 Expert — DeepThink ON",
@@ -342,7 +360,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__direct__r01/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r01/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "DeepSeek V3 Expert — DeepThink ON",
@@ -374,7 +394,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__direct__r02/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r02/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "DeepSeek V3 Expert — DeepThink ON",
@@ -405,100 +427,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__direct__r03/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__deepseek__deepseek-v3-expert__deepthinkon__primed__r03/output.txt"
-      }
-    },
-    {
-      "configuration": "Qwen 3.8 Max — Fast",
-      "replicate": "r01",
-      "direct_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r01",
-      "primed_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01",
-      "canonical_direct": 0.724829,
-      "canonical_primed": 0.666989,
-      "canonical_delta": -0.05783999999999989,
-      "outside_inventory_direct": 34.0,
-      "outside_inventory_primed": 37.0,
-      "opening_jaccard_vs_corpus_direct": 0.052,
-      "opening_jaccard_vs_corpus_primed": 0.065,
-      "corpus_lexeme_markers_primed": [
-        "jedino",
-        "govoret"
-      ],
-      "winter_motif_bleed_primed": false,
-      "summary": "Negative canonical Δ (-5.78 pp) despite some corpus lexical hits (govoret/črěz/jedino); opening stays Podkłady-like, not corpus-narrative rewrite.",
-      "difference_classes": [
-        "apparent degradation",
-        "ambiguous"
-      ],
-      "notable_observations": [
-        "corpus markers P=['jedino', 'govoret']",
-        "ortho 34.0→37.0"
-      ],
-      "artifact_paths": {
-        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r01/output.txt",
-        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01/output.txt"
-      }
-    },
-    {
-      "configuration": "Qwen 3.8 Max — Fast",
-      "replicate": "r02",
-      "direct_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r02",
-      "primed_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02",
-      "canonical_direct": 0.71959,
-      "canonical_primed": 0.682749,
-      "canonical_delta": -0.0368409999999999,
-      "outside_inventory_direct": 28.0,
-      "outside_inventory_primed": 16.0,
-      "opening_jaccard_vs_corpus_direct": 0.052,
-      "opening_jaccard_vs_corpus_primed": 0.066,
-      "corpus_lexeme_markers_primed": [
-        "črěz",
-        "govoret"
-      ],
-      "winter_motif_bleed_primed": false,
-      "summary": "Negative canonical Δ (-3.68 pp) despite some corpus lexical hits (govoret/črěz/jedino); opening stays Podkłady-like, not corpus-narrative rewrite.",
-      "difference_classes": [
-        "apparent degradation",
-        "ambiguous"
-      ],
-      "notable_observations": [
-        "corpus markers P=['črěz', 'govoret']",
-        "ortho 28.0→16.0"
-      ],
-      "artifact_paths": {
-        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r02/output.txt",
-        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02/output.txt"
-      }
-    },
-    {
-      "configuration": "Qwen 3.8 Max — Fast",
-      "replicate": "r03",
-      "direct_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r03",
-      "primed_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03",
-      "canonical_direct": 0.721078,
-      "canonical_primed": 0.453415,
-      "canonical_delta": -0.267663,
-      "outside_inventory_direct": 18.0,
-      "outside_inventory_primed": 1066.0,
-      "opening_jaccard_vs_corpus_direct": 0.065,
-      "opening_jaccard_vs_corpus_primed": 0.025,
-      "corpus_lexeme_markers_primed": [
-        "govoret"
-      ],
-      "winter_motif_bleed_primed": true,
-      "summary": "Primed output largely reverts to Polish source prose (się/który/ortho explosion); canonical Δ ≈ −26.8 pp.",
-      "difference_classes": [
-        "apparent degradation",
-        "Polish collapse"
-      ],
-      "notable_observations": [
-        "Polish-letter surge 44→983",
-        "outside-inventory 18→1066",
-        "urban Podkłady content retained"
-      ],
-      "artifact_paths": {
-        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r03/output.txt",
-        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "GPT-5.6 Luna — thinking OFF",
@@ -529,7 +460,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__direct__r01/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r01/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "GPT-5.6 Luna — thinking OFF",
@@ -561,7 +494,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__direct__r02/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r02/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "GPT-5.6 Luna — thinking OFF",
@@ -593,7 +528,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__direct__r03/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__openai__gpt-5.6-luna__thinkoff__primed__r03/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "Grok 4.5 Fast",
@@ -624,7 +561,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__xai__grok__fast__direct__r01/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__xai__grok__fast__primed__r01/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "Grok 4.5 Fast",
@@ -653,7 +592,9 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__xai__grok__fast__direct__r02/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__xai__grok__fast__primed__r02/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
     },
     {
       "configuration": "Grok 4.5 Fast",
@@ -683,7 +624,120 @@
       "artifact_paths": {
         "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__xai__grok__fast__direct__r03/output.txt",
         "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__xai__grok__fast__primed__r03/output.txt"
-      }
+      },
+      "primary_audit_include": true,
+      "paired_validity": "valid"
+    }
+  ],
+  "corrected": "2026-09-16",
+  "n_pairs_planned": 21,
+  "n_pairs_primary_valid": 18,
+  "qwen_incident": {
+    "status": "INVALID — MODEL MISMATCH",
+    "doc": "experiments/exp004-modelscreen/phase2b/analysis/low/QWEN_INCIDENT.md",
+    "ledger": "experiments/exp004-modelscreen/phase2b/analysis/low/invalid_cells.json",
+    "priming_effect_estimated": false,
+    "do_not_interpret_historical_delta_pp": -12.08
+  },
+  "excluded_invalid_pairs": [
+    {
+      "configuration": "Qwen 3.8 Max — Fast",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r01",
+      "primed_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01",
+      "canonical_direct": 0.724829,
+      "canonical_primed": 0.666989,
+      "canonical_delta": -0.05783999999999989,
+      "outside_inventory_direct": 34.0,
+      "outside_inventory_primed": 37.0,
+      "opening_jaccard_vs_corpus_direct": 0.052,
+      "opening_jaccard_vs_corpus_primed": 0.065,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "EXCLUDED from primary D→P audit: Primed was Qwen3.7-Plus, not Qwen3.8-Max. Do not interpret Δ as priming. See QWEN_INCIDENT.md.",
+      "difference_classes": [
+        "invalid_pairing",
+        "model_mismatch"
+      ],
+      "notable_observations": [
+        "corpus markers P=['jedino', 'govoret']",
+        "ortho 34.0→37.0"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r01/output.txt"
+      },
+      "primary_audit_include": false,
+      "paired_validity": "INVALID — MODEL MISMATCH"
+    },
+    {
+      "configuration": "Qwen 3.8 Max — Fast",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r02",
+      "primed_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02",
+      "canonical_direct": 0.71959,
+      "canonical_primed": 0.682749,
+      "canonical_delta": -0.0368409999999999,
+      "outside_inventory_direct": 28.0,
+      "outside_inventory_primed": 16.0,
+      "opening_jaccard_vs_corpus_direct": 0.052,
+      "opening_jaccard_vs_corpus_primed": 0.066,
+      "corpus_lexeme_markers_primed": [
+        "črěz",
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "EXCLUDED from primary D→P audit: Primed was Qwen3.7-Plus, not Qwen3.8-Max. Do not interpret Δ as priming. See QWEN_INCIDENT.md.",
+      "difference_classes": [
+        "invalid_pairing",
+        "model_mismatch"
+      ],
+      "notable_observations": [
+        "corpus markers P=['črěz', 'govoret']",
+        "ortho 28.0→16.0"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r02/output.txt"
+      },
+      "primary_audit_include": false,
+      "paired_validity": "INVALID — MODEL MISMATCH"
+    },
+    {
+      "configuration": "Qwen 3.8 Max — Fast",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r03",
+      "primed_run_id": "2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03",
+      "canonical_direct": 0.721078,
+      "canonical_primed": 0.453415,
+      "canonical_delta": -0.267663,
+      "outside_inventory_direct": 18.0,
+      "outside_inventory_primed": 1066.0,
+      "opening_jaccard_vs_corpus_direct": 0.065,
+      "opening_jaccard_vs_corpus_primed": 0.025,
+      "corpus_lexeme_markers_primed": [
+        "govoret"
+      ],
+      "winter_motif_bleed_primed": true,
+      "summary": "EXCLUDED from primary D→P audit: Primed was Qwen3.7-Plus, not Qwen3.8-Max. Do not interpret Δ as priming. See QWEN_INCIDENT.md.",
+      "difference_classes": [
+        "invalid_pairing",
+        "model_mismatch"
+      ],
+      "notable_observations": [
+        "Polish-letter surge 44→983",
+        "outside-inventory 18→1066",
+        "urban Podkłady content retained"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-15__p2b-low__alibaba__qwen-3.8-max__fast__primed__r03/output.txt"
+      },
+      "primary_audit_include": false,
+      "paired_validity": "INVALID — MODEL MISMATCH"
     }
   ]
 }

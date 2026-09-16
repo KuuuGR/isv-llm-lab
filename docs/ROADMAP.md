@@ -5,7 +5,13 @@
 > record, Phase 2B plan, publication direction, stopping rule) lives in
 > `docs/research-roadmap.md`.
 
-Status: updated 2026-09-09 (Task 031 — GROK CONFIGURATION IDENTITY
+Status: updated 2026-09-16 (Phase 2B LOW — Qwen `INVALID — MODEL MISMATCH`
+correction: primary Δ on **n=6** valid configs; Qwen priming not
+estimated; see `phase2b/analysis/low/QWEN_INCIDENT.md`. Prior same-day:
+Phase 2B LOW — RESULTS PRESERVED: 42/42
+collected/verified/evaluated; descriptive Δ_LOW under
+`phase2b/analysis/low/`; HIGH untouched; UNSEEN unexecuted — see
+`docs/STATE.md` / `docs/EXPERIMENTS.md`). Prior update 2026-09-09 (Task 031 — GROK CONFIGURATION IDENTITY
 CANONICALIZED: repository-wide audit + canonicalization of the Grok
 configuration to **Grok 4.5 Fast** (operator-reported "Grok 4.5, built by
 xAI (fast)") across EXP-004 displays/rosters/summaries/generators/docs;

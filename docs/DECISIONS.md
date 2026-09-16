@@ -1523,3 +1523,49 @@ recorded.
 4. **Immutability.** No modification of raw outputs, frozen story,
    frozen corpus, prompts, run IDs, configuration names, condition
    labels, or evaluator definitions.
+
+## D-056 · 2026-09-16 · Phase 2B LOW results are a descriptive paired record; HIGH↔LOW contrast is evidence, not causal proof
+
+**Context.** Phase 2B LOW completed intake and aggregate analysis
+(42/42; integrity PASS) on frozen `Podkłady` v1 with the same evaluator
+and corpus pins as HIGH. After correction for a Qwen model-mismatch
+incident, **primary paired analysis uses 6 valid configurations**
+(descriptive mean of valid config means +8.53 pp; all 6 means positive;
+Grok mixed at replicate level). Qualitative audit (valid pairs) finds no
+systematic corpus-opening near-copy (unlike HIGH).
+
+**Decision.**
+
+1. **Preserve under `phase2b/analysis/low/`.** Do not overwrite HIGH
+   artifacts. Keep n=3 descriptive limits; no significance tests; no
+   model ranking; no causal priming claim.
+2. **Treat HIGH↔LOW contrasts as descriptive evidence / hypotheses**
+   (e.g. HIGH opening-copy susceptibility; Gemini sign flip), not as
+   confirmation of H-HIGH. When comparing aggregates, state unequal
+   configuration sets explicitly or use the matched 6-config sensitivity.
+3. **Do not start UNSEEN** from this preservation task.
+4. **Immutability.** No modification of raw LOW/HIGH outputs, frozen
+   Podkłady story, frozen corpus, prompts, or evaluator definitions.
+
+## D-057 · 2026-09-16 · Qwen LOW Direct/Primed is INVALID — MODEL MISMATCH; priming not estimated; no filter workaround
+
+**Context.** LOW Primed Qwen sessions were accidentally run on
+**Qwen3.7-Plus** (default-selected) while Direct used **Qwen 3.8 Max**.
+A later attempt at true Qwen3.8-Max Primed with the frozen corpus returned
+a content-security / connection warning.
+
+**Decision.**
+
+1. Mark the Qwen LOW paired cell **`INVALID — MODEL MISMATCH`**.
+2. **Retain** all Direct (3.8-Max) and Primed (3.7-Plus) outputs, metadata,
+   and hashes; do not delete or overwrite.
+3. Record the exact service error verbatim; treat it as an observed
+   infrastructure constraint.
+4. **No workaround:** do not modify/shorten/split the corpus, alter the
+   prompt to evade the filter, substitute models, or retry to bypass the
+   block. No additional LLM sessions for this correction.
+5. Exclude Qwen from primary LOW priming aggregates and qualitative D→P
+   audit; **do not cite historical −12.08 pp** as a Qwen 3.8 Max LOW
+   priming effect; state explicitly that the effect is **not estimated**.
+6. Classify as an **execution/infrastructure incident**, not a linguistic
+   result. Gemini LOW data remain unchanged.

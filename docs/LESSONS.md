@@ -1107,3 +1107,42 @@ decides what additional analysis is justified.
 Interpretation / Hypothesis layers pointing at `dataset.json`. (2) Flag
 mixed-sign replicate Δs in the same place as the mean Δ. (3) Do not start
 LOW/UNSEEN or write final conclusions from HIGH means alone.
+
+## L-046 · 2026-09-16 · LOW positive Δ without corpus-opening copy — do not equate coverage gain with motif reuse (Phase 2B LOW)
+
+**Observation.** After 42/42 LOW-overlap runs were aggregated — and after
+excluding the invalid Qwen model-mismatched cell — the **six valid**
+configurations all showed a positive mean canonical Δ, yet primed
+openings remained recognizably `Podkłady`-shaped (opening Jaccard vs
+`tuta-historija` stayed low). HIGH large positive Δs frequently
+co-occurred with corpus winter-opening near-copy; LOW positives more
+often co-occurred with lexical borrowing / orthography cleanup only.
+
+**Why it matters.** A higher coverage score after priming is not, by
+itself, evidence of broader language improvement or of corpus-motif
+adoption. Regime contrasts are useful for interpreting HIGH Δ, but remain
+descriptive hypotheses until UNSEEN exists and until scientific review
+decides what claims are justified.
+
+**Next time.** (1) Keep qualitative D→P audit alongside mean Δ.
+(2) Distinguish opening adoption from local lexical/ortho change.
+(3) Flag polarity extremes (all+/all−/mixed) before summarizing means.
+(4) Do not start UNSEEN or write final Phase 2B conclusions from
+HIGH↔LOW means alone.
+
+## L-047 · 2026-09-16 · Same-model pairing failures are infrastructure incidents — retain evidence, exclude from primary Δ (Phase 2B LOW Qwen)
+
+**Observation.** LOW Qwen Primed sessions used Qwen3.7-Plus while Direct
+used Qwen3.8-Max. The resulting −12.08 pp figure is not a valid same-model
+priming effect. A later true Qwen3.8-Max Primed attempt hit a content-
+security warning; no workaround was applied.
+
+**Why it matters.** Silently keeping a mismatched pair in the primary
+aggregate invents a false priming result. Deleting the runs would destroy
+audit evidence. Treating a filter block as something to “bypass” would
+confound the experiment.
+
+**Next time.** (1) Verify operator-selected model identity before/after
+each session. (2) Mark invalid pairs explicitly; retain bytes. (3) Exclude
+from primary mean Δ and qualitative priming audit. (4) Document service
+errors verbatim; never shorten corpus or alter prompts to evade filters.

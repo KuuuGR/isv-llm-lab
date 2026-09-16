@@ -1,6 +1,14 @@
 # Project State
 
-Updated: 2026-09-16 (Phase 2B LOW — RESULTS PRESERVATION: 42/42
+Updated: 2026-09-16 (Phase 2B HIGH↔LOW exploratory synthesis under
+`phase2b/analysis/high_low/` — matched n=6 descriptive comparison;
+overlap-vs-configuration question explored without causal claim.
+Prior same-day: Phase 2B LOW — Qwen mismatch correction: primary
+paired analysis = **6 valid** configs; Qwen `INVALID — MODEL MISMATCH`;
+mean Δ **+8.53 pp** on n=6; priming for Qwen3.8-Max **not estimated**;
+incident under `phase2b/analysis/low/QWEN_INCIDENT.md`; HIGH/Gemini/
+story/corpus untouched — see Phase-2B-LOW results below. Prior same-day
+update: Phase 2B LOW — RESULTS PRESERVATION: 42/42
 collected, verified, evaluated; aggregate analysis integrity PASS;
 descriptive paired Δ_LOW recorded under
 `experiments/exp004-modelscreen/phase2b/analysis/low/`; article-ready
@@ -78,16 +86,23 @@ dimension, master table, supported/suggestive/not-established
 conclusions, research candidates, ≤ 3 recommended next experiments — **no
 composite score, no winner**).
 
-Phase 2B LOW (2026-09-16) — RESULTS PRESERVED. Operator-collected
-42/42 LOW-overlap runs intaken (collect → verify → evaluate; LOW-aware
-Phase-2B gate) and aggregated (`analyze_exp004_phase2b.py --regime low`;
-integrity PASS). Provenance pins: story SHA-256 `ce1c4fca…5271b`,
-corpus SHA-256 `aaad28e4…a857`. Canonical mean Δ (n=3): Gemini Flash ON
-+13.23 / OFF +10.40; Claude Medium +12.11; DeepSeek Expert ON +6.19;
-Qwen Max Fast −12.08; GPT-5.6 Luna +5.31; Grok 4.5 Fast +3.95 pp
-(descriptive mean of config means +5.59 pp; 6/7 positive). Artifacts:
-`phase2b/analysis/low/`. Qualitative: no systematic corpus-opening
-near-copy. HIGH untouched; UNSEEN unexecuted; no LLM during intake/analysis.
+Phase 2B LOW (2026-09-16; **corrected same day for Qwen mismatch**) —
+RESULTS PRESERVED. Operator-collected 42/42 LOW-overlap runs intaken
+(collect → verify → evaluate; LOW-aware Phase-2B gate) and aggregated
+(`analyze_exp004_phase2b.py --regime low`; integrity PASS). **Primary
+paired analysis uses 6 valid same-model configurations**; Qwen cell is
+`INVALID — MODEL MISMATCH` (Direct=Qwen3.8-Max; Primed=accidentally
+Qwen3.7-Plus; later Qwen3.8-Max Primed hit a content-security service
+warning — **no workaround**; data retained). Provenance pins: story
+SHA-256 `ce1c4fca…5271b`, corpus SHA-256 `aaad28e4…a857`. Canonical mean
+Δ on **n=6 valid configs**: Gemini Flash ON +13.23 / OFF +10.40; Claude
+Medium +12.11; DeepSeek Expert ON +6.19; GPT-5.6 Luna +5.31; Grok 4.5
+Fast +3.95 pp (descriptive mean of valid config means **+8.53 pp**;
+all 6 means positive; Grok mixed at replicate level). Qwen 3.8 Max LOW
+priming effect **not estimated** (do not cite historical −12.08 pp).
+Artifacts: `phase2b/analysis/low/` + `QWEN_INCIDENT.md`. Qualitative:
+no systematic corpus-opening near-copy (valid pairs). HIGH untouched;
+UNSEEN unexecuted; no LLM during intake/analysis/correction.
 
 Phase 2B HIGH (2026-09-15) — RESULTS PRESERVED. Operator-collected
 42/42 HIGH-overlap runs were formally intaken (collect → verify →
@@ -446,7 +461,8 @@ any constrained system is judged against it.
 | **EXP-004 Phase-2B HIGH-overlap kit (Task 029, 2026-09-09)** | ✅ **PREPARED — NOT EXECUTED** — deterministic 42-run HIGH-overlap kit (`experiments/exp004-modelscreen/phase2b/` + `scripts/run_exp004_phase2b.py`): 7 shortlisted configs × direct/primed × 3 replicates; source regime `high_overlap_corpus_inspired` (`Iskra i Wieloryb`); direct corpus-free, primed full-corpus hash-gated (`aaad28e4…`); H-HIGH hypothesis recorded; **story text still to be frozen by the author — `prepare` fails loudly until then; no translations exist; next manual step is the 42 translations** |
 | **EXP-004 HIGH-overlap story frozen + kit generated (Task 030, 2026-09-09)** | ✅ **FROZEN + GENERATED — NOT EXECUTED** — story `Iskra i Wieloryb` extracted from the author's bank section `# 3.` (`scripts/extract_phase2b_high_story.py`, deterministic; Markdown markers removed only; 227 content lines preserved exactly) and frozen v1 (sha256 `ab8a0dcf…`, 30 061 B / 440 lines; classification `high_overlap_corpus_inspired`); 42-run kit generated (`prepare --date 2026-09-09`; 63 prompt files; regeneration byte-identical); bank sections 1/2 unused, **`Podkłady` (section 4) reserved as LOW-overlap source for the NEXT stage — not prepared**; corpus self-evaluation reproducibility re-verified |
 | **EXP-004 Grok configuration identity canonicalized (Task 031, 2026-09-09)** | ✅ **COMPLETE — METADATA/NAMING ONLY** — repository-wide audit + canonicalization of the Grok configuration to **Grok 4.5 Fast** (operator-reported identity "Grok 4.5, built by xAI (fast)", marked `operator_reported`, not independently verified). Rendered labels in tables/rosters/summaries/figures (EXP-004 README, Phase-2A/2B/repeats READMEs, repeats REPORT, roadmap) canonicalized; generators apply the overlay forward (`scripts/run_exp004_phase1.py` constants/helpers, `run_exp004_phase2b.py`, `analyze_exp004_repeats.py`, `build_assistant_research_bundle.py`); pre-canonicalization run ids/prompt filenames keep the recorded `unknown` token as historical provenance with canonical alias `xai__grok__fast` (Phase 1 row 08, Phase 2A, repeats); the Phase-2B HIGH kit uses canonical `…__grok__fast__…` run ids/files; **no Grok Build run exists in repository evidence**; EXP-001/002-era Grok run `exp002__2026-08-31__unknown__grok__unknown` preserved as genuinely `unknown`; authoritative note + machine-readable map `experiments/exp004-modelscreen/grok-identity.md` / `grok-identity-map.json`; canonicalization tests added; **no raw output bytes, no metrics, no evaluator/conditions changed**; full suite green |
-| **EXP-004 Phase-2B HIGH executed + aggregated (2026-09-15)** | ✅ **EXECUTED, COLLECTED, VERIFIED, EVALUATED, AGGREGATE ANALYSED — DESCRIPTIVE ONLY** — 42/42 HIGH-overlap runs intaken (`scripts/run_exp004_phase2b.py` collect/verify/evaluate; Phase-2B gate) and aggregated (`scripts/analyze_exp004_phase2b.py`; integrity PASS). Design: 7 shortlisted configs × direct/primed × r01–r03; story SHA-256 `ab8a0dcf…792f63`; corpus SHA-256 `aaad28e4…a857`. Canonical mean Δ (n=3): Gemini Flash ON −0.55 / OFF −1.75; Claude Medium +14.28; DeepSeek Expert ON +9.25; Qwen Max Fast +5.18; GPT-5.6 Luna +8.62; Grok 4.5 Fast +14.49 pp. Mixed-sign replicate Δs for Gemini ON, Gemini OFF, Qwen. Artifacts: `phase2b/EVIDENCE.md` (article-ready fact/interpretation/hypothesis), `phase2b/analysis/{dataset,analysis}.{json,md}`, `phase2b/README.md`. Constraints recorded: n=3 descriptive; no significance tests; no causal claim; orthography separate; unresolved structurally related to canonical. **No LLM reruns during intake/analysis; raw outputs + frozen inputs untouched; LOW/UNSEEN not started; no final scientific conclusions** |
+| **EXP-004 Phase-2B HIGH executed + aggregated (2026-09-15)** | ✅ **EXECUTED, COLLECTED, VERIFIED, EVALUATED, AGGREGATE ANALYSED — DESCRIPTIVE ONLY** — 42/42 HIGH-overlap runs intaken (`scripts/run_exp004_phase2b.py` collect/verify/evaluate; Phase-2B gate) and aggregated (`scripts/analyze_exp004_phase2b.py`; integrity PASS). Design: 7 shortlisted configs × direct/primed × r01–r03; story SHA-256 `ab8a0dcf…792f63`; corpus SHA-256 `aaad28e4…a857`. Canonical mean Δ (n=3): Gemini Flash ON −0.55 / OFF −1.75; Claude Medium +14.28; DeepSeek Expert ON +9.25; Qwen Max Fast +5.18; GPT-5.6 Luna +8.62; Grok 4.5 Fast +14.49 pp. Mixed-sign replicate Δs for Gemini ON, Gemini OFF, Qwen. Artifacts: `phase2b/EVIDENCE.md` (article-ready fact/interpretation/hypothesis), `phase2b/analysis/{dataset,analysis}.{json,md}`, `phase2b/README.md`. Constraints recorded: n=3 descriptive; no significance tests; no causal claim; orthography separate; unresolved structurally related to canonical. **No LLM reruns during intake/analysis; raw outputs + frozen inputs untouched; no final scientific conclusions** |
+| **EXP-004 Phase-2B LOW executed + aggregated (2026-09-16; Qwen cell corrected)** | ✅ **EXECUTED, COLLECTED 42/42, VERIFIED, EVALUATED, AGGREGATE ANALYSED — DESCRIPTIVE ONLY; QWEN PAIR INVALID** — 42/42 LOW-overlap (`Podkłady` v1) runs retained; primary paired analysis = **6 valid** same-model configs (`analyze_exp004_phase2b.py --regime low`; integrity PASS). Story SHA-256 `ce1c4fca…5271b`; corpus SHA-256 `aaad28e4…a857`. Canonical mean Δ (n=3/cell; **n=6 configs**): Gemini Flash ON +13.23 / OFF +10.40; Claude Medium +12.11; DeepSeek Expert ON +6.19; GPT-5.6 Luna +5.31; Grok 4.5 Fast +3.95 pp (mean of valid config means **+8.53 pp**). **Qwen:** `INVALID — MODEL MISMATCH` (Direct=Qwen3.8-Max; Primed=Qwen3.7-Plus; Qwen3.8-Max Primed later blocked by content-security warning; **no workaround**; priming effect **not estimated**; historical −12.08 pp must not be cited). Artifacts: `phase2b/analysis/low/` + `QWEN_INCIDENT.md` + `invalid_cells.json`. **HIGH untouched; Gemini unchanged; UNSEEN unexecuted; no LLM during correction** |
 | Translator / LLM integration | ❌ Not implemented (out of scope) |
 
 

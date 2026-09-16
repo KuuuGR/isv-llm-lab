@@ -1,0 +1,492 @@
+{
+  "artifact": "phase2b_high_low_cross_regime_synthesis",
+  "status": "exploratory_descriptive",
+  "date": "2026-09-16",
+  "generator": "manual synthesis from frozen HIGH/LOW aggregates (no LLM)",
+  "research_question": "Across HIGH-overlap and LOW-overlap source texts, does the observed priming effect show a pattern more consistent with source/corpus overlap, or does it appear primarily configuration/model-dependent?",
+  "disclaimer": "Exploratory descriptive analysis only. Not a causal test. No significance tests. No model ranking. No UNSEEN claims.",
+  "data_scope": {
+    "high": {
+      "n_configurations_planned": 7,
+      "n_observations": 42,
+      "qwen_included": true,
+      "story_sha256": "ab8a0dcf7352789c09c4aca132c086999c861407e4cd682ee9414aab5b792f63",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "canonical_mean_delta_7configs": 0.0707372380952381
+    },
+    "low": {
+      "n_configurations_planned": 7,
+      "n_configurations_primary_valid": 6,
+      "n_observations_retained": 42,
+      "n_valid_pairs": 18,
+      "qwen_included_in_primary": false,
+      "qwen_status": "INVALID — MODEL MISMATCH",
+      "story_sha256": "ce1c4fca03fe9cb2c5f8181ab45c91767759a0c785f0a066543d95bc32f5271b",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "canonical_mean_delta_6valid": 0.08532683333333335
+    }
+  },
+  "matched_six_configurations": {
+    "n": 6,
+    "note": "Identical configuration set in HIGH and LOW; Qwen excluded on both sides.",
+    "high_canonical_delta_mean": 0.07388916666666666,
+    "low_canonical_delta_mean": 0.08532683333333335,
+    "low_minus_high_aggregate_pp": 1.1437666666666693,
+    "rows": [
+      {
+        "label": "Gemini 3.6 Flash — extended thinking ON",
+        "config": [
+          "google",
+          "gemini-3.6-flash",
+          "extthinkon"
+        ],
+        "high_delta_mean": -0.005498000000000003,
+        "low_delta_mean": 0.13229600000000005,
+        "low_minus_high": 0.13779400000000006,
+        "high_delta_values": {
+          "r01": 0.018930000000000002,
+          "r02": -0.03768300000000002,
+          "r03": 0.002259000000000011
+        },
+        "low_delta_values": {
+          "r01": 0.15842600000000007,
+          "r02": 0.11369300000000004,
+          "r03": 0.12476900000000002
+        },
+        "high_direction": "mixed",
+        "low_direction": "all positive",
+        "descriptive_direction_class": "direction reversal",
+        "descriptive_magnitude_class": "magnitude substantially changed",
+        "abs_low_minus_high_pp": 13.779400000000006,
+        "high_direct_mean": 0.6868193333333333,
+        "high_primed_mean": 0.6813213333333333,
+        "low_direct_mean": 0.643319,
+        "low_primed_mean": 0.775615,
+        "high_broader_delta_mean": -0.0037589999999999937,
+        "low_broader_delta_mean": 0.07279500000000001
+      },
+      {
+        "label": "Gemini 3.6 Flash — extended thinking OFF",
+        "config": [
+          "google",
+          "gemini-3.6-flash",
+          "extthinkoff"
+        ],
+        "high_delta_mean": -0.017508333333333386,
+        "low_delta_mean": 0.10402233333333337,
+        "low_minus_high": 0.12153066666666676,
+        "high_delta_values": {
+          "r01": -0.05391400000000002,
+          "r02": 0.031151999999999958,
+          "r03": -0.029763000000000095
+        },
+        "low_delta_values": {
+          "r01": 0.13742100000000002,
+          "r02": 0.11553500000000005,
+          "r03": 0.059111000000000025
+        },
+        "high_direction": "mixed",
+        "low_direction": "all positive",
+        "descriptive_direction_class": "direction reversal",
+        "descriptive_magnitude_class": "magnitude substantially changed",
+        "abs_low_minus_high_pp": 12.153066666666676,
+        "high_direct_mean": 0.6719626666666666,
+        "high_primed_mean": 0.6544543333333332,
+        "low_direct_mean": 0.6451253333333333,
+        "low_primed_mean": 0.7491476666666667,
+        "high_broader_delta_mean": -0.02921700000000001,
+        "low_broader_delta_mean": 0.06271999999999996
+      },
+      {
+        "label": "Claude Sonnet 5 — Medium (default)",
+        "config": [
+          "anthropic",
+          "claude",
+          "sonnet-5"
+        ],
+        "high_delta_mean": 0.1428373333333333,
+        "low_delta_mean": 0.12109233333333332,
+        "low_minus_high": -0.021744999999999973,
+        "high_delta_values": {
+          "r01": 0.16688399999999992,
+          "r02": 0.139637,
+          "r03": 0.12199099999999996
+        },
+        "low_delta_values": {
+          "r01": 0.13817999999999997,
+          "r02": 0.09237899999999999,
+          "r03": 0.132718
+        },
+        "high_direction": "all positive",
+        "low_direction": "all positive",
+        "descriptive_direction_class": "same direction",
+        "descriptive_magnitude_class": "magnitude similar (<5 pp)",
+        "abs_low_minus_high_pp": 2.1744999999999974,
+        "high_direct_mean": 0.6928573333333334,
+        "high_primed_mean": 0.8356946666666666,
+        "low_direct_mean": 0.6572323333333333,
+        "low_primed_mean": 0.7783246666666667,
+        "high_broader_delta_mean": 0.07624200000000003,
+        "low_broader_delta_mean": 0.08507033333333336
+      },
+      {
+        "label": "DeepSeek V3 Expert — DeepThink ON",
+        "config": [
+          "deepseek",
+          "deepseek-v3-expert",
+          "deepthinkon"
+        ],
+        "high_delta_mean": 0.09245766666666666,
+        "low_delta_mean": 0.06191333333333334,
+        "low_minus_high": -0.03054433333333332,
+        "high_delta_values": {
+          "r01": 0.09238400000000002,
+          "r02": 0.118178,
+          "r03": 0.06681099999999995
+        },
+        "low_delta_values": {
+          "r01": 0.054288,
+          "r02": 0.07923200000000008,
+          "r03": 0.05221999999999993
+        },
+        "high_direction": "all positive",
+        "low_direction": "all positive",
+        "descriptive_direction_class": "same direction",
+        "descriptive_magnitude_class": "magnitude similar (<5 pp)",
+        "abs_low_minus_high_pp": 3.054433333333332,
+        "high_direct_mean": 0.7453363333333334,
+        "high_primed_mean": 0.837794,
+        "low_direct_mean": 0.6893206666666667,
+        "low_primed_mean": 0.7512340000000001,
+        "high_broader_delta_mean": 0.03995633333333334,
+        "low_broader_delta_mean": 0.03608466666666669
+      },
+      {
+        "label": "GPT-5.6 Luna — thinking OFF",
+        "config": [
+          "openai",
+          "gpt-5.6-luna",
+          "thinkoff"
+        ],
+        "high_delta_mean": 0.08615400000000002,
+        "low_delta_mean": 0.05313633333333334,
+        "low_minus_high": -0.03301766666666668,
+        "high_delta_values": {
+          "r01": 0.09433900000000006,
+          "r02": 0.070631,
+          "r03": 0.09349200000000002
+        },
+        "low_delta_values": {
+          "r01": 0.048456000000000055,
+          "r02": 0.06367199999999995,
+          "r03": 0.04728100000000002
+        },
+        "high_direction": "all positive",
+        "low_direction": "all positive",
+        "descriptive_direction_class": "same direction",
+        "descriptive_magnitude_class": "magnitude similar (<5 pp)",
+        "abs_low_minus_high_pp": 3.3017666666666683,
+        "high_direct_mean": 0.7354280000000001,
+        "high_primed_mean": 0.8215819999999999,
+        "low_direct_mean": 0.707482,
+        "low_primed_mean": 0.7606183333333334,
+        "high_broader_delta_mean": 0.05772366666666665,
+        "low_broader_delta_mean": 0.02905033333333329
+      },
+      {
+        "label": "Grok 4.5 Fast",
+        "config": [
+          "xai",
+          "grok",
+          "fast"
+        ],
+        "high_delta_mean": 0.14489233333333337,
+        "low_delta_mean": 0.03950066666666666,
+        "low_minus_high": -0.10539166666666672,
+        "high_delta_values": {
+          "r01": 0.1537130000000001,
+          "r02": 0.19894599999999996,
+          "r03": 0.08201800000000004
+        },
+        "low_delta_values": {
+          "r01": 0.08212799999999998,
+          "r02": 0.051331000000000016,
+          "r03": -0.014956999999999998
+        },
+        "high_direction": "all positive",
+        "low_direction": "mixed",
+        "descriptive_direction_class": "same direction",
+        "descriptive_magnitude_class": "magnitude substantially changed",
+        "abs_low_minus_high_pp": 10.539166666666672,
+        "high_direct_mean": 0.6835006666666666,
+        "high_primed_mean": 0.828393,
+        "low_direct_mean": 0.693193,
+        "low_primed_mean": 0.7326936666666667,
+        "high_broader_delta_mean": 0.10594733333333332,
+        "low_broader_delta_mean": -0.0016326666666666527
+      }
+    ]
+  },
+  "high_full_seven_for_reference": {
+    "n": 7,
+    "canonical_delta_mean": 0.0707372380952381,
+    "note": "Published HIGH aggregate including valid HIGH Qwen; not directly comparable to LOW n=6 without stating unequal sets.",
+    "rows": [
+      {
+        "label": "Gemini 3.6 Flash — extended thinking ON",
+        "config": [
+          "google",
+          "gemini-3.6-flash",
+          "extthinkon"
+        ],
+        "delta_mean": -0.005498000000000003,
+        "delta_values": {
+          "r01": 0.018930000000000002,
+          "r02": -0.03768300000000002,
+          "r03": 0.002259000000000011
+        },
+        "direction": "mixed"
+      },
+      {
+        "label": "Gemini 3.6 Flash — extended thinking OFF",
+        "config": [
+          "google",
+          "gemini-3.6-flash",
+          "extthinkoff"
+        ],
+        "delta_mean": -0.017508333333333386,
+        "delta_values": {
+          "r01": -0.05391400000000002,
+          "r02": 0.031151999999999958,
+          "r03": -0.029763000000000095
+        },
+        "direction": "mixed"
+      },
+      {
+        "label": "Claude Sonnet 5 — Medium (default)",
+        "config": [
+          "anthropic",
+          "claude",
+          "sonnet-5"
+        ],
+        "delta_mean": 0.1428373333333333,
+        "delta_values": {
+          "r01": 0.16688399999999992,
+          "r02": 0.139637,
+          "r03": 0.12199099999999996
+        },
+        "direction": "all positive"
+      },
+      {
+        "label": "DeepSeek V3 Expert — DeepThink ON",
+        "config": [
+          "deepseek",
+          "deepseek-v3-expert",
+          "deepthinkon"
+        ],
+        "delta_mean": 0.09245766666666666,
+        "delta_values": {
+          "r01": 0.09238400000000002,
+          "r02": 0.118178,
+          "r03": 0.06681099999999995
+        },
+        "direction": "all positive"
+      },
+      {
+        "label": "Qwen 3.8 Max — Fast",
+        "config": [
+          "alibaba",
+          "qwen-3.8-max",
+          "fast"
+        ],
+        "delta_mean": 0.051825666666666735,
+        "delta_values": {
+          "r01": 0.08703400000000006,
+          "r02": 0.08073300000000005,
+          "r03": -0.012289999999999912
+        },
+        "direction": "mixed"
+      },
+      {
+        "label": "GPT-5.6 Luna — thinking OFF",
+        "config": [
+          "openai",
+          "gpt-5.6-luna",
+          "thinkoff"
+        ],
+        "delta_mean": 0.08615400000000002,
+        "delta_values": {
+          "r01": 0.09433900000000006,
+          "r02": 0.070631,
+          "r03": 0.09349200000000002
+        },
+        "direction": "all positive"
+      },
+      {
+        "label": "Grok 4.5 Fast",
+        "config": [
+          "xai",
+          "grok",
+          "fast"
+        ],
+        "delta_mean": 0.14489233333333337,
+        "delta_values": {
+          "r01": 0.1537130000000001,
+          "r02": 0.19894599999999996,
+          "r03": 0.08201800000000004
+        },
+        "direction": "all positive"
+      }
+    ]
+  },
+  "stability_summary": {
+    "direction_reversals": [
+      "Gemini 3.6 Flash — extended thinking ON",
+      "Gemini 3.6 Flash — extended thinking OFF"
+    ],
+    "same_direction_both_positive": [
+      "Claude Sonnet 5 — Medium (default)",
+      "DeepSeek V3 Expert — DeepThink ON",
+      "GPT-5.6 Luna — thinking OFF",
+      "Grok 4.5 Fast"
+    ],
+    "magnitude_substantially_changed": [
+      "Gemini 3.6 Flash — extended thinking ON",
+      "Gemini 3.6 Flash — extended thinking OFF",
+      "Grok 4.5 Fast"
+    ],
+    "low_mixed_replicate_direction": [
+      "Grok 4.5 Fast"
+    ],
+    "high_mixed_replicate_direction_in_matched": [
+      "Gemini 3.6 Flash — extended thinking ON",
+      "Gemini 3.6 Flash — extended thinking OFF"
+    ]
+  },
+  "qualitative": {
+    "high_n_pairs": 21,
+    "low_n_pairs_primary": 18,
+    "high_difference_class_counts": {
+      "neutral variation": 5,
+      "ambiguous": 8,
+      "apparent degradation": 6,
+      "apparent improvement": 15
+    },
+    "low_difference_class_counts": {
+      "improvement": 17,
+      "lexical borrowing": 10,
+      "neutral variation": 7,
+      "ambiguous": 1,
+      "apparent degradation": 1
+    },
+    "high_opening_near_copy_common": true,
+    "low_opening_near_copy_observed": false,
+    "sources": {
+      "high": "experiments/exp004-modelscreen/phase2b/QUALITATIVE_AUDIT.md",
+      "low": "experiments/exp004-modelscreen/phase2b/analysis/low/QUALITATIVE_AUDIT.md"
+    }
+  },
+  "infrastructure": {
+    "qwen_low": {
+      "status": "INVALID — MODEL MISMATCH",
+      "note": "Direct=Qwen3.8-Max; Primed=Qwen3.7-Plus; later Qwen3.8-Max Primed content-security warning; priming not estimated; no workaround.",
+      "doc": "experiments/exp004-modelscreen/phase2b/analysis/low/QWEN_INCIDENT.md"
+    },
+    "gemini_low": {
+      "status": "valid under executed multi-message protocol",
+      "note": "Context-window / interface constraint; protocol preserved; not a reason to reinterpret linguistic Δ."
+    }
+  },
+  "conclusions": {
+    "supported_observations": [
+      "On the matched 6-config set, mean canonical Δ is HIGH +7.39 pp vs LOW +8.53 pp (descriptive; 1.14 pp difference not interpretable alone).",
+      "Gemini ON/OFF reverse direction: HIGH near-zero/negative (mixed replicates) → LOW strongly positive (all+).",
+      "Claude, DeepSeek, GPT, and Grok are positive in both regimes; Claude/DeepSeek/GPT change by <5 pp mean; Grok drops substantially (+14.49 → +3.95) while remaining positive at the mean.",
+      "Grok LOW has mixed replicate signs (+8.21 / +5.13 / −1.50); HIGH Grok was all+.",
+      "HIGH qualitative audit: large positive Δs often co-occur with corpus-opening / motif near-copy.",
+      "LOW qualitative audit (valid pairs): no systematic corpus-opening near-copy; positive Δ often co-occurs with lexical borrowing and/or orthography/Polish-residue cleanup while Podkłady structure is retained.",
+      "LOW can show large positive Δ without HIGH-style opening rewrite (especially Gemini).",
+      "Qwen LOW pairing is INVALID — MODEL MISMATCH; Qwen3.8-Max LOW priming is not estimated.",
+      "Gemini LOW used the established multi-message corpus protocol; results valid under that executed protocol."
+    ],
+    "compatible_hypotheses": [
+      "HIGH large positive Δs partly reflect overlap with corpus-like openings/motifs (compatible with H-HIGH framing), but this is not demonstrated as the sole driver.",
+      "Priming response is substantially configuration-dependent (Gemini reversal; Grok magnitude drop; Claude-like stability).",
+      "LOW positive Δ without opening-copy may reflect local lexical/orthographic conditioning from corpus exposure rather than narrative reuse.",
+      "Evaluator sensitivity to resource-supported forms may amplify some coverage gains independently of human-judged quality."
+    ],
+    "not_established": [
+      "Causal effect of corpus priming in general.",
+      "That HIGH-overlap systematically produces larger Δ than LOW-overlap.",
+      "That configuration/model identity alone determines Δ.",
+      "Statistical significance (n=3; no tests).",
+      "Model ranking or inherent model superiority.",
+      "Behavior under UNSEEN-domain sources.",
+      "Qwen 3.8 Max LOW priming effect.",
+      "Confirmation or rejection of H-HIGH as a causal claim."
+    ]
+  },
+  "alternative_explanations": [
+    {
+      "id": "lexical_overlap",
+      "label": "source/corpus lexical & motif overlap",
+      "status": "plausible_partial"
+    },
+    {
+      "id": "configuration",
+      "label": "model/configuration differences",
+      "status": "plausible_partial"
+    },
+    {
+      "id": "stochastic",
+      "label": "stochastic variation between repeats (n=3)",
+      "status": "always_present"
+    },
+    {
+      "id": "prompt_context",
+      "label": "prompt/context handling differences",
+      "status": "plausible"
+    },
+    {
+      "id": "context_window",
+      "label": "context-window / multi-message delivery (Gemini)",
+      "status": "documented_protocol"
+    },
+    {
+      "id": "infrastructure",
+      "label": "service/infrastructure constraints (Qwen filter)",
+      "status": "documented_incident"
+    },
+    {
+      "id": "scoring",
+      "label": "scoring sensitivity to orthography and lexical choices",
+      "status": "plausible"
+    }
+  ],
+  "mechanisms": {
+    "corpus_opening_motif_copying": {
+      "high": "recurrent in large+ configs (Claude, DeepSeek, Grok, often Qwen/GPT)",
+      "low": "not systematically observed; openings stay Podkłady-shaped"
+    },
+    "lexical_borrowing": {
+      "high": "common, often together with opening rewrite",
+      "low": "common without opening rewrite (črěz, govoret, tutčas, jedino)"
+    },
+    "orthographic_normalization": {
+      "high": "frequent co-occurrence with positive Δ; can diverge from coverage",
+      "low": "frequent for Gemini/Claude; not universal (Grok ortho↑ sometimes)"
+    },
+    "polish_residue_reduction": {
+      "high": "often noted alongside improvement",
+      "low": "often noted alongside improvement"
+    },
+    "structural_changes": {
+      "high": "frequent winter-narrative opening swap / title-world shifts",
+      "low": "usually structural continuity of archive/urban plot"
+    },
+    "other_local_lexical": {
+      "high": "name/title variants (Kit/Velryb), local substitutions",
+      "low": "name/title variants (Katarzyna/Katarina), local synonyms"
+    }
+  }
+}

@@ -1204,19 +1204,27 @@ scientific conclusions. Next step: scientific review of the preserved
 HIGH results before deciding whether additional analysis or LOW/UNSEEN
 is justified.
 
-### 4.26 EXP-004 Phase 2B LOW — descriptive paired results preserved (2026-09-16)
+### 4.26 EXP-004 Phase 2B LOW — descriptive paired results preserved (2026-09-16; Qwen corrected)
 
 Phase 2B LOW-overlap (`Podkłady` v1, clean prose) status: **42/42
 collected, verified, evaluated**; aggregate analysis integrity **PASS**;
-article-ready record
+**primary paired analysis = 6 valid configs** (Qwen excluded).
+Article-ready record
 `experiments/exp004-modelscreen/phase2b/analysis/low/EVIDENCE.md`;
 computational aggregates `phase2b/analysis/low/{dataset,analysis}.{json,md}`;
-qualitative audit `phase2b/analysis/low/QUALITATIVE_AUDIT.md`. Intake and
-analysis used deterministic scripts only (no LLM reruns). Raw outputs,
-frozen LOW story (`ce1c4fca…5271b`), frozen corpus (`aaad28e4…a857`),
-HIGH artifacts, and evaluator definitions were not modified.
+qualitative audit `phase2b/analysis/low/QUALITATIVE_AUDIT.md` (18 valid
+pairs); incident `QWEN_INCIDENT.md`. Intake/analysis/correction used
+deterministic scripts only (no LLM reruns). Raw outputs, frozen LOW story
+(`ce1c4fca…5271b`), frozen corpus (`aaad28e4…a857`), HIGH artifacts, Gemini
+LOW runs, and evaluator definitions were not modified.
 
-**Observed (descriptive, n=3 per cell):**
+**Qwen incident (not a linguistic result):** intended Qwen 3.8 Max on both
+sides; Primed accidentally ran on **Qwen3.7-Plus**; later true Qwen3.8-Max
+Primed hit a content-security / connection warning; **no workaround**;
+pair marked `INVALID — MODEL MISMATCH`; historical −12.08 pp must **not**
+be cited as a Qwen 3.8 Max LOW priming effect; priming **not estimated**.
+
+**Observed (descriptive, n=3 per cell; primary valid configs only):**
 
 | Configuration | Direct mean | Primed mean | Mean Δ | Direction |
 |---|---:|---:|---:|---|
@@ -1224,27 +1232,40 @@ HIGH artifacts, and evaluator definitions were not modified.
 | Gemini 3.6 Flash — ext. thinking OFF | 64.51% | 74.91% | +10.40 pp | all+ |
 | Claude Sonnet 5 Medium | 65.72% | 77.83% | +12.11 pp | all+ |
 | DeepSeek V3 Expert ON | 68.93% | 75.12% | +6.19 pp | all+ |
-| Qwen 3.8 Max Fast | 72.18% | 60.11% | −12.08 pp | all− |
 | GPT-5.6 Luna | 70.75% | 76.06% | +5.31 pp | all+ |
 | Grok 4.5 Fast | 69.32% | 73.27% | +3.95 pp | mixed |
 
 Supported observations (not causal claims):
 
-- Positive mean canonical Δ for **6/7** configurations; descriptive mean
-  of config mean-Δ ≈ **+5.59 pp**.
+- Positive mean canonical Δ for **6/6 valid** configurations; descriptive
+  mean of valid config mean-Δ ≈ **+8.53 pp** (`n=6 configurations`).
 - Gemini ON/OFF under LOW are **strongly positive with all+ replicates**
   (contrast with HIGH near-zero/negative mixed Gemini pattern).
-- Qwen under LOW is **all-negative**; r03 is an extreme Polish-collapse /
-  orthography failure (outside-inventory 18→1066).
-- Qualitative audit: **no systematic corpus-opening near-copy** on LOW;
-  positive Δ often co-occurs with lexical borrowing / ortho cleanup while
-  Podkłady openings remain.
+- Qualitative audit (valid pairs): **no systematic corpus-opening
+  near-copy** on LOW; positive Δ often co-occurs with lexical borrowing /
+  ortho cleanup while Podkłady openings remain.
+- Matched 6-config HIGH↔LOW sensitivity (Qwen out on both sides): HIGH
+  mean Δ +7.39 pp vs LOW +8.53 pp (descriptive; unequal to HIGH’s
+  published 7-config aggregate).
 - This contrast is **compatible with** (not proof of) the hypothesis that
   large HIGH positive Δs partly reflected overlap with corpus-like
   openings/motifs.
 
-**Not established:** significance; causal priming; model ranking; UNSEEN
-results (unexecuted); final Phase 2B conclusions.
+**Not established:** significance; causal priming; model ranking; Qwen
+3.8 Max LOW priming (not estimated); UNSEEN results (unexecuted); final
+Phase 2B conclusions.
+
+### 4.27 EXP-004 Phase 2B HIGH↔LOW exploratory synthesis (2026-09-16)
+
+Descriptive cross-regime synthesis of validated HIGH (7 configs) and LOW
+(**6 valid** configs; Qwen excluded) under
+`experiments/exp004-modelscreen/phase2b/analysis/high_low/`. Matched mean
+canonical Δ: HIGH +7.39 pp vs LOW +8.53 pp. Gemini reverses HIGH→LOW;
+Claude/DeepSeek/GPT stay positive with mild shifts; Grok drops in
+magnitude with LOW mixed replicates. HIGH large+ often co-occurs with
+corpus-opening copy; LOW large+ often does not. Compatible with both
+overlap-sensitive and configuration-sensitive readings; **neither
+established**. No significance, ranking, causal, or UNSEEN claims.
 
 ## 5. Standing methodological rules learned so far (research-relevant)
 
@@ -1402,16 +1423,18 @@ results (unexecuted); final Phase 2B conclusions.
 - **Task 025 prepared the controlled repeat for (1), (2) and (5)** (kit
   under `experiments/exp004-modelscreen/repeats/`; results in Task 026 /
   §4.24). **Phase 2B HIGH (2026-09-15) answered the HIGH-overlap slice of
-  (3) descriptively** (§4.25): 42-run paired Δ_HIGH preserved; LOW and
-  UNSEEN still open. Scientific review of HIGH precedes any decision to
-  prepare LOW/UNSEEN.
+  (3) descriptively** (§4.25): 42-run paired Δ_HIGH preserved.
+  **Phase 2B LOW (2026-09-16) answered the LOW-overlap slice of (3)
+  descriptively** (§4.26): 42-run paired Δ_LOW preserved under
+  `phase2b/analysis/low/`; UNSEEN still open. Descriptive HIGH↔LOW
+  contrasts are available; no causal H-HIGH confirmation.
 - **Task 026 answered parts of (1), (2) and (5) descriptively** (see
   §4.24): the repeated Δ direction is positive 16/16 (mean +6.93 pp),
   Task-024 directions replicated 15/15, baseline dependence persists
   (ρ ≈ −0.84), Dola Fast's +28.20 pp is NOT re-estimable (repeated
   direct condition unusable), and the priming shift generally exceeds
   within-condition variation except for Qwen 3.8 Max Fast. Still open
-  after HIGH preservation: (3) LOW-overlap and UNSEEN regimes; (4)
+  after HIGH+LOW preservation: (3) UNSEEN-domain regime; (4)
   ON-vs-OFF / Fast-vs-Thinking pair gaps — with added evidence for
   Gemini OFF > its old single delta and DeepSeek Expert ON stable above
   OFF, but Claude Max comparability limited by its thinking-OFF

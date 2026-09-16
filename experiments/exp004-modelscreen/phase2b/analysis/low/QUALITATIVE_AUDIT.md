@@ -1,13 +1,18 @@
 # Phase 2B LOW — qualitative paired Direct → Primed audit
 
-**Status:** descriptive qualitative audit of existing evidence (2026-09-16).  
+**Status:** descriptive qualitative audit (2026-09-16);
+**corrected 2026-09-16** — Qwen mismatch removed from primary audit.  
 **Not:** a new experiment, causal claim, grammar adjudication, or replacement for the quantitative aggregate.
 
 Machine-readable pair ledger: [`qualitative_audit.json`](qualitative_audit.json)  
 Quantitative source of truth: [`dataset.json`](dataset.json)  
-Article-ready quantitative record: [`EVIDENCE.md`](EVIDENCE.md)
+Article-ready quantitative record: [`EVIDENCE.md`](EVIDENCE.md)  
+Qwen incident: [`QWEN_INCIDENT.md`](QWEN_INCIDENT.md)
 
-> All **21** Direct↔Primed pairs were inspected (7 configurations × r01–r03).  
+> Primary audit covers **18** valid Direct↔Primed pairs
+> (6 configurations × r01–r03).  
+> The Qwen cell is **excluded** from primary D→P interpretation
+> (`INVALID — MODEL MISMATCH`).  
 > Classifications are **apparent** judgments relative to resource-supported /
 > orthographic signals and corpus-overlap observations — not proof of
 > linguistic correctness.
@@ -26,16 +31,18 @@ Article-ready quantitative record: [`EVIDENCE.md`](EVIDENCE.md)
    **not** systematically near-copy the corpus winter narrative
    (`Ljudi govoret, že v tamtoj denj…`).
 5. **n = 3** per configuration limits generalization.
-6. Orthography outside-inventory and coverage can **move in opposite
-   directions** within the same pair (extreme: Qwen r03).
+6. Orthography outside-inventory and coverage can move in opposite
+   directions within the same pair.
+7. **Qwen LOW is not a valid same-model pair** (Direct = Qwen3.8-Max;
+   Primed = Qwen3.7-Plus). Do not interpret any Qwen Δ as priming.
 
 ---
 
-## A. Pair-level audit table (all 21)
+## A. Pair-level audit table (18 valid pairs)
 
-Canonical values from `dataset.json`. Δ = P − D (percentage points).
-Opening Jaccard is vs the authentic corpus narrative excerpt
-(`tuta-historija-excerpt.txt`) — a HIGH-style corpus-opening detector.
+Canonical values from `dataset.json` (primary valid cells). Δ = P − D
+(percentage points). Opening Jaccard is vs the authentic corpus narrative
+excerpt (`tuta-historija-excerpt.txt`) — a HIGH-style corpus-opening detector.
 
 ### Gemini 3.6 Flash — extended thinking ON (mean Δ +13.23 pp; all positive)
 
@@ -69,14 +76,6 @@ Opening Jaccard is vs the authentic corpus narrative excerpt
 | r02 | 67.80 | 75.72 | +7.92 | 16→15 | Strongest DeepSeek LOW Δ | improvement / lexical borrowing |
 | r03 | 69.75 | 74.97 | +5.22 | 12→9 | Consistent mild positive | improvement / lexical borrowing |
 
-### Qwen 3.8 Max Fast (mean Δ −12.08 pp; all negative)
-
-| rep | D% | P% | Δ pp | ortho D→P | concise differences | classes |
-|---|---:|---:|---:|---|---|---|
-| r01 | 72.48 | 66.70 | −5.78 | 32→28 | Negative Δ despite some corpus markers; opening stays Podkłady | degradation / ambiguous |
-| r02 | 71.96 | 68.27 | −3.68 | 30→25 | Milder negative; same qualitative character | degradation / ambiguous |
-| r03 | 72.11 | 45.34 | −26.77 | 18→1066 | **Polish collapse:** primed largely restores Polish source prose (`się`, `który`, …); extreme outside-inventory | degradation / Polish collapse |
-
 ### GPT-5.6 Luna (mean Δ +5.31 pp; all positive)
 
 | rep | D% | P% | Δ pp | ortho D→P | concise differences | classes |
@@ -95,11 +94,29 @@ Opening Jaccard is vs the authentic corpus narrative excerpt
 
 ---
 
-## B. Recurring D→P patterns (observations)
+## A′. Qwen cell — incident note (not primary D→P)
+
+**Status:** `INVALID — MODEL MISMATCH` — see [`QWEN_INCIDENT.md`](QWEN_INCIDENT.md).
+
+| Fact | Value |
+|---|---|
+| Intended | Qwen 3.8 Max — Fast on both Direct and Primed |
+| Actual Direct | Qwen 3.8 Max — Fast |
+| Actual Primed | Qwen3.7-Plus (default-selected) |
+| Later Qwen3.8-Max Primed attempt | service security / connection warning (not worked around) |
+| Historical −12.08 pp | **must not** be interpreted as priming |
+
+Outputs are **retained** for audit. No primary qualitative classes
+(improvement / degradation / Polish collapse) are assigned as priming
+evidence.
+
+---
+
+## B. Recurring D→P patterns (observations — valid pairs only)
 
 1. **No systematic corpus-opening near-copy.** Primed openings remain
    recognizably `Podkłady` (Katarzyna/Katarina + archive). Opening Jaccard
-   vs `tuta-historija` stays low (max ≈ 0.09 across all primed runs).
+   vs `tuta-historija` stays low (max ≈ 0.09 across valid primed runs).
 2. **Lexical borrowing without opening rewrite.** Primed texts more often
    contain corpus-register items such as `črěz`, `govoret`, `tutčas`,
    `jedino` while keeping the urban plot.
@@ -110,26 +127,22 @@ Opening Jaccard is vs the authentic corpus narrative excerpt
 5. **Structural continuity:** archive / Fabryczna / podkłady plot usually
    preserved (≠ HIGH’s frequent winter-narrative opening swap).
 
-### Counterexamples
+### Counterexamples (valid pairs)
 
 - **Δ↑ with little obvious corpus influence:** Gemini positives with low
   opening Jaccard — improvement may be local ISV/ortho cleanup rather than
   motif copy.
-- **Δ↓ despite visible corpus markers:** Qwen r01/r02 show some
-  `govoret`/`črěz`/`jedino` yet negative canonical Δ.
-- **Δ↓ with catastrophic Polish reversion:** Qwen r03 — primed ≈ Polish
-  source; coverage and orthography both collapse.
+- **Δ↓ with mixed signals:** Grok r03 small negative without opening rewrite.
 
 ---
 
-## C. Relationship to canonical Δ (descriptive)
+## C. Relationship to canonical Δ (descriptive — valid pairs)
 
 | Pattern | Configurations | Qualitative character |
 |---|---|---|
 | Consistently large positive Δ | Gemini ON/OFF, Claude | Lexical borrowing + ortho cleanup; **no** corpus-opening near-copy |
 | Consistently moderate positive Δ | DeepSeek, GPT-5.6 Luna | Same direction; milder magnitude |
 | Positive mean, one negative replicate | Grok | r03 small negative; no opening rewrite |
-| Consistently negative Δ | Qwen | Interference / Polish collapse (r03 extreme) |
 
 This is **compatible with** (not proof of) the hypothesis that large HIGH
 positive Δs partly reflected overlap with corpus-like openings/motifs:
@@ -140,12 +153,11 @@ and some HIGH-strong configs (Grok) show smaller / mixed LOW Δ.
 
 ## HIGH vs LOW qualitative contrast (descriptive)
 
-| Observation | HIGH | LOW |
+| Observation | HIGH | LOW (valid cells) |
 |---|---|---|
 | Primed opening ≈ corpus winter narrative | Frequent in large+ configs | Not observed |
 | Gemini priming direction | Mixed / mean≈0 or negative | Strongly positive, all+ |
-| Qwen priming direction | Mostly positive (1 negative rep) | All negative |
-| Polish collapse under priming | Rare | Qwen r03 extreme case |
+| Qwen | Valid HIGH pair (+5.18 mean Δ, mixed) | **LOW priming not estimated** (model mismatch) |
 
 ---
 
@@ -158,3 +170,4 @@ and some HIGH-strong configs (Grok) show smaller / mixed LOW Δ.
   component).
 - **No LLM calls.** No raw outputs, frozen inputs, prompts, evaluations, or
   HIGH aggregate artifacts were modified.
+- Gemini LOW runs were not modified or reinterpreted.

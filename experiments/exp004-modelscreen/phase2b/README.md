@@ -5,7 +5,7 @@
 | Regime | Status |
 |---|---|
 | **HIGH-overlap** | executed + analysed (42/42; descriptive Δ_HIGH; 2026-09-15) |
-| **LOW-overlap** | executed + analysed (42/42; descriptive Δ_LOW; 2026-09-16) |
+| **LOW-overlap** | executed + analysed (42/42 retained; **6 valid** paired configs; Qwen `INVALID — MODEL MISMATCH`; descriptive Δ_LOW; 2026-09-16) |
 | **UNSEEN DOMAIN** | planned / scoped; **not frozen / not executed** |
 
 Intake and analysis used existing replies and deterministic scripts only —
@@ -21,7 +21,18 @@ corpus were not modified by analysis.
 [`analysis/low/EVIDENCE.md`](analysis/low/EVIDENCE.md) ·
 [`analysis/low/`](analysis/low/) ·
 [`analysis/low/QUALITATIVE_AUDIT.md`](analysis/low/QUALITATIVE_AUDIT.md) +
-[`analysis/low/qualitative_audit.json`](analysis/low/qualitative_audit.json)
+[`analysis/low/qualitative_audit.json`](analysis/low/qualitative_audit.json) ·
+[`analysis/low/QWEN_INCIDENT.md`](analysis/low/QWEN_INCIDENT.md)
+(Qwen cell: `INVALID — MODEL MISMATCH`; priming not estimated)
+
+### Checkpoint
+[`EXP-004_PHASE2B_CHECKPOINT.md`](EXP-004_PHASE2B_CHECKPOINT.md)
+(authoritative compact state after HIGH+LOW, before UNSEEN)
+
+### HIGH↔LOW synthesis
+[`analysis/high_low/EVIDENCE.md`](analysis/high_low/EVIDENCE.md) ·
+[`analysis/high_low/`](analysis/high_low/)
+(exploratory descriptive cross-regime synthesis; matched n=6; not causal)
 
 LOW preparation validation (boundary + freeze):
 [`LOW_VALIDATION.md`](LOW_VALIDATION.md).
@@ -39,11 +50,13 @@ To answer it, the project distinguishes **three source-text regimes**:
 | Regime | Description | Item | Status |
 |---|---|---|---|
 | **HIGH-overlap** | a new Polish story strongly inspired by the corpus, deliberately sharing themes/motifs/imagery/narrative patterns | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` (frozen v1, Task 030) | **executed + analysed** (42/42; descriptive Δ_HIGH) |
-| **LOW-overlap** | a new Polish story with very little thematic/fabular overlap with the corpus | **`Podkłady`** (bank section 4; clean prose frozen v1; casting/API preamble excluded) | **executed + analysed** (42/42; descriptive Δ_LOW) |
+| **LOW-overlap** | a new Polish story with very little thematic/fabular overlap with the corpus | **`Podkłady`** (bank section 4; clean prose frozen v1; casting/API preamble excluded) | **executed + analysed** (42/42 retained; **6 valid** paired configs; Qwen invalid — see `analysis/low/QWEN_INCIDENT.md`) |
 | **UNSEEN DOMAIN** | a Polish scientific/educational source from a domain absent from the corpus | future biomedical-physics / electromedicine educational material | scoped, NOT prepared |
 
-HIGH and LOW are complete as descriptive paired datasets. UNSEEN-domain
-runs must not be mixed into either manifest, and UNSEEN remains unexecuted.
+HIGH is complete as a descriptive paired dataset. LOW is complete as a
+descriptive paired dataset on **6 valid** configurations (Qwen cell
+retained but invalid for same-model priming). UNSEEN-domain runs must not
+be mixed into either manifest, and UNSEEN remains unexecuted.
 
 ## HIGH-overlap story identity and classification
 
@@ -122,9 +135,10 @@ strongly thematically/motivically aligned with the priming corpus.
 
 Potential alternative explanation: the model may simply benefit from
 stronger lexical/topic overlap or may reproduce corpus-specific
-structures. The eventual interpretation compares `Δ_HIGH` (this kit)
-with `Δ_LOW` and `Δ_UNSEEN`; no such relationship is claimed until those
-tests are actually run.
+structures. Interpretation compares `Δ_HIGH` (this kit) with `Δ_LOW`
+(executed; see `analysis/low/`) and `Δ_UNSEEN` (not executed); descriptive
+HIGH↔LOW contrasts are recorded, but **no causal confirmation of H-HIGH
+is claimed**.
 
 ## Corpus self-evaluation reference point
 
@@ -200,8 +214,9 @@ Canonical mean Δ (full tables + individual D/P/Δ + run IDs in
 **Interpretation constraints:** n=3; descriptive only; no significance
 tests; no causal priming claim; Gemini ON/OFF and Qwen have mixed-sign
 replicate Δs; orthography is a separate diagnostic; unresolved is
-structurally related to canonical coverage. H-HIGH remains a hypothesis
-until LOW/UNSEEN exist.
+structurally related to canonical coverage. H-HIGH remains a hypothesis;
+LOW descriptive results now exist under `analysis/low/` (UNSEEN still
+unexecuted).
 
 ## Related documents
 

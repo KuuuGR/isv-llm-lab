@@ -119,3 +119,53 @@ def test_real_phase2b_integrity_passes(ana):
     integrity = ana.integrity_checks(obs, plan)
     assert integrity["ok"]
     assert integrity["n_observations"] == 42
+
+
+def test_low_qwen_excluded_from_primary_mean(ana):
+    """LOW Qwen config is retained but excluded from primary mean Δ."""
+    key_q = ("alibaba", "qwen-3.8-max", "fast")
+    assert key_q in ana.INVALID_LOW_PAIRED_CONFIGS
+    assert not ana._cfg_is_primary_valid("low", key_q)
+    assert ana._cfg_is_primary_valid("high", key_q)
+
+    obs = []
+    for provider, model, version in ana.SHORTLIST_ORDER:
+        lab = f"{model}-{version}"
+        for rep in ("r01", "r02", "r03"):
+            if (provider, model, version) == key_q:
+                d_c, p_c = 0.70, 0.40  # Δ = -0.30
+            else:
+                d_c, p_c = 0.60, 0.70  # Δ = +0.10
+            d = _synth_obs(lab, provider, model, version, "direct",
+                           rep, d_c, 0.8, 0.4, 10)
+            d["run_id"] = (
+                f"2099-01-01__p2b-low__{provider}__{model}__{version}"
+                f"__direct__{rep}")
+            p = _synth_obs(lab, provider, model, version, "primed",
+                           rep, p_c, 0.85, 0.3, 8)
+            p["run_id"] = (
+                f"2099-01-01__p2b-low__{provider}__{model}__{version}"
+                f"__primed__{rep}")
+            obs.extend([d, p])
+
+    plan = {"runs": [{"run_id": o["run_id"]} for o in obs],
+            "source": {"sha256": "s"}, "corpus": {"sha256": "c"}}
+    integrity = ana.integrity_checks(obs, plan, regime="low")
+    assert integrity["ok"]
+    dataset = ana.build_dataset(obs, integrity, plan, regime="low")
+    assert dataset["n_configurations_primary_valid"] == 6
+    assert dataset["n_configurations_invalid_pairing"] == 1
+    analysis = ana.build_analysis(dataset)
+    assert len(analysis["tables"]["canonical"]["rows"]) == 6
+    assert all("qwen" not in r["config"][1]
+               for r in analysis["tables"]["canonical"]["rows"])
+    mean_d = analysis["distribution_notes"][
+        "canonical_delta_mean_across_configs"]
+    assert abs(mean_d - 0.10) < 1e-12
+    assert analysis["distribution_notes"][
+        "canonical_delta_mean_across_configs_n"] == 6
+    assert analysis["distribution_notes"][
+        "qwen_low_priming_effect_estimated"] is False
+    inv = analysis["invalid_pairing_tables"]["canonical"]["rows"]
+    assert len(inv) == 1
+    assert abs(inv[0]["delta_mean"] - (-0.30)) < 1e-12

@@ -68,6 +68,48 @@ SHORTLIST_ORDER = [
     ("xai", "grok", "fast"),
 ]
 
+# LOW paired cells excluded from primary priming aggregates.
+# Collection ledger still retains all 42 runs; exclusion is analytical only.
+INVALID_LOW_PAIRED_CONFIGS: dict[tuple[str, str, str], dict] = {
+    ("alibaba", "qwen-3.8-max", "fast"): {
+        "status": "INVALID — MODEL MISMATCH",
+        "incident_id": "p2b-low-qwen-model-mismatch-2026-09-16",
+        "intended_model": "Qwen 3.8 Max — Fast",
+        "actual_direct_model": "Qwen 3.8 Max — Fast",
+        "actual_primed_model": "Qwen3.7-Plus (default-selected in Qwen Chat)",
+        "why_invalid": (
+            "Primed sessions were accidentally run on Qwen3.7-Plus rather "
+            "than the intended Qwen3.8-Max; Direct/Primed are not a "
+            "same-model pair."
+        ),
+        "qwen38_primed_service_error": (
+            "Oops! There was an issue connecting to Qwen3.8-Max.\n"
+            "Content security warning: output text data may contain "
+            "inappropriate content!"
+        ),
+        "workaround_attempted": False,
+        "priming_effect_estimated": False,
+        "do_not_interpret_delta_as": (
+            "Qwen 3.8 Max LOW priming effect (including any −12.08 pp figure)"
+        ),
+        "retained": True,
+        "incident_doc": (
+            "experiments/exp004-modelscreen/phase2b/analysis/low/"
+            "QWEN_INCIDENT.md"
+        ),
+    },
+}
+
+
+def _invalid_low_info(key: tuple[str, str, str]) -> dict | None:
+    return INVALID_LOW_PAIRED_CONFIGS.get(key)
+
+
+def _cfg_is_primary_valid(regime: str, key: tuple[str, str, str]) -> bool:
+    if regime != "low":
+        return True
+    return key not in INVALID_LOW_PAIRED_CONFIGS
+
 
 def _cfg_key(o: dict) -> tuple[str, str, str]:
     return (o["provider"], o["model"], o["model_version"])
@@ -308,10 +350,17 @@ def build_dataset(obs: list[dict], integrity: dict, plan: dict,
     configurations = []
     for key in SHORTLIST_ORDER:
         g = by_cfg[key]
+        invalid_info = _invalid_low_info(key) if regime == "low" else None
+        primary_valid = _cfg_is_primary_valid(regime, key)
         cfg_rec: dict = {
             "config": list(key),
             "label": g["label"],
             "phase2b_role": g["role"],
+            "paired_validity": (
+                "valid" if primary_valid else "INVALID — MODEL MISMATCH"
+            ),
+            "primary_analysis_include": primary_valid,
+            "invalid_pairing": invalid_info,
             "direct": {},
             "primed": {},
             "paired_deltas": {},
@@ -380,23 +429,35 @@ def build_dataset(obs: list[dict], integrity: dict, plan: dict,
                      "direct": d_vals[2], "primed": p_vals[2],
                      "delta": deltas[2]},
                 ],
+                "usable_for_primary_priming_analysis": primary_valid,
             }
         configurations.append(cfg_rec)
 
+    primary = [c for c in configurations if c["primary_analysis_include"]]
+    invalid = [c for c in configurations if not c["primary_analysis_include"]]
     phase = "p2b-low" if regime == "low" else "p2b-high"
+    note = (
+        f"Descriptive aggregate of the 42 Phase-2B {regime.upper()} "
+        "runs. Paired Δᵢ = Pᵢ − Dᵢ by configuration × replicate. "
+        "n = 3 per cell — descriptive only, not inferential. "
+        "Every aggregate traces to evaluation.json / "
+        "orthography.json under phase2b/outputs/<run_id>/."
+    )
+    if regime == "low":
+        note += (
+            " PRIMARY priming aggregates use the "
+            f"{len(primary)} valid same-model paired configurations only; "
+            f"{len(invalid)} planned configuration(s) are retained but "
+            "marked INVALID — MODEL MISMATCH and excluded from primary "
+            "mean Δ / HIGH↔LOW priming comparison."
+        )
     return {
         "artifact": f"phase2b_{regime}_aggregate_dataset",
         "experiment_id": "exp004",
         "phase": phase,
         "regime": regime,
         "generator": "scripts/analyze_exp004_phase2b.py",
-        "note": (
-            f"Descriptive aggregate of the 42 Phase-2B {regime.upper()} "
-            "runs. Paired Δᵢ = Pᵢ − Dᵢ by configuration × replicate. "
-            "n = 3 per cell — descriptive only, not inferential. "
-            "Every aggregate traces to evaluation.json / "
-            "orthography.json under phase2b/outputs/<run_id>/."
-        ),
+        "note": note,
         "source": plan.get("source"),
         "corpus": plan.get("corpus"),
         "integrity": integrity,
@@ -404,66 +465,214 @@ def build_dataset(obs: list[dict], integrity: dict, plan: dict,
             {"key": k, "field": f, "label": lab} for k, f, lab in METRICS
         ],
         "n_runs": len(obs),
+        "n_configurations_planned": len(configurations),
+        "n_configurations_primary_valid": len(primary),
+        "n_configurations_invalid_pairing": len(invalid),
         "n_configurations": len(configurations),
         "configurations": configurations,
+        "primary_valid_configurations": [
+            c["label"] for c in primary
+        ],
+        "invalid_pairing_configurations": [
+            {
+                "label": c["label"],
+                "config": c["config"],
+                "status": c["paired_validity"],
+                "invalid_pairing": c["invalid_pairing"],
+            }
+            for c in invalid
+        ],
         "observations": obs,
     }
 
 
+def _table_rows_for_cfgs(configurations: list[dict], short: str) -> list[dict]:
+    rows = []
+    for cfg in configurations:
+        d = cfg["direct"][short]
+        p = cfg["primed"][short]
+        delta = cfg["paired_deltas"][short]
+        rows.append({
+            "label": cfg["label"],
+            "config": cfg["config"],
+            "paired_validity": cfg.get("paired_validity", "valid"),
+            "primary_analysis_include": cfg.get(
+                "primary_analysis_include", True),
+            "direct_mean": d["mean"],
+            "direct_sd": d["sd"],
+            "direct_min": d["min"],
+            "direct_max": d["max"],
+            "primed_mean": p["mean"],
+            "primed_sd": p["sd"],
+            "primed_min": p["min"],
+            "primed_max": p["max"],
+            "delta_mean": delta["mean"],
+            "delta_sd": delta["sd"],
+            "delta_min": delta["min"],
+            "delta_max": delta["max"],
+            "delta_values": delta["values"],
+        })
+    return rows
+
+
+def _direction_label(delta_values: dict) -> str:
+    vals = [delta_values["r01"], delta_values["r02"], delta_values["r03"]]
+    if all(v > 0 for v in vals):
+        return "all positive"
+    if all(v < 0 for v in vals):
+        return "all negative"
+    if all(v == 0 for v in vals):
+        return "all zero"
+    return "mixed"
+
+
+def _matched_high_sensitivity(low_primary: list[dict]) -> dict | None:
+    """Descriptive HIGH↔LOW comparison on the same 6 valid LOW configs.
+
+    Reads the frozen HIGH analysis.json if present. Does not modify HIGH.
+    """
+    high_path = ANALYSIS_ROOT / "analysis.json"
+    if not high_path.is_file():
+        return None
+    high = json.loads(high_path.read_text(encoding="utf-8"))
+    high_rows = {
+        tuple(r["config"]): r
+        for r in high["tables"]["canonical"]["rows"]
+    }
+    pairs = []
+    high_means = []
+    low_means = []
+    for cfg in low_primary:
+        key = tuple(cfg["config"])
+        h = high_rows.get(key)
+        if h is None:
+            continue
+        low_d = cfg["paired_deltas"]["canonical"]["mean"]
+        pairs.append({
+            "label": cfg["label"],
+            "config": list(key),
+            "high_delta_mean": h["delta_mean"],
+            "low_delta_mean": low_d,
+            "high_delta_values": h["delta_values"],
+            "low_delta_values": cfg["paired_deltas"]["canonical"]["values"],
+            "high_direction": _direction_label(h["delta_values"]),
+            "low_direction": _direction_label(
+                cfg["paired_deltas"]["canonical"]["values"]),
+        })
+        high_means.append(h["delta_mean"])
+        low_means.append(low_d)
+    if not pairs:
+        return None
+    return {
+        "label": (
+            "matched-configuration sensitivity analysis "
+            "(identical 6 configs in HIGH and LOW; Qwen excluded)"
+        ),
+        "n_configurations": len(pairs),
+        "note": (
+            "Descriptive only. Unequal to the published HIGH 7-config "
+            "aggregate; do not treat as a replacement for HIGH's full "
+            "record. Qwen is excluded on both sides so the configuration "
+            "sets match."
+        ),
+        "high_canonical_delta_mean_across_configs":
+            statistics.fmean(high_means),
+        "low_canonical_delta_mean_across_configs":
+            statistics.fmean(low_means),
+        "rows": pairs,
+    }
+
+
 def build_analysis(dataset: dict) -> dict:
+    regime = dataset.get("regime", "high")
+    primary = [c for c in dataset["configurations"]
+               if c.get("primary_analysis_include", True)]
+    invalid = [c for c in dataset["configurations"]
+               if not c.get("primary_analysis_include", True)]
+
     tables = {}
     for short, _field, human in METRICS:
-        rows = []
-        for cfg in dataset["configurations"]:
-            d = cfg["direct"][short]
-            p = cfg["primed"][short]
-            delta = cfg["paired_deltas"][short]
-            rows.append({
-                "label": cfg["label"],
-                "config": cfg["config"],
-                "direct_mean": d["mean"],
-                "direct_sd": d["sd"],
-                "direct_min": d["min"],
-                "direct_max": d["max"],
-                "primed_mean": p["mean"],
-                "primed_sd": p["sd"],
-                "primed_min": p["min"],
-                "primed_max": p["max"],
-                "delta_mean": delta["mean"],
-                "delta_sd": delta["sd"],
-                "delta_min": delta["min"],
-                "delta_max": delta["max"],
-                "delta_values": delta["values"],
-            })
-        tables[short] = {"metric": human, "rows": rows}
+        tables[short] = {
+            "metric": human,
+            "scope": "primary_valid_paired_configurations",
+            "n_configurations": len(primary),
+            "rows": _table_rows_for_cfgs(primary, short),
+        }
 
-    # Distribution notes (descriptive only)
+    invalid_tables = {}
+    for short, _field, human in METRICS:
+        invalid_tables[short] = {
+            "metric": human,
+            "scope": "invalid_pairing_retained_not_primary",
+            "n_configurations": len(invalid),
+            "rows": _table_rows_for_cfgs(invalid, short),
+            "warning": (
+                "Do not interpret these Δ values as same-model priming "
+                "effects."
+            ),
+        }
+
     canon_means = [r["delta_mean"] for r in tables["canonical"]["rows"]]
-    regime = dataset.get("regime", "high")
+    n_cfg = len(canon_means)
     notes = {
         "n_per_cell": 3,
         "interpretation": "descriptive_only",
-        "canonical_delta_mean_across_configs": statistics.fmean(canon_means),
+        "n_configurations_planned": dataset.get(
+            "n_configurations_planned", len(dataset["configurations"])),
+        "n_configurations_primary_valid": n_cfg,
+        "n_configurations_invalid_pairing": len(invalid),
+        "canonical_delta_mean_across_configs":
+            statistics.fmean(canon_means) if canon_means else None,
+        "canonical_delta_mean_across_configs_n": n_cfg,
+        "canonical_delta_mean_label": (
+            f"mean of {n_cfg} valid configuration mean-Δ values"
+        ),
         "canonical_delta_positive_configs":
             sum(1 for v in canon_means if v > 0),
         "canonical_delta_negative_configs":
             sum(1 for v in canon_means if v < 0),
         "canonical_delta_zero_configs":
             sum(1 for v in canon_means if v == 0),
+        "direction_consistency": [
+            {
+                "label": r["label"],
+                "delta_values": r["delta_values"],
+                "direction": _direction_label(r["delta_values"]),
+            }
+            for r in tables["canonical"]["rows"]
+        ],
     }
-    return {
+    if regime == "low":
+        notes["qwen_low_priming_effect_estimated"] = False
+        notes["do_not_use_as_qwen38_low_priming"] = (
+            "Any historical −12.08 pp Qwen LOW figure is from an invalid "
+            "model-mismatched pair and must not be cited as a Qwen 3.8 Max "
+            "priming effect."
+        )
+
+    analysis = {
         "artifact": f"phase2b_{regime}_aggregate_analysis",
         "status": "results",
         "generator": "scripts/analyze_exp004_phase2b.py",
         "integrity_ok": dataset["integrity"]["ok"],
         "tables": tables,
+        "invalid_pairing_tables": invalid_tables,
         "distribution_notes": notes,
         "disclaimer": (
             "n = 3 replicates per configuration/condition. Results are "
             "descriptive replication/variance characterizations. Do not "
             "treat mean Δ as a statistically established effect."
+            + (
+                " LOW primary mean Δ uses valid same-model pairs only "
+                f"(n={n_cfg} configurations)."
+                if regime == "low" else ""
+            )
         ),
     }
+    if regime == "low":
+        analysis["matched_high_sensitivity"] = _matched_high_sensitivity(
+            primary)
+    return analysis
 
 
 def _fmt_rate_stats(s: dict) -> str:
@@ -498,11 +707,25 @@ def render_markdown(dataset: dict, analysis: dict) -> str:
     regime = dataset.get("regime", "high")
     regime_u = regime.upper()
     story_label = "LOW" if regime == "low" else "HIGH"
+    primary_cfgs = [c for c in dataset["configurations"]
+                    if c.get("primary_analysis_include", True)]
+    invalid_cfgs = [c for c in dataset["configurations"]
+                    if not c.get("primary_analysis_include", True)]
+    n_primary = len(primary_cfgs)
     lines: list[str] = []
+    status_line = (
+        f"**Status:** results written from 42 verified + evaluated runs"
+        + (
+            f"; **primary priming analysis uses {n_primary} valid "
+            f"paired configurations** "
+            f"({len(invalid_cfgs)} invalid pairing retained, excluded)."
+            if regime == "low" and invalid_cfgs else "."
+        )
+    )
     lines += [
         f"# EXP-004 Phase 2B {regime_u} — aggregate analysis (descriptive)",
         "",
-        "**Status:** results written from 42 verified + evaluated runs.",
+        status_line,
         "**Generator:** `scripts/analyze_exp004_phase2b.py` (deterministic;",
         "std-lib only; never calls an LLM).",
         "",
@@ -511,13 +734,58 @@ def render_markdown(dataset: dict, analysis: dict) -> str:
         "> **not** establish statistical significance, does **not** claim",
         "> causal corpus-priming effects, and does **not** rank models.",
         "",
+    ]
+    if regime == "low" and invalid_cfgs:
+        lines += [
+            "## 0. Validity (LOW)",
+            "",
+            "| set | n |",
+            "|---|---:|",
+            "| planned configurations | "
+            f"{dataset.get('n_configurations_planned', 7)} |",
+            f"| **valid paired configurations (primary)** | "
+            f"**{n_primary}** |",
+            f"| invalid pairing (retained, excluded from primary) | "
+            f"{len(invalid_cfgs)} |",
+            "",
+        ]
+        for inv in invalid_cfgs:
+            info = inv.get("invalid_pairing") or {}
+            lines += [
+                f"**{inv['label']}** — `{inv['paired_validity']}`",
+                "",
+                f"- Intended model: {info.get('intended_model', '—')}",
+                f"- Actual Direct model: "
+                f"{info.get('actual_direct_model', '—')}",
+                f"- Actual Primed model: "
+                f"{info.get('actual_primed_model', '—')}",
+                f"- Why invalid: {info.get('why_invalid', '—')}",
+                "- Observed Qwen3.8-Max Primed service error "
+                "(verbatim; not worked around):",
+                "",
+                "```",
+                info.get("qwen38_primed_service_error", "").rstrip(),
+                "```",
+                "",
+                "- Workaround attempted: **NO**",
+                "- Qwen 3.8 Max LOW priming effect: **not estimated**",
+                "- Raw outputs / metadata retained for audit "
+                f"(see `{info.get('incident_doc', 'QWEN_INCIDENT.md')}`).",
+                "",
+                "Do **not** cite any historical −12.08 pp Qwen LOW figure "
+                "as a Qwen 3.8 Max priming effect.",
+                "",
+            ]
+
+    lines += [
         "## 1. Data-integrity checks",
         "",
     ]
     integ = dataset["integrity"]
     lines.append(f"Overall: **{'PASS' if integ['ok'] else 'FAIL'}** "
-                 f"({integ['n_observations']} observations, "
-                 f"{integ['n_configurations']} configurations).")
+                 f"({integ['n_observations']} observations collected, "
+                 f"{integ['n_configurations']} planned configurations; "
+                 f"primary valid pairs = {n_primary}).")
     lines.append("")
     lines.append("| check | result |")
     lines.append("|---|---|")
@@ -539,11 +807,12 @@ def render_markdown(dataset: dict, analysis: dict) -> str:
         "`phase2b/outputs/<run_id>/evaluation.json` and "
         "`orthography.json` (paths listed in `dataset.json`).",
         "",
-        "## 2. Cross-configuration summary (direct vs primed vs mean Δ)",
+        "## 2. Cross-configuration summary "
+        f"(primary valid pairs only; n={n_primary})",
         "",
     ]
 
-    # Four summary tables
+    # Four summary tables — primary only
     for short, _field, human in METRICS:
         is_rate = short != "ortho_out"
         lines.append(f"### {human}")
@@ -579,14 +848,28 @@ def render_markdown(dataset: dict, analysis: dict) -> str:
                 )
         lines.append("")
 
+    notes = analysis["distribution_notes"]
+    if notes.get("canonical_delta_mean_across_configs") is not None:
+        lines += [
+            f"**Overall descriptive mean Δ (canonical)** across "
+            f"**n={notes['canonical_delta_mean_across_configs_n']} "
+            f"valid configurations**: "
+            f"{_pp(notes['canonical_delta_mean_across_configs'])} pp "
+            f"({notes['canonical_delta_positive_configs']} positive / "
+            f"{notes['canonical_delta_negative_configs']} negative).",
+            "",
+        ]
+
     lines += [
         "## 3. Per-configuration detail (individual D / P / Δ)",
         "",
         "Replicates are independent fresh sessions (r01–r03). "
         "Δᵢ = Pᵢ − Dᵢ for the same replicate tag.",
         "",
+        "### 3a. Primary valid configurations",
+        "",
     ]
-    for cfg in dataset["configurations"]:
+    for cfg in primary_cfgs:
         lines.append(f"### {cfg['label']}")
         lines.append("")
         if cfg.get("phase2b_role"):
@@ -607,7 +890,6 @@ def render_markdown(dataset: dict, analysis: dict) -> str:
                 lines.append(f"- Primed:  {_fmt_rate_stats(p)}")
                 lines.append(f"- Paired:  {_fmt_delta_rate(delta)}")
             lines.append("")
-            # Individual values table
             lines.append("| rep | direct | primed | Δ | direct run_id | "
                          "primed run_id |")
             lines.append("|---|---:|---:|---:|---|---|")
@@ -632,57 +914,91 @@ def render_markdown(dataset: dict, analysis: dict) -> str:
                     )
             lines.append("")
 
-    notes = analysis["distribution_notes"]
+    if invalid_cfgs:
+        lines += [
+            "### 3b. Invalid pairing (retained; not primary)",
+            "",
+            "Metrics below are retained for audit completeness only. "
+            "**They are not same-model priming effects.**",
+            "",
+        ]
+        for cfg in invalid_cfgs:
+            lines.append(f"#### {cfg['label']} — {cfg['paired_validity']}")
+            lines.append("")
+            delta = cfg["paired_deltas"]["canonical"]
+            lines.append(
+                f"- Canonical Δ r01/r02/r03 (audit only): "
+                f"{_pp(delta['values']['r01'])} / "
+                f"{_pp(delta['values']['r02'])} / "
+                f"{_pp(delta['values']['r03'])} pp; "
+                f"mean={_pp(delta['mean'])} pp — "
+                "**do not interpret as Qwen 3.8 Max priming**."
+            )
+            lines.append("")
+            for cond in ("direct", "primed"):
+                for o in cfg["observations"][cond]:
+                    lines.append(f"- `{cond}` `{o['replicate']}`: "
+                                 f"`{o['run_id']}`")
+            lines.append("")
+
     lines += [
         "## 4. Observations about distribution and variance",
         "",
         "- Each cell has **n = 3**. Means and SDs are small-sample "
-        "descriptive quantities; ranges of the three replicates are the "
-        "clearest variance signal.",
-        "- Individual replicate Δ values are reported above so that a "
-        "large mean Δ driven by a single replicate remains visible.",
-        f"- Across the 7 configurations, mean canonical Δ is "
-        f"**{_pp(notes['canonical_delta_mean_across_configs'])} pp** "
-        f"(positive in {notes['canonical_delta_positive_configs']}/7, "
-        f"negative in {notes['canonical_delta_negative_configs']}/7). "
-        "This is a descriptive cross-config summary only.",
-        "- Orthography outside-inventory is a character-level count "
-        "(not a coverage rate); interpret separately from "
-        "canonical/broader/unresolved.",
-        "- Unresolved rate moves inversely with coverage by construction "
-        "of the evaluator (unresolved ≈ 1 − canonical under the "
-        "lexical-token denominator); report both, do not invent a "
-        "composite.",
-        "",
-        "## 5. Clear statement on n = 3",
-        "",
-        analysis["disclaimer"],
-        "",
-        "No significance tests were run. No causal claim about corpus "
-        "priming is made in this artifact. A later bounded task may "
-        "interpret these descriptive results against Phase-2A / repeats.",
-        "",
-        "## 6. Anomalies worth investigating",
+        "descriptive characterizations, not population estimates.",
+        f"- Primary overall mean Δ uses "
+        f"**n={notes.get('canonical_delta_mean_across_configs_n', n_primary)} "
+        f"valid configurations**"
+        + (" (not the 7 planned cells)." if regime == "low" and invalid_cfgs
+           else "."),
+        "- Do not compare a 6-config LOW aggregate directly to the "
+        "published 7-config HIGH aggregate without stating the unequal "
+        "configuration sets; see matched sensitivity below when present.",
         "",
     ]
-    anomalies = _flag_anomalies(dataset)
-    if not anomalies:
-        lines.append("None flagged by the deterministic anomaly heuristics "
-                     "in this generator (see `analysis.json` if extended "
-                     "later). Integrity checks all passed.")
-    else:
-        for a in anomalies:
-            lines.append(f"- {a}")
+    for item in notes.get("direction_consistency", []):
+        vals = item["delta_values"]
+        lines.append(
+            f"- {item['label']}: Δ "
+            f"{_pp(vals['r01'])} / {_pp(vals['r02'])} / "
+            f"{_pp(vals['r03'])} pp → **{item['direction']}**"
+        )
+    lines.append("")
+
+    matched = analysis.get("matched_high_sensitivity")
+    if matched:
+        lines += [
+            "## 5. Matched-configuration HIGH↔LOW sensitivity "
+            f"(n={matched['n_configurations']})",
+            "",
+            matched["note"],
+            "",
+            f"- HIGH mean Δ (matched 6): "
+            f"{_pp(matched['high_canonical_delta_mean_across_configs'])} pp",
+            f"- LOW mean Δ (matched 6): "
+            f"{_pp(matched['low_canonical_delta_mean_across_configs'])} pp",
+            "",
+            "| configuration | HIGH mean Δ | LOW mean Δ | "
+            "HIGH direction | LOW direction |",
+            "|---|---:|---:|---|---|",
+        ]
+        for row in matched["rows"]:
+            lines.append(
+                f"| {row['label']} | "
+                f"{_pp(row['high_delta_mean'])} pp | "
+                f"{_pp(row['low_delta_mean'])} pp | "
+                f"{row['high_direction']} | {row['low_direction']} |"
+            )
+        lines.append("")
+
     lines += [
+        "## 6. Constraints",
         "",
-        "## 7. Files",
-        "",
-        "| file | role |",
-        "|---|---|",
-        "| `dataset.json` | machine-readable observations + per-config "
-        "stats + paired Δ (traceable to run artifacts) |",
-        "| `analysis.json` | summary tables + distribution notes |",
-        "| `analysis.md` | this report |",
+        "- No significance tests.",
+        "- No causal corpus-priming claims.",
+        "- No model ranking.",
+        "- Orthography outside-inventory is a separate diagnostic.",
+        "- Unresolved rate is structurally related to canonical coverage.",
         "",
     ]
     return "\n".join(lines) + "\n"
@@ -692,6 +1008,8 @@ def _flag_anomalies(dataset: dict) -> list[str]:
     """Lightweight descriptive flags only (not scientific conclusions)."""
     flags: list[str] = []
     for cfg in dataset["configurations"]:
+        if not cfg.get("primary_analysis_include", True):
+            continue
         label = cfg["label"]
         # Sign inconsistency across the three replicate deltas (canonical)
         deltas = list(cfg["paired_deltas"]["canonical"]["values"].values())
@@ -723,21 +1041,66 @@ def write_readme(regime: str = "high") -> None:
     regime_u = regime.upper()
     plan_path = ("phase2b/outputs/low/plan.json" if regime == "low"
                  else "phase2b/outputs/plan.json")
-    cmd = (".venv/bin/python scripts/analyze_exp004_phase2b.py "
-           f"--regime {regime}")
+    if regime == "low":
+        cmd = (".venv/bin/python scripts/analyze_exp004_phase2b.py "
+               "--regime low")
+        generator_note = (
+            "outputs of `scripts/analyze_exp004_phase2b.py --regime low`, "
+            "derived from\nevaluated runs that stay local"
+        )
+        contents = (
+            "| file | content |\n"
+            "|---|---|\n"
+            "| `dataset.json` | integrity ledger + 42 observations + "
+            "per-config direct/primed stats + paired Δᵢ = Pᵢ − Dᵢ for "
+            "canonical / broader / unresolved / orthography-out |\n"
+            "| `analysis.json` | machine-readable summary tables + "
+            "distribution notes |\n"
+            "| `analysis.md` | human-readable descriptive report |\n"
+            "| `EVIDENCE.md` | article-ready evidence record "
+            "(fact / interpretation / hypothesis) |\n"
+            "| `QUALITATIVE_AUDIT.md` | descriptive D→P audit of "
+            "**valid** pairs (Qwen mismatch excluded from primary) |\n"
+            "| `qualitative_audit.json` | machine-readable pair ledger "
+            "for the qualitative audit |\n"
+            "| `QWEN_INCIDENT.md` | methodological incident: invalid "
+            "Qwen LOW pairing + service error |\n"
+            "| `invalid_cells.json` | machine-readable invalid-cell "
+            "ledger |"
+        )
+        extra = (
+            "- Does **not** overwrite HIGH artifacts under "
+            "`phase2b/analysis/` (parent).\n"
+            "- Primary priming aggregates use **6 valid** same-model "
+            "paired configurations; Qwen is retained but marked "
+            "`INVALID — MODEL MISMATCH`.\n"
+        )
+    else:
+        cmd = ".venv/bin/python scripts/analyze_exp004_phase2b.py"
+        generator_note = (
+            "outputs of `scripts/analyze_exp004_phase2b.py`, derived from "
+            "evaluated\nruns that stay local"
+        )
+        contents = (
+            "| file | content |\n"
+            "|---|---|\n"
+            "| `dataset.json` | integrity ledger + 42 observations + "
+            "per-config direct/primed stats + paired Δᵢ = Pᵢ − Dᵢ for "
+            "canonical / broader / unresolved / orthography-out "
+            "(each row traces to run IDs + artifact paths) |\n"
+            "| `analysis.json` | machine-readable summary tables + "
+            "distribution notes |\n"
+            "| `analysis.md` | human-readable descriptive report |"
+        )
+        extra = ""
     text = f"""# Phase 2B {regime_u} — aggregate analysis
 
 Derived artifacts in this directory are **gitignored** (deterministic
-outputs of `scripts/analyze_exp004_phase2b.py`, derived from evaluated
-runs that stay local); this README is committed.
+{generator_note}); this README is committed.
 
 ## Contents
 
-| file | content |
-|---|---|
-| `dataset.json` | integrity ledger + 42 observations + per-config direct/primed stats + paired Δᵢ = Pᵢ − Dᵢ for canonical / broader / unresolved / orthography-out |
-| `analysis.json` | machine-readable summary tables + distribution notes |
-| `analysis.md` | human-readable descriptive report |
+{contents}
 
 ## Method
 
@@ -751,7 +1114,7 @@ runs that stay local); this README is committed.
   run ids, every D/P pair share replicate tags, all usable/complete.
 - **n = 3** → descriptive only; no significance tests; no causal claims.
 - Never calls an LLM; never modifies raw outputs / story / corpus.
-"""
+{extra}"""
     out.mkdir(parents=True, exist_ok=True)
     (out / "README.md").write_text(text, encoding="utf-8")
 
@@ -777,11 +1140,20 @@ def run_analyze(regime: str = "high") -> int:
 
     print(f"[analyze] Phase-2B {regime.upper()} aggregate written to {out}")
     print(f"  integrity: PASS ({integrity['n_observations']} runs, "
-          f"{integrity['n_configurations']} configs)")
+          f"{integrity['n_configurations']} planned configs; "
+          f"primary valid="
+          f"{dataset.get('n_configurations_primary_valid', 7)})")
     notes = analysis["distribution_notes"]
-    print(f"  canonical mean Δ across configs: "
-          f"{notes['canonical_delta_mean_across_configs']*100:+.2f} pp "
-          f"(positive {notes['canonical_delta_positive_configs']}/7)")
+    n_mean = notes.get("canonical_delta_mean_across_configs_n", 7)
+    mean_d = notes.get("canonical_delta_mean_across_configs")
+    if mean_d is not None:
+        print(f"  canonical mean Δ across {n_mean} valid configs: "
+              f"{mean_d*100:+.2f} pp "
+              f"(positive {notes['canonical_delta_positive_configs']}/"
+              f"{n_mean})")
+    if regime == "low" and dataset.get("n_configurations_invalid_pairing"):
+        print("  Qwen LOW pairing: INVALID — MODEL MISMATCH "
+              "(excluded from primary; priming effect not estimated)")
     print("  note: n=3 descriptive only — see analysis.md")
     return 0
 

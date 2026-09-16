@@ -69,6 +69,14 @@ experiments/exp004-modelscreen/phase2b/analysis/low/*
 !experiments/exp004-modelscreen/phase2b/analysis/low/EVIDENCE.md
 !experiments/exp004-modelscreen/phase2b/analysis/low/QUALITATIVE_AUDIT.md
 !experiments/exp004-modelscreen/phase2b/analysis/low/qualitative_audit.json
+!experiments/exp004-modelscreen/phase2b/analysis/low/QWEN_INCIDENT.md
+!experiments/exp004-modelscreen/phase2b/analysis/low/invalid_cells.json
+!experiments/exp004-modelscreen/phase2b/analysis/high_low/
+experiments/exp004-modelscreen/phase2b/analysis/high_low/*
+!experiments/exp004-modelscreen/phase2b/analysis/high_low/README.md
+!experiments/exp004-modelscreen/phase2b/analysis/high_low/EVIDENCE.md
+!experiments/exp004-modelscreen/phase2b/analysis/high_low/analysis.md
+!experiments/exp004-modelscreen/phase2b/analysis/high_low/analysis.json
 
 # EXP-004 Task-029 corpus self-evaluation scratch (per-dataset isv-eval
 # CLI artifacts; gitignored — the reports themselves are committed)

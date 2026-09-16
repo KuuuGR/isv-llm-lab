@@ -1279,20 +1279,21 @@ orthography-out varies independently enough not to collapse into
 canonical. Individual D/P/Δ + run IDs in `phase2b/analysis/`. H-HIGH
 remains a hypothesis until LOW/UNSEEN comparisons exist.
 
-### EXP-004 Phase 2B LOW — executed + descriptive aggregate (2026-09-16)
+### EXP-004 Phase 2B LOW — executed + descriptive aggregate (2026-09-16; Qwen corrected)
 
 | Field | Value |
 |---|---|
-| Status | **EXECUTED, COLLECTED 42/42, VERIFIED 42/42, EVALUATED 42/42, AGGREGATE ANALYSED** — descriptive paired summary only; no significance tests; no causal claim; UNSEEN not started; no final scientific conclusions |
+| Status | **EXECUTED, COLLECTED 42/42, VERIFIED 42/42, EVALUATED 42/42, AGGREGATE ANALYSED** — primary paired analysis = **6 valid** configs; **1 invalid** Qwen pairing retained; descriptive only; no significance tests; no causal claim; UNSEEN not started |
 | Design | same Phase 2B shortlist / pairing as HIGH; regime `p2b-low` |
 | Story | LOW-overlap `Podkłady` v1 (clean prose), SHA-256 `ce1c4fca03fe9cb2c5f8181ab45c91767759a0c785f0a066543d95bc32f5271b` |
 | Corpus | `phase2a-authentic-isv` v1, SHA-256 `aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857` (unchanged) |
-| Sample | 7 configurations × direct/primed × r01–r03 = 42 runs (21 paired Δᵢ = Pᵢ − Dᵢ) |
+| Sample | 7 planned × direct/primed × r01–r03 = 42 runs retained; **18 valid pairs** (6 configs) |
+| Qwen incident | `INVALID — MODEL MISMATCH` — Direct=Qwen3.8-Max; Primed=Qwen3.7-Plus; later Qwen3.8-Max Primed content-security warning; **no workaround**; priming **not estimated** — `analysis/low/QWEN_INCIDENT.md` |
 | Metrics | identical to HIGH (canonical / broader / unresolved / ortho outside-inventory) |
 | Harness | `scripts/run_exp004_phase2b.py` (LOW-aware intake) + `scripts/analyze_exp004_phase2b.py --regime low` |
-| Artifacts | `phase2b/analysis/low/EVIDENCE.md`; `phase2b/analysis/low/{dataset,analysis}.{json,md}`; `phase2b/analysis/low/QUALITATIVE_AUDIT.md` + `qualitative_audit.json` |
+| Artifacts | `phase2b/analysis/low/EVIDENCE.md`; `phase2b/analysis/low/{dataset,analysis}.{json,md}`; `QUALITATIVE_AUDIT.md` + `qualitative_audit.json`; `QWEN_INCIDENT.md` + `invalid_cells.json` |
 
-**Canonical mean Δ (n=3 per cell; descriptive):**
+**Canonical mean Δ — primary valid configs only (n=3 per cell; descriptive):**
 
 | Configuration | Direct mean | Primed mean | Mean Δ | Direction |
 |---|---:|---:|---:|---|
@@ -1300,14 +1301,15 @@ remains a hypothesis until LOW/UNSEEN comparisons exist.
 | Gemini 3.6 Flash — ext. thinking OFF | 64.51% | 74.91% | +10.40 pp | all+ |
 | Claude Sonnet 5 Medium | 65.72% | 77.83% | +12.11 pp | all+ |
 | DeepSeek V3 Expert ON | 68.93% | 75.12% | +6.19 pp | all+ |
-| Qwen 3.8 Max Fast | 72.18% | 60.11% | −12.08 pp | all− |
 | GPT-5.6 Luna | 70.75% | 76.06% | +5.31 pp | all+ |
 | Grok 4.5 Fast | 69.32% | 73.27% | +3.95 pp | mixed |
 
-Descriptive mean of configuration mean-Δ values: **+5.59 pp** (6/7
-positive). Qualitative audit: no systematic corpus-opening near-copy
-(unlike HIGH); Qwen r03 Polish-collapse extreme. HIGH artifacts
-untouched. UNSEEN remains unexecuted.
+Descriptive mean of **n=6** valid configuration mean-Δ values: **+8.53 pp**.
+Do **not** silently compare to HIGH’s 7-config mean; matched 6-config
+sensitivity: HIGH +7.39 pp vs LOW +8.53 pp. Qualitative audit (18 valid
+pairs): no systematic corpus-opening near-copy. HIGH artifacts untouched.
+UNSEEN remains unexecuted. Historical Qwen −12.08 pp is **not** a priming
+result.
 
 ## Planned (not started) — current (2026-09-16)
 
@@ -1444,4 +1446,5 @@ Planned (not started):
   Execution/collection/audit/evaluation followed in Tasks 021–023 and the
   full deterministic research analysis in Task 024 — see the entries
   above. Phase 2B HIGH is now executed and aggregated (2026-09-15);
-  LOW/UNSEEN remain not prepared.
+  Phase 2B LOW is executed and aggregated (2026-09-16);
+  UNSEEN remains not prepared.
