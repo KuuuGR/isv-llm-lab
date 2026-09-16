@@ -1,14 +1,16 @@
 # EXP-004 Phase 2B — UNSEEN candidate validation
 
-**Document type:** methodological validation only (**NOT FROZEN**)  
+**Document type:** methodological validation + **operator freeze record**  
 **Date:** 2026-09-16  
 **Candidate title:** `Ćwiczenie 2.2 — Biofizyka głosu ludzkiego`  
 **Intended domain label:** medical biophysics / voice acoustics / speech biophysics  
 **Machine-readable companion:** `validation.json`  
-**Recommendation:** **`APPROVE`**
+**Recommendation:** **`APPROVE`**  
+**Operator decision:** **`APPROVE`** (2026-09-16)  
+**Freeze status:** **`v1 FROZEN`** — SHA-256 `cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4`
 
-> This file does **not** freeze the UNSEEN source, create a kit, or authorize sessions.  
-> Rejected in-repo candidates (`about/pl/about.md`, `Biofizyka ogólnie.md`, and other near-misses) remain rejected and are not reused here.
+> Rejected in-repo candidates (`about/pl/about.md`, `Biofizyka ogólnie.md`, and other near-misses) remain rejected and are not reused here.  
+> Freeze does **not** prepare a prompt kit or authorize LLM sessions.
 
 ---
 
@@ -58,7 +60,15 @@
 | Whitespace-token count | 675 |
 | **SHA-256** | `cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4` |
 
-The exact UTF-8 string used for this hash is stored under `candidate_text_utf8` in `validation.json` (validation artifact only — **not** a Phase 2B freeze).
+The exact UTF-8 string used for this hash is stored under `candidate_text_utf8` in `validation.json` and is byte-identical to the frozen v1 source.
+
+### Freeze locations (after operator APPROVE)
+
+| Artifact | Path |
+|---|---|
+| Frozen v1 (local / gitignored) | `input/versions/exercise-2-2-voice-biophysics-v1.txt` |
+| Meta (local / gitignored) | `input/unseen-domain-source.meta.json` |
+| Freeze report | `UNSEEN_VALIDATION.md` |
 
 ### Comparator integrity (unchanged)
 
@@ -133,14 +143,16 @@ Limited bibliographic provenance is recorded; it does **not** by itself invalida
 
 ## 5. Final recommendation
 
-### `APPROVE`
+### `APPROVE` → **frozen v1**
 
-Methodologically suitable as a Phase 2B UNSEEN candidate: coherent, self-contained educational scientific prose; clearly domain-unseen vs the authentic corpus; no meaningful passage leakage into corpus/HIGH/LOW; provenance limited but adequate for freeze consideration after **operator** approval.
+Methodologically suitable as a Phase 2B UNSEEN candidate: coherent, self-contained educational scientific prose; clearly domain-unseen vs the authentic corpus; no meaningful passage leakage into corpus/HIGH/LOW; provenance limited but adequate.
 
-**Not done in this step:** freeze, kit preparation, prompts, LLM sessions, or changes to HIGH/LOW/corpus.
+**Operator APPROVE recorded 2026-09-16.** Source frozen as **v1** (`cd3bfb9a…f7f4`).
+
+**Still not done:** kit preparation, prompts, LLM sessions, or changes to HIGH/LOW/corpus.
 
 ---
 
 ## Operator freeze gate
 
-After review, the operator may freeze this candidate (or request revision). Validation alone does not authorize UNSEEN execution.
+**Closed — APPROVE.** See `UNSEEN_VALIDATION.md` for the freeze ledger. Next step is optional kit preparation.

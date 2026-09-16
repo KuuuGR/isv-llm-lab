@@ -1,8 +1,20 @@
 {
   "document_type": "UNSEEN_candidate_validation",
-  "status": "NOT_FROZEN",
+  "status": "FROZEN_V1",
   "date": "2026-09-16",
   "recommendation": "APPROVE",
+  "operator_decision": "APPROVE",
+  "operator_decision_date": "2026-09-16",
+  "freeze": {
+    "version": "v1",
+    "story_id": "exercise-2-2-voice-biophysics",
+    "file": "input/versions/exercise-2-2-voice-biophysics-v1.txt",
+    "meta": "input/unseen-domain-source.meta.json",
+    "sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+    "bytes": 5676,
+    "kit_prepared": false,
+    "executed": false
+  },
   "candidate": {
     "title": "Ćwiczenie 2.2 — Biofizyka głosu ludzkiego",
     "domain_label": "medical biophysics / voice acoustics / speech biophysics",

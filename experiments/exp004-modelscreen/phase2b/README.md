@@ -6,7 +6,7 @@
 |---|---|
 | **HIGH-overlap** | executed + analysed (42/42; descriptive Δ_HIGH; 2026-09-15) |
 | **LOW-overlap** | executed + analysed (42/42 retained; **6 valid** paired configs; Qwen `INVALID — MODEL MISMATCH`; descriptive Δ_LOW; 2026-09-16) |
-| **UNSEEN DOMAIN** | planned / scoped; **not frozen / not executed** |
+| **UNSEEN DOMAIN** | frozen v1 (not prepared / not executed) |
 
 Intake and analysis used existing replies and deterministic scripts only —
 **no LLM calls** during intake/analysis. Frozen stories and the authentic
@@ -51,12 +51,13 @@ To answer it, the project distinguishes **three source-text regimes**:
 |---|---|---|---|
 | **HIGH-overlap** | a new Polish story strongly inspired by the corpus, deliberately sharing themes/motifs/imagery/narrative patterns | `Iskra i Wieloryb — wersja z oryginalnymi nazwami` (frozen v1, Task 030) | **executed + analysed** (42/42; descriptive Δ_HIGH) |
 | **LOW-overlap** | a new Polish story with very little thematic/fabular overlap with the corpus | **`Podkłady`** (bank section 4; clean prose frozen v1; casting/API preamble excluded) | **executed + analysed** (42/42 retained; **6 valid** paired configs; Qwen invalid — see `analysis/low/QWEN_INCIDENT.md`) |
-| **UNSEEN DOMAIN** | a Polish scientific/educational source from a domain absent from the corpus | future biomedical-physics / electromedicine educational material | scoped, NOT prepared |
+| **UNSEEN DOMAIN** | a Polish scientific/educational source from a domain absent from the corpus | **`Ćwiczenie 2.2 — Biofizyka głosu ludzkiego`** (theory; frozen v1) | **frozen**; kit not prepared; not executed |
 
 HIGH is complete as a descriptive paired dataset. LOW is complete as a
 descriptive paired dataset on **6 valid** configurations (Qwen cell
 retained but invalid for same-model priming). UNSEEN-domain runs must not
-be mixed into either manifest, and UNSEEN remains unexecuted.
+be mixed into either HIGH or LOW manifest. UNSEEN source is **frozen v1**
+(`cd3bfb9a…`; see `UNSEEN_VALIDATION.md`); kit/execution still pending.
 
 ## HIGH-overlap story identity and classification
 

@@ -1,7 +1,7 @@
 # EXP-004 Phase 2B — Checkpoint
 
 **Document type:** authoritative project checkpoint  
-**Scope:** state **after** HIGH and LOW completion, **before** UNSEEN  
+**Scope:** state **after** HIGH and LOW completion, **with UNSEEN source frozen v1** (kit not prepared)  
 **Date:** 2026-09-16  
 **Nature:** documentation only — no new LLM sessions, translations, evaluations, or kit preparation  
 **Sources of truth:** frozen Phase 2B plans, intake/aggregate artifacts, qualitative audits, Qwen incident ledger, HIGH↔LOW synthesis (paths below)
@@ -17,7 +17,7 @@
 | Experiment | **EXP-004 Phase 2B** (source-regime corpus-priming tests) |
 | **HIGH-overlap** | **complete** (collected, verified, evaluated, aggregated, qualitative audit) |
 | **LOW-overlap** | **complete** with one invalid configuration cell retained and excluded from primary priming analysis |
-| **UNSEEN DOMAIN** | **not frozen / not prepared / not executed** |
+| **UNSEEN DOMAIN** | **frozen v1** — kit not prepared / not executed |
 
 Regime root: `experiments/exp004-modelscreen/phase2b/`
 
@@ -189,13 +189,13 @@ Verified descriptive findings from `phase2b/analysis/high_low/`:
 
 ## 9. UNSEEN status
 
-- UNSEEN has **not** been frozen.
-- No UNSEEN story has been selected as authoritative.
-- No UNSEEN kit exists.
+- UNSEEN source **frozen v1** (operator APPROVE 2026-09-16).
+- Authoritative item: **`Ćwiczenie 2.2 — Biofizyka głosu ludzkiego`** (`exercise-2-2-voice-biophysics`).
+- SHA-256: `cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4` (5 676 B).
+- Freeze ledger: `UNSEEN_VALIDATION.md`; meta: `input/unseen-domain-source.meta.json` (local).
+- No UNSEEN kit exists yet.
 - No UNSEEN LLM sessions have been run.
 - No UNSEEN results exist.
-
-This checkpoint does **not** choose an UNSEEN story.
 
 ---
 
@@ -212,9 +212,9 @@ Separated from linguistic results:
 
 ## 11. Next decision point
 
-> The next experimental decision is selection and validation of the UNSEEN source text and confirmation of the execution protocol before any UNSEEN kit is prepared.
+> The next experimental decision is confirmation of the UNSEEN execution protocol and preparation of the UNSEEN kit (source already frozen v1).
 
-This checkpoint does **not** make that decision.
+This checkpoint records the freeze; it does **not** prepare the kit or authorize sessions.
 
 ---
 

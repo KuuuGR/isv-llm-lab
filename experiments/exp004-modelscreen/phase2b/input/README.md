@@ -64,8 +64,31 @@ was not modified.
 | Boundary | bank lines 1107–1247 (first: `Katarzyna odłożyła teczkę…`; last: `I po raz pierwszy od lat pomyślała…`) |
 | Provenance | gitignored `low-overlap-story.meta.json` |
 
-LOW prompt kit is **not** prepared yet. Do not mix LOW into the HIGH
+LOW prompt kit was prepared separately; do not mix LOW into the HIGH
 manifest.
+
+## Status: UNSEEN-domain source frozen (2026-09-16)
+
+Operator-supplied Exercise 2.2 theory (*Biofizyka głosu ludzkiego*) was
+frozen as **v1** after human **APPROVE** of the validation recommendation.
+Canonical bytes match `analysis/unseen/validation.json` `hash_basis`
+(blank-line paragraph normalization). HIGH/LOW/corpus unchanged.
+
+| Field | Value |
+|---|---|
+| Source id | `exercise-2-2-voice-biophysics` |
+| Title | `Ćwiczenie 2.2 — Biofizyka głosu ludzkiego` |
+| Version | `v1` (immutable) |
+| Frozen file | `versions/exercise-2-2-voice-biophysics-v1.txt` (gitignored) |
+| SHA-256 | `cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4` |
+| Bytes / lines | 5 676 B / 51 lines |
+| Classification | **`unseen_domain`** |
+| Regime | `unseen` |
+| Provenance | gitignored `unseen-domain-source.meta.json` |
+| Freeze ledger | `../UNSEEN_VALIDATION.md` |
+
+UNSEEN prompt kit is **not** prepared yet. Do not mix UNSEEN into the
+HIGH or LOW manifests.
 
 ## Freezing a revised HIGH version (future, if the author supplies one)
 
