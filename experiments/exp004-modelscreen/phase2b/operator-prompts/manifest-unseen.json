@@ -1,0 +1,670 @@
+{
+  "artifact": "phase2b_unseen_prompt_manifest",
+  "experiment_id": "exp004",
+  "phase": "p2b-unseen",
+  "regime": "unseen",
+  "date": "2026-09-16",
+  "generator": "scripts/run_exp004_phase2b.py prepare",
+  "generator_commit": "1d9d453f1bf68536a5f4f270f08da5726fdefa76",
+  "source": {
+    "story_id": "exercise-2-2-voice-biophysics",
+    "title": "Ćwiczenie 2.2 — Biofizyka głosu ludzkiego",
+    "classification": "unseen_domain",
+    "file": "experiments/exp004-modelscreen/phase2b/input/versions/exercise-2-2-voice-biophysics-v1.txt",
+    "version": "v1",
+    "sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+    "bytes": 5676,
+    "lines": 51
+  },
+  "corpus": {
+    "id": "phase2a-authentic-isv",
+    "version": "v1",
+    "file": "experiments/exp004-modelscreen/phase2a/corpus/phase2a-authentic-isv-corpus.txt",
+    "sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+    "bytes": 58459
+  },
+  "counts": {
+    "representative_configurations": 7,
+    "conditions": 2,
+    "replicates_per_condition": 3,
+    "runs_per_configuration_per_condition": 3,
+    "direct_runs": 21,
+    "primed_runs": 21,
+    "total_runs": 42,
+    "prompt_files": 63
+  },
+  "model_output_included": false,
+  "note": "Prompt hashes + run enumeration only (no story text, no corpus, no model output). Files under operator-prompts/ are gitignored; this manifest is the committed record.",
+  "files": [
+    {
+      "file": "unseen-direct-01-gemini-3.6-flash-extthinkon-r01.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "b0a2af4654deeef0e36e995a72fdd5792c5d5fd41c387641d32c2aa2d4a065ff",
+      "bytes": 7238
+    },
+    {
+      "file": "unseen-direct-01-gemini-3.6-flash-extthinkon-r02.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "b0a2af4654deeef0e36e995a72fdd5792c5d5fd41c387641d32c2aa2d4a065ff",
+      "bytes": 7238
+    },
+    {
+      "file": "unseen-direct-01-gemini-3.6-flash-extthinkon-r03.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "b0a2af4654deeef0e36e995a72fdd5792c5d5fd41c387641d32c2aa2d4a065ff",
+      "bytes": 7238
+    },
+    {
+      "file": "unseen-direct-02-gemini-3.6-flash-extthinkoff-r01.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "27f6c35983ce52c8b6a8a6cfa13a8e0183b93b31d16f88fca41c9109370c2f0d",
+      "bytes": 7242
+    },
+    {
+      "file": "unseen-direct-02-gemini-3.6-flash-extthinkoff-r02.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "27f6c35983ce52c8b6a8a6cfa13a8e0183b93b31d16f88fca41c9109370c2f0d",
+      "bytes": 7242
+    },
+    {
+      "file": "unseen-direct-02-gemini-3.6-flash-extthinkoff-r03.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "27f6c35983ce52c8b6a8a6cfa13a8e0183b93b31d16f88fca41c9109370c2f0d",
+      "bytes": 7242
+    },
+    {
+      "file": "unseen-direct-03-claude-sonnet-5-r01.md",
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "d3b441d2e3b821a5ba05ee24d374325b0b1e9242ad14590cb2548e7b420d54b7",
+      "bytes": 7203
+    },
+    {
+      "file": "unseen-direct-03-claude-sonnet-5-r02.md",
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "d3b441d2e3b821a5ba05ee24d374325b0b1e9242ad14590cb2548e7b420d54b7",
+      "bytes": 7203
+    },
+    {
+      "file": "unseen-direct-03-claude-sonnet-5-r03.md",
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "d3b441d2e3b821a5ba05ee24d374325b0b1e9242ad14590cb2548e7b420d54b7",
+      "bytes": 7203
+    },
+    {
+      "file": "unseen-direct-04-deepseek-v3-expert-deepthinkon-r01.md",
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "8466bd0ddb3f506c122c5282c73bd98544e0d1966ca95db1cf2fa3b57d88ab3e",
+      "bytes": 7214
+    },
+    {
+      "file": "unseen-direct-04-deepseek-v3-expert-deepthinkon-r02.md",
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "8466bd0ddb3f506c122c5282c73bd98544e0d1966ca95db1cf2fa3b57d88ab3e",
+      "bytes": 7214
+    },
+    {
+      "file": "unseen-direct-04-deepseek-v3-expert-deepthinkon-r03.md",
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "8466bd0ddb3f506c122c5282c73bd98544e0d1966ca95db1cf2fa3b57d88ab3e",
+      "bytes": 7214
+    },
+    {
+      "file": "unseen-direct-05-qwen-3.8-max-fast-r01.md",
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "143beddcfca48d267d3d9c125d1447f902b283876d2e73d7d9e8bcf16cd94b14",
+      "bytes": 7170
+    },
+    {
+      "file": "unseen-direct-05-qwen-3.8-max-fast-r02.md",
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "143beddcfca48d267d3d9c125d1447f902b283876d2e73d7d9e8bcf16cd94b14",
+      "bytes": 7170
+    },
+    {
+      "file": "unseen-direct-05-qwen-3.8-max-fast-r03.md",
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "143beddcfca48d267d3d9c125d1447f902b283876d2e73d7d9e8bcf16cd94b14",
+      "bytes": 7170
+    },
+    {
+      "file": "unseen-direct-06-gpt-5.6-luna-thinkoff-r01.md",
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "53772f248db30d2b38e7f64e8169ffc0969bcf46770745aee6bea81754dac4b9",
+      "bytes": 7171
+    },
+    {
+      "file": "unseen-direct-06-gpt-5.6-luna-thinkoff-r02.md",
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "53772f248db30d2b38e7f64e8169ffc0969bcf46770745aee6bea81754dac4b9",
+      "bytes": 7171
+    },
+    {
+      "file": "unseen-direct-06-gpt-5.6-luna-thinkoff-r03.md",
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "53772f248db30d2b38e7f64e8169ffc0969bcf46770745aee6bea81754dac4b9",
+      "bytes": 7171
+    },
+    {
+      "file": "unseen-direct-07-grok-fast-r01.md",
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r01",
+      "condition": "direct",
+      "replicate": "r01",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "af1db9a3950a6c29a5b48c21432ddf7cba2e51baacaeb394bc3282198af4c7e4",
+      "bytes": 7287
+    },
+    {
+      "file": "unseen-direct-07-grok-fast-r02.md",
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r02",
+      "condition": "direct",
+      "replicate": "r02",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "af1db9a3950a6c29a5b48c21432ddf7cba2e51baacaeb394bc3282198af4c7e4",
+      "bytes": 7287
+    },
+    {
+      "file": "unseen-direct-07-grok-fast-r03.md",
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r03",
+      "condition": "direct",
+      "replicate": "r03",
+      "message": null,
+      "regime": "unseen",
+      "prompt_sha256": "af1db9a3950a6c29a5b48c21432ddf7cba2e51baacaeb394bc3282198af4c7e4",
+      "bytes": 7287
+    },
+    {
+      "file": "unseen-primed-01-gemini-3.6-flash-extthinkon-r01-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "4dbe2ed9feef7d5da3790cc303d55abc64dcd3a6c39d31348bed791ed3127694",
+      "bytes": 61134
+    },
+    {
+      "file": "unseen-primed-01-gemini-3.6-flash-extthinkon-r01-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "3aaf884781af5483297e0c6fba229cc9f938261588fb0fced84b0aadc1637b08",
+      "bytes": 7392
+    },
+    {
+      "file": "unseen-primed-01-gemini-3.6-flash-extthinkon-r02-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "4dbe2ed9feef7d5da3790cc303d55abc64dcd3a6c39d31348bed791ed3127694",
+      "bytes": 61134
+    },
+    {
+      "file": "unseen-primed-01-gemini-3.6-flash-extthinkon-r02-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "3aaf884781af5483297e0c6fba229cc9f938261588fb0fced84b0aadc1637b08",
+      "bytes": 7392
+    },
+    {
+      "file": "unseen-primed-01-gemini-3.6-flash-extthinkon-r03-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "4dbe2ed9feef7d5da3790cc303d55abc64dcd3a6c39d31348bed791ed3127694",
+      "bytes": 61134
+    },
+    {
+      "file": "unseen-primed-01-gemini-3.6-flash-extthinkon-r03-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "3aaf884781af5483297e0c6fba229cc9f938261588fb0fced84b0aadc1637b08",
+      "bytes": 7392
+    },
+    {
+      "file": "unseen-primed-02-gemini-3.6-flash-extthinkoff-r01-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "aacb210960d033912adeda1e3cdaf3d141cbb15f31b17de25ed7976cc42b7042",
+      "bytes": 61138
+    },
+    {
+      "file": "unseen-primed-02-gemini-3.6-flash-extthinkoff-r01-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "88ce7bce02b78e16ab31060a5fd5fd9c5c8c322d6717d898edf7bc52c121f82c",
+      "bytes": 7396
+    },
+    {
+      "file": "unseen-primed-02-gemini-3.6-flash-extthinkoff-r02-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "aacb210960d033912adeda1e3cdaf3d141cbb15f31b17de25ed7976cc42b7042",
+      "bytes": 61138
+    },
+    {
+      "file": "unseen-primed-02-gemini-3.6-flash-extthinkoff-r02-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "88ce7bce02b78e16ab31060a5fd5fd9c5c8c322d6717d898edf7bc52c121f82c",
+      "bytes": 7396
+    },
+    {
+      "file": "unseen-primed-02-gemini-3.6-flash-extthinkoff-r03-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "aacb210960d033912adeda1e3cdaf3d141cbb15f31b17de25ed7976cc42b7042",
+      "bytes": 61138
+    },
+    {
+      "file": "unseen-primed-02-gemini-3.6-flash-extthinkoff-r03-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "88ce7bce02b78e16ab31060a5fd5fd9c5c8c322d6717d898edf7bc52c121f82c",
+      "bytes": 7396
+    },
+    {
+      "file": "unseen-primed-03-claude-sonnet-5-r01-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "d0dabb26cabda67cb29f524a52caa06b5aa2387911c5a6627228686d1f640875",
+      "bytes": 61099
+    },
+    {
+      "file": "unseen-primed-03-claude-sonnet-5-r01-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "23da7070d7ba0d077057641802bb8a72b3e53a921fd24f3bce2b1cafd99bd210",
+      "bytes": 7357
+    },
+    {
+      "file": "unseen-primed-03-claude-sonnet-5-r02-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "d0dabb26cabda67cb29f524a52caa06b5aa2387911c5a6627228686d1f640875",
+      "bytes": 61099
+    },
+    {
+      "file": "unseen-primed-03-claude-sonnet-5-r02-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "23da7070d7ba0d077057641802bb8a72b3e53a921fd24f3bce2b1cafd99bd210",
+      "bytes": 7357
+    },
+    {
+      "file": "unseen-primed-03-claude-sonnet-5-r03-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "d0dabb26cabda67cb29f524a52caa06b5aa2387911c5a6627228686d1f640875",
+      "bytes": 61099
+    },
+    {
+      "file": "unseen-primed-03-claude-sonnet-5-r03-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "23da7070d7ba0d077057641802bb8a72b3e53a921fd24f3bce2b1cafd99bd210",
+      "bytes": 7357
+    },
+    {
+      "file": "unseen-primed-04-deepseek-v3-expert-deepthinkon-r01-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "7e08b6362c2df39f0fed8774b33fdd81530613676c1539433e103d78624d178a",
+      "bytes": 61110
+    },
+    {
+      "file": "unseen-primed-04-deepseek-v3-expert-deepthinkon-r01-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "8e8f5cccf4bd5e6258f5859605e9a0efc415f61aa4662d3ebfb9dcb78d77c7a7",
+      "bytes": 7368
+    },
+    {
+      "file": "unseen-primed-04-deepseek-v3-expert-deepthinkon-r02-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "7e08b6362c2df39f0fed8774b33fdd81530613676c1539433e103d78624d178a",
+      "bytes": 61110
+    },
+    {
+      "file": "unseen-primed-04-deepseek-v3-expert-deepthinkon-r02-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "8e8f5cccf4bd5e6258f5859605e9a0efc415f61aa4662d3ebfb9dcb78d77c7a7",
+      "bytes": 7368
+    },
+    {
+      "file": "unseen-primed-04-deepseek-v3-expert-deepthinkon-r03-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "7e08b6362c2df39f0fed8774b33fdd81530613676c1539433e103d78624d178a",
+      "bytes": 61110
+    },
+    {
+      "file": "unseen-primed-04-deepseek-v3-expert-deepthinkon-r03-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "8e8f5cccf4bd5e6258f5859605e9a0efc415f61aa4662d3ebfb9dcb78d77c7a7",
+      "bytes": 7368
+    },
+    {
+      "file": "unseen-primed-05-qwen-3.8-max-fast-r01-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "a6e177696b6e19efeb13e266fc22ff56bb89bd66722fc15c1b89c83686a797d8",
+      "bytes": 61066
+    },
+    {
+      "file": "unseen-primed-05-qwen-3.8-max-fast-r01-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "d662cafe83de01cd8621e0cb3d8521ae9eb22c260e1b72f07eeec16f2b7fcf0f",
+      "bytes": 7324
+    },
+    {
+      "file": "unseen-primed-05-qwen-3.8-max-fast-r02-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "a6e177696b6e19efeb13e266fc22ff56bb89bd66722fc15c1b89c83686a797d8",
+      "bytes": 61066
+    },
+    {
+      "file": "unseen-primed-05-qwen-3.8-max-fast-r02-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "d662cafe83de01cd8621e0cb3d8521ae9eb22c260e1b72f07eeec16f2b7fcf0f",
+      "bytes": 7324
+    },
+    {
+      "file": "unseen-primed-05-qwen-3.8-max-fast-r03-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "a6e177696b6e19efeb13e266fc22ff56bb89bd66722fc15c1b89c83686a797d8",
+      "bytes": 61066
+    },
+    {
+      "file": "unseen-primed-05-qwen-3.8-max-fast-r03-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "d662cafe83de01cd8621e0cb3d8521ae9eb22c260e1b72f07eeec16f2b7fcf0f",
+      "bytes": 7324
+    },
+    {
+      "file": "unseen-primed-06-gpt-5.6-luna-thinkoff-r01-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "ff4e1091819bd1272f730debc6cafbfbf8a678a2252b7e4c3658d9e7a47dc8b7",
+      "bytes": 61067
+    },
+    {
+      "file": "unseen-primed-06-gpt-5.6-luna-thinkoff-r01-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "1fb745434cb1b693bebf3f14e4c0e6981160492b5251aff9dac6d6a43ae4a516",
+      "bytes": 7325
+    },
+    {
+      "file": "unseen-primed-06-gpt-5.6-luna-thinkoff-r02-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "ff4e1091819bd1272f730debc6cafbfbf8a678a2252b7e4c3658d9e7a47dc8b7",
+      "bytes": 61067
+    },
+    {
+      "file": "unseen-primed-06-gpt-5.6-luna-thinkoff-r02-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "1fb745434cb1b693bebf3f14e4c0e6981160492b5251aff9dac6d6a43ae4a516",
+      "bytes": 7325
+    },
+    {
+      "file": "unseen-primed-06-gpt-5.6-luna-thinkoff-r03-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "ff4e1091819bd1272f730debc6cafbfbf8a678a2252b7e4c3658d9e7a47dc8b7",
+      "bytes": 61067
+    },
+    {
+      "file": "unseen-primed-06-gpt-5.6-luna-thinkoff-r03-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "1fb745434cb1b693bebf3f14e4c0e6981160492b5251aff9dac6d6a43ae4a516",
+      "bytes": 7325
+    },
+    {
+      "file": "unseen-primed-07-grok-fast-r01-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "de0924eb83f49343a49c1451e6a77088e395aebfc3adc1d30e9fa019a88aa97b",
+      "bytes": 61183
+    },
+    {
+      "file": "unseen-primed-07-grok-fast-r01-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r01",
+      "condition": "primed",
+      "replicate": "r01",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "bc48347bd186f565c84fb5e24a81941e17009b95d0d1c2402c9890dc1d85f768",
+      "bytes": 7441
+    },
+    {
+      "file": "unseen-primed-07-grok-fast-r02-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "de0924eb83f49343a49c1451e6a77088e395aebfc3adc1d30e9fa019a88aa97b",
+      "bytes": 61183
+    },
+    {
+      "file": "unseen-primed-07-grok-fast-r02-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r02",
+      "condition": "primed",
+      "replicate": "r02",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "bc48347bd186f565c84fb5e24a81941e17009b95d0d1c2402c9890dc1d85f768",
+      "bytes": 7441
+    },
+    {
+      "file": "unseen-primed-07-grok-fast-r03-msg1.md",
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 1,
+      "regime": "unseen",
+      "prompt_sha256": "de0924eb83f49343a49c1451e6a77088e395aebfc3adc1d30e9fa019a88aa97b",
+      "bytes": 61183
+    },
+    {
+      "file": "unseen-primed-07-grok-fast-r03-msg2.md",
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r03",
+      "condition": "primed",
+      "replicate": "r03",
+      "message": 2,
+      "regime": "unseen",
+      "prompt_sha256": "bc48347bd186f565c84fb5e24a81941e17009b95d0d1c2402c9890dc1d85f768",
+      "bytes": 7441
+    }
+  ]
+}

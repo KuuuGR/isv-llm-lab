@@ -15,6 +15,11 @@ experiments/**/outputs/*
 !experiments/exp004-modelscreen/phase2b/outputs/low/
 experiments/exp004-modelscreen/phase2b/outputs/low/*
 !experiments/exp004-modelscreen/phase2b/outputs/low/README.md
+!experiments/exp004-modelscreen/phase2b/outputs/unseen/
+experiments/exp004-modelscreen/phase2b/outputs/unseen/*
+!experiments/exp004-modelscreen/phase2b/outputs/unseen/README.md
+!experiments/exp004-modelscreen/phase2b/outputs/unseen/plan.json
+!experiments/exp004-modelscreen/phase2b/outputs/unseen/collection-checklist.md
 experiments/**/input/*
 !experiments/**/input/README.md
 
@@ -35,6 +40,8 @@ experiments/**/operator-prompts/*
 !experiments/**/operator-prompts/README.md
 !experiments/**/operator-prompts/manifest.json
 !experiments/**/operator-prompts/manifest-low.json
+!experiments/**/operator-prompts/manifest-unseen.json
+!experiments/**/operator-prompts/collection-checklist-unseen.md
 
 # EXP-004 collected raw sessions (author-saved prompt+reply files, contain
 # the copyrighted source story + raw model outputs; never committed)

@@ -18,15 +18,16 @@ To answer it, the project distinguishes THREE source-text regimes (Task
                   overlap with the corpus  (`Opowieść o sygnale` and/or
                   `Podkłady` — NOT prepared here);
   UNSEEN DOMAIN   a Polish scientific/educational source from a domain
-                  absent from the corpus (future biomedical-physics /
-                  electromedicine material — NOT prepared here).
+                  absent from the corpus (`Ćwiczenie 2.2 — Biofizyka
+                  głosu ludzkiego`, frozen v1).
 
-THIS MODULE prepares HIGH-overlap (`--regime high`, default) and
-LOW-overlap (`--regime low`) kits. It never calls an LLM itself, never
-modifies raw experimental data, never modifies the authoritative corpus,
-and never prepares UNSEEN-domain runs. LOW uses the approved clean
-Podkłady freeze and writes a separate plan/manifest that does not
-overwrite HIGH. It extends the EXP-004 repeated-generation
+THIS MODULE prepares HIGH-overlap (`--regime high`, default),
+LOW-overlap (`--regime low`), and UNSEEN-domain (`--regime unseen`) kits.
+It never calls an LLM itself, never modifies raw experimental data, and
+never modifies the authoritative corpus. Each regime writes a separate
+plan/manifest that does not overwrite the others. LOW uses the approved
+clean Podkłady freeze; UNSEEN uses the approved Exercise 2.2 voice-
+biophysics freeze. It extends the EXP-004 repeated-generation
 machinery (`scripts/run_exp004_repeats.py`) by importing its
 prompt-rendering constants and helpers — it does not re-implement or
 fork them.
@@ -163,10 +164,16 @@ REPLICATES = ("r01", "r02", "r03")
 RUN_ID_FIELDS = ("date", "phase", "provider", "model", "model_version",
                  "condition", "replicate")
 
-SUPPORTED_REGIMES = ("high", "low")
+SUPPORTED_REGIMES = ("high", "low", "unseen")
 REGIME_LABELS = {
     "high": "HIGH-overlap",
     "low": "LOW-overlap",
+    "unseen": "UNSEEN-domain",
+}
+PHASE_TOKENS = {
+    "high": "p2b-high",
+    "low": "p2b-low",
+    "unseen": "p2b-unseen",
 }
 # The frozen HIGH-overlap source file + provenance (gitignored input/).
 STORY_META_NAME = "high-overlap-story.meta.json"
@@ -190,6 +197,19 @@ LOW_STORY_SHA256 = (
 )
 LOW_STORY_BYTES = 15249
 LOW_STORY_LINES = 141
+
+# Frozen UNSEEN-domain source (approved Exercise 2.2 voice-biophysics theory).
+UNSEEN_STORY_META_NAME = "unseen-domain-source.meta.json"
+UNSEEN_STORY_TITLE = "Ćwiczenie 2.2 — Biofizyka głosu ludzkiego"
+UNSEEN_STORY_ID = "exercise-2-2-voice-biophysics"
+UNSEEN_STORY_CLASSIFICATION = "unseen_domain"
+UNSEEN_STORY_SHA256 = (
+    "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4"
+)
+UNSEEN_STORY_BYTES = 5676
+UNSEEN_STORY_LINES = 51
+UNSEEN_STORY_CHARS = 5242
+UNSEEN_STORY_TOKENS = 675
 
 # ---------------------------------------------------------------------------
 # Phase-2B representative shortlist (docs/research-roadmap.md §10 — the
@@ -313,7 +333,7 @@ def run_id_for(date: str, row: dict, condition: str, replicate: str,
         raise ValueError(f"unknown phase-2B condition {condition!r}")
     if replicate not in REPLICATES:
         raise ValueError(f"unknown replicate {replicate!r}")
-    if phase not in ("p2b-high", "p2b-low"):
+    if phase not in PHASE_TOKENS.values():
         raise ValueError(f"unknown phase-2B phase token {phase!r}")
     return (f"{date}__{phase}__{row['provider']}__{row['model']}__"
             f"{row['model_version']}__{condition}__{replicate}")
@@ -321,22 +341,28 @@ def run_id_for(date: str, row: dict, condition: str, replicate: str,
 
 def parse_run_id(run_id: str) -> dict:
     parts = run_id.split("__")
-    if (len(parts) != 7 or parts[1] not in ("p2b-high", "p2b-low")
+    if (len(parts) != 7 or parts[1] not in PHASE_TOKENS.values()
             or parts[5] not in CONDITIONS or parts[6] not in REPLICATES):
         raise ValueError(
-            f"run id must be <date>__p2b-high|p2b-low__<provider>__"
-            f"<model>__<model_version>__direct|primed__r01|r02|r03, "
-            f"got: {run_id!r}")
+            f"run id must be <date>__p2b-high|p2b-low|p2b-unseen__"
+            f"<provider>__<model>__<model_version>__direct|primed__"
+            f"r01|r02|r03, got: {run_id!r}")
     return dict(zip(RUN_ID_FIELDS, parts))
 
 
 def regime_from_run_id(run_id: str) -> str:
-    return "low" if parse_run_id(run_id)["phase"] == "p2b-low" else "high"
+    phase = parse_run_id(run_id)["phase"]
+    for regime, token in PHASE_TOKENS.items():
+        if phase == token:
+            return regime
+    raise ValueError(f"unknown phase token in run id: {phase!r}")
 
 
 def plan_path_for(regime: str) -> Path:
     if regime == "low":
         return OUTPUTS_DIR / "low" / "plan.json"
+    if regime == "unseen":
+        return OUTPUTS_DIR / "unseen" / "plan.json"
     if regime == "high":
         return OUTPUTS_DIR / "plan.json"
     raise ValueError(f"unknown regime {regime!r}")
@@ -417,6 +443,45 @@ def _ensure_low_story() -> tuple[Path, dict, dict]:
         raise RuntimeError(
             f"LOW story byte count {version.get('bytes')} != "
             f"{LOW_STORY_BYTES}")
+    return path, version, meta
+
+
+def _ensure_unseen_source() -> tuple[Path, dict, dict]:
+    """Hash-gate the frozen UNSEEN-domain source (approved Exercise 2.2
+    voice-biophysics theory). Returns (path, version_dict, full_meta)."""
+    meta_path = INPUT_DIR / UNSEEN_STORY_META_NAME
+    if not meta_path.is_file():
+        raise RuntimeError(
+            f"UNSEEN-domain source provenance missing at {meta_path}; "
+            "freeze the approved Exercise 2.2 voice-biophysics text "
+            "before prepare --regime unseen")
+    meta = json.loads(meta_path.read_text(encoding="utf-8"))
+    if not meta.get("frozen") and meta.get("boundary", {}).get("status") != "APPROVED":
+        raise RuntimeError(
+            "UNSEEN source is not frozen/APPROVED; refusing to prepare")
+    if meta.get("boundary", {}).get("status") != "APPROVED":
+        raise RuntimeError(
+            "UNSEEN source boundary is not APPROVED; refusing to prepare")
+    current = meta.get("current_version")
+    if not current:
+        raise RuntimeError("UNSEEN source meta has no current_version")
+    version = meta["versions"][current]
+    path = INPUT_DIR / version["file"]
+    if not path.is_file():
+        raise RuntimeError(f"frozen UNSEEN source missing at {path}")
+    actual = sha256_file(path)
+    if actual != version["sha256"]:
+        raise RuntimeError(
+            f"{path} sha256 {actual[:16]}... does not match recorded "
+            f"{version['sha256'][:16]}...; refusing edited source bytes")
+    if actual != UNSEEN_STORY_SHA256:
+        raise RuntimeError(
+            f"{path} sha256 {actual} does not match the approved UNSEEN "
+            f"source SHA-256 {UNSEEN_STORY_SHA256}; refusing to prepare")
+    if version.get("bytes") != UNSEEN_STORY_BYTES:
+        raise RuntimeError(
+            f"UNSEEN source byte count {version.get('bytes')} != "
+            f"{UNSEEN_STORY_BYTES}")
     return path, version, meta
 
 
@@ -733,10 +798,14 @@ def run_prepare(date: str, force: bool = False,
         plan_dir = OUTPUTS_DIR
         plan_path = plan_dir / "plan.json"
         checklist_path = plan_dir / "collection-checklist.md"
+        checklist_alias = None
         manifest_path = OPERATOR_PROMPTS / "manifest.json"
         artifact_plan = "phase2b_high_plan"
         artifact_manifest = "phase2b_high_prompt_manifest"
         story_path, story_version = _ensure_story()
+        meta_update = None
+        source_lines = story_version.get("lines")
+        approved_sha = None
         research_q = (
             "HIGH-overlap test (Phase 2B-A): when the target Polish "
             "story is strongly thematically/motivically aligned with the "
@@ -756,7 +825,7 @@ def run_prepare(date: str, force: bool = False,
             "corpus (never shortened per model). No LLM was called by "
             "this script; the 42 translations are the next manual "
             "operator step.")
-    else:
+    elif regime == "low":
         phase_token = "p2b-low"
         regime_label = REGIME_LABELS["low"]
         story_title = LOW_STORY_TITLE
@@ -766,10 +835,14 @@ def run_prepare(date: str, force: bool = False,
         plan_dir = OUTPUTS_DIR / "low"
         plan_path = plan_dir / "plan.json"
         checklist_path = plan_dir / "collection-checklist.md"
+        checklist_alias = None
         manifest_path = OPERATOR_PROMPTS / "manifest-low.json"
         artifact_plan = "phase2b_low_plan"
         artifact_manifest = "phase2b_low_prompt_manifest"
         story_path, story_version, low_meta = _ensure_low_story()
+        meta_update = ("low", LOW_STORY_META_NAME)
+        source_lines = LOW_STORY_LINES
+        approved_sha = LOW_STORY_SHA256
         research_q = (
             "LOW-overlap test (Phase 2B): when the target Polish story "
             "has substantially weaker thematic/fabular overlap with the "
@@ -788,6 +861,46 @@ def run_prepare(date: str, force: bool = False,
             "No HIGH story/output is included. No LLM was called by this "
             "script; the 42 translations are the next manual operator "
             "step.")
+    else:  # unseen
+        phase_token = "p2b-unseen"
+        regime_label = REGIME_LABELS["unseen"]
+        story_title = UNSEEN_STORY_TITLE
+        story_id = UNSEEN_STORY_ID
+        story_classification = UNSEEN_STORY_CLASSIFICATION
+        file_prefix = "unseen"
+        plan_dir = OUTPUTS_DIR / "unseen"
+        plan_path = plan_dir / "plan.json"
+        checklist_path = plan_dir / "collection-checklist.md"
+        checklist_alias = (
+            OPERATOR_PROMPTS / "collection-checklist-unseen.md")
+        manifest_path = OPERATOR_PROMPTS / "manifest-unseen.json"
+        artifact_plan = "phase2b_unseen_plan"
+        artifact_manifest = "phase2b_unseen_prompt_manifest"
+        story_path, story_version, unseen_meta = _ensure_unseen_source()
+        meta_update = ("unseen", UNSEEN_STORY_META_NAME)
+        source_lines = UNSEEN_STORY_LINES
+        approved_sha = UNSEEN_STORY_SHA256
+        research_q = (
+            "UNSEEN-domain test (Phase 2B): when the target Polish text "
+            "is scientific/educational material from a domain absent "
+            "from the authentic ISV priming corpus (medical biophysics "
+            "/ voice acoustics / speech biophysics), does corpus priming "
+            "still change resource-supported Interslavic generation? "
+            "Descriptive comparison with Δ_HIGH and Δ_LOW; hypothesis, "
+            "not a result. No hints about domain novelty are given to "
+            "the model.")
+        plan_note = (
+            "UNSEEN-domain corpus-priming test. Source is the approved "
+            "Exercise 2.2 voice-biophysics theory "
+            f"(sha256 {UNSEEN_STORY_SHA256}). Same Direct/Primed "
+            "protocol and shortlist as HIGH/LOW; priming corpus is the "
+            "identical authoritative phase2a-authentic-isv v1 (never "
+            "shortened; Gemini multi-message structure preserved). "
+            "Qwen remains in the configuration set (LOW Qwen incident "
+            "is execution-time only, not kit design). No HIGH/LOW "
+            "source/output is included. No LLM was called by this "
+            "script; the 42 translations are the next manual operator "
+            "step.")
 
     corpus_path = _ensure_corpus()
     source_text = story_path.read_text(encoding="utf-8")
@@ -802,8 +915,8 @@ def run_prepare(date: str, force: bool = False,
         print("error: corpus sha mismatch — refusing to proceed",
               file=sys.stderr)
         return 2
-    if regime == "low" and source_sha != LOW_STORY_SHA256:
-        print("error: LOW story sha does not match approved freeze",
+    if approved_sha is not None and source_sha != approved_sha:
+        print(f"error: {regime} source sha does not match approved freeze",
               file=sys.stderr)
         return 2
 
@@ -905,8 +1018,7 @@ def run_prepare(date: str, force: bool = False,
                    "version": story_version["version"],
                    "sha256": source_sha,
                    "bytes": len(source_text.encode("utf-8")),
-                   "lines": (LOW_STORY_LINES if regime == "low"
-                             else story_version.get("lines"))},
+                   "lines": source_lines},
         "corpus": {"id": "phase2a-authentic-isv", "version": "v1",
                    "file": _rel_or_abs(corpus_path),
                    "sha256": corpus_sha,
@@ -947,12 +1059,15 @@ def run_prepare(date: str, force: bool = False,
         plan, date, checklist_path=checklist_path,
         regime_label=regime_label, story_title=story_title,
         story_classification=story_classification)
+    if checklist_alias is not None:
+        checklist_alias.write_text(
+            checklist_path.read_text(encoding="utf-8"), encoding="utf-8")
 
-    if regime == "low":
-        # Record kit status on the local LOW meta (does not alter story bytes).
-        low_meta = json.loads(
-            (INPUT_DIR / LOW_STORY_META_NAME).read_text(encoding="utf-8"))
-        low_meta["kit_status"] = {
+    if meta_update is not None:
+        kind, meta_name = meta_update
+        meta_path = INPUT_DIR / meta_name
+        kit_meta = json.loads(meta_path.read_text(encoding="utf-8"))
+        kit_meta["kit_status"] = {
             "frozen": True,
             "prompts_prepared": True,
             "executed": False,
@@ -960,12 +1075,12 @@ def run_prepare(date: str, force: bool = False,
             "manifest": _rel_or_abs(manifest_path),
             "prepare_date": date,
             "note": (
-                "LOW 42-run kit prepared; no LLM sessions; "
+                f"{kind.upper()} 42-run kit prepared; no LLM sessions; "
                 "model_output_included=false."
             ),
         }
-        (INPUT_DIR / LOW_STORY_META_NAME).write_text(
-            json.dumps(low_meta, ensure_ascii=False, indent=2) + "\n",
+        meta_path.write_text(
+            json.dumps(kit_meta, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8")
 
     print(f"[prepare] {date}: {len(runs)} {regime_label} runs "
@@ -1129,12 +1244,15 @@ def _meta_base(run_id: str, row: dict, pe: dict,
         "source": {
             "sha256": plan.get("source", {}).get("sha256")
                       or pe.get("source_sha256"),
-            "story_id": pe.get("source_story_id",
-                               LOW_STORY_ID if regime == "low"
-                               else STORY_ID),
+            "story_id": pe.get(
+                "source_story_id",
+                UNSEEN_STORY_ID if regime == "unseen"
+                else LOW_STORY_ID if regime == "low"
+                else STORY_ID),
             "classification": pe.get(
                 "source_classification",
-                LOW_STORY_CLASSIFICATION if regime == "low"
+                UNSEEN_STORY_CLASSIFICATION if regime == "unseen"
+                else LOW_STORY_CLASSIFICATION if regime == "low"
                 else STORY_CLASSIFICATION),
         },
         "corpus": (dict(plan["corpus"])
@@ -1657,12 +1775,13 @@ def main(argv: list[str] | None = None) -> int:
 
     p_prep = sub.add_parser(
         "prepare",
-        help="prepare the 42-run Phase-2B kit (--regime high|low)")
+        help="prepare the 42-run Phase-2B kit (--regime high|low|unseen)")
     p_prep.add_argument("--date", required=True, metavar="YYYY-MM-DD")
     p_prep.add_argument(
         "--regime", default="high", choices=list(SUPPORTED_REGIMES),
         help="source-text regime (default: high). low uses frozen "
-             "Podkłady clean prose; never overwrites the HIGH plan.")
+             "Podkłady; unseen uses frozen Exercise 2.2 voice-"
+             "biophysics; never overwrites other regimes' plans.")
     p_prep.add_argument("--force", action="store_true",
                         help="rewrite existing plan/prompts (safe only "
                              "before any collection)")
