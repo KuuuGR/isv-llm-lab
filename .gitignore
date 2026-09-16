@@ -78,6 +78,14 @@ experiments/exp004-modelscreen/phase2b/analysis/high_low/*
 !experiments/exp004-modelscreen/phase2b/analysis/high_low/analysis.md
 !experiments/exp004-modelscreen/phase2b/analysis/high_low/analysis.json
 
+# Phase 2B UNSEEN candidate validation (not frozen; operator decision pending)
+!experiments/exp004-modelscreen/phase2b/analysis/unseen/
+experiments/exp004-modelscreen/phase2b/analysis/unseen/*
+!experiments/exp004-modelscreen/phase2b/analysis/unseen/README.md
+!experiments/exp004-modelscreen/phase2b/analysis/unseen/VALIDATION.md
+!experiments/exp004-modelscreen/phase2b/analysis/unseen/validation.json
+!experiments/exp004-modelscreen/phase2b/analysis/unseen/candidate_exercise_2_2_voice_biophysics.pl.md
+
 # EXP-004 Task-029 corpus self-evaluation scratch (per-dataset isv-eval
 # CLI artifacts; gitignored — the reports themselves are committed)
 experiments/exp004-modelscreen/phase2a/corpus-selfeval/.scratch/
