@@ -1,0 +1,100 @@
+{
+  "document_type": "scientific_audit",
+  "date": "2026-09-18",
+  "manuscript_root": "docs/research/exp004-phase2b/manuscript/latex/main.tex",
+  "canonical_synthesis": "experiments/exp004-modelscreen/phase2b/analysis/combined/",
+  "executive_assessment": {
+    "readiness": "revision_stage_not_submission_ready",
+    "summary": "Evidence-aligned careful draft; one P0 numerical table drift; methods/literature/format gaps remain.",
+    "matched_six_verified": {"HIGH": 7.39, "LOW": 8.53, "UNSEEN": 5.78}
+  },
+  "numerical_corrections": [
+    {
+      "id": "N1",
+      "priority": "P0",
+      "location": "latex/tables/table5_dp_means.tex (Gemini OFF, LOW Primed)",
+      "manuscript_value": 74.92,
+      "canonical_value": 74.91,
+      "canonical_source": "analysis/combined/analysis.json configurations[].low.primed_mean_pp; cross_regime_table_full.csv",
+      "note": "analysis.md prose table also shows 74.92; prefer JSON"
+    }
+  ],
+  "numerical_verified_ok": [
+    "matched_six_7.39_8.53_5.78",
+    "all_config_7.07_8.53_5.45",
+    "table3_deltas",
+    "integrity_42_valid_7_6_7",
+    "unseen_21_positive",
+    "qualitative_spot_checks",
+    "qwen_historical_-12.08_non_effect"
+  ],
+  "claim_strength": [
+    {
+      "id": "C1",
+      "priority": "P1",
+      "class": "SUPPORTED_BUT_QUALIFY",
+      "location": "sections/mechanisms.tex",
+      "issue": "demonstrates that opening-copy is not required",
+      "guidance": "prefer indicates / inconsistent with necessity"
+    },
+    {
+      "id": "C2",
+      "priority": "P1",
+      "class": "SUPPORTED_BUT_QUALIFY",
+      "location": "sections/research_questions.tex",
+      "issue": "generalization across sources",
+      "guidance": "prefer persistence / cross-regime comparison"
+    },
+    {
+      "id": "C3",
+      "priority": "P2",
+      "class": "SUPPORTED_BUT_QUALIFY",
+      "location": "abstract/discussion/conclusion",
+      "issue": "generally positive",
+      "guidance": "keep paired with not-universal / Gemini HIGH negatives"
+    },
+    {
+      "id": "C8",
+      "priority": "P0",
+      "class": "SUPPORTED",
+      "location": "throughout (as negation)",
+      "issue": "must not convert coverage to quality improvement as a finding",
+      "guidance": "preserve refusals in revision"
+    }
+  ],
+  "evidence_gaps": [
+    {"id": "E1", "priority": "P1", "gap": "evaluator operational definition incomplete"},
+    {"id": "E2", "priority": "P1", "gap": "prompt templates and decoding/UI settings not quoted"},
+    {"id": "E3", "priority": "P2", "gap": "EVIDENCE_MAP omits Table5/Appendix/Abstract"}
+  ],
+  "literature_gaps": [
+    {"id": "L1", "priority": "P1", "gap": "Interslavic language description citation missing"},
+    {"id": "L2", "priority": "P2", "gap": "confirm venue versions for zhu/moslem arXiv entries"}
+  ],
+  "structural_improvements": [
+    {"id": "S1", "priority": "P2", "action": "shorten Discussion RQ echo"},
+    {"id": "S3", "priority": "P1", "action": "add +150-300 words evaluator/prompt operational detail"},
+    {"id": "S4", "priority": "P1", "action": "expand ISV related work only after L1 citation", "blocked_on": "L1"},
+    {"id": "S8", "priority": "P2", "action": "do not pad solely for 8-12k band; ~7.4k scientifically largely complete"}
+  ],
+  "journal_format_issues": [
+    {"id": "J1", "priority": "P1", "issue": "not using CUP NLP LaTeX template"},
+    {"id": "J2", "priority": "P1", "issue": "funding/COI placeholders"},
+    {"id": "J3", "priority": "P1", "issue": "resolve authorship pending before submission"},
+    {"id": "J9", "priority": "P1", "issue": "clarify public vs gitignored data availability"}
+  ],
+  "authorship_declarations": {
+    "confirmed_author_only": "Grzegorz R. Kulesza",
+    "pending_coauthor": "Jacek Kapała",
+    "no_invented_orcid_email_affiliation": true,
+    "funding_placeholder": true,
+    "coi_placeholder": true,
+    "ethics_appropriate": true,
+    "ai_disclosure_present": true
+  },
+  "figure_table_notes": [
+    "Fig1 descriptive bar chart OK; avoid reading as ranking",
+    "Fig2 UNSEEN uniform positivity correctly non-inferential",
+    "central Table3 clear and correct"
+  ]
+}
