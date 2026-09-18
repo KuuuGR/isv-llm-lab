@@ -1,0 +1,23 @@
+{
+  "story_id": "iskra-wieloryb-original-names",
+  "title": "Iskra i Wieloryb — wersja z oryginalnymi nazwami",
+  "classification": "high_overlap_corpus_inspired",
+  "regime": "high",
+  "classification_note": "HIGH-overlap: this Polish story is deliberately corpus-inspired and shares substantial themes/motifs with the authentic corpus (e.g. eternal winter; the Red/Scarlet Spark; Zimorodzice; an inherited key; a grandfather's legacy; Mogiła Szronu; songs used as narrative mechanisms; whale imagery; the Heart of the Earth; sacrifice and transformation; maritime and storm imagery). It is an experimental input for the HIGH-overlap corpus-priming test, NOT an independent same-topic control and NOT part of the corpus.",
+  "current_version": "v1",
+  "versions": {
+    "v1": {
+      "version": "v1",
+      "file": "versions/iskra-wieloryb-original-names-v1.txt",
+      "sha256": "ab8a0dcf7352789c09c4aca132c086999c861407e4cd682ee9414aab5b792f63",
+      "bytes": 30061,
+      "title": "Iskra i Wieloryb — wersja z oryginalnymi nazwami",
+      "story_id": "iskra-wieloryb-original-names",
+      "classification": "high_overlap_corpus_inspired",
+      "source_file_read_only": "experiments/exp004-modelscreen/phase2b/input/_extracted/high-overlap-story.txt",
+      "note": "Extracted by scripts/extract_phase2b_high_story.py from the author's story bank (InterslavicTesty.md, sha256 3662cda9...) section '# 3. Iskra i Wieloryb — wersja z oryginalnymi nazwami' (lines 603-1058). Classification high_overlap_corpus_inspired (deliberately NOT independent_same_topic; NOT an independent control; NOT part of the corpus). Markdown structural markers removed only (H1 section number, '## ' heading prefixes, '> ' song blockquote prefixes, '*' emphasis, '---' rules); all 227 story content lines preserved exactly (verified parity); title line added. Bank file untouched; sections 1, 2 (Opowieść o sygnale) and 4 (Podkłady = LOW, future) excluded. 30061 bytes, 440 lines, sha256 ab8a0dcf7352789c09c4aca132c086999c861407e4cd682ee9414aab5b792f63.",
+      "frozen_by": "scripts/run_exp004_phase2b.py freeze-story",
+      "frozen_date": "2026-09-09"
+    }
+  }
+}

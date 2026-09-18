@@ -1,0 +1,8 @@
+configuration,HIGH_delta_pp,LOW_delta_pp,UNSEEN_delta_pp,HIGH_validity,LOW_validity,UNSEEN_validity
+Gemini 3.6 Flash — extended thinking ON,-0.55,13.23,5.68,valid,valid,valid
+Gemini 3.6 Flash — extended thinking OFF,-1.75,10.4,6.09,valid,valid,valid
+Claude Sonnet 5 — Medium (default),14.28,12.11,6.42,valid,valid,valid
+DeepSeek V3 Expert — DeepThink ON,9.25,6.19,3.83,valid,valid,valid
+Qwen 3.8 Max — Fast,5.18,INVALID — MODEL MISMATCH,3.52,valid,INVALID — MODEL MISMATCH,valid
+GPT-5.6 Luna — thinking OFF,8.62,5.31,5.52,valid,valid,valid
+Grok 4.5 Fast,14.49,3.95,7.12,valid,valid,valid

@@ -1,0 +1,694 @@
+{
+  "artifact": "phase2b-unseen-qualitative-paired-audit",
+  "date": "2026-09-18",
+  "n_pairs": 21,
+  "note": "Descriptive qualitative audit of Phase 2B UNSEEN D→P pairs (Exercise 2.2 voice biophysics). Not causal. Derived from raw outputs + analysis/unseen/dataset.json; does not modify sources.",
+  "source_aggregates": "experiments/exp004-modelscreen/phase2b/analysis/unseen/dataset.json",
+  "story_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+  "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+  "source_characteristics": {
+    "bytes": 5676,
+    "genre": "expository_educational",
+    "domain": "voice_biophysics",
+    "shorter_than_high_low": true,
+    "note": "Design characteristic / possible confound; not corrected for."
+  },
+  "contrast_with_high_low": {
+    "corpus_opening_near_copy_observed": false,
+    "all_configs_positive_mean_delta": true,
+    "qwen_low_style_polish_collapse_observed": false,
+    "qwen_low_model_mismatch_observed": false
+  },
+  "pairs": [
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking ON",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01",
+      "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01",
+      "canonical_direct": 0.667665,
+      "canonical_primed": 0.688857,
+      "canonical_delta": 0.0211920000000001,
+      "outside_inventory_direct": 16.0,
+      "outside_inventory_primed": 19.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+2.12 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 42→2"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking ON",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02",
+      "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02",
+      "canonical_direct": 0.648729,
+      "canonical_primed": 0.709489,
+      "canonical_delta": 0.060760000000000036,
+      "outside_inventory_direct": 32.0,
+      "outside_inventory_primed": 29.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+6.08 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 20→2"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking ON",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03",
+      "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03",
+      "canonical_direct": 0.656848,
+      "canonical_primed": 0.745297,
+      "canonical_delta": 0.088449,
+      "outside_inventory_direct": 24.0,
+      "outside_inventory_primed": 18.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+8.84 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Coverage gain with little obvious corpus-lexeme echo — compatible with local ISV/ortho cleanup.",
+      "difference_classes": [
+        "improvement",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "no jedino/črěz/govoret-style corpus markers in primed",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 10→1"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03/output.txt"
+      }
+    },
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking OFF",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01",
+      "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01",
+      "canonical_direct": 0.622951,
+      "canonical_primed": 0.702663,
+      "canonical_delta": 0.079712,
+      "outside_inventory_direct": 17.0,
+      "outside_inventory_primed": 14.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+7.97 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino', 'črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 32→1"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking OFF",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02",
+      "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02",
+      "canonical_direct": 0.648449,
+      "canonical_primed": 0.688047,
+      "canonical_delta": 0.03959799999999991,
+      "outside_inventory_direct": 47.0,
+      "outside_inventory_primed": 26.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+3.96 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 99→2"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking OFF",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03",
+      "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03",
+      "canonical_direct": 0.644245,
+      "canonical_primed": 0.707783,
+      "canonical_delta": 0.0635380000000001,
+      "outside_inventory_direct": 29.0,
+      "outside_inventory_primed": 16.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+6.35 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino', 'črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 54→3"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03/output.txt"
+      }
+    },
+    {
+      "configuration": "Claude Sonnet 5 — Medium (default)",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01",
+      "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01",
+      "canonical_direct": 0.662182,
+      "canonical_primed": 0.733631,
+      "canonical_delta": 0.07144899999999998,
+      "outside_inventory_direct": 26.0,
+      "outside_inventory_primed": 21.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+7.14 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 15→5"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "Claude Sonnet 5 — Medium (default)",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02",
+      "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02",
+      "canonical_direct": 0.658574,
+      "canonical_primed": 0.710015,
+      "canonical_delta": 0.05144099999999996,
+      "outside_inventory_direct": 25.0,
+      "outside_inventory_primed": 10.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+5.14 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino', 'črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 23→5"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "Claude Sonnet 5 — Medium (default)",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03",
+      "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03",
+      "canonical_direct": 0.661218,
+      "canonical_primed": 0.730825,
+      "canonical_delta": 0.06960699999999997,
+      "outside_inventory_direct": 21.0,
+      "outside_inventory_primed": 27.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+6.96 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino', 'črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 17→5"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03/output.txt"
+      }
+    },
+    {
+      "configuration": "DeepSeek V3 Expert — DeepThink ON",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01",
+      "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01",
+      "canonical_direct": 0.688988,
+      "canonical_primed": 0.718101,
+      "canonical_delta": 0.029112999999999944,
+      "outside_inventory_direct": 15.0,
+      "outside_inventory_primed": 14.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+2.91 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino']",
+        "opening Jaccard vs tuta-historija remains low (0.0)"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "DeepSeek V3 Expert — DeepThink ON",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02",
+      "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02",
+      "canonical_direct": 0.68437,
+      "canonical_primed": 0.734328,
+      "canonical_delta": 0.04995799999999995,
+      "outside_inventory_direct": 14.0,
+      "outside_inventory_primed": 15.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+5.00 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino', 'črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "DeepSeek V3 Expert — DeepThink ON",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03",
+      "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03",
+      "canonical_direct": 0.665667,
+      "canonical_primed": 0.701493,
+      "canonical_delta": 0.035826000000000024,
+      "outside_inventory_direct": 22.0,
+      "outside_inventory_primed": 14.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+3.58 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 4→2"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03/output.txt"
+      }
+    },
+    {
+      "configuration": "Qwen 3.8 Max — Fast",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01",
+      "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01",
+      "canonical_direct": 0.678625,
+      "canonical_primed": 0.71535,
+      "canonical_delta": 0.03672500000000001,
+      "outside_inventory_direct": 22.0,
+      "outside_inventory_primed": 20.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+3.67 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Coverage gain with little obvious corpus-lexeme echo — compatible with local ISV/ortho cleanup.",
+      "difference_classes": [
+        "improvement",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "no jedino/črěz/govoret-style corpus markers in primed",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 9→7"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "Qwen 3.8 Max — Fast",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02",
+      "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02",
+      "canonical_direct": 0.682159,
+      "canonical_primed": 0.694815,
+      "canonical_delta": 0.012656,
+      "outside_inventory_direct": 22.0,
+      "outside_inventory_primed": 23.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+1.27 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino', 'črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "Qwen 3.8 Max — Fast",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03",
+      "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03",
+      "canonical_direct": 0.668675,
+      "canonical_primed": 0.724852,
+      "canonical_delta": 0.05617700000000003,
+      "outside_inventory_direct": 21.0,
+      "outside_inventory_primed": 20.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+5.62 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 8→7"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03/output.txt"
+      }
+    },
+    {
+      "configuration": "GPT-5.6 Luna — thinking OFF",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01",
+      "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01",
+      "canonical_direct": 0.690799,
+      "canonical_primed": 0.756391,
+      "canonical_delta": 0.06559199999999998,
+      "outside_inventory_direct": 30.0,
+      "outside_inventory_primed": 16.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+6.56 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino', 'črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 26→4"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "GPT-5.6 Luna — thinking OFF",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02",
+      "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02",
+      "canonical_direct": 0.65449,
+      "canonical_primed": 0.730253,
+      "canonical_delta": 0.07576300000000002,
+      "outside_inventory_direct": 14.0,
+      "outside_inventory_primed": 16.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+7.58 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 17→4"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "GPT-5.6 Luna — thinking OFF",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03",
+      "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03",
+      "canonical_direct": 0.710606,
+      "canonical_primed": 0.734904,
+      "canonical_delta": 0.024298000000000042,
+      "outside_inventory_direct": 40.0,
+      "outside_inventory_primed": 53.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+2.43 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "ambiguous",
+        "neutral variation"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count rose 1→10",
+        "primed opening wrapped in markdown bold (**## Vježba 2.2**)"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03/output.txt"
+      }
+    },
+    {
+      "configuration": "Grok 4.5 Fast",
+      "replicate": "r01",
+      "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r01",
+      "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r01",
+      "canonical_direct": 0.675266,
+      "canonical_primed": 0.735513,
+      "canonical_delta": 0.06024699999999994,
+      "outside_inventory_direct": 16.0,
+      "outside_inventory_primed": 18.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+6.02 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "orthographic cleanup"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino', 'črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count 13→4"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r01/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r01/output.txt"
+      }
+    },
+    {
+      "configuration": "Grok 4.5 Fast",
+      "replicate": "r02",
+      "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r02",
+      "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r02",
+      "canonical_direct": 0.647779,
+      "canonical_primed": 0.743976,
+      "canonical_delta": 0.09619699999999998,
+      "outside_inventory_direct": 13.0,
+      "outside_inventory_primed": 14.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+9.62 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino', 'črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r02/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r02/output.txt"
+      }
+    },
+    {
+      "configuration": "Grok 4.5 Fast",
+      "replicate": "r03",
+      "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r03",
+      "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r03",
+      "canonical_direct": 0.654021,
+      "canonical_primed": 0.711044,
+      "canonical_delta": 0.057023000000000046,
+      "outside_inventory_direct": 16.0,
+      "outside_inventory_primed": 26.0,
+      "opening_jaccard_vs_corpus_direct": 0.0,
+      "opening_jaccard_vs_corpus_primed": 0.0,
+      "corpus_lexeme_markers_primed": [
+        "jedino",
+        "črěz"
+      ],
+      "winter_motif_bleed_primed": false,
+      "summary": "Positive Δ (+5.70 pp). Expository voice-biophysics structure retained (titles/sections about Biofizika glasa). No corpus winter-narrative opening adoption. Primed shows some corpus-register lexical items without opening rewrite.",
+      "difference_classes": [
+        "improvement",
+        "lexical borrowing",
+        "ambiguous"
+      ],
+      "notable_observations": [
+        "corpus-register markers in P: ['jedino', 'črěz']",
+        "opening Jaccard vs tuta-historija remains low (0.0)",
+        "Polish-letter count rose 0→7"
+      ],
+      "artifact_paths": {
+        "direct_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r03/output.txt",
+        "primed_output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r03/output.txt"
+      }
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "metric": "canonical_coverage_mean_delta_pp",
+  "rows": [
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking ON",
+      "HIGH_delta_pp": -0.55,
+      "LOW_delta_pp": 13.23,
+      "UNSEEN_delta_pp": 5.68,
+      "LOW_validity": "valid"
+    },
+    {
+      "configuration": "Gemini 3.6 Flash — extended thinking OFF",
+      "HIGH_delta_pp": -1.75,
+      "LOW_delta_pp": 10.4,
+      "UNSEEN_delta_pp": 6.09,
+      "LOW_validity": "valid"
+    },
+    {
+      "configuration": "Claude Sonnet 5 — Medium (default)",
+      "HIGH_delta_pp": 14.28,
+      "LOW_delta_pp": 12.11,
+      "UNSEEN_delta_pp": 6.42,
+      "LOW_validity": "valid"
+    },
+    {
+      "configuration": "DeepSeek V3 Expert — DeepThink ON",
+      "HIGH_delta_pp": 9.25,
+      "LOW_delta_pp": 6.19,
+      "UNSEEN_delta_pp": 3.83,
+      "LOW_validity": "valid"
+    },
+    {
+      "configuration": "Qwen 3.8 Max — Fast",
+      "HIGH_delta_pp": 5.18,
+      "LOW_delta_pp": null,
+      "UNSEEN_delta_pp": 3.52,
+      "LOW_validity": "INVALID — MODEL MISMATCH"
+    },
+    {
+      "configuration": "GPT-5.6 Luna — thinking OFF",
+      "HIGH_delta_pp": 8.62,
+      "LOW_delta_pp": 5.31,
+      "UNSEEN_delta_pp": 5.52,
+      "LOW_validity": "valid"
+    },
+    {
+      "configuration": "Grok 4.5 Fast",
+      "HIGH_delta_pp": 14.49,
+      "LOW_delta_pp": 3.95,
+      "UNSEEN_delta_pp": 7.12,
+      "LOW_validity": "valid"
+    }
+  ],
+  "matched_six_mean_delta_pp": {
+    "HIGH": 7.39,
+    "LOW": 8.53,
+    "UNSEEN": 5.78,
+    "n": 6,
+    "excluded": "Qwen 3.8 Max — Fast"
+  },
+  "all_config_mean_delta_pp_unmatched": {
+    "HIGH_n7": 7.07,
+    "LOW_n6": 8.53,
+    "UNSEEN_n7": 5.45,
+    "note": "Not perfectly matched; do not compare LOW n=6 mean directly to HIGH/UNSEEN n=7 means without caveat"
+  }
+}

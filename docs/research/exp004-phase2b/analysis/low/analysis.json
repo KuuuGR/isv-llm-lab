@@ -1,0 +1,1039 @@
+{
+  "artifact": "phase2b_low_aggregate_analysis",
+  "status": "results",
+  "generator": "scripts/analyze_exp004_phase2b.py",
+  "integrity_ok": true,
+  "tables": {
+    "canonical": {
+      "metric": "canonical coverage",
+      "scope": "primary_valid_paired_configurations",
+      "n_configurations": 6,
+      "rows": [
+        {
+          "label": "Gemini 3.6 Flash — extended thinking ON",
+          "config": [
+            "google",
+            "gemini-3.6-flash",
+            "extthinkon"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.643319,
+          "direct_sd": 0.018005220937272602,
+          "direct_min": 0.623478,
+          "direct_max": 0.658619,
+          "primed_mean": 0.775615,
+          "primed_sd": 0.005448739579021945,
+          "primed_min": 0.772312,
+          "primed_max": 0.781904,
+          "delta_mean": 0.13229600000000005,
+          "delta_sd": 0.02329704099236641,
+          "delta_min": 0.11369300000000004,
+          "delta_max": 0.15842600000000007,
+          "delta_values": {
+            "r01": 0.15842600000000007,
+            "r02": 0.11369300000000004,
+            "r03": 0.12476900000000002
+          }
+        },
+        {
+          "label": "Gemini 3.6 Flash — extended thinking OFF",
+          "config": [
+            "google",
+            "gemini-3.6-flash",
+            "extthinkoff"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.6451253333333333,
+          "direct_sd": 0.024477734562931543,
+          "direct_min": 0.626938,
+          "direct_max": 0.672956,
+          "primed_mean": 0.7491476666666667,
+          "primed_sd": 0.021220464305319355,
+          "primed_min": 0.732067,
+          "primed_max": 0.772903,
+          "delta_mean": 0.10402233333333337,
+          "delta_sd": 0.04040445699837251,
+          "delta_min": 0.059111000000000025,
+          "delta_max": 0.13742100000000002,
+          "delta_values": {
+            "r01": 0.13742100000000002,
+            "r02": 0.11553500000000005,
+            "r03": 0.059111000000000025
+          }
+        },
+        {
+          "label": "Claude Sonnet 5 — Medium (default)",
+          "config": [
+            "anthropic",
+            "claude",
+            "sonnet-5"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.6572323333333333,
+          "direct_sd": 0.013468541655774512,
+          "direct_min": 0.641784,
+          "direct_max": 0.66651,
+          "primed_mean": 0.7783246666666667,
+          "primed_sd": 0.02176934287784855,
+          "primed_min": 0.755782,
+          "primed_max": 0.799228,
+          "delta_mean": 0.12109233333333332,
+          "delta_sd": 0.025015994770013306,
+          "delta_min": 0.09237899999999999,
+          "delta_max": 0.13817999999999997,
+          "delta_values": {
+            "r01": 0.13817999999999997,
+            "r02": 0.09237899999999999,
+            "r03": 0.132718
+          }
+        },
+        {
+          "label": "DeepSeek V3 Expert — DeepThink ON",
+          "config": [
+            "deepseek",
+            "deepseek-v3-expert",
+            "deepthinkon"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.6893206666666667,
+          "direct_sd": 0.010156677868935989,
+          "direct_min": 0.677966,
+          "direct_max": 0.69754,
+          "primed_mean": 0.7512340000000001,
+          "primed_sd": 0.005380616693279722,
+          "primed_min": 0.746744,
+          "primed_max": 0.757198,
+          "delta_mean": 0.06191333333333334,
+          "delta_sd": 0.015034005365614824,
+          "delta_min": 0.05221999999999993,
+          "delta_max": 0.07923200000000008,
+          "delta_values": {
+            "r01": 0.054288,
+            "r02": 0.07923200000000008,
+            "r03": 0.05221999999999993
+          }
+        },
+        {
+          "label": "GPT-5.6 Luna — thinking OFF",
+          "config": [
+            "openai",
+            "gpt-5.6-luna",
+            "thinkoff"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.707482,
+          "direct_sd": 0.008779332149998641,
+          "direct_min": 0.700674,
+          "direct_max": 0.717391,
+          "primed_mean": 0.7606183333333334,
+          "primed_sd": 0.0077926362890444875,
+          "primed_min": 0.751662,
+          "primed_max": 0.765847,
+          "delta_mean": 0.05313633333333334,
+          "delta_sd": 0.009143049837627074,
+          "delta_min": 0.04728100000000002,
+          "delta_max": 0.06367199999999995,
+          "delta_values": {
+            "r01": 0.048456000000000055,
+            "r02": 0.06367199999999995,
+            "r03": 0.04728100000000002
+          }
+        },
+        {
+          "label": "Grok 4.5 Fast",
+          "config": [
+            "xai",
+            "grok",
+            "fast"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.693193,
+          "direct_sd": 0.0005161230473443399,
+          "direct_min": 0.692607,
+          "direct_max": 0.69358,
+          "primed_mean": 0.7326936666666667,
+          "primed_sd": 0.0494174405077128,
+          "primed_min": 0.678623,
+          "primed_max": 0.77552,
+          "delta_mean": 0.03950066666666666,
+          "delta_sd": 0.0496119128469497,
+          "delta_min": -0.014956999999999998,
+          "delta_max": 0.08212799999999998,
+          "delta_values": {
+            "r01": 0.08212799999999998,
+            "r02": 0.051331000000000016,
+            "r03": -0.014956999999999998
+          }
+        }
+      ]
+    },
+    "broader": {
+      "metric": "broader resource-supported coverage",
+      "scope": "primary_valid_paired_configurations",
+      "n_configurations": 6,
+      "rows": [
+        {
+          "label": "Gemini 3.6 Flash — extended thinking ON",
+          "config": [
+            "google",
+            "gemini-3.6-flash",
+            "extthinkon"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.7684099999999999,
+          "direct_sd": 0.02910772665461871,
+          "direct_min": 0.735996,
+          "direct_max": 0.792315,
+          "primed_mean": 0.841205,
+          "primed_sd": 0.009745271468768798,
+          "primed_min": 0.832825,
+          "primed_max": 0.851899,
+          "delta_mean": 0.07279500000000001,
+          "delta_sd": 0.03762295805754775,
+          "delta_min": 0.04657600000000006,
+          "delta_max": 0.11590299999999998,
+          "delta_values": {
+            "r01": 0.11590299999999998,
+            "r02": 0.05590600000000001,
+            "r03": 0.04657600000000006
+          }
+        },
+        {
+          "label": "Gemini 3.6 Flash — extended thinking OFF",
+          "config": [
+            "google",
+            "gemini-3.6-flash",
+            "extthinkoff"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.7616926666666667,
+          "direct_sd": 0.018012442153504147,
+          "direct_min": 0.748909,
+          "direct_max": 0.782293,
+          "primed_mean": 0.8244126666666666,
+          "primed_sd": 0.022491031308798072,
+          "primed_min": 0.8019,
+          "primed_max": 0.846882,
+          "delta_mean": 0.06271999999999996,
+          "delta_sd": 0.03976986533796666,
+          "delta_min": 0.01960699999999993,
+          "delta_max": 0.09797299999999998,
+          "delta_values": {
+            "r01": 0.09797299999999998,
+            "r02": 0.07057999999999998,
+            "r03": 0.01960699999999993
+          }
+        },
+        {
+          "label": "Claude Sonnet 5 — Medium (default)",
+          "config": [
+            "anthropic",
+            "claude",
+            "sonnet-5"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.774581,
+          "direct_sd": 0.025795397515836056,
+          "direct_min": 0.748425,
+          "direct_max": 0.8,
+          "primed_mean": 0.8596513333333333,
+          "primed_sd": 0.008700819750651845,
+          "primed_min": 0.853377,
+          "primed_max": 0.869584,
+          "delta_mean": 0.08507033333333336,
+          "delta_sd": 0.028241571031607533,
+          "delta_min": 0.05337700000000001,
+          "delta_max": 0.107568,
+          "delta_values": {
+            "r01": 0.107568,
+            "r02": 0.05337700000000001,
+            "r03": 0.09426600000000007
+          }
+        },
+        {
+          "label": "DeepSeek V3 Expert — DeepThink ON",
+          "config": [
+            "deepseek",
+            "deepseek-v3-expert",
+            "deepthinkon"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.8171076666666667,
+          "direct_sd": 0.00981116314884905,
+          "direct_min": 0.807264,
+          "direct_max": 0.826886,
+          "primed_mean": 0.8531923333333333,
+          "primed_sd": 0.007634161206925987,
+          "primed_min": 0.845341,
+          "primed_max": 0.860589,
+          "delta_mean": 0.03608466666666669,
+          "delta_sd": 0.009338137305337404,
+          "delta_min": 0.02816799999999997,
+          "delta_max": 0.04638300000000006,
+          "delta_values": {
+            "r01": 0.03370300000000004,
+            "r02": 0.04638300000000006,
+            "r03": 0.02816799999999997
+          }
+        },
+        {
+          "label": "GPT-5.6 Luna — thinking OFF",
+          "config": [
+            "openai",
+            "gpt-5.6-luna",
+            "thinkoff"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.8314963333333334,
+          "direct_sd": 0.00746138059164206,
+          "direct_min": 0.826756,
+          "direct_max": 0.840097,
+          "primed_mean": 0.8605466666666667,
+          "primed_sd": 0.0019833631370309696,
+          "primed_min": 0.85842,
+          "primed_max": 0.862346,
+          "delta_mean": 0.02905033333333329,
+          "delta_sd": 0.005942471736014679,
+          "delta_min": 0.022248999999999963,
+          "delta_max": 0.03323799999999999,
+          "delta_values": {
+            "r01": 0.022248999999999963,
+            "r02": 0.031663999999999914,
+            "r03": 0.03323799999999999
+          }
+        },
+        {
+          "label": "Grok 4.5 Fast",
+          "config": [
+            "xai",
+            "grok",
+            "fast"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.8163706666666667,
+          "direct_sd": 0.005283818726388428,
+          "direct_min": 0.81323,
+          "direct_max": 0.822471,
+          "primed_mean": 0.8147380000000001,
+          "primed_sd": 0.044496779467732284,
+          "primed_min": 0.765875,
+          "primed_max": 0.852927,
+          "delta_mean": -0.0016326666666666527,
+          "delta_sd": 0.04361572514969039,
+          "delta_min": -0.047355000000000036,
+          "delta_max": 0.039515999999999996,
+          "delta_values": {
+            "r01": 0.039515999999999996,
+            "r02": 0.0029410000000000824,
+            "r03": -0.047355000000000036
+          }
+        }
+      ]
+    },
+    "unresolved": {
+      "metric": "unresolved rate",
+      "scope": "primary_valid_paired_configurations",
+      "n_configurations": 6,
+      "rows": [
+        {
+          "label": "Gemini 3.6 Flash — extended thinking ON",
+          "config": [
+            "google",
+            "gemini-3.6-flash",
+            "extthinkon"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.356681,
+          "direct_sd": 0.018005220937272626,
+          "direct_min": 0.341381,
+          "direct_max": 0.376522,
+          "primed_mean": 0.22438499999999997,
+          "primed_sd": 0.005448739579021913,
+          "primed_min": 0.218096,
+          "primed_max": 0.227688,
+          "delta_mean": -0.132296,
+          "delta_sd": 0.0232970409923664,
+          "delta_min": -0.158426,
+          "delta_max": -0.11369299999999999,
+          "delta_values": {
+            "r01": -0.158426,
+            "r02": -0.11369299999999999,
+            "r03": -0.12476900000000002
+          }
+        },
+        {
+          "label": "Gemini 3.6 Flash — extended thinking OFF",
+          "config": [
+            "google",
+            "gemini-3.6-flash",
+            "extthinkoff"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.35487466666666667,
+          "direct_sd": 0.024477734562931543,
+          "direct_min": 0.327044,
+          "direct_max": 0.373062,
+          "primed_mean": 0.2508523333333333,
+          "primed_sd": 0.02122046430531936,
+          "primed_min": 0.227097,
+          "primed_max": 0.267933,
+          "delta_mean": -0.10402233333333334,
+          "delta_sd": 0.0404044569983725,
+          "delta_min": -0.13742100000000002,
+          "delta_max": -0.059111000000000025,
+          "delta_values": {
+            "r01": -0.13742100000000002,
+            "r02": -0.115535,
+            "r03": -0.059111000000000025
+          }
+        },
+        {
+          "label": "Claude Sonnet 5 — Medium (default)",
+          "config": [
+            "anthropic",
+            "claude",
+            "sonnet-5"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.34276766666666664,
+          "direct_sd": 0.013468541655774505,
+          "direct_min": 0.33349,
+          "direct_max": 0.358216,
+          "primed_mean": 0.22167533333333334,
+          "primed_sd": 0.021769342877848496,
+          "primed_min": 0.200772,
+          "primed_max": 0.244218,
+          "delta_mean": -0.12109233333333332,
+          "delta_sd": 0.025015994770013306,
+          "delta_min": -0.13817999999999997,
+          "delta_max": -0.09237899999999999,
+          "delta_values": {
+            "r01": -0.13817999999999997,
+            "r02": -0.09237899999999999,
+            "r03": -0.132718
+          }
+        },
+        {
+          "label": "DeepSeek V3 Expert — DeepThink ON",
+          "config": [
+            "deepseek",
+            "deepseek-v3-expert",
+            "deepthinkon"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.3106793333333333,
+          "direct_sd": 0.010156677868935943,
+          "direct_min": 0.30246,
+          "direct_max": 0.322034,
+          "primed_mean": 0.24876600000000001,
+          "primed_sd": 0.005380616693279684,
+          "primed_min": 0.242802,
+          "primed_max": 0.253256,
+          "delta_mean": -0.06191333333333333,
+          "delta_sd": 0.015034005365614759,
+          "delta_min": -0.079232,
+          "delta_max": -0.05221999999999999,
+          "delta_values": {
+            "r01": -0.054288,
+            "r02": -0.079232,
+            "r03": -0.05221999999999999
+          }
+        },
+        {
+          "label": "GPT-5.6 Luna — thinking OFF",
+          "config": [
+            "openai",
+            "gpt-5.6-luna",
+            "thinkoff"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.292518,
+          "direct_sd": 0.008779332149998651,
+          "direct_min": 0.282609,
+          "direct_max": 0.299326,
+          "primed_mean": 0.2393816666666667,
+          "primed_sd": 0.007792636289044507,
+          "primed_min": 0.234153,
+          "primed_max": 0.248338,
+          "delta_mean": -0.053136333333333334,
+          "delta_sd": 0.009143049837627103,
+          "delta_min": -0.06367199999999998,
+          "delta_max": -0.04728100000000002,
+          "delta_values": {
+            "r01": -0.048456,
+            "r02": -0.06367199999999998,
+            "r03": -0.04728100000000002
+          }
+        },
+        {
+          "label": "Grok 4.5 Fast",
+          "config": [
+            "xai",
+            "grok",
+            "fast"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 0.306807,
+          "direct_sd": 0.0005161230473443399,
+          "direct_min": 0.30642,
+          "direct_max": 0.307393,
+          "primed_mean": 0.26730633333333337,
+          "primed_sd": 0.0494174405077128,
+          "primed_min": 0.22448,
+          "primed_max": 0.321377,
+          "delta_mean": -0.03950066666666666,
+          "delta_sd": 0.0496119128469497,
+          "delta_min": -0.08212799999999998,
+          "delta_max": 0.014956999999999998,
+          "delta_values": {
+            "r01": -0.08212799999999998,
+            "r02": -0.051331000000000016,
+            "r03": 0.014956999999999998
+          }
+        }
+      ]
+    },
+    "ortho_out": {
+      "metric": "orthography outside-inventory",
+      "scope": "primary_valid_paired_configurations",
+      "n_configurations": 6,
+      "rows": [
+        {
+          "label": "Gemini 3.6 Flash — extended thinking ON",
+          "config": [
+            "google",
+            "gemini-3.6-flash",
+            "extthinkon"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 42.666666666666664,
+          "direct_sd": 17.15614564327703,
+          "direct_min": 27.0,
+          "direct_max": 61.0,
+          "primed_mean": 30.0,
+          "primed_sd": 15.716233645501712,
+          "primed_min": 12.0,
+          "primed_max": 41.0,
+          "delta_mean": -12.666666666666666,
+          "delta_sd": 32.593455375785695,
+          "delta_min": -49.0,
+          "delta_max": 14.0,
+          "delta_values": {
+            "r01": -49.0,
+            "r02": 14.0,
+            "r03": -3.0
+          }
+        },
+        {
+          "label": "Gemini 3.6 Flash — extended thinking OFF",
+          "config": [
+            "google",
+            "gemini-3.6-flash",
+            "extthinkoff"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 43.0,
+          "direct_sd": 26.28687885618983,
+          "direct_min": 24.0,
+          "direct_max": 73.0,
+          "primed_mean": 29.666666666666668,
+          "primed_sd": 17.95364401266031,
+          "primed_min": 16.0,
+          "primed_max": 50.0,
+          "delta_mean": -13.333333333333334,
+          "delta_sd": 41.66933324800546,
+          "delta_min": -57.0,
+          "delta_max": 26.0,
+          "delta_values": {
+            "r01": -57.0,
+            "r02": -9.0,
+            "r03": 26.0
+          }
+        },
+        {
+          "label": "Claude Sonnet 5 — Medium (default)",
+          "config": [
+            "anthropic",
+            "claude",
+            "sonnet-5"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 182.33333333333334,
+          "direct_sd": 116.4230790407698,
+          "direct_min": 93.0,
+          "direct_max": 314.0,
+          "primed_mean": 13.0,
+          "primed_sd": 14.933184523068078,
+          "primed_min": 2.0,
+          "primed_max": 30.0,
+          "delta_mean": -169.33333333333334,
+          "delta_sd": 102.65151403332214,
+          "delta_min": -284.0,
+          "delta_max": -86.0,
+          "delta_values": {
+            "r01": -284.0,
+            "r02": -86.0,
+            "r03": -138.0
+          }
+        },
+        {
+          "label": "DeepSeek V3 Expert — DeepThink ON",
+          "config": [
+            "deepseek",
+            "deepseek-v3-expert",
+            "deepthinkon"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 15.333333333333334,
+          "direct_sd": 3.7859388972001824,
+          "direct_min": 11.0,
+          "direct_max": 18.0,
+          "primed_mean": 12.666666666666666,
+          "primed_sd": 4.618802153517006,
+          "primed_min": 10.0,
+          "primed_max": 18.0,
+          "delta_mean": -2.6666666666666665,
+          "delta_sd": 3.7859388972001824,
+          "delta_min": -7.0,
+          "delta_max": 0.0,
+          "delta_values": {
+            "r01": -1.0,
+            "r02": -7.0,
+            "r03": 0.0
+          }
+        },
+        {
+          "label": "GPT-5.6 Luna — thinking OFF",
+          "config": [
+            "openai",
+            "gpt-5.6-luna",
+            "thinkoff"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 11.666666666666666,
+          "direct_sd": 4.932882862316247,
+          "direct_min": 6.0,
+          "direct_max": 15.0,
+          "primed_mean": 15.0,
+          "primed_sd": 7.211102550927978,
+          "primed_min": 9.0,
+          "primed_max": 23.0,
+          "delta_mean": 3.3333333333333335,
+          "delta_sd": 4.509249752822894,
+          "delta_min": -1.0,
+          "delta_max": 8.0,
+          "delta_values": {
+            "r01": 3.0,
+            "r02": -1.0,
+            "r03": 8.0
+          }
+        },
+        {
+          "label": "Grok 4.5 Fast",
+          "config": [
+            "xai",
+            "grok",
+            "fast"
+          ],
+          "paired_validity": "valid",
+          "primary_analysis_include": true,
+          "direct_mean": 24.333333333333332,
+          "direct_sd": 4.932882862316247,
+          "direct_min": 21.0,
+          "direct_max": 30.0,
+          "primed_mean": 71.33333333333333,
+          "primed_sd": 71.65426249242492,
+          "primed_min": 19.0,
+          "primed_max": 153.0,
+          "delta_mean": 47.0,
+          "delta_sd": 73.08214556237385,
+          "delta_min": -2.0,
+          "delta_max": 131.0,
+          "delta_values": {
+            "r01": -2.0,
+            "r02": 12.0,
+            "r03": 131.0
+          }
+        }
+      ]
+    }
+  },
+  "invalid_pairing_tables": {
+    "canonical": {
+      "metric": "canonical coverage",
+      "scope": "invalid_pairing_retained_not_primary",
+      "n_configurations": 1,
+      "rows": [
+        {
+          "label": "Qwen 3.8 Max — Fast",
+          "config": [
+            "alibaba",
+            "qwen-3.8-max",
+            "fast"
+          ],
+          "paired_validity": "INVALID — MODEL MISMATCH",
+          "primary_analysis_include": false,
+          "direct_mean": 0.7218323333333333,
+          "direct_sd": 0.002699730418640587,
+          "direct_min": 0.71959,
+          "direct_max": 0.724829,
+          "primed_mean": 0.601051,
+          "primed_sd": 0.12809912479014057,
+          "primed_min": 0.453415,
+          "primed_max": 0.682749,
+          "delta_mean": -0.12078133333333325,
+          "delta_sd": 0.12763583941171597,
+          "delta_min": -0.267663,
+          "delta_max": -0.0368409999999999,
+          "delta_values": {
+            "r01": -0.05783999999999989,
+            "r02": -0.0368409999999999,
+            "r03": -0.267663
+          }
+        }
+      ],
+      "warning": "Do not interpret these Δ values as same-model priming effects."
+    },
+    "broader": {
+      "metric": "broader resource-supported coverage",
+      "scope": "invalid_pairing_retained_not_primary",
+      "n_configurations": 1,
+      "rows": [
+        {
+          "label": "Qwen 3.8 Max — Fast",
+          "config": [
+            "alibaba",
+            "qwen-3.8-max",
+            "fast"
+          ],
+          "paired_validity": "INVALID — MODEL MISMATCH",
+          "primary_analysis_include": false,
+          "direct_mean": 0.8358089999999999,
+          "direct_sd": 0.004668460238665413,
+          "direct_min": 0.830484,
+          "direct_max": 0.839198,
+          "primed_mean": 0.7425860000000001,
+          "primed_sd": 0.12160829569153575,
+          "primed_min": 0.602195,
+          "primed_max": 0.815302,
+          "delta_mean": -0.09322299999999999,
+          "delta_sd": 0.12345052127471956,
+          "delta_min": -0.23554999999999993,
+          "delta_max": -0.015182000000000029,
+          "delta_values": {
+            "r01": -0.02893699999999999,
+            "r02": -0.015182000000000029,
+            "r03": -0.23554999999999993
+          }
+        }
+      ],
+      "warning": "Do not interpret these Δ values as same-model priming effects."
+    },
+    "unresolved": {
+      "metric": "unresolved rate",
+      "scope": "invalid_pairing_retained_not_primary",
+      "n_configurations": 1,
+      "rows": [
+        {
+          "label": "Qwen 3.8 Max — Fast",
+          "config": [
+            "alibaba",
+            "qwen-3.8-max",
+            "fast"
+          ],
+          "paired_validity": "INVALID — MODEL MISMATCH",
+          "primary_analysis_include": false,
+          "direct_mean": 0.27816766666666665,
+          "direct_sd": 0.002699730418640595,
+          "direct_min": 0.275171,
+          "direct_max": 0.28041,
+          "primed_mean": 0.398949,
+          "primed_sd": 0.12809912479014054,
+          "primed_min": 0.317251,
+          "primed_max": 0.546585,
+          "delta_mean": 0.12078133333333334,
+          "delta_sd": 0.1276358394117159,
+          "delta_min": 0.03684100000000001,
+          "delta_max": 0.267663,
+          "delta_values": {
+            "r01": 0.05784,
+            "r02": 0.03684100000000001,
+            "r03": 0.267663
+          }
+        }
+      ],
+      "warning": "Do not interpret these Δ values as same-model priming effects."
+    },
+    "ortho_out": {
+      "metric": "orthography outside-inventory",
+      "scope": "invalid_pairing_retained_not_primary",
+      "n_configurations": 1,
+      "rows": [
+        {
+          "label": "Qwen 3.8 Max — Fast",
+          "config": [
+            "alibaba",
+            "qwen-3.8-max",
+            "fast"
+          ],
+          "paired_validity": "INVALID — MODEL MISMATCH",
+          "primary_analysis_include": false,
+          "direct_mean": 26.666666666666668,
+          "direct_sd": 8.082903768654761,
+          "direct_min": 18.0,
+          "direct_max": 34.0,
+          "primed_mean": 373.0,
+          "primed_sd": 600.247448974171,
+          "primed_min": 16.0,
+          "primed_max": 1066.0,
+          "delta_mean": 346.3333333333333,
+          "delta_sd": 607.7074405775638,
+          "delta_min": -12.0,
+          "delta_max": 1048.0,
+          "delta_values": {
+            "r01": 3.0,
+            "r02": -12.0,
+            "r03": 1048.0
+          }
+        }
+      ],
+      "warning": "Do not interpret these Δ values as same-model priming effects."
+    }
+  },
+  "distribution_notes": {
+    "n_per_cell": 3,
+    "interpretation": "descriptive_only",
+    "n_configurations_planned": 7,
+    "n_configurations_primary_valid": 6,
+    "n_configurations_invalid_pairing": 1,
+    "canonical_delta_mean_across_configs": 0.08532683333333335,
+    "canonical_delta_mean_across_configs_n": 6,
+    "canonical_delta_mean_label": "mean of 6 valid configuration mean-Δ values",
+    "canonical_delta_positive_configs": 6,
+    "canonical_delta_negative_configs": 0,
+    "canonical_delta_zero_configs": 0,
+    "direction_consistency": [
+      {
+        "label": "Gemini 3.6 Flash — extended thinking ON",
+        "delta_values": {
+          "r01": 0.15842600000000007,
+          "r02": 0.11369300000000004,
+          "r03": 0.12476900000000002
+        },
+        "direction": "all positive"
+      },
+      {
+        "label": "Gemini 3.6 Flash — extended thinking OFF",
+        "delta_values": {
+          "r01": 0.13742100000000002,
+          "r02": 0.11553500000000005,
+          "r03": 0.059111000000000025
+        },
+        "direction": "all positive"
+      },
+      {
+        "label": "Claude Sonnet 5 — Medium (default)",
+        "delta_values": {
+          "r01": 0.13817999999999997,
+          "r02": 0.09237899999999999,
+          "r03": 0.132718
+        },
+        "direction": "all positive"
+      },
+      {
+        "label": "DeepSeek V3 Expert — DeepThink ON",
+        "delta_values": {
+          "r01": 0.054288,
+          "r02": 0.07923200000000008,
+          "r03": 0.05221999999999993
+        },
+        "direction": "all positive"
+      },
+      {
+        "label": "GPT-5.6 Luna — thinking OFF",
+        "delta_values": {
+          "r01": 0.048456000000000055,
+          "r02": 0.06367199999999995,
+          "r03": 0.04728100000000002
+        },
+        "direction": "all positive"
+      },
+      {
+        "label": "Grok 4.5 Fast",
+        "delta_values": {
+          "r01": 0.08212799999999998,
+          "r02": 0.051331000000000016,
+          "r03": -0.014956999999999998
+        },
+        "direction": "mixed"
+      }
+    ],
+    "qwen_low_priming_effect_estimated": false,
+    "do_not_use_as_qwen38_low_priming": "Any historical −12.08 pp Qwen LOW figure is from an invalid model-mismatched pair and must not be cited as a Qwen 3.8 Max priming effect."
+  },
+  "disclaimer": "n = 3 replicates per configuration/condition. Results are descriptive replication/variance characterizations. Do not treat mean Δ as a statistically established effect. LOW primary mean Δ uses valid same-model pairs only (n=6 configurations).",
+  "matched_high_sensitivity": {
+    "label": "matched-configuration sensitivity analysis (identical 6 configs in HIGH and LOW; Qwen excluded)",
+    "n_configurations": 6,
+    "note": "Descriptive only. Unequal to the published HIGH 7-config aggregate; do not treat as a replacement for HIGH's full record. Qwen is excluded on both sides so the configuration sets match.",
+    "high_canonical_delta_mean_across_configs": 0.07388916666666666,
+    "low_canonical_delta_mean_across_configs": 0.08532683333333335,
+    "rows": [
+      {
+        "label": "Gemini 3.6 Flash — extended thinking ON",
+        "config": [
+          "google",
+          "gemini-3.6-flash",
+          "extthinkon"
+        ],
+        "high_delta_mean": -0.005498000000000003,
+        "low_delta_mean": 0.13229600000000005,
+        "high_delta_values": {
+          "r01": 0.018930000000000002,
+          "r02": -0.03768300000000002,
+          "r03": 0.002259000000000011
+        },
+        "low_delta_values": {
+          "r01": 0.15842600000000007,
+          "r02": 0.11369300000000004,
+          "r03": 0.12476900000000002
+        },
+        "high_direction": "mixed",
+        "low_direction": "all positive"
+      },
+      {
+        "label": "Gemini 3.6 Flash — extended thinking OFF",
+        "config": [
+          "google",
+          "gemini-3.6-flash",
+          "extthinkoff"
+        ],
+        "high_delta_mean": -0.017508333333333386,
+        "low_delta_mean": 0.10402233333333337,
+        "high_delta_values": {
+          "r01": -0.05391400000000002,
+          "r02": 0.031151999999999958,
+          "r03": -0.029763000000000095
+        },
+        "low_delta_values": {
+          "r01": 0.13742100000000002,
+          "r02": 0.11553500000000005,
+          "r03": 0.059111000000000025
+        },
+        "high_direction": "mixed",
+        "low_direction": "all positive"
+      },
+      {
+        "label": "Claude Sonnet 5 — Medium (default)",
+        "config": [
+          "anthropic",
+          "claude",
+          "sonnet-5"
+        ],
+        "high_delta_mean": 0.1428373333333333,
+        "low_delta_mean": 0.12109233333333332,
+        "high_delta_values": {
+          "r01": 0.16688399999999992,
+          "r02": 0.139637,
+          "r03": 0.12199099999999996
+        },
+        "low_delta_values": {
+          "r01": 0.13817999999999997,
+          "r02": 0.09237899999999999,
+          "r03": 0.132718
+        },
+        "high_direction": "all positive",
+        "low_direction": "all positive"
+      },
+      {
+        "label": "DeepSeek V3 Expert — DeepThink ON",
+        "config": [
+          "deepseek",
+          "deepseek-v3-expert",
+          "deepthinkon"
+        ],
+        "high_delta_mean": 0.09245766666666666,
+        "low_delta_mean": 0.06191333333333334,
+        "high_delta_values": {
+          "r01": 0.09238400000000002,
+          "r02": 0.118178,
+          "r03": 0.06681099999999995
+        },
+        "low_delta_values": {
+          "r01": 0.054288,
+          "r02": 0.07923200000000008,
+          "r03": 0.05221999999999993
+        },
+        "high_direction": "all positive",
+        "low_direction": "all positive"
+      },
+      {
+        "label": "GPT-5.6 Luna — thinking OFF",
+        "config": [
+          "openai",
+          "gpt-5.6-luna",
+          "thinkoff"
+        ],
+        "high_delta_mean": 0.08615400000000002,
+        "low_delta_mean": 0.05313633333333334,
+        "high_delta_values": {
+          "r01": 0.09433900000000006,
+          "r02": 0.070631,
+          "r03": 0.09349200000000002
+        },
+        "low_delta_values": {
+          "r01": 0.048456000000000055,
+          "r02": 0.06367199999999995,
+          "r03": 0.04728100000000002
+        },
+        "high_direction": "all positive",
+        "low_direction": "all positive"
+      },
+      {
+        "label": "Grok 4.5 Fast",
+        "config": [
+          "xai",
+          "grok",
+          "fast"
+        ],
+        "high_delta_mean": 0.14489233333333337,
+        "low_delta_mean": 0.03950066666666666,
+        "high_delta_values": {
+          "r01": 0.1537130000000001,
+          "r02": 0.19894599999999996,
+          "r03": 0.08201800000000004
+        },
+        "low_delta_values": {
+          "r01": 0.08212799999999998,
+          "r02": 0.051331000000000016,
+          "r03": -0.014956999999999998
+        },
+        "high_direction": "all positive",
+        "low_direction": "mixed"
+      }
+    ]
+  }
+}

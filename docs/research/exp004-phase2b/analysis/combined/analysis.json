@@ -1,0 +1,705 @@
+{
+  "artifact": "phase2b_cross_regime_synthesis",
+  "status": "final_descriptive_synthesis",
+  "date": "2026-09-18",
+  "metric": "canonical_coverage",
+  "definition": "Δ = Primed − Direct; configuration mean Δ = mean of three replicate Δᵢ; descriptive only (n=3)",
+  "disclaimer": "Descriptive synthesis only. No significance tests. No causal claims. No model ranking. Reconstruct figures from cited HIGH/LOW/UNSEEN analysis artifacts.",
+  "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+  "sources": {
+    "high": {
+      "path": "analysis/analysis.json",
+      "evidence": "EVIDENCE.md",
+      "qualitative": "QUALITATIVE_AUDIT.md",
+      "dataset": "analysis/dataset.json"
+    },
+    "low": {
+      "path": "analysis/low/analysis.json",
+      "evidence": "analysis/low/EVIDENCE.md",
+      "qualitative": "analysis/low/QUALITATIVE_AUDIT.md",
+      "dataset": "analysis/low/dataset.json",
+      "incident": "analysis/low/QWEN_INCIDENT.md"
+    },
+    "unseen": {
+      "path": "analysis/unseen/analysis.json",
+      "evidence": "analysis/unseen/EVIDENCE.md",
+      "qualitative": "analysis/unseen/QUALITATIVE_AUDIT.md",
+      "dataset": "analysis/unseen/dataset.json"
+    },
+    "prior_high_low_only": {
+      "path": "analysis/high_low/",
+      "note": "Historical HIGH↔LOW exploratory synthesis (2026-09-16). Superseded for three-regime questions by this combined pack. Not deleted."
+    },
+    "stale_checkpoint": {
+      "path": "EXP-004_PHASE2B_CHECKPOINT.md",
+      "note": "Records state after HIGH+LOW, before UNSEEN execution/analysis. Do not present as final Phase 2B state."
+    },
+    "high_analysis_sha256": "7b0e0f92add147db02d7501ced97f217f7f308d7f284731216e0912a66b99c40",
+    "low_analysis_sha256": "ff2ca641758f58732e30e5bd55525cb58813ae1c6753685b19af26ec3579e6e4",
+    "unseen_analysis_sha256": "f0a2f3ea0819d89eed1c3626eb765194c0e32809e85ca694559d9154d50322dc"
+  },
+  "regime_summaries": {
+    "high": {
+      "n_valid_configurations": 7,
+      "n_planned_runs": 42,
+      "n_collected_evaluated": 42,
+      "n_valid_paired_observations": 42,
+      "n_valid_pairs": 21,
+      "mean_delta_across_valid_configs": 0.0707372380952381,
+      "mean_delta_pp": 7.07,
+      "positive_mean_delta_configs": 5,
+      "negative_mean_delta_configs": 2,
+      "source_sha256": "ab8a0dcf7352789c09c4aca132c086999c861407e4cd682ee9414aab5b792f63",
+      "integrity_ok": true
+    },
+    "low": {
+      "n_valid_configurations": 6,
+      "n_planned_runs": 42,
+      "n_collected_evaluated_retained": 42,
+      "n_invalid_paired_configurations": 1,
+      "n_valid_paired_observations": 36,
+      "n_valid_pairs": 18,
+      "mean_delta_across_valid_configs": 0.08532683333333335,
+      "mean_delta_pp": 8.53,
+      "positive_mean_delta_configs": 6,
+      "negative_mean_delta_configs": 0,
+      "qwen_incident_id": "p2b-low-qwen-model-mismatch-2026-09-16",
+      "qwen_priming_effect_estimated": false,
+      "source_sha256": "ce1c4fca03fe9cb2c5f8181ab45c91767759a0c785f0a066543d95bc32f5271b",
+      "integrity_ok": true
+    },
+    "unseen": {
+      "n_valid_configurations": 7,
+      "n_planned_runs": 42,
+      "n_collected_evaluated": 42,
+      "n_valid_paired_observations": 42,
+      "n_valid_pairs": 21,
+      "mean_delta_across_valid_configs": 0.05453909523809524,
+      "mean_delta_pp": 5.45,
+      "positive_mean_delta_configs": 7,
+      "negative_mean_delta_configs": 0,
+      "all_21_replicate_deltas_positive": true,
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "integrity_ok": true
+    }
+  },
+  "matched_six": {
+    "n_configurations": 6,
+    "excluded": {
+      "config": [
+        "alibaba",
+        "qwen-3.8-max",
+        "fast"
+      ],
+      "label": "Qwen 3.8 Max — Fast",
+      "reason": "LOW paired cell INVALID — MODEL MISMATCH; excluded on all three regimes for matched comparison"
+    },
+    "included_labels": [
+      "Gemini 3.6 Flash — extended thinking ON",
+      "Gemini 3.6 Flash — extended thinking OFF",
+      "Claude Sonnet 5 — Medium (default)",
+      "DeepSeek V3 Expert — DeepThink ON",
+      "GPT-5.6 Luna — thinking OFF",
+      "Grok 4.5 Fast"
+    ],
+    "high_mean_delta": 0.07388916666666666,
+    "low_mean_delta": 0.08532683333333335,
+    "unseen_mean_delta": 0.057764611111111114,
+    "high_mean_delta_pp": 7.39,
+    "low_mean_delta_pp": 8.53,
+    "unseen_mean_delta_pp": 5.78
+  },
+  "configurations": [
+    {
+      "config": [
+        "google",
+        "gemini-3.6-flash",
+        "extthinkon"
+      ],
+      "label": "Gemini 3.6 Flash — extended thinking ON",
+      "high": {
+        "validity": "valid",
+        "direct_mean": 0.6868193333333333,
+        "primed_mean": 0.6813213333333333,
+        "delta_mean": -0.005498000000000003,
+        "delta_sd": 0.029092717800164373,
+        "delta_min": -0.03768300000000002,
+        "delta_max": 0.018930000000000002,
+        "delta_values": {
+          "r01": 0.018930000000000002,
+          "r02": -0.03768300000000002,
+          "r03": 0.002259000000000011
+        },
+        "direction": "mixed",
+        "direct_mean_pp": 68.68,
+        "primed_mean_pp": 68.13,
+        "delta_mean_pp": -0.55,
+        "delta_sd_pp": 2.91,
+        "delta_min_pp": -3.77,
+        "delta_max_pp": 1.89,
+        "delta_values_pp": {
+          "r01": 1.89,
+          "r02": -3.77,
+          "r03": 0.23
+        }
+      },
+      "low": {
+        "validity": "valid",
+        "direct_mean": 0.643319,
+        "primed_mean": 0.775615,
+        "delta_mean": 0.13229600000000005,
+        "delta_sd": 0.02329704099236641,
+        "delta_min": 0.11369300000000004,
+        "delta_max": 0.15842600000000007,
+        "delta_values": {
+          "r01": 0.15842600000000007,
+          "r02": 0.11369300000000004,
+          "r03": 0.12476900000000002
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 64.33,
+        "primed_mean_pp": 77.56,
+        "delta_mean_pp": 13.23,
+        "delta_sd_pp": 2.33,
+        "delta_min_pp": 11.37,
+        "delta_max_pp": 15.84,
+        "delta_values_pp": {
+          "r01": 15.84,
+          "r02": 11.37,
+          "r03": 12.48
+        }
+      },
+      "unseen": {
+        "validity": "valid",
+        "direct_mean": 0.6577473333333334,
+        "primed_mean": 0.7145476666666667,
+        "delta_mean": 0.056800333333333376,
+        "delta_sd": 0.03380288792889344,
+        "delta_min": 0.0211920000000001,
+        "delta_max": 0.088449,
+        "delta_values": {
+          "r01": 0.0211920000000001,
+          "r02": 0.060760000000000036,
+          "r03": 0.088449
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 65.77,
+        "primed_mean_pp": 71.45,
+        "delta_mean_pp": 5.68,
+        "delta_sd_pp": 3.38,
+        "delta_min_pp": 2.12,
+        "delta_max_pp": 8.84,
+        "delta_values_pp": {
+          "r01": 2.12,
+          "r02": 6.08,
+          "r03": 8.84
+        }
+      }
+    },
+    {
+      "config": [
+        "google",
+        "gemini-3.6-flash",
+        "extthinkoff"
+      ],
+      "label": "Gemini 3.6 Flash — extended thinking OFF",
+      "high": {
+        "validity": "valid",
+        "direct_mean": 0.6719626666666666,
+        "primed_mean": 0.6544543333333332,
+        "delta_mean": -0.017508333333333386,
+        "delta_sd": 0.04383707027543393,
+        "delta_min": -0.05391400000000002,
+        "delta_max": 0.031151999999999958,
+        "delta_values": {
+          "r01": -0.05391400000000002,
+          "r02": 0.031151999999999958,
+          "r03": -0.029763000000000095
+        },
+        "direction": "mixed",
+        "direct_mean_pp": 67.2,
+        "primed_mean_pp": 65.45,
+        "delta_mean_pp": -1.75,
+        "delta_sd_pp": 4.38,
+        "delta_min_pp": -5.39,
+        "delta_max_pp": 3.12,
+        "delta_values_pp": {
+          "r01": -5.39,
+          "r02": 3.12,
+          "r03": -2.98
+        }
+      },
+      "low": {
+        "validity": "valid",
+        "direct_mean": 0.6451253333333333,
+        "primed_mean": 0.7491476666666667,
+        "delta_mean": 0.10402233333333337,
+        "delta_sd": 0.04040445699837251,
+        "delta_min": 0.059111000000000025,
+        "delta_max": 0.13742100000000002,
+        "delta_values": {
+          "r01": 0.13742100000000002,
+          "r02": 0.11553500000000005,
+          "r03": 0.059111000000000025
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 64.51,
+        "primed_mean_pp": 74.91,
+        "delta_mean_pp": 10.4,
+        "delta_sd_pp": 4.04,
+        "delta_min_pp": 5.91,
+        "delta_max_pp": 13.74,
+        "delta_values_pp": {
+          "r01": 13.74,
+          "r02": 11.55,
+          "r03": 5.91
+        }
+      },
+      "unseen": {
+        "validity": "valid",
+        "direct_mean": 0.6385483333333334,
+        "primed_mean": 0.6994976666666667,
+        "delta_mean": 0.060949333333333335,
+        "delta_sd": 0.02018190143007679,
+        "delta_min": 0.03959799999999991,
+        "delta_max": 0.079712,
+        "delta_values": {
+          "r01": 0.079712,
+          "r02": 0.03959799999999991,
+          "r03": 0.0635380000000001
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 63.85,
+        "primed_mean_pp": 69.95,
+        "delta_mean_pp": 6.09,
+        "delta_sd_pp": 2.02,
+        "delta_min_pp": 3.96,
+        "delta_max_pp": 7.97,
+        "delta_values_pp": {
+          "r01": 7.97,
+          "r02": 3.96,
+          "r03": 6.35
+        }
+      }
+    },
+    {
+      "config": [
+        "anthropic",
+        "claude",
+        "sonnet-5"
+      ],
+      "label": "Claude Sonnet 5 — Medium (default)",
+      "high": {
+        "validity": "valid",
+        "direct_mean": 0.6928573333333334,
+        "primed_mean": 0.8356946666666666,
+        "delta_mean": 0.1428373333333333,
+        "delta_sd": 0.022616961828091153,
+        "delta_min": 0.12199099999999996,
+        "delta_max": 0.16688399999999992,
+        "delta_values": {
+          "r01": 0.16688399999999992,
+          "r02": 0.139637,
+          "r03": 0.12199099999999996
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 69.29,
+        "primed_mean_pp": 83.57,
+        "delta_mean_pp": 14.28,
+        "delta_sd_pp": 2.26,
+        "delta_min_pp": 12.2,
+        "delta_max_pp": 16.69,
+        "delta_values_pp": {
+          "r01": 16.69,
+          "r02": 13.96,
+          "r03": 12.2
+        }
+      },
+      "low": {
+        "validity": "valid",
+        "direct_mean": 0.6572323333333333,
+        "primed_mean": 0.7783246666666667,
+        "delta_mean": 0.12109233333333332,
+        "delta_sd": 0.025015994770013306,
+        "delta_min": 0.09237899999999999,
+        "delta_max": 0.13817999999999997,
+        "delta_values": {
+          "r01": 0.13817999999999997,
+          "r02": 0.09237899999999999,
+          "r03": 0.132718
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 65.72,
+        "primed_mean_pp": 77.83,
+        "delta_mean_pp": 12.11,
+        "delta_sd_pp": 2.5,
+        "delta_min_pp": 9.24,
+        "delta_max_pp": 13.82,
+        "delta_values_pp": {
+          "r01": 13.82,
+          "r02": 9.24,
+          "r03": 13.27
+        }
+      },
+      "unseen": {
+        "validity": "valid",
+        "direct_mean": 0.6606580000000001,
+        "primed_mean": 0.7248236666666666,
+        "delta_mean": 0.06416566666666663,
+        "delta_sd": 0.011058304451105224,
+        "delta_min": 0.05144099999999996,
+        "delta_max": 0.07144899999999998,
+        "delta_values": {
+          "r01": 0.07144899999999998,
+          "r02": 0.05144099999999996,
+          "r03": 0.06960699999999997
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 66.07,
+        "primed_mean_pp": 72.48,
+        "delta_mean_pp": 6.42,
+        "delta_sd_pp": 1.11,
+        "delta_min_pp": 5.14,
+        "delta_max_pp": 7.14,
+        "delta_values_pp": {
+          "r01": 7.14,
+          "r02": 5.14,
+          "r03": 6.96
+        }
+      }
+    },
+    {
+      "config": [
+        "deepseek",
+        "deepseek-v3-expert",
+        "deepthinkon"
+      ],
+      "label": "DeepSeek V3 Expert — DeepThink ON",
+      "high": {
+        "validity": "valid",
+        "direct_mean": 0.7453363333333334,
+        "primed_mean": 0.837794,
+        "delta_mean": 0.09245766666666666,
+        "delta_sd": 0.02568357923524941,
+        "delta_min": 0.06681099999999995,
+        "delta_max": 0.118178,
+        "delta_values": {
+          "r01": 0.09238400000000002,
+          "r02": 0.118178,
+          "r03": 0.06681099999999995
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 74.53,
+        "primed_mean_pp": 83.78,
+        "delta_mean_pp": 9.25,
+        "delta_sd_pp": 2.57,
+        "delta_min_pp": 6.68,
+        "delta_max_pp": 11.82,
+        "delta_values_pp": {
+          "r01": 9.24,
+          "r02": 11.82,
+          "r03": 6.68
+        }
+      },
+      "low": {
+        "validity": "valid",
+        "direct_mean": 0.6893206666666667,
+        "primed_mean": 0.7512340000000001,
+        "delta_mean": 0.06191333333333334,
+        "delta_sd": 0.015034005365614824,
+        "delta_min": 0.05221999999999993,
+        "delta_max": 0.07923200000000008,
+        "delta_values": {
+          "r01": 0.054288,
+          "r02": 0.07923200000000008,
+          "r03": 0.05221999999999993
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 68.93,
+        "primed_mean_pp": 75.12,
+        "delta_mean_pp": 6.19,
+        "delta_sd_pp": 1.5,
+        "delta_min_pp": 5.22,
+        "delta_max_pp": 7.92,
+        "delta_values_pp": {
+          "r01": 5.43,
+          "r02": 7.92,
+          "r03": 5.22
+        }
+      },
+      "unseen": {
+        "validity": "valid",
+        "direct_mean": 0.679675,
+        "primed_mean": 0.717974,
+        "delta_mean": 0.03829899999999997,
+        "delta_sd": 0.010640267994745238,
+        "delta_min": 0.029112999999999944,
+        "delta_max": 0.04995799999999995,
+        "delta_values": {
+          "r01": 0.029112999999999944,
+          "r02": 0.04995799999999995,
+          "r03": 0.035826000000000024
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 67.97,
+        "primed_mean_pp": 71.8,
+        "delta_mean_pp": 3.83,
+        "delta_sd_pp": 1.06,
+        "delta_min_pp": 2.91,
+        "delta_max_pp": 5.0,
+        "delta_values_pp": {
+          "r01": 2.91,
+          "r02": 5.0,
+          "r03": 3.58
+        }
+      }
+    },
+    {
+      "config": [
+        "alibaba",
+        "qwen-3.8-max",
+        "fast"
+      ],
+      "label": "Qwen 3.8 Max — Fast",
+      "high": {
+        "validity": "valid",
+        "direct_mean": 0.763579,
+        "primed_mean": 0.8154046666666668,
+        "delta_mean": 0.051825666666666735,
+        "delta_sd": 0.05561510302366913,
+        "delta_min": -0.012289999999999912,
+        "delta_max": 0.08703400000000006,
+        "delta_values": {
+          "r01": 0.08703400000000006,
+          "r02": 0.08073300000000005,
+          "r03": -0.012289999999999912
+        },
+        "direction": "mixed",
+        "direct_mean_pp": 76.36,
+        "primed_mean_pp": 81.54,
+        "delta_mean_pp": 5.18,
+        "delta_sd_pp": 5.56,
+        "delta_min_pp": -1.23,
+        "delta_max_pp": 8.7,
+        "delta_values_pp": {
+          "r01": 8.7,
+          "r02": 8.07,
+          "r03": -1.23
+        }
+      },
+      "low": {
+        "validity": "INVALID — MODEL MISMATCH",
+        "direct_mean": null,
+        "primed_mean": null,
+        "delta_mean": null,
+        "delta_sd": null,
+        "delta_min": null,
+        "delta_max": null,
+        "delta_values": null,
+        "direction": null,
+        "direct_mean_pp": null,
+        "primed_mean_pp": null,
+        "delta_mean_pp": null,
+        "note": "Qwen LOW paired cell invalid: Direct=Qwen 3.8 Max Fast; Primed=Qwen3.7-Plus. Priming effect not estimated. Incident p2b-low-qwen-model-mismatch-2026-09-16. Do not cite historical -12.08 pp (historical invalid aggregate) as Qwen 3.8 Max LOW priming."
+      },
+      "unseen": {
+        "validity": "valid",
+        "direct_mean": 0.6764863333333334,
+        "primed_mean": 0.7116723333333334,
+        "delta_mean": 0.035186000000000016,
+        "delta_sd": 0.021801278655161505,
+        "delta_min": 0.012656,
+        "delta_max": 0.05617700000000003,
+        "delta_values": {
+          "r01": 0.03672500000000001,
+          "r02": 0.012656,
+          "r03": 0.05617700000000003
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 67.65,
+        "primed_mean_pp": 71.17,
+        "delta_mean_pp": 3.52,
+        "delta_sd_pp": 2.18,
+        "delta_min_pp": 1.27,
+        "delta_max_pp": 5.62,
+        "delta_values_pp": {
+          "r01": 3.67,
+          "r02": 1.27,
+          "r03": 5.62
+        }
+      }
+    },
+    {
+      "config": [
+        "openai",
+        "gpt-5.6-luna",
+        "thinkoff"
+      ],
+      "label": "GPT-5.6 Luna — thinking OFF",
+      "high": {
+        "validity": "valid",
+        "direct_mean": 0.7354280000000001,
+        "primed_mean": 0.8215819999999999,
+        "delta_mean": 0.08615400000000002,
+        "delta_sd": 0.013449981375451813,
+        "delta_min": 0.070631,
+        "delta_max": 0.09433900000000006,
+        "delta_values": {
+          "r01": 0.09433900000000006,
+          "r02": 0.070631,
+          "r03": 0.09349200000000002
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 73.54,
+        "primed_mean_pp": 82.16,
+        "delta_mean_pp": 8.62,
+        "delta_sd_pp": 1.34,
+        "delta_min_pp": 7.06,
+        "delta_max_pp": 9.43,
+        "delta_values_pp": {
+          "r01": 9.43,
+          "r02": 7.06,
+          "r03": 9.35
+        }
+      },
+      "low": {
+        "validity": "valid",
+        "direct_mean": 0.707482,
+        "primed_mean": 0.7606183333333334,
+        "delta_mean": 0.05313633333333334,
+        "delta_sd": 0.009143049837627074,
+        "delta_min": 0.04728100000000002,
+        "delta_max": 0.06367199999999995,
+        "delta_values": {
+          "r01": 0.048456000000000055,
+          "r02": 0.06367199999999995,
+          "r03": 0.04728100000000002
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 70.75,
+        "primed_mean_pp": 76.06,
+        "delta_mean_pp": 5.31,
+        "delta_sd_pp": 0.91,
+        "delta_min_pp": 4.73,
+        "delta_max_pp": 6.37,
+        "delta_values_pp": {
+          "r01": 4.85,
+          "r02": 6.37,
+          "r03": 4.73
+        }
+      },
+      "unseen": {
+        "validity": "valid",
+        "direct_mean": 0.6852983333333333,
+        "primed_mean": 0.7405160000000001,
+        "delta_mean": 0.055217666666666686,
+        "delta_sd": 0.027255855340336182,
+        "delta_min": 0.024298000000000042,
+        "delta_max": 0.07576300000000002,
+        "delta_values": {
+          "r01": 0.06559199999999998,
+          "r02": 0.07576300000000002,
+          "r03": 0.024298000000000042
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 68.53,
+        "primed_mean_pp": 74.05,
+        "delta_mean_pp": 5.52,
+        "delta_sd_pp": 2.73,
+        "delta_min_pp": 2.43,
+        "delta_max_pp": 7.58,
+        "delta_values_pp": {
+          "r01": 6.56,
+          "r02": 7.58,
+          "r03": 2.43
+        }
+      }
+    },
+    {
+      "config": [
+        "xai",
+        "grok",
+        "fast"
+      ],
+      "label": "Grok 4.5 Fast",
+      "high": {
+        "validity": "valid",
+        "direct_mean": 0.6835006666666666,
+        "primed_mean": 0.828393,
+        "delta_mean": 0.14489233333333337,
+        "delta_sd": 0.05896093975110412,
+        "delta_min": 0.08201800000000004,
+        "delta_max": 0.19894599999999996,
+        "delta_values": {
+          "r01": 0.1537130000000001,
+          "r02": 0.19894599999999996,
+          "r03": 0.08201800000000004
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 68.35,
+        "primed_mean_pp": 82.84,
+        "delta_mean_pp": 14.49,
+        "delta_sd_pp": 5.9,
+        "delta_min_pp": 8.2,
+        "delta_max_pp": 19.89,
+        "delta_values_pp": {
+          "r01": 15.37,
+          "r02": 19.89,
+          "r03": 8.2
+        }
+      },
+      "low": {
+        "validity": "valid",
+        "direct_mean": 0.693193,
+        "primed_mean": 0.7326936666666667,
+        "delta_mean": 0.03950066666666666,
+        "delta_sd": 0.0496119128469497,
+        "delta_min": -0.014956999999999998,
+        "delta_max": 0.08212799999999998,
+        "delta_values": {
+          "r01": 0.08212799999999998,
+          "r02": 0.051331000000000016,
+          "r03": -0.014956999999999998
+        },
+        "direction": "mixed",
+        "direct_mean_pp": 69.32,
+        "primed_mean_pp": 73.27,
+        "delta_mean_pp": 3.95,
+        "delta_sd_pp": 4.96,
+        "delta_min_pp": -1.5,
+        "delta_max_pp": 8.21,
+        "delta_values_pp": {
+          "r01": 8.21,
+          "r02": 5.13,
+          "r03": -1.5
+        }
+      },
+      "unseen": {
+        "validity": "valid",
+        "direct_mean": 0.659022,
+        "primed_mean": 0.7301776666666666,
+        "delta_mean": 0.07115566666666666,
+        "delta_sd": 0.021746260030941707,
+        "delta_min": 0.057023000000000046,
+        "delta_max": 0.09619699999999998,
+        "delta_values": {
+          "r01": 0.06024699999999994,
+          "r02": 0.09619699999999998,
+          "r03": 0.057023000000000046
+        },
+        "direction": "all_positive",
+        "direct_mean_pp": 65.9,
+        "primed_mean_pp": 73.02,
+        "delta_mean_pp": 7.12,
+        "delta_sd_pp": 2.17,
+        "delta_min_pp": 5.7,
+        "delta_max_pp": 9.62,
+        "delta_values_pp": {
+          "r01": 6.02,
+          "r02": 9.62,
+          "r03": 5.7
+        }
+      }
+    }
+  ]
+}

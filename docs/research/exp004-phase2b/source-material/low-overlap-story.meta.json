@@ -1,0 +1,51 @@
+{
+  "story_id": "podklady",
+  "title": "Podkłady",
+  "classification": "low_overlap",
+  "regime": "low",
+  "classification_note": "LOW-overlap: contemporary Polish municipal/archive narrative (railway sleepers under a city street). Deliberately weak thematic/fabular overlap with the authentic ISV priming corpus and with the HIGH-overlap story Iskra i Wieloryb. Not part of the corpus. Clean prose only — casting notes and API docs from bank section #4 are excluded by the approved boundary.",
+  "boundary": {
+    "status": "APPROVED",
+    "approved_date": "2026-09-15",
+    "bank_file": "InterslavicTesty.md",
+    "bank_sha256": "411d71c86807f3e85a80a9e957002218b31eda41cd70aada2d0cd36210c024e7",
+    "bank_section": "# 4. Podkłady",
+    "bank_section_lines": "1061-1251",
+    "first_story_line_bank": 1107,
+    "last_story_line_bank": 1247,
+    "first_story_line_prefix": "Katarzyna odłożyła teczkę",
+    "last_story_line_prefix": "I po raz pierwszy od lat pomyślała",
+    "excluded_before": "H1 '# 4. Podkłady' plus casting notes and ElevenLabs API/billing material (bank lines after H1 through 1106)",
+    "excluded_after": "trailing blank lines only (1248-1251)",
+    "internal_contamination": "PASS",
+    "high_leakage_sanity_check": "PASS",
+    "note": "Human operator approved the proposed clean-story boundary on 2026-09-15. Frozen bytes match the approved SHA-256 exactly; InterslavicTesty.md was not modified."
+  },
+  "current_version": "v1",
+  "versions": {
+    "v1": {
+      "version": "v1",
+      "file": "versions/podklady-v1.txt",
+      "sha256": "ce1c4fca03fe9cb2c5f8181ab45c91767759a0c785f0a066543d95bc32f5271b",
+      "bytes": 15249,
+      "lines": 141,
+      "title": "Podkłady",
+      "story_id": "podklady",
+      "classification": "low_overlap",
+      "source_file_read_only": "experiments/exp004-modelscreen/phase2b/input/_extracted/low-overlap-story.txt",
+      "note": "Clean prose extracted from InterslavicTesty.md section '# 4. Podkłady' bank lines 1107-1247 (bank sha256 411d71c86807f3e85a80a9e957002218b31eda41cd70aada2d0cd36210c024e7). Boundary APPROVED 2026-09-15. Casting/API preamble excluded. Trailing newline only. 15249 bytes, 141 lines, sha256 ce1c4fca03fe9cb2c5f8181ab45c91767759a0c785f0a066543d95bc32f5271b.",
+      "frozen_by": "phase2b LOW boundary approval (2026-09-15)",
+      "frozen_date": "2026-09-15",
+      "boundary_approved": true
+    }
+  },
+  "kit_status": {
+    "frozen": true,
+    "prompts_prepared": true,
+    "executed": false,
+    "plan": "experiments/exp004-modelscreen/phase2b/outputs/low/plan.json",
+    "manifest": "experiments/exp004-modelscreen/phase2b/operator-prompts/manifest-low.json",
+    "prepare_date": "2026-09-15",
+    "note": "LOW 42-run kit prepared; no LLM sessions; model_output_included=false."
+  }
+}

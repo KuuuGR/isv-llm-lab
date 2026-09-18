@@ -1,4 +1,9 @@
-# Phase 2B HIGH vs LOW — cross-regime synthesis
+# Phase 2B HIGH vs LOW — cross-regime synthesis (historical)
+
+> **Superseded for three-regime questions** by
+> [`../combined/`](../combined/) (final HIGH / LOW / UNSEEN synthesis,
+> 2026-09-18). This directory is retained as the exploratory
+> HIGH↔LOW-only record from 2026-09-16.
 
 Derived / committed synthesis artifacts for the exploratory descriptive
 comparison of Phase 2B HIGH-overlap and LOW-overlap priming results.

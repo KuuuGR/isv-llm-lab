@@ -1,0 +1,71 @@
+{
+  "story_id": "exercise-2-2-voice-biophysics",
+  "title": "Ćwiczenie 2.2 — Biofizyka głosu ludzkiego",
+  "classification": "unseen_domain",
+  "regime": "unseen",
+  "domain": "medical biophysics / voice acoustics / speech biophysics",
+  "classification_note": "UNSEEN DOMAIN: Polish educational scientific prose on human-voice biophysics / speech acoustics. Domain absent from the authentic ISV priming corpus and distinct from HIGH/LOW narrative regimes. Not part of the corpus. Operator-supplied Exercise 2.2 theoretical part; validated 2026-09-16; operator APPROVE 2026-09-16.",
+  "provenance": {
+    "description": "Operator-supplied external Polish teaching/exercise-derived theory text (Ćwiczenie 2.2 — Biofizyka głosu ludzkiego); lightly edited by the operator before validation. Exact original publication / bibliographic citation unknown.",
+    "not_provenance": [
+      "medbiophys-content/about/pl/about.md",
+      "Biofizyka ogólnie.md"
+    ],
+    "validation_report": "experiments/exp004-modelscreen/phase2b/analysis/unseen/VALIDATION.md",
+    "validation_json": "experiments/exp004-modelscreen/phase2b/analysis/unseen/validation.json",
+    "validation_status": "APPROVE",
+    "validation_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4"
+  },
+  "boundary": {
+    "status": "APPROVED",
+    "approved_date": "2026-09-16",
+    "source": "operator_supplied_exercise_2_2_theory",
+    "scope": "theoretical part only (lab procedure excluded by source)",
+    "encoding": "utf-8",
+    "line_endings": "LF",
+    "trailing_newline": true,
+    "normalization": "paragraphs joined by blank lines (\\n\\n); single trailing LF; UTF-8; no other transforms — exact validation.json candidate_text_utf8",
+    "validation_report": "analysis/unseen/VALIDATION.md",
+    "leakage_check": "PASS",
+    "domain_unseen_check": "PASS",
+    "note": "Human operator APPROVE on 2026-09-16. Frozen bytes match validation.json hash_basis / candidate_text_utf8 exactly."
+  },
+  "current_version": "v1",
+  "frozen": true,
+  "versions": {
+    "v1": {
+      "version": "v1",
+      "status": "frozen_unseen_source",
+      "file": "versions/exercise-2-2-voice-biophysics-v1.txt",
+      "sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "encoding": "utf-8",
+      "line_endings": "LF",
+      "trailing_newline": true,
+      "characters": 5242,
+      "bytes": 5676,
+      "lines": 51,
+      "whitespace_tokens": 675,
+      "word_count": 675,
+      "title": "Ćwiczenie 2.2 — Biofizyka głosu ludzkiego",
+      "story_id": "exercise-2-2-voice-biophysics",
+      "classification": "unseen_domain",
+      "domain": "medical biophysics / voice acoustics / speech biophysics",
+      "source_file_read_only": "experiments/exp004-modelscreen/phase2b/analysis/unseen/candidate_exercise_2_2_voice_biophysics.pl.md",
+      "extracted_mirror": "experiments/exp004-modelscreen/phase2b/input/_extracted/unseen-domain-source.txt",
+      "note": "Frozen UNSEEN Phase 2B source v1. Exact approved candidate from analysis/unseen/validation.json (sha256 cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4). No content rewrite at freeze.",
+      "frozen_by": "operator APPROVE (2026-09-16)",
+      "frozen_date": "2026-09-16",
+      "boundary_approved": true,
+      "validation_status": "APPROVE"
+    }
+  },
+  "kit_status": {
+    "frozen": true,
+    "prompts_prepared": true,
+    "executed": false,
+    "plan": "experiments/exp004-modelscreen/phase2b/outputs/unseen/plan.json",
+    "manifest": "experiments/exp004-modelscreen/phase2b/operator-prompts/manifest-unseen.json",
+    "prepare_date": "2026-09-16",
+    "note": "UNSEEN 42-run kit prepared; no LLM sessions; model_output_included=false."
+  }
+}

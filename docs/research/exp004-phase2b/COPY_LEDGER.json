@@ -1,0 +1,346 @@
+{
+  "document_type": "docs_research_mirror_ledger",
+  "policy": "experiments/exp004-modelscreen/phase2b/ is canonical; this tree is a curated mirror",
+  "updated": "2026-09-18",
+  "note": "analysis/combined/ now mirrors the final HIGH/LOW/UNSEEN synthesis (not historical high_low/). Historical HIGH\u2194LOW remains only under experiments/.../analysis/high_low/.",
+  "copied_count": 56,
+  "missing": [],
+  "artifacts": [
+    {
+      "hub_path": "docs/research/exp004-phase2b/checkpoint/EXP-004_PHASE2B_CHECKPOINT.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/EXP-004_PHASE2B_CHECKPOINT.md",
+      "sha256": "96c76a7a1f7ca72f5914f27c9facb4df1f19d81d4ed2bdcd22c2fff06da6c045",
+      "bytes": 11247
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/checkpoint/README.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/README.md",
+      "sha256": "e0bb0ea2613cd8476ce82989ed32888b37b9e8f8b5b16f781271d09966382fc5",
+      "bytes": 12917
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/checkpoint/UNSEEN_VALIDATION.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/UNSEEN_VALIDATION.md",
+      "sha256": "5b6ddae22f3195b733b870d4ee049656ab027b3a08e0f66eab6d2a2b21613618",
+      "bytes": 2127
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/checkpoint/LOW_VALIDATION.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/LOW_VALIDATION.md",
+      "sha256": "9dbb01051d91d612a78e5b9d7a2c06b2ad1006091c573367b9fae577da18c046",
+      "bytes": 1867
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/source-material/high-overlap-story.meta.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/input/high-overlap-story.meta.json",
+      "sha256": "7a16743e096e7074df4b0140b97802a9a123573b1fa91a2ba2baa7fef80f70d1",
+      "bytes": 2159
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/source-material/low-overlap-story.meta.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/input/low-overlap-story.meta.json",
+      "sha256": "f83348486c91b3eab87518d8b34b0ec23a7f86f443e16f3f8bc5f07ed8ed2a00",
+      "bytes": 2793
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/source-material/unseen-domain-source.meta.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/input/unseen-domain-source.meta.json",
+      "sha256": "718dd6e347e53a92e12d48e2a503f40401242697360f4fb28c609e9bfd3d85ec",
+      "bytes": 3745
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/source-material/README.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/input/README.md",
+      "sha256": "b1f94844a28f75060503cfc73cb1c8c6c5f7d1d2f5da2a16577e268e9327ce82",
+      "bytes": 4935
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/source-material/VALIDATION.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/VALIDATION.md",
+      "sha256": "21792c82eebed559809248758f563bad081191c512eb067cfdf3bf12fcc4d125",
+      "bytes": 7877
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/source-material/validation.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/validation.json",
+      "sha256": "ca59d5ea051049f12b230ad943f4a8c98bc316af527ae547479f6f69846d8460",
+      "bytes": 8505
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/source-material/UNSEEN_VALIDATION.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/UNSEEN_VALIDATION.md",
+      "sha256": "5b6ddae22f3195b733b870d4ee049656ab027b3a08e0f66eab6d2a2b21613618",
+      "bytes": 2127
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/source-material/LOW_VALIDATION.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/LOW_VALIDATION.md",
+      "sha256": "9dbb01051d91d612a78e5b9d7a2c06b2ad1006091c573367b9fae577da18c046",
+      "bytes": 1867
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/source-material/candidate_exercise_2_2_voice_biophysics.pl.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/candidate_exercise_2_2_voice_biophysics.pl.md",
+      "sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "bytes": 5676
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/low/README.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/low/README.md",
+      "sha256": "323fa15f06fdc05b2636634f74c542a5d349b6808c866391850441dcaa66fcb2",
+      "bytes": 1740
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/low/EVIDENCE.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/low/EVIDENCE.md",
+      "sha256": "95011d654c6b6bb95190f88f4f264545f937fff6d18faaa6125ecdde0fc7995e",
+      "bytes": 9465
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/low/QUALITATIVE_AUDIT.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/low/QUALITATIVE_AUDIT.md",
+      "sha256": "39bb0c23c4f585b014d08cd9cda81e678d029e2684fe66ea720e462838deea05",
+      "bytes": 9119
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/low/qualitative_audit.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/low/qualitative_audit.json",
+      "sha256": "b174e29f471760d320d5a6ad0349ad54d19c75aa46b9e5bbb4fbad139925b2cd",
+      "bytes": 33183
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/low/QWEN_INCIDENT.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/low/QWEN_INCIDENT.md",
+      "sha256": "b711a97f845962f4a8e7c6449faa7d1146f8cd7e192e33ac0829a5ab7323d94b",
+      "bytes": 3220
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/low/invalid_cells.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/low/invalid_cells.json",
+      "sha256": "b0a067218c1a939dbf14643d418d666f2fe6734be5f65fe7ec6726ff32e316ca",
+      "bytes": 9469
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/low/analysis.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/low/analysis.json",
+      "sha256": "ff2ca641758f58732e30e5bd55525cb58813ae1c6753685b19af26ec3579e6e4",
+      "bytes": 33670
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/low/analysis.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/low/analysis.md",
+      "sha256": "b50b40653b8d42a2dd86ba8211802a163736d1cbae202309b790cd2e973b993f",
+      "bytes": 30602
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/low/dataset.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/low/dataset.json",
+      "sha256": "44cd3cc33279243bf96d85a5259a06521896818352c44a6af5a123737ce88123",
+      "bytes": 187427
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/results/low/EVIDENCE.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/low/EVIDENCE.md",
+      "sha256": "95011d654c6b6bb95190f88f4f264545f937fff6d18faaa6125ecdde0fc7995e",
+      "bytes": 9465
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/results/low/analysis.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/low/analysis.md",
+      "sha256": "b50b40653b8d42a2dd86ba8211802a163736d1cbae202309b790cd2e973b993f",
+      "bytes": 30602
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/unseen/README.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/README.md",
+      "sha256": "a9147c3e49adeda41841d79be6f269907ff5b7aa3e9bad5b4c7348b40bec1e4a",
+      "bytes": 1439
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/unseen/VALIDATION.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/VALIDATION.md",
+      "sha256": "21792c82eebed559809248758f563bad081191c512eb067cfdf3bf12fcc4d125",
+      "bytes": 7877
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/unseen/validation.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/validation.json",
+      "sha256": "ca59d5ea051049f12b230ad943f4a8c98bc316af527ae547479f6f69846d8460",
+      "bytes": 8505
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/unseen/EVIDENCE.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/EVIDENCE.md",
+      "sha256": "a7256894455284fca0eb192e352791652e967fe298ac3f67320fb7bf41b4e7df",
+      "bytes": 6001
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/unseen/QUALITATIVE_AUDIT.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/QUALITATIVE_AUDIT.md",
+      "sha256": "cc4e7a97f0da75a02b30aa7ddb2dab2382a2df1428c8e90157c3e43711b190bc",
+      "bytes": 7845
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/unseen/qualitative_audit.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/qualitative_audit.json",
+      "sha256": "48e12498ed59c04e28d14f9f8562b82efb0e4ca4ee55102fa4746a123434d300",
+      "bytes": 34525
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/unseen/analysis.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/analysis.json",
+      "sha256": "f0a2f3ea0819d89eed1c3626eb765194c0e32809e85ca694559d9154d50322dc",
+      "bytes": 29038
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/unseen/analysis.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/analysis.md",
+      "sha256": "b9475b0bc84f96418c59e13d429f4ab34fe4fa4c556e7de61ae084ba5d220022",
+      "bytes": 31971
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/unseen/dataset.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/dataset.json",
+      "sha256": "182486f3c274d1562a9879232e8aa156102425d44d8b096bc8f6c448be5a1c9d",
+      "bytes": 186777
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/results/unseen/EVIDENCE.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/EVIDENCE.md",
+      "sha256": "a7256894455284fca0eb192e352791652e967fe298ac3f67320fb7bf41b4e7df",
+      "bytes": 6001
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/results/unseen/analysis.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/unseen/analysis.md",
+      "sha256": "b9475b0bc84f96418c59e13d429f4ab34fe4fa4c556e7de61ae084ba5d220022",
+      "bytes": 31971
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/combined/README.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/combined/README.md",
+      "sha256": "661e541568916320ba1e95f55088e96a349e0075b84ffe2111f904553b808f65",
+      "bytes": 2312
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/combined/analysis.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/combined/analysis.md",
+      "sha256": "e2f3b036f77e6bbe24454aef5c19e7be131b19c1e81dd5281af8b30b8d29ff1c",
+      "bytes": 11531
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/combined/analysis.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/combined/analysis.json",
+      "sha256": "382526d6882c780816c727e22734b3eca93722ce5037cab73b20b2e26407e283",
+      "bytes": 21735
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/combined/EVIDENCE.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/combined/EVIDENCE.md",
+      "sha256": "a2005da9a3fdfcbf8a28d69d60b0495aea8fddf7c1ce14c2b21bb814c0a28355",
+      "bytes": 4754
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/combined/QUALITATIVE_SYNTHESIS.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/combined/QUALITATIVE_SYNTHESIS.md",
+      "sha256": "d7a32de7d1d52cba52032868e3b9e55ac9a9171475941cde28d6f62ab1a7bb3a",
+      "bytes": 6899
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/combined/cross_regime_table.csv",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/combined/cross_regime_table.csv",
+      "sha256": "7f21e1778a42721e0af3525cac13615d6cee7654f083dee9fed7c7591a461d60",
+      "bytes": 612
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/combined/cross_regime_table_full.csv",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/combined/cross_regime_table_full.csv",
+      "sha256": "7b04a2880c7e57af7c127e9915ece1ed35b55666cef9c62702047500d7106c9e",
+      "bytes": 1186
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/combined/cross_regime_table.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/combined/cross_regime_table.json",
+      "sha256": "be729c8ce9783183faff691b97377a139db9163953252ddc7788e8ead2994422",
+      "bytes": 1787
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/results/combined/analysis.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/combined/analysis.md",
+      "sha256": "e2f3b036f77e6bbe24454aef5c19e7be131b19c1e81dd5281af8b30b8d29ff1c",
+      "bytes": 11531
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/results/combined/EVIDENCE.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/combined/EVIDENCE.md",
+      "sha256": "a2005da9a3fdfcbf8a28d69d60b0495aea8fddf7c1ce14c2b21bb814c0a28355",
+      "bytes": 4754
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/results/combined/QUALITATIVE_SYNTHESIS.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/combined/QUALITATIVE_SYNTHESIS.md",
+      "sha256": "d7a32de7d1d52cba52032868e3b9e55ac9a9171475941cde28d6f62ab1a7bb3a",
+      "bytes": 6899
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/results/combined/cross_regime_table.csv",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/combined/cross_regime_table.csv",
+      "sha256": "7f21e1778a42721e0af3525cac13615d6cee7654f083dee9fed7c7591a461d60",
+      "bytes": 612
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/high/README.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/README.md",
+      "sha256": "6c78dba6b3d9eec67b90e0c1977745b3e79267f06e3561ff8737e0ee3c139c14",
+      "bytes": 1337
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/high/EVIDENCE.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/EVIDENCE.md",
+      "sha256": "9586c0292b7dd7e1bbe71289825e3682b793934f4d7914dcb0824195b285ad63",
+      "bytes": 6132
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/high/QUALITATIVE_AUDIT.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/QUALITATIVE_AUDIT.md",
+      "sha256": "cd5f376f7fa1c44bf7857e871727fc398feac05afe45addc3e3ee6e2fbeab7b3",
+      "bytes": 14637
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/high/qualitative_audit.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/qualitative_audit.json",
+      "sha256": "c77d2d65af797d7882f5c301094e42a942830b4782babab8ff39dde181389187",
+      "bytes": 25236
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/high/analysis.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/analysis.json",
+      "sha256": "7b0e0f92add147db02d7501ced97f217f7f308d7f284731216e0912a66b99c40",
+      "bytes": 23373
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/high/analysis.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/analysis.md",
+      "sha256": "029eccec9a06d7c3ac69fbfa975030f297979c02a9002c60dcb67d53f5743587",
+      "bytes": 32674
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/analysis/high/dataset.json",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/dataset.json",
+      "sha256": "2c2a9633f0c9b6e19dd92c36bc686f8fa9bc5d1b10e186cfc549e1b5ad1ce799",
+      "bytes": 183161
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/results/high/EVIDENCE.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/EVIDENCE.md",
+      "sha256": "9586c0292b7dd7e1bbe71289825e3682b793934f4d7914dcb0824195b285ad63",
+      "bytes": 6132
+    },
+    {
+      "hub_path": "docs/research/exp004-phase2b/results/high/analysis.md",
+      "canonical_path": "experiments/exp004-modelscreen/phase2b/analysis/analysis.md",
+      "sha256": "029eccec9a06d7c3ac69fbfa975030f297979c02a9002c60dcb67d53f5743587",
+      "bytes": 32674
+    }
+  ]
+}

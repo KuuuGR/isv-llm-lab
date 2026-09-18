@@ -85,14 +85,28 @@ experiments/exp004-modelscreen/phase2b/analysis/high_low/*
 !experiments/exp004-modelscreen/phase2b/analysis/high_low/analysis.md
 !experiments/exp004-modelscreen/phase2b/analysis/high_low/analysis.json
 
-# Phase 2B UNSEEN candidate validation (not frozen; operator decision pending)
+# Phase 2B final cross-regime synthesis (HIGH / LOW / UNSEEN)
+!experiments/exp004-modelscreen/phase2b/analysis/combined/
+experiments/exp004-modelscreen/phase2b/analysis/combined/*
+!experiments/exp004-modelscreen/phase2b/analysis/combined/README.md
+!experiments/exp004-modelscreen/phase2b/analysis/combined/analysis.md
+!experiments/exp004-modelscreen/phase2b/analysis/combined/analysis.json
+!experiments/exp004-modelscreen/phase2b/analysis/combined/EVIDENCE.md
+!experiments/exp004-modelscreen/phase2b/analysis/combined/QUALITATIVE_SYNTHESIS.md
+!experiments/exp004-modelscreen/phase2b/analysis/combined/cross_regime_table.csv
+!experiments/exp004-modelscreen/phase2b/analysis/combined/cross_regime_table_full.csv
+!experiments/exp004-modelscreen/phase2b/analysis/combined/cross_regime_table.json
+
+# Phase 2B UNSEEN analysis + validation artifacts
 !experiments/exp004-modelscreen/phase2b/analysis/unseen/
 experiments/exp004-modelscreen/phase2b/analysis/unseen/*
 !experiments/exp004-modelscreen/phase2b/analysis/unseen/README.md
 !experiments/exp004-modelscreen/phase2b/analysis/unseen/VALIDATION.md
 !experiments/exp004-modelscreen/phase2b/analysis/unseen/validation.json
 !experiments/exp004-modelscreen/phase2b/analysis/unseen/candidate_exercise_2_2_voice_biophysics.pl.md
-
+!experiments/exp004-modelscreen/phase2b/analysis/unseen/EVIDENCE.md
+!experiments/exp004-modelscreen/phase2b/analysis/unseen/QUALITATIVE_AUDIT.md
+!experiments/exp004-modelscreen/phase2b/analysis/unseen/qualitative_audit.json
 # EXP-004 Task-029 corpus self-evaluation scratch (per-dataset isv-eval
 # CLI artifacts; gitignored — the reports themselves are committed)
 experiments/exp004-modelscreen/phase2a/corpus-selfeval/.scratch/

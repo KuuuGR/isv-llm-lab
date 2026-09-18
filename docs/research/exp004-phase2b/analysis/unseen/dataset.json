@@ -1,0 +1,4281 @@
+{
+  "artifact": "phase2b_unseen_aggregate_dataset",
+  "experiment_id": "exp004",
+  "phase": "p2b-unseen",
+  "regime": "unseen",
+  "generator": "scripts/analyze_exp004_phase2b.py",
+  "note": "Descriptive aggregate of the 42 Phase-2B UNSEEN runs. Paired Δᵢ = Pᵢ − Dᵢ by configuration × replicate. n = 3 per cell — descriptive only, not inferential. Every aggregate traces to evaluation.json / orthography.json under phase2b/outputs/<run_id>/.",
+  "source": {
+    "story_id": "exercise-2-2-voice-biophysics",
+    "title": "Ćwiczenie 2.2 — Biofizyka głosu ludzkiego",
+    "classification": "unseen_domain",
+    "file": "experiments/exp004-modelscreen/phase2b/input/versions/exercise-2-2-voice-biophysics-v1.txt",
+    "version": "v1",
+    "sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+    "bytes": 5676,
+    "lines": 51
+  },
+  "corpus": {
+    "id": "phase2a-authentic-isv",
+    "version": "v1",
+    "file": "experiments/exp004-modelscreen/phase2a/corpus/phase2a-authentic-isv-corpus.txt",
+    "sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+    "bytes": 58459
+  },
+  "integrity": {
+    "ok": true,
+    "n_observations": 42,
+    "n_configurations": 7,
+    "n_planned": 42,
+    "issues": [],
+    "checks": {
+      "exactly_42_evaluated": true,
+      "exactly_7_configurations": true,
+      "no_duplicate_run_ids": true,
+      "three_direct_three_primed_per_config": true,
+      "every_direct_has_matching_primed_replicate": true,
+      "all_usable_complete": true
+    }
+  },
+  "metrics": [
+    {
+      "key": "canonical",
+      "field": "canonical_coverage",
+      "label": "canonical coverage"
+    },
+    {
+      "key": "broader",
+      "field": "broader_resource_supported_coverage",
+      "label": "broader resource-supported coverage"
+    },
+    {
+      "key": "unresolved",
+      "field": "unresolved_rate",
+      "label": "unresolved rate"
+    },
+    {
+      "key": "ortho_out",
+      "field": "outside_inventory",
+      "label": "orthography outside-inventory"
+    }
+  ],
+  "n_runs": 42,
+  "n_configurations_planned": 7,
+  "n_configurations_primary_valid": 7,
+  "n_configurations_invalid_pairing": 0,
+  "n_configurations": 7,
+  "configurations": [
+    {
+      "config": [
+        "google",
+        "gemini-3.6-flash",
+        "extthinkon"
+      ],
+      "label": "Gemini 3.6 Flash — extended thinking ON",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "paired_validity": "valid",
+      "primary_analysis_include": true,
+      "invalid_pairing": null,
+      "direct": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.6577473333333334,
+          "sd": 0.009499980228049576,
+          "min": 0.648729,
+          "max": 0.667665,
+          "range": 0.018935999999999953,
+          "values": {
+            "r01": 0.667665,
+            "r02": 0.648729,
+            "r03": 0.656848
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.7638186666666668,
+          "sd": 0.012465664055048717,
+          "min": 0.753363,
+          "max": 0.777614,
+          "range": 0.024251000000000023,
+          "values": {
+            "r01": 0.760479,
+            "r02": 0.753363,
+            "r03": 0.777614
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.3422526666666667,
+          "sd": 0.009499980228049605,
+          "min": 0.332335,
+          "max": 0.351271,
+          "range": 0.01893600000000001,
+          "values": {
+            "r01": 0.332335,
+            "r02": 0.351271,
+            "r03": 0.343152
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 24.0,
+          "sd": 8.0,
+          "min": 16.0,
+          "max": 32.0,
+          "range": 16.0,
+          "values": {
+            "r01": 16.0,
+            "r02": 32.0,
+            "r03": 24.0
+          }
+        }
+      },
+      "primed": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.7145476666666667,
+          "sd": 0.028558028316628084,
+          "min": 0.688857,
+          "max": 0.745297,
+          "range": 0.056439999999999935,
+          "values": {
+            "r01": 0.688857,
+            "r02": 0.709489,
+            "r03": 0.745297
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.798234,
+          "sd": 0.034787468706417836,
+          "min": 0.768452,
+          "max": 0.836469,
+          "range": 0.068017,
+          "values": {
+            "r01": 0.768452,
+            "r02": 0.789781,
+            "r03": 0.836469
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.28545233333333336,
+          "sd": 0.028558028316628112,
+          "min": 0.254703,
+          "max": 0.311143,
+          "range": 0.05643999999999999,
+          "values": {
+            "r01": 0.311143,
+            "r02": 0.290511,
+            "r03": 0.254703
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 22.0,
+          "sd": 6.082762530298219,
+          "min": 18.0,
+          "max": 29.0,
+          "range": 11.0,
+          "values": {
+            "r01": 19.0,
+            "r02": 29.0,
+            "r03": 18.0
+          }
+        }
+      },
+      "paired_deltas": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.056800333333333376,
+          "sd": 0.03380288792889344,
+          "min": 0.0211920000000001,
+          "max": 0.088449,
+          "range": 0.0672569999999999,
+          "values": {
+            "r01": 0.0211920000000001,
+            "r02": 0.060760000000000036,
+            "r03": 0.088449
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01",
+              "direct": 0.667665,
+              "primed": 0.688857,
+              "delta": 0.0211920000000001
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02",
+              "direct": 0.648729,
+              "primed": 0.709489,
+              "delta": 0.060760000000000036
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03",
+              "direct": 0.656848,
+              "primed": 0.745297,
+              "delta": 0.088449
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.03441533333333332,
+          "sd": 0.025500048751587373,
+          "min": 0.007973000000000008,
+          "max": 0.05885499999999999,
+          "range": 0.05088199999999998,
+          "values": {
+            "r01": 0.007973000000000008,
+            "r02": 0.03641799999999995,
+            "r03": 0.05885499999999999
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01",
+              "direct": 0.760479,
+              "primed": 0.768452,
+              "delta": 0.007973000000000008
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02",
+              "direct": 0.753363,
+              "primed": 0.789781,
+              "delta": 0.03641799999999995
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03",
+              "direct": 0.777614,
+              "primed": 0.836469,
+              "delta": 0.05885499999999999
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": -0.05680033333333332,
+          "sd": 0.033802887928893494,
+          "min": -0.088449,
+          "max": -0.02119199999999999,
+          "range": 0.06725700000000001,
+          "values": {
+            "r01": -0.02119199999999999,
+            "r02": -0.06075999999999998,
+            "r03": -0.088449
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01",
+              "direct": 0.332335,
+              "primed": 0.311143,
+              "delta": -0.02119199999999999
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02",
+              "direct": 0.351271,
+              "primed": 0.290511,
+              "delta": -0.06075999999999998
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03",
+              "direct": 0.343152,
+              "primed": 0.254703,
+              "delta": -0.088449
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": -2.0,
+          "sd": 4.58257569495584,
+          "min": -6.0,
+          "max": 3.0,
+          "range": 9.0,
+          "values": {
+            "r01": 3.0,
+            "r02": -3.0,
+            "r03": -6.0
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01",
+              "direct": 16.0,
+              "primed": 19.0,
+              "delta": 3.0
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02",
+              "direct": 32.0,
+              "primed": 29.0,
+              "delta": -3.0
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03",
+              "direct": 24.0,
+              "primed": 18.0,
+              "delta": -6.0
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        }
+      },
+      "observations": {
+        "direct": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.667665,
+              "broader_resource_supported_coverage": 0.760479,
+              "unresolved_rate": 0.332335,
+              "outside_inventory": 16.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.648729,
+              "broader_resource_supported_coverage": 0.753363,
+              "unresolved_rate": 0.351271,
+              "outside_inventory": 32.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.656848,
+              "broader_resource_supported_coverage": 0.777614,
+              "unresolved_rate": 0.343152,
+              "outside_inventory": 24.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03/output.txt"
+            }
+          }
+        ],
+        "primed": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.688857,
+              "broader_resource_supported_coverage": 0.768452,
+              "unresolved_rate": 0.311143,
+              "outside_inventory": 19.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.709489,
+              "broader_resource_supported_coverage": 0.789781,
+              "unresolved_rate": 0.290511,
+              "outside_inventory": 29.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.745297,
+              "broader_resource_supported_coverage": 0.836469,
+              "unresolved_rate": 0.254703,
+              "outside_inventory": 18.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03/output.txt"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "config": [
+        "google",
+        "gemini-3.6-flash",
+        "extthinkoff"
+      ],
+      "label": "Gemini 3.6 Flash — extended thinking OFF",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "paired_validity": "valid",
+      "primary_analysis_include": true,
+      "invalid_pairing": null,
+      "direct": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.6385483333333334,
+          "sd": 0.013670260031664837,
+          "min": 0.622951,
+          "max": 0.648449,
+          "range": 0.02549800000000002,
+          "values": {
+            "r01": 0.622951,
+            "r02": 0.648449,
+            "r03": 0.644245
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.730304,
+          "sd": 0.025185376173486047,
+          "min": 0.703428,
+          "max": 0.753363,
+          "range": 0.04993499999999995,
+          "values": {
+            "r01": 0.703428,
+            "r02": 0.734121,
+            "r03": 0.753363
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.36145166666666667,
+          "sd": 0.01367026003166486,
+          "min": 0.351551,
+          "max": 0.377049,
+          "range": 0.02549800000000002,
+          "values": {
+            "r01": 0.377049,
+            "r02": 0.351551,
+            "r03": 0.355755
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 31.0,
+          "sd": 15.0996688705415,
+          "min": 17.0,
+          "max": 47.0,
+          "range": 30.0,
+          "values": {
+            "r01": 17.0,
+            "r02": 47.0,
+            "r03": 29.0
+          }
+        }
+      },
+      "primed": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.6994976666666667,
+          "sd": 0.010241675904525308,
+          "min": 0.688047,
+          "max": 0.707783,
+          "range": 0.019736000000000087,
+          "values": {
+            "r01": 0.702663,
+            "r02": 0.688047,
+            "r03": 0.707783
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.8062213333333333,
+          "sd": 0.012710173890759026,
+          "min": 0.791545,
+          "max": 0.813609,
+          "range": 0.022063999999999973,
+          "values": {
+            "r01": 0.813609,
+            "r02": 0.791545,
+            "r03": 0.81351
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.30050233333333337,
+          "sd": 0.010241675904525245,
+          "min": 0.292217,
+          "max": 0.311953,
+          "range": 0.019735999999999976,
+          "values": {
+            "r01": 0.297337,
+            "r02": 0.311953,
+            "r03": 0.292217
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 18.666666666666668,
+          "sd": 6.429100507328637,
+          "min": 14.0,
+          "max": 26.0,
+          "range": 12.0,
+          "values": {
+            "r01": 14.0,
+            "r02": 26.0,
+            "r03": 16.0
+          }
+        }
+      },
+      "paired_deltas": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.060949333333333335,
+          "sd": 0.02018190143007679,
+          "min": 0.03959799999999991,
+          "max": 0.079712,
+          "range": 0.040114000000000094,
+          "values": {
+            "r01": 0.079712,
+            "r02": 0.03959799999999991,
+            "r03": 0.0635380000000001
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01",
+              "direct": 0.622951,
+              "primed": 0.702663,
+              "delta": 0.079712
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02",
+              "direct": 0.648449,
+              "primed": 0.688047,
+              "delta": 0.03959799999999991
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03",
+              "direct": 0.644245,
+              "primed": 0.707783,
+              "delta": 0.0635380000000001
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.07591733333333332,
+          "sd": 0.029704424288872065,
+          "min": 0.05742400000000003,
+          "max": 0.11018099999999997,
+          "range": 0.05275699999999994,
+          "values": {
+            "r01": 0.11018099999999997,
+            "r02": 0.05742400000000003,
+            "r03": 0.06014699999999995
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01",
+              "direct": 0.703428,
+              "primed": 0.813609,
+              "delta": 0.11018099999999997
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02",
+              "direct": 0.734121,
+              "primed": 0.791545,
+              "delta": 0.05742400000000003
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03",
+              "direct": 0.753363,
+              "primed": 0.81351,
+              "delta": 0.06014699999999995
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": -0.060949333333333335,
+          "sd": 0.020181901430076723,
+          "min": -0.079712,
+          "max": -0.03959800000000002,
+          "range": 0.04011399999999998,
+          "values": {
+            "r01": -0.079712,
+            "r02": -0.03959800000000002,
+            "r03": -0.06353799999999998
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01",
+              "direct": 0.377049,
+              "primed": 0.297337,
+              "delta": -0.079712
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02",
+              "direct": 0.351551,
+              "primed": 0.311953,
+              "delta": -0.03959800000000002
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03",
+              "direct": 0.355755,
+              "primed": 0.292217,
+              "delta": -0.06353799999999998
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": -12.333333333333334,
+          "sd": 9.018499505645789,
+          "min": -21.0,
+          "max": -3.0,
+          "range": 18.0,
+          "values": {
+            "r01": -3.0,
+            "r02": -21.0,
+            "r03": -13.0
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01",
+              "direct": 17.0,
+              "primed": 14.0,
+              "delta": -3.0
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02",
+              "direct": 47.0,
+              "primed": 26.0,
+              "delta": -21.0
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03",
+              "direct": 29.0,
+              "primed": 16.0,
+              "delta": -13.0
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        }
+      },
+      "observations": {
+        "direct": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.622951,
+              "broader_resource_supported_coverage": 0.703428,
+              "unresolved_rate": 0.377049,
+              "outside_inventory": 17.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.648449,
+              "broader_resource_supported_coverage": 0.734121,
+              "unresolved_rate": 0.351551,
+              "outside_inventory": 47.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.644245,
+              "broader_resource_supported_coverage": 0.753363,
+              "unresolved_rate": 0.355755,
+              "outside_inventory": 29.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03/output.txt"
+            }
+          }
+        ],
+        "primed": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.702663,
+              "broader_resource_supported_coverage": 0.813609,
+              "unresolved_rate": 0.297337,
+              "outside_inventory": 14.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.688047,
+              "broader_resource_supported_coverage": 0.791545,
+              "unresolved_rate": 0.311953,
+              "outside_inventory": 26.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.707783,
+              "broader_resource_supported_coverage": 0.81351,
+              "unresolved_rate": 0.292217,
+              "outside_inventory": 16.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03/output.txt"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "config": [
+        "anthropic",
+        "claude",
+        "sonnet-5"
+      ],
+      "label": "Claude Sonnet 5 — Medium (default)",
+      "phase2b_role": "stable high-performance configuration",
+      "paired_validity": "valid",
+      "primary_analysis_include": true,
+      "invalid_pairing": null,
+      "direct": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.6606580000000001,
+          "sd": 0.0018680513911560552,
+          "min": 0.658574,
+          "max": 0.662182,
+          "range": 0.0036080000000000556,
+          "values": {
+            "r01": 0.662182,
+            "r02": 0.658574,
+            "r03": 0.661218
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.766034,
+          "sd": 0.011672749975905422,
+          "min": 0.752656,
+          "max": 0.774146,
+          "range": 0.02149000000000001,
+          "values": {
+            "r01": 0.7713,
+            "r02": 0.752656,
+            "r03": 0.774146
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.33934200000000003,
+          "sd": 0.0018680513911560326,
+          "min": 0.337818,
+          "max": 0.341426,
+          "range": 0.003608,
+          "values": {
+            "r01": 0.337818,
+            "r02": 0.341426,
+            "r03": 0.338782
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 24.0,
+          "sd": 2.6457513110645907,
+          "min": 21.0,
+          "max": 26.0,
+          "range": 5.0,
+          "values": {
+            "r01": 26.0,
+            "r02": 25.0,
+            "r03": 21.0
+          }
+        }
+      },
+      "primed": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.7248236666666666,
+          "sd": 0.012901196275281374,
+          "min": 0.710015,
+          "max": 0.733631,
+          "range": 0.02361600000000008,
+          "values": {
+            "r01": 0.733631,
+            "r02": 0.710015,
+            "r03": 0.730825
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.8311966666666667,
+          "sd": 0.006358762248530283,
+          "min": 0.825112,
+          "max": 0.837798,
+          "range": 0.012686000000000086,
+          "values": {
+            "r01": 0.837798,
+            "r02": 0.825112,
+            "r03": 0.83068
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.2751763333333333,
+          "sd": 0.012901196275281338,
+          "min": 0.266369,
+          "max": 0.289985,
+          "range": 0.02361599999999997,
+          "values": {
+            "r01": 0.266369,
+            "r02": 0.289985,
+            "r03": 0.269175
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 19.333333333333332,
+          "sd": 8.621678104251709,
+          "min": 10.0,
+          "max": 27.0,
+          "range": 17.0,
+          "values": {
+            "r01": 21.0,
+            "r02": 10.0,
+            "r03": 27.0
+          }
+        }
+      },
+      "paired_deltas": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.06416566666666663,
+          "sd": 0.011058304451105224,
+          "min": 0.05144099999999996,
+          "max": 0.07144899999999998,
+          "range": 0.020008000000000026,
+          "values": {
+            "r01": 0.07144899999999998,
+            "r02": 0.05144099999999996,
+            "r03": 0.06960699999999997
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01",
+              "direct": 0.662182,
+              "primed": 0.733631,
+              "delta": 0.07144899999999998
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02",
+              "direct": 0.658574,
+              "primed": 0.710015,
+              "delta": 0.05144099999999996
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03",
+              "direct": 0.661218,
+              "primed": 0.730825,
+              "delta": 0.06960699999999997
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.06516266666666666,
+          "sd": 0.008044554514286878,
+          "min": 0.05653399999999997,
+          "max": 0.07245599999999996,
+          "range": 0.01592199999999999,
+          "values": {
+            "r01": 0.06649800000000006,
+            "r02": 0.07245599999999996,
+            "r03": 0.05653399999999997
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01",
+              "direct": 0.7713,
+              "primed": 0.837798,
+              "delta": 0.06649800000000006
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02",
+              "direct": 0.752656,
+              "primed": 0.825112,
+              "delta": 0.07245599999999996
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03",
+              "direct": 0.774146,
+              "primed": 0.83068,
+              "delta": 0.05653399999999997
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": -0.06416566666666668,
+          "sd": 0.011058304451105205,
+          "min": -0.07144899999999998,
+          "max": -0.051441000000000014,
+          "range": 0.02000799999999997,
+          "values": {
+            "r01": -0.07144899999999998,
+            "r02": -0.051441000000000014,
+            "r03": -0.06960700000000003
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01",
+              "direct": 0.337818,
+              "primed": 0.266369,
+              "delta": -0.07144899999999998
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02",
+              "direct": 0.341426,
+              "primed": 0.289985,
+              "delta": -0.051441000000000014
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03",
+              "direct": 0.338782,
+              "primed": 0.269175,
+              "delta": -0.06960700000000003
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": -4.666666666666667,
+          "sd": 10.503967504392486,
+          "min": -15.0,
+          "max": 6.0,
+          "range": 21.0,
+          "values": {
+            "r01": -5.0,
+            "r02": -15.0,
+            "r03": 6.0
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01",
+              "direct": 26.0,
+              "primed": 21.0,
+              "delta": -5.0
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02",
+              "direct": 25.0,
+              "primed": 10.0,
+              "delta": -15.0
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03",
+              "direct": 21.0,
+              "primed": 27.0,
+              "delta": 6.0
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        }
+      },
+      "observations": {
+        "direct": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.662182,
+              "broader_resource_supported_coverage": 0.7713,
+              "unresolved_rate": 0.337818,
+              "outside_inventory": 26.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.658574,
+              "broader_resource_supported_coverage": 0.752656,
+              "unresolved_rate": 0.341426,
+              "outside_inventory": 25.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.661218,
+              "broader_resource_supported_coverage": 0.774146,
+              "unresolved_rate": 0.338782,
+              "outside_inventory": 21.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03/output.txt"
+            }
+          }
+        ],
+        "primed": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.733631,
+              "broader_resource_supported_coverage": 0.837798,
+              "unresolved_rate": 0.266369,
+              "outside_inventory": 21.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.710015,
+              "broader_resource_supported_coverage": 0.825112,
+              "unresolved_rate": 0.289985,
+              "outside_inventory": 10.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.730825,
+              "broader_resource_supported_coverage": 0.83068,
+              "unresolved_rate": 0.269175,
+              "outside_inventory": 27.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03/output.txt"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "config": [
+        "deepseek",
+        "deepseek-v3-expert",
+        "deepthinkon"
+      ],
+      "label": "DeepSeek V3 Expert — DeepThink ON",
+      "phase2b_role": "clean output, high baseline",
+      "paired_validity": "valid",
+      "primary_analysis_include": true,
+      "invalid_pairing": null,
+      "direct": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.679675,
+          "sd": 0.012349069964981188,
+          "min": 0.665667,
+          "max": 0.688988,
+          "range": 0.023321000000000036,
+          "values": {
+            "r01": 0.688988,
+            "r02": 0.68437,
+            "r03": 0.665667
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.8012863333333332,
+          "sd": 0.009046927452640135,
+          "min": 0.791604,
+          "max": 0.809524,
+          "range": 0.017920000000000047,
+          "values": {
+            "r01": 0.809524,
+            "r02": 0.802731,
+            "r03": 0.791604
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.320325,
+          "sd": 0.012349069964981155,
+          "min": 0.311012,
+          "max": 0.334333,
+          "range": 0.02332099999999998,
+          "values": {
+            "r01": 0.311012,
+            "r02": 0.31563,
+            "r03": 0.334333
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 17.0,
+          "sd": 4.358898943540674,
+          "min": 14.0,
+          "max": 22.0,
+          "range": 8.0,
+          "values": {
+            "r01": 15.0,
+            "r02": 14.0,
+            "r03": 22.0
+          }
+        }
+      },
+      "primed": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.717974,
+          "sd": 0.01641786840609947,
+          "min": 0.701493,
+          "max": 0.734328,
+          "range": 0.03283499999999995,
+          "values": {
+            "r01": 0.718101,
+            "r02": 0.734328,
+            "r03": 0.701493
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.8316560000000001,
+          "sd": 0.01474044582093769,
+          "min": 0.814925,
+          "max": 0.84273,
+          "range": 0.02780499999999997,
+          "values": {
+            "r01": 0.84273,
+            "r02": 0.837313,
+            "r03": 0.814925
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.28202600000000005,
+          "sd": 0.016417868406099496,
+          "min": 0.265672,
+          "max": 0.298507,
+          "range": 0.032835,
+          "values": {
+            "r01": 0.281899,
+            "r02": 0.265672,
+            "r03": 0.298507
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 14.333333333333334,
+          "sd": 0.5773502691896257,
+          "min": 14.0,
+          "max": 15.0,
+          "range": 1.0,
+          "values": {
+            "r01": 14.0,
+            "r02": 15.0,
+            "r03": 14.0
+          }
+        }
+      },
+      "paired_deltas": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.03829899999999997,
+          "sd": 0.010640267994745238,
+          "min": 0.029112999999999944,
+          "max": 0.04995799999999995,
+          "range": 0.020845000000000002,
+          "values": {
+            "r01": 0.029112999999999944,
+            "r02": 0.04995799999999995,
+            "r03": 0.035826000000000024
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01",
+              "direct": 0.688988,
+              "primed": 0.718101,
+              "delta": 0.029112999999999944
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02",
+              "direct": 0.68437,
+              "primed": 0.734328,
+              "delta": 0.04995799999999995
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03",
+              "direct": 0.665667,
+              "primed": 0.701493,
+              "delta": 0.035826000000000024
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.030369666666666666,
+          "sd": 0.006142973248625861,
+          "min": 0.023321000000000036,
+          "max": 0.034582,
+          "range": 0.011260999999999965,
+          "values": {
+            "r01": 0.03320599999999996,
+            "r02": 0.034582,
+            "r03": 0.023321000000000036
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01",
+              "direct": 0.809524,
+              "primed": 0.84273,
+              "delta": 0.03320599999999996
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02",
+              "direct": 0.802731,
+              "primed": 0.837313,
+              "delta": 0.034582
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03",
+              "direct": 0.791604,
+              "primed": 0.814925,
+              "delta": 0.023321000000000036
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": -0.03829899999999999,
+          "sd": 0.01064026799474525,
+          "min": -0.049958,
+          "max": -0.029113,
+          "range": 0.020845000000000002,
+          "values": {
+            "r01": -0.029113,
+            "r02": -0.049958,
+            "r03": -0.03582599999999997
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01",
+              "direct": 0.311012,
+              "primed": 0.281899,
+              "delta": -0.029113
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02",
+              "direct": 0.31563,
+              "primed": 0.265672,
+              "delta": -0.049958
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03",
+              "direct": 0.334333,
+              "primed": 0.298507,
+              "delta": -0.03582599999999997
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": -2.6666666666666665,
+          "sd": 4.725815626252609,
+          "min": -8.0,
+          "max": 1.0,
+          "range": 9.0,
+          "values": {
+            "r01": -1.0,
+            "r02": 1.0,
+            "r03": -8.0
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01",
+              "direct": 15.0,
+              "primed": 14.0,
+              "delta": -1.0
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02",
+              "direct": 14.0,
+              "primed": 15.0,
+              "delta": 1.0
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03",
+              "direct": 22.0,
+              "primed": 14.0,
+              "delta": -8.0
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        }
+      },
+      "observations": {
+        "direct": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.688988,
+              "broader_resource_supported_coverage": 0.809524,
+              "unresolved_rate": 0.311012,
+              "outside_inventory": 15.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.68437,
+              "broader_resource_supported_coverage": 0.802731,
+              "unresolved_rate": 0.31563,
+              "outside_inventory": 14.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.665667,
+              "broader_resource_supported_coverage": 0.791604,
+              "unresolved_rate": 0.334333,
+              "outside_inventory": 22.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03/output.txt"
+            }
+          }
+        ],
+        "primed": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.718101,
+              "broader_resource_supported_coverage": 0.84273,
+              "unresolved_rate": 0.281899,
+              "outside_inventory": 14.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.734328,
+              "broader_resource_supported_coverage": 0.837313,
+              "unresolved_rate": 0.265672,
+              "outside_inventory": 15.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.701493,
+              "broader_resource_supported_coverage": 0.814925,
+              "unresolved_rate": 0.298507,
+              "outside_inventory": 14.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03/output.txt"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "config": [
+        "alibaba",
+        "qwen-3.8-max",
+        "fast"
+      ],
+      "label": "Qwen 3.8 Max — Fast",
+      "phase2b_role": "small-effect/high-variance counterexample",
+      "paired_validity": "valid",
+      "primary_analysis_include": true,
+      "invalid_pairing": null,
+      "direct": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.6764863333333334,
+          "sd": 0.0069917798401646645,
+          "min": 0.668675,
+          "max": 0.682159,
+          "range": 0.01348399999999994,
+          "values": {
+            "r01": 0.678625,
+            "r02": 0.682159,
+            "r03": 0.668675
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.7925006666666666,
+          "sd": 0.024070951919966402,
+          "min": 0.775785,
+          "max": 0.82009,
+          "range": 0.04430500000000004,
+          "values": {
+            "r01": 0.775785,
+            "r02": 0.82009,
+            "r03": 0.781627
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.32351366666666664,
+          "sd": 0.006991779840164679,
+          "min": 0.317841,
+          "max": 0.331325,
+          "range": 0.013483999999999996,
+          "values": {
+            "r01": 0.321375,
+            "r02": 0.317841,
+            "r03": 0.331325
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 21.666666666666668,
+          "sd": 0.5773502691896257,
+          "min": 21.0,
+          "max": 22.0,
+          "range": 1.0,
+          "values": {
+            "r01": 22.0,
+            "r02": 22.0,
+            "r03": 21.0
+          }
+        }
+      },
+      "primed": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.7116723333333334,
+          "sd": 0.0153525003283939,
+          "min": 0.694815,
+          "max": 0.724852,
+          "range": 0.03003700000000009,
+          "values": {
+            "r01": 0.71535,
+            "r02": 0.694815,
+            "r03": 0.724852
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.8160163333333333,
+          "sd": 0.018650681390590867,
+          "min": 0.797037,
+          "max": 0.83432,
+          "range": 0.037282999999999955,
+          "values": {
+            "r01": 0.816692,
+            "r02": 0.797037,
+            "r03": 0.83432
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.2883276666666667,
+          "sd": 0.01535250032839384,
+          "min": 0.275148,
+          "max": 0.305185,
+          "range": 0.03003699999999998,
+          "values": {
+            "r01": 0.28465,
+            "r02": 0.305185,
+            "r03": 0.275148
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 21.0,
+          "sd": 1.7320508075688772,
+          "min": 20.0,
+          "max": 23.0,
+          "range": 3.0,
+          "values": {
+            "r01": 20.0,
+            "r02": 23.0,
+            "r03": 20.0
+          }
+        }
+      },
+      "paired_deltas": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.035186000000000016,
+          "sd": 0.021801278655161505,
+          "min": 0.012656,
+          "max": 0.05617700000000003,
+          "range": 0.04352100000000003,
+          "values": {
+            "r01": 0.03672500000000001,
+            "r02": 0.012656,
+            "r03": 0.05617700000000003
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01",
+              "direct": 0.678625,
+              "primed": 0.71535,
+              "delta": 0.03672500000000001
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02",
+              "direct": 0.682159,
+              "primed": 0.694815,
+              "delta": 0.012656
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03",
+              "direct": 0.668675,
+              "primed": 0.724852,
+              "delta": 0.05617700000000003
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.023515666666666674,
+          "sd": 0.040757919295927425,
+          "min": -0.02305299999999999,
+          "max": 0.05269299999999999,
+          "range": 0.07574599999999998,
+          "values": {
+            "r01": 0.04090700000000003,
+            "r02": -0.02305299999999999,
+            "r03": 0.05269299999999999
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01",
+              "direct": 0.775785,
+              "primed": 0.816692,
+              "delta": 0.04090700000000003
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02",
+              "direct": 0.82009,
+              "primed": 0.797037,
+              "delta": -0.02305299999999999
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03",
+              "direct": 0.781627,
+              "primed": 0.83432,
+              "delta": 0.05269299999999999
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": -0.035185999999999995,
+          "sd": 0.021801278655161477,
+          "min": -0.05617699999999998,
+          "max": -0.012656,
+          "range": 0.043520999999999976,
+          "values": {
+            "r01": -0.03672500000000001,
+            "r02": -0.012656,
+            "r03": -0.05617699999999998
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01",
+              "direct": 0.321375,
+              "primed": 0.28465,
+              "delta": -0.03672500000000001
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02",
+              "direct": 0.317841,
+              "primed": 0.305185,
+              "delta": -0.012656
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03",
+              "direct": 0.331325,
+              "primed": 0.275148,
+              "delta": -0.05617699999999998
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": -0.6666666666666666,
+          "sd": 1.5275252316519468,
+          "min": -2.0,
+          "max": 1.0,
+          "range": 3.0,
+          "values": {
+            "r01": -2.0,
+            "r02": 1.0,
+            "r03": -1.0
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01",
+              "direct": 22.0,
+              "primed": 20.0,
+              "delta": -2.0
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02",
+              "direct": 22.0,
+              "primed": 23.0,
+              "delta": 1.0
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03",
+              "direct": 21.0,
+              "primed": 20.0,
+              "delta": -1.0
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        }
+      },
+      "observations": {
+        "direct": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.678625,
+              "broader_resource_supported_coverage": 0.775785,
+              "unresolved_rate": 0.321375,
+              "outside_inventory": 22.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.682159,
+              "broader_resource_supported_coverage": 0.82009,
+              "unresolved_rate": 0.317841,
+              "outside_inventory": 22.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.668675,
+              "broader_resource_supported_coverage": 0.781627,
+              "unresolved_rate": 0.331325,
+              "outside_inventory": 21.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03/output.txt"
+            }
+          }
+        ],
+        "primed": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.71535,
+              "broader_resource_supported_coverage": 0.816692,
+              "unresolved_rate": 0.28465,
+              "outside_inventory": 20.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.694815,
+              "broader_resource_supported_coverage": 0.797037,
+              "unresolved_rate": 0.305185,
+              "outside_inventory": 23.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.724852,
+              "broader_resource_supported_coverage": 0.83432,
+              "unresolved_rate": 0.275148,
+              "outside_inventory": 20.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03/output.txt"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "config": [
+        "openai",
+        "gpt-5.6-luna",
+        "thinkoff"
+      ],
+      "label": "GPT-5.6 Luna — thinking OFF",
+      "phase2b_role": "neutral general-purpose reference",
+      "paired_validity": "valid",
+      "primary_analysis_include": true,
+      "invalid_pairing": null,
+      "direct": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.6852983333333333,
+          "sd": 0.028459521505698793,
+          "min": 0.65449,
+          "max": 0.710606,
+          "range": 0.056115999999999944,
+          "values": {
+            "r01": 0.690799,
+            "r02": 0.65449,
+            "r03": 0.710606
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.788865,
+          "sd": 0.043174245424790036,
+          "min": 0.756469,
+          "max": 0.837879,
+          "range": 0.0814100000000001,
+          "values": {
+            "r01": 0.772247,
+            "r02": 0.756469,
+            "r03": 0.837879
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.31470166666666666,
+          "sd": 0.028459521505698814,
+          "min": 0.289394,
+          "max": 0.34551,
+          "range": 0.056116,
+          "values": {
+            "r01": 0.309201,
+            "r02": 0.34551,
+            "r03": 0.289394
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 28.0,
+          "sd": 13.114877048604,
+          "min": 14.0,
+          "max": 40.0,
+          "range": 26.0,
+          "values": {
+            "r01": 30.0,
+            "r02": 14.0,
+            "r03": 40.0
+          }
+        }
+      },
+      "primed": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.7405160000000001,
+          "sd": 0.013943445377667606,
+          "min": 0.730253,
+          "max": 0.756391,
+          "range": 0.026137999999999995,
+          "values": {
+            "r01": 0.756391,
+            "r02": 0.730253,
+            "r03": 0.734904
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.824901,
+          "sd": 0.014904283310511777,
+          "min": 0.815906,
+          "max": 0.842105,
+          "range": 0.026198999999999972,
+          "values": {
+            "r01": 0.842105,
+            "r02": 0.816692,
+            "r03": 0.815906
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.259484,
+          "sd": 0.013943445377667611,
+          "min": 0.243609,
+          "max": 0.269747,
+          "range": 0.026138000000000022,
+          "values": {
+            "r01": 0.243609,
+            "r02": 0.269747,
+            "r03": 0.265096
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 28.333333333333332,
+          "sd": 21.361959960016154,
+          "min": 16.0,
+          "max": 53.0,
+          "range": 37.0,
+          "values": {
+            "r01": 16.0,
+            "r02": 16.0,
+            "r03": 53.0
+          }
+        }
+      },
+      "paired_deltas": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.055217666666666686,
+          "sd": 0.027255855340336182,
+          "min": 0.024298000000000042,
+          "max": 0.07576300000000002,
+          "range": 0.05146499999999998,
+          "values": {
+            "r01": 0.06559199999999998,
+            "r02": 0.07576300000000002,
+            "r03": 0.024298000000000042
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01",
+              "direct": 0.690799,
+              "primed": 0.756391,
+              "delta": 0.06559199999999998
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02",
+              "direct": 0.65449,
+              "primed": 0.730253,
+              "delta": 0.07576300000000002
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03",
+              "direct": 0.710606,
+              "primed": 0.734904,
+              "delta": 0.024298000000000042
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.03603599999999999,
+          "sd": 0.05046772599394588,
+          "min": -0.02197300000000002,
+          "max": 0.06985799999999998,
+          "range": 0.091831,
+          "values": {
+            "r01": 0.06985799999999998,
+            "r02": 0.060223000000000027,
+            "r03": -0.02197300000000002
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01",
+              "direct": 0.772247,
+              "primed": 0.842105,
+              "delta": 0.06985799999999998
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02",
+              "direct": 0.756469,
+              "primed": 0.816692,
+              "delta": 0.060223000000000027
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03",
+              "direct": 0.837879,
+              "primed": 0.815906,
+              "delta": -0.02197300000000002
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": -0.05521766666666666,
+          "sd": 0.0272558553403362,
+          "min": -0.07576299999999997,
+          "max": -0.024297999999999986,
+          "range": 0.05146499999999998,
+          "values": {
+            "r01": -0.06559200000000001,
+            "r02": -0.07576299999999997,
+            "r03": -0.024297999999999986
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01",
+              "direct": 0.309201,
+              "primed": 0.243609,
+              "delta": -0.06559200000000001
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02",
+              "direct": 0.34551,
+              "primed": 0.269747,
+              "delta": -0.07576299999999997
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03",
+              "direct": 0.289394,
+              "primed": 0.265096,
+              "delta": -0.024297999999999986
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 0.3333333333333333,
+          "sd": 13.576941236277534,
+          "min": -14.0,
+          "max": 13.0,
+          "range": 27.0,
+          "values": {
+            "r01": -14.0,
+            "r02": 2.0,
+            "r03": 13.0
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01",
+              "direct": 30.0,
+              "primed": 16.0,
+              "delta": -14.0
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02",
+              "direct": 14.0,
+              "primed": 16.0,
+              "delta": 2.0
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03",
+              "direct": 40.0,
+              "primed": 53.0,
+              "delta": 13.0
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        }
+      },
+      "observations": {
+        "direct": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.690799,
+              "broader_resource_supported_coverage": 0.772247,
+              "unresolved_rate": 0.309201,
+              "outside_inventory": 30.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.65449,
+              "broader_resource_supported_coverage": 0.756469,
+              "unresolved_rate": 0.34551,
+              "outside_inventory": 14.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.710606,
+              "broader_resource_supported_coverage": 0.837879,
+              "unresolved_rate": 0.289394,
+              "outside_inventory": 40.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03/output.txt"
+            }
+          }
+        ],
+        "primed": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.756391,
+              "broader_resource_supported_coverage": 0.842105,
+              "unresolved_rate": 0.243609,
+              "outside_inventory": 16.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.730253,
+              "broader_resource_supported_coverage": 0.816692,
+              "unresolved_rate": 0.269747,
+              "outside_inventory": 16.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.734904,
+              "broader_resource_supported_coverage": 0.815906,
+              "unresolved_rate": 0.265096,
+              "outside_inventory": 53.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03/output.txt"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "config": [
+        "xai",
+        "grok",
+        "fast"
+      ],
+      "label": "Grok 4.5 Fast",
+      "phase2b_role": "independent model-family reference; operator-reported identity",
+      "paired_validity": "valid",
+      "primary_analysis_include": true,
+      "invalid_pairing": null,
+      "direct": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.659022,
+          "sd": 0.0144097638079186,
+          "min": 0.647779,
+          "max": 0.675266,
+          "range": 0.02748700000000004,
+          "values": {
+            "r01": 0.675266,
+            "r02": 0.647779,
+            "r03": 0.654021
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.7610163333333334,
+          "sd": 0.009849409948485929,
+          "min": 0.754977,
+          "max": 0.772382,
+          "range": 0.017405000000000004,
+          "values": {
+            "r01": 0.772382,
+            "r02": 0.754977,
+            "r03": 0.75569
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.340978,
+          "sd": 0.014409763807918561,
+          "min": 0.324734,
+          "max": 0.352221,
+          "range": 0.027486999999999984,
+          "values": {
+            "r01": 0.324734,
+            "r02": 0.352221,
+            "r03": 0.345979
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 15.0,
+          "sd": 1.7320508075688772,
+          "min": 13.0,
+          "max": 16.0,
+          "range": 3.0,
+          "values": {
+            "r01": 16.0,
+            "r02": 13.0,
+            "r03": 16.0
+          }
+        }
+      },
+      "primed": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.7301776666666666,
+          "sd": 0.017102002582543737,
+          "min": 0.711044,
+          "max": 0.743976,
+          "range": 0.03293199999999996,
+          "values": {
+            "r01": 0.735513,
+            "r02": 0.743976,
+            "r03": 0.711044
+          }
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.8092796666666667,
+          "sd": 0.017796860434732116,
+          "min": 0.791225,
+          "max": 0.826807,
+          "range": 0.035582,
+          "values": {
+            "r01": 0.809807,
+            "r02": 0.826807,
+            "r03": 0.791225
+          }
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": 0.26982233333333333,
+          "sd": 0.017102002582543758,
+          "min": 0.256024,
+          "max": 0.288956,
+          "range": 0.03293200000000002,
+          "values": {
+            "r01": 0.264487,
+            "r02": 0.256024,
+            "r03": 0.288956
+          }
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 19.333333333333332,
+          "sd": 6.110100926607787,
+          "min": 14.0,
+          "max": 26.0,
+          "range": 12.0,
+          "values": {
+            "r01": 18.0,
+            "r02": 14.0,
+            "r03": 26.0
+          }
+        }
+      },
+      "paired_deltas": {
+        "canonical": {
+          "n": 3,
+          "mean": 0.07115566666666666,
+          "sd": 0.021746260030941707,
+          "min": 0.057023000000000046,
+          "max": 0.09619699999999998,
+          "range": 0.03917399999999993,
+          "values": {
+            "r01": 0.06024699999999994,
+            "r02": 0.09619699999999998,
+            "r03": 0.057023000000000046
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r01",
+              "direct": 0.675266,
+              "primed": 0.735513,
+              "delta": 0.06024699999999994
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r02",
+              "direct": 0.647779,
+              "primed": 0.743976,
+              "delta": 0.09619699999999998
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r03",
+              "direct": 0.654021,
+              "primed": 0.711044,
+              "delta": 0.057023000000000046
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "broader": {
+          "n": 3,
+          "mean": 0.048263333333333325,
+          "sd": 0.020431198161961327,
+          "min": 0.03553499999999998,
+          "max": 0.07182999999999995,
+          "range": 0.036294999999999966,
+          "values": {
+            "r01": 0.03742500000000004,
+            "r02": 0.07182999999999995,
+            "r03": 0.03553499999999998
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r01",
+              "direct": 0.772382,
+              "primed": 0.809807,
+              "delta": 0.03742500000000004
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r02",
+              "direct": 0.754977,
+              "primed": 0.826807,
+              "delta": 0.07182999999999995
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r03",
+              "direct": 0.75569,
+              "primed": 0.791225,
+              "delta": 0.03553499999999998
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "unresolved": {
+          "n": 3,
+          "mean": -0.07115566666666667,
+          "sd": 0.021746260030941742,
+          "min": -0.09619700000000003,
+          "max": -0.05702299999999999,
+          "range": 0.03917400000000004,
+          "values": {
+            "r01": -0.060246999999999995,
+            "r02": -0.09619700000000003,
+            "r03": -0.05702299999999999
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r01",
+              "direct": 0.324734,
+              "primed": 0.264487,
+              "delta": -0.060246999999999995
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r02",
+              "direct": 0.352221,
+              "primed": 0.256024,
+              "delta": -0.09619700000000003
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r03",
+              "direct": 0.345979,
+              "primed": 0.288956,
+              "delta": -0.05702299999999999
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        },
+        "ortho_out": {
+          "n": 3,
+          "mean": 4.333333333333333,
+          "sd": 4.932882862316247,
+          "min": 1.0,
+          "max": 10.0,
+          "range": 9.0,
+          "values": {
+            "r01": 2.0,
+            "r02": 1.0,
+            "r03": 10.0
+          },
+          "pairs": [
+            {
+              "replicate": "r01",
+              "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r01",
+              "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r01",
+              "direct": 16.0,
+              "primed": 18.0,
+              "delta": 2.0
+            },
+            {
+              "replicate": "r02",
+              "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r02",
+              "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r02",
+              "direct": 13.0,
+              "primed": 14.0,
+              "delta": 1.0
+            },
+            {
+              "replicate": "r03",
+              "direct_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r03",
+              "primed_run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r03",
+              "direct": 16.0,
+              "primed": 26.0,
+              "delta": 10.0
+            }
+          ],
+          "usable_for_primary_priming_analysis": true
+        }
+      },
+      "observations": {
+        "direct": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.675266,
+              "broader_resource_supported_coverage": 0.772382,
+              "unresolved_rate": 0.324734,
+              "outside_inventory": 16.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.647779,
+              "broader_resource_supported_coverage": 0.754977,
+              "unresolved_rate": 0.352221,
+              "outside_inventory": 13.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.654021,
+              "broader_resource_supported_coverage": 0.75569,
+              "unresolved_rate": 0.345979,
+              "outside_inventory": 16.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r03/output.txt"
+            }
+          }
+        ],
+        "primed": [
+          {
+            "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r01",
+            "replicate": "r01",
+            "metrics": {
+              "canonical_coverage": 0.735513,
+              "broader_resource_supported_coverage": 0.809807,
+              "unresolved_rate": 0.264487,
+              "outside_inventory": 18.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r01/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r01/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r01/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r01/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r02",
+            "replicate": "r02",
+            "metrics": {
+              "canonical_coverage": 0.743976,
+              "broader_resource_supported_coverage": 0.826807,
+              "unresolved_rate": 0.256024,
+              "outside_inventory": 14.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r02/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r02/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r02/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r02/output.txt"
+            }
+          },
+          {
+            "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r03",
+            "replicate": "r03",
+            "metrics": {
+              "canonical_coverage": 0.711044,
+              "broader_resource_supported_coverage": 0.791225,
+              "unresolved_rate": 0.288956,
+              "outside_inventory": 26.0
+            },
+            "artifact_paths": {
+              "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r03/evaluation.json",
+              "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r03/orthography.json",
+              "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r03/intake.json",
+              "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r03/output.txt"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "primary_valid_configurations": [
+    "Gemini 3.6 Flash — extended thinking ON",
+    "Gemini 3.6 Flash — extended thinking OFF",
+    "Claude Sonnet 5 — Medium (default)",
+    "DeepSeek V3 Expert — DeepThink ON",
+    "Qwen 3.8 Max — Fast",
+    "GPT-5.6 Luna — thinking OFF",
+    "Grok 4.5 Fast"
+  ],
+  "invalid_pairing_configurations": [],
+  "observations": [
+    {
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01",
+      "label": "Gemini 3.6 Flash — extended thinking ON",
+      "provider": "google",
+      "model": "gemini-3.6-flash",
+      "model_version": "extthinkon",
+      "condition": "direct",
+      "replicate": "r01",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.667665,
+        "broader_resource_supported_coverage": 0.760479,
+        "unresolved_rate": 0.332335,
+        "outside_inventory": 16.0,
+        "total_tokens": 668,
+        "canonical_supported_tokens": 446,
+        "unresolved_tokens": 222
+      },
+      "orthography": {
+        "outside_inventory": 16,
+        "cyrillic": 0,
+        "polish_specific": 2,
+        "other_latin": 1
+      },
+      "output_sha256": "df508374630f65e8a4166a28e2bd49ea30f21db0c2062232727bcba3bd42faae",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01",
+      "label": "Gemini 3.6 Flash — extended thinking ON",
+      "provider": "google",
+      "model": "gemini-3.6-flash",
+      "model_version": "extthinkon",
+      "condition": "primed",
+      "replicate": "r01",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.688857,
+        "broader_resource_supported_coverage": 0.768452,
+        "unresolved_rate": 0.311143,
+        "outside_inventory": 19.0,
+        "total_tokens": 691,
+        "canonical_supported_tokens": 476,
+        "unresolved_tokens": 215
+      },
+      "orthography": {
+        "outside_inventory": 19,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 6
+      },
+      "output_sha256": "e158448b011d57b10657d74ef9bc74e8e0f536d2d7eb5daec9a22acdec19df57",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02",
+      "label": "Gemini 3.6 Flash — extended thinking ON",
+      "provider": "google",
+      "model": "gemini-3.6-flash",
+      "model_version": "extthinkon",
+      "condition": "direct",
+      "replicate": "r02",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.648729,
+        "broader_resource_supported_coverage": 0.753363,
+        "unresolved_rate": 0.351271,
+        "outside_inventory": 32.0,
+        "total_tokens": 669,
+        "canonical_supported_tokens": 434,
+        "unresolved_tokens": 235
+      },
+      "orthography": {
+        "outside_inventory": 32,
+        "cyrillic": 0,
+        "polish_specific": 6,
+        "other_latin": 13
+      },
+      "output_sha256": "b504b3d89cd84beb8c3ac058a1161558a2cda45707e676a109edfccb37732e7e",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02",
+      "label": "Gemini 3.6 Flash — extended thinking ON",
+      "provider": "google",
+      "model": "gemini-3.6-flash",
+      "model_version": "extthinkon",
+      "condition": "primed",
+      "replicate": "r02",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.709489,
+        "broader_resource_supported_coverage": 0.789781,
+        "unresolved_rate": 0.290511,
+        "outside_inventory": 29.0,
+        "total_tokens": 685,
+        "canonical_supported_tokens": 486,
+        "unresolved_tokens": 199
+      },
+      "orthography": {
+        "outside_inventory": 29,
+        "cyrillic": 0,
+        "polish_specific": 2,
+        "other_latin": 14
+      },
+      "output_sha256": "c928c4707810426949eb6bf2610765a54cb1d63ef14ff9ece9d721f867f34312",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03",
+      "label": "Gemini 3.6 Flash — extended thinking ON",
+      "provider": "google",
+      "model": "gemini-3.6-flash",
+      "model_version": "extthinkon",
+      "condition": "direct",
+      "replicate": "r03",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.656848,
+        "broader_resource_supported_coverage": 0.777614,
+        "unresolved_rate": 0.343152,
+        "outside_inventory": 24.0,
+        "total_tokens": 679,
+        "canonical_supported_tokens": 446,
+        "unresolved_tokens": 233
+      },
+      "orthography": {
+        "outside_inventory": 24,
+        "cyrillic": 0,
+        "polish_specific": 1,
+        "other_latin": 10
+      },
+      "output_sha256": "806282d94d0ff66042cd88812511162f7fb25fa9504c666028624eabd6d0cf95",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__direct__r03/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03",
+      "label": "Gemini 3.6 Flash — extended thinking ON",
+      "provider": "google",
+      "model": "gemini-3.6-flash",
+      "model_version": "extthinkon",
+      "condition": "primed",
+      "replicate": "r03",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.745297,
+        "broader_resource_supported_coverage": 0.836469,
+        "unresolved_rate": 0.254703,
+        "outside_inventory": 18.0,
+        "total_tokens": 691,
+        "canonical_supported_tokens": 515,
+        "unresolved_tokens": 176
+      },
+      "orthography": {
+        "outside_inventory": 18,
+        "cyrillic": 4,
+        "polish_specific": 1,
+        "other_latin": 0
+      },
+      "output_sha256": "fe690b4d2cb43edd286859664c9c8f7352f681b3ed8e29f3426aed4cd98be728",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkon__primed__r03/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01",
+      "label": "Gemini 3.6 Flash — extended thinking OFF",
+      "provider": "google",
+      "model": "gemini-3.6-flash",
+      "model_version": "extthinkoff",
+      "condition": "direct",
+      "replicate": "r01",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.622951,
+        "broader_resource_supported_coverage": 0.703428,
+        "unresolved_rate": 0.377049,
+        "outside_inventory": 17.0,
+        "total_tokens": 671,
+        "canonical_supported_tokens": 418,
+        "unresolved_tokens": 253
+      },
+      "orthography": {
+        "outside_inventory": 17,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 4
+      },
+      "output_sha256": "74c21995a569ffb9cbb137e73cde67d01b55265a8ac878f68f918a4f1cdf4675",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01",
+      "label": "Gemini 3.6 Flash — extended thinking OFF",
+      "provider": "google",
+      "model": "gemini-3.6-flash",
+      "model_version": "extthinkoff",
+      "condition": "primed",
+      "replicate": "r01",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.702663,
+        "broader_resource_supported_coverage": 0.813609,
+        "unresolved_rate": 0.297337,
+        "outside_inventory": 14.0,
+        "total_tokens": 676,
+        "canonical_supported_tokens": 475,
+        "unresolved_tokens": 201
+      },
+      "orthography": {
+        "outside_inventory": 14,
+        "cyrillic": 0,
+        "polish_specific": 1,
+        "other_latin": 0
+      },
+      "output_sha256": "90faf210a820d6215e9bc8c6cad9b03ee92f9b9ceca3277fe2d26b10d0d788ca",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02",
+      "label": "Gemini 3.6 Flash — extended thinking OFF",
+      "provider": "google",
+      "model": "gemini-3.6-flash",
+      "model_version": "extthinkoff",
+      "condition": "direct",
+      "replicate": "r02",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.648449,
+        "broader_resource_supported_coverage": 0.734121,
+        "unresolved_rate": 0.351551,
+        "outside_inventory": 47.0,
+        "total_tokens": 677,
+        "canonical_supported_tokens": 439,
+        "unresolved_tokens": 238
+      },
+      "orthography": {
+        "outside_inventory": 47,
+        "cyrillic": 0,
+        "polish_specific": 20,
+        "other_latin": 14
+      },
+      "output_sha256": "7e94db58d59203685257a6d4a8eddd28f7ba5d328970e771819904fdd60f0c33",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02",
+      "label": "Gemini 3.6 Flash — extended thinking OFF",
+      "provider": "google",
+      "model": "gemini-3.6-flash",
+      "model_version": "extthinkoff",
+      "condition": "primed",
+      "replicate": "r02",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.688047,
+        "broader_resource_supported_coverage": 0.791545,
+        "unresolved_rate": 0.311953,
+        "outside_inventory": 26.0,
+        "total_tokens": 686,
+        "canonical_supported_tokens": 472,
+        "unresolved_tokens": 214
+      },
+      "orthography": {
+        "outside_inventory": 26,
+        "cyrillic": 0,
+        "polish_specific": 1,
+        "other_latin": 12
+      },
+      "output_sha256": "56cc8dcb5a78210067600f6b5e7675aec0056163b2cb20af16b2d443357f1d4c",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03",
+      "label": "Gemini 3.6 Flash — extended thinking OFF",
+      "provider": "google",
+      "model": "gemini-3.6-flash",
+      "model_version": "extthinkoff",
+      "condition": "direct",
+      "replicate": "r03",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.644245,
+        "broader_resource_supported_coverage": 0.753363,
+        "unresolved_rate": 0.355755,
+        "outside_inventory": 29.0,
+        "total_tokens": 669,
+        "canonical_supported_tokens": 431,
+        "unresolved_tokens": 238
+      },
+      "orthography": {
+        "outside_inventory": 29,
+        "cyrillic": 0,
+        "polish_specific": 14,
+        "other_latin": 2
+      },
+      "output_sha256": "adc94226ec6c716c27d2e06ec277936a834006e29b42a0734062600c7a80af73",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__direct__r03/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03",
+      "label": "Gemini 3.6 Flash — extended thinking OFF",
+      "provider": "google",
+      "model": "gemini-3.6-flash",
+      "model_version": "extthinkoff",
+      "condition": "primed",
+      "replicate": "r03",
+      "phase2b_role": "strong priming effect (large reproduced Δ)",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.707783,
+        "broader_resource_supported_coverage": 0.81351,
+        "unresolved_rate": 0.292217,
+        "outside_inventory": 16.0,
+        "total_tokens": 681,
+        "canonical_supported_tokens": 482,
+        "unresolved_tokens": 199
+      },
+      "orthography": {
+        "outside_inventory": 16,
+        "cyrillic": 0,
+        "polish_specific": 3,
+        "other_latin": 0
+      },
+      "output_sha256": "c59ab0feff61f3b236a06b17bfd59ed9a5bbc9b2aea819426eb3ba140366c037",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__google__gemini-3.6-flash__extthinkoff__primed__r03/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01",
+      "label": "Claude Sonnet 5 — Medium (default)",
+      "provider": "anthropic",
+      "model": "claude",
+      "model_version": "sonnet-5",
+      "condition": "direct",
+      "replicate": "r01",
+      "phase2b_role": "stable high-performance configuration",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.662182,
+        "broader_resource_supported_coverage": 0.7713,
+        "unresolved_rate": 0.337818,
+        "outside_inventory": 26.0,
+        "total_tokens": 669,
+        "canonical_supported_tokens": 443,
+        "unresolved_tokens": 226
+      },
+      "orthography": {
+        "outside_inventory": 26,
+        "cyrillic": 7,
+        "polish_specific": 5,
+        "other_latin": 1
+      },
+      "output_sha256": "da4da6e6ac78012675bbd2aae6cd1146b1b896084369a87a386aadf7ffb72de9",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01",
+      "label": "Claude Sonnet 5 — Medium (default)",
+      "provider": "anthropic",
+      "model": "claude",
+      "model_version": "sonnet-5",
+      "condition": "primed",
+      "replicate": "r01",
+      "phase2b_role": "stable high-performance configuration",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.733631,
+        "broader_resource_supported_coverage": 0.837798,
+        "unresolved_rate": 0.266369,
+        "outside_inventory": 21.0,
+        "total_tokens": 672,
+        "canonical_supported_tokens": 493,
+        "unresolved_tokens": 179
+      },
+      "orthography": {
+        "outside_inventory": 21,
+        "cyrillic": 3,
+        "polish_specific": 5,
+        "other_latin": 0
+      },
+      "output_sha256": "ad30ab24289f73fe37a5e4dba335f3c1be555f8180e244c69c45227860f648c8",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02",
+      "label": "Claude Sonnet 5 — Medium (default)",
+      "provider": "anthropic",
+      "model": "claude",
+      "model_version": "sonnet-5",
+      "condition": "direct",
+      "replicate": "r02",
+      "phase2b_role": "stable high-performance configuration",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.658574,
+        "broader_resource_supported_coverage": 0.752656,
+        "unresolved_rate": 0.341426,
+        "outside_inventory": 25.0,
+        "total_tokens": 659,
+        "canonical_supported_tokens": 434,
+        "unresolved_tokens": 225
+      },
+      "orthography": {
+        "outside_inventory": 25,
+        "cyrillic": 1,
+        "polish_specific": 6,
+        "other_latin": 5
+      },
+      "output_sha256": "f686d8a7c55ec6ffdcec5f3b68c62bc548edf8e978d465931f96c01b79285135",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02",
+      "label": "Claude Sonnet 5 — Medium (default)",
+      "provider": "anthropic",
+      "model": "claude",
+      "model_version": "sonnet-5",
+      "condition": "primed",
+      "replicate": "r02",
+      "phase2b_role": "stable high-performance configuration",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.710015,
+        "broader_resource_supported_coverage": 0.825112,
+        "unresolved_rate": 0.289985,
+        "outside_inventory": 10.0,
+        "total_tokens": 669,
+        "canonical_supported_tokens": 475,
+        "unresolved_tokens": 194
+      },
+      "orthography": {
+        "outside_inventory": 10,
+        "cyrillic": 6,
+        "polish_specific": 4,
+        "other_latin": 0
+      },
+      "output_sha256": "4b299c5e9899cd0ac1ecb38926dfa88c5bbeb5f10be56deefcfc631f71ddbed3",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03",
+      "label": "Claude Sonnet 5 — Medium (default)",
+      "provider": "anthropic",
+      "model": "claude",
+      "model_version": "sonnet-5",
+      "condition": "direct",
+      "replicate": "r03",
+      "phase2b_role": "stable high-performance configuration",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.661218,
+        "broader_resource_supported_coverage": 0.774146,
+        "unresolved_rate": 0.338782,
+        "outside_inventory": 21.0,
+        "total_tokens": 673,
+        "canonical_supported_tokens": 445,
+        "unresolved_tokens": 228
+      },
+      "orthography": {
+        "outside_inventory": 21,
+        "cyrillic": 1,
+        "polish_specific": 5,
+        "other_latin": 2
+      },
+      "output_sha256": "e9a2d2b7338d2ef8be27e9ad2458d58559682a96713996bbe67f598e8421cb81",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__direct__r03/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03",
+      "label": "Claude Sonnet 5 — Medium (default)",
+      "provider": "anthropic",
+      "model": "claude",
+      "model_version": "sonnet-5",
+      "condition": "primed",
+      "replicate": "r03",
+      "phase2b_role": "stable high-performance configuration",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.730825,
+        "broader_resource_supported_coverage": 0.83068,
+        "unresolved_rate": 0.269175,
+        "outside_inventory": 27.0,
+        "total_tokens": 691,
+        "canonical_supported_tokens": 505,
+        "unresolved_tokens": 186
+      },
+      "orthography": {
+        "outside_inventory": 27,
+        "cyrillic": 9,
+        "polish_specific": 5,
+        "other_latin": 0
+      },
+      "output_sha256": "36c9f708db96eb9b8f2e322dc3538e4c5b96762ce6a80d6e20a9b6bd76ce9e30",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__anthropic__claude__sonnet-5__primed__r03/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01",
+      "label": "DeepSeek V3 Expert — DeepThink ON",
+      "provider": "deepseek",
+      "model": "deepseek-v3-expert",
+      "model_version": "deepthinkon",
+      "condition": "direct",
+      "replicate": "r01",
+      "phase2b_role": "clean output, high baseline",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.688988,
+        "broader_resource_supported_coverage": 0.809524,
+        "unresolved_rate": 0.311012,
+        "outside_inventory": 15.0,
+        "total_tokens": 672,
+        "canonical_supported_tokens": 463,
+        "unresolved_tokens": 209
+      },
+      "orthography": {
+        "outside_inventory": 15,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 2
+      },
+      "output_sha256": "a448ebef406a1eb8934be693f58539086ab4ce4e333f4e94ddfcba0944227f0f",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01",
+      "label": "DeepSeek V3 Expert — DeepThink ON",
+      "provider": "deepseek",
+      "model": "deepseek-v3-expert",
+      "model_version": "deepthinkon",
+      "condition": "primed",
+      "replicate": "r01",
+      "phase2b_role": "clean output, high baseline",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.718101,
+        "broader_resource_supported_coverage": 0.84273,
+        "unresolved_rate": 0.281899,
+        "outside_inventory": 14.0,
+        "total_tokens": 674,
+        "canonical_supported_tokens": 484,
+        "unresolved_tokens": 190
+      },
+      "orthography": {
+        "outside_inventory": 14,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 1
+      },
+      "output_sha256": "72c92ce554f18aec8e3bc7a18274e7716baf45375487366adff39f2b54ebe1dc",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02",
+      "label": "DeepSeek V3 Expert — DeepThink ON",
+      "provider": "deepseek",
+      "model": "deepseek-v3-expert",
+      "model_version": "deepthinkon",
+      "condition": "direct",
+      "replicate": "r02",
+      "phase2b_role": "clean output, high baseline",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.68437,
+        "broader_resource_supported_coverage": 0.802731,
+        "unresolved_rate": 0.31563,
+        "outside_inventory": 14.0,
+        "total_tokens": 659,
+        "canonical_supported_tokens": 451,
+        "unresolved_tokens": 208
+      },
+      "orthography": {
+        "outside_inventory": 14,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 1
+      },
+      "output_sha256": "e63e931ebe254947a70e324ccf7b5788217087ab34195156cf103e569c6a4bd8",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02",
+      "label": "DeepSeek V3 Expert — DeepThink ON",
+      "provider": "deepseek",
+      "model": "deepseek-v3-expert",
+      "model_version": "deepthinkon",
+      "condition": "primed",
+      "replicate": "r02",
+      "phase2b_role": "clean output, high baseline",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.734328,
+        "broader_resource_supported_coverage": 0.837313,
+        "unresolved_rate": 0.265672,
+        "outside_inventory": 15.0,
+        "total_tokens": 670,
+        "canonical_supported_tokens": 492,
+        "unresolved_tokens": 178
+      },
+      "orthography": {
+        "outside_inventory": 15,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 2
+      },
+      "output_sha256": "bf22f4bc3b35fa44c751e042df80d831583a5dc84304f764c88ec3a42eac904b",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03",
+      "label": "DeepSeek V3 Expert — DeepThink ON",
+      "provider": "deepseek",
+      "model": "deepseek-v3-expert",
+      "model_version": "deepthinkon",
+      "condition": "direct",
+      "replicate": "r03",
+      "phase2b_role": "clean output, high baseline",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.665667,
+        "broader_resource_supported_coverage": 0.791604,
+        "unresolved_rate": 0.334333,
+        "outside_inventory": 22.0,
+        "total_tokens": 667,
+        "canonical_supported_tokens": 444,
+        "unresolved_tokens": 223
+      },
+      "orthography": {
+        "outside_inventory": 22,
+        "cyrillic": 0,
+        "polish_specific": 4,
+        "other_latin": 5
+      },
+      "output_sha256": "492699689d42e838fe53021321839e70a424f97a066c0ec91b7d290f699800b2",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__direct__r03/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03",
+      "label": "DeepSeek V3 Expert — DeepThink ON",
+      "provider": "deepseek",
+      "model": "deepseek-v3-expert",
+      "model_version": "deepthinkon",
+      "condition": "primed",
+      "replicate": "r03",
+      "phase2b_role": "clean output, high baseline",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.701493,
+        "broader_resource_supported_coverage": 0.814925,
+        "unresolved_rate": 0.298507,
+        "outside_inventory": 14.0,
+        "total_tokens": 670,
+        "canonical_supported_tokens": 470,
+        "unresolved_tokens": 200
+      },
+      "orthography": {
+        "outside_inventory": 14,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 1
+      },
+      "output_sha256": "364b7136d74a7042729d78d24061af94cb2bfe23c32e40e94a360122a38e0917",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__deepseek__deepseek-v3-expert__deepthinkon__primed__r03/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01",
+      "label": "Qwen 3.8 Max — Fast",
+      "provider": "alibaba",
+      "model": "qwen-3.8-max",
+      "model_version": "fast",
+      "condition": "direct",
+      "replicate": "r01",
+      "phase2b_role": "small-effect/high-variance counterexample",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.678625,
+        "broader_resource_supported_coverage": 0.775785,
+        "unresolved_rate": 0.321375,
+        "outside_inventory": 22.0,
+        "total_tokens": 669,
+        "canonical_supported_tokens": 454,
+        "unresolved_tokens": 215
+      },
+      "orthography": {
+        "outside_inventory": 22,
+        "cyrillic": 1,
+        "polish_specific": 0,
+        "other_latin": 8
+      },
+      "output_sha256": "1809a731d82c3b66fa04282308f2eda9dfa4f3117ae7331d28ba5cf916f39628",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01",
+      "label": "Qwen 3.8 Max — Fast",
+      "provider": "alibaba",
+      "model": "qwen-3.8-max",
+      "model_version": "fast",
+      "condition": "primed",
+      "replicate": "r01",
+      "phase2b_role": "small-effect/high-variance counterexample",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.71535,
+        "broader_resource_supported_coverage": 0.816692,
+        "unresolved_rate": 0.28465,
+        "outside_inventory": 20.0,
+        "total_tokens": 671,
+        "canonical_supported_tokens": 480,
+        "unresolved_tokens": 191
+      },
+      "orthography": {
+        "outside_inventory": 20,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 7
+      },
+      "output_sha256": "85fa224efddd37f3bf6589a7a7856392ff0220625c37f0a53a2f1b9f3fc63b9d",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02",
+      "label": "Qwen 3.8 Max — Fast",
+      "provider": "alibaba",
+      "model": "qwen-3.8-max",
+      "model_version": "fast",
+      "condition": "direct",
+      "replicate": "r02",
+      "phase2b_role": "small-effect/high-variance counterexample",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.682159,
+        "broader_resource_supported_coverage": 0.82009,
+        "unresolved_rate": 0.317841,
+        "outside_inventory": 22.0,
+        "total_tokens": 667,
+        "canonical_supported_tokens": 455,
+        "unresolved_tokens": 212
+      },
+      "orthography": {
+        "outside_inventory": 22,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 9
+      },
+      "output_sha256": "545f3b5b55a148a4da4efe9e9ed40f46fbb598d373fa5fe469563fe637e1b141",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02",
+      "label": "Qwen 3.8 Max — Fast",
+      "provider": "alibaba",
+      "model": "qwen-3.8-max",
+      "model_version": "fast",
+      "condition": "primed",
+      "replicate": "r02",
+      "phase2b_role": "small-effect/high-variance counterexample",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.694815,
+        "broader_resource_supported_coverage": 0.797037,
+        "unresolved_rate": 0.305185,
+        "outside_inventory": 23.0,
+        "total_tokens": 675,
+        "canonical_supported_tokens": 469,
+        "unresolved_tokens": 206
+      },
+      "orthography": {
+        "outside_inventory": 23,
+        "cyrillic": 1,
+        "polish_specific": 0,
+        "other_latin": 9
+      },
+      "output_sha256": "30637bfa66364bd34626487e8618f94aab9811ad870c476a1d48889d7917375d",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03",
+      "label": "Qwen 3.8 Max — Fast",
+      "provider": "alibaba",
+      "model": "qwen-3.8-max",
+      "model_version": "fast",
+      "condition": "direct",
+      "replicate": "r03",
+      "phase2b_role": "small-effect/high-variance counterexample",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.668675,
+        "broader_resource_supported_coverage": 0.781627,
+        "unresolved_rate": 0.331325,
+        "outside_inventory": 21.0,
+        "total_tokens": 664,
+        "canonical_supported_tokens": 444,
+        "unresolved_tokens": 220
+      },
+      "orthography": {
+        "outside_inventory": 21,
+        "cyrillic": 2,
+        "polish_specific": 0,
+        "other_latin": 6
+      },
+      "output_sha256": "047b2ceb3d4b2cd8f3aa611876f9086ea0da5c392724f31145ec51072b8614dc",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__direct__r03/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03",
+      "label": "Qwen 3.8 Max — Fast",
+      "provider": "alibaba",
+      "model": "qwen-3.8-max",
+      "model_version": "fast",
+      "condition": "primed",
+      "replicate": "r03",
+      "phase2b_role": "small-effect/high-variance counterexample",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.724852,
+        "broader_resource_supported_coverage": 0.83432,
+        "unresolved_rate": 0.275148,
+        "outside_inventory": 20.0,
+        "total_tokens": 676,
+        "canonical_supported_tokens": 490,
+        "unresolved_tokens": 186
+      },
+      "orthography": {
+        "outside_inventory": 20,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 7
+      },
+      "output_sha256": "d5a483d25b7e1473643d62e08a504bc173907e14d12bef977a158bec4f1eb37f",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__alibaba__qwen-3.8-max__fast__primed__r03/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01",
+      "label": "GPT-5.6 Luna — thinking OFF",
+      "provider": "openai",
+      "model": "gpt-5.6-luna",
+      "model_version": "thinkoff",
+      "condition": "direct",
+      "replicate": "r01",
+      "phase2b_role": "neutral general-purpose reference",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.690799,
+        "broader_resource_supported_coverage": 0.772247,
+        "unresolved_rate": 0.309201,
+        "outside_inventory": 30.0,
+        "total_tokens": 663,
+        "canonical_supported_tokens": 458,
+        "unresolved_tokens": 205
+      },
+      "orthography": {
+        "outside_inventory": 30,
+        "cyrillic": 0,
+        "polish_specific": 17,
+        "other_latin": 0
+      },
+      "output_sha256": "9087c266437e1677525ff74895b508e0e5fd913cf017215e7509dd8a081461de",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01",
+      "label": "GPT-5.6 Luna — thinking OFF",
+      "provider": "openai",
+      "model": "gpt-5.6-luna",
+      "model_version": "thinkoff",
+      "condition": "primed",
+      "replicate": "r01",
+      "phase2b_role": "neutral general-purpose reference",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.756391,
+        "broader_resource_supported_coverage": 0.842105,
+        "unresolved_rate": 0.243609,
+        "outside_inventory": 16.0,
+        "total_tokens": 665,
+        "canonical_supported_tokens": 503,
+        "unresolved_tokens": 162
+      },
+      "orthography": {
+        "outside_inventory": 16,
+        "cyrillic": 0,
+        "polish_specific": 3,
+        "other_latin": 0
+      },
+      "output_sha256": "5f9de119ba2e59981e9234d517d362b9d467fb7d39144de135ff22c791ed356c",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02",
+      "label": "GPT-5.6 Luna — thinking OFF",
+      "provider": "openai",
+      "model": "gpt-5.6-luna",
+      "model_version": "thinkoff",
+      "condition": "direct",
+      "replicate": "r02",
+      "phase2b_role": "neutral general-purpose reference",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.65449,
+        "broader_resource_supported_coverage": 0.756469,
+        "unresolved_rate": 0.34551,
+        "outside_inventory": 14.0,
+        "total_tokens": 657,
+        "canonical_supported_tokens": 430,
+        "unresolved_tokens": 227
+      },
+      "orthography": {
+        "outside_inventory": 14,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 1
+      },
+      "output_sha256": "dba5de47b4c124cfb0f3a4e5a8c8ba0a0c0dde56230dddf3989e1b81ac0400f5",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02",
+      "label": "GPT-5.6 Luna — thinking OFF",
+      "provider": "openai",
+      "model": "gpt-5.6-luna",
+      "model_version": "thinkoff",
+      "condition": "primed",
+      "replicate": "r02",
+      "phase2b_role": "neutral general-purpose reference",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.730253,
+        "broader_resource_supported_coverage": 0.816692,
+        "unresolved_rate": 0.269747,
+        "outside_inventory": 16.0,
+        "total_tokens": 671,
+        "canonical_supported_tokens": 490,
+        "unresolved_tokens": 181
+      },
+      "orthography": {
+        "outside_inventory": 16,
+        "cyrillic": 0,
+        "polish_specific": 3,
+        "other_latin": 0
+      },
+      "output_sha256": "15d0f1bc2f755aaf59ed140f5e3055ea19412536d0ce70730900b432cc4ba125",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03",
+      "label": "GPT-5.6 Luna — thinking OFF",
+      "provider": "openai",
+      "model": "gpt-5.6-luna",
+      "model_version": "thinkoff",
+      "condition": "direct",
+      "replicate": "r03",
+      "phase2b_role": "neutral general-purpose reference",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.710606,
+        "broader_resource_supported_coverage": 0.837879,
+        "unresolved_rate": 0.289394,
+        "outside_inventory": 40.0,
+        "total_tokens": 660,
+        "canonical_supported_tokens": 469,
+        "unresolved_tokens": 191
+      },
+      "orthography": {
+        "outside_inventory": 40,
+        "cyrillic": 0,
+        "polish_specific": 1,
+        "other_latin": 2
+      },
+      "output_sha256": "d7b99ee35bc4e1c17883515e7da23ff81ee672a756184a4c430ff89edd09a42b",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__direct__r03/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03",
+      "label": "GPT-5.6 Luna — thinking OFF",
+      "provider": "openai",
+      "model": "gpt-5.6-luna",
+      "model_version": "thinkoff",
+      "condition": "primed",
+      "replicate": "r03",
+      "phase2b_role": "neutral general-purpose reference",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.734904,
+        "broader_resource_supported_coverage": 0.815906,
+        "unresolved_rate": 0.265096,
+        "outside_inventory": 53.0,
+        "total_tokens": 679,
+        "canonical_supported_tokens": 499,
+        "unresolved_tokens": 180
+      },
+      "orthography": {
+        "outside_inventory": 53,
+        "cyrillic": 0,
+        "polish_specific": 9,
+        "other_latin": 7
+      },
+      "output_sha256": "84f6c27799e7b7d216e12869b59875dff28ef2b90c4880fac56e654947c45836",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__openai__gpt-5.6-luna__thinkoff__primed__r03/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r01",
+      "label": "Grok 4.5 Fast",
+      "provider": "xai",
+      "model": "grok",
+      "model_version": "fast",
+      "condition": "direct",
+      "replicate": "r01",
+      "phase2b_role": "independent model-family reference; operator-reported identity",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.675266,
+        "broader_resource_supported_coverage": 0.772382,
+        "unresolved_rate": 0.324734,
+        "outside_inventory": 16.0,
+        "total_tokens": 659,
+        "canonical_supported_tokens": 445,
+        "unresolved_tokens": 214
+      },
+      "orthography": {
+        "outside_inventory": 16,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 3
+      },
+      "output_sha256": "cd393fa185e17065bc8b4b827aa026ec69a7bed61a5c28db1f2b90b6c2f64609",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r01",
+      "label": "Grok 4.5 Fast",
+      "provider": "xai",
+      "model": "grok",
+      "model_version": "fast",
+      "condition": "primed",
+      "replicate": "r01",
+      "phase2b_role": "independent model-family reference; operator-reported identity",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.735513,
+        "broader_resource_supported_coverage": 0.809807,
+        "unresolved_rate": 0.264487,
+        "outside_inventory": 18.0,
+        "total_tokens": 673,
+        "canonical_supported_tokens": 495,
+        "unresolved_tokens": 178
+      },
+      "orthography": {
+        "outside_inventory": 18,
+        "cyrillic": 0,
+        "polish_specific": 4,
+        "other_latin": 1
+      },
+      "output_sha256": "dd2d0ecf134b77337cd6a80575e37c0cd0aa79205ea4d3ebb6abfdbeb9f6b084",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r01/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r01/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r01/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r01/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r02",
+      "label": "Grok 4.5 Fast",
+      "provider": "xai",
+      "model": "grok",
+      "model_version": "fast",
+      "condition": "direct",
+      "replicate": "r02",
+      "phase2b_role": "independent model-family reference; operator-reported identity",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.647779,
+        "broader_resource_supported_coverage": 0.754977,
+        "unresolved_rate": 0.352221,
+        "outside_inventory": 13.0,
+        "total_tokens": 653,
+        "canonical_supported_tokens": 423,
+        "unresolved_tokens": 230
+      },
+      "orthography": {
+        "outside_inventory": 13,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 0
+      },
+      "output_sha256": "568986ddd50eeef343879ec9fddff43469c04d6ace8b41c4f9b4d091f96d762c",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r02",
+      "label": "Grok 4.5 Fast",
+      "provider": "xai",
+      "model": "grok",
+      "model_version": "fast",
+      "condition": "primed",
+      "replicate": "r02",
+      "phase2b_role": "independent model-family reference; operator-reported identity",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.743976,
+        "broader_resource_supported_coverage": 0.826807,
+        "unresolved_rate": 0.256024,
+        "outside_inventory": 14.0,
+        "total_tokens": 664,
+        "canonical_supported_tokens": 494,
+        "unresolved_tokens": 170
+      },
+      "orthography": {
+        "outside_inventory": 14,
+        "cyrillic": 0,
+        "polish_specific": 1,
+        "other_latin": 0
+      },
+      "output_sha256": "1369d69b82c58019b918bc8f6158415c3545f3ddd79c79b229bb89b7656e2434",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r02/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r02/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r02/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r02/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__direct__r03",
+      "label": "Grok 4.5 Fast",
+      "provider": "xai",
+      "model": "grok",
+      "model_version": "fast",
+      "condition": "direct",
+      "replicate": "r03",
+      "phase2b_role": "independent model-family reference; operator-reported identity",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.654021,
+        "broader_resource_supported_coverage": 0.75569,
+        "unresolved_rate": 0.345979,
+        "outside_inventory": 16.0,
+        "total_tokens": 659,
+        "canonical_supported_tokens": 431,
+        "unresolved_tokens": 228
+      },
+      "orthography": {
+        "outside_inventory": 16,
+        "cyrillic": 0,
+        "polish_specific": 0,
+        "other_latin": 3
+      },
+      "output_sha256": "37ca2c9a1538d2ee5d0f9488c70f0a24e8f99c20606e26b3e11adc02ad00a6f1",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": null,
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__direct__r03/output.txt"
+      }
+    },
+    {
+      "run_id": "2026-09-16__p2b-unseen__xai__grok__fast__primed__r03",
+      "label": "Grok 4.5 Fast",
+      "provider": "xai",
+      "model": "grok",
+      "model_version": "fast",
+      "condition": "primed",
+      "replicate": "r03",
+      "phase2b_role": "independent model-family reference; operator-reported identity",
+      "intake_verdict": "complete",
+      "usable": true,
+      "metrics": {
+        "canonical_coverage": 0.711044,
+        "broader_resource_supported_coverage": 0.791225,
+        "unresolved_rate": 0.288956,
+        "outside_inventory": 26.0,
+        "total_tokens": 661,
+        "canonical_supported_tokens": 470,
+        "unresolved_tokens": 191
+      },
+      "orthography": {
+        "outside_inventory": 26,
+        "cyrillic": 0,
+        "polish_specific": 7,
+        "other_latin": 6
+      },
+      "output_sha256": "2d9aeb71033bb112019e3142a5815dba6a53b2ae9fa002257af395a4a210e770",
+      "source_sha256": "cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4",
+      "corpus_sha256": "aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857",
+      "artifact_paths": {
+        "evaluation": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r03/evaluation.json",
+        "orthography": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r03/orthography.json",
+        "intake": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r03/intake.json",
+        "output": "experiments/exp004-modelscreen/phase2b/outputs/2026-09-16__p2b-unseen__xai__grok__fast__primed__r03/output.txt"
+      }
+    }
+  ]
+}
