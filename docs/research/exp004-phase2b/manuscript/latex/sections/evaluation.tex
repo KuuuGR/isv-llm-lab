@@ -2,19 +2,41 @@
 \label{sec:evaluation}
 
 \subsection{Primary and secondary metrics}
-Each completed run is scored with the project's deterministic ISV evaluation stack (no LLM calls during scoring).
+Each completed run is scored with the project's deterministic ISV evaluation stack implemented in \texttt{src/isv\_eval/} (CLI entry via the project's \texttt{isv-eval} tooling).
+Scoring does not call an LLM.
 The metrics used in Phase~2B are:
 
 \begin{itemize}[leftmargin=*]
-  \item \textbf{canonical coverage} (primary): resource-supported coverage against the canonical ISV lexical inventory used by the evaluator;
-  \item \textbf{broader resource-supported coverage}: a broader inventory variant;
-  \item \textbf{unresolved rate}: proportion of tokens not resolved to supported inventory entries under the evaluator construction;
-  \item \textbf{orthography outside-inventory}: character-level count of orthographic material outside the expected inventory (separate diagnostic).
+  \item \textbf{canonical coverage} (primary): share of lexical tokens classified as resource-supported under the canonical inventory policy;
+  \item \textbf{broader resource-supported coverage}: canonical-supported tokens plus additional lexical tokens with qualifying exact attestation in audited alternative resources;
+  \item \textbf{unresolved rate}: share of lexical tokens in the unresolved (unsupported) bucket;
+  \item \textbf{orthography outside-inventory}: character-level count of letters/symbols outside the accepted Interslavic Latin inventory (separate diagnostic in \texttt{src/isv\_eval/orthography.py}).
 \end{itemize}
 
 Manuscript quantitative claims focus on canonical coverage and its paired $\Delta$.
 Other metrics are retained in the machine-readable datasets for audit and are not collapsed into a single composite score.
 In particular, unresolved rate tends to move inversely with canonical coverage under the evaluator construction; reporting both without inventing a composite avoids double-counting the same inventory phenomenon under two names.
+
+\subsection{Operational definition of canonical coverage}
+The evaluator tokenizes model output and distinguishes \emph{lexical} (word-like) tokens from non-lexical tokens (punctuation, numbers, and similar).
+Coverage denominators use lexical tokens only, as documented in the metrics module denominator policy.
+
+\paragraph{Token and lookup policy.}
+A token is treated as lexical when it contains at least one Unicode letter (\texttt{src/isv\_eval/normalize.py}).
+Surface forms are not rewritten for display; normalization builds lookup keys only (NFC + lowercase; an optional secondary folded key for selected etymological characters).
+Cyrillic tokens may be transliterated to Latin for lookup by the morphology backend.
+Each lexical token is classified into inventory buckets used by the metrics module (\texttt{src/isv\_eval/metrics.py}, \texttt{classifier.py}, \texttt{lexicon.py}):
+bucket~A (exact dictionary match), bucket~B (morphologically justified under available ISV resources), or bucket~C (unresolved).
+Canonical coverage is $(A+B)/\text{lexical\_tokens}$.
+Broader coverage additionally counts selected unresolved tokens that carry exact alternative-resource attestation; the broader tier is an evidence estimate, not a validity claim.
+
+\paragraph{Orthography diagnostic.}
+Orthography outside-inventory counts characters outside the accepted Interslavic Latin inventory (standard letters, etymological extensions, and sanctioned alternatives documented in the orthography module).
+Polish-specific letters absent from that inventory (e.g.\ \emph{\k{a}}, \emph{\l{}}, \emph{\'{o}}, \emph{\.{z}}) are flagged when present.
+The orthography check never repairs text and never enters the coverage denominators.
+
+\paragraph{Implementation location.}
+Metric definitions and denominator policy are implemented in \texttt{src/isv\_eval/metrics.py}; character audit in \texttt{src/isv\_eval/orthography.py}; Phase~2B aggregates regenerate from per-run \texttt{evaluation.json} / \texttt{orthography.json} via \texttt{scripts/analyze\_exp004\_phase2b.py}.
 
 \subsection{What coverage is not}
 Canonical coverage is a screening metric for resource-supported ISV lexical realization.
@@ -37,7 +59,6 @@ Invalid pairs are excluded from primary paired inference rather than imputed.
 For each regime, all valid Direct$\leftrightarrow$Primed pairs were inspected in a descriptive qualitative audit (HIGH and UNSEEN: 21 pairs; LOW primary: 18 valid pairs).
 Audits record apparent classes such as lexical borrowing, orthographic cleanup, corpus-opening alignment, and degradations, without adjudicating full linguistic correctness.
 Opening-overlap checks against a corpus narrative excerpt are used as an operational detector for winter-opening near-copy, especially to contrast HIGH against LOW/UNSEEN.
-
 
 \subsection{Reporting conventions used in Results}
 Unless otherwise stated, coverage means are percentages averaged over three Direct or three Primed runs, and $\Delta$ means are averages of three paired differences.

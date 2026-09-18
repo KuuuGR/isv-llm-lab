@@ -1,0 +1,62 @@
+regime,config_short,config_label,replicate,delta_pp,validity,plotted
+HIGH,Gemini ON,Gemini 3.6 Flash — extended thinking ON,r01,1.89,valid,1
+HIGH,Gemini ON,Gemini 3.6 Flash — extended thinking ON,r02,-3.77,valid,1
+HIGH,Gemini ON,Gemini 3.6 Flash — extended thinking ON,r03,0.23,valid,1
+HIGH,Gemini OFF,Gemini 3.6 Flash — extended thinking OFF,r01,-5.39,valid,1
+HIGH,Gemini OFF,Gemini 3.6 Flash — extended thinking OFF,r02,3.12,valid,1
+HIGH,Gemini OFF,Gemini 3.6 Flash — extended thinking OFF,r03,-2.98,valid,1
+HIGH,Claude,Claude Sonnet 5 — Medium (default),r01,16.69,valid,1
+HIGH,Claude,Claude Sonnet 5 — Medium (default),r02,13.96,valid,1
+HIGH,Claude,Claude Sonnet 5 — Medium (default),r03,12.20,valid,1
+HIGH,DeepSeek,DeepSeek V3 Expert — DeepThink ON,r01,9.24,valid,1
+HIGH,DeepSeek,DeepSeek V3 Expert — DeepThink ON,r02,11.82,valid,1
+HIGH,DeepSeek,DeepSeek V3 Expert — DeepThink ON,r03,6.68,valid,1
+HIGH,Qwen,Qwen 3.8 Max — Fast,r01,8.70,valid,1
+HIGH,Qwen,Qwen 3.8 Max — Fast,r02,8.07,valid,1
+HIGH,Qwen,Qwen 3.8 Max — Fast,r03,-1.23,valid,1
+HIGH,GPT-5.6,GPT-5.6 Luna — thinking OFF,r01,9.43,valid,1
+HIGH,GPT-5.6,GPT-5.6 Luna — thinking OFF,r02,7.06,valid,1
+HIGH,GPT-5.6,GPT-5.6 Luna — thinking OFF,r03,9.35,valid,1
+HIGH,Grok,Grok 4.5 Fast,r01,15.37,valid,1
+HIGH,Grok,Grok 4.5 Fast,r02,19.89,valid,1
+HIGH,Grok,Grok 4.5 Fast,r03,8.20,valid,1
+LOW,Gemini ON,Gemini 3.6 Flash — extended thinking ON,r01,15.84,valid,1
+LOW,Gemini ON,Gemini 3.6 Flash — extended thinking ON,r02,11.37,valid,1
+LOW,Gemini ON,Gemini 3.6 Flash — extended thinking ON,r03,12.48,valid,1
+LOW,Gemini OFF,Gemini 3.6 Flash — extended thinking OFF,r01,13.74,valid,1
+LOW,Gemini OFF,Gemini 3.6 Flash — extended thinking OFF,r02,11.55,valid,1
+LOW,Gemini OFF,Gemini 3.6 Flash — extended thinking OFF,r03,5.91,valid,1
+LOW,Claude,Claude Sonnet 5 — Medium (default),r01,13.82,valid,1
+LOW,Claude,Claude Sonnet 5 — Medium (default),r02,9.24,valid,1
+LOW,Claude,Claude Sonnet 5 — Medium (default),r03,13.27,valid,1
+LOW,DeepSeek,DeepSeek V3 Expert — DeepThink ON,r01,5.43,valid,1
+LOW,DeepSeek,DeepSeek V3 Expert — DeepThink ON,r02,7.92,valid,1
+LOW,DeepSeek,DeepSeek V3 Expert — DeepThink ON,r03,5.22,valid,1
+LOW,Qwen,Qwen 3.8 Max — Fast,,,INVALID — MODEL MISMATCH,0
+LOW,GPT-5.6,GPT-5.6 Luna — thinking OFF,r01,4.85,valid,1
+LOW,GPT-5.6,GPT-5.6 Luna — thinking OFF,r02,6.37,valid,1
+LOW,GPT-5.6,GPT-5.6 Luna — thinking OFF,r03,4.73,valid,1
+LOW,Grok,Grok 4.5 Fast,r01,8.21,valid,1
+LOW,Grok,Grok 4.5 Fast,r02,5.13,valid,1
+LOW,Grok,Grok 4.5 Fast,r03,-1.50,valid,1
+UNSEEN,Gemini ON,Gemini 3.6 Flash — extended thinking ON,r01,2.12,valid,1
+UNSEEN,Gemini ON,Gemini 3.6 Flash — extended thinking ON,r02,6.08,valid,1
+UNSEEN,Gemini ON,Gemini 3.6 Flash — extended thinking ON,r03,8.84,valid,1
+UNSEEN,Gemini OFF,Gemini 3.6 Flash — extended thinking OFF,r01,7.97,valid,1
+UNSEEN,Gemini OFF,Gemini 3.6 Flash — extended thinking OFF,r02,3.96,valid,1
+UNSEEN,Gemini OFF,Gemini 3.6 Flash — extended thinking OFF,r03,6.35,valid,1
+UNSEEN,Claude,Claude Sonnet 5 — Medium (default),r01,7.14,valid,1
+UNSEEN,Claude,Claude Sonnet 5 — Medium (default),r02,5.14,valid,1
+UNSEEN,Claude,Claude Sonnet 5 — Medium (default),r03,6.96,valid,1
+UNSEEN,DeepSeek,DeepSeek V3 Expert — DeepThink ON,r01,2.91,valid,1
+UNSEEN,DeepSeek,DeepSeek V3 Expert — DeepThink ON,r02,5.00,valid,1
+UNSEEN,DeepSeek,DeepSeek V3 Expert — DeepThink ON,r03,3.58,valid,1
+UNSEEN,Qwen,Qwen 3.8 Max — Fast,r01,3.67,valid,1
+UNSEEN,Qwen,Qwen 3.8 Max — Fast,r02,1.27,valid,1
+UNSEEN,Qwen,Qwen 3.8 Max — Fast,r03,5.62,valid,1
+UNSEEN,GPT-5.6,GPT-5.6 Luna — thinking OFF,r01,6.56,valid,1
+UNSEEN,GPT-5.6,GPT-5.6 Luna — thinking OFF,r02,7.58,valid,1
+UNSEEN,GPT-5.6,GPT-5.6 Luna — thinking OFF,r03,2.43,valid,1
+UNSEEN,Grok,Grok 4.5 Fast,r01,6.02,valid,1
+UNSEEN,Grok,Grok 4.5 Fast,r02,9.62,valid,1
+UNSEEN,Grok,Grok 4.5 Fast,r03,5.70,valid,1

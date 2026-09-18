@@ -1,5 +1,9 @@
-% EXP-004 Phase 2B manuscript — Natural Language Processing (Cambridge)
+% EXP-004 Phase 2B manuscript — intended for Natural Language Processing (Cambridge UP).
 % Working draft; not submission-ready until authorship/declarations confirmed.
+% Journal-template note: the official CUP NLP class/style (cupnlp / Overleaf CUP Medium
+% template) is not vendored in this repository. Structure below follows CUP NLP author
+% expectations (title/author/abstract/keywords; natbib; declarations) on standard article
+% until the publisher class file is installed for camera-ready.
 \documentclass[11pt,a4paper]{article}
 
 \usepackage[margin=2.5cm]{geometry}
@@ -23,6 +27,7 @@
 \usepackage{subcaption}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
+\usepgfplotslibrary{groupplots}
 \usepackage{pgfplotstable}
 \usepackage{siunitx}
 \usepackage{csquotes}
@@ -69,9 +74,9 @@ The primary metric is canonical ISV lexical coverage; the paired effect is $\Del
 Analysis is descriptive ($n{=}3$); no significance tests and no causal claims are made.
 On a matched six-configuration comparison (excluding one invalid LOW pairing), mean $\Delta$ is $+7.39$ percentage points (pp) on HIGH, $+8.53$\,pp on LOW, and $+5.78$\,pp on UNSEEN.
 Positive mean $\Delta$ is common but not universal: two Gemini configurations are negative on HIGH yet positive on LOW and UNSEEN.
-Qualitative audits show that large HIGH gains often co-occur with corpus-opening motif reuse, whereas LOW and UNSEEN positives frequently involve lexical borrowing and orthographic cleanup without winter-narrative opening near-copy.
+Qualitative audits show that large HIGH gains often co-occur with corpus-opening motif reuse, whereas LOW and UNSEEN positives recurrently involve lexical borrowing and orthographic cleanup without winter-narrative opening near-copy.
 One Qwen LOW paired cell is invalid due to a Direct/Primed model-identity mismatch and is excluded from primary paired inference.
-We conclude that authentic ISV corpus priming is associated with generally positive but strongly configuration-dependent coverage shifts that can persist under lower overlap and domain-unseen sources, without establishing that priming universally improves translation quality.
+We conclude that authentic ISV corpus priming is associated with generally positive but strongly configuration-dependent coverage shifts---with the necessary caveat that HIGH contains negative Gemini mean $\Delta$s and that priming is not universal---that can persist under lower overlap and domain-unseen sources, without establishing that priming universally improves translation quality.
 \end{abstract}
 
 \noindent\textbf{Keywords:}

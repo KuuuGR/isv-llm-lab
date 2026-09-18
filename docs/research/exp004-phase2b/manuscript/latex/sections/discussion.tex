@@ -2,54 +2,35 @@
 \label{sec:discussion}
 
 \subsection{What the experiment establishes}
-Across three source regimes, authentic ISV corpus priming is associated with generally positive but strongly configuration-dependent shifts in canonical coverage.
-Matched-six mean $\Delta$ is positive on HIGH, LOW, and UNSEEN.
-UNSEEN shows uniform replicate positivity.
-Qualitative audits show that positive $\Delta$ can occur with or without corpus-opening near-copy, depending on regime.
-Operationally, the study also establishes that execution integrity (same-model pairing; recorded protocol deviations) must be part of the scientific record, because one invalid cell and one multi-message constraint materially affect interpretation.
+Across three source regimes, authentic ISV corpus priming is associated with generally positive but strongly configuration-dependent shifts in canonical coverage---with the necessary caveat that HIGH contains negative Gemini mean $\Delta$s and that priming is not universal.
+Matched-six mean $\Delta$ is positive on HIGH, LOW, and UNSEEN; UNSEEN shows uniform replicate positivity.
+Qualitative audits show that positive $\Delta$ can occur with or without corpus-opening near-copy, depending on regime (\Cref{sec:qual}).
+Operationally, execution integrity (same-model pairing; recorded protocol deviations) belongs in the scientific record because one invalid cell and one multi-message constraint materially affect interpretation.
 
 \subsection{What it does not establish}
 The study does not establish that priming always improves translation quality, that overlap causes larger effects, that any model is best, or that observed $\Delta$ is causally produced by corpus content alone.
 It also does not establish statistical significance.
 Readers should resist converting matched-six means into a claim that ``priming improves ISV by about 6--9 points'' as if that were a portable constant.
 
-\subsection{Why cross-regime consistency matters}
+\subsection{Why cross-regime consistency and heterogeneity matter}
 If positive $\Delta$ appeared only on HIGH, a plausible scepticism would be that results merely reward thematic overlap.
 LOW and UNSEEN reduce that scepticism for the coverage metric, while still leaving length/genre confounds.
-Cross-regime persistence is therefore evidence of broader association, not proof of a universal intervention.
-In particular, UNSEEN matters because it extends the association beyond narrative fiction into a short educational scientific domain.
-
-\subsection{Why configuration heterogeneity matters}
-Gemini's HIGH$\rightarrow$LOW reversal shows that regime-averaged slogans fail.
-Engineering or scientific summaries that report only a global mean would hide opposite behaviours that are empirically present.
-Heterogeneity also cautions against treating vendor labels as interchangeable ``LLM translation'' units: the same priming corpus and source can yield different signed outcomes under different configurations.
+Cross-regime persistence is therefore evidence of broader association within the tested regimes, not proof of a universal intervention.
+At the same time, Gemini's HIGH$\rightarrow$LOW reversal shows that regime-averaged slogans fail: the same priming corpus can yield differently signed outcomes by configuration (\Cref{sec:results,sec:cross}).
 
 \subsection{Metric vs.\ quality}
-Because coverage is sensitive to inventory hits and orthography, Discussion must keep RQ5--RQ6 in view: textual mechanisms that move the metric are only partially aligned with naive notions of ``better translation.''
+Because coverage is sensitive to inventory hits and orthography, textual pathways that move the metric are only partially aligned with naive notions of ``better translation.''
 A Primed output can gain coverage by adopting inventory-supported forms while still containing naming instability, formatting artifacts, or unassessed adequacy errors.
 Future work should add human evaluation protocols before claiming quality gains.
 
 \subsection{A restrained conceptual framing}
 A useful descriptive framing---not a formal causal law---is that priming appears to be a context-sensitive intervention whose observed effect depends on the interaction between model configuration and source regime.
-That framing fits the tables without requiring an overfitted story about overlap, length, or a single textual mechanism.
-
-
-\subsection{Implications for interpreting ``priming success''}
-If ``success'' is defined as a positive configuration mean $\Delta$ on a single high-overlap narrative, several configurations look successful on HIGH while Gemini does not.
-If ``success'' is defined as persistence of positive mean $\Delta$ on LOW and UNSEEN, Gemini looks successful there while the HIGH negatives remain part of the same evidence pack.
-The only non-misleading definition for this paper is therefore regime-conditional and configuration-conditional.
-That definition is less slogan-friendly, but it matches the tables.
+``Success'' is therefore regime-conditional and configuration-conditional: HIGH-only positives and LOW/UNSEEN positives need not coincide.
 
 \subsection{Relation to in-context learning literature}
 Prior LLM-MT work already shows that prompt content and domain matter~\citep{hendy2023good,moslem2023adaptive,zhu2023multilingual}.
-Our contribution is not to rediscover that fact in the abstract, but to measure a specific Direct/Primed contrast for Polish-to-ISV under three deliberately chosen source regimes with frozen artifacts and paired repeats.
-The ISV coverage metric then makes the result auditable inside this repository even though it is not a substitute for human quality evaluation.
-
-\subsection{Answering RQ4--RQ6 in discussion form}
-RQ4 is answered by heterogeneity itself: reversals, attenuation, missing cells, and stable positives coexist.
-RQ5 is answered by the audit inventory: opening reuse, lexical borrowing, orthographic cleanup, naming churn, and structure preservation.
-RQ6 is answered negatively with respect to any single necessary textual mechanism: corpus-opening copying is salient on HIGH but not required for positive $\Delta$ on LOW/UNSEEN.
-
+Our contribution measures a specific Direct/Primed contrast for Polish-to-ISV under three frozen source regimes with paired repeats.
+The ISV coverage metric makes the result auditable inside this repository even though it is not a substitute for human quality evaluation.
 
 \subsection{External validity}
 The study uses contemporary vendor interfaces and named configurations recorded at collection time.

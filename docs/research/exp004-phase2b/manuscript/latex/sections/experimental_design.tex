@@ -5,11 +5,11 @@
 Each translation session is assigned to one of two conditions:
 
 \begin{itemize}[leftmargin=*]
-  \item \textbf{Direct}: the model receives the Polish source and a translation instruction into Interslavic, without the authentic priming corpus.
-  \item \textbf{Primed}: the model first receives the frozen authentic ISV corpus, then the translation instruction and Polish source.
+  \item \textbf{Direct}: a fresh-session Polish$\rightarrow$ISV translation without the authentic priming corpus.
+  \item \textbf{Primed}: the same frozen Polish source after the authentic ISV corpus has been presented in the same session (corpus first, then translation).
 \end{itemize}
 
-The corpus is never shortened for any configuration.
+The corpus is never shortened, paraphrased, or filtered for any configuration.
 For Gemini Primed runs, corpus delivery uses a recorded multi-message protocol (corpus in message~1; translation request in message~2) because of interface/context-window constraints (\Cref{sec:repro}).
 All other scientific factors---source text, configuration identity, and repeat structure---are held as constant as the collection interfaces allow.
 
@@ -40,8 +40,12 @@ This is a deliberate epistemological choice aligned with the sample size, not an
 
 \input{tables/table1_design}
 
-\subsection{Operator protocol notes}
-Runs were collected as independent sessions following the Phase~2B kits prepared for each regime.
-Intake verification checked completeness and identity metadata before evaluation.
-Analysis scripts aggregate already-evaluated runs and do not call LLMs.
-These process controls do not eliminate vendor stochasticity, but they make the Direct/Primed pairing auditable after the fact.
+\subsection{Prompt kit and execution reproducibility}
+Operator prompt kits for each regime live under
+\texttt{experiments/exp004-modelscreen/phase2b/operator-prompts/}
+(Direct single-message files; Primed message~1 corpus + message~2 translation files; per-regime manifests).
+Prompt files are largely gitignored as local collection artifacts; the committed README/manifest records enumerate filenames, configuration IDs, and the Gemini multi-message convention.
+Collection used vendor chat/API surfaces corresponding to the seven named configurations.
+Exact vendor decoding hyperparameters (temperature, top-$p$, seed, etc.) are \emph{not} recorded as a controlled experimental factor beyond the named mode switches (e.g.\ Gemini extended thinking ON/OFF; DeepSeek DeepThink ON; GPT thinking OFF; Qwen/Grok Fast labels).
+Where an interface default was used, we do not invent a numeric setting after the fact.
+Sessions were collected as independent fresh chats; intake verified completeness and identity metadata before evaluation; analysis scripts aggregate already-evaluated runs without additional LLM calls.

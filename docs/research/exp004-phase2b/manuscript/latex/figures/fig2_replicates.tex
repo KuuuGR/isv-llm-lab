@@ -1,35 +1,79 @@
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}
-\begin{axis}[
-  width=0.95\linewidth,
-  height=6.8cm,
-  ylabel={Replicate $\Delta$ (pp)},
-  xlabel={UNSEEN pairs (all 21 positive)},
-  only marks,
-  mark size=2.2pt,
-  ymin=0, ymax=11,
-  xmin=0.5, xmax=21.5,
-  xtick={1,7,14,21},
-  grid=major,
-  grid style={dashed,gray!25},
+\begin{groupplot}[
+  group style={
+    group size=1 by 3,
+    vertical sep=1.35cm,
+    xticklabels at=edge bottom,
+    ylabels at=edge left,
+  },
+  width=0.96\linewidth,
+  height=4.15cm,
+  ymin=-8, ymax=22,
+  xmin=0.35, xmax=7.65,
+  xtick={1,2,3,4,5,6,7},
+  xticklabels={Gemini ON,Gemini OFF,Claude,DeepSeek,Qwen,GPT-5.6,Grok},
+  x tick label style={rotate=28,anchor=east,font=\scriptsize},
+  ylabel={$\Delta$ (pp)},
+  y label style={font=\small},
+  ymajorgrids=true,
+  grid style={dashed,gray!28},
 ]
-% All 21 UNSEEN replicate deltas from combined analysis (config order)
-\addplot[black] coordinates {
-  (1,2.12) (2,6.08) (3,8.84)
-  (4,7.97) (5,3.96) (6,6.35)
-  (7,7.14) (8,5.14) (9,6.96)
-  (10,2.91) (11,5.00) (12,3.58)
-  (13,3.67) (14,1.27) (15,5.62)
-  (16,6.56) (17,7.58) (18,2.43)
-  (19,6.02) (20,9.62) (21,5.70)
-};
-\addplot[gray,dashed,forget plot] coordinates {(0.5,0) (21.5,0)};
-\end{axis}
+
+% HIGH: 21 valid pairs
+\nextgroupplot[
+  title={\small HIGH ($n{=}21$ paired replicates)},
+  title style={at={(0.5,1.02)},anchor=south},
+]
+\addplot[
+  only marks,
+  mark=*,
+  mark size=2.0pt,
+  black,
+] table[x=x, y=y] {data/fig2_high_points.dat};
+\draw[gray!70!black, dashed]
+  (axis cs:0.35,0) -- (axis cs:7.65,0);
+
+% LOW: 18 valid pairs; Qwen missing
+\nextgroupplot[
+  title={\small LOW ($n{=}18$ valid paired replicates; Qwen unavailable)},
+  title style={at={(0.5,1.02)},anchor=south},
+]
+\addplot[
+  only marks,
+  mark=*,
+  mark size=2.0pt,
+  black,
+] table[x=x, y=y] {data/fig2_low_points.dat};
+\draw[gray!70!black, dashed]
+  (axis cs:0.35,0) -- (axis cs:7.65,0);
+\node[font=\scriptsize\itshape, gray!50!black, anchor=center]
+  at (axis cs:5,0) {n/a};
+
+% UNSEEN: 21 valid pairs
+\nextgroupplot[
+  title={\small UNSEEN ($n{=}21$ paired replicates)},
+  title style={at={(0.5,1.02)},anchor=south},
+]
+\addplot[
+  only marks,
+  mark=*,
+  mark size=2.0pt,
+  black,
+] table[x=x, y=y] {data/fig2_unseen_points.dat};
+\draw[gray!70!black, dashed]
+  (axis cs:0.35,0) -- (axis cs:7.65,0);
+
+\end{groupplot}
 \end{tikzpicture}
-\caption{UNSEEN replicate-level paired $\Delta$ values (canonical coverage).
-All 21 Direct$\leftrightarrow$Primed pairs are positive.
-Points are ordered by configuration (Gemini ON, Gemini OFF, Claude, DeepSeek, Qwen, GPT-5.6 Luna, Grok), three replicates each.
-Descriptive display only.}
+\caption{Replicate-level paired coverage shifts across regimes.
+Each point is one Direct$\rightarrow$Primed paired replicate,
+$\Delta = \mathrm{Primed} - \mathrm{Direct}$ (canonical coverage, percentage points).
+Sixty valid paired observations are shown (HIGH~21, LOW~18, UNSEEN~21).
+Within each panel, points are grouped by configuration with a small horizontal offset for the three repeats; points are not connected.
+Qwen on LOW is marked unavailable because the paired cell was invalidated by the documented Direct/Primed model mismatch and is not plotted.
+The horizontal dashed line marks $\Delta{=}0$.
+Descriptive display only; no inferential intervals or model ranking.}
 \label{fig:replicates}
 \end{figure}
