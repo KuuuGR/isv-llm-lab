@@ -1,0 +1,47 @@
+\section{Corpus and Source Regimes}
+\label{sec:corpus}
+
+\subsection{Authentic priming corpus}
+All Primed runs use the frozen authentic three-register corpus \texttt{phase2a-authentic-isv} v1
+(SHA-256 \texttt{aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857}).
+The corpus is held constant across regimes and configurations.
+It is never shortened, paraphrased, or filtered to evade interface constraints.
+Prior corpus self-evaluation under the same evaluator stack provides a reference ceiling for reading coverage magnitudes; it is not a translation baseline and is not used as a Direct/Primed control.
+
+Keeping the corpus fixed is essential for the scientific contrast: regime differences are differences in the Polish source (and associated genre/length/overlap properties), not silent edits to the priming material.
+
+\subsection{Source regimes}
+\Cref{tab:design} summarizes the three regimes.
+Length and genre differ jointly with overlap by design.
+
+\paragraph{HIGH.}
+Frozen Polish narrative \emph{Iskra i Wieloryb --- wersja z oryginalnymi nazwami} v1
+(SHA-256 \texttt{ab8a0dcf7352789c09c4aca132c086999c861407e4cd682ee9414aab5b792f63}; 30\,061 bytes / 440 lines).
+Classification: \texttt{high\_overlap\_corpus\_inspired}.
+The story deliberately shares motifs with the priming corpus (for example winter narrative material associated with the corpus register excerpt used in qualitative opening checks).
+HIGH is therefore not an ``independent same-topic'' control; it is the high-overlap arm of the design.
+
+\paragraph{LOW.}
+Frozen Polish narrative \emph{Podk\l{}ady} v1
+(SHA-256 \texttt{ce1c4fca03fe9cb2c5f8181ab45c91767759a0c785f0a066543d95bc32f5271b}; 15\,249 bytes / 141 lines).
+Classification: \texttt{low\_overlap}.
+Contemporary municipal/archive plot with intentionally weak thematic overlap with the priming corpus and with the HIGH story.
+Clean-prose boundary decisions (exclusion of casting notes and unrelated preamble material) were operator-approved before freeze.
+
+\paragraph{UNSEEN.}
+Frozen Polish educational theory text \emph{\'{C}wiczenie 2.2 --- Biofizyka g\l{}osu ludzkiego} v1
+(SHA-256 \texttt{cd3bfb9a819b415e3cfb382e0737ba22540ccb679d0d34983c40dfbf89a9f7f4}; 5\,676 bytes after validation hash basis).
+Classification: \texttt{unseen\_domain}.
+Voice/speech biophysics exposition; domain absent from HIGH/LOW narrative registers and from the priming corpus domains under the project's validation record.
+Exact bibliographic provenance of the teaching-derived source is incompletely known and is disclosed as a limitation.
+
+\paragraph{Design confounds (disclosed).}
+Overlap, length, and genre are not orthogonally crossed.
+UNSEEN is shorter and expository; HIGH/LOW are longer narratives.
+Magnitude comparisons across regimes are therefore descriptive and must not be read as causal attributions to overlap alone.
+The manuscript treats these differences as first-class design characteristics rather than as nuisances to be narrated away after seeing the results.
+
+
+\subsection{Why three regimes rather than one}
+A single-regime study could not separate high-overlap narrative behaviour from lower-overlap or domain-unseen behaviour.
+Three regimes increase confounds (length/genre) but buy interpretive breadth: persistence of positive $\Delta$ under LOW and UNSEEN cannot be dismissed as merely HIGH-overlap artefact, while HIGH still documents that negatives are possible even when overlap is intentional.

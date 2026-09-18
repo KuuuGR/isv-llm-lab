@@ -1,0 +1,31 @@
+\section{Models and Experimental Conditions}
+\label{sec:models}
+
+We evaluate seven Phase~2B configurations, named exactly as in the canonical experiment artifacts (\Cref{tab:models}).
+Configurations differ by vendor model and, where applicable, thinking/mode switches exposed by the interface used for collection.
+No configuration is treated as a gold standard.
+
+\input{tables/table2_models}
+
+\paragraph{Gemini ON vs.\ OFF.}
+Two Gemini 3.6 Flash configurations differ only in the extended-thinking switch (ON vs.\ OFF).
+Both use the multi-message Primed protocol described in \Cref{sec:repro}.
+
+\paragraph{What is held constant.}
+Within a regime, all configurations translate the same frozen Polish source under the same Direct/Primed definitions, with three independent repeats.
+Cross-regime comparisons reuse the same configuration list.
+
+\paragraph{What is not claimed.}
+Vendor display names and mode switches are operational labels for reproducibility.
+We do not equate interface labels with internal model checkpoints beyond what the operator interfaces exposed at collection time, and we do not rank configurations by quality.
+
+
+\subsection{Collection interfaces as part of the method}
+Because the experiment uses vendor chat/API surfaces rather than a single open-weights checkpoint under identical decoding controls, configuration identity includes the operator-facing mode switches recorded at collection time.
+That is a feature of the ecological validity of the study and a limitation for mechanistic attribution to a specific open checkpoint.
+The manuscript therefore reports configuration labels exactly and avoids rewriting them into unofficial synonyms.
+
+
+\subsection{Non-goals of the configuration set}
+The seven configurations were chosen as representative Phase~2B operator-facing setups, not as an exhaustive survey of all vendors or decoding hyperparameters.
+Absence of an open-weights local baseline is a limitation for mechanistic replication, not an accidental omission in the Results tables.

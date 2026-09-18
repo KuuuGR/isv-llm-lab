@@ -1,0 +1,24 @@
+\begin{table}[t]
+\centering
+\caption{Central cross-regime configuration mean $\Delta$ (canonical coverage, percentage points).
+LOW Qwen cell is invalid and shown as ---.}
+\label{tab:deltas}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+\textbf{Configuration} & \textbf{HIGH $\Delta$} & \textbf{LOW $\Delta$} & \textbf{UNSEEN $\Delta$} \\
+\midrule
+Gemini ON & $-0.55$ & $+13.23$ & $+5.68$ \\
+Gemini OFF & $-1.75$ & $+10.40$ & $+6.09$ \\
+Claude Sonnet 5 & $+14.28$ & $+12.11$ & $+6.42$ \\
+DeepSeek Expert ON & $+9.25$ & $+6.19$ & $+3.83$ \\
+Qwen 3.8 Max Fast & $+5.18$ & --- & $+3.52$ \\
+GPT-5.6 Luna & $+8.62$ & $+5.31$ & $+5.52$ \\
+Grok 4.5 Fast & $+14.49$ & $+3.95$ & $+7.12$ \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize
+Source: \texttt{experiments/exp004-modelscreen/phase2b/analysis/combined/cross\_regime\_table.csv}.
+Each cell is the mean of three replicate $\Delta_i$ values except LOW Qwen (invalid model mismatch).
+\end{flushleft}
+\end{table}

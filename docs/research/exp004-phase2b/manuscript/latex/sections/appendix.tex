@@ -1,0 +1,26 @@
+\section*{Appendix A: Extended descriptive notes}
+\label{sec:appendix}
+\addcontentsline{toc}{section}{Appendix A: Extended descriptive notes}
+
+This appendix restates selected descriptive facts already present in the combined synthesis so that the main text can remain readable while the PDF remains self-contained for review.
+
+\subsection*{A.1 Matched-six membership}
+The matched-six comparison includes Gemini ON, Gemini OFF, Claude Sonnet 5, DeepSeek Expert ON, GPT-5.6 Luna, and Grok 4.5 Fast.
+It excludes Qwen 3.8 Max Fast solely because the LOW paired cell is invalid.
+HIGH and UNSEEN Qwen results remain valid within their regimes and are reported in \Cref{tab:deltas}, but they are not averaged into the matched-six means.
+
+\subsection*{A.2 UNSEEN uniform positivity}
+UNSEEN contributes 21 paired replicate $\Delta$ values, all positive, ranging from $+1.27$\,pp (Qwen r02) to $+9.62$\,pp (Grok r02) in the combined synthesis.
+Uniform positivity is a sample property of these 21 pairs; it is not a significance claim and does not imply that every future unseen-domain source would behave identically.
+
+\subsection*{A.3 HIGH mixed-sign cells}
+On HIGH, mixed-sign replicate patterns appear for Gemini ON ($+1.89$, $-3.77$, $+0.23$\,pp), Gemini OFF ($-5.39$, $+3.12$, $-2.98$\,pp), and Qwen ($+8.70$, $+8.07$, $-1.23$\,pp).
+These cells illustrate why mean $\Delta$ alone can mislead when signs disagree within $n{=}3$.
+
+\subsection*{A.4 LOW Grok mixed cell}
+On LOW, Grok is the only valid configuration with a mixed-sign pattern among primary cells; one replicate is negative ($-1.50$\,pp) while the configuration mean remains positive ($+3.95$\,pp).
+This is a descriptive caveat for LOW Grok, not a reason to invalidate the configuration.
+
+\subsection*{A.5 Artifact precedence}
+If a historical checkpoint states that UNSEEN is incomplete, the current UNSEEN analysis and \texttt{analysis/combined/} synthesis take precedence for manuscript purposes.
+Historical HIGH$\leftrightarrow$LOW-only synthesis remains useful as a dated exploratory record but is not the final three-regime evidence pack.

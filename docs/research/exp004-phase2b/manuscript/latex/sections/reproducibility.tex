@@ -1,0 +1,32 @@
+\section{Reproducibility and Operational Findings}
+\label{sec:repro}
+
+\subsection{Qwen LOW invalid pairing}
+For LOW Qwen 3.8 Max --- Fast, Direct runs used the intended model, but Primed runs were executed with \textbf{Qwen3.7-Plus} (default-selected in the chat interface).
+The paired cell is therefore \texttt{INVALID --- MODEL MISMATCH}.
+Any historical numerical $\Delta$ for that cell (including $-12.08$\,pp) must not be interpreted as a Qwen 3.8 Max LOW priming effect.
+A later attempt to run the intended Qwen3.8-Max Primed condition encountered a service/security block; no corpus-shortening or prompt-evasion workaround was performed.
+Outputs were retained with validity sidecars.
+Incident record: \texttt{experiments/exp004-modelscreen/phase2b/analysis/low/QWEN\_INCIDENT.md}.
+
+\subsection{Gemini multi-message Primed protocol}
+Gemini Primed runs deliver the full corpus in message~1 and the translation request in message~2.
+Corpus bytes are not shortened.
+This is a recorded interface/context-window constraint applied consistently across regimes, not a redesign of the priming material.
+
+\subsection{Artifact provenance}
+Canonical experiment root: \texttt{experiments/exp004-modelscreen/phase2b/}.
+Final synthesis: \texttt{analysis/combined/}.
+Historical checkpoint files that predate UNSEEN completion are not used as the current experimental state for manuscript claims.
+
+
+\subsection{Replication package expectations}
+A reader seeking to regenerate the quantitative tables should start from the regime analysis JSON files and the combined synthesis, not from historical checkpoint prose.
+The manuscript's \texttt{EVIDENCE\_MAP.md} lists stable paths for each major claim.
+Raw outputs may remain local under copyright and repository policy; the committed evidence documents are sufficient to verify the numbers reported here.
+
+
+\subsection{What changed after HIGH+LOW}
+UNSEEN execution and analysis completed after the historical HIGH+LOW checkpoint.
+The final combined synthesis therefore supersedes any manuscript language that would treat UNSEEN as pending.
+Readers comparing older repository snapshots to this PDF should use artifact dates and the combined evidence pack rather than checkpoint prose alone.

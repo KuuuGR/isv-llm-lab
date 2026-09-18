@@ -1,0 +1,26 @@
+\begin{table}[t]
+\centering
+\caption{Direct and Primed mean canonical coverage (\%) by configuration and regime.
+LOW Qwen paired means are omitted (invalid).}
+\label{tab:dpmeans}
+\scriptsize
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+ & \multicolumn{2}{c}{\textbf{HIGH}} & \multicolumn{2}{c}{\textbf{LOW}} & \multicolumn{2}{c}{\textbf{UNSEEN}} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
+\textbf{Config.} & D & P & D & P & D & P \\
+\midrule
+Gemini ON & 68.68 & 68.13 & 64.33 & 77.56 & 65.77 & 71.45 \\
+Gemini OFF & 67.20 & 65.45 & 64.51 & 74.92 & 63.85 & 69.95 \\
+Claude & 69.29 & 83.57 & 65.72 & 77.83 & 66.07 & 72.48 \\
+DeepSeek & 74.53 & 83.78 & 68.93 & 75.12 & 67.97 & 71.80 \\
+Qwen & 76.36 & 81.54 & --- & --- & 67.65 & 71.17 \\
+GPT-5.6 & 73.54 & 82.16 & 70.75 & 76.06 & 68.53 & 74.05 \\
+Grok & 68.35 & 82.84 & 69.32 & 73.27 & 65.90 & 73.02 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+\footnotesize
+Source: \texttt{analysis/combined/analysis.md} canonical cross-regime table.
+\end{flushleft}
+\end{table}

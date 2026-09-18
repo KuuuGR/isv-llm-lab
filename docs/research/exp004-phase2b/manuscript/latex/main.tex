@@ -1,0 +1,109 @@
+% EXP-004 Phase 2B manuscript — Natural Language Processing (Cambridge)
+% Working draft; not submission-ready until authorship/declarations confirmed.
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{pgfplotstable}
+\usepackage{siunitx}
+\usepackage{csquotes}
+\usepackage{url}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue
+}
+
+\sisetup{round-mode=places,round-precision=2}
+
+\title{Corpus Priming in Polish-to-Interslavic Translation with Large Language Models:\\
+A Controlled Study Across Source Regimes}
+
+\author{%
+  Grzegorz R.\ Kulesza%
+  \thanks{Corresponding author.
+  Department of Medical Biophysics,
+  Medical University of Bialystok, Bialystok, Poland.
+  Email: \texttt{grzegorz.kulesza@umb.edu.pl}.
+  Academic status (internal metadata): PhD / Assistant.}%
+  \\[0.4em]
+  \textit{Medical University of Bialystok}\\[0.6em]
+  {\small\color{gray!60!black}
+  % AUTHORSHIP PLACEHOLDER — do not treat as confirmed
+  % [Potential coauthor pending confirmation: see AUTHORSHIP\_PENDING.md]
+  }
+}
+
+\date{Working draft: 18 September 2026}
+
+\begin{document}
+\onehalfspacing
+\maketitle
+
+\begin{abstract}
+Interslavic (ISV) is a constructed Slavic bridge language with limited digital resources relative to major national Slavic languages.
+Large language models (LLMs) can be prompted to translate into ISV, but it remains unclear whether providing authentic ISV corpus material as context---\emph{corpus priming}---systematically shifts translation behaviour, and whether any such shift depends on thematic overlap between the source text and the priming corpus.
+We report a controlled descriptive study of Polish-to-ISV translation under two conditions (Direct vs.\ Primed) across seven vendor model configurations, three independent repeats per cell, and three source regimes: HIGH (narrative, intentionally higher corpus overlap), LOW (narrative, lower overlap), and UNSEEN (shorter technical/expository voice-biophysics text from a domain absent from the priming corpus).
+The primary metric is canonical ISV lexical coverage; the paired effect is $\Delta = \text{Primed} - \text{Direct}$.
+Analysis is descriptive ($n{=}3$); no significance tests and no causal claims are made.
+On a matched six-configuration comparison (excluding one invalid LOW pairing), mean $\Delta$ is $+7.39$ percentage points (pp) on HIGH, $+8.53$\,pp on LOW, and $+5.78$\,pp on UNSEEN.
+Positive mean $\Delta$ is common but not universal: two Gemini configurations are negative on HIGH yet positive on LOW and UNSEEN.
+Qualitative audits show that large HIGH gains often co-occur with corpus-opening motif reuse, whereas LOW and UNSEEN positives frequently involve lexical borrowing and orthographic cleanup without winter-narrative opening near-copy.
+One Qwen LOW paired cell is invalid due to a Direct/Primed model-identity mismatch and is excluded from primary paired inference.
+We conclude that authentic ISV corpus priming is associated with generally positive but strongly configuration-dependent coverage shifts that can persist under lower overlap and domain-unseen sources, without establishing that priming universally improves translation quality.
+\end{abstract}
+
+\noindent\textbf{Keywords:}
+Interslavic;
+machine translation;
+large language models;
+in-context learning;
+low-resource languages
+
+\tableofcontents
+\newpage
+
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/research_questions}
+\input{sections/experimental_design}
+\input{sections/corpus}
+\input{sections/models}
+\input{sections/evaluation}
+\input{sections/results}
+\input{sections/qualitative_analysis}
+\input{sections/cross_regime}
+\input{sections/mechanisms}
+\input{sections/reproducibility}
+\input{sections/limitations}
+\input{sections/discussion}
+\input{sections/implications}
+\input{sections/conclusion}
+\input{sections/declarations}
+\input{sections/appendix}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

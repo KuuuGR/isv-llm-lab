@@ -1,0 +1,47 @@
+\section{Experimental Design}
+\label{sec:design}
+
+\subsection{Conditions}
+Each translation session is assigned to one of two conditions:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Direct}: the model receives the Polish source and a translation instruction into Interslavic, without the authentic priming corpus.
+  \item \textbf{Primed}: the model first receives the frozen authentic ISV corpus, then the translation instruction and Polish source.
+\end{itemize}
+
+The corpus is never shortened for any configuration.
+For Gemini Primed runs, corpus delivery uses a recorded multi-message protocol (corpus in message~1; translation request in message~2) because of interface/context-window constraints (\Cref{sec:repro}).
+All other scientific factors---source text, configuration identity, and repeat structure---are held as constant as the collection interfaces allow.
+
+\subsection{Pairing and effect definition}
+For each configuration and replicate $i\in\{\mathrm{r01},\mathrm{r02},\mathrm{r03}\}$,
+\[
+\Delta_i = C(\mathrm{Primed}_i) - C(\mathrm{Direct}_i),
+\]
+where $C$ denotes canonical ISV coverage (reported as a percentage; $\Delta$ in percentage points).
+Configuration-level summaries use the mean of the three replicate $\Delta_i$ values.
+All comparisons are descriptive.
+The paired construction is the reason a Direct/Primed model-identity mismatch invalidates a cell: $\Delta$ is not defined as a same-model priming effect unless both sides share the intended configuration.
+
+\subsection{Factorial structure}
+Within each source regime the planned design is:
+\[
+7\ \text{configurations}\ \times\ 2\ \text{conditions}\ \times\ 3\ \text{repeats}\ =\ 42\ \text{runs}.
+\]
+Repeats are independent fresh sessions.
+The same seven configurations are used in HIGH, LOW, and UNSEEN.
+Across the full Phase~2B programme this yields $3\times 42=126$ planned runs, of which one LOW paired configuration is invalid for priming inference.
+
+\subsection{Why the analysis is descriptive}
+With $n{=}3$ per configuration cell, the study is not powered for inferential claims about population effects.
+We report means, standard deviations, ranges, and sign consistency.
+We do not compute $p$-values, confidence intervals intended for inferential generalization, or model rankings.
+This is a deliberate epistemological choice aligned with the sample size, not an accidental omission.
+
+\input{tables/table1_design}
+
+\subsection{Operator protocol notes}
+Runs were collected as independent sessions following the Phase~2B kits prepared for each regime.
+Intake verification checked completeness and identity metadata before evaluation.
+Analysis scripts aggregate already-evaluated runs and do not call LLMs.
+These process controls do not eliminate vendor stochasticity, but they make the Direct/Primed pairing auditable after the fact.

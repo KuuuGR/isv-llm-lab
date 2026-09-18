@@ -1,0 +1,8 @@
+config_short,HIGH_delta_pp,LOW_delta_pp,UNSEEN_delta_pp,LOW_valid
+Gemini ON,-0.55,13.23,5.68,1
+Gemini OFF,-1.75,10.4,6.09,1
+Claude Sonnet 5,14.28,12.11,6.42,1
+DeepSeek Expert ON,9.25,6.19,3.83,1
+Qwen 3.8 Max Fast,5.18,,3.52,0
+GPT-5.6 Luna,8.62,5.31,5.52,1
+Grok 4.5 Fast,14.49,3.95,7.12,1

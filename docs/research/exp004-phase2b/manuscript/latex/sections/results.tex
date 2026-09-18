@@ -1,0 +1,100 @@
+\section{Results}
+\label{sec:results}
+
+All quantitative results below reconstruct from the canonical combined synthesis and the underlying HIGH/LOW/UNSEEN analysis artifacts.
+No numbers were re-estimated for this manuscript.
+Where we round to two decimal places in percentage points, rounding follows the combined evidence tables and does not change sign or qualitative interpretation.
+
+\subsection{Integrity and validity}
+HIGH and UNSEEN each collected and evaluated 42/42 planned runs with seven valid paired configurations (21 pairs).
+LOW collected 42/42 retained runs but has six valid paired configurations (18 pairs) because the Qwen cell is \texttt{INVALID --- MODEL MISMATCH} (\Cref{sec:repro}).
+Integrity gates (unique run IDs; complete Direct$\leftrightarrow$Primed pairing structure) pass on all three regimes.
+These integrity facts are prerequisites for interpreting any mean $\Delta$: a missing or mismatched pair would silently break the Direct/Primed contrast.
+
+\subsection{Central configuration-level $\Delta$ table}
+\Cref{tab:deltas} is the primary quantitative table for later discussion and for RQ1--RQ4.
+Reading the table by columns emphasizes regime behaviour; reading by rows emphasizes configuration heterogeneity.
+Both views are necessary.
+A column-only summary would hide Gemini's HIGH negatives; a row-only focus on one ``successful'' configuration would hide attenuation and invalid cells elsewhere.
+
+\input{tables/table3_deltas}
+
+\subsection{Direct and Primed means}
+In addition to $\Delta$, \Cref{tab:dpmeans} reports configuration-level Direct and Primed mean coverage.
+This table clarifies whether a positive $\Delta$ arises from a large Primed gain, a low Direct baseline, or both.
+For example, Gemini LOW combines comparatively low Direct means with substantially higher Primed means, whereas several HIGH positives combine mid Direct means with Primed means above 80\%.
+\input{tables/table5_dp_means}
+
+
+\subsection{All-configuration vs.\ matched-six summaries}
+Unequal all-configuration means must not be treated as a matched three-regime average:
+
+\begin{itemize}[leftmargin=*]
+  \item HIGH: mean of 7 configuration $\Delta$s $= +7.07$\,pp (5 positive, 2 negative);
+  \item LOW: mean of 6 valid configuration $\Delta$s $= +8.53$\,pp (6 positive);
+  \item UNSEEN: mean of 7 configuration $\Delta$s $= +5.45$\,pp (7 positive).
+\end{itemize}
+
+For direct cross-regime comparison we use the matched six configurations available in all regimes (\Cref{tab:matched}):
+HIGH $+7.39$\,pp, LOW $+8.53$\,pp, UNSEEN $+5.78$\,pp.
+The matched-six construction excludes Qwen because LOW cannot supply a valid same-model paired effect for that configuration.
+This exclusion is a validity decision, not a performance ranking.
+
+\input{tables/table4_matched}
+
+\subsection{Replicate consistency}
+Sign consistency of the three replicate $\Delta_i$ values varies by configuration and regime (\Cref{fig:replicates}):
+\begin{itemize}[leftmargin=*]
+  \item HIGH: Gemini ON/OFF and Qwen show mixed signs; Claude, DeepSeek, GPT, and Grok are all-positive.
+  \item LOW (valid): five configurations are all-positive; Grok is mixed (one negative replicate).
+  \item UNSEEN: all 21 replicate $\Delta$s are positive.
+\end{itemize}
+Particularly variable HIGH cells include Grok (SD$(\Delta)\approx 5.90$\,pp) and Qwen (SD$(\Delta)\approx 5.56$\,pp).
+More stable examples include GPT on HIGH (SD$(\Delta)\approx 1.34$\,pp) and Claude/DeepSeek on UNSEEN (SD$(\Delta)\approx 1.11$ / $1.06$\,pp).
+Variance is reported as a descriptive property of the sample, not as a formal test of equality of variances.
+
+\input{figures/fig1_config_deltas}
+\input{figures/fig2_replicates}
+
+\subsection{Regime-level reading of the metric}
+On HIGH, mean $\Delta$ spans a wide range: from $-1.75$\,pp (Gemini OFF) to $+14.49$\,pp (Grok).
+On LOW, valid means are all positive and Gemini becomes strongly positive.
+On UNSEEN, means are moderate and uniformly signed at both configuration and replicate levels.
+These patterns answer different questions: HIGH shows that priming is not uniformly helpful under the metric even when overlap is high; LOW and UNSEEN show that positive associations are not confined to high-overlap narrative material.
+
+\subsection{Answering RQ1--RQ3 at the metric level}
+RQ1: priming is associated with measurable $\Delta$ shifts, but not with a single universal sign on HIGH.
+RQ2: on LOW, every \emph{valid} configuration mean $\Delta$ is positive; Gemini means are large ($+13.23$ / $+10.40$\,pp).
+RQ3: on UNSEEN, every configuration mean $\Delta$ is positive and every replicate $\Delta$ is positive.
+These statements are descriptive coverage observations, not quality or causality claims.
+
+
+\subsection{Configuration-level commentary (descriptive)}
+The following comments restate \Cref{tab:deltas} in prose so that later Discussion can refer to patterns without reintroducing numbers from memory.
+
+\paragraph{Gemini.}
+Both Gemini configurations have negative mean $\Delta$ on HIGH ($-0.55$ and $-1.75$\,pp) with mixed replicate signs.
+On LOW they become the largest valid positives ($+13.23$ and $+10.40$\,pp), all replicates positive.
+On UNSEEN they remain positive ($+5.68$ and $+6.09$\,pp), all replicates positive.
+This is the clearest cross-regime reversal in the study.
+
+\paragraph{Claude Sonnet 5.}
+Claude is positive in every regime mean and every replicate in the primary tables.
+Magnitudes are large on HIGH/LOW and smaller on UNSEEN.
+The pattern is persistence with attenuation toward the short technical source, not a sign flip.
+
+\paragraph{DeepSeek Expert ON.}
+DeepSeek is likewise persistently positive, with a smooth attenuation sequence $+9.25\rightarrow +6.19\rightarrow +3.83$\,pp.
+Among valid configurations, it is one of the clearest monotonic magnitude declines across the three regimes.
+
+\paragraph{Qwen 3.8 Max Fast.}
+Qwen contributes valid positive means on HIGH ($+5.18$\,pp, mixed replicates) and UNSEEN ($+3.52$\,pp, all positive).
+LOW remains invalid; therefore Qwen cannot enter matched-six summaries.
+
+\paragraph{GPT-5.6 Luna.}
+GPT is positive everywhere in the primary means, with relatively stable HIGH replicates and similar LOW/UNSEEN magnitudes.
+It is an example of a moderate, persistent association rather than an extreme HIGH-only spike.
+
+\paragraph{Grok 4.5 Fast.}
+Grok shows a large HIGH mean ($+14.49$\,pp), a much smaller LOW mean ($+3.95$\,pp) with one negative replicate, and a positive UNSEEN mean ($+7.12$\,pp).
+The scientific point is magnitude instability across regimes, not a claim that Grok is ``best'' or ``worst.''

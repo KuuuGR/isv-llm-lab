@@ -1,0 +1,40 @@
+\section{Qualitative Analysis}
+\label{sec:qual}
+
+This section synthesizes the regime qualitative audits and the combined qualitative synthesis.
+Examples are traceable to audited configuration/replicate cells; no invented illustrations are used.
+The audit language is intentionally cautious: labels such as ``lexical borrowing'' or ``improvement'' are apparent classes relative to orthographic/resource signals and corpus-overlap observations, not adjudicated proof of linguistic correctness.
+
+\subsection{Corpus-opening and motif copying}
+On HIGH, large positive $\Delta$ cells often co-occur with primed openings that track the authentic corpus winter narrative (audit cue: \emph{Ljudi govoret, \v{z}e v tamtoj denj\ldots}).
+Documented examples include Claude HIGH (mean $\Delta +14.28$\,pp) and DeepSeek HIGH (mean $\Delta +9.25$\,pp), where Kit$\rightarrow$Velryb and corpus lexis such as \emph{pomalo}, \emph{jedino}, \emph{\v{c}r\v{e}z} appear with opening alignment.
+Qwen HIGH r01--r02 show opening adoption with positive $\Delta$, while r03 is negative despite opening presence---a reminder that opening copy is not sufficient for a positive metric shift.
+
+On LOW, primed openings remain recognizably \emph{Podk\l{}ady} (Katarzyna/Katarina + archive).
+Opening Jaccard against the winter corpus excerpt stays low (maximum $\approx 0.09$ in the LOW audit).
+Nevertheless, Gemini LOW shows large positive mean $\Delta$ without systematic winter-opening near-copy.
+This contrast is one of the strongest qualitative results in the study: the textual signature that accompanies many HIGH positives is largely absent from LOW positives.
+
+On UNSEEN, primed texts open with exercise/biophysics titles (e.g.\ \emph{Vje\v{z}ba}/\emph{Upra\v{z}nenje} + \emph{Biofizika \ldots glasa}), not the winter story; opening Jaccard remains low for all 21 pairs.
+If corpus priming ``worked'' only by transplanting the winter narrative, UNSEEN positives should not occur in this form.
+
+\subsection{Lexical borrowing and orthographic cleanup}
+Across regimes, primed outputs frequently show corpus-register lexical items (\emph{\v{c}r\v{e}z}, \emph{jedino}, \emph{govoret}, \emph{pomalo}, \emph{no} for Polish \emph{ale}) while retaining source plot or expository structure.
+Concrete LOW example: Gemini ON r01, $\Delta +15.84$\,pp, with \emph{\v{c}r\v{e}z}/\emph{govoret} and no winter-opening rewrite.
+Orthographic / Polish-residue reductions often co-occur with positive $\Delta$ (e.g.\ LOW Claude r01, outside-inventory $301\rightarrow 11$ with $\Delta +13.82$\,pp; HIGH Claude r01, $365\rightarrow 18$), but dimensions can diverge (coverage down with ortho up, or both up).
+Therefore orthographic cleanup is best described as a recurrent correlate, not as a sufficient explanation of $\Delta$.
+
+\subsection{Positive $\Delta$ without obvious corpus-opening copying}
+LOW Gemini ON/OFF cell means ($+13.23$ / $+10.40$\,pp) and UNSEEN Gemini ON r03 ($+8.84$\,pp) illustrate positive coverage shifts with little or no winter-motif transplant.
+UNSEEN Qwen r02 ($+1.27$\,pp) shows the complementary pattern: markers may be present without a large coverage move.
+These cases are central to RQ6: metric-positive priming is compatible with lexical/orthographic calibration rather than wholesale narrative copying, and surface corpus cues are not a reliable thermometer of $\Delta$ magnitude.
+
+\subsection{Structural and domain preservation}
+LOW primed outputs keep the urban/archive plot; UNSEEN keeps educational biophysics terminology (\emph{formant*}, \emph{rezonan*}, \emph{biofizik*}) in both Direct and Primed.
+Title/name churn occurs (HIGH whale-title variants; LOW Katarina/Katarzyna; UNSEEN exercise-title variants) and should not be equated with priming success.
+Markdown or formatting artifacts can also appear (e.g.\ UNSEEN GPT primed r03 title formatting) without invalidating run completeness under the project's intake rules; such surface noise is another reason not to equate coverage with polished quality.
+
+\subsection{RQ5 summary}
+Positive coverage shifts are accompanied by heterogeneous textual changes: HIGH often shows opening/motif alignment plus lexical adoption; LOW/UNSEEN more often show lexical and orthographic shifts inside preserved source structure.
+Negative or mixed HIGH Gemini cells show reshuffles without reliable corpus-opening adoption and sometimes show rising Polish-residue or outside-inventory signals.
+The qualitative layer therefore supports configuration- and regime-dependent descriptions rather than a single Primed ``style.''

@@ -1,0 +1,46 @@
+\section{Evaluation Methodology}
+\label{sec:evaluation}
+
+\subsection{Primary and secondary metrics}
+Each completed run is scored with the project's deterministic ISV evaluation stack (no LLM calls during scoring).
+The metrics used in Phase~2B are:
+
+\begin{itemize}[leftmargin=*]
+  \item \textbf{canonical coverage} (primary): resource-supported coverage against the canonical ISV lexical inventory used by the evaluator;
+  \item \textbf{broader resource-supported coverage}: a broader inventory variant;
+  \item \textbf{unresolved rate}: proportion of tokens not resolved to supported inventory entries under the evaluator construction;
+  \item \textbf{orthography outside-inventory}: character-level count of orthographic material outside the expected inventory (separate diagnostic).
+\end{itemize}
+
+Manuscript quantitative claims focus on canonical coverage and its paired $\Delta$.
+Other metrics are retained in the machine-readable datasets for audit and are not collapsed into a single composite score.
+In particular, unresolved rate tends to move inversely with canonical coverage under the evaluator construction; reporting both without inventing a composite avoids double-counting the same inventory phenomenon under two names.
+
+\subsection{What coverage is not}
+Canonical coverage is a screening metric for resource-supported ISV lexical realization.
+It is \emph{not} claimed to be equivalent to:
+\begin{itemize}[leftmargin=*]
+  \item human-judged translation quality,
+  \item adequacy/fluency in the sense of DA/MQM protocols,
+  \item BLEU~\citep{papineni-etal-2002-bleu} or COMET~\citep{rei-etal-2020-comet}.
+\end{itemize}
+Orthographic cleanup or substitution of inventory-supported synonyms can move coverage without implying a global quality improvement.
+Conversely, communicative improvements that do not increase inventory hits may be invisible to the metric.
+This asymmetry is why the paper pairs every major quantitative claim with qualitative audits and explicit limitations.
+
+\subsection{Paired analysis unit}
+The experimental unit for priming effects is the Direct$\leftrightarrow$Primed pair within a configuration and replicate, not an unpaired mixture of runs.
+Configuration summaries average three paired $\Delta_i$ values.
+Invalid pairs are excluded from primary paired inference rather than imputed.
+
+\subsection{Qualitative audit}
+For each regime, all valid Direct$\leftrightarrow$Primed pairs were inspected in a descriptive qualitative audit (HIGH and UNSEEN: 21 pairs; LOW primary: 18 valid pairs).
+Audits record apparent classes such as lexical borrowing, orthographic cleanup, corpus-opening alignment, and degradations, without adjudicating full linguistic correctness.
+Opening-overlap checks against a corpus narrative excerpt are used as an operational detector for winter-opening near-copy, especially to contrast HIGH against LOW/UNSEEN.
+
+
+\subsection{Reporting conventions used in Results}
+Unless otherwise stated, coverage means are percentages averaged over three Direct or three Primed runs, and $\Delta$ means are averages of three paired differences.
+We report two decimal places in percentage points when that precision is present in the combined tables.
+Sign consistency is reported as all-positive, all-negative, or mixed within the three replicates.
+Invalid cells are marked explicitly rather than imputed.

@@ -1,0 +1,4 @@
+# Keep PDFs; ignore latexmk auxiliaries
+*
+!*.pdf
+!.gitignore

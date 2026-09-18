@@ -1,0 +1,50 @@
+
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{LLM-based machine translation.}
+LLMs can perform translation in zero- and few-shot settings without task-specific fine-tuning~\citep{brown2020language}.
+Systematic evaluations report competitive quality for high-resource directions and weaker behaviour for low-resource pairs, with sensitivity to prompting strategy and domain~\citep{hendy2023good,jiao2023chatgpt,zhu2023multilingual}.
+Document-level and domain-shift analyses further show that LLM translation behaviour is not a single scalar property of a model name: prompt packaging and domain can change outcomes~\citep{hendy2023good}.
+Comparisons among GPT-family systems also illustrate that engine choice can dominate superficial ``ChatGPT vs.\ translator'' contrasts~\citep{jiao2023chatgpt}.
+These findings motivate careful experimental design when the target language is under-resourced: gains observed under favourable prompting may not transfer across domains or source types.
+
+A recurring methodological lesson in this literature is that prompting is itself an experimental factor.
+Changing the presence, length, or identity of in-context material can move measured translation scores even when the underlying model family is held constant.
+Our Direct vs.\ Primed contrast is intentionally narrow: it varies corpus presence while freezing the authentic corpus bytes and the source text within each regime.
+
+\paragraph{Low-resource and multilingual MT.}
+Data scarcity, domain mismatch, and rare-word behaviour remain core difficulties for neural MT~\citep{koehn-knowles-2017-six}.
+Recent work continues to study how minimal or carefully selected data can still yield useful systems~\citep{maillard-etal-2023-small}.
+Low-resource MT research often focuses on parallel-data collection, transfer learning, or multilingual training objectives.
+Our setting differs: we do not train an NMT model on Polish--ISV bitext.
+Instead we evaluate commercial/API LLM configurations under a fixed Direct vs.\ Primed prompting contrast.
+This makes the work closer to an intervention study on prompting context than to a bitext-training bake-off.
+The practical motivation remains related: when bitext is scarce, target-side authentic text may be the most available resource for conditioning generation.
+
+\paragraph{In-context learning and example-based contextualization.}
+Few-shot in-context learning~\citep{brown2020language} shows that providing demonstrations in the prompt can change task behaviour without weight updates.
+Adaptive or example-conditioned LLM translation explores related ideas in which target-side or parallel material is supplied to guide generation~\citep{moslem2023adaptive}.
+Multilingual LLM-MT analyses likewise emphasize that in-context examples and language coverage interact~\citep{zhu2023multilingual}.
+Our \emph{corpus priming} condition supplies a frozen authentic ISV multi-register corpus before the translation request.
+It is therefore related to in-context conditioning, but it is not a classical $k$-shot bitext demonstration protocol, nor a fine-tuning method.
+The distinction matters for interpretation: a positive $\Delta$ indicates an association between corpus-conditioned prompting and the coverage metric, not proof that the model acquired a new grammar from the corpus.
+
+\paragraph{Evaluation of translation and low-resource systems.}
+Surface $n$-gram metrics such as BLEU~\citep{papineni-etal-2002-bleu} and learned metrics such as COMET~\citep{rei-etal-2020-comet} are widely used for MT evaluation; LLMs have also been studied as quality estimators~\citep{kocmi-federmann-2023-large}.
+Each family of metrics encodes assumptions about references, human ratings, or learned representations that may not hold for Interslavic.
+For ISV, we do not treat BLEU/COMET as primary endpoints in this experiment.
+Phase~2B uses a project-specific resource-supported coverage stack (canonical coverage, broader coverage, unresolved rate, and orthography outside-inventory), designed around available ISV lexical/orthographic resources.
+We explicitly warn that coverage is not a complete proxy for translation quality (\Cref{sec:evaluation}).
+In low-resource settings, mismatched evaluation choices can create false confidence; we therefore keep metric language operational and separate qualitative audits from coverage tables.
+
+\paragraph{Interslavic language technology.}
+Interslavic is a community-developed Slavic auxiliary language with published grammars, dictionaries, and educational materials.
+Computational work on Slavic NLP is extensive for national languages, but peer-reviewed evaluations of Polish-to-ISV LLM translation under controlled corpus priming remain scarce.
+We therefore treat ISV primarily through operational definitions in this repository experiment rather than through a large prior MT literature.
+Additional language-description citations suitable for a camera-ready related-work paragraph are listed in \texttt{REFERENCES\_NEEDED.md} when full bibliographic verification is still pending.
+
+\paragraph{Positioning of this study.}
+Relative to LLM-MT evaluations that sweep many language pairs, this paper is narrow and deep: one source language, one constructed target, three source regimes, seven configurations, and paired repeats.
+Relative to purely anecdotal prompting notes, it is comparatively strict: frozen hashes, integrity gates, invalid-cell documentation, and an evidence map from claims to artifacts.
+That trade-off is intentional for an under-resourced target where over-claiming would be especially costly.

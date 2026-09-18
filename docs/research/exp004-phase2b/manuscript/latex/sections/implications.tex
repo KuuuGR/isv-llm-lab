@@ -1,0 +1,16 @@
+\section{Implications for Low-Resource Translation Systems}
+\label{sec:implications}
+
+\paragraph{Future engineering direction (not an experimental result).}
+A practical Polish-to-ISV assistant could, in principle, generate both Direct and Primed candidates, score them with deterministic resource-supported metrics, and expose disagreements for human review rather than assuming Primed is always preferable.
+Gemini's HIGH negatives illustrate why blind Primed-only routing would be unsafe under the present evidence.
+
+\paragraph{What is not validated here.}
+We do not present a production translator architecture, latency study, user study, or deployment evaluation.
+Any such system remains future work.
+The present contribution is an evidence pack for when corpus priming moves a specific coverage metric under controlled regimes.
+
+
+\subsection{Evaluation-in-the-loop as a research agenda}
+Beyond candidate comparison, the results motivate evaluation-in-the-loop research for under-resourced targets: deterministic resource-supported metrics can flag large Primed/Direct disagreements for human inspection.
+That agenda is complementary to learned metrics such as COMET~\citep{rei-etal-2020-comet} and LLM-based evaluation~\citep{kocmi-federmann-2023-large}, which remain future options once ISV-compatible references or human ratings are available.

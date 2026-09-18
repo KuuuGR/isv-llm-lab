@@ -1,0 +1,64 @@
+config_short,regime,replicate,delta_pp,valid
+Gemini ON,HIGH,r01,1.89,1
+Gemini ON,HIGH,r02,-3.77,1
+Gemini ON,HIGH,r03,0.23,1
+Gemini ON,LOW,r01,15.84,1
+Gemini ON,LOW,r02,11.37,1
+Gemini ON,LOW,r03,12.48,1
+Gemini ON,UNSEEN,r01,2.12,1
+Gemini ON,UNSEEN,r02,6.08,1
+Gemini ON,UNSEEN,r03,8.84,1
+Gemini OFF,HIGH,r01,-5.39,1
+Gemini OFF,HIGH,r02,3.12,1
+Gemini OFF,HIGH,r03,-2.98,1
+Gemini OFF,LOW,r01,13.74,1
+Gemini OFF,LOW,r02,11.55,1
+Gemini OFF,LOW,r03,5.91,1
+Gemini OFF,UNSEEN,r01,7.97,1
+Gemini OFF,UNSEEN,r02,3.96,1
+Gemini OFF,UNSEEN,r03,6.35,1
+Claude Sonnet 5,HIGH,r01,16.69,1
+Claude Sonnet 5,HIGH,r02,13.96,1
+Claude Sonnet 5,HIGH,r03,12.2,1
+Claude Sonnet 5,LOW,r01,13.82,1
+Claude Sonnet 5,LOW,r02,9.24,1
+Claude Sonnet 5,LOW,r03,13.27,1
+Claude Sonnet 5,UNSEEN,r01,7.14,1
+Claude Sonnet 5,UNSEEN,r02,5.14,1
+Claude Sonnet 5,UNSEEN,r03,6.96,1
+DeepSeek Expert ON,HIGH,r01,9.24,1
+DeepSeek Expert ON,HIGH,r02,11.82,1
+DeepSeek Expert ON,HIGH,r03,6.68,1
+DeepSeek Expert ON,LOW,r01,5.43,1
+DeepSeek Expert ON,LOW,r02,7.92,1
+DeepSeek Expert ON,LOW,r03,5.22,1
+DeepSeek Expert ON,UNSEEN,r01,2.91,1
+DeepSeek Expert ON,UNSEEN,r02,5.0,1
+DeepSeek Expert ON,UNSEEN,r03,3.58,1
+Qwen 3.8 Max Fast,HIGH,r01,8.7,1
+Qwen 3.8 Max Fast,HIGH,r02,8.07,1
+Qwen 3.8 Max Fast,HIGH,r03,-1.23,1
+Qwen 3.8 Max Fast,LOW,r01,,0
+Qwen 3.8 Max Fast,LOW,r02,,0
+Qwen 3.8 Max Fast,LOW,r03,,0
+Qwen 3.8 Max Fast,UNSEEN,r01,3.67,1
+Qwen 3.8 Max Fast,UNSEEN,r02,1.27,1
+Qwen 3.8 Max Fast,UNSEEN,r03,5.62,1
+GPT-5.6 Luna,HIGH,r01,9.43,1
+GPT-5.6 Luna,HIGH,r02,7.06,1
+GPT-5.6 Luna,HIGH,r03,9.35,1
+GPT-5.6 Luna,LOW,r01,4.85,1
+GPT-5.6 Luna,LOW,r02,6.37,1
+GPT-5.6 Luna,LOW,r03,4.73,1
+GPT-5.6 Luna,UNSEEN,r01,6.56,1
+GPT-5.6 Luna,UNSEEN,r02,7.58,1
+GPT-5.6 Luna,UNSEEN,r03,2.43,1
+Grok 4.5 Fast,HIGH,r01,15.37,1
+Grok 4.5 Fast,HIGH,r02,19.89,1
+Grok 4.5 Fast,HIGH,r03,8.2,1
+Grok 4.5 Fast,LOW,r01,8.21,1
+Grok 4.5 Fast,LOW,r02,5.13,1
+Grok 4.5 Fast,LOW,r03,-1.5,1
+Grok 4.5 Fast,UNSEEN,r01,6.02,1
+Grok 4.5 Fast,UNSEEN,r02,9.62,1
+Grok 4.5 Fast,UNSEEN,r03,5.7,1
