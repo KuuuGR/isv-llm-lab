@@ -1,125 +1,115 @@
-# ISV Grammar Aggregator — Research Track
+# ISV Grammar Aggregator — Research Package
 
-**Status:** research / design only (2026-09-20)  
+**Status:** research / design package (updated 2026-09-20)  
 **Experiments run for this track:** none  
-**Implementation status:** not started  
+**Implementation / database / seed facts:** not started  
 
 ## What it is
 
-A proposed **knowledge/evidence layer** that aggregates Interslavic
-(Medžuslovjansky) morphology and grammar facts from the project's already
-audited resources, with **explicit provenance, tier, confidence, and
-conflict status**.
+A **self-contained working research package** for an Interslavic
+(Medžuslovjansky) **language knowledge / evidence layer**: provenance-preserving
+grammar and morphology facts, conflict tracking, and (later) small LLM
+context packages for Polish → ISV assistance.
 
-The intended downstream use is **small, targeted LLM context packages** for
-Polish → ISV translation assistance — conceptually the next step beyond
-EXP-003 Condition D's thin grammatical annotations, and a structured
-realization of intervention-ladder rung **D**
-(`docs/translation-method.md`).
+Conceptually this is intervention-ladder rung **D**
+(`docs/translation-method.md`; see `context/TRANSLATION_METHOD_RELEVANT.md`),
+extended beyond EXP-003 Condition D’s thin annotations.
 
-Pipeline idea (not yet built):
+## Core design principle
+
+> The purpose of the project is to model Interslavic as a language system
+> in its own right. Similarity to other Slavic languages is contextual
+> evidence, not permission to invent ISV forms.
+
+Also preserved from project policy:
+
+> Canonical resource coverage is not identical to proof that a form is
+> correct Interslavic. Alternative resources may provide useful evidence
+> without automatically becoming canonical.
+
+## Complete workflow
 
 ```text
-multiple ISV language resources
-        ↓
-structured evidence (rules / paradigms / attestations / diagnostics)
-        ↓
-grammar–morphology knowledge base (provenance-preserving)
-        ↓
-retrieval → compact context package
-        ↓
-LLM Polish → ISV generation
-        ↓
-deterministic isv-eval (+ optional repair)
+collect source
+→ preserve source metadata          (SourceRecord)
+→ extract evidence                  (Observation ≠ rule)
+→ compare with existing KB          (incl. conflict ledger)
+→ propose fact                      (candidate GrammarFact)
+→ review                            (claim-type evidence bar)
+→ version                           (accepted / historical / …)
+→ retrieve
+→ render compact LLM package        (Modes A / B / C)
+```
+
+```text
+raw source → source record → observation → candidate fact
+→ reviewed fact → versioned KB → LLM context package
 ```
 
 ## What it is not
 
 - Not a full translation engine.
-- Not a dump of Steen's grammar into an LLM prompt.
+- Not a dump of Steen / Wikipedia / Hunspell into prompts.
 - Not a claim that aggregated grammar will improve translation.
-- Not a claim that any single resource is the only correct ISV grammar.
+- Not bulk ingestion (Steen scrape, Wikipedia dump, YouTube harvest) —
+  protocols exist; execution is future work.
 - Not a redesign of EXP-004 or a change to canonical experiment artifacts.
-- Not a replacement for the two-tier resource policy
-  (`docs/RESOURCE_POLICY.md`): **canonical coverage ≠ proof of correct
-  Interslavic**; alternative resources remain evidence, not automatic
-  promotion into the canonical tier.
+- Not a replacement for `docs/RESOURCE_POLICY.md` two-tier metrics.
 
-## Why the project needs it
+## Package layout
 
-Measured work already shows:
+```text
+docs/research/isv-grammar-aggregator/
+├── README.md                          (this file)
+├── RESEARCH_QUESTION.md
+├── HYPOTHESES.md
+├── TODO.md
+├── context/                           (local mirrors / extracts)
+├── protocols/                         (intake, evidence, review, …)
+├── schemas/                           (source, fact, provenance, storage)
+├── architecture/                      (system boundary + LLM modes)
+├── experiments/                       (proposed A/B/C design)
+└── resources/                         (inventory + hierarchy)
+```
 
-- Lexical scaffolding can raise coverage (EXP-003 B/C).
-- Adding morphology/grammar annotations (EXP-003 D) can help, but effects
-  are **model-dependent**.
-- Corpus priming (EXP-004) is a different intervention with its own
-  configuration heterogeneity.
+### Start here
 
-What is still missing is a **reusable, provenance-preserving grammar
-evidence store** that can:
-
-1. encode disagreements between Steen prose, JS/Rust engines, and
-   community inventories without silently resolving them;
-2. retrieve only the rules/forms relevant to a given Polish source or
-   candidate ISV output;
-3. support later controlled comparison of grammar guidance vs
-   dictionary-only assistance vs corpus priming.
-
-## Existing resources it builds upon
-
-See [`RESOURCE_INVENTORY.md`](RESOURCE_INVENTORY.md) and
-[`RESOURCE_HIERARCHY.md`](RESOURCE_HIERARCHY.md). Primary anchors:
-
-| Role | Resource |
+| Need | Document |
 |---|---|
-| Normative prose reference | Steen grammar pages (`SOURCES.md` §8); audit in `docs/GRAMMAR_AUDIT.md` |
-| Canonical dictionary | `basic.json` snapshot lineage (`SOURCES.md` §10–11) |
-| Computational morphology | `@interslavic/morphology` via `src/morphology_backend/` |
-| Generated paradigms | `lexicon.tsv` (local, gitignored) |
-| Supporting surface evidence | Hunspell `isv.dic` / `isv.aff`; `interslavicfreq` wordlists |
-| Historical same-lineage snapshot | `medzuslovjansky/slovnik` test fixture |
-| Alternate morphology implementation | Rust `gold-silver-copper/interslavic` (parity reference; not required locally) |
-| Evaluation policy | `docs/RESOURCE_POLICY.md` |
+| Self-contained policy context | [`context/CONTEXT_README.md`](context/CONTEXT_README.md) |
+| Add a new external source | [`protocols/SOURCE_INTAKE_PROTOCOL.md`](protocols/SOURCE_INTAKE_PROTOCOL.md) |
+| Observation vs fact | [`protocols/EVIDENCE_EXTRACTION_PROTOCOL.md`](protocols/EVIDENCE_EXTRACTION_PROTOCOL.md) |
+| Review / accept | [`protocols/FACT_REVIEW_PROTOCOL.md`](protocols/FACT_REVIEW_PROTOCOL.md) |
+| Known disagreements | [`protocols/CONFLICT_LEDGER.md`](protocols/CONFLICT_LEDGER.md) |
+| LLM package modes | [`architecture/LLM_CONTEXT_DESIGN.md`](architecture/LLM_CONTEXT_DESIGN.md) |
+| Future experiment | [`experiments/EXPERIMENT_DESIGN.md`](experiments/EXPERIMENT_DESIGN.md) |
 
-## How provenance is preserved
+### Index
 
-Every grammar fact is a record with source, version/pin, location, tier,
-status, variants, and notes — see [`PROVENANCE_MODEL.md`](PROVENANCE_MODEL.md).
-No rule may become an unexplained fact with lost provenance.
-
-## How it could later feed an LLM
-
-Not as one giant prompt. Three designed retrieval modes
-([`LLM_CONTEXT_DESIGN.md`](LLM_CONTEXT_DESIGN.md)):
-
-- **Mode A** — grammar-only targeted rules;
-- **Mode B** — lexical candidates + grammatical guidance;
-- **Mode C** — diagnostic/repair guidance for an existing ISV candidate.
-
-## Documents in this track
-
-| File | Contents |
+| Path | Role |
 |---|---|
 | [`RESEARCH_QUESTION.md`](RESEARCH_QUESTION.md) | Framing questions |
 | [`HYPOTHESES.md`](HYPOTHESES.md) | H1–H5 (untested) |
-| [`RESOURCE_INVENTORY.md`](RESOURCE_INVENTORY.md) | Audited resource inventory |
-| [`RESOURCE_HIERARCHY.md`](RESOURCE_HIERARCHY.md) | Tier model + disagreement rule |
-| [`PROVENANCE_MODEL.md`](PROVENANCE_MODEL.md) | Minimal fact schema |
-| [`GRAMMAR_TAXONOMY.md`](GRAMMAR_TAXONOMY.md) | Knowledge categories + rule/example split |
-| [`LLM_CONTEXT_DESIGN.md`](LLM_CONTEXT_DESIGN.md) | Context package modes |
-| [`CONFLICT_POLICY.md`](CONFLICT_POLICY.md) | Conflict/status policy |
-| [`EXPERIMENT_DESIGN.md`](EXPERIMENT_DESIGN.md) | Proposed minimal future experiment |
-| [`ARCHITECTURE.md`](ARCHITECTURE.md) | Aggregator vs translator boundary |
-| [`TODO.md`](TODO.md) | Next steps and open questions |
+| [`resources/RESOURCE_INVENTORY.md`](resources/RESOURCE_INVENTORY.md) | Resource inventory |
+| [`resources/RESOURCE_HIERARCHY.md`](resources/RESOURCE_HIERARCHY.md) | Tiers N→C→A→S→H→X |
+| [`schemas/PROVENANCE_MODEL.md`](schemas/PROVENANCE_MODEL.md) | Provenance rules + core fact fields |
+| [`schemas/FACT_SCHEMA.md`](schemas/FACT_SCHEMA.md) | Extended GrammarFact schema |
+| [`schemas/SOURCE_RECORD_SCHEMA.md`](schemas/SOURCE_RECORD_SCHEMA.md) | Source-level schema |
+| [`schemas/GRAMMAR_TAXONOMY.md`](schemas/GRAMMAR_TAXONOMY.md) | Domains + knowledge kinds |
+| [`schemas/STORAGE_PROPOSAL.md`](schemas/STORAGE_PROPOSAL.md) | Storage options (recommend D) |
+| [`protocols/`](protocols/) | Intake, evidence, review, temporal, reliability, Wikipedia, video, author, current-ISV, backward audit, lifecycle, conflict policy + ledger |
+| [`architecture/ARCHITECTURE.md`](architecture/ARCHITECTURE.md) | Aggregator vs translator |
+| [`TODO.md`](TODO.md) | Next steps |
+
+## Authority
+
+> `docs/research/isv-grammar-aggregator/` is the working research package;
+> canonical project policies remain authoritative in their original locations.
+
+See `context/CONTEXT_README.md`.
 
 ## Explicit non-claims
 
-This track does **not** claim that:
-
-- an aggregated grammar will improve translation;
-- grammar guidance is superior to corpus priming;
-- EXP-003 D already validated this architecture (D used thin annotations,
-  not a provenance-preserving aggregator);
-- the proposed experiment or hierarchy has been validated.
-
-All outcome statements remain **hypotheses** until measured.
+This package does **not** claim that grammar guidance works, that it beats
+corpus priming, that EXP-003 D validated this architecture, or that seeded
+conflicts are resolved. Outcomes remain hypotheses until measured.

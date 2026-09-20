@@ -4,7 +4,7 @@
 track has been run.
 
 Framing: these are directional research questions for a *future* minimal
-experiment (`EXPERIMENT_DESIGN.md`). They must not be cited as findings.
+experiment (`experiments/EXPERIMENT_DESIGN.md`). They must not be cited as findings.
 
 ---
 

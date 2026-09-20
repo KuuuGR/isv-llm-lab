@@ -105,7 +105,7 @@ heuristic POS guesses.
    by a shared `conflict_group_id`.
 2. **Do not majority-vote.** Surface count in Tier S does not outvote Tier C
    or Tier N.
-3. Assign an explicit status (`CONFLICT_POLICY.md`): e.g. `canonical`,
+3. Assign an explicit status (`protocols/CONFLICT_POLICY.md`): e.g. `canonical`,
    `accepted_variant`, `attested_variant`, `engine_optional`,
    `documented_avoid`, `conflicting`, `uncertain`, `unsupported`.
 4. Prefer **descriptive packaging** to the LLM: show the recommended /

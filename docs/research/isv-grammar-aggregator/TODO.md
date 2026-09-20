@@ -1,81 +1,56 @@
-# TODO — Grammar Aggregator research track
+# TODO — Grammar Aggregator research package
 
-**Status:** design complete for v0 spec. Implementation not started.
+**Status:** context pack + intake/review protocols complete (2026-09-20).  
+**Implementation / seed facts / experiments:** not started.
 
-## Next concrete implementation step (recommended)
+## Next concrete steps (ordered)
 
-1. **Seed a tiny reviewed fact set (human-curated JSON), not a database.**
-   - Start from `docs/GRAMMAR_AUDIT.md` conflict rows + a handful of
-     high-priority Tier-C rules (animate ACC, 1sg variants, prep+case
-     samples from documented sources).
-   - Each entry must satisfy `PROVENANCE_MODEL.md` (source_location
-     required).
-   - Target size: on the order of **20–50 facts**, enough to exercise
-     Mode A/B package rendering offline (no LLM).
+1. **Do not bulk-ingest.** Protocols are ready; execution waits.
+2. When authorized: seed **20–50** reviewed facts from
+   `protocols/CONFLICT_LEDGER.md` + high-priority Tier-C rules, each with
+   provenance (`schemas/FACT_SCHEMA.md` / `PROVENANCE_MODEL.md`).
+3. Offline Mode A/B package renderer (no LLM).
+4. Freeze minimal A/B/C experiment kit (`experiments/EXPERIMENT_DESIGN.md`).
 
-2. Only after (1): a dry-run **package renderer** that prints Mode A/B
-   text for the EXP-003 story lemmas — still no LLM calls.
+## Deferred (explicitly not this pass)
 
-3. Only after (2): freeze a minimal A/B/C experiment kit per
-   `EXPERIMENT_DESIGN.md`.
+- Scrape Steen / bulk Wikipedia / bulk YouTube / bulk Hunspell.
+- Implement aggregator software or database.
+- Create the fact seed.
+- Run A/B/C experiment.
+- Modify translator, EXP-004, or canonical language resources.
+- Reinterpret old experiment results (backward audit is protocol-only).
 
-Do **not** begin with full Steen HTML scraping, Hunspell ingestion, or
-translator refactors.
+## Open design questions
 
----
-
-## Open / unresolved questions
-
-1. Dictionary data license remains **UNRESOLVED** — public redistribution
-   of lemma/paradigm packages may be blocked even if research use is
-   local (`SOURCES.md`, D-009).
-2. Should Rust preposition government be promoted to packaging defaults
-   while JS lacks a table? (Conflict vs enrichment.)
-3. How much Polish-side analysis is allowed before it becomes a confound
-   (tagger LLM vs deterministic heuristics)?
-4. Exact package token budgets for each vendor context window.
-5. Whether Mode C should share EXP-002’s candidate-generation codepaths
-   or a new diagnostic query API.
-6. How to version facts when `@interslavic/morphology` or `basic.json`
-   snapshots move.
-7. Whether a future paper cites Steen extensively enough to need
-   permissioning beyond fair-use quotation of short rules.
-
----
+1. Dictionary data license **UNRESOLVED** (public redistribution limits).
+2. Rust prep-government table as packaging default vs Tier-A enrichment only.
+3. Polish-side phenomenon detection (deterministic vs LLM tagger confound).
+4. Package token budgets per vendor.
+5. Mode C vs EXP-002 candidate codepaths.
+6. Fact versioning when morphology/`basic.json` pins move.
+7. Steen quotation depth vs copyright for publications.
+8. Whether Option D storage cards live under this tree or gitignored local
+   data until license clarity.
 
 ## Integration points (do not edit yet)
 
-| Document / component | Possible future touch | Action now |
-|---|---|---|
-| `docs/translation-method.md` | Mention aggregator as structured rung-D evidence layer | **Deferred** — record only here |
-| `docs/research-roadmap.md` | New research-track pointer | Deferred |
-| `docs/RESOURCE_POLICY.md` | Already compatible; no change required for design | None |
-| Translator / scaffold scripts | Consumer of packages | No modification in this pass |
-| EXP-004 artifacts | None | **Do not touch** |
+| Document | Action |
+|---|---|
+| `docs/translation-method.md` | Deferred pointer to this package as structured rung-D evidence layer |
+| `docs/research-roadmap.md` | Deferred research-track pointer |
+| `docs/RESOURCE_POLICY.md` | Compatible; no change required |
+| EXP-004 / translator | **Do not touch** |
 
----
+## Consistency notes vs canonical policy
 
-## Explicitly out of scope until decided
+| Document | Status |
+|---|---|
+| `RESOURCE_POLICY.md` | Aligned (tiers, no promotion of alt resources) |
+| `GRAMMAR_AUDIT.md` | Aligned (ledger seeds unresolved) |
+| `translation-method.md` | Soft staleness on Phase 2B wording in canonical file; package does not depend on editing it |
+| EXP-003 D | Thin annotations ≠ this architecture; do not over-claim |
 
-- Production Python/TS/Rust aggregator service.
-- Automatic conflict resolution UI.
-- Running LLM sessions for this track.
-- Changing canonical experiment results or frozen corpora.
-- Redesigning EXP-004.
-
----
-
-## Possible conflicts with existing project documents
-
-| Document | Tension? | Notes |
-|---|---|---|
-| `RESOURCE_POLICY.md` | **No conflict** | Hierarchy and statuses extend it. |
-| `GRAMMAR_AUDIT.md` | **No conflict** | Seed source for conflicts. |
-| `translation-method.md` | **Soft staleness, not design conflict** | Still describes Phase 2B as unexecuted in one paragraph; aggregator design does not depend on editing it. Rung D is compatible. |
-| `RESEARCH_NOTES.md` §1 | **No conflict** | Taxonomy of lexical vs grammatical guidance remains valid; aggregator refines the grammatical side. |
-| EXP-003 D results | **Interpretive caution** | D is evidence that *thin* grammar annotations can help some models; it is **not** validation of this aggregator architecture. |
-| EXP-004 Phase 2B | **No conflict** if priming remains a separate optional arm | Do not redesign. |
-
-If any future implementation would require changing A/B/C semantics or
-promoting Tier S into canonical coverage, that would **conflict** with
-RESOURCE_POLICY and must be rejected or separately decided.
+If implementation would change A/B/C semantics or promote Tier S into
+canonical coverage, that would **conflict** with RESOURCE_POLICY and must be
+rejected or separately decided.

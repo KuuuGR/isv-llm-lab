@@ -128,7 +128,7 @@ effects if hidden).
 
 ## What each mode must always include
 
-- Mode id and package provenance header (`PROVENANCE_MODEL.md`).
+- Mode id and package provenance header (`../schemas/PROVENANCE_MODEL.md`).
 - Status legend (so the model is not told Tier-S hits are “correct ISV”).
 - Explicit statement that coverage metrics remain Tier-C-defined.
 

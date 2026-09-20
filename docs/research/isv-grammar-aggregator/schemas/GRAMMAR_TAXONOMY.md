@@ -89,7 +89,7 @@ analysis**, no full paradigms (`experiments/exp003-scaffold/DESIGN.md`).
 
 The aggregator taxonomy is a **superset for retrieval**, not a
 requirement that every package include every domain. Packages should stay
-small (see `LLM_CONTEXT_DESIGN.md`).
+small (see `../architecture/LLM_CONTEXT_DESIGN.md`).
 
 ---
 
