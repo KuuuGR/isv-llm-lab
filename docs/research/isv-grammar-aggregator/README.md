@@ -1,8 +1,12 @@
 # ISV Grammar Aggregator — Research Package
 
 **Status:** research / design package (updated 2026-09-20)  
+**Paper ID:** **Paper 2** (planned; see [`docs/research/PAPERS.md`](../PAPERS.md))  
 **Experiments run for this track:** none  
-**Implementation / database / seed facts:** not started  
+**Implementation / database:** not started  
+**Reviewed seed:** [`seed/`](seed/) (48 facts; 47 accepted; 1 needs_review)  
+**Submission checklist:** [`SUBMISSION_CHECKLIST.md`](SUBMISSION_CHECKLIST.md) — tag `paper2-submission-v1` **not created yet**  
+**Versioning policy:** [`docs/PUBLICATION_VERSIONING.md`](../../PUBLICATION_VERSIONING.md)
 
 ## What it is
 

@@ -1,7 +1,10 @@
 # EXP-004 Phase 2B — Manuscript (working draft)
 
-**Status:** first complete compilable LaTeX draft (2026-09-18)  
-**Not submission-ready** until authorship/funding/COI placeholders are resolved and Interslavic language-description citations are completed.
+**Paper ID:** **Paper 1** (see [`docs/research/PAPERS.md`](../../PAPERS.md))  
+**Status:** working LaTeX draft (public repository development)  
+**Not submission-ready** until authorship/funding/COI placeholders are resolved and remaining checklist items are complete.  
+**Submission freeze:** use [`SUBMISSION_CHECKLIST.md`](SUBMISSION_CHECKLIST.md); intended tag `paper1-submission-v1` (**not created yet**).  
+**Versioning policy:** [`docs/PUBLICATION_VERSIONING.md`](../../../PUBLICATION_VERSIONING.md)
 
 ## Target journal
 
@@ -22,6 +25,7 @@ Also kept modular for later adaptation to *Machine Translation* (Springer) or TA
 | Evidence map | [`EVIDENCE_MAP.md`](EVIDENCE_MAP.md) |
 | Authorship pending | [`AUTHORSHIP_PENDING.md`](AUTHORSHIP_PENDING.md) |
 | References needed | [`REFERENCES_NEEDED.md`](REFERENCES_NEEDED.md) |
+| Submission checklist | [`SUBMISSION_CHECKLIST.md`](SUBMISSION_CHECKLIST.md) |
 
 ## Word count (texcount, current draft)
 

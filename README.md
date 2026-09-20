@@ -57,6 +57,8 @@ reproducible.
 | [`docs/STATE.md`](docs/STATE.md) | Project state |
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | SODA task roadmap + future ideas (scientific direction: [`docs/research-roadmap.md`](docs/research-roadmap.md)) |
 | [`docs/research-roadmap.md`](docs/research-roadmap.md) | High-level research state: hypothesis, completed experiments, key findings, Phase 2B plan, publication direction, stopping rule |
+| [`docs/PUBLICATION_VERSIONING.md`](docs/PUBLICATION_VERSIONING.md) | Public-repo manuscript development; immutable submission git tags (`paper1-submission-v1`, …) |
+| [`docs/research/PAPERS.md`](docs/research/PAPERS.md) | Paper 1 / Paper 2 directory map and checklist pointers |
 | [`docs/translation-method.md`](docs/translation-method.md) | Translation method: intervention ladder A–E, pipeline orderings (hypotheses), evaluation layers |
 | [`docs/DECISIONS.md`](docs/DECISIONS.md) | Decision log |
 | [`docs/EXPERIMENTS.md`](docs/EXPERIMENTS.md) | Experiment log |

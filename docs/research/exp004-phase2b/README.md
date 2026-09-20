@@ -46,7 +46,7 @@ SHA-256 `aaad28e43935a40313585d77a33bfc788d97e8d69b081f9486af74d52ca1a857`
 | **LOW** | executed + analysed (42/42 retained; **6 valid** paired configs; Qwen `INVALID — MODEL MISMATCH`; descriptive Δ_LOW; 2026-09-16) |
 | **UNSEEN** | executed + analysed (42/42; **7/7 valid**; descriptive Δ_UNSEEN; 2026-09-18) |
 | **Final cross-regime synthesis** | **Complete** — [`analysis/combined/`](analysis/combined/) (HIGH / LOW / UNSEEN; 2026-09-18) |
-| Manuscript | **Not started** — see [`manuscript/`](manuscript/) |
+| Manuscript (Paper 1) | **Working draft** — [`manuscript/`](manuscript/); map: [`docs/research/PAPERS.md`](../PAPERS.md) |
 
 **Authoritative combined synthesis:** [`analysis/combined/analysis.md`](analysis/combined/analysis.md) · [`analysis/combined/EVIDENCE.md`](analysis/combined/EVIDENCE.md)
 
@@ -79,7 +79,7 @@ Preserve these as documented; do not strengthen into causal claims.
 | LOW analysis | [`analysis/low/`](analysis/low/) | `experiments/exp004-modelscreen/phase2b/analysis/low/` |
 | UNSEEN validation + analysis | [`analysis/unseen/`](analysis/unseen/) | `experiments/exp004-modelscreen/phase2b/analysis/unseen/` |
 | Readable results | [`results/`](results/) | mirrors of EVIDENCE / analysis.md per regime + combined |
-| Manuscript | [`manuscript/`](manuscript/) | *(hub only for now)* |
+| Manuscript (Paper 1) | [`manuscript/`](manuscript/) | Working draft + [`SUBMISSION_CHECKLIST.md`](manuscript/SUBMISSION_CHECKLIST.md) |
 
 Historical HIGH↔LOW-only pack remains only under the experiment tree:  
 `experiments/exp004-modelscreen/phase2b/analysis/high_low/` (not duplicated as the hub “combined” target).
