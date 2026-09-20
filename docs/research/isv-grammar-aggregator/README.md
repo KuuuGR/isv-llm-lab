@@ -69,7 +69,8 @@ docs/research/isv-grammar-aggregator/
 ├── schemas/                           (source, fact, provenance, storage)
 ├── architecture/                      (system boundary + LLM modes)
 ├── experiments/                       (proposed A/B/C design)
-└── resources/                         (inventory + hierarchy)
+├── resources/                         (inventory + hierarchy)
+└── seed/                              (initial reviewed GrammarFact cards + JSON)
 ```
 
 ### Start here
@@ -83,6 +84,7 @@ docs/research/isv-grammar-aggregator/
 | Known disagreements | [`protocols/CONFLICT_LEDGER.md`](protocols/CONFLICT_LEDGER.md) |
 | LLM package modes | [`architecture/LLM_CONTEXT_DESIGN.md`](architecture/LLM_CONTEXT_DESIGN.md) |
 | Future experiment | [`experiments/EXPERIMENT_DESIGN.md`](experiments/EXPERIMENT_DESIGN.md) |
+| Reviewed fact seed | [`seed/README.md`](seed/README.md) |
 
 ### Index
 

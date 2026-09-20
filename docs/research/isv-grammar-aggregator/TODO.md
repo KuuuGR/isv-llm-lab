@@ -5,18 +5,16 @@
 
 ## Next concrete steps (ordered)
 
-1. **Do not bulk-ingest.** Protocols are ready; execution waits.
-2. When authorized: seed **20–50** reviewed facts from
-   `protocols/CONFLICT_LEDGER.md` + high-priority Tier-C rules, each with
-   provenance (`schemas/FACT_SCHEMA.md` / `PROVENANCE_MODEL.md`).
-3. Offline Mode A/B package renderer (no LLM).
-4. Freeze minimal A/B/C experiment kit (`experiments/EXPERIMENT_DESIGN.md`).
+1. **Seed status (2026-09-20):** initial reviewed seed exists under `seed/` (**47 accepted**, 1 needs_review). See `seed/README.md`.
+2. Do **not** bulk-ingest external sources yet; use intake protocols when expanding.
+3. Next implementation step when authorized: offline Mode A/B package renderer over `seed/generated/facts.json` (no LLM).
+4. Then freeze minimal A/B/C experiment kit (`experiments/EXPERIMENT_DESIGN.md`).
 
 ## Deferred (explicitly not this pass)
 
 - Scrape Steen / bulk Wikipedia / bulk YouTube / bulk Hunspell.
 - Implement aggregator software or database.
-- Create the fact seed.
+- ~~Create the fact seed.~~ **Done (initial seed).**
 - Run A/B/C experiment.
 - Modify translator, EXP-004, or canonical language resources.
 - Reinterpret old experiment results (backward audit is protocol-only).
